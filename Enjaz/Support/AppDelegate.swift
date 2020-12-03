@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Enjaz
-//
-//  Created by mohammed balegh on 29/11/2020.
-//
-
 import UIKit
 
 @main
