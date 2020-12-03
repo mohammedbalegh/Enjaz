@@ -1,11 +1,3 @@
-//
-//  AuthTextField.swift
-//  TechMall
-//
-//  Created by Abdelrhman Elmahdy on 3/14/20.
-//  Copyright © 2020 Abdelrhman Elmahdy. All rights reserved.
-//
-
 import UIKit
 
 class AuthTextField : UIView {
