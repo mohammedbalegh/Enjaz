@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4142F78125759DE5008FCC23 /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78025759DE5008FCC23 /* CarouselCell.swift */; };
+		4142F7862576EC5B008FCC23 /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */; };
+		4142F78B257739DB008FCC23 /* CarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78A257739DB008FCC23 /* CarouselCard.swift */; };
 		41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646A9257397BA000327D5 /* AppDelegate.swift */; };
 		41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AB257397BA000327D5 /* SceneDelegate.swift */; };
-		41C646AE257397BA000327D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AD257397BA000327D5 /* ViewController.swift */; };
+		41C646AE257397BA000327D5 /* StartScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AD257397BA000327D5 /* StartScreenVC.swift */; };
 		41C646B3257397BC000327D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B2257397BC000327D5 /* Assets.xcassets */; };
 		41C646B6257397BC000327D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B4257397BC000327D5 /* LaunchScreen.storyboard */; };
 		41C646C1257397BC000327D5 /* EnjazTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646C0257397BC000327D5 /* EnjazTests.swift */; };
 		41C646CC257397BC000327D5 /* EnjazUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646CB257397BC000327D5 /* EnjazUITests.swift */; };
+		41C646E42573AB23000327D5 /* PrimaryBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646E32573AB23000327D5 /* PrimaryBtn.swift */; };
+		41C646EE25744537000327D5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646ED25744537000327D5 /* Colors.swift */; };
+		41C646F7257445EC000327D5 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646F6257445EC000327D5 /* UIColor+Ext.swift */; };
+		41C6470325756CB1000327D5 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6470225756CB1000327D5 /* OnboardingVC.swift */; };
+		41C6471325757032000327D5 /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6471225757032000327D5 /* LayoutConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,10 +42,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
+		4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
+		4142F78A257739DB008FCC23 /* CarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCard.swift; sourceTree = "<group>"; };
 		41C646A6257397BA000327D5 /* Enjaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enjaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646A9257397BA000327D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C646AB257397BA000327D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		41C646AD257397BA000327D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		41C646AD257397BA000327D5 /* StartScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenVC.swift; sourceTree = "<group>"; };
 		41C646B2257397BC000327D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41C646B5257397BC000327D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41C646B7257397BC000327D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +58,11 @@
 		41C646C7257397BC000327D5 /* EnjazUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnjazUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646CB257397BC000327D5 /* EnjazUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnjazUITests.swift; sourceTree = "<group>"; };
 		41C646CD257397BC000327D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41C646E32573AB23000327D5 /* PrimaryBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryBtn.swift; sourceTree = "<group>"; };
+		41C646ED25744537000327D5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		41C646F6257445EC000327D5 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
+		41C6470225756CB1000327D5 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		41C6471225757032000327D5 /* LayoutConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +113,14 @@
 		41C646A8257397BA000327D5 /* Enjaz */ = {
 			isa = PBXGroup;
 			children = (
-				41C646A9257397BA000327D5 /* AppDelegate.swift */,
-				41C646AB257397BA000327D5 /* SceneDelegate.swift */,
-				41C646AD257397BA000327D5 /* ViewController.swift */,
-				41C646B2257397BC000327D5 /* Assets.xcassets */,
-				41C646B4257397BC000327D5 /* LaunchScreen.storyboard */,
-				41C646B7257397BC000327D5 /* Info.plist */,
+				41C646FB25756A16000327D5 /* Support */,
+				41C646F5257445CD000327D5 /* Extesions */,
+				41C646EC25744501000327D5 /* Constants */,
+				41C646E22573AAEA000327D5 /* Views */,
+				41C646AD257397BA000327D5 /* StartScreenVC.swift */,
+				41C6470225756CB1000327D5 /* OnboardingVC.swift */,
+				4142F78025759DE5008FCC23 /* CarouselCell.swift */,
+				4142F78A257739DB008FCC23 /* CarouselCard.swift */,
 			);
 			path = Enjaz;
 			sourceTree = "<group>";
@@ -123,6 +141,44 @@
 				41C646CD257397BC000327D5 /* Info.plist */,
 			);
 			path = EnjazUITests;
+			sourceTree = "<group>";
+		};
+		41C646E22573AAEA000327D5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				41C646E32573AB23000327D5 /* PrimaryBtn.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		41C646EC25744501000327D5 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				41C6471225757032000327D5 /* LayoutConstants.swift */,
+				41C646ED25744537000327D5 /* Colors.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		41C646F5257445CD000327D5 /* Extesions */ = {
+			isa = PBXGroup;
+			children = (
+				41C646F6257445EC000327D5 /* UIColor+Ext.swift */,
+				4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */,
+			);
+			path = Extesions;
+			sourceTree = "<group>";
+		};
+		41C646FB25756A16000327D5 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				41C646A9257397BA000327D5 /* AppDelegate.swift */,
+				41C646AB257397BA000327D5 /* SceneDelegate.swift */,
+				41C646B2257397BC000327D5 /* Assets.xcassets */,
+				41C646B4257397BC000327D5 /* LaunchScreen.storyboard */,
+				41C646B7257397BC000327D5 /* Info.plist */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,9 +310,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C646AE257397BA000327D5 /* ViewController.swift in Sources */,
+				4142F78B257739DB008FCC23 /* CarouselCard.swift in Sources */,
+				41C646AE257397BA000327D5 /* StartScreenVC.swift in Sources */,
+				41C646EE25744537000327D5 /* Colors.swift in Sources */,
 				41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */,
+				4142F78125759DE5008FCC23 /* CarouselCell.swift in Sources */,
+				4142F7862576EC5B008FCC23 /* UICollectionView+Ext.swift in Sources */,
+				41C6471325757032000327D5 /* LayoutConstants.swift in Sources */,
+				41C646F7257445EC000327D5 /* UIColor+Ext.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
+				41C646E42573AB23000327D5 /* PrimaryBtn.swift in Sources */,
+				41C6470325756CB1000327D5 /* OnboardingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5V7642F68F;
-				INFOPLIST_FILE = Enjaz/Info.plist;
+				INFOPLIST_FILE = Enjaz/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -445,7 +509,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5V7642F68F;
-				INFOPLIST_FILE = Enjaz/Info.plist;
+				INFOPLIST_FILE = Enjaz/Support/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
