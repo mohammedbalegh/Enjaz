@@ -41,7 +41,7 @@ class PrimaryBtn: UIButton {
         self.setTitle(label, for: .normal)
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 2.0
-        self.layer.cornerRadius = 14
+        self.layer.cornerRadius = 15
         self.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
 
         self.translatesAutoresizingMaskIntoConstraints = false

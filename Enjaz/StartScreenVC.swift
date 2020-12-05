@@ -33,36 +33,50 @@ class StartScreenVC: UIViewController {
     
     func setupIllustration() {
         view.addSubview(illustration)
+        let height: CGFloat = 275
+        let width: CGFloat = 251
         
         NSLayoutConstraint.activate([
             illustration.topAnchor.constraint(equalTo: view.topAnchor, constant: (LayoutConstants.screenHeight * 0.1)),
             illustration.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            illustration.heightAnchor.constraint(equalToConstant: (LayoutConstants.screenHeight * 0.3)),
-            illustration.widthAnchor.constraint(equalToConstant: (LayoutConstants.screenWidth * 0.58)),
+            illustration.heightAnchor.constraint(equalToConstant: height),
+            illustration.widthAnchor.constraint(equalToConstant: width),
         ])
     }
     
     func setupLogo() {
         view.addSubview(logo)
+        let height: CGFloat = 131
+        let width: CGFloat = 152
         
         NSLayoutConstraint.activate([
-            logo.topAnchor.constraint(equalTo: illustration.bottomAnchor, constant: (LayoutConstants.screenHeight * 0.1)),
+            logo.topAnchor.constraint(equalTo: illustration.bottomAnchor, constant: 38),
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.heightAnchor.constraint(equalToConstant: (LayoutConstants.screenHeight * 0.14)),
-            logo.widthAnchor.constraint(equalToConstant: (LayoutConstants.screenWidth * 0.36))
+            logo.heightAnchor.constraint(equalToConstant: height),
+            logo.widthAnchor.constraint(equalToConstant: width)
         ])
         
     }
     
     func setupStartBtn() {
         view.addSubview(startBtn)
+        startBtn.addTarget(self, action: #selector(pushOnboardingVC), for: .touchUpInside)
+        let height = LayoutConstants.screenHeight * 0.053
+        let width = height * 3.71
         
         NSLayoutConstraint.activate([
             startBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.09)),
             startBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startBtn.heightAnchor.constraint(equalToConstant: (LayoutConstants.screenHeight * 0.06)),
-            startBtn.widthAnchor.constraint(equalToConstant: (LayoutConstants.screenWidth * 0.46)),
+            startBtn.heightAnchor.constraint(equalToConstant: height),
+            startBtn.widthAnchor.constraint(equalToConstant: width)
         ])
+    }
+    
+    @objc func pushOnboardingVC() {
+        print("navigation clicked")
+        let destinationVC = OnboardingVC()
+        destinationVC.modalPresentationStyle = .fullScreen
+        present(destinationVC, animated: true, completion: nil)
     }
 }
 
