@@ -78,7 +78,6 @@ class OnboardingVC: UIViewController {
         mainLabel.text = carouselCard.mainLabel[0]
         secondaryLabel.text = carouselCard.secoundaryLabel[0]
         setupSubviews()
-        
     }
     
     func setupSubviews() {
@@ -90,6 +89,7 @@ class OnboardingVC: UIViewController {
         setupSecondaryLabel()
         setupmainLabel()
         setupPageControl()
+        timer()
     }
         
     func setupPageControl() {
@@ -189,7 +189,20 @@ class OnboardingVC: UIViewController {
         let centerPoint = view.convert(view.center, to: carousel)
         guard let centerIndexPath = carousel.indexPathForItem(at:centerPoint) else { return }
         carousel.scrollToItem(at: centerIndexPath, at: .centeredHorizontally, animated: true)
-      }
+    }
+    
+    func timer() {
+        let _ = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(scrollToPoint), userInfo: nil, repeats: true)
+    }
+    
+    @objc func scrollToPoint() {
+        DispatchQueue.main.async {
+            if self.carousel.contentOffset.x <= 900 {
+                self.carousel.setContentOffset(CGPoint(x: self.carousel.contentOffset.x +   self.view.frame.width, y: self.carousel.contentOffset.y), animated:true)
+                print(self.carousel.contentOffset.x)
+            }
+        }
+    }
 
 }
 
@@ -229,5 +242,7 @@ extension OnboardingVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
        }
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
+        
     }
+    
 }
