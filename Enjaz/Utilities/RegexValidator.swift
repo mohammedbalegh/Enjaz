@@ -24,4 +24,9 @@ class RegexValidator {
 		return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: candidate)
 	}
 	
+	static func validateResetCode(candidate: String) -> Bool {
+		let passwordRegex = "^\\d{4}$"
+		return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: candidate)
+	}
+	
 }

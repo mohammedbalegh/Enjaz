@@ -7,11 +7,14 @@ class AuthTextField : UIView {
 		case confirmPassword = "تأكيد الرمز السري"
 		case name = "الاسم الشخصي (ثنائي)"
 		case email = "البريد الإلكتروني"
+		case resetCode = "الكود"
+		case newPassword = "الرمز السري الجديد"
 	}
 	
 	var textField = UITextField()
 	var icon = UIImageView()
 	var errorLabel = UILabel()
+	var textFieldContainer = UIView()
 	
 	var type : textFieldType!
 	var fieldNounName = "" // This property is used when the filed name is required in a sentence as a noun and not as a verb (like the error label)
@@ -19,9 +22,10 @@ class AuthTextField : UIView {
 	var canStartWithNumber = true
 	var defaultErrorMessage: String?
 	var validator: ((String) -> Bool)?
-	let height: CGFloat = 68
+	let height: CGFloat = max(LayoutConstants.screenHeight * 0.085, 50)
 	let horizontalMargin: CGFloat = 20
 	let iconHorizontalMargin: CGFloat = 12
+	let errorLabelHeight: CGFloat = 12
 	var password: String?
 	
 	var text: String? {
@@ -45,31 +49,31 @@ class AuthTextField : UIView {
 		self.minimumLength = minimumLength
 		self.canStartWithNumber = canStartWithNumber
 		self.password = password
-		
 		setUp()
 	}
 	
 	override func didMoveToWindow() {
-		if window == nil { return }
+		guard window != nil else { return }
 		
 		setDefaultConstraints()
 		setErrorLabelConstraints()
+		setTextFieldContainerConstraints()
 		setIconConstraints()
 		setTextFieldConstraints()
 		setTextFieldDirection()
 	}
 	
 	func setUp() {
-		errorLabel.font = UIFont.systemFont(ofSize: 13)
+		errorLabel.font = UIFont.systemFont(ofSize: 11)
 		errorLabel.textAlignment = .center
 		errorLabel.textColor = .red
 		
-		if type == nil  { return }
+		guard type != nil else { return }
 		
         var attributedTitle = NSMutableAttributedString()
         let placeholder  = type!.rawValue
         
-        attributedTitle = NSMutableAttributedString(string:placeholder, attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 16.0)!])
+        attributedTitle = NSMutableAttributedString(string:placeholder, attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 18.0)!])
         attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 110, green: 110, blue: 110, alpha: 0.7), range:NSRange(location:0, length: placeholder.count))
         textField.attributedPlaceholder = attributedTitle
         
@@ -88,12 +92,27 @@ class AuthTextField : UIView {
 				icon.image = #imageLiteral(resourceName: "lockIcon")
 				validator = RegexValidator.validatePassword
 				defaultErrorMessage = "Password must contain a special character"
+
 			case .confirmPassword:
 				textField.textContentType = .password
 				textField.isSecureTextEntry = true
 				icon.image = #imageLiteral(resourceName: "lockIcon")
 				defaultErrorMessage = "Passwords do not match"
 				fieldNounName = "تأكيد الرمز السري"
+				
+			case .newPassword:
+				textField.textContentType = .password
+				textField.isSecureTextEntry = true
+				icon.image = #imageLiteral(resourceName: "lockIcon")
+				validator = RegexValidator.validatePassword
+				defaultErrorMessage = "Password must contain a special character"
+				
+			case .resetCode:
+				textField.textContentType = .oneTimeCode
+				textField.keyboardType = .numberPad
+				icon.image = #imageLiteral(resourceName: "lockIcon")
+				validator = RegexValidator.validateResetCode
+				defaultErrorMessage = "reset code is a four digit number"
 			
 			case .name:
 				textField.textContentType = .name
@@ -109,6 +128,7 @@ class AuthTextField : UIView {
 		
 		textField.addTarget(self, action: #selector(hideErrorMessage), for: .allEditingEvents)
 		
+		addSubview(textFieldContainer)
 		addSubview(errorLabel)
 		addSubview(icon)
 		addSubview(textField)
@@ -119,8 +139,6 @@ class AuthTextField : UIView {
 		
 		NSLayoutConstraint.activate([
 			heightAnchor.constraint(equalToConstant: height),
-			leftAnchor.constraint(equalTo: superview!.leftAnchor, constant: horizontalMargin),
-			rightAnchor.constraint(equalTo: superview!.rightAnchor, constant: -horizontalMargin),
 		])
 	}
 	
@@ -129,8 +147,26 @@ class AuthTextField : UIView {
 		
 		NSLayoutConstraint.activate([
 			errorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),
-			errorLabel.leftAnchor.constraint(equalTo: leftAnchor),
-			errorLabel.heightAnchor.constraint(equalToConstant: 12),
+			errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+			errorLabel.heightAnchor.constraint(equalToConstant: errorLabelHeight),
+		])
+	}
+	
+	func setTextFieldContainerConstraints() {
+		textFieldContainer.translatesAutoresizingMaskIntoConstraints = false
+		
+		let containerHeight = height - errorLabelHeight
+		textFieldContainer.layer.cornerRadius = containerHeight / 2
+		
+		textFieldContainer.applyLightShadow()
+		
+		textFieldContainer.backgroundColor = .white
+		
+		NSLayoutConstraint.activate([
+			textFieldContainer.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 3),
+			textFieldContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+			textFieldContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
+			textFieldContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
 		])
 	}
 	
@@ -139,9 +175,9 @@ class AuthTextField : UIView {
 		icon.contentMode = .scaleAspectFit
 
 		NSLayoutConstraint.activate([
-			icon.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
-			icon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: iconHorizontalMargin),
-			icon.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+			icon.centerYAnchor.constraint(equalTo: textFieldContainer.centerYAnchor),
+			icon.leadingAnchor.constraint(equalTo: textFieldContainer.leadingAnchor, constant: iconHorizontalMargin),
+			icon.heightAnchor.constraint(equalTo: textFieldContainer.heightAnchor, multiplier: 0.4),
 			icon.widthAnchor.constraint(equalToConstant: 25),
 		])
 	}
@@ -150,10 +186,10 @@ class AuthTextField : UIView {
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		
 		NSLayoutConstraint.activate([
-			textField.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 2),
+			textField.topAnchor.constraint(equalTo: textFieldContainer.topAnchor),
 			textField.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: iconHorizontalMargin),
-			textField.bottomAnchor.constraint(equalTo: bottomAnchor),
-			textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 5),
+			textField.bottomAnchor.constraint(equalTo: textFieldContainer.bottomAnchor),
+			textField.trailingAnchor.constraint(equalTo: textFieldContainer.trailingAnchor, constant: 5),
 		])
 	}
 	
