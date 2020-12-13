@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41328EBE25860F3700A86330 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EBD25860F3700A86330 /* MainTabBar.swift */; };
+		41328EC32586110600A86330 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EC22586110600A86330 /* HomeScreenVC.swift */; };
+		41328ED4258622DC00A86330 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED3258622DC00A86330 /* MainTabBarController.swift */; };
+		41328ED92586258B00A86330 /* CalenderScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED82586258B00A86330 /* CalenderScreenVC.swift */; };
+		41328EDE258628E900A86330 /* MonthlyPlanScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */; };
+		41328EE325862DAD00A86330 /* GoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EE225862DAD00A86330 /* GoalsScreenVC.swift */; };
 		4142F78125759DE5008FCC23 /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78025759DE5008FCC23 /* CarouselCell.swift */; };
 		4142F7862576EC5B008FCC23 /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */; };
 		4142F78B257739DB008FCC23 /* CarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78A257739DB008FCC23 /* CarouselCard.swift */; };
@@ -42,6 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41328EBD25860F3700A86330 /* MainTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
+		41328EC22586110600A86330 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
+		41328ED3258622DC00A86330 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		41328ED82586258B00A86330 /* CalenderScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderScreenVC.swift; sourceTree = "<group>"; };
+		41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPlanScreenVC.swift; sourceTree = "<group>"; };
+		41328EE225862DAD00A86330 /* GoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsScreenVC.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCard.swift; sourceTree = "<group>"; };
@@ -121,6 +133,11 @@
 				41C6470225756CB1000327D5 /* OnboardingVC.swift */,
 				4142F78025759DE5008FCC23 /* CarouselCell.swift */,
 				4142F78A257739DB008FCC23 /* CarouselCard.swift */,
+				41328EC22586110600A86330 /* HomeScreenVC.swift */,
+				41328ED3258622DC00A86330 /* MainTabBarController.swift */,
+				41328ED82586258B00A86330 /* CalenderScreenVC.swift */,
+				41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */,
+				41328EE225862DAD00A86330 /* GoalsScreenVC.swift */,
 			);
 			path = Enjaz;
 			sourceTree = "<group>";
@@ -146,6 +163,7 @@
 		41C646E22573AAEA000327D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				41328EBD25860F3700A86330 /* MainTabBar.swift */,
 				41C646E32573AB23000327D5 /* PrimaryBtn.swift */,
 			);
 			path = Views;
@@ -310,14 +328,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41328ED92586258B00A86330 /* CalenderScreenVC.swift in Sources */,
+				41328EBE25860F3700A86330 /* MainTabBar.swift in Sources */,
 				4142F78B257739DB008FCC23 /* CarouselCard.swift in Sources */,
+				41328EDE258628E900A86330 /* MonthlyPlanScreenVC.swift in Sources */,
 				41C646AE257397BA000327D5 /* StartScreenVC.swift in Sources */,
 				41C646EE25744537000327D5 /* Colors.swift in Sources */,
 				41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */,
 				4142F78125759DE5008FCC23 /* CarouselCell.swift in Sources */,
 				4142F7862576EC5B008FCC23 /* UICollectionView+Ext.swift in Sources */,
 				41C6471325757032000327D5 /* LayoutConstants.swift in Sources */,
+				41328EC32586110600A86330 /* HomeScreenVC.swift in Sources */,
 				41C646F7257445EC000327D5 /* UIColor+Ext.swift in Sources */,
+				41328ED4258622DC00A86330 /* MainTabBarController.swift in Sources */,
+				41328EE325862DAD00A86330 /* GoalsScreenVC.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				41C646E42573AB23000327D5 /* PrimaryBtn.swift in Sources */,
 				41C6470325756CB1000327D5 /* OnboardingVC.swift in Sources */,
@@ -418,7 +442,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -473,7 +497,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -491,6 +515,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5V7642F68F;
 				INFOPLIST_FILE = Enjaz/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,6 +535,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5V7642F68F;
 				INFOPLIST_FILE = Enjaz/Support/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
