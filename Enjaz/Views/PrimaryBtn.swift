@@ -1,50 +1,69 @@
 import UIKit
 
 class PrimaryBtn: UIButton {
-    
-    enum btnThemeType {
-        case blue
-        case white
+    enum BtnTheme {
+        case blue, white
     }
+	
+	enum BtnSize {
+		case small, large
+	}
     
     var label = ""
-    var theme: btnThemeType = .blue
+    var theme: BtnTheme = .blue
+	var size: BtnSize = .small
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        setup()
     }
     
-    init(label: String, theme: btnThemeType) {
+	init(label: String, theme: BtnTheme, size: BtnSize? = nil) {
         super.init(frame: .zero)
+		translatesAutoresizingMaskIntoConstraints = false
         self.label = label
         self.theme = theme
-        configure()
+		if let size = size {
+			self.size = size
+		}
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	override func didMoveToWindow() {
+		guard window != nil else { return }
+		
+		let largeBtnHeight = LayoutConstants.screenHeight * 0.06
+		let smallBtnHeight = LayoutConstants.screenHeight * 0.053
+		let btnHeight = size == .large ? largeBtnHeight : smallBtnHeight
+		
+		layer.cornerRadius = btnHeight / 2
+		heightAnchor.constraint(equalToConstant: btnHeight).isActive = true
+	}
     
-    func configure() {
-        
+    func setup() {
         if theme == .blue {
-            self.backgroundColor = Colors.mainBTNColor
-            self.setTitleColor(.white, for: .normal)
-            self.layer.shadowColor = Colors.mainBTNColor?.cgColor
+			backgroundColor = .accentColor
+            setTitleColor(.white, for: .normal)
+			layer.shadowColor = UIColor.accentColor.cgColor
         } else {
-            self.backgroundColor = .white
-            self.setTitleColor( .gray, for: .normal)
-            self.layer.shadowColor = UIColor.gray.cgColor
+            backgroundColor = .white
+            setTitleColor( .gray, for: .normal)
+            layer.shadowColor = UIColor.gray.cgColor
         }
         
-        self.setTitle(label, for: .normal)
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowRadius = 2.0
-        self.layer.cornerRadius = 15
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 10.0)
-
-        self.translatesAutoresizingMaskIntoConstraints = false
+		let largeBtnFontSize = max(22, LayoutConstants.screenHeight * 0.03)
+		let smallBtnFontSize = max(16, LayoutConstants.screenHeight * 0.02)
+		let fontSize = size == .large ? largeBtnFontSize : smallBtnFontSize
+		titleLabel?.font = .systemFont(ofSize: fontSize)
+        setTitle(label, for: .normal)
+        layer.shadowOpacity = 0.3
+        layer.shadowRadius = 2.0
+        layer.shadowOffset = CGSize(width: 0, height: 5)
+		
+        translatesAutoresizingMaskIntoConstraints = false
     }
-    
 }
