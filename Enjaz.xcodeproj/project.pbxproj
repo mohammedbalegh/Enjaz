@@ -7,13 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41328EBE25860F3700A86330 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EBD25860F3700A86330 /* MainTabBar.swift */; };
+		41328EC32586110600A86330 /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EC22586110600A86330 /* HomeScreenVC.swift */; };
+		41328ED4258622DC00A86330 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED3258622DC00A86330 /* MainTabBarController.swift */; };
+		41328ED92586258B00A86330 /* CalenderScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED82586258B00A86330 /* CalenderScreenVC.swift */; };
+		41328EDE258628E900A86330 /* MonthlyPlanScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */; };
+		41328EE325862DAD00A86330 /* GoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EE225862DAD00A86330 /* GoalsScreenVC.swift */; };
+		4142F78125759DE5008FCC23 /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78025759DE5008FCC23 /* CarouselCell.swift */; };
+		4142F7862576EC5B008FCC23 /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */; };
+		4142F78B257739DB008FCC23 /* CarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78A257739DB008FCC23 /* CarouselCard.swift */; };
 		41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646A9257397BA000327D5 /* AppDelegate.swift */; };
 		41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AB257397BA000327D5 /* SceneDelegate.swift */; };
+
 		41C646AE257397BA000327D5 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AD257397BA000327D5 /* SignupVC.swift */; };
 		41C646B3257397BC000327D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B2257397BC000327D5 /* Assets.xcassets */; };
 		41C646B6257397BC000327D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B4257397BC000327D5 /* LaunchScreen.storyboard */; };
 		41C646C1257397BC000327D5 /* EnjazTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646C0257397BC000327D5 /* EnjazTests.swift */; };
 		41C646CC257397BC000327D5 /* EnjazUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646CB257397BC000327D5 /* EnjazUITests.swift */; };
+
 		BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0A87CF2575836F0045A54E /* AppLogo.swift */; };
 		BC389450258521EC0039EE35 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38944F258521EC0039EE35 /* UIViewControllerExtension.swift */; };
 		BC3894552586077F0039EE35 /* PasswordResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3894542586077F0039EE35 /* PasswordResetVC.swift */; };
@@ -50,9 +61,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41328EBD25860F3700A86330 /* MainTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
+		41328EC22586110600A86330 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
+		41328ED3258622DC00A86330 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		41328ED82586258B00A86330 /* CalenderScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderScreenVC.swift; sourceTree = "<group>"; };
+		41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPlanScreenVC.swift; sourceTree = "<group>"; };
+		41328EE225862DAD00A86330 /* GoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsScreenVC.swift; sourceTree = "<group>"; };
+		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
+		4142F7852576EC5B008FCC23 /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
+		4142F78A257739DB008FCC23 /* CarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCard.swift; sourceTree = "<group>"; };
 		41C646A6257397BA000327D5 /* Enjaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enjaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646A9257397BA000327D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C646AB257397BA000327D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+
 		41C646AD257397BA000327D5 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		41C646B2257397BC000327D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41C646B5257397BC000327D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +84,7 @@
 		41C646C7257397BC000327D5 /* EnjazUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnjazUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646CB257397BC000327D5 /* EnjazUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnjazUITests.swift; sourceTree = "<group>"; };
 		41C646CD257397BC000327D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+
 		BC0A87CF2575836F0045A54E /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		BC38944F258521EC0039EE35 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		BC3894542586077F0039EE35 /* PasswordResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetVC.swift; sourceTree = "<group>"; };
@@ -135,6 +157,15 @@
 				BC54008025795B9D009DC69B /* Utilities */,
 				BCAAC979257593E8008B52C8 /* Extensions */,
 				BCAAC97F25759622008B52C8 /* Constants */,
+				41C646AD257397BA000327D5 /* StartScreenVC.swift */,
+				41C6470225756CB1000327D5 /* OnboardingVC.swift */,
+				4142F78025759DE5008FCC23 /* CarouselCell.swift */,
+				4142F78A257739DB008FCC23 /* CarouselCard.swift */,
+				41328EC22586110600A86330 /* HomeScreenVC.swift */,
+				41328ED3258622DC00A86330 /* MainTabBarController.swift */,
+				41328ED82586258B00A86330 /* CalenderScreenVC.swift */,
+				41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */,
+				41328EE225862DAD00A86330 /* GoalsScreenVC.swift */,
 			);
 			path = Enjaz;
 			sourceTree = "<group>";
@@ -466,7 +497,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -521,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
