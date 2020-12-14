@@ -1,7 +1,6 @@
-
 import UIKit
 
-class OnboardingVC: UIViewController {
+class OnboardingScreenVC: UIViewController {
     
     var contentOffset: CGFloat = 0
     
@@ -10,7 +9,7 @@ class OnboardingVC: UIViewController {
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .gray
-        pageControl.currentPageIndicatorTintColor = Colors.mainLabelColor
+		pageControl.currentPageIndicatorTintColor = .accentColor
         pageControl.numberOfPages = 4
         pageControl.currentPage = 0
         pageControl.subviews.forEach {
@@ -23,7 +22,7 @@ class OnboardingVC: UIViewController {
     
     let carouselBackground: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "onBoerdingBackGroundImg")
+        imageView.image = #imageLiteral(resourceName: "onBoardingBackgroundImage")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -37,7 +36,7 @@ class OnboardingVC: UIViewController {
     
     let mainLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.mainLabelColor
+        label.textColor = .accentColor
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.font = label.font.withSize(24)
@@ -76,7 +75,7 @@ class OnboardingVC: UIViewController {
         carousel.dataSource = self
         view.backgroundColor = .white
         mainLabel.text = carouselCard.mainLabel[0]
-        secondaryLabel.text = carouselCard.secoundaryLabel[0]
+        secondaryLabel.text = carouselCard.secondaryLabel[0]
         setupSubviews()
     }
     
@@ -87,7 +86,7 @@ class OnboardingVC: UIViewController {
         setupLoginBtn()
         setupCarousel()
         setupSecondaryLabel()
-        setupmainLabel()
+        setupMainLabel()
         setupPageControl()
         timer()
     }
@@ -115,7 +114,7 @@ class OnboardingVC: UIViewController {
         ])
     }
     
-    func setupmainLabel() {
+    func setupMainLabel() {
         view.addSubview(mainLabel)
         
         NSLayoutConstraint.activate([
@@ -206,7 +205,7 @@ class OnboardingVC: UIViewController {
 
 }
 
-extension OnboardingVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
+extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
@@ -229,16 +228,16 @@ extension OnboardingVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
        if scrollView.contentOffset.x < 220{
         mainLabel.text = carouselCard.mainLabel[0]
-        secondaryLabel.text = carouselCard.secoundaryLabel[0]
+        secondaryLabel.text = carouselCard.secondaryLabel[0]
        } else if scrollView.contentOffset.x < 640 {
         mainLabel.text = carouselCard.mainLabel[1]
-        secondaryLabel.text = carouselCard.secoundaryLabel[1]
+        secondaryLabel.text = carouselCard.secondaryLabel[1]
        } else if scrollView.contentOffset.x < 1060 {
         mainLabel.text = carouselCard.mainLabel[2]
-        secondaryLabel.text = carouselCard.secoundaryLabel[2]
+        secondaryLabel.text = carouselCard.secondaryLabel[2]
        } else if scrollView.contentOffset.x > 1060 {
         mainLabel.text = carouselCard.mainLabel[3]
-        secondaryLabel.text = carouselCard.secoundaryLabel[3]
+        secondaryLabel.text = carouselCard.secondaryLabel[3]
        }
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)

@@ -1,11 +1,3 @@
-//
-//  RegexMatchers.swift
-//  TechMall
-//
-//  Created by Abdelrhman Elmahdy on 6/22/20.
-//  Copyright © 2020 Abdelrhman Elmahdy. All rights reserved.
-//
-
 import Foundation
 
 class RegexValidator {

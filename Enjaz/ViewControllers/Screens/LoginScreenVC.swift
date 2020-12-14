@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginVC: UIViewController {
+class LoginScreenVC: UIViewController {
 	// MARK: Properties
 	var appLogo = AppLogo(frame: .zero)
 	var titleLabel: UILabel = {
@@ -21,8 +21,8 @@ class LoginVC: UIViewController {
 		label.textColor = .gray
 		return label
 	}()
-	var usernameTextField = AuthTextField(type: .username, minimumLength: 8, canStartWithNumber: false)
-	var passwordTextField = AuthTextField(type: .password, minimumLength: 8)
+	var usernameTextField = UsernameTextField()
+	var passwordTextField = PasswordTextField()
 	var loginBtn = PrimaryBtn(label: "تسجيل الدخول", theme: .blue, size: .large)
 	lazy var textFieldsVSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [usernameTextField, passwordTextField])
@@ -191,20 +191,20 @@ class LoginVC: UIViewController {
 	// MARK: Event Handlers
 	
 	@objc func onSignupTap() {
-		navigateToSignupVC()
+		navigateToSignupScreen()
 	}
 	
 	@objc func onForgotPasswordTap() {
-		navigateToForgotPasswordVC()
+		navigateToForgotPasswordScreen()
 	}
 	
 	// MARK: Tools
 	
-	func navigateToSignupVC() {
-		navigationController?.pushViewController(SignupVC(), animated: true)
+	func navigateToSignupScreen() {
+		navigationController?.pushViewController(SignupScreenVC(), animated: true)
 	}
 	
-	func navigateToForgotPasswordVC() {
-		navigationController?.pushViewController(PasswordResetVC(), animated: true)
+	func navigateToForgotPasswordScreen() {
+		navigationController?.pushViewController(PasswordResetScreenVC(), animated: true)
 	}
 }

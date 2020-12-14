@@ -1,13 +1,6 @@
-//
-//  ForgotPasswordVC.swift
-//  Enjaz
-//
-//  Created by Abdelrhman Elmahdy on 13/12/2020.
-//
-
 import UIKit
 
-class PasswordResetVC: UIViewController {
+class PasswordResetScreenVC: UIViewController {
 
 	// MARK: Properties
 	var lockImage: UIImageView = {
@@ -38,10 +31,10 @@ class PasswordResetVC: UIViewController {
 		label.textColor = .gray
 		return label
 	}()
-	var emailTextField = AuthTextField(type: .email)
-	var resetCodeTextField = AuthTextField(type: .resetCode)
-	var newPasswordTextField = AuthTextField(type: .newPassword)
-	var confirmPasswordTextField = AuthTextField(type: .newPassword)
+	var emailTextField = EmailTextField()
+	var resetCodeTextField = ResetCodeTextField()
+	var newPasswordTextField = NewPasswordTextField()
+	var confirmPasswordTextField = ConfirmPasswordTextField()
 	lazy var textFieldsVSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [emailTextField])
 		stackView.translatesAutoresizingMaskIntoConstraints = false

@@ -74,7 +74,7 @@ class StartScreenVC: UIViewController {
     
     @objc func pushOnboardingVC() {
         print("navigation clicked")
-        let destinationVC = OnboardingVC()
+        let destinationVC = OnboardingScreenVC()
         destinationVC.modalPresentationStyle = .fullScreen
         present(destinationVC, animated: true, completion: nil)
     }

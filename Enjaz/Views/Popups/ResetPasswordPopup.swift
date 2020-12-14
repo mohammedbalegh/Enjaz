@@ -1,10 +1,3 @@
-//
-//  ResetPasswordPopup.swift
-//  Enjaz
-//
-//  Created by Abdelrhman Elmahdy on 13/12/2020.
-//
-
 import UIKit
 
 class ResetPasswordPopup: Popup {
@@ -48,21 +41,23 @@ class ResetPasswordPopup: Popup {
 		fatalError("init(coder:) has not been implemented")
 	}
 		
-	override func setPopupContainerConstraints() {
-		guard let superview = superview else { return }
-
+	override func onPopupContainerShown() {
+		setupPopupContainer()
+		setupSuccessImage()
+		setupLabel()
+		setupBackToLoginBtn()
+	}
+	
+	func setupPopupContainer() {
 		popupContainer.backgroundColor = .accentColor
 		popupContainer.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([
-			popupContainer.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
-			popupContainer.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
-			popupContainer.heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: 0.4),
-			popupContainer.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.75),
+			popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+			popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+			popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+			popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
 		])
-		setupSuccessImage()
-		setupLabel()
-		setupBackToLoginBtn()
 	}
 	
 	func setupSuccessImage() {

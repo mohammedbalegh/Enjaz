@@ -1,10 +1,3 @@
-//
-//  CarouselCell.swift
-//  Enjaz
-//
-//  Created by mohammed balegh on 30/11/2020.
-//
-
 import UIKit
 
 class CarouselCell: UICollectionViewCell {
@@ -21,7 +14,7 @@ class CarouselCell: UICollectionViewCell {
         return label
     }()
     
-    let secoundaryLabel: UILabel = {
+    let secondaryLabel: UILabel = {
         let label = UILabel()
         return label
     }()
@@ -50,8 +43,5 @@ class CarouselCell: UICollectionViewCell {
             carouselImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             carouselImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        
-        
     }
-    
 }

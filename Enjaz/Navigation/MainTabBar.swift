@@ -1,10 +1,3 @@
-//
-//  MainTabBar.swift
-//  Enjaz
-//
-//  Created by mohammed balegh on 13/12/2020.
-//
-
 import UIKit
 
 class MainTabBar: UITabBar {
@@ -17,18 +10,18 @@ class MainTabBar: UITabBar {
     }
     
     private func addShape() {
-        let shapelayer = CAShapeLayer()
-        shapelayer.path = createPath()
-        shapelayer.strokeColor = UIColor.lightGray.cgColor
-        shapelayer.fillColor = UIColor.white.cgColor
-        shapelayer.lineWidth = 1.0
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = createPath()
+        shapeLayer.strokeColor = UIColor.lightGray.cgColor
+        shapeLayer.fillColor = UIColor.white.cgColor
+        shapeLayer.lineWidth = 1.0
         
         if let oldShapeLayer = self.shapeLayer {
-            self.layer.replaceSublayer(oldShapeLayer, with: shapelayer)
+            self.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
         } else {
-            self.layer.insertSublayer(shapelayer, at: 0)
+            self.layer.insertSublayer(shapeLayer, at: 0)
         }
-        self.shapeLayer = shapelayer
+        self.shapeLayer = shapeLayer
     }
     
     

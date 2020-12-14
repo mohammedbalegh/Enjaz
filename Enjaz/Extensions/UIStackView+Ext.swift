@@ -7,5 +7,5 @@ extension UIStackView {
 			NSLayoutConstraint.deactivate($0.constraints)
 			$0.removeFromSuperview()
 		}
-	}	
+	}
 }

@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.tintColor = UIColor(hexaRGB: "#12B3B9")
+		view.tintColor = .accentColor
         configureTabBar()
     }
     
@@ -28,12 +28,12 @@ class MainTabBarController: UITabBarController {
     
     func configureTabBar() {
         setValue(MainTabBar(), forKey: "TabBar")
-        viewControllers = [GoalsScreenVC(),MonthlyPlanScreenVC(),UIViewController(),CalenderScreenVC(),HomeScreenVC()]
+        viewControllers = [GoalsScreenVC(), MonthlyPlanScreenVC(), UIViewController(), CalendarScreenVC(), HomeScreenVC()]
         
-        self.tabBar.items![0].image = #imageLiteral(resourceName: "Iconly-Bulk-Category")
-        self.tabBar.items![1].image = #imageLiteral(resourceName: "Iconly-Bold-Graph")
-        self.tabBar.items![3].image = #imageLiteral(resourceName: "Iconly-Bulk-Calendar")
-        self.tabBar.items![4].image = #imageLiteral(resourceName: "Iconly-Bulk-Home")
+        tabBar.items![0].image = UIImage(named: "HomeIcon")
+        tabBar.items![1].image = UIImage(named: "CalendarIcon")
+        tabBar.items![3].image = UIImage(named: "GraphIcon")
+		tabBar.items![4].image = UIImage(named: "CategoryIcon")
     }
     
     func setupFloatingButton() {

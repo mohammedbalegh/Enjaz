@@ -70,6 +70,7 @@ extension UIView {
 		
 		NSLayoutConstraint.activate(constraints)
 	}
+	
 	/// Constrain width and height of `self` to specified view with specified multipliers.
 	func constrainDimensions(to view:UIView, widthMultiplier: CGFloat?=nil, heightMultiplier: CGFloat?=nil) {
 		disableAutoresizingMaskTranslationIfEnabled()

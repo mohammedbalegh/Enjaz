@@ -1,6 +1,6 @@
 import UIKit
 
-class SignupVC: UIViewController {
+class SignupScreenVC: UIViewController {
     // MARK: Properties
 	
 	var appLogo = AppLogo(frame: .zero)
@@ -22,11 +22,11 @@ class SignupVC: UIViewController {
 		label.textColor = .gray
 		return label
 	}()
-	var nameTextField = AuthTextField(type: .name, canStartWithNumber: false)
-	var usernameTextField = AuthTextField(type: .username, minimumLength: 8, canStartWithNumber: false)
-	var emailTextField = AuthTextField(type: .email)
-	var passwordTextField = AuthTextField(type: .password, minimumLength: 8)
-	var confirmPasswordTextField = AuthTextField(type: .confirmPassword, minimumLength: 8)
+	var nameTextField = NameTextField()
+	var usernameTextField = UsernameTextField()
+	var emailTextField = EmailTextField()
+	var passwordTextField = PasswordTextField()
+	var confirmPasswordTextField = ConfirmPasswordTextField()
 	var signupBtn = PrimaryBtn(label: "إنشاء حساب", theme: .blue, size: .large)
 	lazy var textFieldsVSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [nameTextField, usernameTextField, emailTextField, passwordTextField, confirmPasswordTextField])
