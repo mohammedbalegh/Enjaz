@@ -21,7 +21,6 @@ class ResetPasswordPopup: Popup {
 		
 		return label
 	}()
-	
 	var backToLoginBtn: UIButton = {
 		var button = UIButton(type: .system)
 		button.translatesAutoresizingMaskIntoConstraints = false
@@ -32,15 +31,7 @@ class ResetPasswordPopup: Popup {
 		
 		return button
 	}()
-	
-	override init(frame: CGRect) {
-		super.init(frame: .zero)
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-		
+			
 	override func onPopupContainerShown() {
 		setupPopupContainer()
 		setupSuccessImage()
@@ -84,14 +75,13 @@ class ResetPasswordPopup: Popup {
 	func setupBackToLoginBtn() {
 		popupContainer.addSubview(backToLoginBtn)
 		
-		
 		let buttonHeight: CGFloat = 50
 		
 		backToLoginBtn.layer.cornerRadius = buttonHeight / 2
 		
 		backToLoginBtn.layer.borderWidth = 1
 		backToLoginBtn.layer.borderColor = UIColor.white.cgColor
-		
+		    
 		NSLayoutConstraint.activate([
 			backToLoginBtn.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor, constant: -40),
 			backToLoginBtn.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),

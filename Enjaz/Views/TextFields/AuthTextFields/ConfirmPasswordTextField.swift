@@ -24,7 +24,7 @@ class ConfirmPasswordTextField: AuthTextField {
 		guard let password = password else { return false }
 		
 		if text != password {
-			showErrorLabel()
+			showErrorMessage()
 			return false
 		}
 		

@@ -46,7 +46,6 @@ class AuthTextField : UIView {
 	func setUp() {
 		translatesAutoresizingMaskIntoConstraints = false
 		
-		print(fieldNounName)
 		heightAnchor.constraint(equalToConstant: height).isActive = true
 	}
 	
@@ -102,13 +101,7 @@ class AuthTextField : UIView {
 		addSubview(textField)
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		
-		var attributedTitle = NSMutableAttributedString()
-		let placeholder  = fieldName
-		
-		attributedTitle = NSMutableAttributedString(string:placeholder, attributes: [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 18.0)!])
-		attributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor(red: 110, green: 110, blue: 110, alpha: 0.7), range:NSRange(location:0, length: placeholder.count))
-		textField.attributedPlaceholder = attributedTitle
-		
+		textField.setPlaceholder(fieldName)
 		setTextFieldDirection()
 		
 		NSLayoutConstraint.activate([
@@ -132,17 +125,17 @@ class AuthTextField : UIView {
 	
 	func validate() -> Bool {
 		if text.count == 0 {
-			showErrorLabel(errorMessage: "\(fieldNounName) cannot be left blank")
+			showErrorMessage(errorMessage: "\(fieldNounName) cannot be left blank")
 			return false
 		}
 		
 		if !canStartWithNumber && Character(text[0]).isNumber {
-			showErrorLabel(errorMessage: "\(fieldNounName) cannot start with a number")
+			showErrorMessage(errorMessage: "\(fieldNounName) cannot start with a number")
 			return false
 		}
 		
 		if text.count < minimumLength {
-			showErrorLabel(errorMessage: "\(fieldNounName) must at least be \(minimumLength) characters")
+			showErrorMessage(errorMessage: "\(fieldNounName) must at least be \(minimumLength) characters")
 			return false
 		}
 
@@ -151,14 +144,14 @@ class AuthTextField : UIView {
 		let inputIsValid = validator(text)
 		
 		if !inputIsValid {
-			showErrorLabel()
+			showErrorMessage()
 			return false
 		}
 		
 		return true
 	}
 	
-	func showErrorLabel(errorMessage: String? = nil) {
+	func showErrorMessage(errorMessage: String? = nil) {
 		if let errorMessage = errorMessage {
 			errorLabel.text = errorMessage
 			return

@@ -12,12 +12,7 @@ class PrimaryBtn: UIButton {
     var label = ""
     var theme: BtnTheme = .blue
 	var size: BtnSize = .small
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
+        
 	init(label: String, theme: BtnTheme, size: BtnSize? = nil) {
         super.init(frame: .zero)
 		translatesAutoresizingMaskIntoConstraints = false
