@@ -3,8 +3,22 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    lazy var floatingBtn: UIButton = {
-        let button = UIButton(type: .custom)
+    enum TapBarTypes {
+        case title
+        case date
+    }
+    
+    let tabBarHeight = LayoutConstants.screenHeight * 0.10
+    
+    let topBar: NavBarTabView = {
+        let bar = NavBarTabView()
+        bar.title.isHidden = true
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        return bar
+    }()
+    
+  lazy var floatingBtn: UIButton = {
+    let button = UIButton(type: .custom)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
         button.setBackgroundImage(UIImage(named:"floatingNewAdditionBtn"), for: .normal)
@@ -36,19 +50,35 @@ class MainTabBarController: UITabBarController {
 		
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.tintColor = .accentColor
+        setupSubviews()
+    }
+    
+    func setupSubviews() {
         configureTabBar()
+        setupFloatingButton()
+        setupTopBar()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tabBar.frame.size.height = 100
-        tabBar.frame.origin.y = view.frame.height - 95
-        setupFloatingButton()
+        tabBar.frame.size.height = tabBarHeight
+        tabBar.frame.origin.y = view.frame.height - tabBarHeight
+    }
+    
+    func setupTopBar() {
+        view.addSubview(topBar)
+        
+        NSLayoutConstraint.activate([
+            topBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (LayoutConstants.screenHeight  * 0.03)),
+            topBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBar.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.08)
+        ])
     }
 	    
     func configureTabBar() {
         setValue(MainTabBar(), forKey: "TabBar")
-		
 		let homeScreenVC = HomeScreenVC()
 		let calendarScreenVC = CalendarScreenVC()
 		let goalsScreenVC = GoalsScreenVC()
@@ -64,7 +94,21 @@ class MainTabBarController: UITabBarController {
 		// Disable the NewAdditionScreen tab bar item, because the screen is accessed through the floating button.
 		tabBar.items?[2].isEnabled = false
     }
-	    
+    }
+    
+    func showTapBar(type: TapBarTypes, title: String?) {
+        if type == TapBarTypes.title {
+            topBar.title.isHidden = false
+            topBar.dateLabel.isHidden = true
+            topBar.islamicDateLabel.isHidden = true
+            topBar.title.text = title
+        } else if type == TapBarTypes.date {
+            topBar.title.isHidden = true
+            topBar.dateLabel.isHidden = false
+            topBar.islamicDateLabel.isHidden = false
+        }
+        
+    }
     func setupFloatingButton() {
         view.addSubview(floatingBtn)
         		
@@ -72,7 +116,7 @@ class MainTabBarController: UITabBarController {
 		
         NSLayoutConstraint.activate([
             floatingBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            floatingBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -65),
+            floatingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: LayoutConstants.screenHeight * -0.05),
             floatingBtn.heightAnchor.constraint(equalToConstant: size),
             floatingBtn.widthAnchor.constraint(equalToConstant: size)
         ])
@@ -100,6 +144,18 @@ class MainTabBarController: UITabBarController {
 		newAdditionScreenIsSelected
 			? setupFloatingBtnAsNewAdditionScreenSaveBtn()
 			: setupFloatingBtnAsNewAdditionScreenTabBarItem()
+    
+    if selectedIndex == 0 {
+        showTapBar(type: .date, title: "")
+    } else if selectedIndex == 1 {
+        showTapBar(type: .title, title: "التقويم")
+    } else if selectedIndex == 2 {
+        showTapBar(type: .title, title: "إضافة جديدة")
+    } else if selectedIndex == 3 {
+        showTapBar(type: .title, title: "الخطة الشهرية")
+    } else if selectedIndex == 4 {
+        showTapBar(type: .title, title: "الأهداف")
+    }
 	}
 	
 	func setupFloatingBtnAsNewAdditionScreenTabBarItem() {

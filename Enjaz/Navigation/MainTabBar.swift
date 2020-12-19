@@ -23,7 +23,6 @@ class MainTabBar: UITabBar {
         self.shapeLayer = shapeLayer
     }
     
-    
     func createPath() -> CGPath {
         let height: CGFloat = 40
         let path = UIBezierPath()

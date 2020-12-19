@@ -217,3 +217,13 @@ extension UIView {
 		self.transform = CGAffineTransform(scaleX: scale, y: scale)
 	}
 }
+
+extension UIView {
+    func asCircle() {
+        DispatchQueue.main.async{
+            self.layer.cornerRadius = self.frame.width / 2;
+            self.layer.masksToBounds = true         
+        }
+    }
+}
+
