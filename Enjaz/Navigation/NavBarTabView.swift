@@ -8,6 +8,15 @@ class NavBarTabView: UIView {
         case date
     }
 
+	lazy var dateLabel: UILabel = {
+		let label = UILabel()
+		label.textColor = .gray
+		label.text = date()
+		label.font = label.font.withSize(14)
+		label.textAlignment = .center
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}()
     lazy var islamicDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(hex: 0x011942)
@@ -17,17 +26,15 @@ class NavBarTabView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .gray
-        label.text = date()
-        label.font = label.font.withSize(14)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+	lazy var dateVSV: UIStackView = {
+		let stackView = UIStackView(arrangedSubviews: [islamicDateLabel, dateLabel])
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		
+		stackView.axis = .vertical
+		stackView.spacing = 5
+		
+		return stackView
+	}()
     let menuButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
@@ -69,9 +76,10 @@ class NavBarTabView: UIView {
     func setupSubviews() {
         setupBillButton()
         setupMenuButton()
-        setupIslamicDateLabel()
-        setupDateLabel()
-        setuTitle()
+		setupDateVSV()
+//        setupIslamicDateLabel()
+//        setupDateLabel()
+        setupTitle()
     }
     
     
@@ -97,8 +105,28 @@ class NavBarTabView: UIView {
         let currentDate = formatter.string(from: today)
         return currentDate
     }
+	
+	func setupBillButton() {
+		addSubview(billButton)
+		
+		NSLayoutConstraint.activate([
+			billButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+			billButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: (LayoutConstants.screenWidth * 0.058)),
+			billButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
+			billButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
+		])
+	}
+	
+	func setupDateVSV() {
+		addSubview(dateVSV)
+		
+		NSLayoutConstraint.activate([
+			dateVSV.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+			dateVSV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+		])
+	}
     
-    func setuTitle() {
+    func setupTitle() {
         addSubview(title)
         
         NSLayoutConstraint.activate([
@@ -113,45 +141,10 @@ class NavBarTabView: UIView {
         addSubview(menuButton)
         
         NSLayoutConstraint.activate([
-            menuButton.topAnchor.constraint(equalTo: self.topAnchor),
+            menuButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             menuButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.058)),
             menuButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
             menuButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
         ])
     }
-        
-    func setupIslamicDateLabel() {
-        addSubview(islamicDateLabel)
-        
-        NSLayoutConstraint.activate([
-            islamicDateLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            islamicDateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            islamicDateLabel.heightAnchor.constraint(equalToConstant: (LayoutConstants.screenHeight * 0.02)),
-            islamicDateLabel.widthAnchor.constraint(equalToConstant: (LayoutConstants.screenWidth * 0.4))
-        ])
-    }
-    
-    func setupDateLabel() {
-        addSubview(dateLabel)
-        
-        NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: islamicDateLabel.bottomAnchor),
-            dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            dateLabel.heightAnchor.constraint(equalToConstant: (LayoutConstants.screenHeight * 0.03)),
-            dateLabel.widthAnchor.constraint(equalToConstant: (LayoutConstants.screenWidth * 0.27))
-        
-        ])
-    }
-    
-    func setupBillButton() {
-        addSubview(billButton)
-        
-        NSLayoutConstraint.activate([
-            billButton.topAnchor.constraint(equalTo: self.topAnchor),
-            billButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: (LayoutConstants.screenWidth * 0.058)),
-            billButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
-            billButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
-        ])
-    }
-
 }

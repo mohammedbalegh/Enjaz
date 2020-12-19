@@ -3,10 +3,11 @@ import UIKit
 
 class TasksView: UIView {
 
-    let cards: CardCollectionView = {
-        let layout = RightToLiftFlowLayout()
+    let cards: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let cv = CardCollectionView(frame: .zero, collectionViewLayout: layout)
+		
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CardCell.self, forCellWithReuseIdentifier: "cardCell")
         cv.backgroundColor = .rootTabBarScreensBackgroundColor
         cv.showsHorizontalScrollIndicator = false

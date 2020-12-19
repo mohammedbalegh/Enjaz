@@ -10,16 +10,6 @@ class NewAdditionScreenVC: UIViewController {
 		scrollView.backgroundColor = .rootTabBarScreensBackgroundColor
 		return scrollView
 	}()
-	var titleLabel: UILabel = {
-		var label = UILabel(frame: .zero)
-		label.translatesAutoresizingMaskIntoConstraints = false
-		
-		label.text = "إضافة جديدة"
-		label.font = UIFont.systemFont(ofSize: 18)
-		label.textColor = .accentColor
-		
-		return label
-	}()
 	var setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
 	var setStickerBtn = RoundBtn(image: UIImage(named: "stickerIconBlue"), size: LayoutConstants.screenHeight * 0.03)
 	var imageAndStickerPopup = ImageAndStickerPickerPopup()
@@ -43,7 +33,14 @@ class NewAdditionScreenVC: UIViewController {
 		
 		return pickerPopup
 	}()
-	var additionDateAndTimeInput = AddTaskTextField(fieldName: "التاريخ و الوقت")
+	lazy var additionDateAndTimeInput: AddTaskTextField = {
+		let textField = AddTaskTextField(fieldName: "التاريخ و الوقت")
+		
+		textField.delegate = self
+		textField.addTarget(self, action: #selector(onAdditionDateAndTimeInputTap), for: .allTouchEvents)
+		
+		return textField
+	}()
 	var additionDescriptionTextField = AddTaskTextField(fieldName: "الوصف", height: 160)
 	lazy var textFieldsVSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [additionNameTextField, additionTypeTextField, additionDateAndTimeInput, additionDescriptionTextField])
@@ -71,7 +68,6 @@ class NewAdditionScreenVC: UIViewController {
 	
 	func setupSubviews() {
 		setupScrollView()
-		setupTitleLabel()
 		setupSetImageButton()
 		setupSetStickerButton()
 		setupTextFieldsVSV()
@@ -82,21 +78,12 @@ class NewAdditionScreenVC: UIViewController {
 
 		scrollView.fillSuperView()
 	}
-	
-	func setupTitleLabel() {
-		view.addSubview(titleLabel)
 		
-		NSLayoutConstraint.activate([
-			titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.05)
-		])
-	}
-	
 	func setupSetImageButton() {
 		view.addSubview(setImageBtn)
 				
 		NSLayoutConstraint.activate([
-			setImageBtn.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 45),
+			setImageBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight - LayoutConstants.toolBarHeight * 0.25),
 			setImageBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 		])
 		
@@ -155,6 +142,10 @@ class NewAdditionScreenVC: UIViewController {
 		additionTypePickerPopup.picker.selectRow(selectedAdditionTypeIndex, inComponent: 0, animated: false)
 	}
 	
+	@objc func onAdditionDateAndTimeInputTap() {
+		present(SetDateAndTimeScreenVC(), animated: true, completion: nil)
+	}
+	
 	@objc func onAdditionTypeSelection() {
 		let selectedValueIndex = additionTypePickerPopup.picker.selectedRow(inComponent: 0)
 		selectedAdditionTypeIndex = selectedValueIndex
@@ -189,9 +180,6 @@ extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
 
 extension NewAdditionScreenVC: UITextFieldDelegate {
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		if textField == additionTypeTextField {
-			return false; // Do not show keyboard nor cursor
-		}
-		return true
+		return false
 	}
 }

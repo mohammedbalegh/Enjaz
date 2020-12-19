@@ -13,10 +13,9 @@ class HomeScreenVC: UIViewController {
         TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true),
         TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true),
         TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true)
-        
     ]
     
-    let cardPopup = CardPopup(frame: .zero)
+	let cardPopup = CardPopup(hideOnOverlayTap: true)
     let collectionHeight = LayoutConstants.screenHeight * 0.238
     
     lazy var welcomeBadge: WelcomeBadgeView = {
@@ -109,7 +108,7 @@ class HomeScreenVC: UIViewController {
         
         NSLayoutConstraint.activate([
             welcomeBadge.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.053)),
-            welcomeBadge.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (LayoutConstants.screenHeight * 0.115)),
+			welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight),
             welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.05),
             welcomeBadge.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.6)
         ])
@@ -152,18 +151,11 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CardCell
-        self.cardPopup.show(inside: view)
+        self.cardPopup.show()
         cardPopup.image.image = cell.image.image
         cardPopup.titleLabel.text = cell.cardInfo.titleLabel.text
         cardPopup.typeLabel.text = cell.cardInfo.typeLabel.text
         cardPopup.timeLabel.text = cell.cardInfo.timeLabel.text
-
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
-        cardPopup.blurOverlay.addGestureRecognizer(tap)
     }
     
-    @objc func dismissPopup() {
-        cardPopup.hide()
-    }
-
 }
