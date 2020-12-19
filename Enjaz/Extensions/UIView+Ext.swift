@@ -2,31 +2,37 @@ import UIKit
 
 // MARK: Constraints
 extension UIView {
-	func assertSuperViewIsNotNil() {
-		assert(superview != nil, "Attempting to set constraints to a \(type(of: self)) before adding it to a superView")
+	func throwNoSuperviewError() {
+		fatalError("Attempting to set constraints to a \(type(of: self)) before adding it to a superView")
 	}
 	
 	func fillScreen() {
-		assertSuperViewIsNotNil()
+		guard let superview = superview else {
+			throwNoSuperviewError()
+			return
+		}
 		disableAutoresizingMaskTranslationIfEnabled()
 		
 		NSLayoutConstraint.activate([
 			heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight),
 			widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth),
-			centerXAnchor.constraint(equalTo: superview!.centerXAnchor),
-			centerYAnchor.constraint(equalTo: superview!.centerYAnchor),
+			centerXAnchor.constraint(equalTo: superview.centerXAnchor),
+			centerYAnchor.constraint(equalTo: superview.centerYAnchor),
 		])
 	}
 	
 	func fillSuperView() {
-		assertSuperViewIsNotNil()
+		guard let superview = superview else {
+			throwNoSuperviewError()
+			return
+		}
 		disableAutoresizingMaskTranslationIfEnabled()
 		
 		NSLayoutConstraint.activate([
-			topAnchor.constraint(equalTo: superview!.topAnchor),
-			leftAnchor.constraint(equalTo: superview!.leftAnchor),
-			bottomAnchor.constraint(equalTo: superview!.bottomAnchor),
-			rightAnchor.constraint(equalTo: superview!.rightAnchor),
+			topAnchor.constraint(equalTo: superview.topAnchor),
+			leftAnchor.constraint(equalTo: superview.leftAnchor),
+			bottomAnchor.constraint(equalTo: superview.bottomAnchor),
+			rightAnchor.constraint(equalTo: superview.rightAnchor),
 		])
 	}
 	
@@ -98,6 +104,40 @@ extension UIView {
 		if centerY { constraints.append(centerYAnchor.constraint(equalTo: view.centerYAnchor)) }
 			
 		NSLayoutConstraint.activate(constraints)
+	}
+	
+	func constrainToSuperviewCorner(cornerPosition: UIRectCorner) {
+		guard let superview = superview else {
+			throwNoSuperviewError()
+			return
+		}
+		disableAutoresizingMaskTranslationIfEnabled()
+		
+		let cornerRadius = superview.layer.cornerRadius
+		
+		let cornerRadiusInset = cornerRadius / 4
+		
+		if cornerPosition == .topLeft {
+			NSLayoutConstraint.activate([
+				centerYAnchor.constraint(equalTo: superview.topAnchor, constant: cornerRadiusInset),
+				centerXAnchor.constraint(equalTo: superview.leftAnchor, constant: cornerRadiusInset),
+			])
+		} else if cornerPosition == .bottomLeft {
+			NSLayoutConstraint.activate([
+				centerXAnchor.constraint(equalTo: superview.leftAnchor, constant: cornerRadiusInset),
+				centerYAnchor.constraint(equalTo: superview.bottomAnchor, constant: -cornerRadiusInset),
+			])
+		} else if cornerPosition == .bottomRight {
+			NSLayoutConstraint.activate([
+				centerXAnchor.constraint(equalTo: superview.rightAnchor, constant: -cornerRadiusInset),
+				centerYAnchor.constraint(equalTo: superview.bottomAnchor, constant: -cornerRadiusInset),
+			])
+		} else if cornerPosition == .topRight {
+			NSLayoutConstraint.activate([
+				centerYAnchor.constraint(equalTo: superview.topAnchor, constant: cornerRadiusInset),
+				centerXAnchor.constraint(equalTo: superview.rightAnchor, constant: -cornerRadiusInset),
+			])
+		}
 	}
 	
 	private func disableAutoresizingMaskTranslationIfEnabled() {

@@ -8,19 +8,15 @@ class OAuthBtn : UIButton {
 	
 	var type : oAuthBtnType?
 	let size : CGFloat = 45
-		
-	private override init(frame: CGRect) {
-		super.init(frame: frame)
-	}
-	
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
 	
 	init(type: oAuthBtnType) {
 		super.init(frame: .zero)
 		self.type = type
 		translatesAutoresizingMaskIntoConstraints = false
+	}
+	
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
 	}
 	
 	override func didMoveToWindow() {

@@ -68,7 +68,7 @@ class PasswordResetScreenVC: UIViewController {
 		return stackView
 	}()
 	var resetPasswordPopup: ResetPasswordPopup = {
-		let popup = ResetPasswordPopup(frame: .zero)
+		let popup = ResetPasswordPopup(hideOnOverlayTap: false)
 		popup.backToLoginBtn.addTarget(self, action: #selector(navigateBackToLoginScreen), for: .touchUpInside)
 		return popup
 	}()
@@ -131,7 +131,7 @@ class PasswordResetScreenVC: UIViewController {
 			textFieldsVSV.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor),
 		])
 	}
-		
+	
 	func setupControlBtnsVSV() {
 		view.addSubview(controlBtnsVSV)
 		controlBtnsVSV.translatesAutoresizingMaskIntoConstraints = false
@@ -143,8 +143,8 @@ class PasswordResetScreenVC: UIViewController {
 			controlBtnsVSV.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
 		])
 	}
-			
-	//MARK: Event Handlers
+	
+	// MARK: Event Handlers
 	
 	@objc func onNextBtnTap() {
 		subTitleLabel.text = "ادخل اسم المستخدم و كلمة السر"
@@ -161,9 +161,7 @@ class PasswordResetScreenVC: UIViewController {
 	}
 	
 	@objc func onStartBtnTap() {
-		view.addSubview(resetPasswordPopup)
-		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
-		resetPasswordPopup.blurOverlay.addGestureRecognizer(tap)
+		resetPasswordPopup.show()
 	}
 		
 	@objc func onBackBtnTap() {
@@ -171,7 +169,7 @@ class PasswordResetScreenVC: UIViewController {
 	}
 	
 	@objc func dismissPopup() {
-		resetPasswordPopup.removeFromSuperview()
+		resetPasswordPopup.hide()
 	}
 	
 	@objc func navigateBackToLoginScreen() {

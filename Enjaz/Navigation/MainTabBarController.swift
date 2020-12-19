@@ -3,19 +3,39 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    let floatingButton: UIButton = {
+    lazy var floatingBtn: UIButton = {
         let button = UIButton(type: .custom)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.setImage(UIImage(named:"floatingImage"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+        button.setBackgroundImage(UIImage(named:"floatingNewAdditionBtn"), for: .normal)
+		
+		button.layer.shadowColor = UIColor.accentColor.cgColor
+		button.layer.shadowOffset = CGSize(width: 0, height: 5)
+		button.layer.shadowOpacity = 0.5
+		button.layer.shadowRadius = 6
+		button.layer.masksToBounds = false
+		
+		button.addTarget(self, action: #selector(onFloatingBtnTap), for: .touchUpInside)
+        
         return button
     }()
-
+	let newAdditionScreenVC = NewAdditionScreenVC()
+	
+	// Override selectedViewController for User initiated changes
+	override var selectedViewController: UIViewController? {
+		didSet {
+			tabChangedTo(selectedIndex: selectedIndex)
+		}
+	}
+	// Override selectedIndex for Programmatic changes
+	override var selectedIndex: Int {
+		didSet {
+			tabChangedTo(selectedIndex: selectedIndex)
+		}
+	}
+		
     override func viewDidLoad() {
         super.viewDidLoad()
-		view.tintColor = .accentColor
         configureTabBar()
     }
     
@@ -25,31 +45,72 @@ class MainTabBarController: UITabBarController {
         tabBar.frame.origin.y = view.frame.height - 95
         setupFloatingButton()
     }
-    
+	    
     func configureTabBar() {
         setValue(MainTabBar(), forKey: "TabBar")
-        viewControllers = [GoalsScreenVC(), MonthlyPlanScreenVC(), UIViewController(), CalendarScreenVC(), HomeScreenVC()]
-        
-        tabBar.items![0].image = UIImage(named: "HomeIcon")
-        tabBar.items![1].image = UIImage(named: "CalendarIcon")
-        tabBar.items![3].image = UIImage(named: "GraphIcon")
-		tabBar.items![4].image = UIImage(named: "CategoryIcon")
+		
+		let homeScreenVC = HomeScreenVC()
+		let calendarScreenVC = CalendarScreenVC()
+		let goalsScreenVC = GoalsScreenVC()
+		let monthlyPlanScreenVC = MonthlyPlanScreenVC()
+		
+		setTabBarIcon(for: homeScreenVC, withImageName: "homeIcon")
+		setTabBarIcon(for: calendarScreenVC, withImageName: "calendarIcon")
+		setTabBarIcon(for: goalsScreenVC, withImageName: "graphIcon")
+		setTabBarIcon(for: monthlyPlanScreenVC, withImageName: "categoryIcon")
+				
+		viewControllers = [homeScreenVC, calendarScreenVC, newAdditionScreenVC, goalsScreenVC, monthlyPlanScreenVC]
+		
+		// Disable the NewAdditionScreen tab bar item, because the screen is accessed through the floating button.
+		tabBar.items?[2].isEnabled = false
     }
-    
+	    
     func setupFloatingButton() {
-        view.addSubview(floatingButton)
-        floatingButton.addTarget(self, action: #selector(floatingButtonClicked), for: .touchUpInside)
-        let size = LayoutConstants.screenWidth * 0.25
+        view.addSubview(floatingBtn)
+        		
+        let size = LayoutConstants.screenWidth * 0.18
+		
         NSLayoutConstraint.activate([
-            floatingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            floatingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-            floatingButton.heightAnchor.constraint(equalToConstant: size),
-            floatingButton.widthAnchor.constraint(equalToConstant: size)
+            floatingBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            floatingBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -65),
+            floatingBtn.heightAnchor.constraint(equalToConstant: size),
+            floatingBtn.widthAnchor.constraint(equalToConstant: size)
         ])
     }
-    
-    @objc func floatingButtonClicked() {
-        print("button clicked")
+	
+	func setTabBarIcon(for viewController: UIViewController, withImageName imageName: String) {
+		viewController.tabBarItem.image = UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal)
+		viewController.tabBarItem.selectedImage = UIImage(named: "\(imageName)@selected")?.withRenderingMode(.alwaysOriginal)
+	}
+	
+	@objc func onFloatingBtnTap() {
+		let newAdditionScreenIsSelected = selectedIndex == 2
+		if newAdditionScreenIsSelected {
+			newAdditionScreenVC.onSaveBtnTap()
+			return
+		}
+		navigateToNewAdditionScreen()
     }
-    
+	
+	// MARK: Tools
+	
+	// Handle new selection
+	func tabChangedTo(selectedIndex: Int) {
+		let newAdditionScreenIsSelected = selectedIndex == 2
+		newAdditionScreenIsSelected
+			? setupFloatingBtnAsNewAdditionScreenSaveBtn()
+			: setupFloatingBtnAsNewAdditionScreenTabBarItem()
+	}
+	
+	func setupFloatingBtnAsNewAdditionScreenTabBarItem() {
+		floatingBtn.setBackgroundImage(UIImage(named:"floatingNewAdditionBtn"), for: .normal)
+	}
+	
+	func setupFloatingBtnAsNewAdditionScreenSaveBtn() {
+		floatingBtn.setBackgroundImage(UIImage(named: "floatingSaveButton"), for: .normal)
+	}
+		
+	func navigateToNewAdditionScreen() {
+		selectedIndex = 2
+	}
 }

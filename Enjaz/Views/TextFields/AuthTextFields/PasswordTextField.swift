@@ -9,7 +9,7 @@ class PasswordTextField: AuthTextField {
 		super.init()
 		
 		minimumLength = 8
-
+		
 		fieldName = "الرمز السري"
 		textField.textContentType = .password
 		textField.isSecureTextEntry = true
