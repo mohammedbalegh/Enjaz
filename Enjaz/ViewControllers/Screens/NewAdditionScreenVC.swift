@@ -41,14 +41,14 @@ class NewAdditionScreenVC: UIViewController {
 		
 		return textField
 	}()
-	var additionDescriptionTextField = AddTaskTextField(fieldName: "الوصف", height: 160)
+	var additionDescriptionTextField = AddTaskTextField(fieldName: "الوصف", height: LayoutConstants.screenHeight * 0.17)
 	lazy var textFieldsVSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [additionNameTextField, additionTypeTextField, additionDateAndTimeInput, additionDescriptionTextField])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		
 		stackView.axis = .vertical
 		stackView.distribution = .fillProportionally
-		stackView.spacing = 40
+		stackView.spacing = LayoutConstants.screenHeight * 0.04
 		
 		return stackView
 	}()
