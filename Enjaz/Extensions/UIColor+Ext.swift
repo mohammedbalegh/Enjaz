@@ -20,6 +20,7 @@ extension UIColor {
 	}
 	
 	static let accentColor = UIColor(hex: 0x12B3B9)
+    static let rootTabBarScreensBackgroundColor = UIColor(hex: 0xF9F9F9)
 	
 }
 

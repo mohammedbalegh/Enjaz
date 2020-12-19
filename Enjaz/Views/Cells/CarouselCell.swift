@@ -40,7 +40,7 @@ class CarouselCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             carouselImage.topAnchor.constraint(equalTo: contentView.topAnchor),
             carouselImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            carouselImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            carouselImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             carouselImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }

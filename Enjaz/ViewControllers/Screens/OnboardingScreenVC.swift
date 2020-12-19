@@ -11,7 +11,6 @@ class OnboardingScreenVC: UIViewController {
         pageControl.pageIndicatorTintColor = .gray
 		pageControl.currentPageIndicatorTintColor = .accentColor
         pageControl.numberOfPages = 4
-        pageControl.currentPage = 0
         pageControl.subviews.forEach {
             $0.transform = CGAffineTransform(scaleX: 2, y: 2)
         }
@@ -98,7 +97,7 @@ class OnboardingScreenVC: UIViewController {
             pageControl.bottomAnchor.constraint(equalTo: loginBtn.topAnchor, constant: -(LayoutConstants.screenHeight * 0.03)),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 10),
-            pageControl.widthAnchor.constraint(equalToConstant: 140)
+            pageControl.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.35)
         ])
     }
     
@@ -241,7 +240,6 @@ extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionVi
        }
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
-        
     }
     
 }

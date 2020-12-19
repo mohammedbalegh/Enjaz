@@ -12,7 +12,6 @@ class MainTabBar: UITabBar {
     private func addShape() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
-        shapeLayer.strokeColor = UIColor.lightGray.cgColor
         shapeLayer.fillColor = UIColor.white.cgColor
         shapeLayer.lineWidth = 1.0
         
@@ -23,7 +22,6 @@ class MainTabBar: UITabBar {
         }
         self.shapeLayer = shapeLayer
     }
-    
     
     func createPath() -> CGPath {
         let height: CGFloat = 40
