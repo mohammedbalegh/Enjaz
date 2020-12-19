@@ -6,5 +6,9 @@ class CalendarScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBlue
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 
 }
