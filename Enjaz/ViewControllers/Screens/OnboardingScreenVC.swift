@@ -9,7 +9,8 @@ class OnboardingScreenVC: UIViewController {
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .gray
-		pageControl.currentPageIndicatorTintColor = .accentColor
+        pageControl.semanticContentAttribute = .forceLeftToRight
+        pageControl.currentPageIndicatorTintColor = .accentColor
         pageControl.numberOfPages = 4
         pageControl.subviews.forEach {
             $0.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -87,17 +88,17 @@ class OnboardingScreenVC: UIViewController {
         setupSecondaryLabel()
         setupMainLabel()
         setupPageControl()
-        timer()
+        //        timer()
     }
-        
+    
     func setupPageControl() {
         view.addSubview(pageControl)
         
         NSLayoutConstraint.activate([
             pageControl.bottomAnchor.constraint(equalTo: loginBtn.topAnchor, constant: -(LayoutConstants.screenHeight * 0.03)),
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 10),
-            pageControl.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.35)
+            pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -155,7 +156,7 @@ class OnboardingScreenVC: UIViewController {
             loginBtn.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.57),
             loginBtn.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.05)
         ])
-
+        
     }
     
     func setupLogo() {
@@ -189,19 +190,19 @@ class OnboardingScreenVC: UIViewController {
         carousel.scrollToItem(at: centerIndexPath, at: .centeredHorizontally, animated: true)
     }
     
-    func timer() {
-        let _ = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(scrollToPoint), userInfo: nil, repeats: true)
-    }
+    //    func timer() {
+    //        let _ = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(scrollToPoint), userInfo: nil, repeats: true)
+    //    }
+    //
+    //    @objc func scrollToPoint() {
+    //        DispatchQueue.main.async {
+    //            if self.carousel.contentOffset.x <= 900 {
+    //                self.carousel.setContentOffset(CGPoint(x: self.carousel.contentOffset.x +   self.view.frame.width, y: self.carousel.contentOffset.y), animated:true)
+    //                print(self.carousel.contentOffset.x)
+    //            }
+    //        }
+    //        }
     
-    @objc func scrollToPoint() {
-        DispatchQueue.main.async {
-            if self.carousel.contentOffset.x <= 900 {
-                self.carousel.setContentOffset(CGPoint(x: self.carousel.contentOffset.x +   self.view.frame.width, y: self.carousel.contentOffset.y), animated:true)
-                print(self.carousel.contentOffset.x)
-            }
-        }
-    }
-
 }
 
 extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
@@ -225,19 +226,20 @@ extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       if scrollView.contentOffset.x < 220{
-        mainLabel.text = carouselCard.mainLabel[0]
-        secondaryLabel.text = carouselCard.secondaryLabel[0]
-       } else if scrollView.contentOffset.x < 640 {
-        mainLabel.text = carouselCard.mainLabel[1]
-        secondaryLabel.text = carouselCard.secondaryLabel[1]
-       } else if scrollView.contentOffset.x < 1060 {
-        mainLabel.text = carouselCard.mainLabel[2]
-        secondaryLabel.text = carouselCard.secondaryLabel[2]
-       } else if scrollView.contentOffset.x > 1060 {
-        mainLabel.text = carouselCard.mainLabel[3]
-        secondaryLabel.text = carouselCard.secondaryLabel[3]
-       }
+        scrollView.semanticContentAttribute = .forceLeftToRight
+        if scrollView.contentOffset.x < 220{
+            mainLabel.text = carouselCard.mainLabel[0]
+            secondaryLabel.text = carouselCard.secondaryLabel[0]
+        } else if scrollView.contentOffset.x < 640 {
+            mainLabel.text = carouselCard.mainLabel[1]
+            secondaryLabel.text = carouselCard.secondaryLabel[1]
+        } else if scrollView.contentOffset.x < 1060 {
+            mainLabel.text = carouselCard.mainLabel[2]
+            secondaryLabel.text = carouselCard.secondaryLabel[2]
+        } else if scrollView.contentOffset.x > 1060 {
+            mainLabel.text = carouselCard.mainLabel[3]
+            secondaryLabel.text = carouselCard.secondaryLabel[3]
+        }
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = Int(pageNumber)
     }

@@ -5,8 +5,7 @@ class TasksView: UIView {
 
     let cards: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-		
+        layout.scrollDirection = .horizontal		
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(CardCell.self, forCellWithReuseIdentifier: "cardCell")
         cv.backgroundColor = .rootTabBarScreensBackgroundColor
@@ -39,7 +38,7 @@ class TasksView: UIView {
         addSubview(cards)
         
         NSLayoutConstraint.activate([
-            cards.topAnchor.constraint(equalTo: collectionTopBar.bottomAnchor, constant: LayoutConstants.screenHeight * 0.033),
+            cards.topAnchor.constraint(equalTo: collectionTopBar.bottomAnchor, constant: LayoutConstants.screenHeight * 0.02),
             cards.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             cards.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cards.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -49,7 +48,7 @@ class TasksView: UIView {
     func setupCollectionTopBar() {
         addSubview(collectionTopBar)
         let width = LayoutConstants.screenWidth * 0.88
-        let height =  width * 0.063
+        let height =  width * 0.03
         
         NSLayoutConstraint.activate([
             collectionTopBar.topAnchor.constraint(equalTo: self.topAnchor),
