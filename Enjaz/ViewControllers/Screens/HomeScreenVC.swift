@@ -56,6 +56,14 @@ class HomeScreenVC: UIViewController {
         setupSubviews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateItemModels()
+        dailyTaskView.cards.reloadData()
+        dailyDemahView.cards.reloadData()
+    }
+    
     func updateItemModels() {
         let itemModels = RealmManager.retrieveItems()
         taskModels = []
@@ -159,7 +167,7 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
         self.cardPopup.show()
         cardPopup.image.image = cell.image.image
         cardPopup.titleLabel.text = cell.cardInfo.titleLabel.text
-        cardPopup.typeLabel.text = cell.cardInfo.typeLabel.text
+        cardPopup.typeLabel.text = cell.cardInfo.categoryLabel.text
         cardPopup.timeLabel.text = cell.cardInfo.timeLabel.text
     }
     

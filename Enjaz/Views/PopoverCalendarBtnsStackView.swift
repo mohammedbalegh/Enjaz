@@ -5,7 +5,6 @@ class PopoverCalendarBtnsStackView: UIStackView {
 	
 	lazy var calendarTypePopoverBtn: PopoverBtn = {
 		let button = PopoverBtn(frame: CGRect(x: 0, y: 0, width: 100, height: frame.height))
-		button.label.text = "التقويم الهجري"
 		button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
 		
 		return button
@@ -13,7 +12,6 @@ class PopoverCalendarBtnsStackView: UIStackView {
 	
 	lazy var monthPopoverBtn: PopoverBtn = {
 		let button = PopoverBtn(frame: CGRect(x: 0, y: 0, width: 70, height: frame.height))
-		button.label.text = "ربيع الأول"
 		button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
 		
 		return button
@@ -21,7 +19,6 @@ class PopoverCalendarBtnsStackView: UIStackView {
 	
 	lazy var yearPopoverBtn: PopoverBtn = {
 		let button = PopoverBtn(frame: CGRect(x: 0, y: 0, width: 55, height: frame.height))
-		button.label.text = "1441"
 		button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
 		
 		return button
