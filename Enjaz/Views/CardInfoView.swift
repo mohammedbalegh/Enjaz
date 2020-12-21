@@ -14,7 +14,7 @@ class CardInfoView: UIView {
         return label
     }()
     
-    let typeLabel: UILabel = {
+    let categoryLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = label.font.withSize(10)
@@ -72,18 +72,18 @@ class CardInfoView: UIView {
     }
     
     func setupTypeLabel() {
-        addSubview(typeLabel)
+        addSubview(categoryLabel)
         
         DispatchQueue.main.async {
-            self.typeLabel.layer.cornerRadius = self.typeLabel.frame.size.height/2;
+            self.categoryLabel.layer.cornerRadius = self.categoryLabel.frame.size.height/2;
         }
-        typeLabel.lineBreakMode = .byClipping
+        categoryLabel.lineBreakMode = .byClipping
         
         NSLayoutConstraint.activate([
-            typeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant:  self.bounds.height * 0.15),
-            typeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            typeLabel.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.3),
-            typeLabel.heightAnchor.constraint(equalToConstant: 15)
+            categoryLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant:  self.bounds.height * 0.15),
+            categoryLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            categoryLabel.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.3),
+            categoryLabel.heightAnchor.constraint(equalToConstant: 15)
         ])
     }
     
@@ -91,7 +91,7 @@ class CardInfoView: UIView {
         addSubview(timeLabel)
         
         NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: self.bounds.height * 0.15 ),
+            timeLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: self.bounds.height * 0.15 ),
             timeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             timeLabel.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.444),
             timeLabel.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.19)

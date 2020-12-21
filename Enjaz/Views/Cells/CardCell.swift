@@ -7,8 +7,8 @@ class CardCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            image.image = UIImage(named: viewModel.image_id)
-            cardInfo.typeLabel.text = "ديني"
+            image.image = UIImage(named: (ImageIdConstants[viewModel.image_id]) ?? "")
+            cardInfo.categoryLabel.text = ItemCategoryConstants[viewModel.category]
             cardInfo.titleLabel.text = viewModel.name
             let date = Date()
             let formatter = DateFormatter()

@@ -70,6 +70,9 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     
     let saveBtn = PrimaryBtn(label: "حفظ", theme: .blue)
     
+    var selectedTypeId = -1
+    
+    var delegate: NewAdditionScreenModalDelegate?
     
     
     override func viewDidLoad() {
@@ -123,13 +126,33 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
             saveBtn.widthAnchor.constraint(equalToConstant: width),
             saveBtn.heightAnchor.constraint(equalToConstant: width * 0.182)
         ])
+        
+        saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
     }
     
     func onCardSelect(cardId selectedCardId: Int) {
+        selectedTypeId = selectedCardId
         taskCard.selectedId = selectedCardId
         demahCard.selectedId = selectedCardId
         goalCard.selectedId = selectedCardId
         achievementCard.selectedId = selectedCardId
+    }
+    
+    func showDateInPastAlert() {
+        let alert = UIAlertController(title: "خطأ", message: "لم يتم اختيار نوع", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "حسناً", style: UIAlertAction.Style.default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func onSaveBtnTap() {
+        if selectedTypeId == -1 {
+            showDateInPastAlert()
+            
+            return
+        }
+        delegate?.onTypeSaveBtnTap(id: selectedTypeId)
+        dismiss(animated: true)
     }
     
 }

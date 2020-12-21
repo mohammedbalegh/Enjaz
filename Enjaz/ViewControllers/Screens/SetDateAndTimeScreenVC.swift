@@ -77,21 +77,24 @@ class SetDateAndTimeScreenVC: UIViewController {
 	var selectedYearIndex = 0
     var selectedTimePickerIndex = 0
 	
-    var delegate: SetDateAndTimeScreenModalDelegate?
-    
+    var delegate: NewAdditionScreenModalDelegate?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
         hourPicker.dataSource = self
         hourPicker.delegate = self
-        
+                
         setupSubviews()
 		setupCalendarView()
 		setMonthPopoverDataSource()
 		setYearPopoverDataSource()
 		
+        setPopoverBtnsDefaultLables()
+        
 		updateMonthDays()
+        
     }
 
     func setupSubviews() {
@@ -300,6 +303,12 @@ class SetDateAndTimeScreenVC: UIViewController {
 		
 		updateMonthDays()
 	}
+    
+    func setPopoverBtnsDefaultLables() {
+        calendarView.popoverCalendarBtnsHSV.calendarTypePopoverBtn.label.text = calendarTypePopoverDataSource[0]
+        calendarView.popoverCalendarBtnsHSV.monthPopoverBtn.label.text = monthPopoverDataSource[0]
+        calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.label.text = yearPopoverDataSource[0]
+    }
 	
 	func updateMonthDays() {
 		let calendarType: NSCalendar.Identifier = selectedCalendarTypeIndex == 0 ? .islamicCivil : .gregorian

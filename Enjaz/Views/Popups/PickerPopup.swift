@@ -12,7 +12,7 @@ class PickerPopup: Popup {
 		let button = UIButton(type: .system)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
-		button.setTitle("اختيار", for: .normal)
+        button.setTitle("اختيار", for: .normal)
 		button.setTitleColor(.accentColor, for: .normal)
 		button.titleLabel?.font = .systemFont(ofSize: 18)
 		
