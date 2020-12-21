@@ -85,7 +85,7 @@ class NavBarTabView: UIView {
     
     func dateInIslamic() -> String {
         let today = Date()
-        let islamic = Calendar(identifier:.islamic)
+        let islamic = Calendar(identifier: .islamic)
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.dateFormat = "dd MMMM"

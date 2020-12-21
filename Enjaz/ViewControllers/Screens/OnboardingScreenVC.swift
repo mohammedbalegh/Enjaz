@@ -203,6 +203,17 @@ class OnboardingScreenVC: UIViewController {
     //        }
     //        }
     
+<<<<<<< HEAD
+=======
+    @objc func scrollToPoint() {
+        DispatchQueue.main.async {
+            if self.carousel.contentOffset.x <= 900 {
+                self.carousel.setContentOffset(CGPoint(x: self.carousel.contentOffset.x +   self.view.frame.width, y: self.carousel.contentOffset.y), animated:true)
+            }
+        }
+    }
+
+>>>>>>> calendarComponent
 }
 
 extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {

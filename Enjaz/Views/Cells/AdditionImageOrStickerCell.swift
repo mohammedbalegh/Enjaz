@@ -15,7 +15,7 @@ class AdditionImageOrStickerCell: UICollectionViewCell {
 	let checkMarkImageView = UIImageView(image: UIImage(named: "smallCheckMarkImage"))
 	
 	override init(frame: CGRect) {
-		super.init(frame: CGRect(x: 0, y: 0, width: LayoutConstants.screenHeight * 0.4, height: LayoutConstants.screenHeight * 0.4))
+		super.init(frame: frame)
 		translatesAutoresizingMaskIntoConstraints = false
 		backgroundColor = UIColor(hex: 0xF7F7F7)
 		setup()
