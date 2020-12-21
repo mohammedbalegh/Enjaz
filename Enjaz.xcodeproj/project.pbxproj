@@ -288,7 +288,6 @@
 				BCAAC979257593E8008B52C8 /* Extensions */,
 				BCDD83F82590B1A20026E113 /* Protocols */,
 				BCAAC97F25759622008B52C8 /* Constants */,
-				419120F52590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift */,
 			);
 			path = Enjaz;
 			sourceTree = "<group>";
@@ -470,6 +469,7 @@
 		BCDD83F82590B1A20026E113 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				419120F52590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift */,
 				BCDD83F92590B1EE0026E113 /* SetDateAndTimeScreenModalDelegate.swift */,
 			);
 			path = Protocols;
