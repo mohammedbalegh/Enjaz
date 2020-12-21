@@ -1,20 +1,12 @@
 import UIKit
+import RealmSwift
 
 class HomeScreenVC: UIViewController {
     
-    let taskCardModels: [TaskCardModel] = [
-        TaskCardModel(image: #imageLiteral(resourceName: "mosque"), title: "حفظ 5 صفحات من القرآن", type: "ديني", date: "الساعة    03:00", description: "", checkBtnIsHidden: true),
-        
-        TaskCardModel(image: #imageLiteral(resourceName: "familyIcon"), title: "زيارة جدتي", type: "أجتماعي", date: "الساعة  05:00", description: "", checkBtnIsHidden: true)
-    ]
+    var taskModels: [ItemModel] = []
+    var demahModels: [ItemModel] = []
     
-    let demahCardModels: [TaskCardModel] = [
-        TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true),
-        TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true),
-        TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true),
-        TaskCardModel(image: #imageLiteral(resourceName: "fireworksIcon"), title: "مشاهدة المسلسل", type: "ترفيهي", date: "الساعة 05:00", description: "", checkBtnIsHidden: true)
-    ]
-    
+
 	let cardPopup = CardPopup(hideOnOverlayTap: true)
     let collectionHeight = LayoutConstants.screenHeight * 0.238
     
@@ -34,17 +26,17 @@ class HomeScreenVC: UIViewController {
         return view
     }()
     
-    lazy var dailyTaskView: TasksView = {
-        let view = TasksView()
+    lazy var dailyTaskView: ItemsView = {
+        let view = ItemsView()
         view.collectionTopBar.typeLabel.text = "مهام اليوم"
-        view.collectionTopBar.tasksCountLabel.text = "\(self.taskCardModels.count)"
+        view.collectionTopBar.tasksCountLabel.text = "\(taskModels.count)"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var dailyDemahView: TasksView = {
-        let view = TasksView()
-        view.collectionTopBar.tasksCountLabel.text = "\(self.demahCardModels.count)"
+    lazy var dailyDemahView: ItemsView = {
+        let view = ItemsView()
+        view.collectionTopBar.tasksCountLabel.text = "\(demahModels.count)"
         view.collectionTopBar.typeLabel.text = "ديمة اليوم"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -53,11 +45,26 @@ class HomeScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .rootTabBarScreensBackgroundColor
+        updateItemModels()
+        
         dailyTaskView.cards.delegate = self
         dailyTaskView.cards.dataSource = self
         dailyDemahView.cards.delegate = self
         dailyDemahView.cards.dataSource = self
+        
         setupSubviews()
+    }
+    
+    func updateItemModels() {
+        let itemModels = RealmManager.retrieveItems()
+        taskModels = []
+        itemModels.forEach { (itemModel) in
+            if itemModel.type == 0 {
+                taskModels.append(itemModel)
+            } else if itemModel.type == 1 {
+                demahModels.append(itemModel)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,20 +126,17 @@ class HomeScreenVC: UIViewController {
 extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.dailyTaskView.cards {
-            return taskCardModels.count
-        } else {
-            return demahCardModels.count
-        }
         
+        return collectionView == self.dailyDemahView.cards ? demahModels.count : taskModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! CardCell
-        let cardModels = collectionView == self.dailyTaskView.cards ? taskCardModels  : demahCardModels
+        let viewModels = collectionView == self.dailyDemahView.cards ? demahModels : taskModels
         
-        cell.viewModel = cardModels[indexPath.row]
+        cell.viewModel = viewModels[indexPath.row]
+        
         return cell
     }
     
