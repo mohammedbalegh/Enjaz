@@ -5,8 +5,8 @@ class HomeScreenVC: UIViewController {
     var taskModels: [ItemModel] = []
     var demahModels: [ItemModel] = []
     
-
-	let cardPopup = CardPopup(hideOnOverlayTap: true)
+    
+    let cardPopup = CardPopup(hideOnOverlayTap: true)
     let collectionHeight = LayoutConstants.screenHeight * 0.27
     
     lazy var welcomeBadge: WelcomeBadgeView = {
@@ -40,7 +40,7 @@ class HomeScreenVC: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,12 +116,12 @@ class HomeScreenVC: UIViewController {
         
         NSLayoutConstraint.activate([
             welcomeBadge.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
-			welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight),
+            welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight),
             welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
             welcomeBadge.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.6)
         ])
     }
-  
+    
 }
 
 extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
