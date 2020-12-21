@@ -4,7 +4,7 @@ class NewAdditionTextField: UITextField {
 	// MARK: Properties
 		
 	var fieldName = ""
-	var height: CGFloat = max(LayoutConstants.screenHeight * 0.07, 40)
+	var height: CGFloat = LayoutConstants.inputHeight
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -26,20 +26,18 @@ class NewAdditionTextField: UITextField {
 	
 	// MARK: View Setups
 	
-	func setUp() {
-		translatesAutoresizingMaskIntoConstraints = false
-		
-		backgroundColor = .white
-		
-		layer.borderWidth = 1
-		layer.borderColor = UIColor.lightGray.cgColor
-		
-		layer.cornerRadius = height > 80 ? 30 : height / 2
+	func setUp() {		
+//		backgroundColor = .white
+//
+//		layer.borderWidth = 1
+//		layer.borderColor = UIColor.lightGray.cgColor
+//
+//		layer.cornerRadius = height > 80 ? 30 : height / 2
 		
 		setPlaceholder(fieldName)
-		indentText()
+//		indentText()
 		
-		heightAnchor.constraint(equalToConstant: height).isActive = true
+//		heightAnchor.constraint(equalToConstant: height).isActive = true
 		setTextFieldDirectionToMatchSuperView()
 	}
 	

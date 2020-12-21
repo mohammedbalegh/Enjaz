@@ -78,6 +78,8 @@
 		BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */; };
 		BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */; };
 		BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D70258F95720032F2E4 /* EditableTextView.swift */; };
+		BCDD83FA2590B1EE0026E113 /* SetDateAndTimeScreenModalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD83F92590B1EE0026E113 /* SetDateAndTimeScreenModalDelegate.swift */; };
+		BCDD83FF2590CFE00026E113 /* NewAdditionInputFeildContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD83FE2590CFE00026E113 /* NewAdditionInputFeildContainer.swift */; };
 		BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EC22586110600A86330 /* HomeScreenVC.swift */; };
 		BCDE2E9D2587AD7E0040345E /* CalendarScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED82586258B00A86330 /* CalendarScreenVC.swift */; };
 		BCDE2EA12587AD820040345E /* MonthlyPlanScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */; };
@@ -189,6 +191,8 @@
 		BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionScreenVC.swift; sourceTree = "<group>"; };
 		BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBtn.swift; sourceTree = "<group>"; };
 		BCD95D70258F95720032F2E4 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
+		BCDD83F92590B1EE0026E113 /* SetDateAndTimeScreenModalDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateAndTimeScreenModalDelegate.swift; sourceTree = "<group>"; };
+		BCDD83FE2590CFE00026E113 /* NewAdditionInputFeildContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionInputFeildContainer.swift; sourceTree = "<group>"; };
 		BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingScreenVC.swift; sourceTree = "<group>"; };
 		BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreenVC.swift; sourceTree = "<group>"; };
 		C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz_EnjazUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,14 +272,15 @@
 		41C646A8257397BA000327D5 /* Enjaz */ = {
 			isa = PBXGroup;
 			children = (
-				419120C8259039F300CB7BF9 /* Managers */,
 				BCAAC98C25759651008B52C8 /* Support */,
 				BC7EFC3F2587ACCB00F35312 /* ViewControllers */,
 				BC0A87CD2575832A0045A54E /* Views */,
+				419120C8259039F300CB7BF9 /* Managers */,
 				BCDE2EA92587ADEB0040345E /* Models */,
 				BCDE2EAB2587AE970040345E /* Navigation */,
 				BC54008025795B9D009DC69B /* Utilities */,
 				BCAAC979257593E8008B52C8 /* Extensions */,
+				BCDD83F82590B1A20026E113 /* Protocols */,
 				BCAAC97F25759622008B52C8 /* Constants */,
 			);
 			path = Enjaz;
@@ -375,6 +380,7 @@
 				BCB98CEC2588275200B64DC9 /* NewAdditionTextField.swift */,
 				BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */,
 				BCD95D70258F95720032F2E4 /* EditableTextView.swift */,
+				BCDD83FE2590CFE00026E113 /* NewAdditionInputFeildContainer.swift */,
 			);
 			path = InputFeilds;
 			sourceTree = "<group>";
@@ -450,6 +456,14 @@
 				BCBEE8672587D80200D8DE0A /* ResetCodeTextField.swift */,
 			);
 			path = AuthTextFields;
+			sourceTree = "<group>";
+		};
+		BCDD83F82590B1A20026E113 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BCDD83F92590B1EE0026E113 /* SetDateAndTimeScreenModalDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		BCDE2EA92587ADEB0040345E /* Models */ = {
@@ -748,10 +762,12 @@
 				BCDE2E9D2587AD7E0040345E /* CalendarScreenVC.swift in Sources */,
 				BC391166258E90A5000E6273 /* CalendarView.swift in Sources */,
 				BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */,
+				BCDD83FA2590B1EE0026E113 /* SetDateAndTimeScreenModalDelegate.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,
 				BCBEE8682587D80200D8DE0A /* ResetCodeTextField.swift in Sources */,
 				BC80D2D6258E9D1B00E4F7B9 /* WeekDayNames.swift in Sources */,
+				BCDD83FF2590CFE00026E113 /* NewAdditionInputFeildContainer.swift in Sources */,
 				BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */,
 				BC54008F2579878C009DC69B /* LayoutTools.swift in Sources */,
 				BCB54CCF258E42A700E0E54D /* AdditionImageOrStickerCellModel.swift in Sources */,

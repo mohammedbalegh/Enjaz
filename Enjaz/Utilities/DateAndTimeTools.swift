@@ -2,26 +2,13 @@ import Foundation
 
 class DateAndTimeTools {
 	
-	static func getCalendarAndDate(islamic: Bool) -> (NSCalendar, Date) {
-		let date = Date()
-		let calendar = NSCalendar(identifier: islamic ? .islamicCivil : .gregorian)!
-		
-		return (calendar, date)
-	}
-	
-	static func getCurrentYearInIslamicCalendar() -> Int {
-		let (calendar, date) = getCalendarAndDate(islamic: true)
-		
-		let year = calendar.component(.year, from: date)
-		return year
-	}
-	
-	static func getCurrentYearInGeorgianCalendar() -> Int {
-		let (calendar, date) = getCalendarAndDate(islamic: false)
-		
-		let year = calendar.component(.year, from: date)
-		return year
-	}
+    static func getCurrentYear(islamic: Bool) -> Int {
+        let date = Date()
+        let calendar = NSCalendar(identifier: islamic ? .islamicCivil : .gregorian)!
+        
+        let year = calendar.component(.year, from: date)
+        return year
+    }
 	
 	static func getNumberOfMonthDaysAndFirstWeekDay(ofYear year: Int, andMonth month: Int, forCalendarType calendarIdentifier: NSCalendar.Identifier) -> (Int, Int) {
 		let dateComponents = DateComponents(year: year, month: month, day: 1)
@@ -51,4 +38,14 @@ class DateAndTimeTools {
 		
 		return map[georgianWeekDay] ?? 0
 	}
+    
+    static func genrateDateObjectFromComponents(year: Int, month: Int, day: Int, hour: Int, calendarIdentifier: NSCalendar.Identifier) -> Date {
+        
+        let dateComponents = DateComponents(year: year, month: month, day: 1, hour: hour)
+        let calendar = NSCalendar(identifier: calendarIdentifier)!
+        let date = calendar.date(from: dateComponents)!
+
+        return date
+    }
+    
 }

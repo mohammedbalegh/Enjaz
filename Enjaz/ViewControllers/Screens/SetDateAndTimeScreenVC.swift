@@ -2,7 +2,7 @@ import UIKit
 
 class SetDateAndTimeScreenVC: UIViewController {
     
-    var dateModel: [HourModel] = [HourModel(hour: 1, period: "am"),HourModel(hour: 2, period: "am"),HourModel(hour: 3, period: "am"),HourModel(hour: 4, period: "am"),HourModel(hour: 5, period: " am"),HourModel(hour: 6, period: "am"),HourModel(hour: 7, period: "am"),HourModel(hour: 8, period: "am"),HourModel(hour: 9, period: " am"),HourModel(hour: 10, period: "am"),HourModel(hour: 11, period: "am"),HourModel(hour: 12, period: "am"),HourModel(hour: 1, period: "pm"),HourModel(hour: 2, period: "pm"),HourModel(hour: 3, period: "pm"),HourModel(hour: 4, period: "pm"),HourModel(hour: 5, period: "pm"),HourModel(hour: 6, period: "pm"),HourModel(hour: 7, period: "pm"),HourModel(hour: 8, period: "pm"),HourModel(hour: 9, period: "pm"),HourModel(hour: 10, period: "pm"),HourModel(hour: 11, period: "pm"),HourModel(hour: 12, period: "pm")
+    var timeModel: [HourModel] = [HourModel(hour: 1, period: "am"),HourModel(hour: 2, period: "am"),HourModel(hour: 3, period: "am"),HourModel(hour: 4, period: "am"),HourModel(hour: 5, period: " am"),HourModel(hour: 6, period: "am"),HourModel(hour: 7, period: "am"),HourModel(hour: 8, period: "am"),HourModel(hour: 9, period: " am"),HourModel(hour: 10, period: "am"),HourModel(hour: 11, period: "am"),HourModel(hour: 12, period: "am"),HourModel(hour: 1, period: "pm"),HourModel(hour: 2, period: "pm"),HourModel(hour: 3, period: "pm"),HourModel(hour: 4, period: "pm"),HourModel(hour: 5, period: "pm"),HourModel(hour: 6, period: "pm"),HourModel(hour: 7, period: "pm"),HourModel(hour: 8, period: "pm"),HourModel(hour: 9, period: "pm"),HourModel(hour: 10, period: "pm"),HourModel(hour: 11, period: "pm"),HourModel(hour: 12, period: "pm")
     ]
     
     let cornerRadius = (LayoutConstants.screenWidth * 0.86) * 0.186
@@ -34,14 +34,17 @@ class SetDateAndTimeScreenVC: UIViewController {
     
     lazy var saveButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
         button.setTitle("حفظ", for: .normal)
         button.layer.cornerRadius = cornerRadius / 2
         button.titleLabel?.font = button.titleLabel?.font.withSize(25)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.minimumScaleFactor = 0.2
-        button.backgroundColor = .accentColor
-        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
+        
         return button
     }()
     
@@ -72,11 +75,14 @@ class SetDateAndTimeScreenVC: UIViewController {
 	var selectedCalendarTypeIndex = 0
 	var selectedMonthIndex = 0
 	var selectedYearIndex = 0
+    var selectedTimePickerIndex = 0
 	
+    var delegate: SetDateAndTimeScreenModalDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-		
+        
         hourPicker.dataSource = self
         hourPicker.delegate = self
         
@@ -118,7 +124,7 @@ class SetDateAndTimeScreenVC: UIViewController {
 			calendarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
 			calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 			calendarView.widthAnchor.constraint(equalToConstant: LayoutConstants.calendarViewWidth),
-            calendarView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.4),
+            calendarView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.45),
 		])
 		
 		calendarView.popoverCalendarBtnsHSV.calendarTypePopoverBtn.addTarget(self, action: #selector(onCalendarTypePopoverBtnTap), for: .touchUpInside)
@@ -146,12 +152,15 @@ class SetDateAndTimeScreenVC: UIViewController {
         view.addSubview(saveButton)
         
         let width = LayoutConstants.screenWidth * 0.86
+        let height = width * 0.182
+        
+        saveButton.applyAccentColorGradient(size: CGSize(width: width, height: height), cornerRadius: saveButton.layer.cornerRadius)
         
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
             saveButton.widthAnchor.constraint(equalToConstant: width),
-            saveButton.heightAnchor.constraint(equalToConstant: width * 0.182)
+            saveButton.heightAnchor.constraint(equalToConstant: height)
         ])
     }
     
@@ -188,11 +197,7 @@ class SetDateAndTimeScreenVC: UIViewController {
 	func setYearPopoverDataSource() {
 		var currentYearNumber: Int
 		
-		if selectedCalendarTypeIndex == 0 { // Islamic calendar
-			currentYearNumber = DateAndTimeTools.getCurrentYearInIslamicCalendar()
-		} else { // Gregorian calendar
-			currentYearNumber = DateAndTimeTools.getCurrentYearInGeorgianCalendar()
-		}
+        currentYearNumber = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0)
 		
 		var yearsArray: [String] = []
 		for i in currentYearNumber...(currentYearNumber + 5) {
@@ -222,6 +227,29 @@ class SetDateAndTimeScreenVC: UIViewController {
 		
 		presentPopover(frame: calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.frame, numberOfOptions: yearPopoverDataSource.count)
 	}
+    
+    func showDateInPastAlert() {
+        let alert = UIAlertController(title: "خطأ", message: "لا يمكن اختيار تاريخ في الماضي", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "حسناً", style: UIAlertAction.Style.default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func onSaveBtnTap() {
+        let selectedDate = getSelectedDate()
+        
+        let currentDateUnixTimeStamp = Date().timeIntervalSince1970
+        let slectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
+        
+        if slectedDateUnixTimeStamp < currentDateUnixTimeStamp {
+            showDateInPastAlert()
+            
+            return
+        }
+        
+        delegate?.onDateAndTimeSaveBtnTap(selectedTimeStamp: slectedDateUnixTimeStamp)
+        dismiss(animated: true)
+    }
 	
 	func presentPopover(frame: CGRect, numberOfOptions: Int) {
 		popoverTableVC.modalPresentationStyle = .popover
@@ -276,12 +304,26 @@ class SetDateAndTimeScreenVC: UIViewController {
 	func updateMonthDays() {
 		let calendarType: NSCalendar.Identifier = selectedCalendarTypeIndex == 0 ? .islamicCivil : .gregorian
 		let month = selectedMonthIndex + 1
-		let year = Int(yearPopoverDataSource[selectedYearIndex]) ?? 0
+        let year = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0) + selectedYearIndex
 		
 		let (numberOfDaysInMonth, firstWeekDayNumber) = DateAndTimeTools.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarType: calendarType)
 		
 		calendarView.updateMonthDaysModel(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)
 	}
+    
+    func getSelectedDate() -> Date {
+        let day = calendarView.monthDayCellModels[calendarView.selectedMonthDayCellIndex ?? 0].dayNumber
+        let month = selectedMonthIndex + 1
+        let year = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0) + selectedYearIndex
+        let time = timeModel[selectedTimePickerIndex]
+        let hour = time.period == "pm" ? (time.hour + 12) % 24 : time.hour
+        
+        let calendarType: NSCalendar.Identifier = selectedCalendarTypeIndex == 0 ? .islamicCivil : .gregorian
+        
+        let date = DateAndTimeTools.genrateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarType)
+        
+        return date
+    }
 
 }
 
@@ -292,7 +334,7 @@ extension SetDateAndTimeScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return dateModel.count
+        return timeModel.count
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component:Int, reusing view: UIView?) -> UIView {
@@ -300,12 +342,12 @@ extension SetDateAndTimeScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: pickerHeight))
         
         let hour = UILabel(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: pickerHeight / 2))
-        hour.text = "\(dateModel[row].hour)"
+        hour.text = "\(timeModel[row].hour)"
         hour.textAlignment = .center
         view.addSubview(hour)
         
         let period = UILabel(frame: CGRect(x: view.frame.width / 2 - 10, y: view.frame.height / 2 + 2, width: 20, height: 20))
-        period.text = dateModel[row].period
+        period.text = timeModel[row].period
         period.textAlignment = .center
         period.font = period.font.withSize(10)
         view.addSubview(period)
@@ -330,6 +372,7 @@ extension SetDateAndTimeScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedTimePickerIndex = row
         pickerView.reloadAllComponents()
     }
 }

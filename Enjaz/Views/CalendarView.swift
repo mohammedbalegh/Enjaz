@@ -158,10 +158,12 @@ extension CalendarView: UICollectionViewDelegate, UICollectionViewDataSource {
 	}
 	
 	func setCellSelection(at index: Int, selected: Bool) {
+        guard index < monthDayCellModels.count else { return }
+        
 		var selectedCellModel = monthDayCellModels[index]
 		selectedCellModel.isSelected = selected
 		
-		monthDayCellModels[index] = selectedCellModel		
+		monthDayCellModels[index] = selectedCellModel
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -24,4 +24,10 @@ class RealmManager {
         }
     }
     
+    static func removeAllTables() {
+        try? realm.write {
+            realm.deleteAll()
+        }
+    }
+    
 }
