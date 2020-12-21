@@ -34,6 +34,7 @@ class CardCell: UICollectionViewCell {
     let image: UIImageView = {
         let image = UIImageView()
         image.asCircle()
+        image.clipsToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -92,7 +93,7 @@ class CardCell: UICollectionViewCell {
             image.centerXAnchor.constraint(equalTo: cardBody.centerXAnchor),
             image.widthAnchor.constraint(equalToConstant: height),
             image.heightAnchor.constraint(equalToConstant: height),
-            image.bottomAnchor.constraint(equalTo: cardBody.topAnchor, constant: 10)
+            image.bottomAnchor.constraint(equalTo: cardBody.topAnchor, constant: 15)
         
         ])
     }

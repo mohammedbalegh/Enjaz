@@ -8,6 +8,9 @@ class CollectionViewTopBar: UIView {
     let typeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .accentColor
+        label.font = label.font.withSize(20)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -51,8 +54,8 @@ class CollectionViewTopBar: UIView {
         addSubview(typeLabel)
         
         NSLayoutConstraint.activate([
-            typeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            typeLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.2),
+            typeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            typeLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.17),
             typeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             typeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor)
             
@@ -69,7 +72,7 @@ class CollectionViewTopBar: UIView {
         
         NSLayoutConstraint.activate([
             tasksCountLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            tasksCountLabel.trailingAnchor.constraint(equalTo: typeLabel.leadingAnchor, constant: -5),
+            tasksCountLabel.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor),
             tasksCountLabel.widthAnchor.constraint(equalToConstant: width),
             tasksCountLabel.heightAnchor.constraint(equalToConstant: width)
         ])
@@ -79,7 +82,7 @@ class CollectionViewTopBar: UIView {
         addSubview(showMoreButton)
         
         NSLayoutConstraint.activate([
-            showMoreButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            showMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             showMoreButton.topAnchor.constraint(equalTo: self.topAnchor),
             showMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             showMoreButton.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.24)

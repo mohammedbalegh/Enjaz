@@ -8,7 +8,7 @@ class HomeScreenVC: UIViewController {
     
 
 	let cardPopup = CardPopup(hideOnOverlayTap: true)
-    let collectionHeight = LayoutConstants.screenHeight * 0.238
+    let collectionHeight = LayoutConstants.screenHeight * 0.27
     
     lazy var welcomeBadge: WelcomeBadgeView = {
         let view = WelcomeBadgeView()
@@ -44,11 +44,13 @@ class HomeScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .rootTabBarScreensBackgroundColor
         updateItemModels()
         
         dailyTaskView.cards.delegate = self
         dailyTaskView.cards.dataSource = self
+        
         dailyDemahView.cards.delegate = self
         dailyDemahView.cards.dataSource = self
         
@@ -114,9 +116,9 @@ class HomeScreenVC: UIViewController {
         view.addSubview(welcomeBadge)
         
         NSLayoutConstraint.activate([
-            welcomeBadge.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.053)),
+            welcomeBadge.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
 			welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight),
-            welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.05),
+            welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
             welcomeBadge.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.6)
         ])
     }
