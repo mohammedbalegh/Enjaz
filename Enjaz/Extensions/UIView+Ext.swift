@@ -208,6 +208,23 @@ extension UIView {
 		layer.shadowRadius = 9
 		layer.masksToBounds = false
 	}
+	
+	func applyAccentColorGradient(size: CGSize, cornerRadius: CGFloat = 0) {
+		let layer: CAGradientLayer = CAGradientLayer()
+		layer.frame.size = size
+		
+	
+		layer.cornerRadius = cornerRadius
+
+		let leftColor = UIColor.gradientStartColor.cgColor
+		let rightColor = UIColor.gradientEndColor.cgColor
+		
+		layer.startPoint = CGPoint(x: 0.0, y: 0.5)
+		layer.endPoint = CGPoint(x: 1.0, y: 0.5)
+
+		layer.colors = [leftColor, rightColor]
+		self.layer.insertSublayer(layer, at: 0)
+	}
 }
 
 // MARK: Animations

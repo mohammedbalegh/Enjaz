@@ -13,9 +13,9 @@ class NewAdditionScreenVC: UIViewController {
 	var setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
 	var setStickerBtn = RoundBtn(image: UIImage(named: "stickerIconBlue"), size: LayoutConstants.screenHeight * 0.03)
 	var imageAndStickerPopup = ImageAndStickerPickerPopup()
-	var additionNameTextField = AddTaskTextField(fieldName: "اسم الإضافة")
-	lazy var additionTypeTextField: AddTaskTextField = {
-		let textField = AddTaskTextField(fieldName: "مجال الإضافة")
+	var additionNameTextField = NewAdditionTextField(fieldName: "اسم الإضافة")
+	lazy var additionTypeTextField: NewAdditionTextField = {
+		let textField = NewAdditionTextField(fieldName: "مجال الإضافة")
 		
 		textField.delegate = self
 		textField.addTarget(self, action: #selector(onAdditionTypePickerTap), for: .allTouchEvents)
@@ -33,15 +33,15 @@ class NewAdditionScreenVC: UIViewController {
 		
 		return pickerPopup
 	}()
-	lazy var additionDateAndTimeInput: AddTaskTextField = {
-		let textField = AddTaskTextField(fieldName: "التاريخ و الوقت")
+	lazy var additionDateAndTimeInput: NewAdditionTextField = {
+		let textField = NewAdditionTextField(fieldName: "التاريخ و الوقت")
 		
 		textField.delegate = self
 		textField.addTarget(self, action: #selector(onAdditionDateAndTimeInputTap), for: .allTouchEvents)
 		
 		return textField
 	}()
-	var additionDescriptionTextField = AddTaskTextField(fieldName: "الوصف", height: LayoutConstants.screenHeight * 0.17)
+	var additionDescriptionTextField = NewAdditionTextField(fieldName: "الوصف", height: LayoutConstants.screenHeight * 0.17)
 	lazy var textFieldsVSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [additionNameTextField, additionTypeTextField, additionDateAndTimeInput, additionDescriptionTextField])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,10 @@ class NewAdditionScreenVC: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
 		view.backgroundColor = .rootTabBarScreensBackgroundColor
+		definesPresentationContext = true
+		
 		dismissKeyboardOnTextFieldBlur()
 		setupSubviews()
     }

@@ -1,6 +1,6 @@
 import UIKit
 
-class AddTaskTextField: UITextField {
+class NewAdditionTextField: UITextField {
 	// MARK: Properties
 		
 	var fieldName = ""

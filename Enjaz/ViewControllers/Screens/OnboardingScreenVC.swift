@@ -197,7 +197,6 @@ class OnboardingScreenVC: UIViewController {
         DispatchQueue.main.async {
             if self.carousel.contentOffset.x <= 900 {
                 self.carousel.setContentOffset(CGPoint(x: self.carousel.contentOffset.x +   self.view.frame.width, y: self.carousel.contentOffset.y), animated:true)
-                print(self.carousel.contentOffset.x)
             }
         }
     }

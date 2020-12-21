@@ -160,11 +160,7 @@ class ImageAndStickerPickerPopup: Popup {
 }
 
 
-extension ImageAndStickerPickerPopup: UICollectionViewDelegate, UICollectionViewDataSource {
-	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 1
-	}
-	
+extension ImageAndStickerPickerPopup: UICollectionViewDelegate, UICollectionViewDataSource {	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		let count = popupType == .image ? additionImageCellModels.count : additionStickerCellModels.count
 		return count
