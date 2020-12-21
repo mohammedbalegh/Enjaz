@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */; };
 		41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CollectionViewTopBar.swift */; };
+		419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120C925903A1E00CB7BF9 /* RealmManager.swift */; };
 		41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646A9257397BA000327D5 /* AppDelegate.swift */; };
 		41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AB257397BA000327D5 /* SceneDelegate.swift */; };
 		41C646B3257397BC000327D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B2257397BC000327D5 /* Assets.xcassets */; };
@@ -18,7 +19,9 @@
 		41FC4C34258AE77400EA4DDF /* CardInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C33258AE77400EA4DDF /* CardInfoView.swift */; };
 		41FC4C3C258AEEE100EA4DDF /* CardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */; };
 		41FC4C49258BC07600EA4DDF /* NavBarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C48258BC07600EA4DDF /* NavBarTabView.swift */; };
-		41FC4C61258BFD4700EA4DDF /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C60258BFD4700EA4DDF /* TasksView.swift */; };
+		41FC4C61258BFD4700EA4DDF /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C60258BFD4700EA4DDF /* ItemsView.swift */; };
+		5B03A4949ACB93F510BD99A5 /* Pods_EnjazTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */; };
+		B61A3C4C529626847E9C2840 /* Pods_Enjaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 723889AF92353456503E9347 /* Pods_Enjaz.framework */; };
 		BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0A87CF2575836F0045A54E /* AppLogo.swift */; };
 		BC2734BB2587B79300EFB42C /* CarouselCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78A257739DB008FCC23 /* CarouselCard.swift */; };
 		BC2734BF2587B7B400EFB42C /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78025759DE5008FCC23 /* CarouselCell.swift */; };
@@ -26,7 +29,7 @@
 		BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3894542586077F0039EE35 /* PasswordResetScreenVC.swift */; };
 		BC391145258E771A000E6273 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391144258E771A000E6273 /* CardCell.swift */; };
 		BC39114A258E773E000E6273 /* CardPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391149258E773E000E6273 /* CardPopup.swift */; };
-		BC39114F258E776B000E6273 /* TaskCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39114E258E776B000E6273 /* TaskCardModel.swift */; };
+		BC39114F258E776B000E6273 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39114E258E776B000E6273 /* ItemModel.swift */; };
 		BC391154258E77EE000E6273 /* ShowMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391153258E77EE000E6273 /* ShowMoreButton.swift */; };
 		BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */; };
 		BC4646DE2587EBCF00218D7A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED3258622DC00A86330 /* MainTabBarController.swift */; };
@@ -67,6 +70,7 @@
 		BCDE2EA52587AD860040345E /* GoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EE225862DAD00A86330 /* GoalsScreenVC.swift */; };
 		BCDE2EBA2587B4BE0040345E /* OnboardingScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */; };
 		BCDE2EBF2587B4DC0040345E /* StartScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */; };
+		E298AC267A0982FAD37AF7AE /* Pods_Enjaz_EnjazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +91,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnjazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C2E824E42FD6B70390F67C5 /* Pods-EnjazTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnjazTests.release.xcconfig"; path = "Target Support Files/Pods-EnjazTests/Pods-EnjazTests.release.xcconfig"; sourceTree = "<group>"; };
 		41328EC22586110600A86330 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		41328ED3258622DC00A86330 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		41328ED82586258B00A86330 /* CalendarScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreenVC.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 		41328F0D25895C5E00A86330 /* ShowMoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMoreButton.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCard.swift; sourceTree = "<group>"; };
+		419120C925903A1E00CB7BF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		41C646A6257397BA000327D5 /* Enjaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enjaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646A9257397BA000327D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C646AB257397BA000327D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,13 +119,16 @@
 		41FC4C33258AE77400EA4DDF /* CardInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInfoView.swift; sourceTree = "<group>"; };
 		41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBodyView.swift; sourceTree = "<group>"; };
 		41FC4C48258BC07600EA4DDF /* NavBarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarTabView.swift; sourceTree = "<group>"; };
-		41FC4C60258BFD4700EA4DDF /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		41FC4C60258BFD4700EA4DDF /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
+		592DE1D8471E3CABF9D8C42D /* Pods-EnjazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnjazTests.debug.xcconfig"; path = "Target Support Files/Pods-EnjazTests/Pods-EnjazTests.debug.xcconfig"; sourceTree = "<group>"; };
+		723889AF92353456503E9347 /* Pods_Enjaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C99646CE70F8F949F63AABD /* Pods-Enjaz-EnjazUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz-EnjazUITests.debug.xcconfig"; path = "Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC0A87CF2575836F0045A54E /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		BC38944F258521EC0039EE35 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		BC3894542586077F0039EE35 /* PasswordResetScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetScreenVC.swift; sourceTree = "<group>"; };
 		BC391144258E771A000E6273 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		BC391149258E773E000E6273 /* CardPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPopup.swift; sourceTree = "<group>"; };
-		BC39114E258E776B000E6273 /* TaskCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCardModel.swift; sourceTree = "<group>"; };
+		BC39114E258E776B000E6273 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		BC391153258E77EE000E6273 /* ShowMoreButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreButton.swift; sourceTree = "<group>"; };
 		BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateAndTimeScreenVC.swift; sourceTree = "<group>"; };
 		BC4646E22587EC3100218D7A /* MainTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
@@ -154,6 +164,10 @@
 		BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionScreenVC.swift; sourceTree = "<group>"; };
 		BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingScreenVC.swift; sourceTree = "<group>"; };
 		BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreenVC.swift; sourceTree = "<group>"; };
+		C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz_EnjazUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C92202812A6434C5C1FCEC34 /* Pods-Enjaz-EnjazUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz-EnjazUITests.release.xcconfig"; path = "Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E9D3D64764CEC8734F87247B /* Pods-Enjaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz.debug.xcconfig"; path = "Target Support Files/Pods-Enjaz/Pods-Enjaz.debug.xcconfig"; sourceTree = "<group>"; };
+		F7D3B82CAF9FC482ADA2E8CB /* Pods-Enjaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz.release.xcconfig"; path = "Target Support Files/Pods-Enjaz/Pods-Enjaz.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61A3C4C529626847E9C2840 /* Pods_Enjaz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B03A4949ACB93F510BD99A5 /* Pods_EnjazTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,12 +191,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E298AC267A0982FAD37AF7AE /* Pods_Enjaz_EnjazUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B62684CF5BE5DA48F85C118 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				723889AF92353456503E9347 /* Pods_Enjaz.framework */,
+				C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */,
+				1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		419120C8259039F300CB7BF9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				419120C925903A1E00CB7BF9 /* RealmManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		41C6469D257397BA000327D5 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +223,8 @@
 				41C646BF257397BC000327D5 /* EnjazTests */,
 				41C646CA257397BC000327D5 /* EnjazUITests */,
 				41C646A7257397BA000327D5 /* Products */,
+				71AA5F51EBB03F21E89807FA /* Pods */,
+				0B62684CF5BE5DA48F85C118 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -204,6 +241,7 @@
 		41C646A8257397BA000327D5 /* Enjaz */ = {
 			isa = PBXGroup;
 			children = (
+				419120C8259039F300CB7BF9 /* Managers */,
 				BCAAC98C25759651008B52C8 /* Support */,
 				BC7EFC3F2587ACCB00F35312 /* ViewControllers */,
 				BC0A87CD2575832A0045A54E /* Views */,
@@ -234,6 +272,19 @@
 			path = EnjazUITests;
 			sourceTree = "<group>";
 		};
+		71AA5F51EBB03F21E89807FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E9D3D64764CEC8734F87247B /* Pods-Enjaz.debug.xcconfig */,
+				F7D3B82CAF9FC482ADA2E8CB /* Pods-Enjaz.release.xcconfig */,
+				7C99646CE70F8F949F63AABD /* Pods-Enjaz-EnjazUITests.debug.xcconfig */,
+				C92202812A6434C5C1FCEC34 /* Pods-Enjaz-EnjazUITests.release.xcconfig */,
+				592DE1D8471E3CABF9D8C42D /* Pods-EnjazTests.debug.xcconfig */,
+				3C2E824E42FD6B70390F67C5 /* Pods-EnjazTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BC0A87CD2575832A0045A54E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,7 +295,7 @@
 				BC0A87CF2575836F0045A54E /* AppLogo.swift */,
 				41FC4C33258AE77400EA4DDF /* CardInfoView.swift */,
 				41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */,
-				41FC4C60258BFD4700EA4DDF /* TasksView.swift */,
+				41FC4C60258BFD4700EA4DDF /* ItemsView.swift */,
 				41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */,
 				41328F05258955CD00A86330 /* CollectionViewTopBar.swift */,
 			);
@@ -372,7 +423,7 @@
 			children = (
 				4142F78A257739DB008FCC23 /* CarouselCard.swift */,
 				BCB98CFB258AD9D700B64DC9 /* TaksType.swift */,
-				BC39114E258E776B000E6273 /* TaskCardModel.swift */,
+				BC39114E258E776B000E6273 /* ItemModel.swift */,
 				BCB54CCE258E42A600E0E54D /* AdditionImageOrStickerCellModel.swift */,
 			);
 			path = Models;
@@ -405,9 +456,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41C646D0257397BC000327D5 /* Build configuration list for PBXNativeTarget "Enjaz" */;
 			buildPhases = (
+				AE17F37B6A36716AD79F1A7D /* [CP] Check Pods Manifest.lock */,
 				41C646A2257397BA000327D5 /* Sources */,
 				41C646A3257397BA000327D5 /* Frameworks */,
 				41C646A4257397BA000327D5 /* Resources */,
+				E97369715483B2CA2344E30D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -422,6 +475,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41C646D3257397BC000327D5 /* Build configuration list for PBXNativeTarget "EnjazTests" */;
 			buildPhases = (
+				253FCB0CAB7C27AF28269493 /* [CP] Check Pods Manifest.lock */,
 				41C646B8257397BC000327D5 /* Sources */,
 				41C646B9257397BC000327D5 /* Frameworks */,
 				41C646BA257397BC000327D5 /* Resources */,
@@ -440,9 +494,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41C646D6257397BC000327D5 /* Build configuration list for PBXNativeTarget "EnjazUITests" */;
 			buildPhases = (
+				3D22D33E27CDCB4F5543B71E /* [CP] Check Pods Manifest.lock */,
 				41C646C3257397BC000327D5 /* Sources */,
 				41C646C4257397BC000327D5 /* Frameworks */,
 				41C646C5257397BC000327D5 /* Resources */,
+				D6CA7557D9BCE6B3303BFE0D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -522,6 +578,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		253FCB0CAB7C27AF28269493 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EnjazTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D22D33E27CDCB4F5543B71E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Enjaz-EnjazUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE17F37B6A36716AD79F1A7D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Enjaz-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6CA7557D9BCE6B3303BFE0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E97369715483B2CA2344E30D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Enjaz/Pods-Enjaz-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Enjaz/Pods-Enjaz-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Enjaz/Pods-Enjaz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		41C646A2257397BA000327D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -561,7 +720,8 @@
 				41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */,
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
 				41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */,
-				41FC4C61258BFD4700EA4DDF /* TasksView.swift in Sources */,
+				419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */,
+				41FC4C61258BFD4700EA4DDF /* ItemsView.swift in Sources */,
 				41FC4C3C258AEEE100EA4DDF /* CardBodyView.swift in Sources */,
 				BCC4D017258054BF0024429B /* OAuthBtn.swift in Sources */,
 				BC54008225795B9D009DC69B /* RegexValidator.swift in Sources */,
@@ -579,7 +739,7 @@
 				BC54007C25795B13009DC69B /* UIView+Ext.swift in Sources */,
 				BCBEE8592587D03E00D8DE0A /* ConfirmPasswordTextField.swift in Sources */,
 				BCB98CF7258AB83800B64DC9 /* PickerPopup.swift in Sources */,
-				BC39114F258E776B000E6273 /* TaskCardModel.swift in Sources */,
+				BC39114F258E776B000E6273 /* ItemModel.swift in Sources */,
 				BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */,
 				BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */,
 				BCDE2EA12587AD820040345E /* MonthlyPlanScreenVC.swift in Sources */,
@@ -747,6 +907,7 @@
 		};
 		41C646D1257397BC000327D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9D3D64764CEC8734F87247B /* Pods-Enjaz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -767,6 +928,7 @@
 		};
 		41C646D2257397BC000327D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7D3B82CAF9FC482ADA2E8CB /* Pods-Enjaz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -787,6 +949,7 @@
 		};
 		41C646D4257397BC000327D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 592DE1D8471E3CABF9D8C42D /* Pods-EnjazTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -809,6 +972,7 @@
 		};
 		41C646D5257397BC000327D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C2E824E42FD6B70390F67C5 /* Pods-EnjazTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -831,6 +995,7 @@
 		};
 		41C646D7257397BC000327D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C99646CE70F8F949F63AABD /* Pods-Enjaz-EnjazUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -851,6 +1016,7 @@
 		};
 		41C646D8257397BC000327D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C92202812A6434C5C1FCEC34 /* Pods-Enjaz-EnjazUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

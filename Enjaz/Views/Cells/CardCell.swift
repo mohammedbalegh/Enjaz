@@ -1,14 +1,20 @@
 import UIKit
+import Realm
 
 class CardCell: UICollectionViewCell {
     
-    var viewModel: TaskCardModel? {
+    var viewModel: ItemModel? {
         didSet {
-            image.image = viewModel?.image
-            cardInfo.typeLabel.text = viewModel?.type
-            cardInfo.titleLabel.text = viewModel?.title
-            cardInfo.timeLabel.text = viewModel?.date
-            checkButton.isHidden = viewModel?.checkBtnIsHidden ?? true
+            guard let viewModel = viewModel else { return }
+            
+            image.image = UIImage(named: viewModel.image_id)
+            cardInfo.typeLabel.text = "ديني"
+            cardInfo.titleLabel.text = viewModel.name
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:MM. aa"
+            let result = formatter.string(from: date)
+            cardInfo.timeLabel.text = result
         }
     }
     
@@ -66,6 +72,8 @@ class CardCell: UICollectionViewCell {
     
     func setupCheckMark() {
         addSubview(checkButton)
+        
+        checkButton.isHidden = true
         
         NSLayoutConstraint.activate([
             checkButton.bottomAnchor.constraint(equalTo: cardBody.bottomAnchor, constant: -(self.bounds.height * 0.05)),

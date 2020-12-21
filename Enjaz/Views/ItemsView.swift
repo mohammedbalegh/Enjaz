@@ -1,7 +1,7 @@
 
 import UIKit
 
-class TasksView: UIView {
+class ItemsView: UIView {
 
     let cards: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
