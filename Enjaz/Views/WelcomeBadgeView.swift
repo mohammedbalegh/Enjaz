@@ -50,10 +50,10 @@ class WelcomeBadgeView: UIView {
         addSubview(messageLabel)
         
         NSLayoutConstraint.activate([
-            messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            messageLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor),
             messageLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 3),
             messageLabel.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.023),
-            messageLabel.trailingAnchor.constraint(equalTo: image.leadingAnchor)
+            messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
     }
     
@@ -61,7 +61,7 @@ class WelcomeBadgeView: UIView {
         addSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
-            welcomeLabel.trailingAnchor.constraint(equalTo: image.leadingAnchor),
+            welcomeLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor),
             welcomeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             welcomeLabel.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.023),
             welcomeLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.35)
@@ -72,7 +72,7 @@ class WelcomeBadgeView: UIView {
         addSubview(image)
         
         NSLayoutConstraint.activate([
-            image.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            image.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             image.topAnchor.constraint(equalTo: self.topAnchor),
             image.heightAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.064),
             image.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.064)

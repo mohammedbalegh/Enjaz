@@ -42,7 +42,7 @@ class ShowMoreButton: UIButton {
         addSubview(image)
         
         NSLayoutConstraint.activate([
-            image.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             image.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             image.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.035)
         ])
@@ -52,7 +52,7 @@ class ShowMoreButton: UIButton {
         addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 2),
+            label.trailingAnchor.constraint(equalTo: image.leadingAnchor, constant: -2),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             label.topAnchor.constraint(equalTo: self.topAnchor),
             label.bottomAnchor.constraint(equalTo: self.bottomAnchor)
