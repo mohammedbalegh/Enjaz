@@ -101,7 +101,7 @@ class CalendarView: UIView {
 			monthDaysCollectionView.topAnchor.constraint(equalTo: weekDayLabelsHSV.bottomAnchor, constant: 5),
 			monthDaysCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
 			monthDaysCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-			monthDaysCollectionView.heightAnchor.constraint(equalToConstant: 500),
+            monthDaysCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
 		])
 	}
 	

@@ -190,21 +190,6 @@ class OnboardingScreenVC: UIViewController {
         carousel.scrollToItem(at: centerIndexPath, at: .centeredHorizontally, animated: true)
     }
     
-    //    func timer() {
-    //        let _ = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(scrollToPoint), userInfo: nil, repeats: true)
-    //    }
-    //
-    //    @objc func scrollToPoint() {
-    //        DispatchQueue.main.async {
-    //            if self.carousel.contentOffset.x <= 900 {
-    //                self.carousel.setContentOffset(CGPoint(x: self.carousel.contentOffset.x +   self.view.frame.width, y: self.carousel.contentOffset.y), animated:true)
-    //                print(self.carousel.contentOffset.x)
-    //            }
-    //        }
-    //        }
-    
-<<<<<<< HEAD
-=======
     @objc func scrollToPoint() {
         DispatchQueue.main.async {
             if self.carousel.contentOffset.x <= 900 {
@@ -213,7 +198,6 @@ class OnboardingScreenVC: UIViewController {
         }
     }
 
->>>>>>> calendarComponent
 }
 
 extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {

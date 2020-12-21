@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */; };
 		41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CollectionViewTopBar.swift */; };
-		419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120C925903A1E00CB7BF9 /* RealmManager.swift */; };
 		41912090258EC24F00CB7BF9 /* HourPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */; };
 		41912096258ECDA200CB7BF9 /* HourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41912095258ECDA200CB7BF9 /* HourModel.swift */; };
+		419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120C925903A1E00CB7BF9 /* RealmManager.swift */; };
 		41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646A9257397BA000327D5 /* AppDelegate.swift */; };
 		41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AB257397BA000327D5 /* SceneDelegate.swift */; };
 		41C646B3257397BC000327D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B2257397BC000327D5 /* Assets.xcassets */; };
@@ -37,7 +37,6 @@
 		BC391145258E771A000E6273 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391144258E771A000E6273 /* CardCell.swift */; };
 		BC39114A258E773E000E6273 /* CardPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391149258E773E000E6273 /* CardPopup.swift */; };
 		BC39114F258E776B000E6273 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39114E258E776B000E6273 /* ItemModel.swift */; };
-		BC391154258E77EE000E6273 /* ShowMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391153258E77EE000E6273 /* ShowMoreButton.swift */; };
 		BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */; };
 		BC391166258E90A5000E6273 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391165258E90A5000E6273 /* CalendarView.swift */; };
 		BC39116E258E95A5000E6273 /* ShowMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39116D258E95A5000E6273 /* ShowMoreButton.swift */; };
@@ -117,9 +116,9 @@
 		41328F05258955CD00A86330 /* CollectionViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTopBar.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCard.swift; sourceTree = "<group>"; };
-		419120C925903A1E00CB7BF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourPickerCell.swift; sourceTree = "<group>"; };
 		41912095258ECDA200CB7BF9 /* HourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourModel.swift; sourceTree = "<group>"; };
+		419120C925903A1E00CB7BF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		41C646A6257397BA000327D5 /* Enjaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enjaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646A9257397BA000327D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C646AB257397BA000327D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,7 +149,6 @@
 		BC391144258E771A000E6273 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		BC391149258E773E000E6273 /* CardPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPopup.swift; sourceTree = "<group>"; };
 		BC39114E258E776B000E6273 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
-		BC391153258E77EE000E6273 /* ShowMoreButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreButton.swift; sourceTree = "<group>"; };
 		BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateAndTimeScreenVC.swift; sourceTree = "<group>"; };
 		BC391165258E90A5000E6273 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		BC39116D258E95A5000E6273 /* ShowMoreButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMoreButton.swift; sourceTree = "<group>"; };
