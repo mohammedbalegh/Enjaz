@@ -15,7 +15,7 @@ class CollectionViewTopBar: UIView {
         return label
     }()
     
-    let tasksCountLabel: UILabel = {
+    var tasksCountLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
         label.font = label.font.withSize(11)

@@ -34,6 +34,10 @@ class ItemsView: UIView {
         setupCard()
     }
     
+    func updateIndicator(with count: Int) {
+        collectionTopBar.tasksCountLabel.text = "\(count)"
+    }
+    
     func setupCard() {
         addSubview(cards)
         

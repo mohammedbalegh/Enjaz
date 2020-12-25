@@ -48,4 +48,27 @@ class DateAndTimeTools {
         return date
     }
     
+    static func getDateInIslamic() -> String {
+        let today = Date()
+        let islamic = Calendar(identifier: .islamic)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.dateFormat = "dd MMMM"
+        formatter.calendar = islamic
+        formatter.locale = Locale(identifier: "ar_DZ")
+        let currentDate = formatter.string(from: today)
+        
+        return currentDate
+    }
+    
+    static func getDate() -> String {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.dateFormat = "d MMMM yyyy"
+        formatter.locale = Locale(identifier: "ar_DZ")
+        let currentDate = formatter.string(from: today)
+        return currentDate
+    }
+    
 }

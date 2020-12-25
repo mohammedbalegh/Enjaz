@@ -1,9 +1,3 @@
-//
-//  WelcomeBadgeView.swift
-//  Enjaz
-//
-//  Created by mohammed balegh on 15/12/2020.
-//
 
 import UIKit
 

@@ -1,6 +1,6 @@
 import UIKit
 
-class NewAdditionInputFeildContainer: UIView {
+class NewAdditionInputFieldContainer: UIView {
     
     var input: UIView? {
         didSet {

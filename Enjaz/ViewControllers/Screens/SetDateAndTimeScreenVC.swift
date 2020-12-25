@@ -48,12 +48,8 @@ class SetDateAndTimeScreenVC: UIViewController {
         return button
     }()
     
-    var hourPicker: UIPickerView = {
-        let picker = UIPickerView()
-        picker.transform = CGAffineTransform(rotationAngle: (90  * (.pi/180)))
-        picker.translatesAutoresizingMaskIntoConstraints = false
-        return picker
-    }()
+    var hourPicker: HourPickerView!
+    var hourPickerDelegate: HourPickerDelegate!
     
     lazy var indicator: UIView = {
         let view = UILabel()
@@ -75,7 +71,6 @@ class SetDateAndTimeScreenVC: UIViewController {
 	var selectedCalendarTypeIndex = 0
 	var selectedMonthIndex = 0
 	var selectedYearIndex = 0
-    var selectedTimePickerIndex = 0
 	
     var delegate: NewAdditionScreenModalDelegate?
         
@@ -83,8 +78,10 @@ class SetDateAndTimeScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        hourPicker.dataSource = self
-        hourPicker.delegate = self
+        hourPicker =  HourPickerView()
+        
+        hourPicker.dataSource = hourPicker
+        hourPicker.delegate = hourPicker
                 
         setupSubviews()
 		setupCalendarView()
@@ -169,6 +166,8 @@ class SetDateAndTimeScreenVC: UIViewController {
     
     func setupHourPicker() {
         view.addSubview(hourPicker)
+        
+        hourPicker.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180)))
 
         NSLayoutConstraint.activate([
             hourPicker.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: LayoutConstants.screenWidth * 0.1),
@@ -269,7 +268,7 @@ class SetDateAndTimeScreenVC: UIViewController {
 
 		present(popoverTableVC, animated: true)
 	}
-	
+    
 	func onSelectCalendarType(selectedIndex: Int) {
 		guard selectedIndex != selectedCalendarTypeIndex else { return }
 		
@@ -324,7 +323,7 @@ class SetDateAndTimeScreenVC: UIViewController {
         let day = calendarView.monthDayCellModels[calendarView.selectedMonthDayCellIndex ?? 0].dayNumber
         let month = selectedMonthIndex + 1
         let year = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0) + selectedYearIndex
-        let time = timeModel[selectedTimePickerIndex]
+        let time = timeModel[hourPicker.selectedTimePickerIndex]
         let hour = time.period == "pm" ? (time.hour + 12) % 24 : time.hour
         
         let calendarType: NSCalendar.Identifier = selectedCalendarTypeIndex == 0 ? .islamicCivil : .gregorian
@@ -332,57 +331,6 @@ class SetDateAndTimeScreenVC: UIViewController {
         let date = DateAndTimeTools.genrateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarType)
         
         return date
-    }
-
-}
-
-extension SetDateAndTimeScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return timeModel.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component:Int, reusing view: UIView?) -> UIView {
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: pickerHeight))
-        
-        let hour = UILabel(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: pickerHeight / 2))
-        hour.text = "\(timeModel[row].hour)"
-        hour.textAlignment = .center
-        view.addSubview(hour)
-        
-        let period = UILabel(frame: CGRect(x: view.frame.width / 2 - 10, y: view.frame.height / 2 + 2, width: 20, height: 20))
-        period.text = timeModel[row].period
-        period.textAlignment = .center
-        period.font = period.font.withSize(10)
-        view.addSubview(period)
-        
-        if pickerView.selectedRow(inComponent: component) == row {
-            hour.textColor = .white
-            period.textColor = .white
-        } else {
-            hour.textColor = .darkGray
-            period.textColor = .gray
-        }
-        
-        pickerView.subviews[1].backgroundColor = UIColor.clear
-        
-        view.transform = CGAffineTransform(rotationAngle: -(90 * (.pi / 180)))
-                
-        return view
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat{
-        return pickerHeight
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedTimePickerIndex = row
-        pickerView.reloadAllComponents()
     }
 }
 

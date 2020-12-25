@@ -40,6 +40,7 @@ class CardInfoView: UIView {
         return label
     }()
     
+    let cardDescription = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,6 +59,11 @@ class CardInfoView: UIView {
         setupTitleLabel()
         setupTypeLabel()
         setupTimeLabel()
+        setupCardDescription()
+    }
+    
+    func setupCardDescription() {
+        addSubview(cardDescription)
     }
     
     func setupTitleLabel() {

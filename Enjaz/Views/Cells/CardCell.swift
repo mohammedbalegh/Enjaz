@@ -7,56 +7,33 @@ class CardCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            image.image = UIImage(named: (ImageIdConstants[viewModel.image_id]) ?? "")
-            cardInfo.categoryLabel.text = ItemCategoryConstants[viewModel.category]
-            cardInfo.titleLabel.text = viewModel.name
-            let date = Date()
+            cardView.image.image = UIImage(named: (ImageIdConstants[viewModel.image_id]) ?? "")
+            cardView.cardBody.categoryLabel.text = ItemCategoryConstants[viewModel.category]
+            cardView.cardBody.titleLabel.text = viewModel.name
+            let date = NSDate(timeIntervalSince1970: viewModel.date)
             let formatter = DateFormatter()
-            formatter.dateFormat = "HH:MM. aa"
-            let result = formatter.string(from: date)
-            cardInfo.timeLabel.text = result
+            formatter.dateFormat = "hh:00  aa"
+            let result = formatter.string(from: date as Date)
+            cardView.cardBody.descriptionLabel.text = viewModel.item_description
+            cardView.cardBody.timeLabel.text = result
         }
     }
     
-    let cardInfo: CardInfoView = {
-        let view = CardInfoView()
+    var cardView: CardView = {
+        let view = CardView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    let cardBody: CardBodyView = {
-        let view = CardBodyView()
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    let image: UIImageView = {
-        let image = UIImageView()
-        image.asCircle()
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    let checkButton: UIButton = {
-        let button = UIButton()
-        button.asCircle()
-        button.setTitle("✓", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.titleLabel?.font = button.titleLabel?.font.withSize(12)
-        button.titleLabel?.textAlignment = .center
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    
+        
     static let reuseID = "cardCell"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    override func didMoveToWindow() {
+        guard window != nil else { return }
+        
         setupSubviews()
     }
     
@@ -64,62 +41,27 @@ class CardCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
     func setupSubviews() {
-        setupCardBody()
-        setupImage()
-        setupCardInfo()
-        setupCheckMark()
+        setupCardView()
     }
     
-    func setupCheckMark() {
-        addSubview(checkButton)
+    func setupCardView() {
+        addSubview(cardView)
         
-        checkButton.isHidden = true
+        DispatchQueue.main.async {
+            self.cardView.cardBody.titleLabel.topAnchor.constraint(equalTo: self.cardView.image.bottomAnchor, constant: (LayoutConstants.screenHeight * 0.015)).isActive = true
+        }
+       
         
         NSLayoutConstraint.activate([
-            checkButton.bottomAnchor.constraint(equalTo: cardBody.bottomAnchor, constant: -(self.bounds.height * 0.05)),
-            checkButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            checkButton.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.15),
-            checkButton.heightAnchor.constraint(equalToConstant: self.bounds.width * 0.15)
+            cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            cardView.topAnchor.constraint(equalTo: self.topAnchor)
         ])
         
     }
-    
-    func setupImage() {
-        addSubview(image)
-        let height = self.bounds.width * 0.409
-        
-        NSLayoutConstraint.activate([
-            image.centerXAnchor.constraint(equalTo: cardBody.centerXAnchor),
-            image.widthAnchor.constraint(equalToConstant: height),
-            image.heightAnchor.constraint(equalToConstant: height),
-            image.bottomAnchor.constraint(equalTo: cardBody.topAnchor, constant: 15)
-        
-        ])
-    }
-    
-    func setupCardBody() {
-        addSubview(cardBody)
-        
-        NSLayoutConstraint.activate([
-            cardBody.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            cardBody.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            cardBody.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            cardBody.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.7)
-        ])
-        
-    }
-    
-    func setupCardInfo() {
-        addSubview(cardInfo)
-        
-        NSLayoutConstraint.activate([
-            cardInfo.leadingAnchor.constraint(equalTo: cardBody.leadingAnchor),
-            cardInfo.trailingAnchor.constraint(equalTo: cardBody.trailingAnchor),
-            cardInfo.bottomAnchor.constraint(equalTo: cardBody.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.013)),
-            cardInfo.topAnchor.constraint(equalTo: cardBody.topAnchor, constant: (LayoutConstants.screenHeight * 0.04))
-        ])
-    }
-    
     
 }
