@@ -67,7 +67,9 @@ class Popup: UIView {
 	func show() {
 		let window = UIApplication.shared.windows[0]
 		window.addSubview(self);
-		setup()
+        DispatchQueue.main.async {
+            self.setup()
+        }
 	}
 	
 	@objc func hide() {

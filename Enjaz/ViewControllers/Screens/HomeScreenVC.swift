@@ -11,7 +11,7 @@ class HomeScreenVC: UIViewController {
     
     lazy var welcomeBadge: WelcomeBadgeView = {
         let view = WelcomeBadgeView()
-        let mode = time()
+        let mode = getHour()
         if mode == "am" {
             view.image.image = #imageLiteral(resourceName: "sunIcon")
             view.welcomeLabel.text = "صباح الخير احمد!"
@@ -58,7 +58,12 @@ class HomeScreenVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        updateScreen()
+    }
+    
+    func updateScreen() {
+        dailyTaskView.updateIndicator(with: taskModels.count)
+        dailyDemahView.updateIndicator(with: demahModels.count)
         updateItemModels()
         dailyTaskView.cards.reloadData()
         dailyDemahView.cards.reloadData()
@@ -83,7 +88,7 @@ class HomeScreenVC: UIViewController {
         super.viewDidLayoutSubviews()
     }
     
-    func time() -> String {
+    func getHour() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "a"
         formatter.amSymbol = "am"
@@ -145,10 +150,10 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! CardCell
+        
         let viewModels = collectionView == self.dailyDemahView.cards ? demahModels : taskModels
         
         cell.viewModel = viewModels[indexPath.row]
-        
         return cell
     }
     
@@ -168,10 +173,7 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! CardCell
         self.cardPopup.show()
-        cardPopup.image.image = cell.image.image
-        cardPopup.titleLabel.text = cell.cardInfo.titleLabel.text
-        cardPopup.typeLabel.text = cell.cardInfo.categoryLabel.text
-        cardPopup.timeLabel.text = cell.cardInfo.timeLabel.text
+        cardPopup.viewModel = cell.cardView
     }
     
 }

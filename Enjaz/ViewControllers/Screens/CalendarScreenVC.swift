@@ -7,8 +7,9 @@ class CalendarScreenVC: UIViewController {
         view.backgroundColor = .rootTabBarScreensBackgroundColor
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    func setupSubview() {
+        
     }
-
+    
 }

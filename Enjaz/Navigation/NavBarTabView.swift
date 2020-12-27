@@ -11,7 +11,7 @@ class NavBarTabView: UIView {
 	lazy var dateLabel: UILabel = {
 		let label = UILabel()
 		label.textColor = .gray
-		label.text = date()
+        label.text = DateAndTimeTools.getDate()
 		label.font = label.font.withSize(14)
 		label.textAlignment = .center
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -20,7 +20,7 @@ class NavBarTabView: UIView {
     lazy var islamicDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(hex: 0x011942)
-        label.text = dateInIslamic()
+        label.text = DateAndTimeTools.getDateInIslamic()
         label.font = label.font.withSize(20)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -82,29 +82,6 @@ class NavBarTabView: UIView {
         setupTitle()
     }
     
-    
-    func dateInIslamic() -> String {
-        let today = Date()
-        let islamic = Calendar(identifier: .islamic)
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.dateFormat = "dd MMMM"
-        formatter.calendar = islamic
-        formatter.locale = Locale(identifier: "ar_DZ")
-        let currentDate = formatter.string(from: today)
-        
-        return currentDate
-    }
-    
-    func date() -> String {
-        let today = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.dateFormat = "d MMMM yyyy"
-        formatter.locale = Locale(identifier: "ar_DZ")
-        let currentDate = formatter.string(from: today)
-        return currentDate
-    }
 	
 	func setupBillButton() {
 		addSubview(billButton)
