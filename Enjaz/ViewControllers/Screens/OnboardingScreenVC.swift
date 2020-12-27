@@ -4,7 +4,7 @@ class OnboardingScreenVC: UIViewController {
     
     var contentOffset: CGFloat = 0
     
-    let carouselCard = CarouselCard()
+    let carouselCard = CarouselCardModel()
     
     let pageControl: UIPageControl = {
         let pageControl = UIPageControl()
@@ -66,7 +66,7 @@ class OnboardingScreenVC: UIViewController {
         return cv
     }()
     
-    let registerBtn = PrimaryBtn(label: "إنشاء حساب", theme: .white)
+    let signupBtn = PrimaryBtn(label: "إنشاء حساب", theme: .white)
     let loginBtn = PrimaryBtn(label: "تسجيل الدخول", theme: .blue)
     
     override func viewDidLoad() {
@@ -137,26 +137,25 @@ class OnboardingScreenVC: UIViewController {
     }
     
     func setupRegisterBtn() {
-        view.addSubview(registerBtn)
+        view.addSubview(signupBtn)
         
         NSLayoutConstraint.activate([
-            registerBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
-            registerBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            registerBtn.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.57),
-            registerBtn.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.05)
+            signupBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
+            signupBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+        
+        signupBtn.addTarget(self, action: #selector(onSignupBtnTap), for: .touchUpInside)
     }
     
     func setupLoginBtn() {
         view.addSubview(loginBtn)
         
         NSLayoutConstraint.activate([
-            loginBtn.bottomAnchor.constraint(equalTo: registerBtn.topAnchor, constant: -(LayoutConstants.screenHeight * 0.01)),
+            loginBtn.bottomAnchor.constraint(equalTo: signupBtn.topAnchor, constant: -(LayoutConstants.screenHeight * 0.01)),
             loginBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginBtn.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.57),
-            loginBtn.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.05)
         ])
         
+        loginBtn.addTarget(self, action: #selector(onLoginBtnTap), for: .touchUpInside)
     }
     
     func setupLogo() {
@@ -198,6 +197,21 @@ class OnboardingScreenVC: UIViewController {
         }
     }
 
+    @objc func onSignupBtnTap() {
+        navigateToSignupScreen()
+    }
+    
+    @objc func onLoginBtnTap() {
+        navigateToLoginScreen()
+    }
+    
+    func navigateToSignupScreen() {
+        navigationController?.pushViewController(SignupScreenVC(), animated: true)
+    }
+    
+    func navigateToLoginScreen() {
+        navigationController?.pushViewController(LoginScreenVC(), animated: true)
+    }
 }
 
 extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {

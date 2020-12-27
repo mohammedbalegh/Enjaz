@@ -87,6 +87,8 @@ class CardCell: UICollectionViewCell {
     
     func setupImage() {
         addSubview(image)
+        image.backgroundColor = UIColor(hex: 0xF7F7F7)
+        image.contentMode = .scaleAspectFit
         let height = self.bounds.width * 0.409
         
         NSLayoutConstraint.activate([

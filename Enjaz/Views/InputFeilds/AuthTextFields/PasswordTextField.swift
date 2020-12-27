@@ -14,7 +14,5 @@ class PasswordTextField: AuthTextField {
 		textField.textContentType = .password
 		textField.isSecureTextEntry = true
 		icon.image = #imageLiteral(resourceName: "lockIcon")
-		validator = RegexValidator.validatePassword
-		defaultErrorMessage = "Password must contain a special character"
 	}
 }

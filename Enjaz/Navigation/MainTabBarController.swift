@@ -48,14 +48,15 @@ class MainTabBarController: UITabBarController {
 		}
 	}
 	
-	override func viewDidLoad() {
+    override func viewDidLoad() {
 		super.viewDidLoad()
 		view.tintColor = .accentColor
+                
+        configureTabBar()
 		setupSubviews()
 	}
 	
 	func setupSubviews() {
-		configureTabBar()
 		setupFloatingBtn()
 		setupTopBar()
 	}
@@ -139,7 +140,7 @@ class MainTabBarController: UITabBarController {
 	}
 	
 	// MARK: Tools
-	
+    
 	// Handle new selection
 	func tabChangedTo(selectedIndex: Int) {
 		let newAdditionScreenIsSelected = selectedIndex == 2

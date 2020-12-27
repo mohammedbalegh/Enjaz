@@ -81,7 +81,7 @@ class CardPopup: Popup {
     }
     
     func setupTitleLabel() {
-        addSubview(titleLabel)
+        popupContainer.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: cardBody.topAnchor, constant: LayoutConstants.screenHeight * 0.088),
@@ -92,7 +92,7 @@ class CardPopup: Popup {
     }
     
     func setupTypeLabel() {
-        addSubview(typeLabel)
+        popupContainer.addSubview(typeLabel)
     
         self.typeLabel.layer.cornerRadius = (popupContainerHeight * 0.11) / 2;
 
@@ -106,7 +106,7 @@ class CardPopup: Popup {
     }
     
     func setupTimeLabel() {
-        addSubview(timeLabel)
+        popupContainer.addSubview(timeLabel)
         
         NSLayoutConstraint.activate([
             timeLabel.bottomAnchor.constraint(equalTo: cardBody.bottomAnchor, constant: cardBody.bounds.height * 0.166),
@@ -117,7 +117,7 @@ class CardPopup: Popup {
     }
     
     func setupDescriptionLabel() {
-        addSubview(descriptionLabel)
+        popupContainer.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 4),
@@ -128,7 +128,7 @@ class CardPopup: Popup {
     }
     
     func setupCardBody() {
-        addSubview(cardBody)
+        popupContainer.addSubview(cardBody)
         
         NSLayoutConstraint.activate([
             cardBody.leadingAnchor.constraint(equalTo: popupContainer.leadingAnchor),
@@ -152,7 +152,9 @@ class CardPopup: Popup {
     }
     
     func setupImage() {
-        addSubview(image)
+        popupContainer.addSubview(image)
+        image.backgroundColor = UIColor(hex: 0xF7F7F7)
+        image.contentMode = .scaleAspectFit
         let size = popupContainerWidth * 0.409
         image.layer.cornerRadius = size / 2
         image.clipsToBounds = true

@@ -24,7 +24,7 @@ class PopoverTableVC: UITableViewController {
 		
 		view.backgroundColor = .white
 		tableView.backgroundColor = .white
-		
+        tableView.overrideUserInterfaceStyle = .light
 		tableView.register(PopoverTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 

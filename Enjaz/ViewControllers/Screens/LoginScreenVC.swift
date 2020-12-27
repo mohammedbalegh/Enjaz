@@ -1,6 +1,10 @@
 import UIKit
+import Network
+import ReSwift
 
-class LoginScreenVC: UIViewController {
+class LoginScreenVC: UIViewController, StoreSubscriber {
+    typealias StoreSubscriberStateType = AppState
+    
 	// MARK: Properties
 	var appLogo = AppLogo(frame: .zero)
 	var titleLabel: UILabel = {
@@ -70,6 +74,7 @@ class LoginScreenVC: UIViewController {
 	}()
 	var appleOAuthBtn = OAuthBtn(type: .apple)
 	var twitterOAuthBtn = OAuthBtn(type: .twitter)
+    var googleOAuthBtn = OAuthBtn(type: .google)
 	lazy var oAuthBtnsHSV: UIStackView = {
 		var stackView = UIStackView(arrangedSubviews: [appleOAuthBtn, twitterOAuthBtn])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,17 +82,24 @@ class LoginScreenVC: UIViewController {
 		stackView.spacing = 15
 		return stackView
 	}()
+    var alertPopup = AlertPopup(hideOnOverlayTap: true)
 	
+    var isConnectedToInternet = false
+    var previousScreenIsSignupScreen = false
+    
+    
+    func newState(state: AppState) {
+        self.isConnectedToInternet = state.isConnectedToInternet
+    }
+    
 	// MARK: Lifecycle
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		navigationController?.setNavigationBarHidden(true, animated: animated)
-	}
-	
+		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .white
+        
+        store.subscribe(self)
+        
 		dismissKeyboardOnTextFieldBlur()
 		setupSubViews()
 	}
@@ -162,8 +174,9 @@ class LoginScreenVC: UIViewController {
 		NSLayoutConstraint.activate([
 			loginBtn.topAnchor.constraint(equalTo: forgotPasswordBtn.bottomAnchor, constant: LayoutConstants.screenHeight * 0.045),
 			loginBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			loginBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
 		])
+        
+        loginBtn.addTarget(self, action: #selector(onLoginBtnTap), for: .touchUpInside)
 	}
 	
 	func setupSignupLabelAndBtnHSV() {
@@ -189,22 +202,88 @@ class LoginScreenVC: UIViewController {
 	}
 	
 	// MARK: Event Handlers
-	
+        
+    @objc func onLoginBtnTap() {
+        dismissKeyboard()
+        
+        let allInputsAreValid = validateInputs()
+        guard allInputsAreValid else { return }
+        
+        let username = usernameTextField.text
+        let password = passwordTextField.text
+                
+        guard isConnectedToInternet else {
+            alertPopup.showAsInternetConnectionError()
+            return
+        }
+        
+        view.isUserInteractionEnabled = false
+        loginBtn.isLoading = true
+        
+        Auth.login(username: username, password: password) { (user, error) in
+            DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                self.loginBtn.isLoading = false
+                
+                if let error = error {
+                    print(error)
+                    
+                        self.alertPopup.showAsError(withMessage: "اسم المستخدم أو كلمة السر غير صحيحين")
+                    return
+                }
+                
+                guard let user = user else { return }
+                
+                self.saveUserDataToUserDefaults(user)
+                
+                self.navigateToMainTabBarController()
+            }
+        }
+    }
+    
 	@objc func onSignupTap() {
 		navigateToSignupScreen()
 	}
 	
 	@objc func onForgotPasswordTap() {
-		navigateToForgotPasswordScreen()
+		navigateToPasswordResetScreen()
 	}
 	
 	// MARK: Tools
+    
+    func validateInputs() -> Bool {
+        let usernameIsValid = usernameTextField.validate()
+        let passwordIsValid = passwordTextField.validate()
+        
+        let allInputsAreValid = usernameIsValid && passwordIsValid
+        
+        return allInputsAreValid
+    }
 	
 	func navigateToSignupScreen() {
-		navigationController?.pushViewController(SignupScreenVC(), animated: true)
+        if previousScreenIsSignupScreen {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let signupScreen = SignupScreenVC()
+        signupScreen.previousScreenIsLoginScreen = true
+        
+		navigationController?.pushViewController(signupScreen, animated: true)
 	}
 	
-	func navigateToForgotPasswordScreen() {
+	func navigateToPasswordResetScreen() {
 		navigationController?.pushViewController(PasswordResetScreenVC(), animated: true)
 	}
+    
+    func saveUserDataToUserDefaults(_ user: UserModel) {
+        let encodedUserData = try? NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
+        UserDefaults.standard.set(encodedUserData, forKey: UserDefaultsKeys.user)
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func navigateToMainTabBarController() {
+        navigationController?.pushViewController(MainTabBarController(), animated: true)
+    }
 }

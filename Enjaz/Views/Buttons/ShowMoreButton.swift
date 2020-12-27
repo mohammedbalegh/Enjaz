@@ -1,10 +1,3 @@
-//
-//  ShowMoreButton.swift
-//  Enjaz
-//
-//  Created by mohammed balegh on 15/12/2020.
-//
-
 import UIKit
 
 class ShowMoreButton: UIButton {
@@ -35,7 +28,7 @@ class ShowMoreButton: UIButton {
     
     func setupSubviews() {
         setupImage()
-        setuLabel()
+        setupLabel()
     }
     
     func setupImage() {
@@ -48,11 +41,10 @@ class ShowMoreButton: UIButton {
         ])
     }
     
-    func setuLabel() {
+    func setupLabel() {
         addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.trailingAnchor.constraint(equalTo: image.leadingAnchor, constant: -2),
             label.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             label.topAnchor.constraint(equalTo: self.topAnchor),
             label.bottomAnchor.constraint(equalTo: self.bottomAnchor)

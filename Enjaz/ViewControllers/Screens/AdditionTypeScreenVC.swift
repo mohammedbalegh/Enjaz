@@ -68,7 +68,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         return stackView
     }()
     
-    let saveBtn = PrimaryBtn(label: "حفظ", theme: .blue)
+    let saveBtn = PrimaryBtn(label: "حفظ", theme: .blue, size: .large)
     
     var selectedTypeId = -1
     
@@ -117,14 +117,10 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     
     func setupSaveBtn() {
         view.addSubview(saveBtn)
-        
-        let width = LayoutConstants.screenWidth * 0.86
-        
+                
         NSLayoutConstraint.activate([
             saveBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
-            saveBtn.widthAnchor.constraint(equalToConstant: width),
-            saveBtn.heightAnchor.constraint(equalToConstant: width * 0.182)
         ])
         
         saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
@@ -138,7 +134,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         achievementCard.selectedId = selectedCardId
     }
     
-    func showDateInPastAlert() {
+    func showNoTypeSelectedAlert() {
         let alert = UIAlertController(title: "خطأ", message: "لم يتم اختيار نوع", preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "حسناً", style: UIAlertAction.Style.default, handler: nil))
@@ -147,7 +143,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     
     @objc func onSaveBtnTap() {
         if selectedTypeId == -1 {
-            showDateInPastAlert()
+            showNoTypeSelectedAlert()
             
             return
         }

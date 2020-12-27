@@ -16,6 +16,6 @@ class ResetCodeTextField: AuthTextField {
 		textField.keyboardType = .numberPad
 		icon.image = #imageLiteral(resourceName: "lockIcon")
 		validator = RegexValidator.validateResetCode
-		defaultErrorMessage = "reset code is a four digit number"
+		defaultErrorMessage = "الرمز مكون من ٤ أحرف"
 	}
 }

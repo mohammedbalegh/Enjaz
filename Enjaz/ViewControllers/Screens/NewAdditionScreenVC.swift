@@ -17,8 +17,8 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
     
     var imageAndStickerPopup = ImageAndStickerPickerPopup()
     
-    var additionNameTextField: NewAdditionInputFeildContainer = {
-        let containerView = NewAdditionInputFeildContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+    var additionNameTextField: NewAdditionInputFieldContainer = {
+        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
         
         let textField = NewAdditionTextField(fieldName: "اسم الإضافة")
         
@@ -27,8 +27,8 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
         return containerView
     }()
     
-    lazy var additionCategoryPopoverBtn: NewAdditionInputFeildContainer = {
-        let containerView = NewAdditionInputFeildContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+    lazy var additionCategoryPopoverBtn: NewAdditionInputFieldContainer = {
+        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
         
         let button = PopoverBtn(frame: .zero)
         
@@ -54,8 +54,8 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
         return pickerPopup
     }()
     
-    lazy var additionDateAndTimeInput: NewAdditionInputFeildContainer = {
-        let containerView = NewAdditionInputFeildContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+    lazy var additionDateAndTimeInput: NewAdditionInputFieldContainer = {
+        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
         
         let textField = NewAdditionTextField(fieldName: "التاريخ و الوقت")
         
@@ -69,8 +69,8 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
         return containerView
     }()
     
-    lazy var additionDescriptionTextView: NewAdditionInputFeildContainer = {
-        let containerView = NewAdditionInputFeildContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+    lazy var additionDescriptionTextView: NewAdditionInputFieldContainer = {
+        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
         
         let textView = EditableTextView(frame: .zero)
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -262,7 +262,7 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
     }
     
     func getItemDescription() -> String {
-        if let textview = additionCategoryPopoverBtn.input as? EditableTextView {
+        if let textview = additionDescriptionTextView.input as? EditableTextView {
             let description = textview.text ?? ""
             return description
         }

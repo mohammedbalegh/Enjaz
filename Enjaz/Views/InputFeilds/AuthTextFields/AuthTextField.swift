@@ -29,6 +29,7 @@ class AuthTextField : UIView {
 	
 	init() {
 		super.init(frame: .zero)
+        overrideUserInterfaceStyle = .light
 	}
 	
 	override func didMoveToWindow() {
@@ -101,7 +102,7 @@ class AuthTextField : UIView {
 		addSubview(textField)
 		textField.translatesAutoresizingMaskIntoConstraints = false
 		
-		textField.setPlaceholder(fieldName)
+        textField.placeholder = fieldName
 		setTextFieldDirection()
 		
 		NSLayoutConstraint.activate([
@@ -125,17 +126,17 @@ class AuthTextField : UIView {
 	
 	func validate() -> Bool {
 		if text.count == 0 {
-			showErrorMessage(errorMessage: "\(fieldNounName) cannot be left blank")
+			showErrorMessage(errorMessage: "\(fieldNounName) لا يمكن أن يتُرك فارغاً")
 			return false
 		}
 		
 		if !canStartWithNumber && Character(text[0]).isNumber {
-			showErrorMessage(errorMessage: "\(fieldNounName) cannot start with a number")
+			showErrorMessage(errorMessage: "\(fieldNounName) لا يمكن أن يبدأ برقم")
 			return false
 		}
 		
 		if text.count < minimumLength {
-			showErrorMessage(errorMessage: "\(fieldNounName) must at least be \(minimumLength) characters")
+			showErrorMessage(errorMessage: "\(fieldNounName) يجب أن يكون \(minimumLength) حرف على الأقل")
 			return false
 		}
 

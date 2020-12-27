@@ -66,7 +66,10 @@ class HomeScreenVC: UIViewController {
     
     func updateItemModels() {
         let itemModels = RealmManager.retrieveItems()
+        
         taskModels = []
+        demahModels = []
+        
         itemModels.forEach { (itemModel) in
             if itemModel.type == 0 {
                 taskModels.append(itemModel)

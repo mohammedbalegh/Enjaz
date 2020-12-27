@@ -1,7 +1,10 @@
 import UIKit
+import Network
+import ReSwift
 
-class PasswordResetScreenVC: UIViewController {
-
+class PasswordResetScreenVC: UIViewController, StoreSubscriber {
+    typealias StoreSubscriberStateType = AppState
+    
 	// MARK: Properties
 	var lockImage: UIImageView = {
 		var imageView = UIImageView(image: #imageLiteral(resourceName: "LockImage"))
@@ -67,18 +70,27 @@ class PasswordResetScreenVC: UIViewController {
 		
 		return stackView
 	}()
-	var resetPasswordPopup: ResetPasswordPopup = {
+	lazy var resetPasswordPopup: ResetPasswordPopup = {
 		let popup = ResetPasswordPopup(hideOnOverlayTap: false)
-		popup.backToLoginBtn.addTarget(self, action: #selector(navigateBackToLoginScreen), for: .touchUpInside)
+		popup.backToLoginBtn.addTarget(self, action: #selector(onPopupBackToLoginScreenBtnTap), for: .touchUpInside)
 		return popup
 	}()
+    let alertPopup = AlertPopup(hideOnOverlayTap: true)
+    
+    var isConnectedToInternet = false
+    
+    func newState(state: AppState) {
+        self.isConnectedToInternet = state.isConnectedToInternet
+    }
 	
 	// MARK: Lifecycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		view.backgroundColor = .white
-		
+        
+        store.subscribe(self)
+        
 		dismissKeyboardOnTextFieldBlur()
 		setupSubViews()
 	}
@@ -147,6 +159,10 @@ class PasswordResetScreenVC: UIViewController {
 	// MARK: Event Handlers
 	
 	@objc func onNextBtnTap() {
+        let emailIsValid = emailTextField.validate()
+        
+        guard emailIsValid else { return }
+        
 		subTitleLabel.text = "ادخل اسم المستخدم و كلمة السر"
 		
 		nextBtn.setTitle("ابدأ الآن", for: .normal)
@@ -158,21 +174,59 @@ class PasswordResetScreenVC: UIViewController {
 		textFieldsVSV.addArrangedSubview(resetCodeTextField)
 		textFieldsVSV.addArrangedSubview(newPasswordTextField)
 		textFieldsVSV.addArrangedSubview(confirmPasswordTextField)
+        
+        // TODO: Request rest password code from backend
 	}
 	
+    // MARK: Event Handlers
+    
 	@objc func onStartBtnTap() {
-		resetPasswordPopup.show()
-	}
-		
+        let allInputsAreValid = validateInputs()
+        guard allInputsAreValid else { return }
+        
+        let resetCode = resetCodeTextField.text
+        let email = emailTextField.text
+        let newPassword = newPasswordTextField.text
+            
+        guard isConnectedToInternet else {
+            alertPopup.showAsInternetConnectionError()
+            return
+        }
+            
+        Auth.resetPassword(newPassword, email, resetCode) { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+                    self.alertPopup.showAsError(withMessage: "الكود غير صحيح")
+                }
+                
+                self.resetPasswordPopup.show()
+            }
+        }
+    }
+        		
 	@objc func onBackBtnTap() {
 		navigateBackToLoginScreen()
 	}
 	
-	@objc func dismissPopup() {
-		resetPasswordPopup.hide()
-	}
-	
-	@objc func navigateBackToLoginScreen() {
+    @objc func onPopupBackToLoginScreenBtnTap() {
+        resetPasswordPopup.hide()
+        navigateBackToLoginScreen()
+    }
+    
+    // MARK: Tools
+    
+    func validateInputs() -> Bool {
+        let codeIsValid = resetCodeTextField.validate()
+        let newPasswordIsValid = newPasswordTextField.validate()
+        let passwordConfirmationIsValid = confirmPasswordTextField.validate(password: newPasswordTextField.text)
+        
+        let allInputsAreValid = codeIsValid && newPasswordIsValid && passwordConfirmationIsValid
+        
+        return allInputsAreValid
+    }
+    
+    func navigateBackToLoginScreen() {
 		navigationController?.popViewController(animated: true)
 	}
 }

@@ -27,13 +27,17 @@ extension UIViewController {
 	}
 	
 	func translateViewVertically(by translation: CGFloat) {
-		self.view.frame.origin.y -= translation
+        UIView.animate(withDuration: 0.2) {
+            self.view.frame.origin.y -= translation
+        }
 	}
 	
 	func resetViewVerticalTranslation() {
-		if self.view.frame.origin.y != 0 {
-			self.view.frame.origin.y = 0
-		}
+        UIView.animate(withDuration: 0.2) {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+            }
+        }
 	}
 	
 	func dismissKeyboardOnTextFieldBlur() {

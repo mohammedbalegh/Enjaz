@@ -17,8 +17,13 @@ class StartScreenVC: UIViewController {
         return imageView
     }()
     
-    var startBtn = PrimaryBtn(label: "ابدأ", theme: .blue)
+    var startBtn = PrimaryBtn(label: "ابدأ", theme: .blue, size: .small)
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -60,23 +65,16 @@ class StartScreenVC: UIViewController {
     
     func setupStartBtn() {
         view.addSubview(startBtn)
-        startBtn.addTarget(self, action: #selector(pushOnboardingVC), for: .touchUpInside)
-        let height = LayoutConstants.screenHeight * 0.053
-        let width = height * 3.71
+        startBtn.addTarget(self, action: #selector(navigateToOnboardingVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             startBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.09)),
             startBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startBtn.heightAnchor.constraint(equalToConstant: height),
-            startBtn.widthAnchor.constraint(equalToConstant: width)
         ])
     }
     
-    @objc func pushOnboardingVC() {
-        print("navigation clicked")
-        let destinationVC = OnboardingScreenVC()
-        destinationVC.modalPresentationStyle = .fullScreen
-        present(destinationVC, animated: true, completion: nil)
+    @objc func navigateToOnboardingVC() {
+        navigationController?.pushViewController(OnboardingScreenVC(), animated: true)
     }
 }
 

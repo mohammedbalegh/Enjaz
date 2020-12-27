@@ -15,6 +15,6 @@ class UsernameTextField: AuthTextField {
 		textField.textContentType = .username
 		icon.image = #imageLiteral(resourceName: "presonIcon")
 		validator = RegexValidator.validateUsername
-		defaultErrorMessage = "Username is invalid"
+		defaultErrorMessage = "اسم المستخدم غير صحيح"
 	}
 }

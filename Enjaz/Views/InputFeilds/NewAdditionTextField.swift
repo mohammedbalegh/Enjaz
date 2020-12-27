@@ -16,6 +16,7 @@ class NewAdditionTextField: UITextField {
 		if let height = height {
 			self.height = height
 		}
+        overrideUserInterfaceStyle = .light
 	}
 	
 	override func didMoveToWindow() {
@@ -26,18 +27,8 @@ class NewAdditionTextField: UITextField {
 	
 	// MARK: View Setups
 	
-	func setUp() {		
-//		backgroundColor = .white
-//
-//		layer.borderWidth = 1
-//		layer.borderColor = UIColor.lightGray.cgColor
-//
-//		layer.cornerRadius = height > 80 ? 30 : height / 2
-		
-		setPlaceholder(fieldName)
-//		indentText()
-		
-//		heightAnchor.constraint(equalToConstant: height).isActive = true
+	func setUp() {
+		placeholder = fieldName
 		setTextFieldDirectionToMatchSuperView()
 	}
 	

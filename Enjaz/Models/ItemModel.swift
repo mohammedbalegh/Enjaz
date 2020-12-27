@@ -1,5 +1,3 @@
-
-import UIKit
 import RealmSwift
 
 class ItemModel: Object {
