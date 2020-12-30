@@ -48,6 +48,7 @@ class CardBodyView: UIView {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.minimumScaleFactor = 0.1
+        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -111,39 +112,46 @@ class CardBodyView: UIView {
     func setupTitleLabel() {
         addSubview(titleLabel)
         
+        guard let superview = superview as? CardView else { return }
+        
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.27),
-            titleLabel.heightAnchor.constraint(equalTo: superview!.heightAnchor, multiplier: 0.1),
-            titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -(LayoutConstants.screenHeight * 0.035)),
+            titleLabel.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.27),
+            titleLabel.heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: 0.1),
+            titleLabel.topAnchor.constraint(equalTo: superview.imageContainer.bottomAnchor, constant: 20),
         ])
     }
     
     func setupCategoryLabel() {
         addSubview(categoryLabel)
         
-        DispatchQueue.main.async {
-            self.categoryLabel.layer.cornerRadius = self.categoryLabel.frame.size.height/2;
+        var superviewWidth =  superview?.superview?.frame.width ?? 0
+        
+        if superviewWidth == 0 {
+            superviewWidth = LayoutConstants.screenWidth * 0.8
         }
+        
+        let width = superviewWidth * 0.4
+        let height: CGFloat = width * 0.3
         
         NSLayoutConstraint.activate([
             categoryLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             categoryLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            categoryLabel.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.4),
-            categoryLabel.heightAnchor.constraint(equalTo: categoryLabel.widthAnchor, multiplier: 0.3)
+            categoryLabel.widthAnchor.constraint(equalToConstant: width),
+            categoryLabel.heightAnchor.constraint(equalToConstant: height)
         ])
+        
+        categoryLabel.layer.cornerRadius = height / 2;
     }
     
     func setupDescriptionLabel() {
         addSubview(descriptionLabel)
-        
-        descriptionLabel.isHidden = true
-        
+                
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 4),
-            descriptionLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.2),
+            descriptionLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
             descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.06)
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
     
@@ -155,8 +163,7 @@ class CardBodyView: UIView {
             timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
             timeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             timeLabel.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.444),
-            timeLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 0.7)
-
+            timeLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 0.7),
         ])
     }
     

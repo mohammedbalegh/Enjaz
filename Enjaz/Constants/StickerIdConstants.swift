@@ -1,6 +1,6 @@
-let ImageIdConstants = [
-    0: "mosqueImage",
-    1: "bookImage",
+let stickerIdConstants = [
+    0: "bookImage",
+    1: "mosqueImage",
     2: "mosqueImage",
     3: "mosqueImage",
     4: "mosqueImage",

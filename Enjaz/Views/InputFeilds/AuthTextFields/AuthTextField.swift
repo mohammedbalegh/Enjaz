@@ -5,7 +5,16 @@ class AuthTextField : UIView {
 	
 	var textField = UITextField()
 	var icon = UIImageView()
-	var errorLabel = UILabel()
+    var errorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textAlignment = .center
+        label.textColor = .red
+        
+        return label
+    }()
 	var textFieldContainer = UIView()
 	
 	var fieldName = ""
@@ -52,11 +61,6 @@ class AuthTextField : UIView {
 	
 	func setupErrorLabel() {
 		addSubview(errorLabel)
-		errorLabel.translatesAutoresizingMaskIntoConstraints = false
-		
-		errorLabel.font = UIFont.systemFont(ofSize: 11)
-		errorLabel.textAlignment = .center
-		errorLabel.textColor = .red
 		
 		NSLayoutConstraint.activate([
 			errorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 1),

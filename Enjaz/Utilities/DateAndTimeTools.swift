@@ -39,9 +39,9 @@ class DateAndTimeTools {
 		return map[georgianWeekDay] ?? 0
 	}
     
-    static func genrateDateObjectFromComponents(year: Int, month: Int, day: Int, hour: Int, calendarIdentifier: NSCalendar.Identifier) -> Date {
+    static func generateDateObjectFromComponents(year: Int, month: Int, day: Int, hour: Int, calendarIdentifier: NSCalendar.Identifier) -> Date {
         
-        let dateComponents = DateComponents(year: year, month: month, day: 1, hour: hour)
+        let dateComponents = DateComponents(year: year, month: month, day: day, hour: hour)
         let calendar = NSCalendar(identifier: calendarIdentifier)!
         let date = calendar.date(from: dateComponents)!
 
@@ -68,6 +68,22 @@ class DateAndTimeTools {
         formatter.dateFormat = "d MMMM yyyy"
         formatter.locale = Locale(identifier: "ar_DZ")
         let currentDate = formatter.string(from: today)
+        return currentDate
+    }
+    
+    static func getReadableDate(from date: Date, withFormat format: String, calendarIdentifier: NSCalendar.Identifier) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.dateFormat = format
+        
+        if (calendarIdentifier == .islamic) {
+            let islamicCalendar = Calendar(identifier: .islamic)
+            formatter.calendar = islamicCalendar
+        }
+        
+        formatter.locale = Locale(identifier: "ar_DZ")
+        let currentDate = formatter.string(from: date)
+        
         return currentDate
     }
     

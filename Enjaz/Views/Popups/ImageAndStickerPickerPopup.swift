@@ -2,61 +2,6 @@ import UIKit
 
 class ImageAndStickerPickerPopup: Popup {
 	
-	// TODO: Refactor the popup to two different subclasses (one for each type). And pass the models from the view controller, for the fetching logic will be on run on the VC.
-	
-	var additionImageCellModels: [AdditionImageOrStickerCellModel] = [
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "bookImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-	]
-	
-	var additionStickerCellModels: [AdditionImageOrStickerCellModel] = [
-		AdditionImageOrStickerCellModel(image: UIImage(named: "bookImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-		AdditionImageOrStickerCellModel(image: UIImage(named: "mosqueImage"), isSelected: false),
-	]
-		
-	enum PopupType {
-		case image, sticker
-	}
-	
-	var popupType: PopupType = .image {
-		didSet {
-			titleLabel.text = popupType == .image ? imageTitleLabel : stickerTitleLabel
-			let image = UIImage(named: self.popupType == .image ? "imageIcon" : "stickerIconBlue")
-			imageIconOrSticker.setImage(image, for: .normal)
-			collectionView.reloadData()
-		}
-	}
-	
 	lazy var imageIconOrSticker: RoundBtn = {
 		let button = RoundBtn(image: nil, size: LayoutConstants.screenHeight * 0.11)
 		button.isUserInteractionEnabled = false
@@ -88,10 +33,7 @@ class ImageAndStickerPickerPopup: Popup {
 		
 		collectionView.clipsToBounds = true
 		collectionView.backgroundColor = .white
-		
-		collectionView.delegate = self
-		collectionView.dataSource = self
-		
+				
 		collectionView.register(AdditionImageOrStickerCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 		
 		return collectionView
@@ -104,19 +46,25 @@ class ImageAndStickerPickerPopup: Popup {
 	let imageTitleLabel = "اختر صورة مناسبة"
 	let stickerTitleLabel = "اختر الاستكير المناسب"
 	
-	var onImageSelected: (() -> Void)?
+    var onImageSelected: ((_ selectedId: Int) -> Void)?
 	
 	// MARK: State
 	var selectedImageModelIndex: Int?
 	var selectedStickerModelIndex: Int?
 		
 	override func onPopupContainerShown() {
+        configure()
 		setupPopupContainer()
 		setupImageIcon()
 		setupTitleLabel()
 		setupCollectionView()
 	}
-	
+    
+	// @abstract
+    func configure() {
+        fatalError("Subclasses need to implement the `setPopupContainerConstraints()` method.")
+    }
+    
 	func setupPopupContainer() {
 		popupContainer.backgroundColor = .white
 		popupContainer.layer.cornerRadius = 20
@@ -157,60 +105,4 @@ class ImageAndStickerPickerPopup: Popup {
 			collectionView.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor),
 		])
 	}
-}
-
-
-extension ImageAndStickerPickerPopup: UICollectionViewDelegate, UICollectionViewDataSource {	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let count = popupType == .image ? additionImageCellModels.count : additionStickerCellModels.count
-		return count
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! AdditionImageOrStickerCell
-				
-		if popupType == .image {
-			cell.viewModel = additionImageCellModels[indexPath.row]
-		} else {
-			cell.viewModel = additionStickerCellModels[indexPath.row]
-		}
-		
-		return cell
-	}
-		
-	func setCellSelection(at index: Int, selected: Bool) {
-		if popupType == .image {
-			var selectedCellModel = additionImageCellModels[index]
-			selectedCellModel.isSelected = selected
-			
-			additionImageCellModels[index] = selectedCellModel
-			if selected {
-				selectedImageModelIndex = index
-			}
-		} else {
-			var selectedCellModel = additionStickerCellModels[index]
-			selectedCellModel.isSelected = selected
-			
-			additionStickerCellModels[index] = selectedCellModel
-			if selected {
-				selectedStickerModelIndex = index
-			}
-		}
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let selectedModelIndex = popupType == .image ? selectedImageModelIndex : selectedStickerModelIndex
-		
-		guard indexPath.row != (selectedModelIndex ?? -1) else { return }
-		
-		setCellSelection(at: indexPath.row, selected: true)
-		
-		if let selectedModelIndex = selectedModelIndex {
-			setCellSelection(at: selectedModelIndex, selected: false)
-		}
-		
-		collectionView.reloadData()
-		onImageSelected?()
-	}
-	
 }

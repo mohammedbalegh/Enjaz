@@ -10,8 +10,8 @@ class MainTabBarController: UITabBarController {
 	
 	let tabBarHeight = LayoutConstants.screenHeight * 0.10
 	
-	let toolBar: NavBarTabView = {
-		let bar = NavBarTabView()
+	let toolBar: ToolBar = {
+		let bar = ToolBar()
 		bar.title.isHidden = true
 		bar.translatesAutoresizingMaskIntoConstraints = false
 		return bar

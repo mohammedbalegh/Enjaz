@@ -2,10 +2,15 @@ import UIKit
 
 class PopoverBtn: UIButton {
 
+    enum PopoverBtnSizeType {
+        case small, large
+    }
+    
 	let label: UILabel = {
 		let label = UILabel(frame: .zero)
-		
-		label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+		label.textColor = .lightGray
 		label.font = .systemFont(ofSize: 16)
 		
 		return label
@@ -17,42 +22,47 @@ class PopoverBtn: UIButton {
 		
 		imageView.contentMode = .scaleAspectFit
 		imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-		imageView.tintColor = .gray
+		imageView.tintColor = .lightGray
 		
 		return imageView
 	}()
-	
-	lazy var stackView: UIStackView = {
-		let stackView = UIStackView(arrangedSubviews: [label, dropdownArrow])
-		stackView.frame = frame
 		
-		stackView.distribution = .fillProportionally
-		stackView.alignment = .center
-		
-		return stackView
-	}()
-	
 	override var tintColor: UIColor! {
 		didSet {
 			label.textColor = tintColor
 			dropdownArrow.tintColor = tintColor
 		}
 	}
+
+    func configure(withSize size: PopoverBtnSizeType) {
+        setupLabel()
+        setupDropdownArrow(size)
+    }
 	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		
-		stackView.isUserInteractionEnabled = false
-		addSubview(stackView)
-		
-		if frame == .zero {
-			stackView.translatesAutoresizingMaskIntoConstraints = false
-			stackView.fillSuperView()
-		}
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
+    func setupLabel() {
+        addSubview(label)
+        label.isUserInteractionEnabled = false
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
+            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            label.heightAnchor.constraint(equalTo: heightAnchor),
+        ])
+    }
+    
+    func setupDropdownArrow(_ size: PopoverBtnSizeType) {
+        addSubview(dropdownArrow)
+        dropdownArrow.isUserInteractionEnabled = false
+        
+        let width: CGFloat = size == .large ? 18 : 12
+                        
+        NSLayoutConstraint.activate([
+            dropdownArrow.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dropdownArrow.centerYAnchor.constraint(equalTo: centerYAnchor),
+            dropdownArrow.heightAnchor.constraint(equalTo: heightAnchor),
+            dropdownArrow.widthAnchor.constraint(equalToConstant: width),
+        ])
+    }
+            
 }

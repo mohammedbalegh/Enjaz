@@ -5,6 +5,16 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     
     var chosenCard = 0
     
+    lazy var header: ModalHeader = {
+        let header = ModalHeader(frame: .zero)
+        header.translatesAutoresizingMaskIntoConstraints = false
+        
+        header.titleLabel.text = "اختر نوع الإضافة"
+        header.dismissButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+        
+        return header
+    }()
+    
     lazy var taskCard: TypeCardBtn = {
         let card = TypeCardBtn()
         card.delegate = self
@@ -49,7 +59,6 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         let stackView = UIStackView(arrangedSubviews: [taskCard, demahCard])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        stackView.axis = .vertical
         stackView.distribution  = .fillEqually
         stackView.spacing = LayoutConstants.screenHeight * 0.042
         
@@ -57,18 +66,18 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     }()
     
     lazy var stackAchievementGoal: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
+        let stackView = UIStackView(arrangedSubviews: [achievementCard, goalCard])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         stackView.distribution  = .fillEqually
         stackView.spacing = LayoutConstants.screenHeight * 0.042
         
-        stackView.addArrangedSubview(achievementCard)
-        stackView.addArrangedSubview(goalCard)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     let saveBtn = PrimaryBtn(label: "حفظ", theme: .blue, size: .large)
+    
+    let alertPopup = AlertPopup(hideOnOverlayTap: true)
     
     var selectedTypeId = -1
     
@@ -84,34 +93,42 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     }
     
     func setupSubviews() {
+        setupHeader()
         setupStackTaskDemah()
         setupStackAchievementGoal()
         setupSaveBtn()
     }
     
-    func setupStackTaskDemah() {
-        view.addSubview(stackTaskDemah)
-        
-        let width = LayoutConstants.screenWidth * 0.4
+    func setupHeader() {
+        view.addSubview(header)
         
         NSLayoutConstraint.activate([
-            stackTaskDemah.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (LayoutConstants.screenWidth * 0.05)),
-            stackTaskDemah.widthAnchor.constraint(equalToConstant: width),
-            stackTaskDemah.heightAnchor.constraint(equalToConstant: width * 3),
-            stackTaskDemah.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.123)
+            header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            header.topAnchor.constraint(equalTo: view.topAnchor),
+            header.heightAnchor.constraint(equalToConstant: 50),
+        ])
+    }
+    
+    func setupStackTaskDemah() {
+        view.addSubview(stackTaskDemah)
+                
+        NSLayoutConstraint.activate([
+            stackTaskDemah.topAnchor.constraint(equalTo: header.bottomAnchor, constant: LayoutConstants.screenHeight * 0.1),
+            stackTaskDemah.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackTaskDemah.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            stackTaskDemah.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
         ])
     }
     
     func setupStackAchievementGoal() {
         view.addSubview(stackAchievementGoal)
-        
-        let width = LayoutConstants.screenWidth * 0.4
-        
+                
         NSLayoutConstraint.activate([
-            stackAchievementGoal.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.05)),
-            stackAchievementGoal.widthAnchor.constraint(equalToConstant: width),
-            stackAchievementGoal.heightAnchor.constraint(equalToConstant: width * 3),
-            stackAchievementGoal.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.123)
+            stackAchievementGoal.topAnchor.constraint(equalTo: stackTaskDemah.bottomAnchor, constant: LayoutConstants.screenHeight * 0.03),
+            stackAchievementGoal.centerXAnchor.constraint(equalTo: stackTaskDemah.centerXAnchor),
+            stackAchievementGoal.widthAnchor.constraint(equalTo: stackTaskDemah.widthAnchor),
+            stackAchievementGoal.heightAnchor.constraint(equalTo: stackTaskDemah.heightAnchor),
         ])
     }
     
@@ -134,21 +151,18 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         achievementCard.selectedId = selectedCardId
     }
     
-    func showNoTypeSelectedAlert() {
-        let alert = UIAlertController(title: "خطأ", message: "لم يتم اختيار نوع", preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "حسناً", style: UIAlertAction.Style.default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
     
     @objc func onSaveBtnTap() {
         if selectedTypeId == -1 {
-            showNoTypeSelectedAlert()
-            
+            alertPopup.showAsError(withMessage: "لم يتم اختيار نوع")
             return
         }
+        
         delegate?.onTypeSaveBtnTap(id: selectedTypeId)
-        dismiss(animated: true)
+        dismissModal()
     }
     
+    @objc func dismissModal() {
+        dismiss(animated: true)
+    }
 }

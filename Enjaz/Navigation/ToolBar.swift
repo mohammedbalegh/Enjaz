@@ -1,13 +1,13 @@
 
 import UIKit
 
-class NavBarTabView: UIView {
+class ToolBar: UIView {
     
-    enum barLabel {
+    enum BarLabelType {
         case title
         case date
     }
-
+    
 	lazy var dateLabel: UILabel = {
 		let label = UILabel()
 		label.textColor = .gray
@@ -77,8 +77,6 @@ class NavBarTabView: UIView {
         setupBillButton()
         setupMenuButton()
 		setupDateVSV()
-//        setupIslamicDateLabel()
-//        setupDateLabel()
         setupTitle()
     }
     
@@ -88,7 +86,7 @@ class NavBarTabView: UIView {
 		
 		NSLayoutConstraint.activate([
 			billButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-			billButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: (LayoutConstants.screenWidth * 0.058)),
+			billButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.058)),
 			billButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
 			billButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
 		])
@@ -114,12 +112,12 @@ class NavBarTabView: UIView {
         ])
     }
     
-    func setupMenuButton()  {
+    func setupMenuButton() {
         addSubview(menuButton)
         
         NSLayoutConstraint.activate([
             menuButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            menuButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.058)),
+            menuButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: LayoutConstants.screenWidth * 0.058),
             menuButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
             menuButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
         ])

@@ -8,6 +8,8 @@ class NewAdditionInputFieldContainer: UIView {
         }
     }
     
+    var fieldName: String = ""
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -20,7 +22,7 @@ class NewAdditionInputFieldContainer: UIView {
     
     func setup() {
         layer.cornerRadius = LayoutConstants.inputHeight / 2
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = UIColor.init(white: 0.85, alpha: 1).cgColor
         layer.borderWidth = 1
         backgroundColor = .white
     }
@@ -31,15 +33,7 @@ class NewAdditionInputFieldContainer: UIView {
         addSubview(input)
         input.translatesAutoresizingMaskIntoConstraints = false
         
-        if input is EditableTextView {
-            input.constrainEdgesToCorrespondingEdges(of: self, top: 20, leading: 20, bottom: 20, trailing: 20)
-        } else {
-            NSLayoutConstraint.activate([
-                input.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-                input.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-                input.centerYAnchor.constraint(equalTo: centerYAnchor),
-            ])
-        }
+        input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
     }
     
 }

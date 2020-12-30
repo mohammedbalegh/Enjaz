@@ -9,45 +9,18 @@ class SetDateAndTimeScreenVC: UIViewController {
     let pickerWidth = LayoutConstants.screenHeight * 0.0853
     let pickerHeight = LayoutConstants.screenWidth * 0.104
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "التاريخ و الوقت"
-        label.font = label.font.withSize(20)
-        label.textAlignment = .center
-        label.textColor = .accentColor
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.2
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var header: ModalHeader = {
+        let header = ModalHeader(frame: .zero)
+        header.translatesAutoresizingMaskIntoConstraints = false
+        
+        header.titleLabel.text = "التاريخ و الوقت"
+        header.dismissButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
+        
+        return header
     }()
     
-    let dismissButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("الغاء", for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.setTitleColor(.accentColor, for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.minimumScaleFactor = 0.2
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    lazy var saveButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    lazy var saveBtn = PrimaryBtn(label: "حفظ", theme: .blue, size: .large)
         
-        button.setTitle("حفظ", for: .normal)
-        button.layer.cornerRadius = cornerRadius / 2
-        button.titleLabel?.font = button.titleLabel?.font.withSize(25)
-        button.titleLabel?.textAlignment = .center
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.minimumScaleFactor = 0.2
-        
-        button.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
-        
-        return button
-    }()
-    
     var hourPicker: HourPickerView!
     var hourPickerDelegate: HourPickerDelegate!
     
@@ -71,6 +44,8 @@ class SetDateAndTimeScreenVC: UIViewController {
 	var selectedCalendarTypeIndex = 0
 	var selectedMonthIndex = 0
 	var selectedYearIndex = 0
+    
+    var alertPopup = AlertPopup(hideOnOverlayTap: true)
 	
     var delegate: NewAdditionScreenModalDelegate?
         
@@ -82,86 +57,60 @@ class SetDateAndTimeScreenVC: UIViewController {
         
         hourPicker.dataSource = hourPicker
         hourPicker.delegate = hourPicker
-                
+
+        setMonthPopoverDataSource()
+        setYearPopoverDataSource()
+        updateMonthDays()
+        
         setupSubviews()
-		setupCalendarView()
-		setMonthPopoverDataSource()
-		setYearPopoverDataSource()
-		
-        setPopoverBtnsDefaultLables()
-        
-		updateMonthDays()
-        
     }
 
     func setupSubviews() {
-        setupTitleLabel()
-        setupDismissButton()
+        setupHeader()
+        setPopoverBtnsDefaultLabels()
+        setupCalendarView()
         setupSaveButton()
         setupIndicator()
         setupHourPicker()
     }
     
-    func setupTitleLabel() {
-        view.addSubview(titleLabel)
-        
-        let width = LayoutConstants.screenWidth *  0.3
+    func setupHeader() {
+        view.addSubview(header)
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.025),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.widthAnchor.constraint(equalToConstant: width),
-            titleLabel.heightAnchor.constraint(equalToConstant: width * 0.22)
-            
+            header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            header.topAnchor.constraint(equalTo: view.topAnchor),
+            header.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
-	
-		
+    
 	func setupCalendarView() {
 		view.addSubview(calendarView)
 		
 		NSLayoutConstraint.activate([
-			calendarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+			calendarView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 35),
 			calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 			calendarView.widthAnchor.constraint(equalToConstant: LayoutConstants.calendarViewWidth),
             calendarView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.45),
 		])
 		
-		calendarView.popoverCalendarBtnsHSV.calendarTypePopoverBtn.addTarget(self, action: #selector(onCalendarTypePopoverBtnTap), for: .touchUpInside)
+		calendarView.popoverCalendarBtnsRow.calendarTypePopoverBtn.addTarget(self, action: #selector(onCalendarTypePopoverBtnTap), for: .touchUpInside)
 		
-		calendarView.popoverCalendarBtnsHSV.monthPopoverBtn.addTarget(self, action: #selector(onMonthPopoverBtnTap), for: .touchUpInside)
+		calendarView.popoverCalendarBtnsRow.monthPopoverBtn.addTarget(self, action: #selector(onMonthPopoverBtnTap), for: .touchUpInside)
 		
-		calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.addTarget(self, action: #selector(onYearPopoverBtnTap), for: .touchUpInside)
+		calendarView.popoverCalendarBtnsRow.yearPopoverBtn.addTarget(self, action: #selector(onYearPopoverBtnTap), for: .touchUpInside)
 	}
 	
-    
-    func setupDismissButton() {
-        view.addSubview(dismissButton)
-        
-        let width = LayoutConstants.screenWidth * 0.106
-        
-        NSLayoutConstraint.activate([
-            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.04),
-            dismissButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.046),
-            dismissButton.widthAnchor.constraint(equalToConstant: width),
-            dismissButton.heightAnchor.constraint(equalToConstant: width * 0.106)
-        ])
-    }
-    
     func setupSaveButton() {
-        view.addSubview(saveButton)
-        
-        let width = LayoutConstants.screenWidth * 0.86
-        let height = width * 0.182
-        
-        saveButton.applyAccentColorGradient(size: CGSize(width: width, height: height), cornerRadius: saveButton.layer.cornerRadius)
-        
+        view.addSubview(saveBtn)
+                
         NSLayoutConstraint.activate([
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
-            saveButton.widthAnchor.constraint(equalToConstant: width),
-            saveButton.heightAnchor.constraint(equalToConstant: height)
+            saveBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
         ])
+        
+        saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
     }
     
     func setupHourPicker() {
@@ -170,7 +119,7 @@ class SetDateAndTimeScreenVC: UIViewController {
         hourPicker.transform = CGAffineTransform(rotationAngle: (90 * (.pi / 180)))
 
         NSLayoutConstraint.activate([
-            hourPicker.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: LayoutConstants.screenWidth * 0.1),
+            hourPicker.bottomAnchor.constraint(equalTo: saveBtn.topAnchor, constant: LayoutConstants.screenWidth * 0.1),
             hourPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             hourPicker.heightAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.87),
             hourPicker.widthAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.085)
@@ -182,7 +131,7 @@ class SetDateAndTimeScreenVC: UIViewController {
         
         NSLayoutConstraint.activate([
             indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            indicator.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -(LayoutConstants.screenWidth * 0.25)),
+            indicator.bottomAnchor.constraint(equalTo: saveBtn.topAnchor, constant: -(LayoutConstants.screenWidth * 0.25)),
             indicator.widthAnchor.constraint(equalToConstant: pickerHeight),
             indicator.heightAnchor.constraint(equalToConstant: pickerHeight * 1.7)
         ])
@@ -213,55 +162,54 @@ class SetDateAndTimeScreenVC: UIViewController {
 		popoverTableVC.dataSourceArray = calendarTypePopoverDataSource
 		popoverTableVC.onSelectOption = onSelectCalendarType
 		
-		presentPopover(frame: calendarView.popoverCalendarBtnsHSV.calendarTypePopoverBtn.frame, numberOfOptions: calendarTypePopoverDataSource.count)
+		presentPopover(frame: calendarView.popoverCalendarBtnsRow.calendarTypePopoverBtn.frame, numberOfOptions: calendarTypePopoverDataSource.count)
 	}
 	
 	@objc func onMonthPopoverBtnTap() {
 		popoverTableVC.dataSourceArray = monthPopoverDataSource
 		popoverTableVC.onSelectOption = onSelectMonth
 		
-		presentPopover(frame: calendarView.popoverCalendarBtnsHSV.monthPopoverBtn.frame, numberOfOptions: monthPopoverDataSource.count)
+		presentPopover(frame: calendarView.popoverCalendarBtnsRow.monthPopoverBtn.frame, numberOfOptions: monthPopoverDataSource.count)
 	}
 	
 	@objc func onYearPopoverBtnTap() {
 		popoverTableVC.dataSourceArray = yearPopoverDataSource
 		popoverTableVC.onSelectOption = onSelectYear
 		
-		presentPopover(frame: calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.frame, numberOfOptions: yearPopoverDataSource.count)
+		presentPopover(frame: calendarView.popoverCalendarBtnsRow.yearPopoverBtn.frame, numberOfOptions: yearPopoverDataSource.count)
 	}
     
-    func showDateInPastAlert() {
-        let alert = UIAlertController(title: "خطأ", message: "لا يمكن اختيار تاريخ في الماضي", preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "حسناً", style: UIAlertAction.Style.default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
     @objc func onSaveBtnTap() {
-        let selectedDate = getSelectedDate()
-        
-        let currentDateUnixTimeStamp = Date().timeIntervalSince1970
-        let slectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
-        
-        if slectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-            showDateInPastAlert()
-            
+        guard calendarView.selectedMonthDayCellIndex != nil else {
+            alertPopup.showAsError(withMessage: "يجب تحديد اليوم")
             return
         }
         
-        delegate?.onDateAndTimeSaveBtnTap(selectedTimeStamp: slectedDateUnixTimeStamp)
-        dismiss(animated: true)
+        let selectedDate = getSelectedDate()
+        
+        let calendarIdentifier: NSCalendar.Identifier = selectedCalendarTypeIndex == 0 ? .islamic : .gregorian
+        
+        let currentDateUnixTimeStamp = Date().timeIntervalSince1970
+        let selectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
+        
+        if selectedDateUnixTimeStamp < currentDateUnixTimeStamp {
+            alertPopup.showAsError(withMessage: "لا يمكن اختيار تاريخ في الماضي")
+            return
+        }
+        
+        delegate?.onDateAndTimeSaveBtnTap(selectedTimeStamp: selectedDateUnixTimeStamp, calendarIdentifier: calendarIdentifier)
+        dismissModal()
     }
 	
 	func presentPopover(frame: CGRect, numberOfOptions: Int) {
-		popoverTableVC.modalPresentationStyle = .popover
+        popoverTableVC.modalPresentationStyle = .popover
 		popoverTableVC.preferredContentSize = CGSize(width: LayoutConstants.calendarViewPopoverWidth, height: min(200, CGFloat(numberOfOptions) * LayoutConstants.calendarViewPopoverCellHeight))
 
 		let popoverPresentationController = popoverTableVC.popoverPresentationController
 
 		if let popoverPresentationController = popoverPresentationController {
 			popoverPresentationController.permittedArrowDirections = .up
-			popoverPresentationController.sourceView = calendarView.popoverCalendarBtnsHSV
+			popoverPresentationController.sourceView = calendarView.popoverCalendarBtnsRow
 			popoverPresentationController.sourceRect = frame
 			popoverPresentationController.delegate = self
 		}
@@ -272,15 +220,15 @@ class SetDateAndTimeScreenVC: UIViewController {
 	func onSelectCalendarType(selectedIndex: Int) {
 		guard selectedIndex != selectedCalendarTypeIndex else { return }
 		
-		calendarView.popoverCalendarBtnsHSV.calendarTypePopoverBtn.label.text = calendarTypePopoverDataSource[selectedIndex]
+		calendarView.popoverCalendarBtnsRow.calendarTypePopoverBtn.label.text = calendarTypePopoverDataSource[selectedIndex]
 		
 		selectedCalendarTypeIndex = selectedIndex
 		
 		setMonthPopoverDataSource()
 		setYearPopoverDataSource()
 		
-		calendarView.popoverCalendarBtnsHSV.monthPopoverBtn.label.text = monthPopoverDataSource[0]
-		calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.label.text = yearPopoverDataSource[0]
+		calendarView.popoverCalendarBtnsRow.monthPopoverBtn.label.text = monthPopoverDataSource[0]
+		calendarView.popoverCalendarBtnsRow.yearPopoverBtn.label.text = yearPopoverDataSource[0]
 		
 		updateMonthDays()
 	}
@@ -288,7 +236,7 @@ class SetDateAndTimeScreenVC: UIViewController {
 	func onSelectMonth(selectedIndex: Int) {
 		guard selectedIndex != selectedMonthIndex else { return }
 		
-		calendarView.popoverCalendarBtnsHSV.monthPopoverBtn.label.text = monthPopoverDataSource[selectedIndex]
+		calendarView.popoverCalendarBtnsRow.monthPopoverBtn.label.text = monthPopoverDataSource[selectedIndex]
 		selectedMonthIndex = selectedIndex
 		
 		updateMonthDays()
@@ -297,16 +245,16 @@ class SetDateAndTimeScreenVC: UIViewController {
 	func onSelectYear(selectedIndex: Int) {
 		guard selectedIndex != selectedYearIndex else { return }
 		
-		calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.label.text = yearPopoverDataSource[selectedIndex]
+		calendarView.popoverCalendarBtnsRow.yearPopoverBtn.label.text = yearPopoverDataSource[selectedIndex]
 		selectedYearIndex = selectedIndex
 		
 		updateMonthDays()
 	}
     
-    func setPopoverBtnsDefaultLables() {
-        calendarView.popoverCalendarBtnsHSV.calendarTypePopoverBtn.label.text = calendarTypePopoverDataSource[0]
-        calendarView.popoverCalendarBtnsHSV.monthPopoverBtn.label.text = monthPopoverDataSource[0]
-        calendarView.popoverCalendarBtnsHSV.yearPopoverBtn.label.text = yearPopoverDataSource[0]
+    func setPopoverBtnsDefaultLabels() {
+        calendarView.popoverCalendarBtnsRow.calendarTypePopoverBtn.label.text = calendarTypePopoverDataSource[0]
+        calendarView.popoverCalendarBtnsRow.monthPopoverBtn.label.text = monthPopoverDataSource[0]
+        calendarView.popoverCalendarBtnsRow.yearPopoverBtn.label.text = yearPopoverDataSource[0]
     }
 	
 	func updateMonthDays() {
@@ -328,9 +276,13 @@ class SetDateAndTimeScreenVC: UIViewController {
         
         let calendarType: NSCalendar.Identifier = selectedCalendarTypeIndex == 0 ? .islamicCivil : .gregorian
         
-        let date = DateAndTimeTools.genrateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarType)
+        let date = DateAndTimeTools.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarType)
         
         return date
+    }
+    
+    @objc func dismissModal() {
+        dismiss(animated: true)
     }
 }
 

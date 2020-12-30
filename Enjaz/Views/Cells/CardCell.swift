@@ -7,7 +7,7 @@ class CardCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            cardView.image.image = UIImage(named: (ImageIdConstants[viewModel.image_id]) ?? "")
+            cardView.imageView.image = UIImage(named: (imageIdConstants[viewModel.image_id]) ?? "")
             cardView.cardBody.categoryLabel.text = ItemCategoryConstants[viewModel.category]
             cardView.cardBody.titleLabel.text = viewModel.name
             let date = NSDate(timeIntervalSince1970: viewModel.date)
@@ -43,33 +43,12 @@ class CardCell: UICollectionViewCell {
     
     
     
-<<<<<<< HEAD
-    func setupImage() {
-        addSubview(image)
-        image.backgroundColor = UIColor(hex: 0xF7F7F7)
-        image.contentMode = .scaleAspectFit
-        let height = self.bounds.width * 0.409
-        
-        NSLayoutConstraint.activate([
-            image.centerXAnchor.constraint(equalTo: cardBody.centerXAnchor),
-            image.widthAnchor.constraint(equalToConstant: height),
-            image.heightAnchor.constraint(equalToConstant: height),
-            image.bottomAnchor.constraint(equalTo: cardBody.topAnchor, constant: 15)
-        
-        ])
-=======
     func setupSubviews() {
         setupCardView()
->>>>>>> origin/main
     }
     
     func setupCardView() {
         addSubview(cardView)
-        
-        DispatchQueue.main.async {
-            self.cardView.cardBody.titleLabel.topAnchor.constraint(equalTo: self.cardView.image.bottomAnchor, constant: (LayoutConstants.screenHeight * 0.015)).isActive = true
-        }
-       
         
         NSLayoutConstraint.activate([
             cardView.leadingAnchor.constraint(equalTo: self.leadingAnchor),

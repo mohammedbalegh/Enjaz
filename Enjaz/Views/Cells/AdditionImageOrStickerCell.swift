@@ -2,14 +2,18 @@ import UIKit
 
 class AdditionImageOrStickerCell: UICollectionViewCell {
 	
-	var viewModel: AdditionImageOrStickerCellModel? {
+	var image: UIImage? {
 		didSet {
-			imageView.image = viewModel?.image
-			guard let isSelected = viewModel?.isSelected else { return }
-			layer.borderWidth = isSelected ? 0.5 : 0
-			checkMarkImageView.isHidden = !isSelected
+			imageView.image = image
 		}
 	}
+    
+    override var isSelected: Bool {
+        didSet {
+            layer.borderWidth = isSelected ? 0.5 : 0
+            checkMarkImageView.isHidden = !isSelected
+        }
+    }
 	
 	let imageView = UIImageView(frame: .zero)
 	let checkMarkImageView = UIImageView(image: UIImage(named: "smallCheckMarkImage"))

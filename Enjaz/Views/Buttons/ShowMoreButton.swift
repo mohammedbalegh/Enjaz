@@ -45,7 +45,7 @@ class ShowMoreButton: UIButton {
         addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            label.trailingAnchor.constraint(equalTo: image.leadingAnchor),
             label.topAnchor.constraint(equalTo: self.topAnchor),
             label.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])

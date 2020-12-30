@@ -64,17 +64,15 @@ class CollectionViewTopBar: UIView {
     
     func setupTasksCountLabel() {
         addSubview(tasksCountLabel)
-        let width = LayoutConstants.screenWidth * 0.032
+        let size = LayoutConstants.screenWidth * 0.032
         
-        DispatchQueue.main.async {
-            self.tasksCountLabel.layer.cornerRadius = self.tasksCountLabel.bounds.size.height/2
-        }
+        tasksCountLabel.layer.cornerRadius = size / 2
         
         NSLayoutConstraint.activate([
             tasksCountLabel.topAnchor.constraint(equalTo: self.topAnchor),
             tasksCountLabel.leadingAnchor.constraint(equalTo: typeLabel.trailingAnchor),
-            tasksCountLabel.widthAnchor.constraint(equalToConstant: width),
-            tasksCountLabel.heightAnchor.constraint(equalToConstant: width)
+            tasksCountLabel.widthAnchor.constraint(equalToConstant: size),
+            tasksCountLabel.heightAnchor.constraint(equalToConstant: size)
         ])
     }
     

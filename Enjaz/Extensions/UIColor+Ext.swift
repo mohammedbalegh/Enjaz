@@ -23,6 +23,7 @@ extension UIColor {
 	static let rootTabBarScreensBackgroundColor = UIColor(hex: 0xF9F9F9)
 	static let gradientStartColor = UIColor(hex: 0x20D4D0)
 	static let gradientEndColor = UIColor(hex: 0x12B3B9)
+    static let placeholderColor = UIColor(hex: 0xC3C4C6)
 }
 
 func assertRGBComponentsRange(_ red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) {

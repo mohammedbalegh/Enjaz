@@ -3,14 +3,8 @@ import UIKit
 class CalendarView: UIView {
 	
 	var monthDayCellModels: [MonthDayCellModel] = []
-	
-	let popoverBtnsHSVHorizontalPadding: CGFloat = LayoutConstants.screenWidth * 0.04
-	
-	let popoverBtnsHSVHeight: CGFloat = 40
-	
-	let popoverBtnsHSVTopOffset: CGFloat = 20
-	
-	lazy var popoverCalendarBtnsHSV = PopoverCalendarBtnsStackView(frame: CGRect(x: popoverBtnsHSVHorizontalPadding, y: popoverBtnsHSVTopOffset, width: LayoutConstants.calendarViewWidth - (popoverBtnsHSVHorizontalPadding * 2), height: popoverBtnsHSVHeight))
+		
+    let popoverCalendarBtnsRow = CalendarPopoverBtnsRow(frame: .zero)
 	
 	lazy var weekDayLabelsHSV: UIStackView = {
 		let labels = createWeekDayLabels()
@@ -71,10 +65,22 @@ class CalendarView: UIView {
 	}
 	
 	func setupSubviews() {
-		addSubview(popoverCalendarBtnsHSV)
+        setupPopoverCalendarBtnsRow()
 		setupWeekDayLabelsHSV()
 		setupMonthDaysCollectionView()
-	}	
+	}
+    
+    func setupPopoverCalendarBtnsRow() {
+        addSubview(popoverCalendarBtnsRow)
+        popoverCalendarBtnsRow.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            popoverCalendarBtnsRow.topAnchor.constraint(equalTo: topAnchor),
+            popoverCalendarBtnsRow.centerXAnchor.constraint(equalTo: centerXAnchor),
+            popoverCalendarBtnsRow.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
+            popoverCalendarBtnsRow.heightAnchor.constraint(equalToConstant: 20),
+        ])
+    }
 	
 	func setupWeekDayLabelsHSV() {
 		addSubview(weekDayLabelsHSV)
@@ -83,7 +89,7 @@ class CalendarView: UIView {
 		weekDayLabelsHSV.layer.cornerRadius = height / 2
 		
 		NSLayoutConstraint.activate([
-			weekDayLabelsHSV.topAnchor.constraint(equalTo: topAnchor, constant: popoverBtnsHSVHeight + popoverBtnsHSVTopOffset + 20),
+            weekDayLabelsHSV.topAnchor.constraint(equalTo: popoverCalendarBtnsRow.bottomAnchor, constant: 20),
 			weekDayLabelsHSV.leadingAnchor.constraint(equalTo: leadingAnchor),
 			weekDayLabelsHSV.trailingAnchor.constraint(equalTo: trailingAnchor),
 			weekDayLabelsHSV.heightAnchor.constraint(equalToConstant: height),
@@ -126,6 +132,7 @@ class CalendarView: UIView {
 	
 	func updateMonthDaysModel(numberOfDaysInMonth: Int, startsAtColumnNumber: Int) {
 		monthDayCellModels = generateMonthDaysCellModels(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: startsAtColumnNumber)
+        selectedMonthDayCellIndex = nil
 		monthDaysCollectionView.reloadData()
 	}
 	

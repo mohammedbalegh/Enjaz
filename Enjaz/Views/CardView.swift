@@ -3,13 +3,17 @@ import UIKit
 
 class CardView: UIView {
     
-    let image: UIImageView = {
-        let image = UIImageView()
-        image.backgroundColor = .rootTabBarScreensBackgroundColor
-        image.clipsToBounds = true
-        image.layer.masksToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+    let imageContainer = UIView(frame: .zero)
+    
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        
+            
+        imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
     }()
 
     let cardBody: CardBodyView = {
@@ -18,6 +22,8 @@ class CardView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    var imageViewSize: CGFloat?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,8 +41,37 @@ class CardView: UIView {
     }
     
     func setupSubviews() {
+        setupImageContainer()
+        setupImageView()
         setupCardBody()
-        setupImage()
+    }
+    
+    func setupImageContainer() {
+        addSubview(imageContainer)
+        imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageContainer.clipsToBounds = true
+        
+        imageContainer.backgroundColor = UIColor(hex: 0xF2F2F2)
+        
+        NSLayoutConstraint.activate([
+            imageContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageContainer.bottomAnchor.constraint(equalTo: self.topAnchor, constant: (LayoutConstants.screenHeight * 0.09)),
+            imageContainer.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.41),
+            imageContainer.heightAnchor.constraint(equalTo: imageContainer.widthAnchor),
+        ])
+        
+        layoutIfNeeded()
+        
+        imageContainer.layer.cornerRadius = imageContainer.frame.height / 2;
+    }
+
+    func setupImageView() {
+        imageContainer.addSubview(imageView)
+        
+        let inset = imageContainer.frame.width * 0.15
+        
+        imageView.constrainEdgesToCorrespondingEdges(of: imageContainer, top: inset, leading: inset, bottom: -inset, trailing: -inset)
     }
     
     func setupCardBody() {
@@ -50,22 +85,4 @@ class CardView: UIView {
             cardBody.heightAnchor.constraint(equalTo: superview!.heightAnchor, multiplier: 0.703)
         ])
     }
-    
-    func setupImage() {
-        addSubview(image)
-        
-        DispatchQueue.main.async {
-            self.image.layer.cornerRadius = self.image.frame.size.height/2;
-        }
-
-        NSLayoutConstraint.activate([
-            image.centerXAnchor.constraint(equalTo: cardBody.centerXAnchor),
-            image.bottomAnchor.constraint(equalTo: self.topAnchor, constant: (LayoutConstants.screenHeight * 0.09)),
-            image.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.41),
-            image.heightAnchor.constraint(equalTo: image.widthAnchor)
-            
-        
-        ])
-    }
-
 }
