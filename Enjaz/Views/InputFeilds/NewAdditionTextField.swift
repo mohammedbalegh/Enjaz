@@ -16,7 +16,6 @@ class NewAdditionTextField: UITextField {
 		if let height = height {
 			self.height = height
 		}
-        overrideUserInterfaceStyle = .light
 	}
 	
 	override func didMoveToWindow() {

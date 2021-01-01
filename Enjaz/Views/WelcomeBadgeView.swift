@@ -55,10 +55,10 @@ class WelcomeBadgeView: UIView {
         addSubview(welcomeLabel)
         
         NSLayoutConstraint.activate([
-            welcomeLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor),
+            welcomeLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 10),
             welcomeLabel.topAnchor.constraint(equalTo: self.topAnchor),
             welcomeLabel.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.023),
-            welcomeLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.35)
+            welcomeLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor)
         ])
     }
     

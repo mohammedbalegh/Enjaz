@@ -277,8 +277,7 @@ class LoginScreenVC: UIViewController, StoreSubscriber {
 	}
     
     func saveUserDataToUserDefaults(_ user: UserModel) {
-        let encodedUserData = try? NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
-        UserDefaults.standard.set(encodedUserData, forKey: UserDefaultsKeys.user)
+        UserDefaultsManager.setUser(user: user)
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn)
         UserDefaults.standard.synchronize()
     }

@@ -27,7 +27,7 @@ class Request {
         
         let queryItems = generateQueryItems()
         
-        if queryItems.count > 0 {
+        if !queryItems.isEmpty {
             components.queryItems = queryItems
         }
         

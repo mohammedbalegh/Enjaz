@@ -7,7 +7,10 @@ class CardCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            cardView.imageView.image = UIImage(named: (imageIdConstants[viewModel.image_id]) ?? "")
+            if let imageName = imageIdConstants[viewModel.image_id] {
+                cardView.imageView.image = UIImage(named: imageName)
+            }
+            
             cardView.cardBody.categoryLabel.text = ItemCategoryConstants[viewModel.category]
             cardView.cardBody.titleLabel.text = viewModel.name
             let date = NSDate(timeIntervalSince1970: viewModel.date)

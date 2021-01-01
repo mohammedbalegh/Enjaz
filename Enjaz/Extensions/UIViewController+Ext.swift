@@ -19,26 +19,13 @@ extension UIViewController {
 	}
 	
 	@objc func onKeyboardShown(keyBoardHeight: CGFloat) {
-		translateViewVertically(by: keyBoardHeight)
+        view.translateViewVertically(by: keyBoardHeight)
 	}
 	
 	@objc func keyboardWillHide(notification: NSNotification) {
-		resetViewVerticalTranslation()
+        view.resetViewVerticalTranslation()
 	}
 	
-	func translateViewVertically(by translation: CGFloat) {
-        UIView.animate(withDuration: 0.2) {
-            self.view.frame.origin.y -= translation
-        }
-	}
-	
-	func resetViewVerticalTranslation() {
-        UIView.animate(withDuration: 0.2) {
-            if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y = 0
-            }
-        }
-	}
 	
 	func dismissKeyboardOnTextFieldBlur() {
 		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

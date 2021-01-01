@@ -54,9 +54,18 @@ extension UIView {
 		
 		var constraints: [NSLayoutConstraint] = []
 
-		if let top = top { constraints.append(topAnchor.constraint(equalTo: view.topAnchor, constant: top)) }
-		if let leading = leading { constraints.append(leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading)) }
-		if let bottom = bottom { constraints.append(bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom)) }
+		if let top = top {
+            constraints.append(topAnchor.constraint(equalTo: view.topAnchor, constant: top))
+            
+        }
+		if let leading = leading {
+            constraints.append(leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading))
+            
+        }
+		if let bottom = bottom {
+            constraints.append(bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom))
+            
+        }
 		if let trailing = trailing {
 			constraints.append(trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing))
 		}
@@ -209,20 +218,24 @@ extension UIView {
 		layer.masksToBounds = false
 	}
 	
-	func applyAccentColorGradient(size: CGSize, cornerRadius: CGFloat = 0) {
+    func applyAccentColorGradient(size: CGSize, cornerRadius: CGFloat = 0, axis: NSLayoutConstraint.Axis = .horizontal) {
 		let layer: CAGradientLayer = CAGradientLayer()
 		layer.frame.size = size
-		
-	
+			
 		layer.cornerRadius = cornerRadius
 
-		let leftColor = UIColor.gradientStartColor.cgColor
-		let rightColor = UIColor.gradientEndColor.cgColor
+		let startColor = UIColor.gradientStartColor.cgColor
+		let endColor = UIColor.gradientEndColor.cgColor
 		
-		layer.startPoint = CGPoint(x: 0.0, y: 0.5)
-		layer.endPoint = CGPoint(x: 1.0, y: 0.5)
-
-		layer.colors = [leftColor, rightColor]
+        if axis == .horizontal {
+            layer.startPoint = CGPoint(x: 0, y: 0.5)
+            layer.endPoint = CGPoint(x: 1, y: 0.5)
+        } else {
+            layer.startPoint = CGPoint(x: 0.5, y: 0)
+            layer.endPoint = CGPoint(x: 0.5, y: 1)
+        }
+        
+		layer.colors = [startColor, endColor]
 		self.layer.insertSublayer(layer, at: 0)
 	}
 }
@@ -233,14 +246,36 @@ extension UIView {
 		self.alpha = alpha
 		self.transform = CGAffineTransform(scaleX: scale, y: scale)
 	}
+    
+    func translateViewVertically(by translation: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.y -= translation
+        }
+    }
+    
+    func translateViewHorizontally(by translation: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.x -= translation
+        }
+    }
+    
+    func resetViewVerticalTranslation() {
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.y = 0
+        }
+    }
+    
+    func resetViewHorizontalTranslation() {
+        UIView.animate(withDuration: 0.2) {
+            self.frame.origin.x = 0
+        }
+    }
 }
 
 extension UIView {
-    func asCircle() {
-        DispatchQueue.main.async{
-            self.layer.cornerRadius = self.frame.width / 2;
-            self.layer.masksToBounds = true         
-        }
+    func roundAsCircle() {
+        self.layer.cornerRadius = self.frame.height / 2;
+        self.layer.masksToBounds = true
     }
 }
 
