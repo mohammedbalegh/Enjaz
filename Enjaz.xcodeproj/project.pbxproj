@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */; };
 		41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CollectionViewTopBar.swift */; };
+		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
+		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		41912090258EC24F00CB7BF9 /* HourPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */; };
 		41912096258ECDA200CB7BF9 /* HourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41912095258ECDA200CB7BF9 /* HourModel.swift */; };
 		419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120C925903A1E00CB7BF9 /* RealmManager.swift */; };
@@ -146,6 +148,8 @@
 		41328F05258955CD00A86330 /* CollectionViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTopBar.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
+		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
+		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourPickerCell.swift; sourceTree = "<group>"; };
 		41912095258ECDA200CB7BF9 /* HourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourModel.swift; sourceTree = "<group>"; };
 		419120C925903A1E00CB7BF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
@@ -295,6 +299,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		417EE88E259C22BF002F71E5 /* TabelView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TabelView;
+			sourceTree = "<group>";
+		};
 		419120C8259039F300CB7BF9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +390,7 @@
 		BC0A87CD2575832A0045A54E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				417EE88E259C22BF002F71E5 /* TabelView */,
 				BC8015C82587BD5B007AD202 /* InputFeilds */,
 				BCDE2EAA2587AE6C0040345E /* Cells */,
 				BC8015C92587BF9C007AD202 /* Buttons */,
@@ -415,6 +427,7 @@
 				41328EE225862DAD00A86330 /* GoalsScreenVC.swift */,
 				BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */,
 				BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */,
+				417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -581,6 +594,7 @@
 				BC391144258E771A000E6273 /* CardCell.swift */,
 				BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */,
 				BC026C3725900138008222BD /* PopoverTableViewCell.swift */,
+				417EE894259C2566002F71E5 /* GoalsTableCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -876,6 +890,7 @@
 				BCB98CED2588275200B64DC9 /* NewAdditionTextField.swift in Sources */,
 				BC32E8962590EF03008DF8B7 /* ItemTypeConstants.swift in Sources */,
 				BC026C33258FFB8B008222BD /* PopoverTableVC.swift in Sources */,
+				417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */,
 				BC39116E258E95A5000E6273 /* ShowMoreButton.swift in Sources */,
 				BC7EFC0A25863CBB00F35312 /* ResetPasswordPopup.swift in Sources */,
 				419121192592AF3F00CB7BF9 /* HourPickerView.swift in Sources */,
@@ -923,6 +938,7 @@
 				BC7EFC1A2587AACE00F35312 /* SignupScreenVC.swift in Sources */,
 				BC80D2E6258EAEDE00E4F7B9 /* MonthDayCellModel.swift in Sources */,
 				BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */,
+				417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */,
 				BC54007C25795B13009DC69B /* UIView+Ext.swift in Sources */,
 				BCBEE8592587D03E00D8DE0A /* ConfirmPasswordTextField.swift in Sources */,
 				BCB98CF7258AB83800B64DC9 /* PickerPopup.swift in Sources */,
@@ -1102,14 +1118,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MG2N6H9TP7;
+				DEVELOPMENT_TEAM = 5V7642F68F;
 				INFOPLIST_FILE = Enjaz/Support/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.Enjaz;
+				PRODUCT_BUNDLE_IDENTIFIER = none.Enjaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1123,14 +1139,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MG2N6H9TP7;
+				DEVELOPMENT_TEAM = 5V7642F68F;
 				INFOPLIST_FILE = Enjaz/Support/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.Enjaz;
+				PRODUCT_BUNDLE_IDENTIFIER = none.Enjaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
