@@ -1,9 +1,10 @@
 
 import UIKit
+import SideMenu
 
 class MainTabBarController: UITabBarController {
 	
-	enum TapBarTypes {
+	enum ToolBarType {
 		case title
 		case date
 	}
@@ -12,11 +13,14 @@ class MainTabBarController: UITabBarController {
 	
 	let toolBar: ToolBar = {
 		let bar = ToolBar()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        
 		bar.title.isHidden = true
-		bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.menuButton.addTarget(self, action: #selector(onMenuBtnTap), for: .touchUpInside)
+        
 		return bar
 	}()
-	
+    
 	lazy var floatingBtn: UIButton = {
 		let button = UIButton(type: .custom)
 		button.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +62,7 @@ class MainTabBarController: UITabBarController {
 	
 	func setupSubviews() {
 		setupFloatingBtn()
-		setupTopBar()
+		setupToolBar()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -67,7 +71,7 @@ class MainTabBarController: UITabBarController {
 		tabBar.frame.origin.y = view.frame.height - tabBarHeight
 	}
 	
-	func setupTopBar() {
+	func setupToolBar() {
 		view.addSubview(toolBar)
 		
 		NSLayoutConstraint.activate([
@@ -96,18 +100,17 @@ class MainTabBarController: UITabBarController {
 		tabBar.items?[2].isEnabled = false
 	}
 	
-	func showTapBar(type: TapBarTypes, title: String?) {
-		if type == TapBarTypes.title {
+	func showToolBar(type: ToolBarType, title: String?) {
+		if type == ToolBarType.title {
 			toolBar.title.isHidden = false
 			toolBar.dateLabel.isHidden = true
 			toolBar.islamicDateLabel.isHidden = true
 			toolBar.title.text = title
-		} else if type == TapBarTypes.date {
+		} else if type == ToolBarType.date {
 			toolBar.title.isHidden = true
 			toolBar.dateLabel.isHidden = false
 			toolBar.islamicDateLabel.isHidden = false
 		}
-		
 	}
 	
 	func setupFloatingBtn() {
@@ -130,6 +133,8 @@ class MainTabBarController: UITabBarController {
 		viewController.tabBarItem.selectedImage = UIImage(named: "\(imageName)@selected")?.withRenderingMode(.alwaysOriginal)
 	}
 	
+    // MARK: Event Handlers
+    
 	@objc func onFloatingBtnTap() {
 		let newAdditionScreenIsSelected = selectedIndex == 2
 		if newAdditionScreenIsSelected {
@@ -139,6 +144,11 @@ class MainTabBarController: UITabBarController {
 		navigateToNewAdditionScreen()
 	}
 	
+    @objc func onMenuBtnTap() {
+        let menu = SideMenuNavigationController(rootViewController: SideMenuVC())
+        present(menu, animated: true, completion: nil)
+    }
+    
 	// MARK: Tools
     
 	// Handle new selection
@@ -150,15 +160,15 @@ class MainTabBarController: UITabBarController {
 			: setupFloatingBtnAsNewAdditionScreenTabBarItem()
 		
 		if selectedIndex == 0 {
-			showTapBar(type: .date, title: "")
+			showToolBar(type: .date, title: "")
 		} else if selectedIndex == 1 {
-			showTapBar(type: .title, title: "التقويم")
+			showToolBar(type: .title, title: "التقويم")
 		} else if selectedIndex == 2 {
-			showTapBar(type: .title, title: "إضافة جديدة")
+			showToolBar(type: .title, title: "إضافة جديدة")
 		} else if selectedIndex == 3 {
-			showTapBar(type: .title, title: "الخطة الشهرية")
+			showToolBar(type: .title, title: "الخطة الشهرية")
 		} else if selectedIndex == 4 {
-			showTapBar(type: .title, title: "الأهداف")
+			showToolBar(type: .title, title: "الأهداف")
 		}
 	}
 	

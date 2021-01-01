@@ -6,7 +6,7 @@ class CardBodyView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = label.font.withSize(18)
+        label.font = label.font.withSize(15)
         label.textColor = UIColor(hex: 0x011942)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
@@ -46,6 +46,7 @@ class CardBodyView: UIView {
         label.font = label.font.withSize(12)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.minimumScaleFactor = 0.1
         label.isHidden = true
@@ -55,7 +56,7 @@ class CardBodyView: UIView {
     
     let checkButton: UIButton = {
         let button = UIButton()
-        button.asCircle()
+        button.roundAsCircle()
         button.setTitle("✓", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
@@ -116,7 +117,7 @@ class CardBodyView: UIView {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.27),
+            titleLabel.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 0.9),
             titleLabel.heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: 0.1),
             titleLabel.topAnchor.constraint(equalTo: superview.imageContainer.bottomAnchor, constant: 20),
         ])

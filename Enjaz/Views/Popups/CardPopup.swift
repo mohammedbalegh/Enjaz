@@ -22,7 +22,7 @@ class CardPopup: Popup {
     lazy var cardView: CardView = {
         let view = CardView()
         view.imageViewSize = popupContainerWidth * 0.41
-        view.imageView.asCircle()
+        view.imageView.roundAsCircle()
         view.cardBody.descriptionLabel.isHidden = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

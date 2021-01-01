@@ -78,6 +78,9 @@
 		BC80D2D6258E9D1B00E4F7B9 /* WeekDayNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80D2D5258E9D1B00E4F7B9 /* WeekDayNames.swift */; };
 		BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */; };
 		BC80D2E6258EAEDE00E4F7B9 /* MonthDayCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80D2E5258EAEDE00E4F7B9 /* MonthDayCellModel.swift */; };
+		BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC863E26259CAE7C006B7F68 /* UserDefaultsManager.swift */; };
+		BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC963E6B259CF09100A1556B /* SideMenuVC.swift */; };
+		BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC963E70259D04C000A1556B /* SideMenuBtn.swift */; };
 		BC9F669A25924B6900E17117 /* NetworkingUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F669925924B6900E17117 /* NetworkingUrls.swift */; };
 		BC9F66A2259255AA00E17117 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F66A1259255AA00E17117 /* Request.swift */; };
 		BC9F66AA259260FA00E17117 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F66A9259260FA00E17117 /* Auth.swift */; };
@@ -218,6 +221,9 @@
 		BC80D2D5258E9D1B00E4F7B9 /* WeekDayNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayNames.swift; sourceTree = "<group>"; };
 		BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDayCell.swift; sourceTree = "<group>"; };
 		BC80D2E5258EAEDE00E4F7B9 /* MonthDayCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDayCellModel.swift; sourceTree = "<group>"; };
+		BC863E26259CAE7C006B7F68 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		BC963E6B259CF09100A1556B /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
+		BC963E70259D04C000A1556B /* SideMenuBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuBtn.swift; sourceTree = "<group>"; };
 		BC9F669925924B6900E17117 /* NetworkingUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingUrls.swift; sourceTree = "<group>"; };
 		BC9F66A1259255AA00E17117 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		BC9F66A9259260FA00E17117 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
@@ -306,6 +312,7 @@
 				BC47809A2596298E00D21060 /* StateManager */,
 				419120C925903A1E00CB7BF9 /* RealmManager.swift */,
 				BC32E8A0259239B8008DF8B7 /* NetworkingManager.swift */,
+				BC863E26259CAE7C006B7F68 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -452,6 +459,7 @@
 			children = (
 				BC0A87CE257583360045A54E /* Screens */,
 				BC026C32258FFB8B008222BD /* PopoverTableVC.swift */,
+				BC963E6B259CF09100A1556B /* SideMenuVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -476,6 +484,7 @@
 				BCC4D016258054BE0024429B /* OAuthBtn.swift */,
 				BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */,
 				BC39116D258E95A5000E6273 /* ShowMoreButton.swift */,
+				BC963E70259D04C000A1556B /* SideMenuBtn.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -893,10 +902,12 @@
 				BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */,
 				BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */,
 				BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */,
+				BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */,
 				BC4646DE2587EBCF00218D7A /* MainTabBarController.swift in Sources */,
 				BC32E8912590EE8C008DF8B7 /* ItemCategoryConstants.swift in Sources */,
 				BC54008A2579622D009DC69B /* String+Ext.swift in Sources */,
 				BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */,
+				BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */,
 				419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */,
 				41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */,
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
@@ -911,6 +922,7 @@
 				BC54008225795B9D009DC69B /* RegexValidator.swift in Sources */,
 				41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */,
 				BCB98CFC258AD9D700B64DC9 /* TaksType.swift in Sources */,
+				BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */,
 				BC730277259B91BC007AEA96 /* BidirectionalCollection + ext.swift in Sources */,
 				BC4780AB25962A1400D21060 /* Reducer.swift in Sources */,
 				BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */,

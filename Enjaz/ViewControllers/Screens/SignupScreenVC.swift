@@ -258,8 +258,7 @@ class SignupScreenVC: UIViewController, StoreSubscriber {
 	}
     
     func saveUserDataToUserDefaults(_ newUser: UserModel) {
-        let encodedUserData = try? NSKeyedArchiver.archivedData(withRootObject: newUser, requiringSecureCoding: false)
-        UserDefaults.standard.set(encodedUserData, forKey: UserDefaultsKeys.user)
+        UserDefaultsManager.setUser(user: newUser)
         UserDefaults.standard.set(true, forKey: UserDefaultsKeys.isLoggedIn)
         UserDefaults.standard.synchronize()
     }
@@ -276,10 +275,10 @@ class SignupScreenVC: UIViewController, StoreSubscriber {
 
 extension SignupScreenVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        translateViewVertically(by: LayoutConstants.screenHeight * 0.25)
+        view.translateViewVertically(by: LayoutConstants.screenHeight * 0.25)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        resetViewVerticalTranslation()
+        view.resetViewVerticalTranslation()
     }
 }

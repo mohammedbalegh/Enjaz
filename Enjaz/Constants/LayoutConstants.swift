@@ -14,4 +14,5 @@ struct LayoutConstants {
 	static let calendarViewPopoverCellHeight: CGFloat = 45
 	static let calendarViewPopoverWidth: CGFloat = 200
     static let popupContainerWidth = screenWidth * 0.8
+    static let sideMenuBtnHeight: CGFloat = 40
 }

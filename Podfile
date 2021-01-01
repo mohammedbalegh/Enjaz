@@ -7,6 +7,7 @@ target 'Enjaz' do
   pod 'RealmSwift'
   pod 'SwiftKeychainWrapper', '~> 4.0'
   pod 'ReSwift'
+  pod 'SideMenu'
 
   target 'EnjazTests' do
     inherit! :search_paths

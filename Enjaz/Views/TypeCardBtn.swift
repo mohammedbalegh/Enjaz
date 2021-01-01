@@ -13,7 +13,7 @@ class TypeCardBtn: UIButton {
     
     let typeImage: UIImageView = {
         let image = UIImageView()
-        image.asCircle()
+        image.roundAsCircle()
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -40,7 +40,7 @@ class TypeCardBtn: UIButton {
     
     let checkMark: UIImageView = {
         let image = UIImageView()
-        image.asCircle()
+        image.roundAsCircle()
         image.image = UIImage(named: "checkMarkIcon")
         image.isHidden = true
         image.translatesAutoresizingMaskIntoConstraints = false

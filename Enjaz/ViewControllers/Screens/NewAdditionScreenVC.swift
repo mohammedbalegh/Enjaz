@@ -37,7 +37,7 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
         let button = PopoverBtn(frame: .zero)
         button.configure(withSize: .large)
 
-        button.tintColor = .placeholderColor
+        button.tintColor = .placeholderText
         
         let fieldName = "مجال الإضافة"
         containerView.fieldName = fieldName
@@ -266,8 +266,8 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
     
     func descriptionTextViewDidUpdateFocus(focused: Bool) {
         focused
-            ? tabBarController?.translateViewVertically(by: LayoutConstants.screenHeight * 0.22)
-            : tabBarController?.resetViewVerticalTranslation()
+            ? tabBarController?.view.translateViewVertically(by: LayoutConstants.screenHeight * 0.22)
+            : tabBarController?.view.resetViewVerticalTranslation()
     }
     
     func onTypeSaveBtnTap(id: Int) {
@@ -346,7 +346,6 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
     
 }
 
-
 extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -373,10 +372,10 @@ extension NewAdditionScreenVC: UITextFieldDelegate {
 
 extension NewAdditionScreenVC: UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        translateViewVertically(by: LayoutConstants.screenHeight * 0.3)
+        view.translateViewVertically(by: LayoutConstants.screenHeight * 0.3)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        resetViewVerticalTranslation()
+        view.resetViewVerticalTranslation()
     }
 }

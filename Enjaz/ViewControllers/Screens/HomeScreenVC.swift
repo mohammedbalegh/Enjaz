@@ -12,13 +12,15 @@ class HomeScreenVC: UIViewController {
     lazy var welcomeBadge: WelcomeBadgeView = {
         let view = WelcomeBadgeView()
         let mode = getHour()
+        let name = user?.name ?? ""
+        
         if mode == "am" {
             view.image.image = #imageLiteral(resourceName: "sunIcon")
-            view.welcomeLabel.text = "صباح الخير احمد!"
+            view.welcomeLabel.text = "صباح الخير \(name)!"
             view.messageLabel.text = "أطلع على مهام وعادات اليوم"
         } else {
             view.image.image = #imageLiteral(resourceName: "moonIcon")
-            view.welcomeLabel.text = "مساء الخير احمد!"
+            view.welcomeLabel.text = "مساء الخير \(name)!"
             view.messageLabel.text = "أطلع على المهام المتبقية"
         }
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +42,8 @@ class HomeScreenVC: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    let user = UserDefaultsManager.getUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()

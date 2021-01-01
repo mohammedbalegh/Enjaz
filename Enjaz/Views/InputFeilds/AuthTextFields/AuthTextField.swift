@@ -38,7 +38,6 @@ class AuthTextField : UIView {
 	
 	init() {
 		super.init(frame: .zero)
-        overrideUserInterfaceStyle = .light
 	}
 	
 	override func didMoveToWindow() {
