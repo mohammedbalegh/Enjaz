@@ -170,6 +170,15 @@ class NetworkingManager {
             completionHandler(nil)
         }
     }
+    
+    // @Stub
+    
+    static func retrieveGoalSuggestions(completionHandler: (_ goalSuggestions: [String]) -> Void){
+    
+        let goalSuggestions = ["الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي","الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي","الحصول علي 97% في دراستي","المداومة علي الركض صباحا","قراءة كتاب عن احد الفنون","زيارة ذوي القربي","المداومة علي اذكار الصباح و المساء","تلاوة 5 صفحات من القرآن يوميا"]
+        
+        completionHandler(goalSuggestions)
+    }
         
     private static func parseDataIntoDictionary(data: Data) -> [String: Any]? {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
