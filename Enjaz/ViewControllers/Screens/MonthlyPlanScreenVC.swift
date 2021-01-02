@@ -7,6 +7,5 @@ class MonthlyPlanScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .rootTabBarScreensBackgroundColor
     }
-
-
+    
 }

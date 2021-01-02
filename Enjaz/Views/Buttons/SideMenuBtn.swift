@@ -10,14 +10,14 @@ class SideMenuBtn: UIButton {
         self.label.text = label
         iconImageView.image = image
         
-        configure()
+        setupSubViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
+    func setupSubViews() {
         setupIconImageView()
         setupLabel()
     }

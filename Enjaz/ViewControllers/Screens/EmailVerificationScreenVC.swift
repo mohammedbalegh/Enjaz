@@ -190,6 +190,6 @@ class EmailVerificationScreenVC: UIViewController, StoreSubscriber {
     }
     
     func navigateToMainTabBarController() {
-        navigationController?.pushViewController(MainTabBarController(), animated: true)
+        navigationController?.pushViewController(UINavigationController(rootViewController: MainTabBarController()), animated: true)
     }
 }

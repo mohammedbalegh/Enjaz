@@ -2,9 +2,17 @@ import UIKit
 
 class HomeScreenVC: UIViewController {
     
-    var taskModels: [ItemModel] = []
-    var demahModels: [ItemModel] = []
+    var taskModels: [ItemModel] = [] {
+        didSet {
+            dailyTaskView.cards.reloadData()
+        }
+    }
     
+    var demahModels: [ItemModel] = [] {
+        didSet {
+            dailyDemahView.cards.reloadData()
+        }
+    }
     
     let cardPopup = CardPopup(hideOnOverlayTap: true)
     let collectionHeight = LayoutConstants.screenHeight * 0.27
@@ -49,7 +57,6 @@ class HomeScreenVC: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .rootTabBarScreensBackgroundColor
-        updateItemModels()
         
         dailyTaskView.cards.delegate = self
         dailyTaskView.cards.dataSource = self
@@ -66,26 +73,33 @@ class HomeScreenVC: UIViewController {
     }
     
     func updateScreen() {
+        updateItemModels()
         dailyTaskView.updateIndicator(with: taskModels.count)
         dailyDemahView.updateIndicator(with: demahModels.count)
-        updateItemModels()
-        dailyTaskView.cards.reloadData()
-        dailyDemahView.cards.reloadData()
     }
     
-    func updateItemModels() {
+    func getUpdatedItemsModel() -> ([ItemModel], [ItemModel]) {
         let itemModels = RealmManager.retrieveItems()
         
-        taskModels = []
-        demahModels = []
+        var updatedTaskModels: [ItemModel] = []
+        var updatedDemahModels: [ItemModel] = []
         
         itemModels.forEach { (itemModel) in
             if itemModel.type == 0 {
-                taskModels.append(itemModel)
+                updatedTaskModels.append(itemModel)
             } else if itemModel.type == 1 {
-                demahModels.append(itemModel)
+                updatedDemahModels.append(itemModel)
             }
         }
+        
+        return (updatedTaskModels, updatedDemahModels)
+    }
+    
+    func updateItemModels() {
+        let (updatedTaskModels, updatedDemahModels) = getUpdatedItemsModel()
+        
+        taskModels = updatedTaskModels
+        demahModels = updatedDemahModels
     }
     
     override func viewDidLayoutSubviews() {
@@ -136,12 +150,11 @@ class HomeScreenVC: UIViewController {
         
         NSLayoutConstraint.activate([
             welcomeBadge.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
-            welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight),
+            welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight + 30),
             welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
             welcomeBadge.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.6)
         ])
     }
-    
 }
 
 extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
