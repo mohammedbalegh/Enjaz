@@ -11,7 +11,10 @@
 		41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CollectionViewTopBar.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
-		41912090258EC24F00CB7BF9 /* HourPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */; };
+		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
+		417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */; };
+		417EE8CE25A02E40002F71E5 /* MajorGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */; };
+		417EE8D925A13262002F71E5 /* MajorGoalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */; };
 		41912096258ECDA200CB7BF9 /* HourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41912095258ECDA200CB7BF9 /* HourModel.swift */; };
 		419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120C925903A1E00CB7BF9 /* RealmManager.swift */; };
 		419120E92590948100CB7BF9 /* TypeCardBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120E82590948100CB7BF9 /* TypeCardBtn.swift */; };
@@ -150,7 +153,10 @@
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
-		4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourPickerCell.swift; sourceTree = "<group>"; };
+		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
+		417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsCell.swift; sourceTree = "<group>"; };
+		417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsScreenVC.swift; sourceTree = "<group>"; };
+		417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsModel.swift; sourceTree = "<group>"; };
 		41912095258ECDA200CB7BF9 /* HourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourModel.swift; sourceTree = "<group>"; };
 		419120C925903A1E00CB7BF9 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		419120E82590948100CB7BF9 /* TypeCardBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCardBtn.swift; sourceTree = "<group>"; };
@@ -407,6 +413,8 @@
 				419121222593023000CB7BF9 /* CardView.swift */,
 				BC556DD4259934C3000B2B0C /* ModalHeader.swift */,
 				BC2BCE4D259BDFD8002FE716 /* CollectCollectionViewController.swift */,
+				417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */,
+				417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -428,6 +436,7 @@
 				BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */,
 				BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */,
 				417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */,
+				417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 				BC80D2E5258EAEDE00E4F7B9 /* MonthDayCellModel.swift */,
 				BC026C3C25900B23008222BD /* PopoverTableViewCellModel.swift */,
 				BC32E8A525923D6D008DF8B7 /* UserModel.swift */,
+				417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -590,7 +600,6 @@
 			children = (
 				4142F78025759DE5008FCC23 /* CarouselCell.swift */,
 				BCB54CC6258C07AB00E0E54D /* AdditionImageOrStickerCell.swift */,
-				4191208F258EC24F00CB7BF9 /* HourPickerCell.swift */,
 				BC391144258E771A000E6273 /* CardCell.swift */,
 				BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */,
 				BC026C3725900138008222BD /* PopoverTableViewCell.swift */,
@@ -848,6 +857,7 @@
 			files = (
 				BCB54CBD258C016400E0E54D /* ImageAndStickerPickerPopup.swift in Sources */,
 				BC4646E32587EC3100218D7A /* MainTabBar.swift in Sources */,
+				417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
 				BC32E88C2590EC96008DF8B7 /* imageIdConstants.swift in Sources */,
 				BCBEE8752587D89100D8DE0A /* EmailTextField.swift in Sources */,
@@ -873,6 +883,7 @@
 				BC47809C259629AD00D21060 /* State.swift in Sources */,
 				BCC4D02A25827F890024429B /* LoginScreenVC.swift in Sources */,
 				BCDE2E9D2587AD7E0040345E /* CalendarScreenVC.swift in Sources */,
+				417EE8D925A13262002F71E5 /* MajorGoalsModel.swift in Sources */,
 				BC391166258E90A5000E6273 /* CalendarView.swift in Sources */,
 				BC4780A1259629BE00D21060 /* Actions.swift in Sources */,
 				BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */,
@@ -896,6 +907,7 @@
 				419121192592AF3F00CB7BF9 /* HourPickerView.swift in Sources */,
 				BC026C3D25900B23008222BD /* PopoverTableViewCellModel.swift in Sources */,
 				BC5400A425799D1D009DC69B /* PrimaryBtn.swift in Sources */,
+				417EE8CE25A02E40002F71E5 /* MajorGoalsScreenVC.swift in Sources */,
 				BC7EFC0F2586899400F35312 /* UIStackView+Ext.swift in Sources */,
 				BC2734BF2587B7B400EFB42C /* CarouselCell.swift in Sources */,
 				BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */,
@@ -905,6 +917,7 @@
 				BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */,
 				BC4646DE2587EBCF00218D7A /* MainTabBarController.swift in Sources */,
 				BC32E8912590EE8C008DF8B7 /* ItemCategoryConstants.swift in Sources */,
+				417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */,
 				BC54008A2579622D009DC69B /* String+Ext.swift in Sources */,
 				BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */,
 				BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */,
@@ -946,7 +959,6 @@
 				BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */,
 				BC556DD5259934C4000B2B0C /* ModalHeader.swift in Sources */,
 				BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */,
-				41912090258EC24F00CB7BF9 /* HourPickerCell.swift in Sources */,
 				BCDE2EA12587AD820040345E /* MonthlyPlanScreenVC.swift in Sources */,
 				BC9F66A2259255AA00E17117 /* Request.swift in Sources */,
 			);
@@ -1118,14 +1130,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MG2N6H9TP7;
+				DEVELOPMENT_TEAM = 5V7642F68F;
 				INFOPLIST_FILE = Enjaz/Support/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.Enjaz;
+				PRODUCT_BUNDLE_IDENTIFIER = none.Enjaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1139,14 +1151,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MG2N6H9TP7;
+				DEVELOPMENT_TEAM = 5V7642F68F;
 				INFOPLIST_FILE = Enjaz/Support/info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.Enjaz;
+				PRODUCT_BUNDLE_IDENTIFIER = none.Enjaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
