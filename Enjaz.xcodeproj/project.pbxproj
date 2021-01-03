@@ -42,7 +42,6 @@
 		BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AA7172594D3B9008AF315 /* AlertPopup.swift */; };
 		BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78A257739DB008FCC23 /* CarouselCardModel.swift */; };
 		BC2734BF2587B7B400EFB42C /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78025759DE5008FCC23 /* CarouselCell.swift */; };
-		BC2BCE4E259BDFD8002FE716 /* CollectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2BCE4D259BDFD8002FE716 /* CollectCollectionViewController.swift */; };
 		BC2BCE56259BE37D002FE716 /* ImagePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2BCE55259BE37D002FE716 /* ImagePickerPopup.swift */; };
 		BC2BCE5B259BE58B002FE716 /* StickerPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2BCE5A259BE58B002FE716 /* StickerPickerPopup.swift */; };
 		BC2BCE60259BE5BF002FE716 /* StickerIdConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2BCE5F259BE5BF002FE716 /* StickerIdConstants.swift */; };
@@ -115,10 +114,17 @@
 		BCDD83FF2590CFE00026E113 /* NewAdditionInputFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD83FE2590CFE00026E113 /* NewAdditionInputFieldContainer.swift */; };
 		BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EC22586110600A86330 /* HomeScreenVC.swift */; };
 		BCDE2E9D2587AD7E0040345E /* CalendarScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED82586258B00A86330 /* CalendarScreenVC.swift */; };
-		BCDE2EA12587AD820040345E /* MonthlyPlanScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */; };
-		BCDE2EA52587AD860040345E /* GoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EE225862DAD00A86330 /* GoalsScreenVC.swift */; };
+		BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EDD258628E900A86330 /* GoalsScreenVC.swift */; };
+		BCDE2EA52587AD860040345E /* MonthlyPlanScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EE225862DAD00A86330 /* MonthlyPlanScreenVC.swift */; };
 		BCDE2EBA2587B4BE0040345E /* OnboardingScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */; };
 		BCDE2EBF2587B4DC0040345E /* StartScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */; };
+		BCEBF48E259F76690001EB40 /* SelectGoalTypeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF48D259F76690001EB40 /* SelectGoalTypeScreenVC.swift */; };
+		BCEBF4AA259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */; };
+		BCEBF4AF259F965D0001EB40 /* ScreenNavigatorCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4AE259F965D0001EB40 /* ScreenNavigatorCellModel.swift */; };
+		BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */; };
+		BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */; };
+		BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */; };
+		BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */; };
 		E298AC267A0982FAD37AF7AE /* Pods_Enjaz_EnjazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,8 +151,8 @@
 		41328EC22586110600A86330 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		41328ED3258622DC00A86330 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		41328ED82586258B00A86330 /* CalendarScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreenVC.swift; sourceTree = "<group>"; };
-		41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPlanScreenVC.swift; sourceTree = "<group>"; };
-		41328EE225862DAD00A86330 /* GoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsScreenVC.swift; sourceTree = "<group>"; };
+		41328EDD258628E900A86330 /* GoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsScreenVC.swift; sourceTree = "<group>"; };
+		41328EE225862DAD00A86330 /* MonthlyPlanScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPlanScreenVC.swift; sourceTree = "<group>"; };
 		41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBadgeView.swift; sourceTree = "<group>"; };
 		41328F05258955CD00A86330 /* CollectionViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTopBar.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
@@ -189,7 +195,6 @@
 		BC06A7F3258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverBtnsRow.swift; sourceTree = "<group>"; };
 		BC0A87CF2575836F0045A54E /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		BC0AA7172594D3B9008AF315 /* AlertPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopup.swift; sourceTree = "<group>"; };
-		BC2BCE4D259BDFD8002FE716 /* CollectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectCollectionViewController.swift; sourceTree = "<group>"; };
 		BC2BCE55259BE37D002FE716 /* ImagePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerPopup.swift; sourceTree = "<group>"; };
 		BC2BCE5A259BE58B002FE716 /* StickerPickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPickerPopup.swift; sourceTree = "<group>"; };
 		BC2BCE5F259BE5BF002FE716 /* StickerIdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerIdConstants.swift; sourceTree = "<group>"; };
@@ -261,6 +266,13 @@
 		BCDD83FE2590CFE00026E113 /* NewAdditionInputFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionInputFieldContainer.swift; sourceTree = "<group>"; };
 		BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingScreenVC.swift; sourceTree = "<group>"; };
 		BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreenVC.swift; sourceTree = "<group>"; };
+		BCEBF48D259F76690001EB40 /* SelectGoalTypeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGoalTypeScreenVC.swift; sourceTree = "<group>"; };
+		BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorWithDynamicDataTableVC.swift; sourceTree = "<group>"; };
+		BCEBF4AE259F965D0001EB40 /* ScreenNavigatorCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorCellModel.swift; sourceTree = "<group>"; };
+		BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCustomHeader.swift; sourceTree = "<group>"; };
+		BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableScreenVC.swift; sourceTree = "<group>"; };
+		BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalScreenVC.swift; sourceTree = "<group>"; };
+		BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorTableViewCell.swift; sourceTree = "<group>"; };
 		C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz_EnjazUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92202812A6434C5C1FCEC34 /* Pods-Enjaz-EnjazUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz-EnjazUITests.release.xcconfig"; path = "Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E9D3D64764CEC8734F87247B /* Pods-Enjaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz.debug.xcconfig"; path = "Target Support Files/Pods-Enjaz/Pods-Enjaz.debug.xcconfig"; sourceTree = "<group>"; };
@@ -303,13 +315,6 @@
 				1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		417EE88E259C22BF002F71E5 /* TabelView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TabelView;
 			sourceTree = "<group>";
 		};
 		419120C8259039F300CB7BF9 /* Managers */ = {
@@ -396,7 +401,6 @@
 		BC0A87CD2575832A0045A54E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				417EE88E259C22BF002F71E5 /* TabelView */,
 				BC8015C82587BD5B007AD202 /* InputFeilds */,
 				BCDE2EAA2587AE6C0040345E /* Cells */,
 				BC8015C92587BF9C007AD202 /* Buttons */,
@@ -412,9 +416,9 @@
 				419121182592AF3F00CB7BF9 /* HourPickerView.swift */,
 				419121222593023000CB7BF9 /* CardView.swift */,
 				BC556DD4259934C3000B2B0C /* ModalHeader.swift */,
-				BC2BCE4D259BDFD8002FE716 /* CollectCollectionViewController.swift */,
 				417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */,
 				417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */,
+				BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,12 +435,14 @@
 				BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */,
 				41328EC22586110600A86330 /* HomeScreenVC.swift */,
 				41328ED82586258B00A86330 /* CalendarScreenVC.swift */,
-				41328EDD258628E900A86330 /* MonthlyPlanScreenVC.swift */,
-				41328EE225862DAD00A86330 /* GoalsScreenVC.swift */,
+				41328EDD258628E900A86330 /* GoalsScreenVC.swift */,
+				41328EE225862DAD00A86330 /* MonthlyPlanScreenVC.swift */,
 				BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */,
 				BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */,
 				417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */,
 				417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */,
+				BCEBF48D259F76690001EB40 /* SelectGoalTypeScreenVC.swift */,
+				BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -469,6 +475,8 @@
 				BC0A87CE257583360045A54E /* Screens */,
 				BC026C32258FFB8B008222BD /* PopoverTableVC.swift */,
 				BC963E6B259CF09100A1556B /* SideMenuVC.swift */,
+				BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */,
+				BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -494,6 +502,7 @@
 				BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */,
 				BC39116D258E95A5000E6273 /* ShowMoreButton.swift */,
 				BC963E70259D04C000A1556B /* SideMenuBtn.swift */,
+				BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -591,6 +600,7 @@
 				BC026C3C25900B23008222BD /* PopoverTableViewCellModel.swift */,
 				BC32E8A525923D6D008DF8B7 /* UserModel.swift */,
 				417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */,
+				BCEBF4AE259F965D0001EB40 /* ScreenNavigatorCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -858,10 +868,12 @@
 				BCB54CBD258C016400E0E54D /* ImageAndStickerPickerPopup.swift in Sources */,
 				BC4646E32587EC3100218D7A /* MainTabBar.swift in Sources */,
 				417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */,
+				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
+				BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
 				BC32E88C2590EC96008DF8B7 /* imageIdConstants.swift in Sources */,
 				BCBEE8752587D89100D8DE0A /* EmailTextField.swift in Sources */,
-				BCDE2EA52587AD860040345E /* GoalsScreenVC.swift in Sources */,
+				BCDE2EA52587AD860040345E /* MonthlyPlanScreenVC.swift in Sources */,
 				BC39114A258E773E000E6273 /* CardPopup.swift in Sources */,
 				BCB54CC7258C07AB00E0E54D /* AdditionImageOrStickerCell.swift in Sources */,
 				BCDE2EBA2587B4BE0040345E /* OnboardingScreenVC.swift in Sources */,
@@ -888,15 +900,16 @@
 				BC4780A1259629BE00D21060 /* Actions.swift in Sources */,
 				BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */,
 				BCDD83FA2590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift in Sources */,
-				BC2BCE4E259BDFD8002FE716 /* CollectCollectionViewController.swift in Sources */,
 				BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,
 				BCBEE8682587D80200D8DE0A /* ResetCodeTextField.swift in Sources */,
+				BCEBF4AF259F965D0001EB40 /* ScreenNavigatorCellModel.swift in Sources */,
 				BC80D2D6258E9D1B00E4F7B9 /* WeekDayNames.swift in Sources */,
 				BCD1B11B2592ACC40070819B /* UserDefaultsKeys.swift in Sources */,
 				BCDD83FF2590CFE00026E113 /* NewAdditionInputFieldContainer.swift in Sources */,
 				BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */,
+				BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeader.swift in Sources */,
 				BC54008F2579878C009DC69B /* LayoutTools.swift in Sources */,
 				BCB98CED2588275200B64DC9 /* NewAdditionTextField.swift in Sources */,
 				BC32E8962590EF03008DF8B7 /* ItemTypeConstants.swift in Sources */,
@@ -914,6 +927,7 @@
 				BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */,
 				BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */,
 				BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */,
+				BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */,
 				BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */,
 				BC4646DE2587EBCF00218D7A /* MainTabBarController.swift in Sources */,
 				BC32E8912590EE8C008DF8B7 /* ItemCategoryConstants.swift in Sources */,
@@ -922,6 +936,7 @@
 				BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */,
 				BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */,
 				419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */,
+				BCEBF48E259F76690001EB40 /* SelectGoalTypeScreenVC.swift in Sources */,
 				41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */,
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
 				41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */,
@@ -955,11 +970,14 @@
 				BC54007C25795B13009DC69B /* UIView+Ext.swift in Sources */,
 				BCBEE8592587D03E00D8DE0A /* ConfirmPasswordTextField.swift in Sources */,
 				BCB98CF7258AB83800B64DC9 /* PickerPopup.swift in Sources */,
+				BCEBF4AA259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift in Sources */,
 				BC39114F258E776B000E6273 /* ItemModel.swift in Sources */,
 				BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */,
 				BC556DD5259934C4000B2B0C /* ModalHeader.swift in Sources */,
 				BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */,
 				BCDE2EA12587AD820040345E /* MonthlyPlanScreenVC.swift in Sources */,
+				41912090258EC24F00CB7BF9 /* HourPickerCell.swift in Sources */,
+				BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */,
 				BC9F66A2259255AA00E17117 /* Request.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

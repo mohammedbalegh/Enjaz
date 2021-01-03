@@ -22,7 +22,7 @@ class NewAdditionInputFieldContainer: UIView {
     
     func setup() {
         layer.cornerRadius = LayoutConstants.inputHeight / 2
-        layer.borderColor = UIColor.init(white: 0.85, alpha: 1).cgColor
+        layer.borderColor = UIColor.borderColor.cgColor
         layer.borderWidth = 1
         backgroundColor = .white
     }

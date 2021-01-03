@@ -1,6 +1,6 @@
 import UIKit
 
-class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
+class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     // MARK: Properties
     
     var scrollView: UIScrollView = {
@@ -154,7 +154,7 @@ class NewAdditionScreenVC: UIViewController, NewAdditionScreenModalDelegate {
         view.addSubview(setImageBtn)
         
         NSLayoutConstraint.activate([
-            setImageBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight - LayoutConstants.toolBarHeight * 0.25),
+            setImageBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             setImageBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         

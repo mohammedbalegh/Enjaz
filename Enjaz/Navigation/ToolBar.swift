@@ -17,6 +17,7 @@ class ToolBar: UIView {
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}()
+    
     lazy var islamicDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(hex: 0x011942)
@@ -26,6 +27,7 @@ class ToolBar: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
 	lazy var dateVSV: UIStackView = {
 		let stackView = UIStackView(arrangedSubviews: [islamicDateLabel, dateLabel])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +37,7 @@ class ToolBar: UIView {
 		
 		return stackView
 	}()
+    
     let menuButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
@@ -63,7 +66,7 @@ class ToolBar: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -86,9 +89,9 @@ class ToolBar: UIView {
 		
 		NSLayoutConstraint.activate([
 			billButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-			billButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -(LayoutConstants.screenWidth * 0.058)),
-			billButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
-			billButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
+			billButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+			billButton.heightAnchor.constraint(equalTo: heightAnchor),
+			billButton.widthAnchor.constraint(equalToConstant: 22)
 		])
 	}
 	
@@ -98,6 +101,8 @@ class ToolBar: UIView {
 		NSLayoutConstraint.activate([
 			dateVSV.centerYAnchor.constraint(equalTo: self.centerYAnchor),
 			dateVSV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            dateVSV.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
+            dateVSV.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.8),
 		])
 	}
     
@@ -107,8 +112,8 @@ class ToolBar: UIView {
         NSLayoutConstraint.activate([
             title.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             title.centerYAnchor.constraint(equalTo: billButton.centerYAnchor),
-            title.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
-            title.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.3)
+            title.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
+            title.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.8),
         ])
     }
     
@@ -117,9 +122,9 @@ class ToolBar: UIView {
         
         NSLayoutConstraint.activate([
             menuButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            menuButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: LayoutConstants.screenWidth * 0.058),
-            menuButton.heightAnchor.constraint(equalToConstant: LayoutConstants.navBarItemHeight),
-            menuButton.widthAnchor.constraint(equalToConstant: LayoutConstants.navBarItemWidth)
+            menuButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            menuButton.heightAnchor.constraint(equalTo: heightAnchor),
+            menuButton.widthAnchor.constraint(equalToConstant: 25)
         ])
     }
 }

@@ -8,18 +8,68 @@ class MainTabBarController: UITabBarController {
 		case title
 		case date
 	}
-	
-	let tabBarHeight = LayoutConstants.screenHeight * 0.10
-	
-	let toolBar: ToolBar = {
-		let bar = ToolBar()
-        bar.translatesAutoresizingMaskIntoConstraints = false
+    
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray
+        label.text = DateAndTimeTools.getDate()
+        label.font = label.font.withSize(14)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var islamicDateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(hex: 0x011942)
+        label.text = DateAndTimeTools.getDateInIslamic()
+        label.font = label.font.withSize(20)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var dateVSV: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [islamicDateLabel, dateLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-		bar.title.isHidden = true
-        bar.menuButton.addTarget(self, action: #selector(onMenuBtnTap), for: .touchUpInside)
+        stackView.axis = .vertical
+        stackView.spacing = 5
         
-		return bar
-	}()
+        return stackView
+    }()
+    
+    lazy var menuButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.setImage(UIImage(named:"menuIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(onMenuBtnTap), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    let notificationsButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.setImage(UIImage(named:"bellIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let navBarTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "إضافة جديدة"
+        label.textAlignment = .center
+        label.textColor = .accentColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
 	lazy var floatingBtn: UIButton = {
 		let button = UIButton(type: .custom)
@@ -37,7 +87,10 @@ class MainTabBarController: UITabBarController {
 		
 		return button
 	}()
+
+    var screenTitles: [String]?
 	let newAdditionScreenVC = NewAdditionScreenVC()
+    let tabBarHeight = LayoutConstants.tabBarHeight
 	
 	// Override selectedViewController for User initiated changes
 	override var selectedViewController: UIViewController? {
@@ -45,6 +98,7 @@ class MainTabBarController: UITabBarController {
 			tabChangedTo(selectedIndex: selectedIndex)
 		}
 	}
+    
 	// Override selectedIndex for Programmatic changes
 	override var selectedIndex: Int {
 		didSet {
@@ -56,69 +110,54 @@ class MainTabBarController: UITabBarController {
 		super.viewDidLoad()
 		view.tintColor = .accentColor
                 
+        navigationItem.titleView = dateVSV
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationsButton)
+        
         configureTabBar()
-		setupSubviews()
+        setupFloatingBtn()
 	}
-	
-	func setupSubviews() {
-		setupFloatingBtn()
-		setupToolBar()
-	}
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Remove the bottom border of the navigationBar
+        let navigationBar = navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(named: "navBarBackground"), for: .default)
+        navigationBar?.shadowImage = UIImage()
+    }
 	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		tabBar.frame.size.height = tabBarHeight
 		tabBar.frame.origin.y = view.frame.height - tabBarHeight
 	}
-	
-	func setupToolBar() {
-		view.addSubview(toolBar)
-		
-		NSLayoutConstraint.activate([
-			toolBar.topAnchor.constraint(equalTo: view.topAnchor),
-			toolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			toolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			toolBar.heightAnchor.constraint(equalToConstant: LayoutConstants.toolBarHeight)
-		])
-	}
-	
+    
 	func configureTabBar() {
 		setValue(MainTabBar(), forKey: "TabBar")
 		let homeScreenVC = HomeScreenVC()
 		let calendarScreenVC = CalendarScreenVC()
-		let goalsScreenVC = GoalsScreenVC()
 		let monthlyPlanScreenVC = MonthlyPlanScreenVC()
+		let goalsScreenVC = SelectGoalTypeScreenVC()
 		
 		setTabBarIcon(for: homeScreenVC, withImageName: "homeIcon")
 		setTabBarIcon(for: calendarScreenVC, withImageName: "calendarIcon")
-		setTabBarIcon(for: goalsScreenVC, withImageName: "graphIcon")
-		setTabBarIcon(for: monthlyPlanScreenVC, withImageName: "categoryIcon")
+		setTabBarIcon(for: monthlyPlanScreenVC, withImageName: "graphIcon")
+        setTabBarIcon(for: goalsScreenVC, withImageName: "categoryIcon")
 		
-		viewControllers = [homeScreenVC, calendarScreenVC, newAdditionScreenVC, goalsScreenVC, monthlyPlanScreenVC]
+		viewControllers = [homeScreenVC, calendarScreenVC, newAdditionScreenVC, monthlyPlanScreenVC, goalsScreenVC]
+        screenTitles = ["الرئيسية", "التقويم", "إضافة جديدة", "الخطة الشهرية", "الأهداف"]
 		
 		// Disable the NewAdditionScreen tab bar item, because the screen is accessed through the floating button.
 		tabBar.items?[2].isEnabled = false
 	}
-	
-	func showToolBar(type: ToolBarType, title: String?) {
-		if type == ToolBarType.title {
-			toolBar.title.isHidden = false
-			toolBar.dateLabel.isHidden = true
-			toolBar.islamicDateLabel.isHidden = true
-			toolBar.title.text = title
-		} else if type == ToolBarType.date {
-			toolBar.title.isHidden = true
-			toolBar.dateLabel.isHidden = false
-			toolBar.islamicDateLabel.isHidden = false
-		}
-	}
-	
+		
 	func setupFloatingBtn() {
 		view.addSubview(floatingBtn)
 		
 		let size = LayoutConstants.screenWidth * 0.18
 		
-		let bottomOffset = tabBarHeight - tabBarHeight * 0.30
+		let bottomOffset = tabBarHeight - tabBarHeight * 0.3
 		
 		NSLayoutConstraint.activate([
 			floatingBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -159,17 +198,9 @@ class MainTabBarController: UITabBarController {
 			? setupFloatingBtnAsNewAdditionScreenSaveBtn()
 			: setupFloatingBtnAsNewAdditionScreenTabBarItem()
 		
-		if selectedIndex == 0 {
-			showToolBar(type: .date, title: "")
-		} else if selectedIndex == 1 {
-			showToolBar(type: .title, title: "التقويم")
-		} else if selectedIndex == 2 {
-			showToolBar(type: .title, title: "إضافة جديدة")
-		} else if selectedIndex == 3 {
-			showToolBar(type: .title, title: "الخطة الشهرية")
-		} else if selectedIndex == 4 {
-			showToolBar(type: .title, title: "الأهداف")
-		}
+        navigationItem.titleView = selectedIndex == 0 ? dateVSV : navBarTitleLabel
+
+        navBarTitleLabel.text = screenTitles?[selectedIndex]
 	}
 	
 	func setupFloatingBtnAsNewAdditionScreenTabBarItem() {
