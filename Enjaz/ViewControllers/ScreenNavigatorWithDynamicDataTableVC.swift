@@ -12,7 +12,10 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
         }
     }
     
+    var id: Int?
+    
     var targetViewController: SelectableScreenVC?
+    var targetTableViewController: ScreenNavigatorWithDynamicDataTableVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,20 +61,22 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
         
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let tableViewCustomHeader = TableViewCustomHeader(frame: .zero)
-//        tableViewCustomHeader.label.text = tableViewTitle
-//
-//        return tableViewCustomHeader
-//    }
-//
-//    override func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//        return 50
-//    }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section != 0 else { return }
+        print("enterd \(indexPath.row)")
+        
+        if targetTableViewController is SelectGoalTypeScreenVC {
+            print("yes sur")
+        }
+        
+        if indexPath.row < 2, let targetTableViewController = targetTableViewController {
+            print("enterd if")
+            targetTableViewController.id = indexPath.row
+            navigationController?.pushViewController(targetTableViewController, animated: true)
+            return
+        }
+        
         
         if let targetViewController = targetViewController {
             targetViewController.id = indexPath.row

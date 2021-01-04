@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */; };
 		41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CollectionViewTopBar.swift */; };
+		4141500925A1875A00DC369A /* MonthGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */; };
+		4141501125A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -155,6 +157,8 @@
 		41328EE225862DAD00A86330 /* MonthlyPlanScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyPlanScreenVC.swift; sourceTree = "<group>"; };
 		41328EF9258843CD00A86330 /* WelcomeBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBadgeView.swift; sourceTree = "<group>"; };
 		41328F05258955CD00A86330 /* CollectionViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTopBar.swift; sourceTree = "<group>"; };
+		4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGoalsScreenVC.swift; sourceTree = "<group>"; };
+		4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAndCompletedGoalsScreenVC.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
@@ -443,6 +447,8 @@
 				417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */,
 				BCEBF48D259F76690001EB40 /* SelectGoalTypeScreenVC.swift */,
 				BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */,
+				4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */,
+				4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -887,6 +893,7 @@
 				BCBEE8632587D7CF00D8DE0A /* NewPasswordTextField.swift in Sources */,
 				BC9F669A25924B6900E17117 /* NetworkingUrls.swift in Sources */,
 				BCDE2EBF2587B4DC0040345E /* StartScreenVC.swift in Sources */,
+				4141500925A1875A00DC369A /* MonthGoalsScreenVC.swift in Sources */,
 				BC32E8A625923D6D008DF8B7 /* UserModel.swift in Sources */,
 				BC391145258E771A000E6273 /* CardCell.swift in Sources */,
 				419120EE25909CC700CB7BF9 /* AdditionTypeScreenVC.swift in Sources */,
@@ -955,6 +962,7 @@
 				BC4780AB25962A1400D21060 /* Reducer.swift in Sources */,
 				BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */,
 				41FC4C49258BC07600EA4DDF /* ToolBar.swift in Sources */,
+				4141501125A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift in Sources */,
 				BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */,
 				BCBEE85E2587D73000D8DE0A /* PasswordTextField.swift in Sources */,
 				BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */,
@@ -975,8 +983,7 @@
 				BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */,
 				BC556DD5259934C4000B2B0C /* ModalHeader.swift in Sources */,
 				BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */,
-				BCDE2EA12587AD820040345E /* MonthlyPlanScreenVC.swift in Sources */,
-				41912090258EC24F00CB7BF9 /* HourPickerCell.swift in Sources */,
+				BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */,
 				BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */,
 				BC9F66A2259255AA00E17117 /* Request.swift in Sources */,
 			);

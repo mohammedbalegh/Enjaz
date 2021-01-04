@@ -138,7 +138,7 @@ class MainTabBarController: UITabBarController {
 		let homeScreenVC = HomeScreenVC()
 		let calendarScreenVC = CalendarScreenVC()
 		let monthlyPlanScreenVC = MonthlyPlanScreenVC()
-		let goalsScreenVC = SelectGoalTypeScreenVC()
+		let goalsScreenVC = MonthGoalsScreenVC()
 		
 		setTabBarIcon(for: homeScreenVC, withImageName: "homeIcon")
 		setTabBarIcon(for: calendarScreenVC, withImageName: "calendarIcon")

@@ -13,7 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let alwaysOpenOnAuthScreens = false
-        let loggedIn = !alwaysOpenOnAuthScreens && UserDefaults.standard.bool(forKey: UserDefaultsKeys.isLoggedIn)
+//        let loggedIn = !alwaysOpenOnAuthScreens && UserDefaults.standard.bool(forKey: UserDefaultsKeys.isLoggedIn)
+        let loggedIn = true
         
         let rootViewController = UINavigationController(rootViewController: loggedIn ? MainTabBarController() : StartScreenVC())
         

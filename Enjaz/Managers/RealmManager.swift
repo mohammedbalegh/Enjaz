@@ -30,4 +30,19 @@ class RealmManager {
         }
     }
     
+    private static func retrieveGoals(withCompletedEqualTo completed: Bool) -> [ItemModel] {
+        
+        let completionFilter = "is_completed == \(completed.description)"
+        let goals: [ItemModel] = RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == 3").map({ $0 })
+        return  goals
+    }
+    
+    static func retrieveCompletedGoals() -> [ItemModel] {
+        return retrieveGoals(withCompletedEqualTo: true)
+    }
+    
+    static func retrieveUpcomingGoals() -> [ItemModel] {
+        return retrieveGoals(withCompletedEqualTo: false)
+    }
+    
 }
