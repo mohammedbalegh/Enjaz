@@ -64,14 +64,8 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section != 0 else { return }
-        print("enterd \(indexPath.row)")
-        
-        if targetTableViewController is SelectGoalTypeScreenVC {
-            print("yes sur")
-        }
         
         if indexPath.row < 2, let targetTableViewController = targetTableViewController {
-            print("enterd if")
             targetTableViewController.id = indexPath.row
             navigationController?.pushViewController(targetTableViewController, animated: true)
             return

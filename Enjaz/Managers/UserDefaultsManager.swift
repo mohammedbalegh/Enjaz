@@ -1,6 +1,20 @@
 import Foundation
 
 struct UserDefaultsManager {
+    
+    struct Keys {
+        static let majorGoals = "majorGoals"
+    }
+    
+    var majorGoals: [String]? {
+        get {
+            return UserDefaults.standard.array(forKey: Keys.majorGoals) as? [String]
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.majorGoals)
+        }
+    }
+    
     static func setUser(user: UserModel) {
         do {
             let encoder = JSONEncoder()

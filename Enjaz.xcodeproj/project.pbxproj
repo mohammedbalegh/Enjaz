@@ -11,6 +11,10 @@
 		41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CollectionViewTopBar.swift */; };
 		4141500925A1875A00DC369A /* MonthGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */; };
 		4141501125A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */; };
+		4141502425A2AAA200DC369A /* SelfEvaluationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */; };
+		4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */; };
+		4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141503125A2C71700DC369A /* SelfEvaluationChart.swift */; };
+		4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141504125A3FD2F00DC369A /* ChartSliderView.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -159,6 +163,10 @@
 		41328F05258955CD00A86330 /* CollectionViewTopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTopBar.swift; sourceTree = "<group>"; };
 		4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGoalsScreenVC.swift; sourceTree = "<group>"; };
 		4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAndCompletedGoalsScreenVC.swift; sourceTree = "<group>"; };
+		4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationScreenVC.swift; sourceTree = "<group>"; };
+		4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationLabel.swift; sourceTree = "<group>"; };
+		4141503125A2C71700DC369A /* SelfEvaluationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationChart.swift; sourceTree = "<group>"; };
+		4141504125A3FD2F00DC369A /* ChartSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSliderView.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
@@ -321,6 +329,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4141502825A2AB7E00DC369A /* Lables */ = {
+			isa = PBXGroup;
+			children = (
+				4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */,
+			);
+			path = Lables;
+			sourceTree = "<group>";
+		};
 		419120C8259039F300CB7BF9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +421,7 @@
 		BC0A87CD2575832A0045A54E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4141502825A2AB7E00DC369A /* Lables */,
 				BC8015C82587BD5B007AD202 /* InputFeilds */,
 				BCDE2EAA2587AE6C0040345E /* Cells */,
 				BC8015C92587BF9C007AD202 /* Buttons */,
@@ -423,6 +440,8 @@
 				417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */,
 				417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */,
 				BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */,
+				4141503125A2C71700DC369A /* SelfEvaluationChart.swift */,
+				4141504125A3FD2F00DC369A /* ChartSliderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -449,6 +468,7 @@
 				BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */,
 				4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */,
 				4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */,
+				4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -897,6 +917,7 @@
 				BC32E8A625923D6D008DF8B7 /* UserModel.swift in Sources */,
 				BC391145258E771A000E6273 /* CardCell.swift in Sources */,
 				419120EE25909CC700CB7BF9 /* AdditionTypeScreenVC.swift in Sources */,
+				4141502425A2AAA200DC369A /* SelfEvaluationScreenVC.swift in Sources */,
 				BC026C42259021B2008222BD /* DateAndTimeTools.swift in Sources */,
 				BCBEE8702587D85C00D8DE0A /* NameTextField.swift in Sources */,
 				BC47809C259629AD00D21060 /* State.swift in Sources */,
@@ -908,6 +929,7 @@
 				BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */,
 				BCDD83FA2590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift in Sources */,
 				BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */,
+				4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,
 				BCBEE8682587D80200D8DE0A /* ResetCodeTextField.swift in Sources */,
@@ -945,8 +967,10 @@
 				419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */,
 				BCEBF48E259F76690001EB40 /* SelectGoalTypeScreenVC.swift in Sources */,
 				41328EFA258843CD00A86330 /* WelcomeBadgeView.swift in Sources */,
+				4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */,
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
 				41328F06258955CD00A86330 /* CollectionViewTopBar.swift in Sources */,
+				4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */,
 				419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */,
 				41FC4C61258BFD4700EA4DDF /* ItemsView.swift in Sources */,
 				BC2BCE60259BE5BF002FE716 /* StickerIdConstants.swift in Sources */,
