@@ -8,7 +8,7 @@ let store = Store(reducer: appReducer, state: AppState(), middleware: [])
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        forceLayoutDirectionTo(.rightToLeft)
+        LayoutTools.forceLayoutDirectionTo(.rightToLeft)
         configureNavigationBarAppearance()
         monitorInternetConnection()
         

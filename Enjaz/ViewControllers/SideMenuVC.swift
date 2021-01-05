@@ -35,7 +35,7 @@ class SideMenuVC: UIViewController {
     let privacyPolicyBtn = SideMenuBtn(label: "سياسة الخصوصية", image: UIImage(named: "sheetIcon"))
     let contactUsBtn = SideMenuBtn(label: "اتصل بنا", image: UIImage(named: "phoneIcon"))
     
-    lazy var menuBtnsStack: UIStackView = {
+    lazy var menuBtnsVerticalStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [draftBtn, noteBtn, goalsRatingBtn, rateAppBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -48,7 +48,7 @@ class SideMenuVC: UIViewController {
     
     let signOutBtn = SideMenuBtn(label: "تسجيل الخروج", image: UIImage(named: "signOutIcon"))
     
-    var user = UserDefaultsManager.getUser()
+    var user = UserDefaultsManager.user
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,13 +96,13 @@ class SideMenuVC: UIViewController {
     }
     
     func setupMenuBtnsStack() {
-        view.addSubview(menuBtnsStack)
+        view.addSubview(menuBtnsVerticalStack)
                 
         NSLayoutConstraint.activate([
-            menuBtnsStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
-            menuBtnsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            menuBtnsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            menuBtnsStack.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.8),
+            menuBtnsVerticalStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
+            menuBtnsVerticalStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            menuBtnsVerticalStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            menuBtnsVerticalStack.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.8),
         ])
     }
     

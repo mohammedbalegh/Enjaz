@@ -1,7 +1,7 @@
 import UIKit
 
-class EditableTextView: UITextView, UITextViewDelegate {
-	
+class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldContainerInput {
+	    
 	var placeholder = "" {
 		didSet {
             if textColor == .placeholderText {
@@ -9,9 +9,21 @@ class EditableTextView: UITextView, UITextViewDelegate {
 			}
 		}
 	}
-    
-    var textViewDidUpdateFocus: ((_ focused: Bool) -> Void)?
-	
+        
+    var inputText: String? {
+        get {
+            return text == placeholder ? "" : text
+        }
+        set {
+            if (newValue ?? "").isEmpty {
+                setPlaceholder(self)
+                return
+            }
+            
+            text = newValue
+        }
+    }
+        	
 	init(frame: CGRect) {
 		super.init(frame: frame, textContainer: nil)
 		
@@ -27,6 +39,10 @@ class EditableTextView: UITextView, UITextViewDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+    func setPlaceholder(_ textView: UITextView) {
+        textView.text = placeholder
+        textView.textColor = .placeholderText
+    }
 		
 	// MARK: Delegate
 	
@@ -35,17 +51,12 @@ class EditableTextView: UITextView, UITextViewDelegate {
 			textView.text = nil
 			textView.textColor = .black
 		}
-        
-        textViewDidUpdateFocus?(true)
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
 		if textView.text.isEmpty {
-			textView.text = placeholder
-			textView.textColor = .placeholderText
+            setPlaceholder(textView)
 		}
-        
-        textViewDidUpdateFocus?(false)
 	}
 	
 }

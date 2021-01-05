@@ -3,9 +3,11 @@ import UIKit
 class AuthTextField : UIView {
 	// MARK: Properties
 	
-	var textField = UITextField()
-	var icon = UIImageView()
-    var errorLabel: UILabel = {
+    static let height: CGFloat = max(LayoutConstants.screenHeight * 0.085, 50)
+    
+	let textField = UITextField()
+	let icon = UIImageView()
+    let errorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -24,7 +26,6 @@ class AuthTextField : UIView {
 	var defaultErrorMessage: String?
 	var validator: ((String) -> Bool)?
 	
-	let height: CGFloat = max(LayoutConstants.screenHeight * 0.085, 50)
 	let iconHorizontalMargin: CGFloat = 12
 	let errorLabelHeight: CGFloat = 12
 	
@@ -40,24 +41,15 @@ class AuthTextField : UIView {
 		super.init(frame: .zero)
 	}
 	
-	override func didMoveToWindow() {
-		guard window != nil else { return }
-		
-		setUp()
-		setupErrorLabel()
-		setupTextFieldContainer()
-		setupIcon()
-		setupTextField()
-	}
+    override func layoutSubviews() {
+        setupErrorLabel()
+        setupTextFieldContainer()
+        setupIcon()
+        setupTextField()
+    }
 	
 	// MARK: View Setups
-	
-	func setUp() {
-		translatesAutoresizingMaskIntoConstraints = false
 		
-		heightAnchor.constraint(equalToConstant: height).isActive = true
-	}
-	
 	func setupErrorLabel() {
 		addSubview(errorLabel)
 		
@@ -72,7 +64,7 @@ class AuthTextField : UIView {
 		addSubview(textFieldContainer)
 		textFieldContainer.translatesAutoresizingMaskIntoConstraints = false
 		
-		let containerHeight = height - errorLabelHeight
+        let containerHeight = frame.height - errorLabelHeight
 		textFieldContainer.layer.cornerRadius = containerHeight / 2
 		
 		textFieldContainer.applyLightShadow()
@@ -121,7 +113,7 @@ class AuthTextField : UIView {
 	// MARK: Tools
 	
 	func setTextFieldDirection() {
-		let layoutDirection = getCurrentLayoutDirectionFor(self)
+		let layoutDirection = LayoutTools.getCurrentLayoutDirectionFor(self)
 		if layoutDirection == .rightToLeft {
 			textField.textAlignment = .right
 		}

@@ -2,7 +2,7 @@ import UIKit
 import Network
 import ReSwift
 
-class EmailVerificationScreenVC: UIViewController, StoreSubscriber {
+class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
     // MARK: Properties
@@ -69,7 +69,6 @@ class EmailVerificationScreenVC: UIViewController, StoreSubscriber {
         
         store.subscribe(self)
         
-        dismissKeyboardOnTextFieldBlur()
         setupSubViews()
     }
     

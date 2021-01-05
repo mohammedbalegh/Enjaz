@@ -44,7 +44,7 @@ class DateAndTimeTools {
         let dateComponents = DateComponents(year: year, month: month, day: day, hour: hour)
         let calendar = NSCalendar(identifier: calendarIdentifier)!
         let date = calendar.date(from: dateComponents)!
-
+        
         return date
     }
     

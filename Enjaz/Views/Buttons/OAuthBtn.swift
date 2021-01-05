@@ -7,40 +7,32 @@ class OAuthBtn : UIButton {
     }
     
     var type : oAuthBtnType?
-    let size : CGFloat = 45
     
     init(type: oAuthBtnType) {
         super.init(frame: .zero)
         self.type = type
-        translatesAutoresizingMaskIntoConstraints = false
+        
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    override func didMoveToWindow() {
-        guard window != nil else { return }
-        setup()
-    }
-    
-    func setup() {
+    func configure() {
+        frame = CGRect(x: 0, y: 0, width: frame.height, height: frame.height)
+        
         if let type = type {
             switch type {
             case .twitter:
-                setBackgroundImage(#imageLiteral(resourceName: "twitterOAuthImage"), for: .normal)
+                setBackgroundImage(UIImage(named: "twitterIcon"), for: .normal)
                 
             case .apple:
-                setBackgroundImage(#imageLiteral(resourceName: "AppleOAUthImage"), for: .normal)
+                setBackgroundImage(UIImage(named: "appleIcon"), for: .normal)
                 
             case .google:
-                setBackgroundImage(#imageLiteral(resourceName: "GoogleOAUthImage"), for: .normal)
+                setBackgroundImage(UIImage(named: "googleIcon"), for: .normal)
             }
         }
-        
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: size),
-            widthAnchor.constraint(equalToConstant: size),
-        ])
     }
 }

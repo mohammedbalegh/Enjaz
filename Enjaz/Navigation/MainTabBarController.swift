@@ -3,12 +3,7 @@ import UIKit
 import SideMenu
 
 class MainTabBarController: UITabBarController {
-	
-	enum ToolBarType {
-		case title
-		case date
-	}
-    
+	    
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
@@ -29,7 +24,7 @@ class MainTabBarController: UITabBarController {
         return label
     }()
     
-    lazy var dateVSV: UIStackView = {
+    lazy var dateVerticalStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [islamicDateLabel, dateLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -110,7 +105,7 @@ class MainTabBarController: UITabBarController {
 		super.viewDidLoad()
 		view.tintColor = .accentColor
                 
-        navigationItem.titleView = dateVSV
+        navigationItem.titleView = dateVerticalStack
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationsButton)
         
@@ -198,7 +193,7 @@ class MainTabBarController: UITabBarController {
 			? setupFloatingBtnAsNewAdditionScreenSaveBtn()
 			: setupFloatingBtnAsNewAdditionScreenTabBarItem()
 		
-        navigationItem.titleView = selectedIndex == 0 ? dateVSV : navBarTitleLabel
+        navigationItem.titleView = selectedIndex == 0 ? dateVerticalStack : navBarTitleLabel
 
         navBarTitleLabel.text = screenTitles?[selectedIndex]
 	}

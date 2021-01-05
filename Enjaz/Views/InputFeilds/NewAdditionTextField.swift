@@ -1,10 +1,20 @@
 import UIKit
 
-class NewAdditionTextField: UITextField {
+class NewAdditionTextField: UITextField, NewAdditionInputFieldContainerInput {
+    
+    
 	// MARK: Properties
 		
 	var fieldName = ""
 	var height: CGFloat = LayoutConstants.inputHeight
+
+    var inputText: String? {
+        get { return text}
+        set {
+            text = newValue
+        }
+    }
+    
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")

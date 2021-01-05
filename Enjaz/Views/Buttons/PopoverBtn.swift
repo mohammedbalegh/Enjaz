@@ -1,6 +1,6 @@
 import UIKit
 
-class PopoverBtn: UIButton {
+class PopoverBtn: UIButton, NewAdditionInputFieldContainerInput {
 
     enum PopoverBtnSizeType {
         case small, large
@@ -26,14 +26,24 @@ class PopoverBtn: UIButton {
 		
 		return imageView
 	}()
-		
+	
+    var inputText: String? {
+        get {
+            return label.text
+        }
+        
+        set {
+            label.text = newValue
+        }
+    }
+    
 	override var tintColor: UIColor! {
 		didSet {
 			label.textColor = tintColor
 			dropdownArrow.tintColor = tintColor
 		}
 	}
-
+    
     func configure(withSize size: PopoverBtnSizeType) {
         setupLabel()
         setupDropdownArrow(size)

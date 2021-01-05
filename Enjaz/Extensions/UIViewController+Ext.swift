@@ -2,38 +2,25 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-	
-	func enableKeyboardAvoidance() {
-		setUpKeyboardObservers()
-	}
-	
-	func setUpKeyboardObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-	}
-	
-	@objc func keyboardWillShow(notification: NSNotification) {
-		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-			onKeyboardShown(keyBoardHeight: keyboardSize.height)
-		}
-	}
-	
-	@objc func onKeyboardShown(keyBoardHeight: CGFloat) {
-        view.translateViewVertically(by: keyBoardHeight)
-	}
-	
-	@objc func keyboardWillHide(notification: NSNotification) {
-        view.resetViewVerticalTranslation()
-	}
-	
-	
-	func dismissKeyboardOnTextFieldBlur() {
-		let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-		view.addGestureRecognizer(tap)
-	}
-	
-	@objc func dismissKeyboard() {
-		view.endEditing(true)
-	}
-	
+    func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+    }
+    
+    func unsubscribeFromAllNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+        
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+        
+    func focusOnNextTextFieldOnPressReturn(from textField: UITextField) {
+        // Check if there is any other text-field in the view whose tag is +1 greater than the current text-field on which the return key was pressed. If yes then move the cursor to that next text-field. If no then dismiss the keyboard
+        if let nextField = view.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+    }
+    
 }

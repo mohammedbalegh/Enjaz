@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "GoogleOAUthImage.png",
+      "filename" : "googleIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "GoogleOAUthImage@2x.png",
+      "filename" : "googleIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "GoogleOAUthImage@3x.png",
+      "filename" : "googleIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
