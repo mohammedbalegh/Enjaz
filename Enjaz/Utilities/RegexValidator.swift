@@ -1,6 +1,7 @@
 import Foundation
 
 class RegexValidator {
+    
 	static func validateUsername(candidate: String) -> Bool {
 		let userName = "^\\w{7,18}$"
 		return NSPredicate(format: "SELF MATCHES %@", userName).evaluate(with: candidate)

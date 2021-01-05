@@ -137,7 +137,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
                 
         NSLayoutConstraint.activate([
             saveBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.04)),
+            saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
         
         saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)

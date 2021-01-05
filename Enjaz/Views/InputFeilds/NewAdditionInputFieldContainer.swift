@@ -2,11 +2,7 @@ import UIKit
 
 class NewAdditionInputFieldContainer: UIView {
     
-    var input: UIView? {
-        didSet {
-            onInputSet()
-        }
-    }
+    var input: (UIView & NewAdditionInputFieldContainerInput)?
     
     var fieldName: String = ""
     
@@ -27,7 +23,7 @@ class NewAdditionInputFieldContainer: UIView {
         backgroundColor = .white
     }
     
-    func onInputSet() {
+    override func layoutSubviews() {
         guard let input = input else { return }
         
         addSubview(input)
@@ -35,5 +31,5 @@ class NewAdditionInputFieldContainer: UIView {
         
         input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
     }
-    
+        
 }

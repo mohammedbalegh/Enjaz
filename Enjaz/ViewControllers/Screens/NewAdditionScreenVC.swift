@@ -3,28 +3,26 @@ import UIKit
 class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     // MARK: Properties
     
-    var scrollView: UIScrollView = {
-        var scrollView = UIScrollView(frame: .zero)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        scrollView.backgroundColor = .rootTabBarScreensBackgroundColor
-        return scrollView
-    }()
+    let scrollView = UIScrollView()
     
-    var setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
+    let scrollViewContentView = UIView()
     
-    var setStickerBtn = RoundBtn(image: UIImage(named: "stickerIconBlue"), size: LayoutConstants.screenHeight * 0.03)
+    let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
     
-    var imagePickerPopup = ImagePickerPopup(hideOnOverlayTap: true)
-    var stickerPickerPopup = StickerPickerPopup(hideOnOverlayTap: true)
+    let setStickerBtn = RoundBtn(image: UIImage(named: "stickerIconBlue"), size: LayoutConstants.screenHeight * 0.03)
     
-    var additionNameTextField: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+    let imagePickerPopup = ImagePickerPopup(hideOnOverlayTap: true)
+    let stickerPickerPopup = StickerPickerPopup(hideOnOverlayTap: true)
+    
+    lazy var additionNameTextField: NewAdditionInputFieldContainer = {
+        let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
         let fieldName = "اسم الإضافة"
         containerView.fieldName = fieldName
         
         let textField = NewAdditionTextField(fieldName: fieldName)
+        
+        textField.delegate = self
         
         containerView.input = textField
         
@@ -32,7 +30,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }()
     
     lazy var additionCategoryPopoverBtn: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+        let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
         let button = PopoverBtn(frame: .zero)
         button.configure(withSize: .large)
@@ -64,30 +62,31 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }()
     
     lazy var additionDateAndTimeInput: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+        let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
         let fieldName = "التاريخ و الوقت"
         containerView.fieldName = fieldName
         
-        let textField = NewAdditionTextField(fieldName: fieldName)
+        let button = NewAdditionInputFieldContainerBtn(type: .system)
         
-        textField.frame.size = CGSize(width: 0, height: LayoutConstants.inputHeight)
+        button.setTitle(fieldName, for: .normal)
+        button.setTitleColor(.placeholderText, for: .normal)
+        button.contentHorizontalAlignment = .leading
         
-        textField.delegate = self
-        textField.addTarget(self, action: #selector(onAdditionDateAndTimeInputTap), for: .allTouchEvents)
+        button.frame.size = CGSize(width: 0, height: LayoutConstants.inputHeight)
         
-        containerView.input = textField
+        button.addTarget(self, action: #selector(onAdditionDateAndTimeInputTap), for: .touchUpInside)
+        
+        containerView.input = button
         
         return containerView
     }()
     
     lazy var additionDescriptionTextView: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: CGRect(x: 0, y: 0, width: 60, height: LayoutConstants.inputHeight))
+        let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
         let textView = EditableTextView(frame: .zero)
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        textView.textViewDidUpdateFocus = descriptionTextViewDidUpdateFocus
         
         textView.font = .systemFont(ofSize: 18)
         
@@ -100,31 +99,37 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         return containerView
     }()
-    
-    lazy var textFieldsVSV: UIStackView = {
-        var stackView = UIStackView(arrangedSubviews: [additionNameTextField, additionCategoryPopoverBtn, additionDateAndTimeInput])
+        
+    lazy var textFieldsVerticalStack: UIStackView = {
+        var stackView = UIStackView(arrangedSubviews: getTextFieldsStackArrangedSubviews())
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = stackViewSpacing
+        stackView.spacing = 35
         
         return stackView
     }()
-    
-    let stackViewSpacing: CGFloat = LayoutConstants.screenHeight * 0.04
-    
+        
     let taskTypeModel = TaskType()
     
     var alertPopup = AlertPopup(hideOnOverlayTap: true)
         
     // MARK: State
     
-    var selectedAdditionCategoryIndex: Int?
-    var selectedTimeStamp: Double?
-    var selectedItemTypeID: Int?
-    var selectedImageId: Int?
-    var selectedStickerId: Int?
+    var itemName: String {
+        get { return additionNameTextField.input?.inputText ?? "" }
+    }
+        
+    var itemDescription: String {
+        get { return additionDescriptionTextView.input?.inputText ?? ""}
+    }
+    
+    var itemCategory: Int?
+    var itemDate: Double?
+    var itemType: Int?
+    var itemImageId: Int?
+    var itemStickerId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,7 +137,6 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         view.backgroundColor = .rootTabBarScreensBackgroundColor
         definesPresentationContext = true
         
-        dismissKeyboardOnTextFieldBlur()
         setupSubviews()
     }
     
@@ -140,22 +144,28 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         setupScrollView()
         setupSetImageButton()
         setupSetStickerButton()
-        setupTextFieldsVSV()
+        setupTextFieldsVerticalStack()
         setupAdditionDescriptionTextField()
     }
     
     func setupScrollView() {
         view.addSubview(scrollView)
-        
-        scrollView.fillSuperView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+     
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: keyboardPlaceHolderView.topAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
+        ])
     }
-    
+        
     func setupSetImageButton() {
-        view.addSubview(setImageBtn)
+        scrollView.addSubview(setImageBtn)
         
         NSLayoutConstraint.activate([
-            setImageBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            setImageBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            setImageBtn.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            setImageBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
         
         imagePickerPopup.onImageSelected = onImageSelected
@@ -177,26 +187,29 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         setStickerBtn.addTarget(self, action: #selector(onSetStickerBtnTap), for: .touchUpInside)
     }
     
-    func setupTextFieldsVSV() {
-        view.addSubview(textFieldsVSV)
+    func setupTextFieldsVerticalStack() {
+        scrollView.addSubview(textFieldsVerticalStack)
+        
+        let height = textFieldsVerticalStack.calculateHeightBasedOn(arrangedSubviewHeight: LayoutConstants.inputHeight)
         
         NSLayoutConstraint.activate([
-            textFieldsVSV.topAnchor.constraint(equalTo: setImageBtn.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
-            textFieldsVSV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textFieldsVSV.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            textFieldsVSV.heightAnchor.constraint(equalToConstant: LayoutConstants.inputHeight * 3 + stackViewSpacing * 2),
+            textFieldsVerticalStack.topAnchor.constraint(equalTo: setImageBtn.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
+            textFieldsVerticalStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            textFieldsVerticalStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
+            textFieldsVerticalStack.heightAnchor.constraint(equalToConstant: height),
         ])
     }
     
     func setupAdditionDescriptionTextField() {
-        view.addSubview(additionDescriptionTextView)
+        scrollView.addSubview(additionDescriptionTextView)
         additionDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            additionDescriptionTextView.topAnchor.constraint(equalTo: textFieldsVSV.bottomAnchor, constant: stackViewSpacing),
-            additionDescriptionTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            additionDescriptionTextView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            additionDescriptionTextView.topAnchor.constraint(equalTo: textFieldsVerticalStack.bottomAnchor, constant: textFieldsVerticalStack.spacing),
+            additionDescriptionTextView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            additionDescriptionTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
             additionDescriptionTextView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.17),
+            additionDescriptionTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -(LayoutConstants.tabBarHeight + 20)),
         ])
     }
     
@@ -214,7 +227,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }
     
     func onImageSelected(selectedId: Int) {
-        selectedImageId = selectedId
+        itemImageId = selectedId
         
         if let imageName = imageIdConstants[selectedId] {
             setImageBtn.setImage(UIImage(named: imageName), for: .normal)
@@ -224,7 +237,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }
     
     func onStickerSelected(selectedId: Int) {
-        selectedStickerId = selectedId
+        itemStickerId = selectedId
         
         stickerPickerPopup.hide()
     }
@@ -235,17 +248,20 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }
     
     @objc func onAdditionCategorySelection() {
+        (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .black
+        
         let selectedValueIndex = additionCategoryPickerPopup.picker.selectedRow(inComponent: 0)
-        selectedAdditionCategoryIndex = selectedValueIndex
+        
+        itemCategory = selectedValueIndex
+        
         let selectedAdditionCategory = taskTypeModel.types[selectedValueIndex]
-        guard let input = additionCategoryPopoverBtn.input as? PopoverBtn else { return }
-        input.label.text = selectedAdditionCategory
+                
+        additionCategoryPopoverBtn.input?.inputText = selectedAdditionCategory
         additionCategoryPickerPopup.hide()
     }
     
     func onAdditionCategoryPopupDismiss() {
-        guard let selectedAdditionCategoryIndex = selectedAdditionCategoryIndex else { return }
-        additionCategoryPickerPopup.picker.selectRow(selectedAdditionCategoryIndex, inComponent: 0, animated: false)
+        additionCategoryPickerPopup.picker.selectRow(itemCategory ?? 0, inComponent: 0, animated: false)
     }
     
     @objc func onAdditionDateAndTimeInputTap() {
@@ -256,26 +272,16 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }
     
     func onDateAndTimeSaveBtnTap(selectedTimeStamp: Double, calendarIdentifier: NSCalendar.Identifier ) {
-        self.selectedTimeStamp = selectedTimeStamp
+        self.itemDate = selectedTimeStamp
         let selectedDate = Date(timeIntervalSince1970: selectedTimeStamp)
         let formattedDate = DateAndTimeTools.getReadableDate(from: selectedDate, withFormat: "hh:00 aa   dd MMMM yyyy", calendarIdentifier: calendarIdentifier)
-        if let additionDateAndTimeTextField = additionDateAndTimeInput.input as? NewAdditionTextField {
-            additionDateAndTimeTextField.text = formattedDate
-        }
+        
+        (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.black, for: .normal)
+        
+        additionDateAndTimeInput.input?.inputText = formattedDate
     }
     
-    func descriptionTextViewDidUpdateFocus(focused: Bool) {
-        focused
-            ? tabBarController?.view.translateViewVertically(by: LayoutConstants.screenHeight * 0.22)
-            : tabBarController?.view.resetViewVerticalTranslation()
-    }
-    
-    func onTypeSaveBtnTap(id: Int) {
-        selectedItemTypeID = id
-        saveItem()
-    }
-    
-    func onSaveBtnTap() {
+    @objc func onSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         if !nonProvidedRequiredFieldNames.isEmpty {
             let nonProvidedRequiredFieldNamesAsSentence = nonProvidedRequiredFieldNames.joinAsSentence(languageIsArabic: true)
@@ -283,47 +289,32 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
             return
         }
         
-        
         let additionTypeScreenVC = AdditionTypeScreenVC()
         additionTypeScreenVC.delegate = self
         
         present(additionTypeScreenVC, animated: true)
     }
+    
+    func onTypeSaveBtnTap(id: Int) {
+        itemType = id
         
-    func getItemName() -> String {
-        if let nameInput = additionNameTextField.input as? NewAdditionTextField {
-            let name = nameInput.text ?? ""
-            return name
-        }
-        
-        return ""
+        saveItem()
+        resetViewController()
+        switchToHomeScreenTab()
     }
     
-    func getItemCategoryIndex() -> Int {
-        if let popoverBtn = additionCategoryPopoverBtn.input as? PopoverBtn {
-            let category = popoverBtn.label.text ?? ""
-            let categoryIndex = taskTypeModel.types.firstIndex(of: category)
-            return categoryIndex ?? 0
-        }
-        
-        return 0
-    }
+    // MARK: Tools
     
-    func getItemDescription() -> String {
-        if let textview = additionDescriptionTextView.input as? EditableTextView {
-            let description = textview.text ?? ""
-            return description
-        }
-        
-        return ""
+    func getTextFieldsStackArrangedSubviews() -> [UIView] {
+        return [additionNameTextField, additionCategoryPopoverBtn, additionDateAndTimeInput]
     }
     
     func getNonProvidedRequiredFieldNames() -> [String] {
         var nonProvidedRequiredFieldNames: [String] = []
         
-        let nameIsProvided = !getItemName().isEmpty
-        let categoryIsProvided = selectedAdditionCategoryIndex != nil
-        let dateIsProvided = selectedTimeStamp != nil
+        let nameIsProvided = !itemName.isEmpty
+        let categoryIsProvided = itemCategory != nil
+        let dateIsProvided = itemDate != nil
         
         if !nameIsProvided { nonProvidedRequiredFieldNames.append(additionNameTextField.fieldName) }
         if !categoryIsProvided { nonProvidedRequiredFieldNames.append(additionCategoryPopoverBtn.fieldName) }
@@ -331,17 +322,53 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         return nonProvidedRequiredFieldNames
     }
-    
+        
     func saveItem() {
         let item = ItemModel()
-        item.name = getItemName()
-        item.category = selectedAdditionCategoryIndex ?? 0
-        item.type = selectedItemTypeID ?? 0
-        item.date = selectedTimeStamp ?? 0
-        item.item_description = getItemDescription()
-        item.image_id = selectedImageId ?? -1
-        item.sticker_id = selectedStickerId ?? -1
+        
+        item.name = itemName
+        item.category = itemCategory ?? 0
+        item.type = itemType ?? 0
+        item.date = itemDate ?? 0
+        item.item_description = itemDescription
+        item.image_id = itemImageId ?? -1
+        item.sticker_id = itemStickerId ?? -1
+        
         RealmManager.saveItem(item)
+    }
+    
+    func resetViewController() {
+        resetViewControllerStateValues()
+        resetSubviews()
+    }
+    
+    func resetViewControllerStateValues() {
+        itemCategory = nil
+        itemDate = nil
+        itemType = nil
+        itemImageId = nil
+        itemStickerId = nil
+    }
+    
+    func resetSubviews() {
+        setImageBtn.setImage(UIImage(named: "imageIcon"), for: .normal)
+                
+        imagePickerPopup.collectionView.deselectAllItems(animated: false)
+        stickerPickerPopup.collectionView.deselectAllItems(animated: false)
+        additionCategoryPickerPopup.picker.selectRow(0, inComponent: 0, animated: false)
+        
+        
+        additionNameTextField.input?.inputText = ""
+        additionCategoryPopoverBtn.input?.inputText = additionCategoryPopoverBtn.fieldName
+        additionDateAndTimeInput.input?.inputText = additionDateAndTimeInput.fieldName
+        additionDescriptionTextView.input?.inputText = ""
+        
+        (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .placeholderText
+        (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.placeholderText, for: .normal)
+    }
+    
+    func switchToHomeScreenTab() {
+        tabBarController?.selectedIndex = 0
     }
     
 }
@@ -365,17 +392,9 @@ extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension NewAdditionScreenVC: UITextFieldDelegate {
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return false
     }
 }
 
-extension NewAdditionScreenVC: UITextViewDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        view.translateViewVertically(by: LayoutConstants.screenHeight * 0.3)
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        view.resetViewVerticalTranslation()
-    }
-}

@@ -10,7 +10,7 @@ extension UITextField {
 	}
 	
 	func setTextFieldDirectionToMatchSuperView() {
-		let layoutDirection = getCurrentLayoutDirectionFor(self)
+        let layoutDirection = LayoutTools.getCurrentLayoutDirectionFor(self)
 		if layoutDirection == .rightToLeft {
 			textAlignment = .right
 		}

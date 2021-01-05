@@ -39,6 +39,10 @@ class PrimaryBtn: UIButton {
 		}
     }
     
+    convenience init(theme: BtnTheme, size: BtnSize? = nil) {
+        self.init(label: "", theme: theme, size: size)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -64,7 +68,11 @@ class PrimaryBtn: UIButton {
         }
         
         titleLabel?.font = .systemFont(ofSize: fontSize)
-        setTitle(label, for: .normal)
+        
+        if !label.isEmpty {
+            setTitle(label, for: .normal)
+        }
+        
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 2.0
         layer.shadowOffset = CGSize(width: 0, height: 3)
@@ -81,6 +89,9 @@ class PrimaryBtn: UIButton {
             setTitleColor( .gray, for: .normal)
             layer.shadowColor = UIColor.gray.cgColor
         }
+        
+        let highlightedTitleColor = titleColor(for: .normal)?.withAlpha(0.3)
+        setTitleColor(highlightedTitleColor, for: .highlighted)
         
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: btnHeight),

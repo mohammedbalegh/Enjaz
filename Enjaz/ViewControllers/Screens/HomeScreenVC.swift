@@ -51,7 +51,7 @@ class HomeScreenVC: UIViewController {
         return view
     }()
     
-    let user = UserDefaultsManager.getUser()
+    let user = UserDefaultsManager.user
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,7 +150,7 @@ class HomeScreenVC: UIViewController {
         
         NSLayoutConstraint.activate([
             welcomeBadge.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
-            welcomeBadge.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.toolBarHeight + 30),
+            welcomeBadge.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.screenHeight * 0.055),
             welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
             welcomeBadge.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.6)
         ])

@@ -6,7 +6,7 @@ class CalendarView: UIView {
 		
     let popoverCalendarBtnsRow = CalendarPopoverBtnsRow(frame: .zero)
 	
-	lazy var weekDayLabelsHSV: UIStackView = {
+	lazy var weekDayLabelsHorizontalStack: UIStackView = {
 		let labels = createWeekDayLabels()
 		
 		let stackView = UIStackView(arrangedSubviews: labels)
@@ -66,7 +66,7 @@ class CalendarView: UIView {
 	
 	func setupSubviews() {
         setupPopoverCalendarBtnsRow()
-		setupWeekDayLabelsHSV()
+		setupWeekDayLabelsHorizontalStack()
 		setupMonthDaysCollectionView()
 	}
     
@@ -82,20 +82,20 @@ class CalendarView: UIView {
         ])
     }
 	
-	func setupWeekDayLabelsHSV() {
-		addSubview(weekDayLabelsHSV)
+	func setupWeekDayLabelsHorizontalStack() {
+		addSubview(weekDayLabelsHorizontalStack)
 		
 		let height: CGFloat = 60
-		weekDayLabelsHSV.layer.cornerRadius = height / 2
+		weekDayLabelsHorizontalStack.layer.cornerRadius = height / 2
 		
 		NSLayoutConstraint.activate([
-            weekDayLabelsHSV.topAnchor.constraint(equalTo: popoverCalendarBtnsRow.bottomAnchor, constant: 20),
-			weekDayLabelsHSV.leadingAnchor.constraint(equalTo: leadingAnchor),
-			weekDayLabelsHSV.trailingAnchor.constraint(equalTo: trailingAnchor),
-			weekDayLabelsHSV.heightAnchor.constraint(equalToConstant: height),
+            weekDayLabelsHorizontalStack.topAnchor.constraint(equalTo: popoverCalendarBtnsRow.bottomAnchor, constant: 20),
+			weekDayLabelsHorizontalStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+			weekDayLabelsHorizontalStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+			weekDayLabelsHorizontalStack.heightAnchor.constraint(equalToConstant: height),
 		])
 		
-		weekDayLabelsHSV.applyAccentColorGradient(size: CGSize(width: LayoutConstants.calendarViewWidth, height: height), cornerRadius: weekDayLabelsHSV.layer.cornerRadius)
+		weekDayLabelsHorizontalStack.applyAccentColorGradient(size: CGSize(width: LayoutConstants.calendarViewWidth, height: height), cornerRadius: weekDayLabelsHorizontalStack.layer.cornerRadius)
 	}
 	
 	func setupMonthDaysCollectionView() {
@@ -104,7 +104,7 @@ class CalendarView: UIView {
 		monthDaysCollectionView.isUserInteractionEnabled = true
 		
 		NSLayoutConstraint.activate([
-			monthDaysCollectionView.topAnchor.constraint(equalTo: weekDayLabelsHSV.bottomAnchor, constant: 5),
+			monthDaysCollectionView.topAnchor.constraint(equalTo: weekDayLabelsHorizontalStack.bottomAnchor, constant: 5),
 			monthDaysCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
 			monthDaysCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             monthDaysCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
