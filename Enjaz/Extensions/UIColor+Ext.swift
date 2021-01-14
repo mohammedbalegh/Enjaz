@@ -1,15 +1,6 @@
 import UIKit
 
 extension UIColor {
-    var coreImageColor: CIColor {
-        return CIColor(color: self)
-    }
-    
-    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        let coreImageColor = self.coreImageColor
-        return (coreImageColor.red, coreImageColor.green, coreImageColor.blue, coreImageColor.alpha)
-    }
-        
 	convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat = 1.0) {
 		assertRGBComponentsRange(red, green, blue, alpha)
 		self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
@@ -35,10 +26,6 @@ extension UIColor {
     static let placeholderColor = UIColor(hex: 0xC3C4C6)
     static let borderColor = UIColor(white: 0.85, alpha: 1)
     
-    func withAlpha(_ alpha: CGFloat) -> UIColor {
-        let (red, green, blue, _) = self.components
-        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
 }
 
 func assertRGBComponentsRange(_ red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) {

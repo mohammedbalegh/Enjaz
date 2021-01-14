@@ -1,17 +1,20 @@
 import UIKit
 
 class PopoverBtn: UIButton, NewAdditionInputFieldContainerInput {
-
+    
     enum PopoverBtnSizeType {
         case small, large
     }
+    
+    static let defaultTintColor: UIColor = .lightGray
+    static let fontSize: CGFloat = 16
     
 	let label: UILabel = {
 		let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         
-		label.textColor = .lightGray
-		label.font = .systemFont(ofSize: 16)
+        label.textColor = PopoverBtn.defaultTintColor
+        label.font = .systemFont(ofSize: PopoverBtn.fontSize)
 		
 		return label
 	}()
@@ -22,7 +25,7 @@ class PopoverBtn: UIButton, NewAdditionInputFieldContainerInput {
 		
 		imageView.contentMode = .scaleAspectFit
 		imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
-		imageView.tintColor = .lightGray
+		imageView.tintColor = PopoverBtn.defaultTintColor
 		
 		return imageView
 	}()

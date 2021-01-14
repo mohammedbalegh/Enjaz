@@ -99,4 +99,5 @@ class AlertPopup: Popup {
     func showAsInternetConnectionError() {
         showAsError(withMessage: "لا يوجد اتصال بالانترنت")
     }
+    
 }

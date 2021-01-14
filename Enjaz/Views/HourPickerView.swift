@@ -7,20 +7,21 @@ protocol HourPickerDelegate {
 
 class HourPickerView: UIPickerView {
 
-    var timeModel: [HourModel] = [HourModel(hour: 1, period: "am"),HourModel(hour: 2, period: "am"),HourModel(hour: 3, period: "am"),HourModel(hour: 4, period: "am"),HourModel(hour: 5, period: " am"),HourModel(hour: 6, period: "am"),HourModel(hour: 7, period: "am"),HourModel(hour: 8, period: "am"),HourModel(hour: 9, period: "am"),HourModel(hour: 10, period: "am"),HourModel(hour: 11, period: "am"),HourModel(hour: 12, period: "am"),HourModel(hour: 1, period: "pm"),HourModel(hour: 2, period: "pm"),HourModel(hour: 3, period: "pm"),HourModel(hour: 4, period: "pm"),HourModel(hour: 5, period: "pm"),HourModel(hour: 6, period: "pm"),HourModel(hour: 7, period: "pm"),HourModel(hour: 8, period: "pm"),HourModel(hour: 9, period: "pm"),HourModel(hour: 10, period: "pm"),HourModel(hour: 11, period: "pm"),HourModel(hour: 12, period: "pm")
-    ]
+    var hourModels: [HourModel] = []
     
     var hourPickerDelegate: HourPickerDelegate?
     
     let pickerWidth = LayoutConstants.screenHeight * 0.0853
     let pickerHeight = LayoutConstants.screenWidth * 0.104
     
-    var selectedTimePickerIndex = 0
-    
+    var selectedTimePickerIndex: Int {
+        return selectedRow(inComponent: 0)
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
+        delegate = self
+        dataSource = self        
     }
     
     required init?(coder: NSCoder) {
@@ -31,13 +32,12 @@ class HourPickerView: UIPickerView {
 
 extension HourPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return timeModel.count
+        return hourModels.count
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component:Int, reusing view: UIView?) -> UIView {
@@ -46,14 +46,14 @@ extension HourPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
         
         let hour = UILabel(frame: CGRect(x: 0, y: pickerHeight / 2 - 5, width: pickerHeight, height: pickerHeight / 2))
         hour.textAlignment = .center
-        hour.text = "\(timeModel[row].hour)"
+        hour.text = "\(hourModels[row].hour)"
         
         view.addSubview(hour)
         
         let period = UILabel(frame: CGRect(x: hour.center.x / 2 , y: frame.height / 2 + 2, width: 20, height: 20))
         period.textAlignment = .center
         period.font = period.font.withSize(10)
-        period.text = "\(timeModel[row].period)"
+        period.text = "\(hourModels[row].period)"
         pickerView.subviews[1].backgroundColor = UIColor.clear
         view.addSubview(period)
         
@@ -75,7 +75,6 @@ extension HourPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedTimePickerIndex = row
         hourPickerDelegate?.didSelectRow(row: row)
         pickerView.reloadAllComponents()
     }

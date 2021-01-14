@@ -111,7 +111,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         return stackView
     }()
         
-    let taskTypeModel = TaskType()
+    let taskCategoryModels = ItemCategoryConstants
     
     var alertPopup = AlertPopup(hideOnOverlayTap: true)
         
@@ -180,7 +180,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         setStickerBtn.layer.borderWidth = 1
         setStickerBtn.layer.borderColor = UIColor.accentColor.cgColor
         
-        setStickerBtn.constrainToSuperviewCorner(cornerPosition: .bottomLeft)
+        setStickerBtn.constrainToSuperviewCorner(cornerPosition: .bottomTrailing)
         
         stickerPickerPopup.onImageSelected = onStickerSelected
         
@@ -254,7 +254,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         itemCategory = selectedValueIndex
         
-        let selectedAdditionCategory = taskTypeModel.types[selectedValueIndex]
+        let selectedAdditionCategory = taskCategoryModels[selectedValueIndex]
                 
         additionCategoryPopoverBtn.input?.inputText = selectedAdditionCategory
         additionCategoryPickerPopup.hide()
@@ -266,7 +266,9 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     
     @objc func onAdditionDateAndTimeInputTap() {
         dismissKeyboard()
-        let setDateAndTimeScreenVC = SetDateAndTimeScreenVC()
+        
+        let setDateAndTimeScreenVC = itemType == 3 ? SetGoalDateRangeScreenVC() : SetDateAndTimeScreenVC()
+        
         setDateAndTimeScreenVC.delegate = self
         present(setDateAndTimeScreenVC, animated: true, completion: nil)
     }
@@ -301,6 +303,9 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         saveItem()
         resetViewController()
         switchToHomeScreenTab()
+        
+        let itemTypeName = ItemTypeConstants[id] ?? ""
+        Toast.shared.show(withTitle: "تمت إضافة \(itemTypeName) بنجاح")
     }
     
     // MARK: Tools
@@ -374,21 +379,19 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
 }
 
 extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return taskTypeModel.types.count
+        return taskCategoryModels.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return taskTypeModel.types[row]
+        return taskCategoryModels[row]
     }
     
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: taskTypeModel.types[row], attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-    }
 }
 
 extension NewAdditionScreenVC: UITextFieldDelegate {

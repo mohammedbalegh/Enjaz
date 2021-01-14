@@ -75,9 +75,7 @@ class Popup: UIView {
 		
 		animatePopupContainerOut() { finished in
 			self.removeFromSuperview()
-			if let onPopupDismiss = self.onPopupDismiss {
-				onPopupDismiss()
-			}
+            self.onPopupDismiss?()
 		}
 	}
 	

@@ -90,7 +90,7 @@ class PrimaryBtn: UIButton {
             layer.shadowColor = UIColor.gray.cgColor
         }
         
-        let highlightedTitleColor = titleColor(for: .normal)?.withAlpha(0.3)
+        let highlightedTitleColor = titleColor(for: .normal)?.withAlphaComponent(0.3)
         setTitleColor(highlightedTitleColor, for: .highlighted)
         
         NSLayoutConstraint.activate([

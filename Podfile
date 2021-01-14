@@ -8,6 +8,7 @@ target 'Enjaz' do
   pod 'SwiftKeychainWrapper', '~> 4.0'
   pod 'ReSwift'
   pod 'SideMenu'
+  pod 'lottie-ios'
 
   target 'EnjazTests' do
     inherit! :search_paths

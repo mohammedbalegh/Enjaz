@@ -1,7 +1,7 @@
 import Foundation
 
-class Request {
-    enum RequestMethod: String {
+class HttpRequest {
+    enum HttpMethod: String {
         case get = "GET"
         case post = "POST"
         case put = "PUT"
@@ -9,14 +9,14 @@ class Request {
     }
     
     let requestUrl: URL?
-    let method: RequestMethod
-    let data: [String: Any]?
+    let method: HttpMethod
+    let body: [String: Any]?
     let headers: [String: String]?
         
-    init(url: URL?, method: RequestMethod, data: [String: Any]? = [:], headers: [String: String]? = [:]) {
+    init(url: URL?, method: HttpMethod, body: [String: Any]? = [:], headers: [String: String]? = [:]) {
         requestUrl = url
         self.method = method
-        self.data = data
+        self.body = body
         self.headers = headers
     }
         
@@ -43,11 +43,11 @@ class Request {
     }
     
     private func generateQueryItems() -> [URLQueryItem] {
-        guard let data = data else { return [] }
+        guard let body = body else { return [] }
         
         var queryItems: [URLQueryItem] = []
         
-        for (name, value) in data {
+        for (name, value) in body {
             queryItems.append(URLQueryItem(name: name, value: String(describing: value)))
         }
         

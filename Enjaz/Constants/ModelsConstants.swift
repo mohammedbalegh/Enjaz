@@ -1,0 +1,28 @@
+struct ModelsConstants {
+    static let hourPickerModels: [HourModel] = [
+        HourModel(hour: 12, period: "am"),
+        HourModel(hour: 1, period: "am"),
+        HourModel(hour: 2, period: "am"),
+        HourModel(hour: 3, period: "am"),
+        HourModel(hour: 4, period: "am"),
+        HourModel(hour: 5, period: " am"),
+        HourModel(hour: 6, period: "am"),
+        HourModel(hour: 7, period: "am"),
+        HourModel(hour: 8, period: "am"),
+        HourModel(hour: 9, period: " am"),
+        HourModel(hour: 10, period: "am"),
+        HourModel(hour: 11, period: "am"),
+        HourModel(hour: 12, period: "pm"),
+        HourModel(hour: 1, period: "pm"),
+        HourModel(hour: 2, period: "pm"),
+        HourModel(hour: 3, period: "pm"),
+        HourModel(hour: 4, period: "pm"),
+        HourModel(hour: 5, period: "pm"),
+        HourModel(hour: 6, period: "pm"),
+        HourModel(hour: 7, period: "pm"),
+        HourModel(hour: 8, period: "pm"),
+        HourModel(hour: 9, period: "pm"),
+        HourModel(hour: 10, period: "pm"),
+        HourModel(hour: 11, period: "pm"),
+    ]
+}

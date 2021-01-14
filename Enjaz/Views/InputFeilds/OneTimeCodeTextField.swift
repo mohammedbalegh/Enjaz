@@ -57,7 +57,7 @@ class OneTimeCodeTextField: UITextField {
         stackView.distribution = .fillEqually
         stackView.spacing = 8
         
-        for _ in 1 ... count {
+        for _ in 1...count {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textAlignment = .center

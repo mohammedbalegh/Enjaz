@@ -32,14 +32,7 @@ class AddGoalScreenVC: NewAdditionScreenVC {
     }
     
     // MARK: Event Handlers
-    
-    override func onAdditionDateAndTimeInputTap() {
-        dismissKeyboard()
-        let setDateAndTimeScreenVC = SetDateAndTimeScreenVC()
-        setDateAndTimeScreenVC.delegate = self
-        present(setDateAndTimeScreenVC, animated: true, completion: nil)
-    }
-    
+        
     override func onSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         

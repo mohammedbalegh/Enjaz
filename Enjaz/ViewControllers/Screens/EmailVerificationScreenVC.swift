@@ -165,9 +165,13 @@ class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscr
             alertPopup.showAsInternetConnectionError()
             return
         }
+        
+        view.isUserInteractionEnabled = false
                     
         Auth.verifyEmail(email, resetCode) { (error) in
             DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = true
+                
                 if let error = error {
                     print(error)
                     self.alertPopup.showAsError(withMessage: "الكود غير صحيح")

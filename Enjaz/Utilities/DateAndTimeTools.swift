@@ -10,7 +10,7 @@ class DateAndTimeTools {
         return year
     }
 	
-	static func getNumberOfMonthDaysAndFirstWeekDay(ofYear year: Int, andMonth month: Int, forCalendarType calendarIdentifier: NSCalendar.Identifier) -> (Int, Int) {
+	static func getNumberOfMonthDaysAndFirstWeekDay(ofYear year: Int, andMonth month: Int, forCalendarIdentifier calendarIdentifier: NSCalendar.Identifier) -> (Int, Int) {
 		let dateComponents = DateComponents(year: year, month: month, day: 1)
 		let calendar = NSCalendar(identifier: calendarIdentifier)!
 		let date = calendar.date(from: dateComponents)!
@@ -50,12 +50,12 @@ class DateAndTimeTools {
     
     static func getDateInIslamic() -> String {
         let today = Date()
-        let islamic = Calendar(identifier: .islamic)
+        let islamic = Calendar(identifier: .islamicCivil)
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.dateFormat = "dd MMMM"
         formatter.calendar = islamic
-        formatter.locale = Locale(identifier: "ar_DZ")
+        formatter.locale = Locale(identifier: "ar_EG")
         let currentDate = formatter.string(from: today)
         
         return currentDate
@@ -66,25 +66,33 @@ class DateAndTimeTools {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.dateFormat = "d MMMM yyyy"
-        formatter.locale = Locale(identifier: "ar_DZ")
+        formatter.locale = Locale(identifier: "ar_EG")
         let currentDate = formatter.string(from: today)
         return currentDate
     }
     
-    static func getReadableDate(from date: Date, withFormat format: String, calendarIdentifier: NSCalendar.Identifier) -> String {
+    static func getReadableDate(from date: Date?, withFormat format: String, calendarIdentifier: NSCalendar.Identifier) -> String {
+        guard let date = date else { return "-" }
+        
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.dateFormat = format
         
-        if (calendarIdentifier == .islamic) {
-            let islamicCalendar = Calendar(identifier: .islamic)
+        if calendarIdentifier == .islamicCivil {
+            let islamicCalendar = Calendar(identifier: .islamicCivil)
             formatter.calendar = islamicCalendar
         }
         
-        formatter.locale = Locale(identifier: "ar_DZ")
+        formatter.locale = Locale(identifier: "ar_EG")
         let currentDate = formatter.string(from: date)
         
         return currentDate
+    }
+    
+    static func convertHourModelTo24HrFormatInt(_ hourModel: HourModel) -> Int {
+        if hourModel.hour == 12 && hourModel.period == "pm" { return 12 }
+        
+        return hourModel.period == "pm" ? (hourModel.hour + 12) % 24 : hourModel.hour
     }
     
 }

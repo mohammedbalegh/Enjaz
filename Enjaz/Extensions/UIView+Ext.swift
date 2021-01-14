@@ -115,37 +115,45 @@ extension UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func constrainToSuperviewCorner(cornerPosition: UIRectCorner) {
+    func constrainToSuperviewCorner(cornerPosition: UIDirectionalRectCorner) {
         guard let superview = superview else {
             throwNoSuperviewError()
             return
         }
+        
         disableAutoresizingMaskTranslationIfEnabled()
         
         let cornerRadius = superview.layer.cornerRadius
         
         let cornerRadiusInset = cornerRadius / 4
         
-        if cornerPosition == .topLeft {
+        switch cornerPosition {
+        case .topLeading:
             NSLayoutConstraint.activate([
                 centerYAnchor.constraint(equalTo: superview.topAnchor, constant: cornerRadiusInset),
-                centerXAnchor.constraint(equalTo: superview.leftAnchor, constant: cornerRadiusInset),
+                centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: cornerRadiusInset),
             ])
-        } else if cornerPosition == .bottomLeft {
+            
+        case .bottomLeading:
             NSLayoutConstraint.activate([
-                centerXAnchor.constraint(equalTo: superview.leftAnchor, constant: cornerRadiusInset),
+                centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: cornerRadiusInset),
                 centerYAnchor.constraint(equalTo: superview.bottomAnchor, constant: -cornerRadiusInset),
             ])
-        } else if cornerPosition == .bottomRight {
+            
+        case .bottomTrailing:
             NSLayoutConstraint.activate([
-                centerXAnchor.constraint(equalTo: superview.rightAnchor, constant: -cornerRadiusInset),
+                centerXAnchor.constraint(equalTo: superview.trailingAnchor, constant: -cornerRadiusInset),
                 centerYAnchor.constraint(equalTo: superview.bottomAnchor, constant: -cornerRadiusInset),
             ])
-        } else if cornerPosition == .topRight {
+            
+        case .topTrailing:
             NSLayoutConstraint.activate([
                 centerYAnchor.constraint(equalTo: superview.topAnchor, constant: cornerRadiusInset),
-                centerXAnchor.constraint(equalTo: superview.rightAnchor, constant: -cornerRadiusInset),
+                centerXAnchor.constraint(equalTo: superview.trailingAnchor, constant: -cornerRadiusInset),
             ])
+            
+        default:
+            fatalError("View cannot be constrained to more the one corner.")
         }
     }
     
@@ -186,20 +194,23 @@ extension UIView {
 
 // MARK: Effects
 extension UIView {
-    func blurView(style: UIBlurEffect.Style) {
+    private static let blurEffectTag = -1
+    
+    func addBlurEffect(style: UIBlurEffect.Style) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        clipsToBounds = true
+        
         blurEffectView.isUserInteractionEnabled = false
-        blurEffectView.frame = bounds
+        blurEffectView.tag = UIView.blurEffectTag
+        
         addSubview(blurEffectView)
+        blurEffectView.fillSuperView()
     }
     
-    func removeBlur() {
-        for view in subviews {
-            if let view = view as? UIVisualEffectView {
-                view.removeFromSuperview()
-            }
-        }
+    func removeBlurEffect() {
+        viewWithTag(UIView.blurEffectTag)?.removeFromSuperview()
     }
     
     func applyShadow() {
@@ -238,9 +249,29 @@ extension UIView {
         layer.colors = [startColor, endColor]
         self.layer.insertSublayer(layer, at: 0)
     }
+    
+    func roundCorners(_ corners: [UIDirectionalRectCorner], withRadius radius: CGFloat? = nil) {
+        var caCornerMasks: CACornerMask = []
+        
+        for corner in corners {
+            guard let noneDirectionalCorner = LayoutTools.mapUIDirectionalRectCornerToUIRectCorner(corner, forView: self),
+                  let caCornerMask = LayoutTools.mapUIRectCornerToCACornerMask(noneDirectionalCorner) else { continue }
+            caCornerMasks.insert(caCornerMask)
+        }
+        
+        layer.maskedCorners = caCornerMasks
+        
+        if let radius = radius {
+            layer.cornerRadius = radius
+        }
+    }
+    
+    func roundCorner(_ corner: UIDirectionalRectCorner, withRadius radius: CGFloat? = nil) {
+        roundCorners([corner], withRadius: radius)
+    }
 }
 
-// MARK: Animations
+// MARK: Animations and Transformations
 extension UIView {
     func animate(opacityTo alpha: CGFloat, andScaleTo scale: CGFloat) {
         self.alpha = alpha
@@ -248,28 +279,92 @@ extension UIView {
     }
     
     func translateViewVertically(by translation: CGFloat) {
-        UIView.animate(withDuration: 0.2) {
-            self.frame.origin.y -= translation
-        }
+        self.frame.origin.y -= translation
     }
     
     func translateViewHorizontally(by translation: CGFloat) {
-        UIView.animate(withDuration: 0.2) {
-            self.frame.origin.x -= translation
-        }
+        self.frame.origin.x -= translation
     }
     
     func resetViewVerticalTranslation() {
-        UIView.animate(withDuration: 0.2) {
-            self.frame.origin.y = 0
-        }
+        self.frame.origin.y = 0
     }
     
     func resetViewHorizontalTranslation() {
-        UIView.animate(withDuration: 0.2) {
-            self.frame.origin.x = 0
+        self.frame.origin.x = 0
+    }
+    
+    func mapUIHorizontalDirectionToDirectionalInt(_ direction: UIHorizontalDirection) -> Int {
+        switch direction {
+        case .leadingToTrailing:
+            return LayoutTools.getCurrentLayoutDirectionFor(self) == .leftToRight ? -1 : 1
+        case .trailingToLeading:
+            return LayoutTools.getCurrentLayoutDirectionFor(self) == .leftToRight ? 1 : -1
         }
     }
+    
+    /// Animates two consecutive animations while executing the `midAnimationCompletionHandler` between the two animations.
+    private func animateTwoConsecutiveAnimations(withDuration duration: TimeInterval,
+                                                 firstAnimation: @escaping () -> Void,
+                                                 secondAnimation: @escaping () -> Void,
+                                                 midAnimationCompletionHandler: ( (_ : Bool) -> Void)? = nil,
+                                                 completionHandler: ( (_ : Bool) -> Void)? = nil) {
+        
+        func didCompleteFirstAnimation(completed : Bool) {
+            midAnimationCompletionHandler?(completed)
+            UIView.animate(withDuration: duration / 2, animations: secondAnimation, completion: completionHandler)
+        }
+        
+        UIView.animate(withDuration: duration / 2, animations: firstAnimation, completion: didCompleteFirstAnimation)
+    }
+    
+    /// Translates the view horizontally out of the bounds of its superview then translates it in from the other side to give the effect of page switching.
+    func translateHorizontallyOutAndInSuperView(withDuration duration: TimeInterval,
+                                                  atDirection direction: UIHorizontalDirection,
+                                                  fadeOutAndIn: Bool = false,
+                                                  midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
+                                                  completionHandler: ((_ : Bool) -> Void)? = nil) {
+        
+        guard let superview = superview else { return }
+        
+        let translationDirection = CGFloat(mapUIHorizontalDirectionToDirectionalInt(direction))
+        
+        func translateAndToggleAlpha() {
+            translateViewHorizontally(by: translationDirection * superview.frame.width)
+            if fadeOutAndIn {
+                alpha = alpha == 0.5 ? 1 : 0.5
+            }
+        }
+        
+        func didCompleteFirstAnimation(completed : Bool) {
+            midAnimationCompletionHandler?(completed)
+            translateViewHorizontally(by: translationDirection * CalendarView.width * -2)
+        }
+        
+        animateTwoConsecutiveAnimations(
+            withDuration: duration,
+            firstAnimation: translateAndToggleAlpha,
+            secondAnimation: translateAndToggleAlpha,
+            midAnimationCompletionHandler: didCompleteFirstAnimation,
+            completionHandler: completionHandler)
+    }
+    
+    /// fades the view out then fades it back in.
+    func fadeOutAndIn(withDuration duration: TimeInterval, midAnimationCompletionHandler: ( (_ : Bool) -> Void)? = nil, completionHandler: ((_ : Bool) -> Void)? = nil) {
+        alpha = 1
+        
+        func toggleAlpha() {
+            alpha = alpha == 1 ? 0 : 1
+        }
+        
+        animateTwoConsecutiveAnimations(
+            withDuration: duration,
+            firstAnimation: toggleAlpha,
+            secondAnimation: toggleAlpha,
+            midAnimationCompletionHandler: midAnimationCompletionHandler,
+            completionHandler: completionHandler)
+    }
+    
 }
 
 // MARK: Tools

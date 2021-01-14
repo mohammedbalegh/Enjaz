@@ -14,7 +14,7 @@ class NetworkingManager {
             "full_name": user.name,
         ]
         
-        let request = Request(url: url, method: .post, data: data)
+        let request = HttpRequest(url: url, method: .post, body: data)
         
         request.send { (data, response, error) in
             if let error = error {
@@ -24,7 +24,7 @@ class NetworkingManager {
             
             guard let response = response as? HTTPURLResponse, let data = data else { return }
             
-            guard (200 ... 299) ~= response.statusCode else {
+            guard (200...299) ~= response.statusCode else {
                 completionHandler(nil, nil, StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
@@ -44,7 +44,7 @@ class NetworkingManager {
             "password": password,
         ]
         
-        let request = Request(url: url, method: .post, data: data)
+        let request = HttpRequest(url: url, method: .post, body: data)
         
         request.send { (data, response, error) in
             if let error = error {
@@ -54,7 +54,7 @@ class NetworkingManager {
             
             guard let response = response as? HTTPURLResponse, let data = data else { return }
             
-            guard (200 ... 299) ~= response.statusCode else {
+            guard (200...299) ~= response.statusCode else {
                 completionHandler(nil, nil, StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
@@ -73,7 +73,7 @@ class NetworkingManager {
             "email": email,
         ]
         
-        let request = Request(url: url, method: .post, data: data)
+        let request = HttpRequest(url: url, method: .post, body: data)
         
         request.send { (data, response, error) in
             if let error = error {
@@ -83,7 +83,7 @@ class NetworkingManager {
             
             guard let response = response as? HTTPURLResponse else { return }
             
-            guard (200 ... 299) ~= response.statusCode else {
+            guard (200...299) ~= response.statusCode else {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
@@ -100,7 +100,7 @@ class NetworkingManager {
             "password": newPassword,
         ]
         
-        let request = Request(url: url, method: .post, data: data)
+        let request = HttpRequest(url: url, method: .post, body: data)
         
         request.send { (data, response, error) in
             if let error = error {
@@ -110,7 +110,7 @@ class NetworkingManager {
             
             guard let response = response as? HTTPURLResponse else { return }
             
-            guard (200 ... 299) ~= response.statusCode else {
+            guard (200...299) ~= response.statusCode else {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
@@ -126,7 +126,7 @@ class NetworkingManager {
             "password": password,
         ]
         
-        let request = Request(url: url, method: .post, data: data)
+        let request = HttpRequest(url: url, method: .post, body: data)
         
         request.send { (data, response, error) in
             if let error = error {
@@ -136,7 +136,7 @@ class NetworkingManager {
             
             guard let response = response as? HTTPURLResponse else { return }
             
-            guard (200 ... 299) ~= response.statusCode else {
+            guard (200...299) ~= response.statusCode else {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
@@ -152,7 +152,7 @@ class NetworkingManager {
             "code": verificationCode,
         ]
         
-        let request = Request(url: url, method: .post, data: data)
+        let request = HttpRequest(url: url, method: .post, body: data)
         
         request.send { (data, response, error) in
             if let error = error {
@@ -162,7 +162,7 @@ class NetworkingManager {
             
             guard let response = response as? HTTPURLResponse else { return }
             
-            guard (200 ... 299) ~= response.statusCode else {
+            guard (200...299) ~= response.statusCode else {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
