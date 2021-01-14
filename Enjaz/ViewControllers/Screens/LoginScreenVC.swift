@@ -122,7 +122,7 @@ class LoginScreenVC: AuthScreenBaseVC {
     }
     
     func navigateToMainTabBarController() {
-        navigationController?.pushViewController(UINavigationController(rootViewController: MainTabBarController()), animated: true)
+        navigationController?.pushViewController(MainTabBarController(), animated: true)
     }
     
     func navigateToEmailVerificationScreen() {

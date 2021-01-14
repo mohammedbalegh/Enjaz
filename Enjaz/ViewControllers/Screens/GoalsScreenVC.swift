@@ -1,12 +1,16 @@
 
 import UIKit
 
-class GoalsScreenVC: UIViewController {
-
+class GoalsScreenVC: MenuBarNavigationVC {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        
+        
+        menuItems = ["الاهداف الكبري", "إضافة هدف", "أهداف الشهر", "بنك الاهداف",]
+        controllerViews = [MajorGoalsScreenVC(),SelectGoalTypeScreenVC(),MonthGoalsScreenVC(),GoalsBankScreenVC()]
     }
-
-
+    
 }
+
+
