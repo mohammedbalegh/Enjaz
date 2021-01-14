@@ -15,6 +15,8 @@
 		4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */; };
 		4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141503125A2C71700DC369A /* SelfEvaluationChart.swift */; };
 		4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141504125A3FD2F00DC369A /* ChartSliderView.swift */; };
+		4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505725A45BE100DC369A /* TopMenuCell.swift */; };
+		4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -171,6 +173,8 @@
 		4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationLabel.swift; sourceTree = "<group>"; };
 		4141503125A2C71700DC369A /* SelfEvaluationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationChart.swift; sourceTree = "<group>"; };
 		4141504125A3FD2F00DC369A /* ChartSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSliderView.swift; sourceTree = "<group>"; };
+		4141505725A45BE100DC369A /* TopMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopMenuCell.swift; sourceTree = "<group>"; };
+		4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarNavigationVC.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 				BC7D6C7725A2780D00369FC5 /* AuthScreenBaseVC.swift */,
 				BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */,
 				BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */,
+				4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -661,6 +666,7 @@
 				BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */,
 				BC026C3725900138008222BD /* PopoverTableViewCell.swift */,
 				417EE894259C2566002F71E5 /* GoalsTableCell.swift */,
+				4141505725A45BE100DC369A /* TopMenuCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -951,6 +957,7 @@
 				BCDD83FA2590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift in Sources */,
 				BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */,
 				4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */,
+				4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,
 				BCBEE8682587D80200D8DE0A /* ResetCodeTextField.swift in Sources */,
@@ -1008,12 +1015,12 @@
 				BC730277259B91BC007AEA96 /* BidirectionalCollection + ext.swift in Sources */,
 				BC4780AB25962A1400D21060 /* Reducer.swift in Sources */,
 				BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */,
-				41FC4C49258BC07600EA4DDF /* ToolBar.swift in Sources */,
 				4141501125A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift in Sources */,
 				BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */,
 				BCBEE85E2587D73000D8DE0A /* PasswordTextField.swift in Sources */,
 				BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */,
 				419121232593023000CB7BF9 /* CardView.swift in Sources */,
+				4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				BC7EFC052586354E00F35312 /* Popup.swift in Sources */,
 				BC61D5DE2590324400BF3C3D /* MonthNames.swift in Sources */,

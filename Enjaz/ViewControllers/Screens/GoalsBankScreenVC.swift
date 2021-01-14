@@ -62,7 +62,7 @@ class GoalsBankScreenVC: UIViewController {
             suggestionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.027),
             suggestionsLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
             suggestionsLabel.heightAnchor.constraint(equalToConstant: 20),
-            suggestionsLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.23),
+            suggestionsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
         ])
     }
     
@@ -73,7 +73,7 @@ class GoalsBankScreenVC: UIViewController {
             goalsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             goalsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             goalsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            goalsTableView.topAnchor.constraint(equalTo: suggestionsLabel.bottomAnchor, constant: 30),
+            goalsTableView.topAnchor.constraint(equalTo: suggestionsLabel.bottomAnchor, constant: 15),
         ])
     }
     

@@ -115,7 +115,8 @@ class MainTabBarController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         // Remove the bottom border of the navigationBar
         let navigationBar = navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(named: "navBarBackground"), for: .default)
@@ -133,7 +134,7 @@ class MainTabBarController: UITabBarController {
 		let homeScreenVC = HomeScreenVC()
 		let calendarScreenVC = CalendarScreenVC()
 		let monthlyPlanScreenVC = MonthlyPlanScreenVC()
-		let goalsScreenVC = SelfEvaluationScreenVC()
+		let goalsScreenVC = GoalsScreenVC()
 		
 		setTabBarIcon(for: homeScreenVC, withImageName: "homeIcon")
 		setTabBarIcon(for: calendarScreenVC, withImageName: "calendarIcon")

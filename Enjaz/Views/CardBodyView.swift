@@ -31,7 +31,7 @@ class CardBodyView: UIView {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = label.font.withSize(15)
+        label.font = label.font.withSize(13)
         label.textAlignment = .center
         label.textColor = .darkGray
         label.adjustsFontSizeToFitWidth = true
@@ -174,12 +174,18 @@ class CardBodyView: UIView {
         checkButton.isHidden = true
         let size = LayoutConstants.screenWidth * 0.059
         
+        
+        
+        layoutIfNeeded()
+        
         NSLayoutConstraint.activate([
-            checkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.012)),
+            checkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             checkButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             checkButton.widthAnchor.constraint(equalToConstant: size),
             checkButton.heightAnchor.constraint(equalToConstant: size)
         ])
+        
+        checkButton.layer.cornerRadius = size / 2
         
     }
 }

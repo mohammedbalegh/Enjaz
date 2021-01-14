@@ -43,7 +43,7 @@ class MajorGoalsScreenVC: UIViewController {
             majorsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             majorsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             majorsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            majorsCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.225)
+            majorsCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25)
         ])
     }
     
@@ -68,4 +68,5 @@ extension MajorGoalsScreenVC: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width / 1.2), height: (collectionView.frame.height / 2.5))
     }
+    
 }
