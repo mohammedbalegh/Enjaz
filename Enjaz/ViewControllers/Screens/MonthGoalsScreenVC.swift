@@ -20,6 +20,8 @@ class MonthGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
         
         let upcomingAndCompletedGoalsScreenVC = UpcomingAndCompletedGoalsScreenVC()
         
+        print("items count",completedGoals.count)
+        
         upcomingAndCompletedGoalsScreenVC.completedGoals = completedGoals
         upcomingAndCompletedGoalsScreenVC.upcomingGoals = upcomingGoals
         
