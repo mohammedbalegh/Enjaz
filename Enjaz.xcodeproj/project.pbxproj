@@ -131,6 +131,7 @@
 		BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */; };
 		BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D70258F95720032F2E4 /* EditableTextView.swift */; };
 		BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */; };
+		BCDCF79E25B5968400FA94DE /* EditableTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDCF79D25B5968400FA94DE /* EditableTextViewDelegate.swift */; };
 		BCDD83FA2590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD83F92590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift */; };
 		BCDD83FF2590CFE00026E113 /* NewAdditionInputFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD83FE2590CFE00026E113 /* NewAdditionInputFieldContainer.swift */; };
 		BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EC22586110600A86330 /* HomeScreenVC.swift */; };
@@ -304,6 +305,7 @@
 		BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBtn.swift; sourceTree = "<group>"; };
 		BCD95D70258F95720032F2E4 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationScreenVC.swift; sourceTree = "<group>"; };
+		BCDCF79D25B5968400FA94DE /* EditableTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewDelegate.swift; sourceTree = "<group>"; };
 		BCDD83F92590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionScreenModalDelegate.swift; sourceTree = "<group>"; };
 		BCDD83FE2590CFE00026E113 /* NewAdditionInputFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionInputFieldContainer.swift; sourceTree = "<group>"; };
 		BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingScreenVC.swift; sourceTree = "<group>"; };
@@ -672,6 +674,7 @@
 				BCC429D525A2DCD900803CE9 /* NewAdditionInputFieldContainerInput.swift */,
 				BC8F2F5B25A820CB00EF7EA4 /* MultipleCellSelectionCollectionViewDelegate.swift */,
 				BC67971025A914A2002B9A71 /* CalendarViewDelegate.swift */,
+				BCDCF79D25B5968400FA94DE /* EditableTextViewDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 				BCB98CED2588275200B64DC9 /* NewAdditionTextField.swift in Sources */,
 				BC32E8962590EF03008DF8B7 /* ItemTypeConstants.swift in Sources */,
 				BC026C33258FFB8B008222BD /* PopoverTableVC.swift in Sources */,
+				BCDCF79E25B5968400FA94DE /* EditableTextViewDelegate.swift in Sources */,
 				417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */,
 				BC39116E258E95A5000E6273 /* ShowMoreButton.swift in Sources */,
 				BC7EFC0A25863CBB00F35312 /* ResetPasswordPopup.swift in Sources */,

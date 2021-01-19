@@ -65,7 +65,7 @@ private extension KeyboardHandlingBaseViewController {
                         
         guard let firstResponderGlobalFrame = firstResponderGlobalFrame else { return }
         
-        let padding = firstResponderGlobalFrame.height + 35
+        let padding = firstResponderGlobalFrame.height > 80 ? 50 : firstResponderGlobalFrame.height + 35
         
         let firstResponderMaxYWithPadding = firstResponderGlobalFrame.maxY + padding + (keyboardHeightConstraint?.constant ?? 0)
                 

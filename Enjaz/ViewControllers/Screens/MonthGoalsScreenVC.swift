@@ -3,8 +3,8 @@ import UIKit
 
 class MonthGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         let completedGoals = RealmManager.retrieveCompletedGoals()
         let upcomingGoals = RealmManager.retrieveUpcomingGoals()
@@ -13,19 +13,18 @@ class MonthGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
         screenNavigatorCellModels = [
             ScreenNavigatorCellModel(image: UIImage(named: "completedGoalsIcon"), label: "أهداف منتهية", subLabel: "\(completedGoals.count) هدف"),
             ScreenNavigatorCellModel(image: UIImage(named: "upcomingGoalsIcon"), label: "أهداف قادمة", subLabel: "\(upcomingGoals.count)  هدف"),
-            ScreenNavigatorCellModel(image: UIImage(named: "healthSideIcon"), label: "تقيم النفس", subLabel: "لا يوجد تقيم"),
+            ScreenNavigatorCellModel(image: UIImage(named: "healthSideIcon"), label: "تقييم النفس", subLabel: "لا يوجد تقييم"),
         ]
-                
+        
         tableViewTitle = "أهدافك"
         
         let upcomingAndCompletedGoalsScreenVC = UpcomingAndCompletedGoalsScreenVC()
-        
-        print("items count",completedGoals.count)
         
         upcomingAndCompletedGoalsScreenVC.completedGoals = completedGoals
         upcomingAndCompletedGoalsScreenVC.upcomingGoals = upcomingGoals
         
         targetTableViewController = upcomingAndCompletedGoalsScreenVC
+        targetViewController = SelfEvaluationScreenVC()
         
         tableView.reloadData()
     }

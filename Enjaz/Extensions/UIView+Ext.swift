@@ -26,52 +26,37 @@ extension UIView {
             throwNoSuperviewError()
             return
         }
-        disableAutoresizingMaskTranslationIfEnabled()
         
-        NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: superview.topAnchor),
-            leftAnchor.constraint(equalTo: superview.leftAnchor),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-            rightAnchor.constraint(equalTo: superview.rightAnchor),
-        ])
+        disableAutoresizingMaskTranslationIfEnabled()
+        fill(superview)
     }
     
     /// make `self` fill the specified `view` with specified margins.
-    func fill(_ view: UIView, top: CGFloat=0, left: CGFloat=0, bottom: CGFloat=0, right: CGFloat=0) {
+    func fill(_ view: UIView, top: CGFloat=0, leading: CGFloat=0, bottom: CGFloat=0, trailing: CGFloat=0) {
         disableAutoresizingMaskTranslationIfEnabled()
         
-        NSLayoutConstraint.activate([
-            leftAnchor.constraint(equalTo: view.leftAnchor, constant: left),
-            rightAnchor.constraint(equalTo: view.rightAnchor, constant: right),
-            topAnchor.constraint(equalTo: view.topAnchor, constant: top),
-            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom)
-        ])
+        constrainEdgesToCorrespondingEdges(of: view, top: top, leading: leading, bottom: bottom, trailing: trailing)
     }
     
     /// Constrain 4 edges of `self` to specified `view`.
     func constrainEdgesToCorrespondingEdges(of view: UIView, top: CGFloat?=nil, leading: CGFloat?=nil, bottom: CGFloat?=nil, trailing: CGFloat?=nil) {
         disableAutoresizingMaskTranslationIfEnabled()
-        
-        var constraints: [NSLayoutConstraint] = []
-        
+                
         if let top = top {
-            constraints.append(topAnchor.constraint(equalTo: view.topAnchor, constant: top))
-            
+            topAnchor.constraint(equalTo: view.topAnchor, constant: top).isActive = true
         }
         if let leading = leading {
-            constraints.append(leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading))
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading).isActive = true
             
         }
         if let bottom = bottom {
-            constraints.append(bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom))
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom).isActive = true
             
         }
         if let trailing = trailing {
-            constraints.append(trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing))
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing).isActive = true
         }
-        
-        
-        NSLayoutConstraint.activate(constraints)
+                
     }
     
     /// Constrain width and height of `self` to specified constants.
@@ -94,17 +79,33 @@ extension UIView {
         
         if let widthMultiplier = widthMultiplier {
             constraints.append(widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMultiplier))
-            
         }
         if let heightMultiplier = heightMultiplier {
             constraints.append(heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: heightMultiplier))
-            
         }
         
         NSLayoutConstraint.activate(constraints)
     }
     
-    func center(relativeTo view:UIView, centerX: Bool=false, centerY: Bool=false) {
+    func centerVertically(relativeTo view: UIView?=nil, centerX: Bool=false, centerY: Bool=false) {
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
+        
+        center(relativeTo: view, centerY: true)
+    }
+    
+    func centerHorizontally(relativeTo view: UIView?=nil, centerX: Bool=false, centerY: Bool=false) {
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
+        
+        center(relativeTo: view, centerX: true)
+    }
+    
+    func center(relativeTo view: UIView, centerX: Bool=false, centerY: Bool=false) {
         disableAutoresizingMaskTranslationIfEnabled()
         
         var constraints: [NSLayoutConstraint] = []
@@ -115,7 +116,7 @@ extension UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func constrainToSuperviewCorner(cornerPosition: UIDirectionalRectCorner) {
+    func constrainToSuperviewCorner(at cornerPosition: UIDirectionalRectCorner) {
         guard let superview = superview else {
             throwNoSuperviewError()
             return
@@ -124,7 +125,6 @@ extension UIView {
         disableAutoresizingMaskTranslationIfEnabled()
         
         let cornerRadius = superview.layer.cornerRadius
-        
         let cornerRadiusInset = cornerRadius / 4
         
         switch cornerPosition {

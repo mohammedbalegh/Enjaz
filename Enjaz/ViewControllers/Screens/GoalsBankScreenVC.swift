@@ -11,6 +11,7 @@ class GoalsBankScreenVC: UIViewController {
         tableView.backgroundColor = .rootTabBarScreensBackgroundColor
         tableView.tableFooterView = UIView()
         tableView.register(GoalsTableCell.self, forCellReuseIdentifier: "goalsTableCell")
+        tableView.allowsSelection = false
         return tableView
     }()
     
