@@ -180,7 +180,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         setStickerBtn.layer.borderWidth = 1
         setStickerBtn.layer.borderColor = UIColor.accentColor.cgColor
         
-        setStickerBtn.constrainToSuperviewCorner(cornerPosition: .bottomTrailing)
+        setStickerBtn.constrainToSuperviewCorner(at: .bottomTrailing)
         
         stickerPickerPopup.onImageSelected = onStickerSelected
         

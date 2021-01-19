@@ -57,7 +57,7 @@ class AdditionImageOrStickerCell: UICollectionViewCell {
 		
 		let size: CGFloat = 20
 		
-		checkMarkImageView.constrainToSuperviewCorner(cornerPosition: .topTrailing)
+		checkMarkImageView.constrainToSuperviewCorner(at: .topTrailing)
 		NSLayoutConstraint.activate([
 			checkMarkImageView.widthAnchor.constraint(equalToConstant: size),
 			checkMarkImageView.heightAnchor.constraint(equalToConstant: size),

@@ -17,9 +17,8 @@ class UpcomingAndCompletedGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
             title = "اهداف منتهية"
         } else {
             
-            title = "اهداف غير منتهية"
+            title = "اهداف قادمة"
         }
-        
         
         targetViewController = AddGoalScreenVC()
         tableView.reloadData()

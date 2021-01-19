@@ -48,7 +48,7 @@ class SelfEvaluationLabel: UILabel {
     func setupCircleImage() {
         addSubview(circleImage)
         
-        circleImage.constrainToSuperviewCorner(cornerPosition: .bottomTrailing)
+        circleImage.constrainToSuperviewCorner(at: .bottomTrailing)
         
         NSLayoutConstraint.activate([
             circleImage.heightAnchor.constraint(equalToConstant: 7),
@@ -59,7 +59,7 @@ class SelfEvaluationLabel: UILabel {
     func setupCrossImage() {
         addSubview(crossImage)
         
-        crossImage.constrainToSuperviewCorner(cornerPosition: .topLeading)
+        crossImage.constrainToSuperviewCorner(at: .topLeading)
         
         NSLayoutConstraint.activate([
             crossImage.heightAnchor.constraint(equalToConstant: 10),

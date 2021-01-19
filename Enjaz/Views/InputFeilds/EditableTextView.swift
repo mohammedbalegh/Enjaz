@@ -23,6 +23,8 @@ class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldCon
             text = newValue
         }
     }
+    
+    var customDelegate: UITextViewDelegate?
         	
 	init(frame: CGRect) {
 		super.init(frame: frame, textContainer: nil)
@@ -51,12 +53,14 @@ class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldCon
 			textView.text = nil
 			textView.textColor = .black
 		}
+        customDelegate?.textViewDidBeginEditing?(textView)
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
 		if textView.text.isEmpty {
             setPlaceholder(textView)
 		}
+        customDelegate?.textViewDidEndEditing?(textView)
 	}
 	
 }

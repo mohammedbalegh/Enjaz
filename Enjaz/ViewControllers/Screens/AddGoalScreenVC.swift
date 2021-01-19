@@ -43,6 +43,10 @@ class AddGoalScreenVC: NewAdditionScreenVC {
         }
         
         saveItem()
+        resetViewController()
+        
+        Toast.shared.show(withTitle: "تمت إضافة هدف بنجاح")
+        
         navigationController?.popViewController(animated: true)
     }
     

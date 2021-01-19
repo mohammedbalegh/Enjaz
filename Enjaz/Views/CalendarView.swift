@@ -17,6 +17,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         label.lineBreakMode = .byWordWrapping
         label.text = "من - إلى -"
         label.font = .systemFont(ofSize: PopoverBtn.fontSize)
+        label.isHidden = true
         
         return label
     }()
@@ -62,6 +63,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     var allowsRangeSelection: Bool = false {
         didSet {
             monthDaysCollectionView.allowsMultipleSelection = allowsRangeSelection
+            selectedDaysLabel.isHidden = !allowsRangeSelection
         }
     }
         

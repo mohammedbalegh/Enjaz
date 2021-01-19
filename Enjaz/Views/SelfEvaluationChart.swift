@@ -67,6 +67,7 @@ class SelfEvaluationChart: UIView {
         
         for index in 1...7 {
             let slider = createSlider(with: index)
+            slider.tintColor = .accentColor
             slidersStackView.addArrangedSubview(slider)
         }
         
