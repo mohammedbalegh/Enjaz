@@ -5,7 +5,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     static let width = CGFloat(Int(LayoutConstants.screenWidth * 0.95) - (Int(LayoutConstants.screenWidth * 0.95) % 7))
     
 	var monthDayCellModels: [MonthDayCellModel] = []
-		
+    
     let popoverCalendarBtnsRow = CalendarPopoverBtnsRow(frame: .zero)
     
     var selectedDaysLabel: UILabel = {
@@ -15,7 +15,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         label.textColor = PopoverBtn.defaultTintColor
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.text = "من - إلى -"
+        label.text = NSLocalizedString("from", comment: "") + " - " + NSLocalizedString("to", comment: "") + " -"
         label.font = .systemFont(ofSize: PopoverBtn.fontSize)
         label.isHidden = true
         
@@ -23,7 +23,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }()
 	
 	lazy var weekDayLabelsHorizontalStack: UIStackView = {
-		let labels = createWeekDayLabels()
+		let labels = generateWeekDayLabels()
 		
 		let stackView = UIStackView(arrangedSubviews: labels)
 		stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 	var selectedMonthDayItemRow: Int?
     var firstSelectedMonthDayItemRow: Int?
     var lastSelectedMonthDayItemRow: Int?
-
+    
     var isLongPressingOnLastItem = false
     
     var selectionGestureIsSwitchingToNextMonth: Bool = false
@@ -114,7 +114,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    var monthLabel: String? {
+    var selectedMonthLabel: String? {
         get {
             return monthPopoverBtn.label.text
         }
@@ -123,7 +123,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    var yearLabel: String? {
+    var SelectedYearLabel: String? {
         get {
             return yearPopoverBtn.label.text
         }
@@ -197,7 +197,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 		addSubview(monthDaysCollectionView)
 		
 		monthDaysCollectionView.isUserInteractionEnabled = true
-		        
+        
 		NSLayoutConstraint.activate([
 			monthDaysCollectionView.topAnchor.constraint(equalTo: weekDayLabelsHorizontalStack.bottomAnchor, constant: 5),
 			monthDaysCollectionView.widthAnchor.constraint(equalTo: widthAnchor),
@@ -207,14 +207,18 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 	}
 	
 	// MARK: Tools
-    	
-	func createWeekDayLabels() -> [UILabel] {
+    
+    func generateWeekDayLabels() -> [UILabel] {
 		var labels: [UILabel] = []
 		
-		for i in 0...6 {
+        let formatter = DateFormatter()
+        let weekDayNames = formatter.shortWeekdaySymbols ?? []
+        let islamicallyWeekDayNames = sortWeekDayNamesIslamically(weekDayNames)
+        
+		for weekDayName in islamicallyWeekDayNames {
 			let weekDayLabel = UILabel(frame: .zero)
-			
-			weekDayLabel.text = WeekDayNames.arabicNames[i]
+            
+			weekDayLabel.text = weekDayName
 			weekDayLabel.textColor = .white
 			weekDayLabel.font = .systemFont(ofSize: 13)
 			weekDayLabel.textAlignment = .center
@@ -224,6 +228,10 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 		
 		return labels
 	}
+    
+    func sortWeekDayNamesIslamically(_ weekDayNames: [String]) -> [String] {
+        return [weekDayNames[6]] + weekDayNames.dropLast()
+    }
 	
 	func updateMonthDaysModel(numberOfDaysInMonth: Int, startsAtColumnNumber firstColumn: Int) {
 		monthDayCellModels = generateMonthDaysCellModels(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstColumn)
@@ -239,19 +247,16 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 	}
 	
 	func generateMonthDaysCellModels(numberOfDaysInMonth numberOfDays: Int, startsAtColumnNumber firstColumnNumber: Int) -> [MonthDayCellModel] {
-		var models: [MonthDayCellModel] = []
-		
-		for i in 0...((numberOfDays - 1) + firstColumnNumber) {
-			let dayNumber = i < firstColumnNumber ? 0 : (i - firstColumnNumber) + 1
-			
-			models.append(MonthDayCellModel(dayNumber: dayNumber, includesItem: false))
-		}
-		
-		return models
+        let dayNumbers = Array(repeating: 0, count: firstColumnNumber) + (1...numberOfDays)
+        let monthDayCellModels: [MonthDayCellModel] = dayNumbers.map {
+            MonthDayCellModel(dayNumber: $0, includesItem: false)
+        }
+        
+        return monthDayCellModels
 	}
     
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
-        selectedDaysLabel.text = "من \(firstDay) إلى \(lastDay)"
+        selectedDaysLabel.text = "\(NSLocalizedString("from", comment: "")) \(firstDay) \(NSLocalizedString("to", comment: "")) \(lastDay)"
     }
 }
 
@@ -313,7 +318,7 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
             isLongPressingOnLastItem = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 guard self.isLongPressingOnLastItem else { return }
-                self.onLastItemLongPress()
+                self.handleLastItemLongPress()
                 self.isLongPressingOnLastItem = false
            }
         } else {
@@ -349,7 +354,7 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
         }
     }
     
-    func onLastItemLongPress() {
+    func handleLastItemLongPress() {
 
         guard !selectedMonthIsLastSelectableMonth else {
             monthDaysCollectionView.fadeOutAndIn(withDuration: 0.3)

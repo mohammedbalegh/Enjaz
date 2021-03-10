@@ -13,7 +13,7 @@ class EmailTextField: AuthTextField {
 		fieldName = "البريد الإلكتروني"
 		textField.textContentType = .emailAddress
 		textField.keyboardType = .emailAddress
-		icon.image = #imageLiteral(resourceName: "emailIcon")
+		icon.image = UIImage(named: "emailIcon")
 		validator = RegexValidator.validateEmail
 		defaultErrorMessage = "البريد الإلكتروني غير صحيح"
 	}

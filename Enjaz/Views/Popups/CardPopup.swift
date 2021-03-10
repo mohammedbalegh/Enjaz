@@ -28,7 +28,7 @@ class CardPopup: Popup {
         return view
     }()
         
-    override func onPopupContainerShown() {
+    override func popupContainerDidShow() {
         setupPopupContainer()
         setupCardView()
     }

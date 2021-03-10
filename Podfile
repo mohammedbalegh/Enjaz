@@ -9,6 +9,7 @@ target 'Enjaz' do
   pod 'ReSwift'
   pod 'SideMenu'
   pod 'lottie-ios'
+  pod 'SPAlert'
 
   target 'EnjazTests' do
     inherit! :search_paths

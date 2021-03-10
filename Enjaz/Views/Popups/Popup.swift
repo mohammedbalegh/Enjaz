@@ -1,10 +1,10 @@
 import UIKit
 
 class Popup: UIView {
-
+    
 	// MARK: Properties
 	
-	var blurOverlay: UIVisualEffectView = {
+	let blurOverlay: UIVisualEffectView = {
 		let blurEffect = UIBlurEffect(style: .dark)
 		let visualEffectView = UIVisualEffectView(effect: blurEffect)
 		
@@ -12,6 +12,7 @@ class Popup: UIView {
 		
 		return visualEffectView
 	}()
+    
 	lazy var popupContainer: UIView = {
 		let view = UIView(frame: .zero)
 		
@@ -24,9 +25,10 @@ class Popup: UIView {
 		
 		return view
 	}()
+    
 	let popupContainerInitialScale: CGFloat = 1.2
 	var hideOnOverlayTap: Bool
-	var onPopupDismiss: (() -> Void)?
+	var popupDismissalHandler: (() -> Void)?
 	
 	init(hideOnOverlayTap: Bool = true) {
 		self.hideOnOverlayTap = hideOnOverlayTap
@@ -49,13 +51,11 @@ class Popup: UIView {
 		addSubview(popupContainer)
 		animatePopupContainerIn()
 		
-		onPopupContainerShown()
+		popupContainerDidShow()
 	}
 		
 	// @absract
-	func onPopupContainerShown() {
-		fatalError("Subclasses need to implement the `setPopupContainerConstraints()` method.")
-	}
+	func popupContainerDidShow() {}
 	
 	// MARK: Tools
 	
@@ -67,7 +67,7 @@ class Popup: UIView {
 	func show() {
 		let window = UIApplication.shared.windows[0]
 		window.addSubview(self);
-        self.setup()
+        setup()
 	}
 	
 	@objc func hide() {
@@ -75,7 +75,7 @@ class Popup: UIView {
 		
 		animatePopupContainerOut() { finished in
 			self.removeFromSuperview()
-            self.onPopupDismiss?()
+            self.popupDismissalHandler?()
 		}
 	}
 	
@@ -87,14 +87,14 @@ class Popup: UIView {
 		}
 	}
 	
-	func animatePopupContainerOut(onAnimationComplete: @escaping (Bool) -> Void) {
+	func animatePopupContainerOut(CompletionHandler: @escaping (Bool) -> Void) {
 		UIView.animate(
 			withDuration: 0.1,
 			animations: {
 				self.popupContainer.animate(opacityTo: 0, andScaleTo: self.popupContainerInitialScale)
 				self.blurOverlay.alpha = 0
 			},
-			completion: onAnimationComplete
+			completion: CompletionHandler
 		)
 	}
 }

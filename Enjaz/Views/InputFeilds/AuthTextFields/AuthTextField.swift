@@ -113,7 +113,7 @@ class AuthTextField : UIView {
 	// MARK: Tools
 	
 	func setTextFieldDirection() {
-		let layoutDirection = LayoutTools.getCurrentLayoutDirectionFor(self)
+		let layoutDirection = LayoutTools.getCurrentLayoutDirection(for: self)
 		if layoutDirection == .rightToLeft {
 			textField.textAlignment = .right
 		}

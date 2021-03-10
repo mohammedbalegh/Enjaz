@@ -1,0 +1,70 @@
+// MARK: Screen Titles
+"Home" = "Home";
+"Calendar" = "Calendar";
+"New Addition" = "New Addition";
+"Monthly Plan" = "Monthly Plan";
+"Goals" = "Goals";
+
+// MARK: HomeScreen
+"Today's goals" = "Today's goals";
+"Today's demahs" = "Today's demahs";
+"Good morning %@!" = "Good morning %@!";
+"Good evening %@!" = "Good evening %@!";
+"Take a look at today's tasks and habits" = "Take a look at today's tasks and habits";
+"Take a look at today's remaining tasks" = "Take a look at today's remaining tasks";
+"No tasks today" = "No tasks today";
+"No demahs today" = "No demahs today";
+"Show All" = "Show All";
+
+// MARK: NewAdditionScreen
+"Select Image" = "Select Image";
+"Select Sticker" = "Select Sticker";
+"Addition Name" = "Addition Name";
+"Addition Category" = "Addition Category";
+"Date and Time" = "Date and Time";
+"Description" = "Description";
+"Select" = "Select";
+
+// MARK: SetDateAndTimeScreen
+"Hijri Calendar" = "Hijri Calendar";
+"Georgian Calendar" = "Georgian Calendar";
+"A day must be selected" = "A day must be selected";
+"Selected date cannot be in the past" = "Selected date cannot be in the past";
+
+// MARK: SideMenu
+"Draft" = "Draft";
+"Note" = "Note";
+"Goals Rating" = "Goals Rating";
+"Rate App" = "Rate App";
+"About App" = "About App";
+"Privacy Policy" = "Privacy Policy";
+"Contact Us" = "Contact Us";
+"Sign Out" = "Sign Out";
+
+// MARK: Item Categories
+"Religious" = "Religious";
+"Scientific" = "Scientific";
+"Health" = "Health";
+"Social" = "Social";
+"Career" = "Career";
+"Personal" = "Personal";
+"Financial" = "Financial";
+
+// MARK: Item Types
+"Task" = "Task";
+"Demah" = "Demah";
+"Achievement" = "Achievement";
+"Goal" = "Goal";
+
+// MARK: General
+"and" = "and";
+"," = ",";
+"Error" = "Error";
+"No Internet Connection" = "No Internet Connection";
+"Start and End Date" = "Start and End Date";
+"Cancel" = "Cancel";
+"Save" = "Save";
+"from" = "from";
+"to" = "to";
+"Ok" = "Ok";
+"Done" = "Done";

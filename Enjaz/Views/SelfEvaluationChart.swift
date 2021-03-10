@@ -96,7 +96,7 @@ class SelfEvaluationChart: UIView {
         
         layoutIfNeeded()
         
-        categoriesStack.addTopBorderWithColor(color: .lightGray, width: 1)
+        categoriesStack.addTopBorder(withColor: .lightGray, andWidth: 1)
     }
     
     func setupPercentageStack() {
@@ -117,7 +117,7 @@ class SelfEvaluationChart: UIView {
         
         layoutIfNeeded()
         
-        percentageStack.addRightBorderWithColor(color: .lightGray, width: 1)
+        percentageStack.addRightBorder(withColor: .lightGray, andWidth: 1)
     }
     
 }

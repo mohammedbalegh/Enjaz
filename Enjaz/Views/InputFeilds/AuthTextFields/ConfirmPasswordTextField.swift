@@ -15,7 +15,7 @@ class ConfirmPasswordTextField: AuthTextField {
 		fieldNounName = "تأكيد الرمز السري"
 		textField.textContentType = .password
 		textField.isSecureTextEntry = true
-		icon.image = #imageLiteral(resourceName: "lockIcon")
+		icon.image = UIImage(named: "lockIcon")
 		defaultErrorMessage = "كلمتي السر غير متطابقين"
 	}
 	

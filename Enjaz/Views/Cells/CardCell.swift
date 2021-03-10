@@ -9,14 +9,16 @@ class CardCell: UICollectionViewCell {
             
             if let imageName = imageIdConstants[viewModel.image_id] {
                 cardView.imageView.image = UIImage(named: imageName)
+            } else {
+                cardView.imageView.image = nil
             }
             
             cardView.cardBody.categoryLabel.text = ItemCategoryConstants[viewModel.category]
             cardView.cardBody.titleLabel.text = viewModel.name
-            let date = NSDate(timeIntervalSince1970: viewModel.date)
+            let date = Date(timeIntervalSince1970: viewModel.date)
             let formatter = DateFormatter()
             formatter.dateFormat = "hh:00  aa"
-            let result = formatter.string(from: date as Date)
+            let result = formatter.string(from: date)
             cardView.cardBody.descriptionLabel.text = viewModel.item_description
             cardView.cardBody.timeLabel.text = result
         }
@@ -27,7 +29,7 @@ class CardCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-        
+    
     static let reuseID = "cardCell"
     
     override init(frame: CGRect) {
@@ -44,8 +46,6 @@ class CardCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     func setupSubviews() {
         setupCardView()
     }
@@ -59,7 +59,6 @@ class CardCell: UICollectionViewCell {
             cardView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             cardView.topAnchor.constraint(equalTo: self.topAnchor)
         ])
-        
     }
     
 }

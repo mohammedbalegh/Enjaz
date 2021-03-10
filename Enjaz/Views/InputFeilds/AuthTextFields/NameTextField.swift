@@ -13,6 +13,6 @@ class NameTextField: AuthTextField {
 
 		fieldName = "الاسم الشخصي (ثنائي)"
 		textField.textContentType = .name
-		icon.image = #imageLiteral(resourceName: "presonIcon")
+		icon.image = UIImage(named: "personIcon")
 	}
 }

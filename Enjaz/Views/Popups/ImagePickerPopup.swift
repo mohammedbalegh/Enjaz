@@ -2,6 +2,7 @@ import UIKit
 
 class ImagePickerPopup: ImageAndStickerPickerPopup {    
     override func configure() {
+        titleLabel.text = imageTitleLabel
         collectionView.delegate = self
         collectionView.dataSource = self
         titleLabel.text = imageTitleLabel
@@ -25,6 +26,6 @@ extension ImagePickerPopup: UICollectionViewDelegate, UICollectionViewDataSource
     }
             
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        onImageSelected?(indexPath.row)
+        imageSelectionHandler?(indexPath.row)
     }
 }

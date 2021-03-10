@@ -1,18 +1,8 @@
 import UIKit
 
-class SetDateAndTimeScreenVC: UIViewController {
+class SetDateAndTimeScreenVC: CardModalVC {
     
     var hourPickerModels: [HourModel] = ModelsConstants.hourPickerModels
-    
-    lazy var header: ModalHeader = {
-        let header = ModalHeader(frame: .zero)
-        header.translatesAutoresizingMaskIntoConstraints = false
-        
-        header.titleLabel.text = "التاريخ و الوقت"
-        header.dismissButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
-        
-        return header
-    }()
     
     lazy var calendarView: CalendarView = {
         let calendarView = CalendarView()
@@ -44,13 +34,21 @@ class SetDateAndTimeScreenVC: UIViewController {
         return view
     }()
     
-    lazy var saveBtn = PrimaryBtn(label: "حفظ", theme: .blue, size: .large)
+    lazy var saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
 		
 	var popoverTableVC = PopoverTableVC()
 	
-	var calendarTypePopoverDataSource = ["التقويم الهجري", "التقويم الميلادي"]
-	var monthPopoverDataSource: [String] = []
-	var yearPopoverDataSource: [String] = []
+    let calendarTypePopoverDataSource: [String] = {
+        var calendarTypes = [NSLocalizedString("Georgian Calendar", comment: ""), NSLocalizedString("Hijri Calendar", comment: "")]
+        
+        if Locale.current.languageCode == "ar" {
+            calendarTypes.reverse()
+        }
+        
+        return calendarTypes
+    }()
+	lazy var monthPopoverDataSource = monthsNames
+	lazy var yearPopoverDataSource = selectableYears
 	
 	var selectedCalendarTypeIndex = 0
 	var selectedMonthIndex = 0
@@ -71,47 +69,60 @@ class SetDateAndTimeScreenVC: UIViewController {
         return selectedMonthIsLastMonthInYear && selectedYearIsLastSelectableYear
     }
     
-    var selectedCalendarIdentifier: NSCalendar.Identifier {
-        return selectedCalendarTypeIndex == 0 ? .islamicCivil : .gregorian
+    var selectedCalendarIdentifier: Calendar.Identifier {
+        let islamicCalendarIndex = Locale.current.languageCode == "ar" ? 0 : 1
+        return selectedCalendarTypeIndex == islamicCalendarIndex ? .islamicCivil : .gregorian
+    }
+    
+    var currentDay: Int {
+        return DateAndTimeTools.getCurrentDay(forCalendarIdentifier: selectedCalendarIdentifier)
+    }
+    
+    var currentMonth: Int {
+        return DateAndTimeTools.getCurrentMonth(forCalendarIdentifier: selectedCalendarIdentifier)
+    }
+    
+    var currentYear: Int {
+        return DateAndTimeTools.getCurrentYear(forCalendarIdentifier: selectedCalendarIdentifier)
+    }
+    
+    var formatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: selectedCalendarIdentifier)
+        return formatter
+    }
+    
+    var monthsNames: [String] {
+        return formatter.monthSymbols
+    }
+    
+    var selectableYears: [String] {
+        return (currentYear...currentYear + 5).map { String($0) }
     }
     
     var alertPopup = AlertPopup(hideOnOverlayTap: true)
-	
     var delegate: NewAdditionScreenModalDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        hourPicker.selectRow(12, inComponent: 0, animated: false)
-        
-        setMonthPopoverDataSource()
-        setYearPopoverDataSource()
-        updateMonthDays()
+        view.backgroundColor = .systemBackground
+        title = NSLocalizedString("Date and Time", comment: "")
         
         setupSubviews()
+        
+        hourPicker.selectRow(12, inComponent: 0, animated: false)
+        handleMonthSelection(selectedIndex: currentMonth - 1)
+        selectCurrentDay()
     }
 
     func setupSubviews() {
-        setupHeader()
         setPopoverBtnsDefaultLabels()
         setupCalendarView()
         setupSaveButton()
         setupIndicator()
         setupHourPicker()
     }
-    
-    func setupHeader() {
-        view.addSubview(header)
         
-        NSLayoutConstraint.activate([
-            header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            header.topAnchor.constraint(equalTo: view.topAnchor),
-            header.heightAnchor.constraint(equalToConstant: 50),
-        ])
-    }
-    
 	func setupCalendarView() {
 		view.addSubview(calendarView)
         
@@ -122,11 +133,9 @@ class SetDateAndTimeScreenVC: UIViewController {
             calendarView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.45),
 		])
 		
-		calendarView.calendarTypePopoverBtn.addTarget(self, action: #selector(onCalendarTypePopoverBtnTap), for: .touchUpInside)
-		
-		calendarView.monthPopoverBtn.addTarget(self, action: #selector(onMonthPopoverBtnTap), for: .touchUpInside)
-		
-		calendarView.yearPopoverBtn.addTarget(self, action: #selector(onYearPopoverBtnTap), for: .touchUpInside)
+		calendarView.calendarTypePopoverBtn.addTarget(self, action: #selector(handleCalendarTypePopoverBtnTap), for: .touchUpInside)
+		calendarView.monthPopoverBtn.addTarget(self, action: #selector(handleMonthPopoverBtnTap), for: .touchUpInside)
+		calendarView.yearPopoverBtn.addTarget(self, action: #selector(handleYearPopoverBtnTap), for: .touchUpInside)
 	}
 	
     func setupSaveButton() {
@@ -137,7 +146,7 @@ class SetDateAndTimeScreenVC: UIViewController {
             saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
         
-        saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
+        saveBtn.addTarget(self, action: #selector(handleSaveBtnTap), for: .touchUpInside)
     }
     
     func setupHourPicker() {
@@ -167,69 +176,68 @@ class SetDateAndTimeScreenVC: UIViewController {
     
     // MARK: Event Handlers
     
-	@objc func onCalendarTypePopoverBtnTap() {
+	@objc func handleCalendarTypePopoverBtnTap() {
 		popoverTableVC.dataSourceArray = calendarTypePopoverDataSource
-		popoverTableVC.onSelectOption = onSelectCalendarType
+		popoverTableVC.optionSelectionHandler = handleCalendarTypeSelection
 		
 		presentPopover(frame: calendarView.calendarTypePopoverBtn.frame, numberOfOptions: calendarTypePopoverDataSource.count)
 	}
 	
-	@objc func onMonthPopoverBtnTap() {
+	@objc func handleMonthPopoverBtnTap() {
 		popoverTableVC.dataSourceArray = monthPopoverDataSource
-		popoverTableVC.onSelectOption = onSelectMonth
+		popoverTableVC.optionSelectionHandler = handleMonthSelection
 		
 		presentPopover(frame: calendarView.monthPopoverBtn.frame, numberOfOptions: monthPopoverDataSource.count)
 	}
 	
-	@objc func onYearPopoverBtnTap() {
+	@objc func handleYearPopoverBtnTap() {
 		popoverTableVC.dataSourceArray = yearPopoverDataSource
-		popoverTableVC.onSelectOption = onSelectYear
+		popoverTableVC.optionSelectionHandler = handleYearSelection
 		
 		presentPopover(frame: calendarView.yearPopoverBtn.frame, numberOfOptions: yearPopoverDataSource.count)
 	}
     	
-    func onSelectCalendarType(selectedIndex: Int) {
+    func handleCalendarTypeSelection(selectedIndex: Int) {
         guard selectedIndex != selectedCalendarTypeIndex else { return }
-        
+                
         selectedCalendarTypeIndex = selectedIndex
-        selectedMonthIndex = 0
+        selectedMonthIndex = currentMonth - 1
         selectedYearIndex = 0
         
         calendarView.calendarTypeLabel = calendarTypePopoverDataSource[selectedIndex]
         calendarView.selectedMonthIsLastSelectableMonth = selectedMonthIsLastSelectableMonth
         
-        setMonthPopoverDataSource()
-        setYearPopoverDataSource()
+        monthPopoverDataSource = monthsNames
+        yearPopoverDataSource = selectableYears
         
-        calendarView.monthLabel = monthPopoverDataSource[0]
-        calendarView.yearLabel = yearPopoverDataSource[0]
+        calendarView.selectedMonthLabel = monthPopoverDataSource[selectedMonthIndex]
+        calendarView.SelectedYearLabel = yearPopoverDataSource[selectedYearIndex]
         
         updateMonthDays()
+        selectCurrentDay()
     }
     
-    func onSelectMonth(selectedIndex: Int) {
-        guard selectedIndex != selectedMonthIndex else { return }
-        
+    func handleMonthSelection(selectedIndex: Int) {
         selectedMonthIndex = selectedIndex
-        calendarView.monthLabel = monthPopoverDataSource[selectedIndex]
+        calendarView.selectedMonthLabel = monthPopoverDataSource[selectedIndex]
         calendarView.selectedMonthIsLastSelectableMonth = selectedMonthIsLastSelectableMonth
         
         updateMonthDays()
     }
     
-    func onSelectYear(selectedIndex: Int) {
+    func handleYearSelection(selectedIndex: Int) {
         guard selectedIndex != selectedYearIndex else { return }
-        
+                
         selectedYearIndex = selectedIndex
-        calendarView.yearLabel = yearPopoverDataSource[selectedIndex]
+        calendarView.SelectedYearLabel = yearPopoverDataSource[selectedIndex]
         calendarView.selectedMonthIsLastSelectableMonth = selectedMonthIsLastSelectableMonth
         
         updateMonthDays()
     }
     
-    @objc func onSaveBtnTap() {
+    @objc func handleSaveBtnTap() {
         guard calendarView.selectedMonthDayItemRow != nil else {
-            alertPopup.showAsError(withMessage: "يجب تحديد اليوم")
+            alertPopup.showAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
             return
         }
         
@@ -239,36 +247,15 @@ class SetDateAndTimeScreenVC: UIViewController {
         let selectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
         
         if selectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-            alertPopup.showAsError(withMessage: "لا يمكن اختيار تاريخ في الماضي")
+            alertPopup.showAsError(withMessage: NSLocalizedString("Selected date cannot be in the past", comment: ""))
             return
         }
         
-        delegate?.onDateAndTimeSaveBtnTap(selectedTimeStamp: selectedDateUnixTimeStamp, calendarIdentifier: selectedCalendarIdentifier)
+        delegate?.handleDateAndTimeSaveBtnTap(selectedTimeStamp: selectedDateUnixTimeStamp, calendarIdentifier: selectedCalendarIdentifier)
         dismissModal()
     }
     
     // MARK: TOOLS
-    
-    func setMonthPopoverDataSource() {
-        if selectedCalendarTypeIndex == 0 { // Islamic calendar
-            monthPopoverDataSource = MonthNames.islamicMonthNamesInArabic
-        } else { // Gregorian calendar
-            monthPopoverDataSource = MonthNames.gregorianMonthNamesInArabic
-        }
-    }
-    
-    func setYearPopoverDataSource() {
-        var currentYearNumber: Int
-        
-        currentYearNumber = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0)
-        
-        var yearsArray: [String] = []
-        for i in currentYearNumber...(currentYearNumber + 5) {
-            yearsArray.append(String(i))
-        }
-        
-        yearPopoverDataSource = yearsArray
-    }
     
 	func presentPopover(frame: CGRect, numberOfOptions: Int) {
         popoverTableVC.modalPresentationStyle = .popover
@@ -285,7 +272,14 @@ class SetDateAndTimeScreenVC: UIViewController {
 
 		present(popoverTableVC, animated: true)
 	}
-    	
+    
+    func selectCurrentDay() {
+        let currentDayIndexPath = IndexPath(row: currentDay - 1 + calendarView.monthDaysCollectionView.minimumSelectableItemRow, section: 0)
+        
+        calendarView.monthDaysCollectionView.selectItem(at: currentDayIndexPath, animated: true, scrollPosition: .centeredVertically)
+        calendarView.collectionView(calendarView.monthDaysCollectionView, didSelectItemAt: currentDayIndexPath)
+    }
+    
     func selectNextMonth() {
         if selectedMonthIsLastMonthInYear {
             guard !selectedYearIsLastSelectableYear else {
@@ -294,23 +288,23 @@ class SetDateAndTimeScreenVC: UIViewController {
             }
             
             let newSelectedYearIndex = selectedYearIndex + 1
-            onSelectYear(selectedIndex: newSelectedYearIndex)
+            handleYearSelection(selectedIndex: newSelectedYearIndex)
         }
         
         let newSelectedMonthIndex = (selectedMonthIndex + 1) % 12
         
-        onSelectMonth(selectedIndex: newSelectedMonthIndex)
+        handleMonthSelection(selectedIndex: newSelectedMonthIndex)
     }
         
     func setPopoverBtnsDefaultLabels() {
         calendarView.calendarTypeLabel = calendarTypePopoverDataSource[0]
-        calendarView.monthLabel = monthPopoverDataSource[0]
-        calendarView.yearLabel = yearPopoverDataSource[0]
+        calendarView.selectedMonthLabel = monthPopoverDataSource[0]
+        calendarView.SelectedYearLabel = yearPopoverDataSource[0]
     }
 	
 	func updateMonthDays() {
 		let month = selectedMonthIndex + 1
-        let year = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0) + selectedYearIndex
+        let year = currentYear + selectedYearIndex
 		
 		let (numberOfDaysInMonth, firstWeekDayNumber) = DateAndTimeTools.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarIdentifier: selectedCalendarIdentifier)
 		
@@ -320,7 +314,7 @@ class SetDateAndTimeScreenVC: UIViewController {
     func getSelectedDate(ofDay day: Int? = nil) -> Date {
         let day = day ?? calendarView.selectedDay
         let month = selectedMonthIndex + 1
-        let year = DateAndTimeTools.getCurrentYear(islamic: selectedCalendarTypeIndex == 0) + selectedYearIndex
+        let year = currentYear + selectedYearIndex
         let time = hourPicker.hourModels[hourPicker.selectedTimePickerIndex]
         let hour = DateAndTimeTools.convertHourModelTo24HrFormatInt(time)
                 
@@ -344,7 +338,7 @@ class SetDateAndTimeScreenVC: UIViewController {
         var laterDate = lastSelectedDate
         
         if let firstSelectedDate = firstSelectedDate, let lastSelectedDate = lastSelectedDate {
-            let calendar = NSCalendar(identifier: selectedCalendarIdentifier)!
+            let calendar = Calendar(identifier: selectedCalendarIdentifier)
             
             let firstSelectedDateYear = calendar.component(.year, from: firstSelectedDate)
             let lastSelectedDateYear = calendar.component(.year, from: lastSelectedDate)
@@ -369,9 +363,6 @@ class SetDateAndTimeScreenVC: UIViewController {
         calendarView.updateSelectedDaysLabel(firstDay: readableFirstSelectedDate, lastDay: readableLastSelectedDate)
     }
     
-    @objc func dismissModal() {
-        dismiss(animated: true)
-    }
 }
 
 

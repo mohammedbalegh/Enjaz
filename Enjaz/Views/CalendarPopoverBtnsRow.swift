@@ -80,7 +80,7 @@ class CalendarPopoverBtnsRow: UIView {
             monthPopoverBtn.trailingAnchor.constraint(equalTo: yearPopoverBtn.leadingAnchor, constant: -15),
             monthPopoverBtn.centerYAnchor.constraint(equalTo: centerYAnchor),
             monthPopoverBtn.heightAnchor.constraint(equalTo: heightAnchor),
-            monthPopoverBtn.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.18),
+            monthPopoverBtn.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2),
         ])
     }
         

@@ -25,4 +25,16 @@ extension String {
 		let end = index(start, offsetBy: range.upperBound - range.lowerBound)
 		return String(self[start ..< end])
 	}
+    
+    func capitalizeFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
+    func capitalizeOnlyFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst().lowercased()
+    }
+    
+    static func isOrAre(count: Int) -> String {
+        return count > 1 ? "are" : "is"
+    }
 }

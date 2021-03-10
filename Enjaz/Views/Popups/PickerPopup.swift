@@ -12,14 +12,14 @@ class PickerPopup: Popup {
 		let button = UIButton(type: .system)
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
-        button.setTitle("اختيار", for: .normal)
+        button.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
 		button.setTitleColor(.accentColor, for: .normal)
 		button.titleLabel?.font = .systemFont(ofSize: 18)
 		
 		return button
 	}()
 	
-	override func onPopupContainerShown() {
+	override func popupContainerDidShow() {
 		setupPopupContainer()
 		setupPicker()
 		setupSelectBtn()

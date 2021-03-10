@@ -1,6 +1,12 @@
 import UIKit
 
 extension UIColor {
+    var inverted: UIColor {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return UIColor(red: (1 - red), green: (1 - green), blue: (1 - blue), alpha: alpha)
+    }
+    
 	convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat = 1.0) {
 		assertRGBComponentsRange(red, green, blue, alpha)
 		self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
@@ -18,12 +24,11 @@ extension UIColor {
 			blue: hex & 0xFF,
             alpha: alpha)
 	}
-        
+    
 	static let accentColor = UIColor(hex: 0x12B3B9)
 	static let rootTabBarScreensBackgroundColor = UIColor(hex: 0xF9F9F9)
 	static let gradientStartColor = UIColor(hex: 0x20D4D0)
 	static let gradientEndColor = UIColor(hex: 0x12B3B9)
-    static let placeholderColor = UIColor(hex: 0xC3C4C6)
     static let borderColor = UIColor(white: 0.85, alpha: 1)
     
 }

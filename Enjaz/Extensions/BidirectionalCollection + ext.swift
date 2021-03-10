@@ -1,7 +1,9 @@
+import Foundation
+
 extension BidirectionalCollection where Element: StringProtocol {
     func joinAsSentence(languageIsArabic: Bool) -> String {
-        let comma = languageIsArabic ? "، " : ", "
-        let and = languageIsArabic ? " و " : " and "
+        let comma = NSLocalizedString(",", comment: "") + " "
+        let and = " " + NSLocalizedString("and", comment: "") + " "
         
         guard let last = last else { return "" }
         

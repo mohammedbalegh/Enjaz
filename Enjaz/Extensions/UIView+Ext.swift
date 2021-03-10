@@ -163,28 +163,28 @@ extension UIView {
         }
     }
     
-    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+    func addTopBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: width)
         layer.addSublayer(border)
     }
     
-    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+    func addRightBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: frame.size.width - width, y: 0, width: width, height: frame.size.height)
         layer.addSublayer(border)
     }
     
-    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+    func addBottomBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: frame.size.height - width, width: frame.size.width, height: width)
         layer.addSublayer(border)
     }
     
-    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+    func addLeftBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: 0, width: width, height: frame.size.height)
@@ -224,7 +224,7 @@ extension UIView {
     func applyLightShadow() {
         layer.shadowColor = UIColor(hex: 0x979797).cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowOpacity = 0.2
+        layer.shadowOpacity = 0.25
         layer.shadowRadius = 9
         layer.masksToBounds = false
     }
@@ -251,6 +251,10 @@ extension UIView {
     }
     
     func roundCorners(_ corners: [UIDirectionalRectCorner], withRadius radius: CGFloat? = nil) {
+        if let radius = radius {
+            layer.cornerRadius = radius
+        }
+        
         var caCornerMasks: CACornerMask = []
         
         for corner in corners {
@@ -260,10 +264,6 @@ extension UIView {
         }
         
         layer.maskedCorners = caCornerMasks
-        
-        if let radius = radius {
-            layer.cornerRadius = radius
-        }
     }
     
     func roundCorner(_ corner: UIDirectionalRectCorner, withRadius radius: CGFloat? = nil) {
@@ -297,9 +297,9 @@ extension UIView {
     func mapUIHorizontalDirectionToDirectionalInt(_ direction: UIHorizontalDirection) -> Int {
         switch direction {
         case .leadingToTrailing:
-            return LayoutTools.getCurrentLayoutDirectionFor(self) == .leftToRight ? -1 : 1
+            return LayoutTools.getCurrentLayoutDirection(for: self) == .leftToRight ? -1 : 1
         case .trailingToLeading:
-            return LayoutTools.getCurrentLayoutDirectionFor(self) == .leftToRight ? 1 : -1
+            return LayoutTools.getCurrentLayoutDirection(for: self) == .leftToRight ? 1 : -1
         }
     }
     

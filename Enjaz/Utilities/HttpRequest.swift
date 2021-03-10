@@ -20,10 +20,8 @@ class HttpRequest {
         self.headers = headers
     }
         
-    func send (completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        guard let requestUrl = requestUrl else { return }
-        
-        guard var components = URLComponents(url: requestUrl, resolvingAgainstBaseURL: false) else { return }
+    func send(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        guard let requestUrl = requestUrl, var components = URLComponents(url: requestUrl, resolvingAgainstBaseURL: false) else { return }
         
         let queryItems = generateQueryItems()
         
@@ -37,7 +35,7 @@ class HttpRequest {
         request.httpMethod = method.rawValue
         request.httpBody = Data(query.utf8)
         setRequestHeaders(of: &request)
-                
+        
         // Send HTTP Request
         URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
     }

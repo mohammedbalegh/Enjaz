@@ -13,6 +13,6 @@ class NewPasswordTextField: AuthTextField {
 		fieldName = "الرمز السري الجديد"
 		textField.textContentType = .password
 		textField.isSecureTextEntry = true
-		icon.image = #imageLiteral(resourceName: "lockIcon")
+		icon.image = UIImage(named: "lockIcon")
 	}
 }

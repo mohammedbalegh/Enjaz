@@ -12,7 +12,7 @@ class SideMenuVC: UIViewController {
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.cornerRadius = 8
         
-        button.addTarget(self, action: #selector(onDismissBtnTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleDismissBtnTap), for: .touchUpInside)
         
         return button
     }()
@@ -27,13 +27,13 @@ class SideMenuVC: UIViewController {
         return label
     }()
     
-    let draftBtn = SideMenuBtn(label: "المدونة", image: UIImage(named: "draftIcon"))
-    let noteBtn = SideMenuBtn(label: "المفكرة", image: UIImage(named: "noteIcon"))
-    let goalsRatingBtn = SideMenuBtn(label: "تقييمات أهدافي", image: UIImage(named: "starIcon"))
-    let rateAppBtn = SideMenuBtn(label: "تقييم التطبيق", image: UIImage(named: "rateAppIcon"))
-    let aboutAppBtn = SideMenuBtn(label: "عن التطبيق", image: UIImage(named: "infoIcon"))
-    let privacyPolicyBtn = SideMenuBtn(label: "سياسة الخصوصية", image: UIImage(named: "sheetIcon"))
-    let contactUsBtn = SideMenuBtn(label: "اتصل بنا", image: UIImage(named: "phoneIcon"))
+    let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
+    let noteBtn = SideMenuBtn(label: NSLocalizedString("Note", comment: ""), image: UIImage(named: "noteIcon"))
+    let goalsRatingBtn = SideMenuBtn(label: NSLocalizedString("Goals Rating", comment: ""), image: UIImage(named: "starIcon"))
+    let rateAppBtn = SideMenuBtn(label: NSLocalizedString("Rate App", comment: ""), image: UIImage(named: "rateAppIcon"))
+    let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
+    let privacyPolicyBtn = SideMenuBtn(label: NSLocalizedString("Privacy Policy", comment: ""), image: UIImage(named: "sheetIcon"))
+    let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [draftBtn, noteBtn, goalsRatingBtn, rateAppBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
@@ -46,7 +46,7 @@ class SideMenuVC: UIViewController {
         return stackView
     }()
     
-    let signOutBtn = SideMenuBtn(label: "تسجيل الخروج", image: UIImage(named: "signOutIcon"))
+    let signOutBtn = SideMenuBtn(label: NSLocalizedString("Sign Out", comment: ""), image: UIImage(named: "signOutIcon"))
     
     var user = UserDefaultsManager.user
         
@@ -118,7 +118,7 @@ class SideMenuVC: UIViewController {
         ])
     }
     
-    @objc func onDismissBtnTap() {
+    @objc func handleDismissBtnTap() {
         dismiss(animated: true)
     }
 }

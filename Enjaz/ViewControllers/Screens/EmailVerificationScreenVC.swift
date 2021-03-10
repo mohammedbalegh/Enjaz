@@ -2,7 +2,7 @@ import UIKit
 import Network
 import ReSwift
 
-class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber {
+class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
     // MARK: Properties
@@ -45,7 +45,7 @@ class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscr
         button.setTitle("الرجوع", for: .normal)
         button.setTitleColor(.accentColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(onBackBtnTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
         return button
     }()
     
@@ -138,7 +138,7 @@ class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscr
     
     // MARK: Event Handlers
     
-    @objc func onResendCodeBtnTap() {
+    @objc func handleResendCodeBtnTap() {
         guard let password = password, let email = email else { return }
         
         guard isConnectedToInternet else {
@@ -153,12 +153,12 @@ class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscr
                     self.alertPopup.showAsError(withMessage: "البريد الإلكتروني غير مسجل")
                 }
                                 
-                self.oneTimeCodeTextField.didEnterLastCharacter = self.onVerificationCodeEntered
+                self.oneTimeCodeTextField.didEnterLastCharacter = self.handleVerificationCodeEntered
             }
         }
     }
     
-    @objc func onVerificationCodeEntered(resetCode: String) {
+    @objc func handleVerificationCodeEntered(resetCode: String) {
         guard let email = email else { return }
         
         guard isConnectedToInternet else {
@@ -182,7 +182,7 @@ class EmailVerificationScreenVC: KeyboardHandlingBaseViewController, StoreSubscr
         }
     }
     
-    @objc func onBackBtnTap() {
+    @objc func handleBackBtnTap() {
         navigateBackToSignupScreen()
     }
     

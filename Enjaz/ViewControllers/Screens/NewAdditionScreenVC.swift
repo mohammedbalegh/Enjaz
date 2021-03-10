@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     // MARK: Properties
@@ -17,7 +18,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     lazy var additionNameTextField: NewAdditionInputFieldContainer = {
         let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
-        let fieldName = "اسم الإضافة"
+        let fieldName = NSLocalizedString("Addition Name", comment: "")
         containerView.fieldName = fieldName
         
         let textField = NewAdditionTextField(fieldName: fieldName)
@@ -37,26 +38,26 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
 
         button.tintColor = .placeholderText
         
-        let fieldName = "مجال الإضافة"
+        let fieldName = NSLocalizedString("Addition Category", comment: "")
         containerView.fieldName = fieldName
         button.label.text = fieldName
         
         button.frame.size = CGSize(width: 0, height: LayoutConstants.inputHeight)
-        button.addTarget(self, action: #selector(onAdditionCategoryPickerTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleAdditionCategoryPickerTap), for: .touchUpInside)
         
         containerView.input = button
         
         return containerView
     }()
     
-    lazy var additionCategoryPickerPopup: PickerPopup = {
-        let pickerPopup = PickerPopup(hideOnOverlayTap: true)
+    lazy var additionCategoryPickerBottomSheet: PickerBottomSheetView = {
+        let pickerPopup = PickerBottomSheetView()
         
         pickerPopup.picker.delegate = self
         pickerPopup.picker.dataSource = self
         
-        pickerPopup.selectBtn.addTarget(self, action: #selector(onAdditionCategorySelection), for: .touchUpInside)
-        pickerPopup.onPopupDismiss = self.onAdditionCategoryPopupDismiss
+        pickerPopup.dismissalHanlder = handleAdditionCategoryPopupDismissal
+        pickerPopup.selectBtn.addTarget(self, action: #selector(handleAdditionCategorySelection), for: .touchUpInside)
         
         return pickerPopup
     }()
@@ -64,7 +65,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     lazy var additionDateAndTimeInput: NewAdditionInputFieldContainer = {
         let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
-        let fieldName = "التاريخ و الوقت"
+        let fieldName = NSLocalizedString("Date and Time", comment: "")
         containerView.fieldName = fieldName
         
         let button = NewAdditionInputFieldContainerBtn(type: .system)
@@ -72,10 +73,11 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         button.setTitle(fieldName, for: .normal)
         button.setTitleColor(.placeholderText, for: .normal)
         button.contentHorizontalAlignment = .leading
+        button.titleLabel?.font = .systemFont(ofSize: 16)
         
         button.frame.size = CGSize(width: 0, height: LayoutConstants.inputHeight)
         
-        button.addTarget(self, action: #selector(onAdditionDateAndTimeInputTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleAdditionDateAndTimeInputTap), for: .touchUpInside)
         
         containerView.input = button
         
@@ -90,7 +92,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         textView.font = .systemFont(ofSize: 18)
         
-        let fieldName = "الوصف"
+        let fieldName = NSLocalizedString("Description", comment: "")
         containerView.fieldName = fieldName
         
         textView.placeholder = fieldName
@@ -99,7 +101,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         return containerView
     }()
-        
+    
     lazy var textFieldsVerticalStack: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: getTextFieldsStackArrangedSubviews())
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,17 +112,17 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         return stackView
     }()
-        
+    
     let taskCategoryModels = ItemCategoryConstants
     
     var alertPopup = AlertPopup(hideOnOverlayTap: true)
-        
+    
     // MARK: State
     
     var itemName: String {
         get { return additionNameTextField.input?.inputText ?? "" }
     }
-        
+    
     var itemDescription: String {
         get { return additionDescriptionTextView.input?.inputText ?? ""}
     }
@@ -151,7 +153,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-     
+        
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: keyboardPlaceHolderView.topAnchor),
@@ -168,9 +170,9 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
             setImageBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
         
-        imagePickerPopup.onImageSelected = onImageSelected
+        imagePickerPopup.imageSelectionHandler = handleImageSelection
         
-        setImageBtn.addTarget(self, action: #selector(onSetImageBtnTap), for: .touchUpInside)
+        setImageBtn.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
     }
     
     func setupSetStickerButton() {
@@ -182,9 +184,9 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         setStickerBtn.constrainToSuperviewCorner(at: .bottomTrailing)
         
-        stickerPickerPopup.onImageSelected = onStickerSelected
+        stickerPickerPopup.imageSelectionHandler = handleStickerSelection
         
-        setStickerBtn.addTarget(self, action: #selector(onSetStickerBtnTap), for: .touchUpInside)
+        setStickerBtn.addTarget(self, action: #selector(handleSetStickerBtnTap), for: .touchUpInside)
     }
     
     func setupTextFieldsVerticalStack() {
@@ -216,17 +218,17 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     
     // MARK: Event handlers
     
-    @objc func onSetImageBtnTap() {
+    @objc func handleSetImageBtnTap() {
         dismissKeyboard()
         imagePickerPopup.show()
     }
     
-    @objc func onSetStickerBtnTap() {
+    @objc func handleSetStickerBtnTap() {
         dismissKeyboard()
         stickerPickerPopup.show()
     }
     
-    func onImageSelected(selectedId: Int) {
+    func handleImageSelection(selectedId: Int) {
         itemImageId = selectedId
         
         if let imageName = imageIdConstants[selectedId] {
@@ -236,35 +238,35 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         imagePickerPopup.hide()
     }
     
-    func onStickerSelected(selectedId: Int) {
+    func handleStickerSelection(selectedId: Int) {
         itemStickerId = selectedId
         
         stickerPickerPopup.hide()
     }
     
-    @objc func onAdditionCategoryPickerTap() {
+    @objc func handleAdditionCategoryPickerTap() {
         dismissKeyboard()
-        additionCategoryPickerPopup.show()
+        additionCategoryPickerBottomSheet.present(animated: true)
     }
     
-    @objc func onAdditionCategorySelection() {
+    @objc func handleAdditionCategorySelection() {
         (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .black
         
-        let selectedValueIndex = additionCategoryPickerPopup.picker.selectedRow(inComponent: 0)
+        let selectedValueIndex = additionCategoryPickerBottomSheet.picker.selectedRow(inComponent: 0)
         
         itemCategory = selectedValueIndex
         
         let selectedAdditionCategory = taskCategoryModels[selectedValueIndex]
-                
+        
         additionCategoryPopoverBtn.input?.inputText = selectedAdditionCategory
-        additionCategoryPickerPopup.hide()
+        additionCategoryPickerBottomSheet.dismiss(animated: true)
     }
     
-    func onAdditionCategoryPopupDismiss() {
-        additionCategoryPickerPopup.picker.selectRow(itemCategory ?? 0, inComponent: 0, animated: false)
+    func handleAdditionCategoryPopupDismissal() {
+        additionCategoryPickerBottomSheet.picker.selectRow(itemCategory ?? 0, inComponent: 0, animated: false)
     }
     
-    @objc func onAdditionDateAndTimeInputTap() {
+    @objc func handleAdditionDateAndTimeInputTap() {
         dismissKeyboard()
         
         let setDateAndTimeScreenVC = itemType == 3 ? SetGoalDateRangeScreenVC() : SetDateAndTimeScreenVC()
@@ -273,21 +275,23 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         present(setDateAndTimeScreenVC, animated: true, completion: nil)
     }
     
-    func onDateAndTimeSaveBtnTap(selectedTimeStamp: Double, calendarIdentifier: NSCalendar.Identifier ) {
+    func handleDateAndTimeSaveBtnTap(selectedTimeStamp: Double, calendarIdentifier: Calendar.Identifier ) {
         self.itemDate = selectedTimeStamp
         let selectedDate = Date(timeIntervalSince1970: selectedTimeStamp)
-        let formattedDate = DateAndTimeTools.getReadableDate(from: selectedDate, withFormat: "hh:00 aa   dd MMMM yyyy", calendarIdentifier: calendarIdentifier)
+        let formattedDate = DateAndTimeTools.getReadableDate(from: selectedDate, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: calendarIdentifier)
         
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.black, for: .normal)
         
         additionDateAndTimeInput.input?.inputText = formattedDate
     }
     
-    @objc func onSaveBtnTap() {
+    @objc func handleSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         if !nonProvidedRequiredFieldNames.isEmpty {
             let nonProvidedRequiredFieldNamesAsSentence = nonProvidedRequiredFieldNames.joinAsSentence(languageIsArabic: true)
-            alertPopup.showAsError(withMessage: "يجب ادخال \(nonProvidedRequiredFieldNamesAsSentence)")
+            let errorMessage = generateRequiredFieldNamesErrorMessage(requiredFieldNamesAsSentence: nonProvidedRequiredFieldNamesAsSentence, numberOfNonProvidedRequiredFields: nonProvidedRequiredFieldNames.count)
+            
+            AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)
             return
         }
         
@@ -297,7 +301,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         present(additionTypeScreenVC, animated: true)
     }
     
-    func onTypeSaveBtnTap(id: Int) {
+    func handleTypeSaveBtnTap(id: Int) {
         itemType = id
         
         saveItem()
@@ -305,7 +309,8 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         switchToHomeScreenTab()
         
         let itemTypeName = ItemTypeConstants[id] ?? ""
-        Toast.shared.show(withTitle: "تمت إضافة \(itemTypeName) بنجاح")
+        let successMessage = generateSuccessMessage(itemTypeName: itemTypeName)
+        SPAlert.present(title: successMessage, preset: .done)
     }
     
     // MARK: Tools
@@ -327,7 +332,23 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         return nonProvidedRequiredFieldNames
     }
+    
+    func generateRequiredFieldNamesErrorMessage(requiredFieldNamesAsSentence: String, numberOfNonProvidedRequiredFields: Int) -> String {
+        if Locale.current.languageCode == "ar" {
+            return "يجب ادخال \(requiredFieldNamesAsSentence)."
+        }
         
+        return "\(requiredFieldNamesAsSentence) field\(numberOfNonProvidedRequiredFields > 1 ? "s" : "") \(String.isOrAre(count: numberOfNonProvidedRequiredFields)) required.".capitalizeOnlyFirstLetter()
+    }
+    
+    func generateSuccessMessage(itemTypeName: String) -> String {
+        if Locale.current.languageCode == "ar" {
+            return "تمت إضافة \(itemTypeName) بنجاح"
+        }
+        
+        return "\(itemTypeName) was added successfully"
+    }
+    
     func saveItem() {
         let item = ItemModel()
         
@@ -360,7 +381,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
                 
         imagePickerPopup.collectionView.deselectAllItems(animated: false)
         stickerPickerPopup.collectionView.deselectAllItems(animated: false)
-        additionCategoryPickerPopup.picker.selectRow(0, inComponent: 0, animated: false)
+        additionCategoryPickerBottomSheet.picker.selectRow(0, inComponent: 0, animated: false)
         
         
         additionNameTextField.input?.inputText = ""
@@ -400,4 +421,3 @@ extension NewAdditionScreenVC: UITextFieldDelegate {
         return false
     }
 }
-

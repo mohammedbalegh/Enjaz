@@ -22,7 +22,7 @@ class OnboardingScreenVC: UIViewController {
     
     let carouselBackground: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "onBoardingBackgroundImage")
+        imageView.image = UIImage(named: "onBoardingBackgroundImage")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -144,7 +144,7 @@ class OnboardingScreenVC: UIViewController {
             signupBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
-        signupBtn.addTarget(self, action: #selector(onSignupBtnTap), for: .touchUpInside)
+        signupBtn.addTarget(self, action: #selector(handleSignupBtnTap), for: .touchUpInside)
     }
     
     func setupLoginBtn() {
@@ -155,7 +155,7 @@ class OnboardingScreenVC: UIViewController {
             loginBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
-        loginBtn.addTarget(self, action: #selector(onLoginBtnTap), for: .touchUpInside)
+        loginBtn.addTarget(self, action: #selector(handleLoginBtnTap), for: .touchUpInside)
     }
     
     func setupLogo() {
@@ -197,11 +197,11 @@ class OnboardingScreenVC: UIViewController {
         }
     }
 
-    @objc func onSignupBtnTap() {
+    @objc func handleSignupBtnTap() {
         navigateToSignupScreen()
     }
     
-    @objc func onLoginBtnTap() {
+    @objc func handleLoginBtnTap() {
         navigateToLoginScreen()
     }
     

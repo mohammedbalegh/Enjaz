@@ -34,7 +34,7 @@ class RealmManager {
         
         let completionFilter = "is_completed == \(completed.description)"
         let goals: [ItemModel] = RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == 3").map({ $0 })
-        return  goals
+        return goals
     }
     
     static func retrieveCompletedGoals() -> [ItemModel] {

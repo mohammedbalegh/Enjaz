@@ -20,7 +20,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = 0
         card.typeImage.image = UIImage(named: "taskIcon")
-        card.typeTitle.text = "مهمة"
+        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
         card.typeDescription.text = "ان كان لديك مهمة تريد انجازها خلال وقت معين"
         return card
     }()
@@ -30,7 +30,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = 1
         card.typeImage.image = UIImage(named: "demahIcon")
-        card.typeTitle.text = "ديمة"
+        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
         card.typeDescription.text = "اذا كان لديك عادة متكررة خلال فترة معينة"
         return card
     }()
@@ -40,7 +40,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = 2
         card.typeImage.image = UIImage(named: "achievementIcon")
-        card.typeTitle.text = "إنجاز"
+        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
         card.typeDescription.text = "ان كان لديك أنجاز تريد تحقيقه خلال وقت معين"
         return card
     }()
@@ -50,7 +50,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = 3
         card.typeImage.image = UIImage(named: "goalIcon")
-        card.typeTitle.text = "هدف"
+        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
         card.typeDescription.text = "ان كان لديك هدف في مجال معين تريد تحقيقه "
         return card
     }()
@@ -140,10 +140,10 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
             saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
         
-        saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
+        saveBtn.addTarget(self, action: #selector(handleSaveBtnTap), for: .touchUpInside)
     }
     
-    func onCardSelect(cardId selectedCardId: Int) {
+    func handleCardSelection(cardId selectedCardId: Int) {
         selectedTypeId = selectedCardId
         taskCard.selectedId = selectedCardId
         demahCard.selectedId = selectedCardId
@@ -152,13 +152,13 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     }
     
     
-    @objc func onSaveBtnTap() {
+    @objc func handleSaveBtnTap() {
         if selectedTypeId == -1 {
             alertPopup.showAsError(withMessage: "لم يتم اختيار نوع")
             return
         }
         
-        delegate?.onTypeSaveBtnTap(id: selectedTypeId)
+        delegate?.handleTypeSaveBtnTap(id: selectedTypeId)
         dismissModal()
     }
     

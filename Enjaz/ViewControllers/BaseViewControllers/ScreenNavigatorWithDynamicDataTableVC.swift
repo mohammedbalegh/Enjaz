@@ -20,7 +20,7 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: LayoutConstants.tabBarHeight, right: 0)
         
         tableView.register(TableViewCustomHeader.self, forCellReuseIdentifier: customHeaderIdentifier)
@@ -43,7 +43,7 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 50 : 80
+        return indexPath.section == 0 ? 50 : 65
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

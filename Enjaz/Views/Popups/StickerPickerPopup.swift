@@ -11,9 +11,9 @@ class StickerPickerPopup: ImageAndStickerPickerPopup {
     }
     
     override func configure() {
+        titleLabel.text = stickerTitleLabel
         collectionView.delegate = self
         collectionView.dataSource = self
-        titleLabel.text = stickerTitleLabel
         imageIconOrSticker.setImage(UIImage(named: "stickerIconWhite"), for: .normal)
     }
 }
@@ -34,6 +34,6 @@ extension StickerPickerPopup: UICollectionViewDelegate, UICollectionViewDataSour
     }
             
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        onImageSelected?(indexPath.row)
+        imageSelectionHandler?(indexPath.row)
     }
 }

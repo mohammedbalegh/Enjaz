@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class AddGoalScreenVC: NewAdditionScreenVC {
     
@@ -28,12 +29,12 @@ class AddGoalScreenVC: NewAdditionScreenVC {
             saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
         ])
         
-        saveBtn.addTarget(self, action: #selector(onSaveBtnTap), for: .touchUpInside)
+        saveBtn.addTarget(self, action: #selector(handleSaveBtnTap), for: .touchUpInside)
     }
     
     // MARK: Event Handlers
         
-    override func onSaveBtnTap() {
+    override func handleSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         
         if !nonProvidedRequiredFieldNames.isEmpty {
@@ -45,8 +46,7 @@ class AddGoalScreenVC: NewAdditionScreenVC {
         saveItem()
         resetViewController()
         
-        Toast.shared.show(withTitle: "تمت إضافة هدف بنجاح")
-        
+        SPAlert.present(title: "تمت إضافة هدف بنجاح", preset: .done)
         navigationController?.popViewController(animated: true)
     }
     

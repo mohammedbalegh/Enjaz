@@ -1,6 +1,6 @@
 import UIKit
 
-class SelectableScreenVC: KeyboardHandlingBaseViewController {
+class SelectableScreenVC: KeyboardHandlingViewController {
     
     var id: Int?
     

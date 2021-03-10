@@ -1,0 +1,70 @@
+// MARK: Screen Titles
+"Home" = "الرئيسية";
+"Calendar" = "التقويم";
+"New Addition" = "إضافة جديدة";
+"Monthly Plan" = "الخطة الشهرية";
+"Goals" = "الأهداف";
+
+// MARK: HomeScreen
+"Today's goals" = "مهام اليوم";
+"Today's demahs" = "ديمة اليوم";
+"Good morning %@!" = "صباح الخير %@!";
+"Good evening %@!" = "مساء الخير %@!";
+"Take a look at today's tasks and habits" = "أطلع على مهام وعادات اليوم";
+"Take a look at today's remaining tasks" = "أطلع على المهام المتبقية";
+"No tasks today" = "لا يوجد مهام اليوم";
+"No demahs today" = "لا يوجد ديم اليوم";
+"Show All" = "عرض الكل";
+
+// MARK: NewAdditionScreen
+"Select Image" = "اختر صورة مناسبة";
+"Select Sticker" = "اختر الاستكير المناسب";
+"Addition Name" = "اسم الإضافة";
+"Addition Category" = "مجال الإضافة";
+"Date and Time" = "التاريخ و الوقت";
+"Description" = "الوصف";
+"Select" = "اختيار";
+
+// MARK: SetDateAndTimeScreen
+"Hijri Calendar" = "التقويم الهجري";
+"Georgian Calendar" = "التقويم الميلادي";
+"A day must be selected" = "يجب تحديد اليوم";
+"Selected date cannot be in the past" = "لا يمكن اختيار تاريخ في الماضي";
+
+// MARK: SideMenu Buttons
+"Draft" = "المدونة";
+"Note" = "المفكرة";
+"Goals Rating" = "تقييمات أهدافي";
+"Rate App" = "تقييم التطبيق";
+"About App" = "عن التطبيق";
+"Privacy Policy" = "سياسة الخصوصية";
+"Contact Us" = "اتصل بنا";
+"Sign Out" = "تسجيل الخروج";
+
+// MARK: Item Categories
+"Religious" = "ديني";
+"Scientific" = "علمي";
+"Health" = "صحي";
+"Social" = "اجتماعي";
+"Career" = "مهني";
+"Personal" = "شخصي";
+"Financial" = "مالي";
+
+// MARK: Item Types
+"Task" = "مهمة";
+"Demah" = "ديمة";
+"Achievement" = "إنجاز";
+"Goal" = "هدف";
+
+// MARK: General
+"and" = "و";
+"," = "،";
+"Error" = "خطأ";
+"No Internet Connection" = "لا يوجد اتصال بالانترنت";
+"Start and End Date" = "تاريخ البداية و النهاية";
+"Cancel" = "إلغاء";
+"Save" = "حفظ";
+"from" = "من";
+"to" = "إلى";
+"Ok" = "حسنًا";
+"Done" = "تم";

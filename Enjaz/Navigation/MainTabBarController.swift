@@ -1,31 +1,30 @@
-
 import UIKit
 import SideMenu
 
 class MainTabBarController: UITabBarController {
 	    
-    lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .gray
-        label.text = DateAndTimeTools.getDate()
-        label.font = label.font.withSize(14)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     lazy var islamicDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(hex: 0x011942)
-        label.text = DateAndTimeTools.getDateInIslamic()
+        label.textColor = .darkText
+        label.text = DateAndTimeTools.getReadableDate(from: Date(), withFormat: "dd MMMM", calendarIdentifier: .islamicCivil)
         label.font = label.font.withSize(20)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    lazy var georgianDateLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray
+        label.text = DateAndTimeTools.getReadableDate(from: Date(), withFormat: "d MMMM yyyy", calendarIdentifier: .gregorian)
+        label.font = label.font.withSize(14)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var dateVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [islamicDateLabel, dateLabel])
+        let stackView = UIStackView(arrangedSubviews: [islamicDateLabel, georgianDateLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -42,7 +41,7 @@ class MainTabBarController: UITabBarController {
         button.setImage(UIImage(named:"menuIcon"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addTarget(self, action: #selector(onMenuBtnTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleMenuBtnTap), for: .touchUpInside)
         
         return button
     }()
@@ -59,7 +58,6 @@ class MainTabBarController: UITabBarController {
     
     let navBarTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "إضافة جديدة"
         label.textAlignment = .center
         label.textColor = .accentColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,10 +76,17 @@ class MainTabBarController: UITabBarController {
 		button.layer.shadowRadius = 6
 		button.layer.masksToBounds = false
 		
-		button.addTarget(self, action: #selector(onFloatingBtnTap), for: .touchUpInside)
+		button.addTarget(self, action: #selector(handleFloatingBtnTap), for: .touchUpInside)
 		
 		return button
 	}()
+    
+    lazy var sideMenu: UIViewController? = {
+        let layoutDirection = LayoutTools.getCurrentLayoutDirection(for: view)
+        let sideMenu = layoutDirection == .leftToRight ? SideMenuManager.default.leftMenuNavigationController : SideMenuManager.default.rightMenuNavigationController
+        
+        return sideMenu
+    }()
 
     var screenTitles: [String]?
 	let newAdditionScreenVC = NewAdditionScreenVC()
@@ -100,7 +105,7 @@ class MainTabBarController: UITabBarController {
 			tabChangedTo(selectedIndex: selectedIndex)
 		}
 	}
-    
+        
     override func viewDidLoad() {
 		super.viewDidLoad()
 		view.tintColor = .accentColor
@@ -143,8 +148,12 @@ class MainTabBarController: UITabBarController {
         setTabBarIcon(for: goalsScreenVC, withImageName: "categoryIcon")
 		
 		viewControllers = [homeScreenVC, calendarScreenVC, newAdditionScreenVC, monthlyPlanScreenVC, goalsScreenVC]
-        screenTitles = ["الرئيسية", "التقويم", "إضافة جديدة", "الخطة الشهرية", "الأهداف"]
-		
+        screenTitles = [NSLocalizedString("Home", comment: ""),
+                        NSLocalizedString("Calendar", comment: ""),
+                        NSLocalizedString("New Addition", comment: ""),
+                        NSLocalizedString("Monthly Plan", comment: ""),
+                        NSLocalizedString("Goals", comment: "")]
+        
 		// Disable the NewAdditionScreen tab bar item, because the screen is accessed through the floating button.
 		tabBar.items?[2].isEnabled = false
 	}
@@ -171,18 +180,18 @@ class MainTabBarController: UITabBarController {
 	
     // MARK: Event Handlers
     
-	@objc func onFloatingBtnTap() {
+	@objc func handleFloatingBtnTap() {
 		let newAdditionScreenIsSelected = selectedIndex == 2
 		if newAdditionScreenIsSelected {
-			newAdditionScreenVC.onSaveBtnTap()
+			newAdditionScreenVC.handleSaveBtnTap()
 			return
 		}
 		navigateToNewAdditionScreen()
 	}
 	
-    @objc func onMenuBtnTap() {
-        let menu = SideMenuNavigationController(rootViewController: SideMenuVC())
-        present(menu, animated: true, completion: nil)
+    @objc func handleMenuBtnTap() {
+        guard let sideMenu = sideMenu else { return }
+        present(sideMenu, animated: true, completion: nil)
     }
     
 	// MARK: Tools
