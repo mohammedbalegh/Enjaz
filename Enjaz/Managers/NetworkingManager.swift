@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 class NetworkingManager {
     enum StatusCodeError: Error {
@@ -172,11 +172,36 @@ class NetworkingManager {
     }
     
     // @stub
-    static func retrieveGoalSuggestions(completionHandler: (_ goalSuggestions: [String]) -> Void){
-    
+    static func retrieveGoalSuggestions(completionHandler: (_ goalSuggestions: [String]) -> Void) {
         let goalSuggestions = ["الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي","الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي","الحصول علي 97% في دراستي","المداومة علي الركض صباحا","قراءة كتاب عن احد الفنون","زيارة ذوي القربي","المداومة علي اذكار الصباح و المساء","تلاوة 5 صفحات من القرآن يوميا"]
         
         completionHandler(goalSuggestions)
+    }
+    
+    // @stub
+    static func retrieveArticles(completionHandler: (_ articles: [ArticleModel]) -> Void) {
+        let image = UIImage(named: "tempArticleThumbnail")
+        
+        let articles = [
+            ArticleModel(thumbnail: image, image: image, category: "Religious", title: "Article Title", date: Date(), article: ""),
+            ArticleModel(thumbnail: image, image: image, category: "Religious", title: "Article Title", date: Date(), article: ""),
+            ArticleModel(thumbnail: image, image: image, category: "Religious", title: "Article Title", date: Date(), article: ""),
+        ]
+        
+        completionHandler(articles)
+    }
+    
+    // @stub
+    static func retrieveVideos(completionHandler: (_ videos: [VideoModel]) -> Void) {
+        let image = UIImage(named: "tempArticleThumbnail")
+        
+        let videos = [
+            VideoModel(thumbnail: image, category: "Religious", title: "Viceo Title", date: Date(), videoUrl: ""),
+            VideoModel(thumbnail: image, category: "Religious", title: "Viceo Title", date: Date(), videoUrl: ""),
+            VideoModel(thumbnail: image, category: "Religious", title: "Viceo Title", date: Date(), videoUrl: ""),
+        ]
+        
+        completionHandler(videos)
     }
         
     private static func parseDataIntoDictionary(data: Data) -> [String: Any]? {

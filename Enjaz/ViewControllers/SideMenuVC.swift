@@ -49,7 +49,7 @@ class SideMenuVC: UIViewController {
     let signOutBtn = SideMenuBtn(label: NSLocalizedString("Sign Out", comment: ""), image: UIImage(named: "signOutIcon"))
     
     var user = UserDefaultsManager.user
-        
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -62,6 +62,8 @@ class SideMenuVC: UIViewController {
         view.applyAccentColorGradient(size: view.frame.size, axis: .vertical)
         
         setupSubviews()
+        
+        draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
     }
     
     func setupSubviews() {
@@ -116,6 +118,12 @@ class SideMenuVC: UIViewController {
             signOutBtn.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
             signOutBtn.heightAnchor.constraint(equalToConstant: 25),
         ])
+    }
+    
+    // MARK: Event Handlers
+    
+    @objc func handleDraftBtnTap() {
+        navigationController?.pushViewController(DraftScreenVC(), animated: true)
     }
     
     @objc func handleDismissBtnTap() {

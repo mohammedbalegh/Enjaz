@@ -41,7 +41,7 @@ extension UIView {
     /// Constrain 4 edges of `self` to specified `view`.
     func constrainEdgesToCorrespondingEdges(of view: UIView, top: CGFloat?=nil, leading: CGFloat?=nil, bottom: CGFloat?=nil, trailing: CGFloat?=nil) {
         disableAutoresizingMaskTranslationIfEnabled()
-                
+        
         if let top = top {
             topAnchor.constraint(equalTo: view.topAnchor, constant: top).isActive = true
         }
@@ -56,7 +56,7 @@ extension UIView {
         if let trailing = trailing {
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing).isActive = true
         }
-                
+        
     }
     
     /// Constrain width and height of `self` to specified constants.
@@ -87,33 +87,35 @@ extension UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func centerVertically(relativeTo view: UIView?=nil, centerX: Bool=false, centerY: Bool=false) {
-        guard let view = view ?? self.superview else {
-            throwNoSuperviewError()
-            return
-        }
-        
-        center(relativeTo: view, centerY: true)
-    }
-    
-    func centerHorizontally(relativeTo view: UIView?=nil, centerX: Bool=false, centerY: Bool=false) {
-        guard let view = view ?? self.superview else {
-            throwNoSuperviewError()
-            return
-        }
-        
-        center(relativeTo: view, centerX: true)
-    }
-    
-    func center(relativeTo view: UIView, centerX: Bool=false, centerY: Bool=false) {
+    func centerVertically(relativeTo view: UIView?=nil) {
         disableAutoresizingMaskTranslationIfEnabled()
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
         
-        var constraints: [NSLayoutConstraint] = []
+        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    func centerHorizontally(relativeTo view: UIView?=nil) {
+        disableAutoresizingMaskTranslationIfEnabled()
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
         
-        if centerX { constraints.append(centerXAnchor.constraint(equalTo: view.centerXAnchor)) }
-        if centerY { constraints.append(centerYAnchor.constraint(equalTo: view.centerYAnchor)) }
-        
-        NSLayoutConstraint.activate(constraints)
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    /// Centers the view both vertically and horizontally relative to the specified `view` or superview.
+    func center(relativeTo view: UIView?=nil) {
+        disableAutoresizingMaskTranslationIfEnabled()
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
+        centerVertically(relativeTo: view)
+        centerHorizontally(relativeTo: view)
     }
     
     func constrainToSuperviewCorner(at cornerPosition: UIDirectionalRectCorner) {
@@ -320,10 +322,10 @@ extension UIView {
     
     /// Translates the view horizontally out of the bounds of its superview then translates it in from the other side to give the effect of page switching.
     func translateHorizontallyOutAndInSuperView(withDuration duration: TimeInterval,
-                                                  atDirection direction: UIHorizontalDirection,
-                                                  fadeOutAndIn: Bool = false,
-                                                  midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
-                                                  completionHandler: ((_ : Bool) -> Void)? = nil) {
+                                                atDirection direction: UIHorizontalDirection,
+                                                fadeOutAndIn: Bool = false,
+                                                midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
+                                                completionHandler: ((_ : Bool) -> Void)? = nil) {
         
         guard let superview = superview else { return }
         

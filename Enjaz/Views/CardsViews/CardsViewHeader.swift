@@ -1,21 +1,21 @@
 
 import UIKit
 
-class ItemsViewHeader: UIView {
+class CardsViewHeader: UIView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .accentColor
-        label.font = label.font.withSize(20)
+        label.font = label.font.withSize(18)
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.2
+        label.minimumScaleFactor = 0.8
         
         return label
     }()
     
-    let itemsCountLabel: UILabel = {
+    let cardsCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -37,21 +37,21 @@ class ItemsViewHeader: UIView {
         return button
     }()
     
-    var itemsCountLabelWidthConstraint: NSLayoutConstraint?
+    var cardsCountLabelWidthConstraint: NSLayoutConstraint?
     
-    var itemsCount: Int? {
+    var cardsCount: Int? {
         didSet {
-            guard let itemsCount = itemsCount else { return }
-            itemsCountLabel.text = String(itemsCount)
-            itemsCountLabelWidthConstraint?.constant = itemsCountLabelWidth
-            showAllButton.isHidden = itemsCount < 3
+            guard let cardsCount = cardsCount else { return }
+            cardsCountLabel.text = String(cardsCount)
+            cardsCountLabelWidthConstraint?.constant = cardsCountLabelWidth
+            showAllButton.isHidden = cardsCount < 3
         }
     }
     
-    let itemsCountLabelHeight: CGFloat = 15
-    var itemsCountLabelWidth: CGFloat {
-        let numberOfDigitsInItemsCount = String(itemsCount ?? 0).count
-        return itemsCountLabelHeight + CGFloat(5 * numberOfDigitsInItemsCount - 1)
+    let cardsCountLabelHeight: CGFloat = 15
+    var cardsCountLabelWidth: CGFloat {
+        let numberOfDigitsInCardsCount = String(cardsCount ?? 0).count
+        return cardsCountLabelHeight + CGFloat(5 * numberOfDigitsInCardsCount - 1)
     }
     
     override func layoutSubviews() {
@@ -61,8 +61,8 @@ class ItemsViewHeader: UIView {
     
     func setupSubviews() {
         setupTitleLabel()
-        setupItemsCountLabel()
-        setupShowMoreButton()
+        setupCardsCountLabel()
+        setupShowAllButton()
     }
     
     func setupTitleLabel() {
@@ -76,21 +76,21 @@ class ItemsViewHeader: UIView {
         ])
     }
     
-    func setupItemsCountLabel() {
-        addSubview(itemsCountLabel)
-        itemsCountLabel.layer.cornerRadius = itemsCountLabelHeight / 2
+    func setupCardsCountLabel() {
+        addSubview(cardsCountLabel)
+        cardsCountLabel.layer.cornerRadius = cardsCountLabelHeight / 2
         
-        itemsCountLabelWidthConstraint = itemsCountLabel.widthAnchor.constraint(equalToConstant: itemsCountLabelWidth)
+        cardsCountLabelWidthConstraint = cardsCountLabel.widthAnchor.constraint(equalToConstant: cardsCountLabelWidth)
         
         NSLayoutConstraint.activate([
-            itemsCountLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            itemsCountLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
-            itemsCountLabelWidthConstraint!,
-            itemsCountLabel.heightAnchor.constraint(equalToConstant: itemsCountLabelHeight)
+            cardsCountLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            cardsCountLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
+            cardsCountLabelWidthConstraint!,
+            cardsCountLabel.heightAnchor.constraint(equalToConstant: cardsCountLabelHeight)
         ])
     }
     
-    func setupShowMoreButton() {
+    func setupShowAllButton() {
         addSubview(showAllButton)
         
         NSLayoutConstraint.activate([

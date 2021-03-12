@@ -31,6 +31,12 @@
 "A day must be selected" = "يجب تحديد اليوم";
 "Selected date cannot be in the past" = "لا يمكن اختيار تاريخ في الماضي";
 
+// MARK: ArticlesScreen
+"Most Recent Articles" = "آخر المقالات";
+"Most Recent Videos" = "آخر الفيدوهات";
+"No articles yet" = "لا يوجد مقالات حتى الآن";
+"No videos yet" = "لا يوجد فيدوهات حتى الآن";
+
 // MARK: SideMenu Buttons
 "Draft" = "المدونة";
 "Note" = "المفكرة";

@@ -1,7 +1,7 @@
 import UIKit
 import Realm
 
-class CardCell: UICollectionViewCell {
+class ItemCardCell: UICollectionViewCell {
     
     var viewModel: ItemModel? {
         didSet {
@@ -24,8 +24,8 @@ class CardCell: UICollectionViewCell {
         }
     }
     
-    var cardView: CardView = {
-        let view = CardView()
+    var cardView: ItemCardView = {
+        let view = ItemCardView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

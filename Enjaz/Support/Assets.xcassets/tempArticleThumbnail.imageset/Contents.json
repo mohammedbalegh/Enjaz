@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "RateAppIcon.png",
+      "filename" : "tempArtilceThumbnail.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "RateAppIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "RateAppIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,14 +1,14 @@
 
 import UIKit
 
-class CardView: UIView {
+class ItemCardView: UIView {
     
     let imageContainer = UIView(frame: .zero)
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
         
-            
+        
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit

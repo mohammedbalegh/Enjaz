@@ -31,6 +31,12 @@
 "A day must be selected" = "A day must be selected";
 "Selected date cannot be in the past" = "Selected date cannot be in the past";
 
+// MARK: ArticlesScreen
+"Most Recent Articles" = "Most Recent Articles";
+"Most Recent Videos" = "Most Recent Videos";
+"No articles yet" = "No articles yet";
+"No videos yet" = "No videos yet";
+
 // MARK: SideMenu
 "Draft" = "Draft";
 "Note" = "Note";

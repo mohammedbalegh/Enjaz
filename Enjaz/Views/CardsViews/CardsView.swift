@@ -1,26 +1,24 @@
-
 import UIKit
 
-class ItemsView: UIView {
-
+class CardsView: UIView {
+    
     let cardsCollectionView: UICollectionView = {
-		let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.register(CardCell.self, forCellWithReuseIdentifier: "cardCell")
-        collectionView.backgroundColor = .rootTabBarScreensBackgroundColor
+        collectionView.backgroundColor = .none
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isHidden = true // Show when the itemsCount is set to a number greater than zero.
+        collectionView.isHidden = true // Show when the cardsCount is set to a number greater than zero.
         
         return collectionView
     }()
     
-    private let header = ItemsViewHeader()
+    let header = CardsViewHeader()
     
-    private let noItemsLabel: UILabel = {
+    private let noCardsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -32,9 +30,9 @@ class ItemsView: UIView {
         return label
     }()
     
-    var notItemsMessage: String? {
+    var noCardsMessage: String? {
         didSet {
-            noItemsLabel.text = notItemsMessage
+            noCardsLabel.text = noCardsMessage
         }
     }
     
@@ -44,23 +42,19 @@ class ItemsView: UIView {
         }
     }
     
-    var itemsCount: Int? {
+    var cardsCount: Int? {
         didSet {
-            header.itemsCount = itemsCount
-            noItemsLabel.isHidden = itemsCount != 0
-            cardsCollectionView.isHidden = !noItemsLabel.isHidden
+            header.cardsCount = cardsCount
+            noCardsLabel.isHidden = cardsCount != 0
+            cardsCollectionView.isHidden = !noCardsLabel.isHidden
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupSubviews()
-    }
-    
-    func setupSubviews() {
         setupHeader()
         setupCardsCollectionView()
-        setupNoItemsLabel()
+        setupNoCardsLabel()
     }
     
     func setupHeader() {
@@ -71,7 +65,7 @@ class ItemsView: UIView {
             header.topAnchor.constraint(equalTo: self.topAnchor),
             header.centerXAnchor.constraint(equalTo: centerXAnchor),
             header.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.88),
-            header.heightAnchor.constraint(equalToConstant: 23),
+            header.heightAnchor.constraint(lessThanOrEqualToConstant: 22),
         ])
     }
     
@@ -79,17 +73,17 @@ class ItemsView: UIView {
         addSubview(cardsCollectionView)
         
         NSLayoutConstraint.activate([
-            cardsCollectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: LayoutConstants.screenHeight * 0.02),
+            cardsCollectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 0),
             cardsCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             cardsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cardsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     
-    func setupNoItemsLabel() {
-        addSubview(noItemsLabel)
+    func setupNoCardsLabel() {
+        addSubview(noCardsLabel)
         
-        noItemsLabel.fill(cardsCollectionView)
+        noCardsLabel.fill(cardsCollectionView)
     }
     
 }

@@ -16,9 +16,10 @@ class ShowAllButton: UIButton {
     let iconImageView: UIImageView = {
         let image = UIImage(systemName: "arrow.forward.circle.fill")
         
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
+        imageView.tintColor = .accentColor
         imageView.contentMode = .scaleAspectFit
         
         return imageView

@@ -12,9 +12,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-//        let loggedIn = UserDefaultsManager.isLoggedIn
+        let loggedIn = UserDefaultsManager.isLoggedIn
         
-        let loggedIn = false // For testing.
+//        let loggedIn = false // For testing.
         
         let rootViewController = UINavigationController(rootViewController: loggedIn ? MainTabBarController() : StartScreenVC())
         

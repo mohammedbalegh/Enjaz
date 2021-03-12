@@ -113,7 +113,7 @@ class CardBodyView: UIView {
     func setupTitleLabel() {
         addSubview(titleLabel)
         
-        guard let superview = superview as? CardView else { return }
+        guard let superview = superview as? ItemCardView else { return }
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),

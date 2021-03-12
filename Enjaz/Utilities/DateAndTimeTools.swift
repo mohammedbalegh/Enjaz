@@ -84,14 +84,4 @@ class DateAndTimeTools {
         return hourModel.period == "pm" ? (hourModel.hour + 12) % 24 : hourModel.hour
     }
     
-    static func areDatesInSameDay(_ firstDate: Date, _ secondDate: Date) -> Bool {
-        let difference = Calendar.current.dateComponents([.day], from: firstDate, to: secondDate)
-        
-        if difference.day == 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
 }

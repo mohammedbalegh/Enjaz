@@ -31,7 +31,7 @@ class RoundBtn: UIButton {
 	func setup() {
 		translatesAutoresizingMaskIntoConstraints = false
 		
-		imageView?.contentMode = .scaleAspectFit
+		imageView?.contentMode = .scaleAspectFill
 		
 		backgroundColor = .accentColor
 		setTitleColor(.white, for: .normal)
