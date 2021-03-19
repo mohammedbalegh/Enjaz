@@ -12,6 +12,8 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 				isHidden = false
 				isUserInteractionEnabled = true
 			}
+            
+            itemIndicator.isHidden = !viewModel.includesItem
 
 			label.text = String(viewModel.dayNumber)
 		}
@@ -26,7 +28,18 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 		
 		return label
 	}()
+    
+    lazy var itemIndicator: UIView = {
+        let view = UIView(frame: CGRect(x: contentView.frame.width - (cornerRadius / 2), y: cornerRadius / 2, width: 6, height: 6))
+        view.layer.cornerRadius = 2.5
+        view.isHidden = true
+        view.backgroundColor = .indicatorColor
         
+        return view
+    }()
+    
+    lazy var cornerRadius = contentView.frame.height / 2
+    
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -47,6 +60,7 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             }
         }
     }
+    
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -60,12 +74,13 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 	
 	func setup() {
         clipsToBounds = true
-        layer.cornerRadius = contentView.frame.height / 2
+        layer.cornerRadius = cornerRadius
         
-		label.layer.cornerRadius = contentView.frame.height / 2
+		label.layer.cornerRadius = cornerRadius
 		label.layer.masksToBounds = true
 		
 		contentView.addSubview(label)
+        contentView.addSubview(itemIndicator)
 	}
 		
     // MARK: Tools

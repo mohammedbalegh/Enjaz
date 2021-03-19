@@ -23,7 +23,7 @@ class MajorGoalsScreenVC: KeyboardHandlingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         
         majorsCollectionView.delegate = self
         majorsCollectionView.dataSource = self
@@ -38,7 +38,7 @@ class MajorGoalsScreenVC: KeyboardHandlingViewController {
     func setupMajorsCollectionView() {
         view.addSubview(majorsCollectionView)
         
-        majorsCollectionView.backgroundColor = .rootTabBarScreensBackgroundColor
+        majorsCollectionView.backgroundColor = .mainScreenBackgroundColor
         
         NSLayoutConstraint.activate([
             majorsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

@@ -33,7 +33,6 @@ class ModalHeader: UIView {
         button.setTitleColor(.accentColor, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.titleLabel?.minimumScaleFactor = 0.8
-        button.backgroundColor = .green
         
         return button
     }()
@@ -84,8 +83,8 @@ class ModalHeader: UIView {
         NSLayoutConstraint.activate([
             dismissButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             dismissButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            dismissButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-            dismissButton.widthAnchor.constraint(equalToConstant: 80),
+            dismissButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80),
+            dismissButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 35),
         ])
     }
 }

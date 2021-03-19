@@ -1,7 +1,7 @@
 import UIKit
 
 class DraftCardCell: UICollectionViewCell {
-    let borderRadius: CGFloat = 18
+    let cornerRadius: CGFloat = 18
         
     lazy var thumbnail: UIImageView = {
         let imageView = UIImageView()
@@ -9,56 +9,18 @@ class DraftCardCell: UICollectionViewCell {
         
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        imageView.roundCorners([.bottomLeading, .bottomTrailing], withRadius: borderRadius)
+        imageView.roundCorners([.bottomLeading, .bottomTrailing], withRadius: cornerRadius)
         
         return imageView
     }()
     
-    let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.textColor = .accentColor
-        label.font = .systemFont(ofSize: 14.5)
-        
-        return label
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.textColor = .systemGray
-        label.font = .systemFont(ofSize: 14.5)
-        
-        return label
-    }()
-    
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.textColor = .systemGray3
-        label.font = .systemFont(ofSize: 13.5)
-        
-        return label
-    }()
-    
-    lazy var titleAndDateLabelsStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, dateLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        
-        return stackView
-    }()
+    let draftMetaDataContainer = DraftMetaDataContainer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .white
-        layer.cornerRadius = borderRadius
+        layer.cornerRadius = cornerRadius
         applyLightShadow()
     }
     
@@ -67,9 +29,9 @@ class DraftCardCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         setupThumbnail()
-        setupCategoryLabel()
-        setupTitleAndDateLabelsStack()
+        setupArticleMetaDataContainer()
     }
     
     func setupThumbnail() {
@@ -83,26 +45,16 @@ class DraftCardCell: UICollectionViewCell {
         ])
     }
     
-    func setupCategoryLabel() {
-        contentView.addSubview(categoryLabel)
+    func setupArticleMetaDataContainer() {
+        contentView.addSubview(draftMetaDataContainer)
+        draftMetaDataContainer.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            categoryLabel.topAnchor.constraint(equalTo: thumbnail.bottomAnchor, constant: 10),
-            categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            categoryLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor),
-            categoryLabel.heightAnchor.constraint(equalToConstant: 16),
+            draftMetaDataContainer.topAnchor.constraint(equalTo: thumbnail.bottomAnchor, constant: 10),
+            draftMetaDataContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            draftMetaDataContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            draftMetaDataContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-    
-    func setupTitleAndDateLabelsStack() {
-        contentView.addSubview(titleAndDateLabelsStack)
         
-        NSLayoutConstraint.activate([
-            titleAndDateLabelsStack.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
-            titleAndDateLabelsStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            titleAndDateLabelsStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18),
-            titleAndDateLabelsStack.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor),
-        ])
-    }
-    
 }

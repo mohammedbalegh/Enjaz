@@ -9,6 +9,8 @@ class DraftScreenVC: UIViewController {
     
     let cardsReuseIdentifier = "cardCell"
     
+    let scrollView = UIScrollView()
+    
     let articleIconImageView: UIImageView = {
         let image = UIImage(named: "articleIcon")
         let imageView = UIImageView(image: image)
@@ -59,25 +61,31 @@ class DraftScreenVC: UIViewController {
         super.viewDidLoad()
         updateScreen()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .mainScreenBackgroundColor
         title = NSLocalizedString("Draft", comment: "")
-        navigationController?.navigationBar.isTranslucent = false
         
         setupSubViews()
     }
-    
+        
     // MARK: View Setups
     
     func setupSubViews() {
+        setupScrollView()
         setupArticleIconImageView()
         setupCardViewsStack()
     }
     
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.fillSuperView()
+    }
+    
     func setupArticleIconImageView() {
-        view.addSubview(articleIconImageView)
+        scrollView.addSubview(articleIconImageView)
         
         NSLayoutConstraint.activate([
-            articleIconImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            articleIconImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25),
             articleIconImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             articleIconImageView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
             articleIconImageView.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.3),
@@ -85,13 +93,14 @@ class DraftScreenVC: UIViewController {
     }
     
     func setupCardViewsStack() {
-        view.addSubview(cardViewsStack)
+        scrollView.addSubview(cardViewsStack)
         
         NSLayoutConstraint.activate([
             cardViewsStack.topAnchor.constraint(equalTo: articleIconImageView.bottomAnchor, constant: 20),
             cardViewsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cardViewsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            cardViewsStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.73)
+            cardViewsStack.heightAnchor.constraint(equalToConstant: 645),
+            cardViewsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
     
@@ -116,6 +125,12 @@ class DraftScreenVC: UIViewController {
             self.videosView.cardsCount = videos.count
             self.videosView.cardsCollectionView.reloadData()
         }
+    }
+    
+    func navigateToArticleScreen(articleModel: ArticleModel) {
+        let articleScreen = ArticleScreenVC()
+        articleScreen.articleModel = articleModel
+        navigationController?.pushViewController(articleScreen, animated: true)
     }
 }
 
@@ -144,7 +159,7 @@ extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width * 0.38), height: (collectionView.frame.height * 0.8))
+        return CGSize(width: 160, height: collectionView.frame.height * 0.8)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -152,4 +167,9 @@ extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDat
         return UIEdgeInsets(top: 0, left: offSet, bottom: 0, right: offSet)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == articlesView.cardsCollectionView {
+            navigateToArticleScreen(articleModel: articleModels[indexPath.row])
+        }
+    }
 }

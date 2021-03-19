@@ -8,7 +8,7 @@ class GoalsBankScreenVC: UIViewController {
     var goalsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .rootTabBarScreensBackgroundColor
+        tableView.backgroundColor = .mainScreenBackgroundColor
         tableView.tableFooterView = UIView()
         tableView.register(GoalsTableCell.self, forCellReuseIdentifier: "goalsTableCell")
         tableView.allowsSelection = false
@@ -29,7 +29,7 @@ class GoalsBankScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         
         goalsTableView.delegate = self
         goalsTableView.dataSource = self

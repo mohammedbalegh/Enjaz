@@ -1,4 +1,9 @@
 struct MonthDayCellModel {
 	var dayNumber: Int
-	var includesItem: Bool
+    var includedItemsIndices: [Int]
+    var includesItem: Bool {
+        get {
+            includedItemsIndices.count > 0
+        }
+    }
 }

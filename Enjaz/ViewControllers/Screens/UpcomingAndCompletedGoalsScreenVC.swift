@@ -9,7 +9,7 @@ class UpcomingAndCompletedGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         
         if id == 0 {
             

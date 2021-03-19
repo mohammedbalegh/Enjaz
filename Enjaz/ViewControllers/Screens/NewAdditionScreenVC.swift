@@ -136,7 +136,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         definesPresentationContext = true
         
         setupSubviews()

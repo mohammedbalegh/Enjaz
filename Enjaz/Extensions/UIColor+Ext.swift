@@ -26,10 +26,11 @@ extension UIColor {
 	}
     
 	static let accentColor = UIColor(hex: 0x12B3B9)
-	static let rootTabBarScreensBackgroundColor = UIColor(hex: 0xF9F9F9)
+	static let mainScreenBackgroundColor = UIColor(hex: 0xF9F9F9)
 	static let gradientStartColor = UIColor(hex: 0x20D4D0)
 	static let gradientEndColor = UIColor(hex: 0x12B3B9)
     static let borderColor = UIColor(white: 0.85, alpha: 1)
+    static let indicatorColor = UIColor(hex: 0xFFD400)
     
 }
 

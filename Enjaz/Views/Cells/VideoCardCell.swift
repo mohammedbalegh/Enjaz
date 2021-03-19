@@ -6,9 +6,9 @@ class VideoCardCell: DraftCardCell {
             guard let viewModel = viewModel else { return }
             
             self.thumbnail.image = viewModel.thumbnail
-            self.categoryLabel.text = viewModel.category
-            self.titleLabel.text = viewModel.title
-            self.dateLabel.text = DateAndTimeTools.getReadableDate(from: viewModel.date, withFormat: "dd/MM/yyyy", calendarIdentifier: .gregorian)
+            self.draftMetaDataContainer.categoryLabel.text = viewModel.category
+            self.draftMetaDataContainer.titleLabel.text = viewModel.title
+            self.draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: viewModel.date, withFormat: "dd/MM/yyyy", calendarIdentifier: .gregorian)
         }
     }
     

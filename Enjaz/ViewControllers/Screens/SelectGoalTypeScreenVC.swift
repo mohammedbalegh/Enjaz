@@ -5,7 +5,7 @@ class SelectGoalTypeScreenVC: ScreenNavigatorWithDynamicDataTableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         screenNavigatorCellModels = [
             ScreenNavigatorCellModel(image: UIImage(named: "religionSideIcon"), label: "الجانب الديني", subLabel: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي"),
             ScreenNavigatorCellModel(image: UIImage(named: "scientificSideIcon"), label: "الجانب العلمي", subLabel: "الاهداف المرتبطة بالعلم و التعلم و القراءة و الدورات و تنمية العقل"),

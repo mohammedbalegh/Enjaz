@@ -6,7 +6,7 @@ class StartScreenVC: UIViewController {
     var illustration: UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "firstscreenIllustration")
+        imageView.image = UIImage(named: "firstScreenIllustration")
         return imageView
     }()
     

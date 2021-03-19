@@ -6,9 +6,11 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     
 	var monthDayCellModels: [MonthDayCellModel] = []
     
-    let popoverCalendarBtnsRow = CalendarPopoverBtnsRow(frame: .zero)
+    var calendarPopoverBtnsRow = CalendarPopoverBtnsRow(firstBtn: nil, secondBtn: nil, thirdBtn: nil)
     
-    var selectedDaysLabel: UILabel = {
+    let monthSwitcher = MonthSwitcher()
+    
+    let selectedDaysLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -47,8 +49,9 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		
 		collectionView.clipsToBounds = true
-		collectionView.backgroundColor = .white
+		collectionView.backgroundColor = .none
         collectionView.allowsMultipleSelection = false
+        collectionView.isScrollEnabled = false
         
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -94,15 +97,27 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }
     
     var calendarTypePopoverBtn: PopoverBtn {
-        return popoverCalendarBtnsRow.calendarTypePopoverBtn
+        return calendarPopoverBtnsRow.calendarTypePopoverBtn
     }
     
     var monthPopoverBtn: PopoverBtn {
-        return popoverCalendarBtnsRow.monthPopoverBtn
+        return calendarPopoverBtnsRow.monthPopoverBtn
     }
     
     var yearPopoverBtn: PopoverBtn {
-        return popoverCalendarBtnsRow.yearPopoverBtn
+        return calendarPopoverBtnsRow.yearPopoverBtn
+    }
+    
+    var viewTypePopoverBtn: PopoverBtn {
+        return calendarPopoverBtnsRow.viewTypePopoverBtn
+    }
+    
+    var nextMonthBtn: UIButton {
+        return monthSwitcher.nextMonthBtn
+    }
+    
+    var previousMonthBtn: UIButton {
+        return monthSwitcher.previousMonthBtn
     }
     
     var calendarTypeLabel: String? {
@@ -114,21 +129,38 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
+    var viewTypeLabel: String? {
+        get {
+            return viewTypePopoverBtn.label.text
+        }
+        set {
+            viewTypePopoverBtn.label.text = newValue
+        }
+    }
+    
     var selectedMonthLabel: String? {
         get {
             return monthPopoverBtn.label.text
         }
         set {
+            monthSwitcher.selectedMonthLabel.text = newValue
             monthPopoverBtn.label.text = newValue
         }
     }
     
-    var SelectedYearLabel: String? {
+    var selectedYearLabel: String? {
         get {
             return yearPopoverBtn.label.text
         }
         set {
+            monthSwitcher.selectedYearLabel.text = newValue
             yearPopoverBtn.label.text = newValue
+        }
+    }
+    
+    var minimumSelectableItemRow: Int {
+        get {
+            return monthDaysCollectionView.minimumSelectableItemRow
         }
     }
     
@@ -144,25 +176,34 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
 	
 	override func layoutSubviews() {
         super.layoutSubviews()
-		setupSubviews()
-	}
-	
-	func setupSubviews() {
+        setupMonthSwitcher()
         setupPopoverCalendarBtnsRow()
         setupSelectedDaysLabel()
-		setupWeekDayLabelsHorizontalStack()
-		setupMonthDaysCollectionView()
+        setupWeekDayLabelsHorizontalStack()
+        setupMonthDaysCollectionView()
 	}
     
-    func setupPopoverCalendarBtnsRow() {
-        addSubview(popoverCalendarBtnsRow)
-        popoverCalendarBtnsRow.translatesAutoresizingMaskIntoConstraints = false
+    func setupMonthSwitcher() {
+        addSubview(monthSwitcher)
+        monthSwitcher.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            popoverCalendarBtnsRow.topAnchor.constraint(equalTo: topAnchor),
-            popoverCalendarBtnsRow.centerXAnchor.constraint(equalTo: centerXAnchor),
-            popoverCalendarBtnsRow.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
-            popoverCalendarBtnsRow.heightAnchor.constraint(equalToConstant: 20),
+            monthSwitcher.topAnchor.constraint(equalTo: topAnchor),
+            monthSwitcher.centerXAnchor.constraint(equalTo: centerXAnchor),
+            monthSwitcher.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+            monthSwitcher.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+        ])
+    }
+	    
+    func setupPopoverCalendarBtnsRow() {
+        addSubview(calendarPopoverBtnsRow)
+        calendarPopoverBtnsRow.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            calendarPopoverBtnsRow.topAnchor.constraint(equalTo: monthSwitcher.bottomAnchor, constant: 15),
+            calendarPopoverBtnsRow.centerXAnchor.constraint(equalTo: centerXAnchor),
+            calendarPopoverBtnsRow.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
+            calendarPopoverBtnsRow.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
 	
@@ -170,8 +211,8 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         addSubview(selectedDaysLabel)
         
         NSLayoutConstraint.activate([
-            selectedDaysLabel.topAnchor.constraint(equalTo: popoverCalendarBtnsRow.bottomAnchor, constant: 10),
-            selectedDaysLabel.leadingAnchor.constraint(equalTo: popoverCalendarBtnsRow.leadingAnchor),
+            selectedDaysLabel.topAnchor.constraint(equalTo: calendarPopoverBtnsRow.bottomAnchor, constant: 10),
+            selectedDaysLabel.leadingAnchor.constraint(equalTo: calendarPopoverBtnsRow.leadingAnchor),
             selectedDaysLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
             selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
         ])
@@ -245,15 +286,37 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         
 		monthDaysCollectionView.reloadData()
 	}
-	
+    	
 	func generateMonthDaysCellModels(numberOfDaysInMonth numberOfDays: Int, startsAtColumnNumber firstColumnNumber: Int) -> [MonthDayCellModel] {
         let dayNumbers = Array(repeating: 0, count: firstColumnNumber) + (1...numberOfDays)
         let monthDayCellModels: [MonthDayCellModel] = dayNumbers.map {
-            MonthDayCellModel(dayNumber: $0, includesItem: false)
+            MonthDayCellModel(dayNumber: $0, includedItemsIndices: [])
         }
         
         return monthDayCellModels
 	}
+    
+    
+    func updateMonthDaysModelWithDueItems(itemRowsInMonthDaysCollectionViews: [Int]) {
+        guard !itemRowsInMonthDaysCollectionViews.isEmpty else { return }
+        
+        resetMonthDayCellModelsIncludedItems()
+        
+        for i in 0...itemRowsInMonthDaysCollectionViews.count - 1 {
+            let itemRow = itemRowsInMonthDaysCollectionViews[i]
+            monthDayCellModels[itemRow].includedItemsIndices.append(i)
+        }
+        
+        monthDaysCollectionView.reloadData()
+    }
+    
+    func resetMonthDayCellModelsIncludedItems() {
+        monthDayCellModels = monthDayCellModels.map { monthDayCellModel in
+            var updatedMonthDayCellModel = monthDayCellModel
+            updatedMonthDayCellModel.includedItemsIndices = []
+            return updatedMonthDayCellModel
+        }
+    }
     
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
         selectedDaysLabel.text = "\(NSLocalizedString("from", comment: "")) \(firstDay) \(NSLocalizedString("to", comment: "")) \(lastDay)"
@@ -274,11 +337,11 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
         
 		return cell
 	}
-		
+    
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		selectedMonthDayItemRow = indexPath.row
-        
         collectionView.deselectAllItemsExceptAt(indexPath, animated: true)
+        delegate?.calendarCollectionView(collectionView, didSelectItemAt: indexPath)
 	}
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

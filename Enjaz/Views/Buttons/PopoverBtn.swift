@@ -48,20 +48,8 @@ class PopoverBtn: UIButton, NewAdditionInputFieldContainerInput {
 	}
     
     func configure(withSize size: PopoverBtnSizeType) {
-        setupLabel()
         setupDropdownArrow(size)
-    }
-	
-    func setupLabel() {
-        addSubview(label)
-        label.isUserInteractionEnabled = false
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor),
-            label.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
-            label.heightAnchor.constraint(equalTo: heightAnchor),
-        ])
+        setupLabel()
     }
     
     func setupDropdownArrow(_ size: PopoverBtnSizeType) {
@@ -77,5 +65,19 @@ class PopoverBtn: UIButton, NewAdditionInputFieldContainerInput {
             dropdownArrow.widthAnchor.constraint(equalToConstant: width),
         ])
     }
+    
+    func setupLabel() {
+        addSubview(label)
+        label.isUserInteractionEnabled = false
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: dropdownArrow.leadingAnchor, constant: -5),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            label.heightAnchor.constraint(equalTo: heightAnchor),
+        ])
+    }
+    
+    
             
 }

@@ -27,7 +27,7 @@ class GoalsTableCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .rootTabBarScreensBackgroundColor
+        contentView.backgroundColor = .mainScreenBackgroundColor
         preservesSuperviewLayoutMargins = false
         separatorInset = UIEdgeInsets.zero
         layoutMargins = UIEdgeInsets.zero

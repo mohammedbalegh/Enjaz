@@ -9,7 +9,7 @@ class MonthGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
         let completedGoals = RealmManager.retrieveCompletedGoals()
         let upcomingGoals = RealmManager.retrieveUpcomingGoals()
         
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         screenNavigatorCellModels = [
             ScreenNavigatorCellModel(image: UIImage(named: "completedGoalsIcon"), label: "أهداف منتهية", subLabel: "\(completedGoals.count) هدف"),
             ScreenNavigatorCellModel(image: UIImage(named: "upcomingGoalsIcon"), label: "أهداف قادمة", subLabel: "\(upcomingGoals.count)  هدف"),

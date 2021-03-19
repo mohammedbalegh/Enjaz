@@ -84,4 +84,12 @@ class DateAndTimeTools {
         return hourModel.period == "pm" ? (hourModel.hour + 12) % 24 : hourModel.hour
     }
     
+    static func getComponentsOfUnixTimeStampDate(timeIntervalSince1970: TimeInterval, forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> DateComponents {
+        let date = Date(timeIntervalSince1970: timeIntervalSince1970)
+        let calendar = Calendar(identifier: calendarIdentifier)
+        let dateComponents = calendar.dateComponents([.day, .month, .year], from: date)
+        
+        return dateComponents
+    }
+    
 }

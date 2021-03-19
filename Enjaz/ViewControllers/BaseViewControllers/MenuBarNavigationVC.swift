@@ -44,7 +44,7 @@ class MenuBarNavigationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         topMenu.delegate = self
         topMenu.dataSource = self
         setupSubviews()
@@ -92,7 +92,7 @@ class MenuBarNavigationVC: UIViewController {
             cell.addBottomBorder(withColor: .accentColor, andWidth: 2)
         } else {
             cell.label.textColor = .lightGray
-            cell.addBottomBorder(withColor: .rootTabBarScreensBackgroundColor, andWidth: 2)
+            cell.addBottomBorder(withColor: .mainScreenBackgroundColor, andWidth: 2)
         }
     }
     

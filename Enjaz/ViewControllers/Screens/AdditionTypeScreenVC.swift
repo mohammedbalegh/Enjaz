@@ -87,7 +87,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         
         setupSubviews()
     }

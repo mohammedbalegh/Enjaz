@@ -41,7 +41,7 @@ class SelfEvaluationScreenVC: SelectableScreenVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         navigationController?.title = "تقيم النفس"
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
