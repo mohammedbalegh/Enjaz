@@ -25,14 +25,14 @@ class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldCon
     }
     
     var customDelegate: UITextViewDelegate?
-        	
+    
 	init(frame: CGRect) {
 		super.init(frame: frame, textContainer: nil)
 		
 		backgroundColor = .clear
 		delegate = self
 		isEditable = true
-		textAlignment = .right
+        setTextViewDirectionToMatchSuperView()
 		textColor = .placeholderText
         textContainerInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
 	}
@@ -42,6 +42,7 @@ class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldCon
 	}
 	
     func setPlaceholder(_ textView: UITextView) {
+        setTextViewDirectionToMatchSuperView()
         textView.text = placeholder
         textView.textColor = .placeholderText
     }

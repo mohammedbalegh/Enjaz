@@ -1,10 +1,3 @@
-//
-//  EnjazUITests.swift
-//  EnjazUITests
-//
-//  Created by mohammed balegh on 29/11/2020.
-//
-
 import XCTest
 
 class EnjazUITests: XCTestCase {

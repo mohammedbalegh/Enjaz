@@ -89,10 +89,10 @@ class MenuBarNavigationVC: UIViewController {
         }
         if selectCell == .selected {
             cell.label.textColor = .accentColor
-            cell.addBottomBorderWithColor(color: .accentColor, width: 2)
+            cell.addBottomBorder(withColor: .accentColor, andWidth: 2)
         } else {
             cell.label.textColor = .lightGray
-            cell.addBottomBorderWithColor(color: .rootTabBarScreensBackgroundColor, width: 2)
+            cell.addBottomBorder(withColor: .rootTabBarScreensBackgroundColor, andWidth: 2)
         }
     }
     
@@ -124,7 +124,7 @@ class MenuBarNavigationVC: UIViewController {
 
         container.layoutIfNeeded()
         
-        container.addBottomBorderWithColor(color: .lightGray, width: 0.5)
+        container.addBottomBorder(withColor: .lightGray, andWidth: 0.5)
     }
     
 }

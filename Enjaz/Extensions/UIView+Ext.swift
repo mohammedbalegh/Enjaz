@@ -41,7 +41,7 @@ extension UIView {
     /// Constrain 4 edges of `self` to specified `view`.
     func constrainEdgesToCorrespondingEdges(of view: UIView, top: CGFloat?=nil, leading: CGFloat?=nil, bottom: CGFloat?=nil, trailing: CGFloat?=nil) {
         disableAutoresizingMaskTranslationIfEnabled()
-                
+        
         if let top = top {
             topAnchor.constraint(equalTo: view.topAnchor, constant: top).isActive = true
         }
@@ -56,7 +56,7 @@ extension UIView {
         if let trailing = trailing {
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing).isActive = true
         }
-                
+        
     }
     
     /// Constrain width and height of `self` to specified constants.
@@ -87,33 +87,35 @@ extension UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func centerVertically(relativeTo view: UIView?=nil, centerX: Bool=false, centerY: Bool=false) {
-        guard let view = view ?? self.superview else {
-            throwNoSuperviewError()
-            return
-        }
-        
-        center(relativeTo: view, centerY: true)
-    }
-    
-    func centerHorizontally(relativeTo view: UIView?=nil, centerX: Bool=false, centerY: Bool=false) {
-        guard let view = view ?? self.superview else {
-            throwNoSuperviewError()
-            return
-        }
-        
-        center(relativeTo: view, centerX: true)
-    }
-    
-    func center(relativeTo view: UIView, centerX: Bool=false, centerY: Bool=false) {
+    func centerVertically(relativeTo view: UIView?=nil) {
         disableAutoresizingMaskTranslationIfEnabled()
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
         
-        var constraints: [NSLayoutConstraint] = []
+        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    func centerHorizontally(relativeTo view: UIView?=nil) {
+        disableAutoresizingMaskTranslationIfEnabled()
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
         
-        if centerX { constraints.append(centerXAnchor.constraint(equalTo: view.centerXAnchor)) }
-        if centerY { constraints.append(centerYAnchor.constraint(equalTo: view.centerYAnchor)) }
-        
-        NSLayoutConstraint.activate(constraints)
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    /// Centers the view both vertically and horizontally relative to the specified `view` or superview.
+    func center(relativeTo view: UIView?=nil) {
+        disableAutoresizingMaskTranslationIfEnabled()
+        guard let view = view ?? self.superview else {
+            throwNoSuperviewError()
+            return
+        }
+        centerVertically(relativeTo: view)
+        centerHorizontally(relativeTo: view)
     }
     
     func constrainToSuperviewCorner(at cornerPosition: UIDirectionalRectCorner) {
@@ -163,28 +165,28 @@ extension UIView {
         }
     }
     
-    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+    func addTopBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: width)
         layer.addSublayer(border)
     }
     
-    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+    func addRightBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: frame.size.width - width, y: 0, width: width, height: frame.size.height)
         layer.addSublayer(border)
     }
     
-    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+    func addBottomBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: frame.size.height - width, width: frame.size.width, height: width)
         layer.addSublayer(border)
     }
     
-    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+    func addLeftBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0, y: 0, width: width, height: frame.size.height)
@@ -224,7 +226,7 @@ extension UIView {
     func applyLightShadow() {
         layer.shadowColor = UIColor(hex: 0x979797).cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowOpacity = 0.2
+        layer.shadowOpacity = 0.25
         layer.shadowRadius = 9
         layer.masksToBounds = false
     }
@@ -251,6 +253,10 @@ extension UIView {
     }
     
     func roundCorners(_ corners: [UIDirectionalRectCorner], withRadius radius: CGFloat? = nil) {
+        if let radius = radius {
+            layer.cornerRadius = radius
+        }
+        
         var caCornerMasks: CACornerMask = []
         
         for corner in corners {
@@ -260,10 +266,6 @@ extension UIView {
         }
         
         layer.maskedCorners = caCornerMasks
-        
-        if let radius = radius {
-            layer.cornerRadius = radius
-        }
     }
     
     func roundCorner(_ corner: UIDirectionalRectCorner, withRadius radius: CGFloat? = nil) {
@@ -297,9 +299,9 @@ extension UIView {
     func mapUIHorizontalDirectionToDirectionalInt(_ direction: UIHorizontalDirection) -> Int {
         switch direction {
         case .leadingToTrailing:
-            return LayoutTools.getCurrentLayoutDirectionFor(self) == .leftToRight ? -1 : 1
+            return LayoutTools.getCurrentLayoutDirection(for: self) == .leftToRight ? -1 : 1
         case .trailingToLeading:
-            return LayoutTools.getCurrentLayoutDirectionFor(self) == .leftToRight ? 1 : -1
+            return LayoutTools.getCurrentLayoutDirection(for: self) == .leftToRight ? 1 : -1
         }
     }
     
@@ -320,10 +322,10 @@ extension UIView {
     
     /// Translates the view horizontally out of the bounds of its superview then translates it in from the other side to give the effect of page switching.
     func translateHorizontallyOutAndInSuperView(withDuration duration: TimeInterval,
-                                                  atDirection direction: UIHorizontalDirection,
-                                                  fadeOutAndIn: Bool = false,
-                                                  midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
-                                                  completionHandler: ((_ : Bool) -> Void)? = nil) {
+                                                atDirection direction: UIHorizontalDirection,
+                                                fadeOutAndIn: Bool = false,
+                                                midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
+                                                completionHandler: ((_ : Bool) -> Void)? = nil) {
         
         guard let superview = superview else { return }
         

@@ -7,7 +7,7 @@ class CardPopup: Popup {
     let popupContainerWidth = LayoutConstants.screenWidth * 0.8
     let popupContainerHeight = LayoutConstants.screenHeight * 0.44
     
-    var viewModel: CardView? {
+    var viewModel: ItemCardView? {
         didSet {
             guard let viewModel = viewModel else { return }
             
@@ -19,8 +19,8 @@ class CardPopup: Popup {
         }
     }
     
-    lazy var cardView: CardView = {
-        let view = CardView()
+    lazy var cardView: ItemCardView = {
+        let view = ItemCardView()
         view.imageViewSize = popupContainerWidth * 0.41
         view.imageView.roundAsCircle()
         view.cardBody.descriptionLabel.isHidden = false
@@ -28,7 +28,7 @@ class CardPopup: Popup {
         return view
     }()
         
-    override func onPopupContainerShown() {
+    override func popupContainerDidShow() {
         setupPopupContainer()
         setupCardView()
     }

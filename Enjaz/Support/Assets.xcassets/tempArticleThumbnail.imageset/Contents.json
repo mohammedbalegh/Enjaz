@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Path 715.png",
+      "filename" : "tempArtilceThumbnail.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Path 715@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Path 715@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

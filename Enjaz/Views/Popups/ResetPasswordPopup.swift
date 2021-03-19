@@ -3,7 +3,7 @@ import UIKit
 class ResetPasswordPopup: Popup {
 	
 	var successImage: UIImageView = {
-		var imageView = UIImageView(image: #imageLiteral(resourceName: "ResetPasswordSuccessImage"))
+		var imageView = UIImageView(image: UIImage(named: "ResetPasswordSuccessImage"))
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		
 		imageView.contentMode = .scaleAspectFit
@@ -32,7 +32,7 @@ class ResetPasswordPopup: Popup {
 		return button
 	}()
 			
-	override func onPopupContainerShown() {
+	override func popupContainerDidShow() {
 		setupPopupContainer()
 		setupSuccessImage()
 		setupLabel()

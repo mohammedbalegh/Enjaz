@@ -62,14 +62,9 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        backgroundColor = .clear
+        backgroundColor = .white
         selectionStyle = .none
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: frame.width * 0.025, bottom: 8, right: frame.width * 0.025))
-        contentView.layer.cornerRadius = 8
-        contentView.backgroundColor = .white
-        contentView.layer.borderColor = UIColor.borderColor.cgColor
-        contentView.layer.borderWidth = 0.5
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
     }
     
     func setupSubViews() {

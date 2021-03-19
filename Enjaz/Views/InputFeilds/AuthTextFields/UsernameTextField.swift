@@ -13,7 +13,7 @@ class UsernameTextField: AuthTextField {
 		
 		fieldName = "اسم المستخدم"
 		textField.textContentType = .username
-		icon.image = #imageLiteral(resourceName: "presonIcon")
+		icon.image = UIImage(named: "personIcon")
 		validator = RegexValidator.validateUsername
 		defaultErrorMessage = "اسم المستخدم غير صحيح"
 	}

@@ -24,15 +24,16 @@ class ModalHeader: UIView {
     }()
     
     let dismissButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("الغاء", for: .normal)
+        button.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
         button.titleLabel?.textAlignment = .center
         button.setTitleColor(.accentColor, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.titleLabel?.minimumScaleFactor = 0.2
+        button.titleLabel?.minimumScaleFactor = 0.8
+        button.backgroundColor = .green
         
         return button
     }()
@@ -81,10 +82,10 @@ class ModalHeader: UIView {
         addSubview(dismissButton)
         
         NSLayoutConstraint.activate([
-            dismissButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+            dismissButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             dismissButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            dismissButton.heightAnchor.constraint(equalToConstant: 40),
-            dismissButton.widthAnchor.constraint(lessThanOrEqualToConstant: 60),
+            dismissButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            dismissButton.widthAnchor.constraint(equalToConstant: 80),
         ])
     }
 }

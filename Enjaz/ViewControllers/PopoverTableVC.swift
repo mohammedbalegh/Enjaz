@@ -1,10 +1,3 @@
-//
-//  PopoverTableVC.swift
-//  Enjaz
-//
-//  Created by Abdelrhman Elmahdy on 20/12/2020.
-//
-
 import UIKit
 
 class PopoverTableVC: UITableViewController {
@@ -17,7 +10,7 @@ class PopoverTableVC: UITableViewController {
 		}
 	}
 	
-	var onSelectOption: ((_: Int) -> Void)?
+	var optionSelectionHandler: ((_: Int) -> Void)?
 		
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +18,11 @@ class PopoverTableVC: UITableViewController {
 		view.backgroundColor = .white
 		tableView.backgroundColor = .white
 		tableView.register(PopoverTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+    }
+        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        scrollToTop()
     }
 
     // MARK: - Table view data source
@@ -50,8 +48,12 @@ class PopoverTableVC: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		onSelectOption?(indexPath.row)
+		optionSelectionHandler?(indexPath.row)
 		dismiss(animated: true)
 	}
+    
+    func scrollToTop() {
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+    }
 
 }

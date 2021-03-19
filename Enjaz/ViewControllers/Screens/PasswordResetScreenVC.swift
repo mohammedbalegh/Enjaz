@@ -2,13 +2,13 @@ import UIKit
 import Network
 import ReSwift
 
-class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber {
+class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
     
     // MARK: Properties
     
     var lockImage: UIImageView = {
-        var imageView = UIImageView(image: #imageLiteral(resourceName: "LockImage"))
+        var imageView = UIImageView(image: UIImage(named: "LockImage"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -88,7 +88,7 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
     lazy var nextBtn: PrimaryBtn = {
         var button = PrimaryBtn(label: "التالي", theme: .blue, size: .large)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(onNextBtnTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
         return button
     }()
     
@@ -98,7 +98,7 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
         button.setTitle("الرجوع", for: .normal)
         button.setTitleColor(.accentColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(onBackBtnTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
         return button
     }()
     
@@ -114,7 +114,7 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
     
     lazy var resetPasswordPopup: ResetPasswordPopup = {
         let popup = ResetPasswordPopup(hideOnOverlayTap: false)
-        popup.backToLoginBtn.addTarget(self, action: #selector(onPopupBackToLoginScreenBtnTap), for: .touchUpInside)
+        popup.backToLoginBtn.addTarget(self, action: #selector(handlePopupBackToLoginScreenBtnTap), for: .touchUpInside)
         return popup
     }()
     
@@ -207,7 +207,7 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
     
     // MARK: Event Handlers
         
-    @objc func onNextBtnTap() {
+    @objc func handleNextBtnTap() {
         let emailIsValid = emailTextField.validate()
         
         guard emailIsValid else { return }
@@ -224,7 +224,7 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
     
     // MARK: Event Handlers
     
-    @objc func onStartBtnTap() {
+    @objc func handleStartBtnTap() {
         let allInputsAreValid = validateInputs()
         guard allInputsAreValid else { return }
         
@@ -249,11 +249,11 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
         }
     }
     
-    @objc func onBackBtnTap() {
+    @objc func handleBackBtnTap() {
         navigateBackToLoginScreen()
     }
     
-    @objc func onPopupBackToLoginScreenBtnTap() {
+    @objc func handlePopupBackToLoginScreenBtnTap() {
         resetPasswordPopup.hide()
         navigateBackToLoginScreen()
     }
@@ -262,8 +262,8 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
     
     func updateNextBtn() {
         nextBtn.setTitle("ابدأ الآن", for: .normal)
-        nextBtn.removeTarget(self, action: #selector(onNextBtnTap), for: .touchUpInside)
-        nextBtn.addTarget(self, action: #selector(onStartBtnTap), for: .touchUpInside)
+        nextBtn.removeTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
+        nextBtn.addTarget(self, action: #selector(handleStartBtnTap), for: .touchUpInside)
     }
     
     func updateSubTitle() {
@@ -271,7 +271,7 @@ class PasswordResetScreenVC: KeyboardHandlingBaseViewController, StoreSubscriber
     }
     
     func updateTextFieldsVerticalStack() {
-        textFieldsVerticalStack.removeAllSubViews()
+        textFieldsVerticalStack.removeAllArrangedSubviews()
         textFieldsVerticalStack.addArrangedSubview(resetCodeTextField)
         textFieldsVerticalStack.addArrangedSubview(newPasswordTextField)
         textFieldsVerticalStack.addArrangedSubview(confirmPasswordTextField)

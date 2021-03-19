@@ -1,77 +1,66 @@
 import Foundation
 
 class DateAndTimeTools {
-	
-    static func getCurrentYear(islamic: Bool) -> Int {
-        let date = Date()
-        let calendar = NSCalendar(identifier: islamic ? .islamicCivil : .gregorian)!
-        
-        let year = calendar.component(.year, from: date)
-        return year
-    }
-	
-	static func getNumberOfMonthDaysAndFirstWeekDay(ofYear year: Int, andMonth month: Int, forCalendarIdentifier calendarIdentifier: NSCalendar.Identifier) -> (Int, Int) {
-		let dateComponents = DateComponents(year: year, month: month, day: 1)
-		let calendar = NSCalendar(identifier: calendarIdentifier)!
-		let date = calendar.date(from: dateComponents)!
-		
-		let range = calendar.range(of: .day, in: .month, for: date)
-		let numberOfDays = range.length
-		
-		let georgianWeekDay = calendar.component(.weekday, from: date)
-		
-		let weekDay = mapWeekGeorgianWeekDayToIslamicWeekDay(georgianWeekDay)
-		
-		return (numberOfDays, weekDay)
-	}
-	
-	static func mapWeekGeorgianWeekDayToIslamicWeekDay(_ georgianWeekDay: Int) -> Int {
-		let map = [
-			1 : 2,
-			2 : 3,
-			3 : 4,
-			4 : 5,
-			5 : 6,
-			6 : 7,
-			7 : 1,
-		]
-		
-		return map[georgianWeekDay] ?? 0
-	}
     
-    static func generateDateObjectFromComponents(year: Int, month: Int, day: Int, hour: Int, calendarIdentifier: NSCalendar.Identifier) -> Date {
+    static func getCurrentDay(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> Int {
+        return getCurrentCalendarComponent(for: .day, andCalendarIdentifier: calendarIdentifier)
+    }
+    
+    static func getCurrentMonth(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> Int {
+        return getCurrentCalendarComponent(for: .month, andCalendarIdentifier: calendarIdentifier)
+    }
+    
+    static func getCurrentYear(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> Int {
+        return getCurrentCalendarComponent(for: .year, andCalendarIdentifier: calendarIdentifier)
+    }
+    
+    private static func getCurrentCalendarComponent(for calendarComponent: Calendar.Component, andCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> Int {
+        let date = Date()
+        let calendar = Calendar(identifier: calendarIdentifier)
+        
+        let component = calendar.component(calendarComponent, from: date)
+        return component
+    }
+    
+    static func getNumberOfMonthDaysAndFirstWeekDay(ofYear year: Int, andMonth month: Int, forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> (Int, Int) {
+        let dateComponents = DateComponents(year: year, month: month, day: 1)
+        let calendar = Calendar(identifier: calendarIdentifier)
+        let date = calendar.date(from: dateComponents)!
+        
+        let range = calendar.range(of: .day, in: .month, for: date)
+        let numberOfDays = range?.count ?? 0
+        
+        let georgianWeekDay = calendar.component(.weekday, from: date)
+        
+        let weekDay = mapWeekGeorgianWeekDayToIslamicWeekDay(georgianWeekDay)
+        
+        return (numberOfDays, weekDay)
+    }
+    
+    static func mapWeekGeorgianWeekDayToIslamicWeekDay(_ georgianWeekDay: Int) -> Int {
+        let map = [
+            1 : 2,
+            2 : 3,
+            3 : 4,
+            4 : 5,
+            5 : 6,
+            6 : 7,
+            7 : 1,
+        ]
+        
+        return map[georgianWeekDay] ?? 0
+    }
+    
+    static func generateDateObjectFromComponents(year: Int, month: Int, day: Int, hour: Int, calendarIdentifier: Calendar.Identifier) -> Date {
         
         let dateComponents = DateComponents(year: year, month: month, day: day, hour: hour)
-        let calendar = NSCalendar(identifier: calendarIdentifier)!
+        let calendar = Calendar(identifier: calendarIdentifier)
         let date = calendar.date(from: dateComponents)!
         
         return date
     }
-    
-    static func getDateInIslamic() -> String {
-        let today = Date()
-        let islamic = Calendar(identifier: .islamicCivil)
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.dateFormat = "dd MMMM"
-        formatter.calendar = islamic
-        formatter.locale = Locale(identifier: "ar_EG")
-        let currentDate = formatter.string(from: today)
         
-        return currentDate
-    }
-    
-    static func getDate() -> String {
-        let today = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.dateFormat = "d MMMM yyyy"
-        formatter.locale = Locale(identifier: "ar_EG")
-        let currentDate = formatter.string(from: today)
-        return currentDate
-    }
-    
-    static func getReadableDate(from date: Date?, withFormat format: String, calendarIdentifier: NSCalendar.Identifier) -> String {
+    static func getReadableDate(from date: Date?, withFormat format: String, calendarIdentifier: Calendar.Identifier) -> String {
         guard let date = date else { return "-" }
         
         let formatter = DateFormatter()
@@ -83,7 +72,7 @@ class DateAndTimeTools {
             formatter.calendar = islamicCalendar
         }
         
-        formatter.locale = Locale(identifier: "ar_EG")
+        formatter.locale = Locale(identifier: Locale.current.languageCode ?? "en_US")
         let currentDate = formatter.string(from: date)
         
         return currentDate

@@ -10,8 +10,6 @@ let store = Store(reducer: appReducer, state: AppState(), middleware: [])
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        LayoutTools.forceLayoutDirectionTo(.rightToLeft)
         configureNavigationBarAppearance()
         monitorInternetConnection()
         AppCenter.start(withAppSecret: "5ad785cd-60c5-4762-863c-bc3cc4d2811e", services:[

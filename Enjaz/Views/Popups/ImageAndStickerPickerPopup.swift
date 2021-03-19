@@ -11,7 +11,6 @@ class ImageAndStickerPickerPopup: Popup {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		
-		label.text = "اختر صورة مناسبة"
 		label.textColor = UIColor(hex: 0x011942)
 		
 		return label
@@ -41,18 +40,18 @@ class ImageAndStickerPickerPopup: Popup {
 	let popupContainerWidth = LayoutConstants.screenWidth * 0.85
 	let collectionViewSectionHorizontalInset: CGFloat = 10
 	lazy var collectionViewWidth = popupContainerWidth * 0.7 + collectionViewSectionHorizontalInset * 2
-	let reuseIdentifier = "cell"
+	let reuseIdentifier = "imageAndStickerCell"
 	
-	let imageTitleLabel = "اختر صورة مناسبة"
-	let stickerTitleLabel = "اختر الاستكير المناسب"
+	let imageTitleLabel = NSLocalizedString("Select Image", comment: "")
+	let stickerTitleLabel = NSLocalizedString("Select Sticker", comment: "")
 	
-    var onImageSelected: ((_ selectedId: Int) -> Void)?
+    var imageSelectionHandler: ((_ selectedId: Int) -> Void)?
 	
 	// MARK: State
 	var selectedImageModelIndex: Int?
 	var selectedStickerModelIndex: Int?
 		
-	override func onPopupContainerShown() {
+	override func popupContainerDidShow() {
         configure()
 		setupPopupContainer()
 		setupImageIcon()
@@ -62,7 +61,7 @@ class ImageAndStickerPickerPopup: Popup {
     
 	// @abstract
     func configure() {
-        fatalError("Subclasses need to implement the `setPopupContainerConstraints()` method.")
+        fatalError("Subclasses need to implement the `configure()` method.")
     }
     
 	func setupPopupContainer() {

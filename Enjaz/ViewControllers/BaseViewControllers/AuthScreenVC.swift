@@ -1,8 +1,8 @@
 import UIKit
 import ReSwift
 
-class AuthScreenBaseVC: KeyboardHandlingBaseViewController, StoreSubscriber {
-
+class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
+    
     typealias StoreSubscriberStateType = AppState
     
     // MARK: Properties
@@ -62,7 +62,7 @@ class AuthScreenBaseVC: KeyboardHandlingBaseViewController, StoreSubscriber {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setTitleColor(.accentColor, for: .normal)
-        button.addTarget(self, action: #selector(onOtherAuthMethodBtnTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleOtherAuthMethodBtnTap), for: .touchUpInside)
         
         return button
     }()
@@ -181,7 +181,7 @@ class AuthScreenBaseVC: KeyboardHandlingBaseViewController, StoreSubscriber {
             authenticationBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
         
-        authenticationBtn.addTarget(self, action: #selector(onAuthenticationBtnTap), for: .touchUpInside)
+        authenticationBtn.addTarget(self, action: #selector(handleAuthenticationBtnTap), for: .touchUpInside)
     }
     
     func setupOtherAuthMethodLabelAndBtnHorizontalStack() {
@@ -215,13 +215,13 @@ class AuthScreenBaseVC: KeyboardHandlingBaseViewController, StoreSubscriber {
     // MARK: Event Handlers
     
     // @abstract
-    @objc func onAuthenticationBtnTap() {
-        fatalError("Subclasses need to implement the `onAuthenticationBtnTap()` method.")
+    @objc func handleAuthenticationBtnTap() {
+        fatalError("Subclasses need to implement the `handleAuthenticationBtnTap()` method.")
     }
     
     // @abstract
-    @objc func onOtherAuthMethodBtnTap() {
-        fatalError("Subclasses need to implement the `onOtherAuthMethodBtnTap()` method.")
+    @objc func handleOtherAuthMethodBtnTap() {
+        fatalError("Subclasses need to implement the `handleOtherAuthMethodBtnTap()` method.")
     }
     
     // MARK: Tools
@@ -268,7 +268,7 @@ class AuthScreenBaseVC: KeyboardHandlingBaseViewController, StoreSubscriber {
     
 }
 
-extension AuthScreenBaseVC: UITextFieldDelegate {
+extension AuthScreenVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         focusOnNextTextFieldOnPressReturn(from: textField)

@@ -14,7 +14,7 @@ class ResetCodeTextField: AuthTextField {
 		fieldName = "الكود"
 		textField.textContentType = .oneTimeCode
 		textField.keyboardType = .numberPad
-		icon.image = #imageLiteral(resourceName: "lockIcon")
+		icon.image = UIImage(named: "lockIcon")
 		validator = RegexValidator.validateResetCode
 		defaultErrorMessage = "الرمز مكون من ٤ أحرف"
 	}

@@ -1,6 +1,6 @@
 import UIKit
 
-class SignupScreenVC: AuthScreenBaseVC {
+class SignupScreenVC: AuthScreenVC {
     
     var previousScreenIsLoginScreen = false
     
@@ -16,7 +16,7 @@ class SignupScreenVC: AuthScreenBaseVC {
     
     // MARK: Event Handlers
     
-    override func onAuthenticationBtnTap() {
+    override func handleAuthenticationBtnTap() {
         dismissKeyboard()
         
         let allInputsAreValid = validateInputs()
@@ -56,7 +56,7 @@ class SignupScreenVC: AuthScreenBaseVC {
         }
     }
     
-    override func onOtherAuthMethodBtnTap() {
+    override func handleOtherAuthMethodBtnTap() {
         navigateToLoginVC()
     }
     

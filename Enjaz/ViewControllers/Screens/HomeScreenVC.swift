@@ -2,67 +2,84 @@ import UIKit
 
 class HomeScreenVC: UIViewController {
     
+    // MARK: Properties
+    
     var taskModels: [ItemModel] = [] {
         didSet {
-            dailyTaskView.cards.reloadData()
+            dailyTaskView.cardsCollectionView.reloadData()
         }
     }
     
     var demahModels: [ItemModel] = [] {
         didSet {
-            dailyDemahView.cards.reloadData()
+            dailyDemahView.cardsCollectionView.reloadData()
         }
     }
     
-    let cardPopup = CardPopup(hideOnOverlayTap: true)
-    let collectionHeight = LayoutConstants.screenHeight * 0.27
+    let cardsReuseIdentifier = "cardCell"
     
-    lazy var welcomeBadge: WelcomeBadgeView = {
-        let view = WelcomeBadgeView()
+    let cardPopup = CardPopup(hideOnOverlayTap: true)
+    let itemsViewHeight = LayoutConstants.screenHeight * 0.27
+    
+    lazy var greetingMessageView: GreetingMessageView = {
+        let view = GreetingMessageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         let mode = getHour()
         let name = user?.name ?? ""
+        let firstName = String(name.split(separator: " ")[0])
         
         if mode == "am" {
-            view.image.image = #imageLiteral(resourceName: "sunIcon")
-            view.welcomeLabel.text = "صباح الخير \(name)!"
-            view.messageLabel.text = "أطلع على مهام وعادات اليوم"
+            view.image.image = UIImage(named: "sunIcon")
+            view.welcomeLabel.text = String(format: NSLocalizedString("Good morning %@!", comment: ""), firstName)
+            view.messageLabel.text = NSLocalizedString("Take a look at today's tasks and habits", comment: "")
         } else {
-            view.image.image = #imageLiteral(resourceName: "moonIcon")
-            view.welcomeLabel.text = "مساء الخير \(name)!"
-            view.messageLabel.text = "أطلع على المهام المتبقية"
+            view.image.image = UIImage(named: "moonIcon")
+            view.welcomeLabel.text = String(format: NSLocalizedString("Good evening %@!", comment: ""), firstName)
+            view.messageLabel.text = NSLocalizedString("Take a look at today's remaining tasks", comment: "")
         }
-        view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
-    lazy var dailyTaskView: ItemsView = {
-        let view = ItemsView()
-        view.collectionTopBar.typeLabel.text = "مهام اليوم"
-        view.collectionTopBar.tasksCountLabel.text = "\(taskModels.count)"
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var dailyTaskView: CardsView = {
+        let cardsView = CardsView()
+        cardsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        cardsView.cardsCollectionView.register(ItemCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
+        cardsView.cardsCollectionView.delegate = self
+        cardsView.cardsCollectionView.dataSource = self
+        
+        cardsView.title = NSLocalizedString("Today's goals", comment: "")
+        cardsView.noCardsMessage = NSLocalizedString("No tasks today", comment: "")
+        cardsView.cardsCount = taskModels.count
+        
+        return cardsView
     }()
     
-    lazy var dailyDemahView: ItemsView = {
-        let view = ItemsView()
-        view.collectionTopBar.tasksCountLabel.text = "\(demahModels.count)"
-        view.collectionTopBar.typeLabel.text = "ديمة اليوم"
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    lazy var dailyDemahView: CardsView = {
+        let cardsView = CardsView()
+        cardsView.translatesAutoresizingMaskIntoConstraints = false
+        
+        cardsView.cardsCollectionView.register(ItemCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
+        cardsView.cardsCollectionView.delegate = self
+        cardsView.cardsCollectionView.dataSource = self
+        
+        cardsView.title = NSLocalizedString("Today's demahs", comment: "")
+        cardsView.noCardsMessage = NSLocalizedString("No demahs today", comment: "")
+        cardsView.cardsCount = demahModels.count
+        
+        return cardsView
     }()
     
     let user = UserDefaultsManager.user
+    
+    // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .rootTabBarScreensBackgroundColor
-        
-        dailyTaskView.cards.delegate = self
-        dailyTaskView.cards.dataSource = self
-        
-        dailyDemahView.cards.delegate = self
-        dailyDemahView.cards.dataSource = self
         
         setupSubviews()
     }
@@ -72,10 +89,55 @@ class HomeScreenVC: UIViewController {
         updateScreen()
     }
     
+    // MARK: View Setups
+        
+    func setupSubviews()  {
+        setupWelcomeBadge()
+        setupDailyTaskView()
+        setupDailyDemahView()
+    }
+    
+    func setupDailyTaskView() {
+        view.addSubview(dailyTaskView)
+        
+        NSLayoutConstraint.activate([
+            dailyTaskView.topAnchor.constraint(equalTo: greetingMessageView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.06),
+            dailyTaskView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dailyTaskView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dailyTaskView.heightAnchor.constraint(equalToConstant: itemsViewHeight)
+            
+        ])
+    }
+    
+    func setupDailyDemahView() {
+        view.addSubview(dailyDemahView)
+        
+        NSLayoutConstraint.activate([
+            dailyDemahView.topAnchor.constraint(equalTo: dailyTaskView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.035),
+            dailyDemahView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dailyDemahView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dailyDemahView.heightAnchor.constraint(equalToConstant: itemsViewHeight)
+            
+        ])
+    }
+    
+    func setupWelcomeBadge() {
+        view.addSubview(greetingMessageView)
+        
+        NSLayoutConstraint.activate([
+            greetingMessageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
+            greetingMessageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.screenHeight * 0.055),
+            greetingMessageView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
+            greetingMessageView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+    }
+    
+    // MARK: Tools
+    
     func updateScreen() {
         updateItemModels()
-        dailyTaskView.updateIndicator(with: taskModels.count)
-        dailyDemahView.updateIndicator(with: demahModels.count)
+        dailyTaskView.cardsCount = taskModels.count
+        dailyDemahView.cardsCount = demahModels.count
     }
     
     func getUpdatedItemsModel() -> ([ItemModel], [ItemModel]) {
@@ -84,11 +146,16 @@ class HomeScreenVC: UIViewController {
         var updatedTaskModels: [ItemModel] = []
         var updatedDemahModels: [ItemModel] = []
         
-        itemModels.forEach { (itemModel) in
-            if itemModel.type == 0 {
-                updatedTaskModels.append(itemModel)
-            } else if itemModel.type == 1 {
-                updatedDemahModels.append(itemModel)
+        for item in itemModels {
+            let itemDate = Date(timeIntervalSince1970: item.date)
+            let itemIsDueToday = Calendar.current.isDateInToday(itemDate)
+            
+            guard itemIsDueToday && !item.is_completed else { continue }
+            
+            if item.type == 0 {
+                updatedTaskModels.append(item)
+            } else if item.type == 1 {
+                updatedDemahModels.append(item)
             }
         }
         
@@ -102,10 +169,6 @@ class HomeScreenVC: UIViewController {
         demahModels = updatedDemahModels
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
     func getHour() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "a"
@@ -114,61 +177,20 @@ class HomeScreenVC: UIViewController {
         let timeFromDate = formatter.string(from: Date())
         return timeFromDate
     }
-    
-    func setupSubviews()  {
-        setupWelcomeBadge()
-        setupDailyTaskView()
-        setupDailyDemahView()
-    }
-    
-    func setupDailyTaskView() {
-        view.addSubview(dailyTaskView)
-        
-        NSLayoutConstraint.activate([
-            dailyTaskView.topAnchor.constraint(equalTo: welcomeBadge.bottomAnchor, constant: LayoutConstants.screenHeight * 0.06),
-            dailyTaskView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dailyTaskView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dailyTaskView.heightAnchor.constraint(equalToConstant: collectionHeight)
-            
-        ])
-    }
-    
-    func setupDailyDemahView() {
-        view.addSubview(dailyDemahView)
-        
-        NSLayoutConstraint.activate([
-            dailyDemahView.topAnchor.constraint(equalTo: dailyTaskView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.035),
-            dailyDemahView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dailyDemahView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dailyDemahView.heightAnchor.constraint(equalToConstant: collectionHeight)
-            
-        ])
-    }
-    
-    func setupWelcomeBadge() {
-        view.addSubview(welcomeBadge)
-        
-        NSLayoutConstraint.activate([
-            welcomeBadge.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
-            welcomeBadge.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.screenHeight * 0.055),
-            welcomeBadge.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.03),
-            welcomeBadge.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.6)
-        ])
-    }
 }
 
 extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return collectionView == self.dailyDemahView.cards ? demahModels.count : taskModels.count
+        return collectionView == dailyDemahView.cardsCollectionView ? demahModels.count : taskModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! CardCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardsReuseIdentifier, for: indexPath) as! ItemCardCell
         
-        let viewModels = collectionView == self.dailyDemahView.cards ? demahModels : taskModels
+        let viewModels = collectionView == dailyDemahView.cardsCollectionView ? demahModels : taskModels
         
         cell.viewModel = viewModels[indexPath.row]
         return cell
@@ -188,7 +210,7 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! CardCell
+        let cell = collectionView.cellForItem(at: indexPath) as! ItemCardCell
         self.cardPopup.show()
         cardPopup.viewModel = cell.cardView
     }

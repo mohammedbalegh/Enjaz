@@ -11,6 +11,7 @@ class Auth {
                 completionHandler(nil, error)
                 return
             }
+            
             guard let token = token, let user = user else {
                 completionHandler(nil, unwrappingError.errorUnwrapping(value: "token or user"))
                 return
@@ -20,7 +21,6 @@ class Auth {
                 completionHandler(nil, unwrappingError.errorUnwrapping(value: "user data"))
                 return
             }
-            
             
             saveAccessTokenAndUserIdToKeyChain(token, id)
             
@@ -46,7 +46,6 @@ class Auth {
                 completionHandler(nil, unwrappingError.errorUnwrapping(value: "user fields"))
                 return
             }
-            
             
             saveAccessTokenAndUserIdToKeyChain(token, id)
             

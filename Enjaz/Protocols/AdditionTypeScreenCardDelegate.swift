@@ -1,3 +1,3 @@
 protocol AdditionTypeScreenCardDelegate {
-    func onCardSelect(cardId selectedCardId: Int)
+    func handleCardSelection(cardId selectedCardId: Int)
 }

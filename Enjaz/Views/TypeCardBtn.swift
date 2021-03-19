@@ -7,7 +7,7 @@ class TypeCardBtn: UIButton {
     
     var selectedId: Int = -1 {
         didSet {
-            onSelectedIdChange()
+            handleSelectedIdChange()
         }
     }
     
@@ -55,7 +55,7 @@ class TypeCardBtn: UIButton {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
         
-        addTarget(self, action: #selector(onViewTap), for: .touchUpInside)
+        addTarget(self, action: #selector(handleBtnTap), for: .touchUpInside)
         
         self.layer.borderColor = UIColor.accentColor.cgColor
         self.backgroundColor = .white
@@ -129,7 +129,7 @@ class TypeCardBtn: UIButton {
         ])
     }
     
-    func onSelectedIdChange() {
+    func handleSelectedIdChange() {
         if id == selectedId {
             layer.borderWidth = 1
             checkMark.isHidden = false
@@ -139,8 +139,8 @@ class TypeCardBtn: UIButton {
         }
     }
     
-    @objc func onViewTap() {
-        delegate?.onCardSelect(cardId: id)
+    @objc func handleBtnTap() {
+        delegate?.handleCardSelection(cardId: id)
     }
     
     

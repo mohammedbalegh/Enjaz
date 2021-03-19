@@ -1,6 +1,6 @@
 import UIKit
 
-class KeyboardHandlingBaseViewController: UIViewController {
+class KeyboardHandlingViewController: UIViewController {
     
     let keyboardPlaceHolderView = UIView()
     
@@ -42,7 +42,7 @@ class KeyboardHandlingBaseViewController: UIViewController {
 }
 
 
-private extension KeyboardHandlingBaseViewController {
+private extension KeyboardHandlingViewController {
     
     func setupKeyboardDismisserGestureRecognizer() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

@@ -2,18 +2,14 @@ import UIKit
 
 class LayoutTools {
     
-    static func forceLayoutDirectionTo(_ direction: UIUserInterfaceLayoutDirection) {
-        UIView.appearance().semanticContentAttribute = direction == .leftToRight ? .forceLeftToRight : .forceRightToLeft
-    }
-
-    static func getCurrentLayoutDirectionFor(_ view: UIView) -> UIUserInterfaceLayoutDirection {
+    static func getCurrentLayoutDirection(for view: UIView) -> UIUserInterfaceLayoutDirection {
         let attribute = view.semanticContentAttribute
         let layoutDirection = UIView.userInterfaceLayoutDirection(for: attribute)
         return layoutDirection
     }
     
     static func mapUIDirectionalRectCornerToUIRectCorner(_ directionalCorner: UIDirectionalRectCorner, forView view: UIView) -> UIRectCorner? {
-        let layoutDirection = getCurrentLayoutDirectionFor(view)
+        let layoutDirection = getCurrentLayoutDirection(for: view)
         let layoutDirectionIsLeftToRight = layoutDirection == .leftToRight
         
         let map: [UIDirectionalRectCorner: UIRectCorner] = [

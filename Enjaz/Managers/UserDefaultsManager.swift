@@ -26,7 +26,7 @@ struct UserDefaultsManager {
                 let user = try decoder.decode(UserModel.self, from: userData)
                 return user
             } catch {
-                print("Unable to Decode Note (\(error))")
+                print("Unable to Decode data (\(error))")
                 return nil
             }
         }
@@ -49,6 +49,7 @@ struct UserDefaultsManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.majorGoals)
+            UserDefaults.standard.synchronize()
         }
     }
     

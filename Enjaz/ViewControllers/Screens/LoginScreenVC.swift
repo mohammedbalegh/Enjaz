@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginScreenVC: AuthScreenBaseVC {
+class LoginScreenVC: AuthScreenVC {
     
     let forgotPasswordBtn: UIButton = {
         var button = UIButton(type: .system)
@@ -10,7 +10,7 @@ class LoginScreenVC: AuthScreenBaseVC {
         button.setTitleColor(.gray, for: .normal)
         let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
         button.titleLabel?.font = .systemFont(ofSize: fontSize)
-        button.addTarget(self, action: #selector(onForgotPasswordTap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleForgotPasswordBtnTap), for: .touchUpInside)
         
         return button
     }()
@@ -31,7 +31,7 @@ class LoginScreenVC: AuthScreenBaseVC {
         super.setupSubViews()
         setupForgotPasswordBtn()
         
-        alterAuthenctacionBtnTopAnchorConstraint()
+        alterAuthenticationBtnTopAnchorConstraint()
     }
     
     func setupForgotPasswordBtn() {
@@ -47,7 +47,7 @@ class LoginScreenVC: AuthScreenBaseVC {
     
     // MARK: Event Handlers
     
-    override func onAuthenticationBtnTap() {
+    override func handleAuthenticationBtnTap() {
         dismissKeyboard()
         
         let allInputsAreValid = validateInputs()
@@ -85,11 +85,11 @@ class LoginScreenVC: AuthScreenBaseVC {
         }
     }
         
-    override func onOtherAuthMethodBtnTap() {
+    override func handleOtherAuthMethodBtnTap() {
         navigateToSignupScreen()
     }
     
-    @objc func onForgotPasswordTap() {
+    @objc func handleForgotPasswordBtnTap() {
         navigateToPasswordResetScreen()
     }
     
@@ -100,7 +100,7 @@ class LoginScreenVC: AuthScreenBaseVC {
         return arrangedSubviews
     }
     
-    func alterAuthenctacionBtnTopAnchorConstraint() {
+    func alterAuthenticationBtnTopAnchorConstraint() {
         authenticationBtnTopAnchorConstraint.isActive = false
         authenticationBtn.topAnchor.constraint(equalTo: forgotPasswordBtn.bottomAnchor, constant: LayoutConstants.screenHeight * 0.045).isActive = true
     }

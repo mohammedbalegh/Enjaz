@@ -1,10 +1,3 @@
-//
-//  EnjazTests.swift
-//  EnjazTests
-//
-//  Created by mohammed balegh on 29/11/2020.
-//
-
 import XCTest
 @testable import Enjaz
 

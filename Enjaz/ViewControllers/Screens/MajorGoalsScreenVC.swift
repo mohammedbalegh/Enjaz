@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MajorGoalsScreenVC: KeyboardHandlingBaseViewController {
+class MajorGoalsScreenVC: KeyboardHandlingViewController {
     
     var majors: [MajorGoalsModel] = [MajorGoalsModel(image: "kaabaIcon", title: "الجانب الديني", description: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي"),
     MajorGoalsModel(image: "bookIcon", title: "الجانب العلمي", description: "الاهداف المرتبطة بالعلم و التعلم و القراءة و الدورات و تنمية العقل"), MajorGoalsModel(image: "stethoscopeIcon", title: "الجانب الصحي", description: "الاهداف المرتبطة بصحتك الشخصية و اللياقة البدنية و الصحة النفسية"),

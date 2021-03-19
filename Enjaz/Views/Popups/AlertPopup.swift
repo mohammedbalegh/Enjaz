@@ -2,7 +2,7 @@ import UIKit
 
 class AlertPopup: Popup {
     
-    var imageView: UIImageView = {
+    let imageView: UIImageView = {
         var imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -10,7 +10,8 @@ class AlertPopup: Popup {
         
         return imageView
     }()
-    var titleLabel: UILabel = {
+    
+    let titleLabel: UILabel = {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -20,7 +21,8 @@ class AlertPopup: Popup {
         
         return label
     }()
-    var messageLabel: UILabel = {
+    
+    let messageLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -33,7 +35,7 @@ class AlertPopup: Popup {
         return label
     }()
     
-    override func onPopupContainerShown() {
+    override func popupContainerDidShow() {
         setupPopupContainer()
         setupSuccessImage()
         setupTitleLabel()
@@ -92,12 +94,12 @@ class AlertPopup: Popup {
     
     func showAsError(withMessage message: String) {
         let image = UIImage(named: "errorImage")
-        let title = "خطأ"
+        let title = NSLocalizedString("Error", comment: "")
         show(withImage: image, title: title, message: message)
     }
     
     func showAsInternetConnectionError() {
-        showAsError(withMessage: "لا يوجد اتصال بالانترنت")
+        showAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
     }
     
 }
