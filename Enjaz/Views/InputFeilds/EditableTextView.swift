@@ -33,7 +33,9 @@ class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldCon
 		delegate = self
 		isEditable = true
         setTextViewDirectionToMatchSuperView()
-		textColor = .placeholderText
+        if placeholder == text {
+            textColor = .placeholderText
+        }
         textContainerInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
 	}
 	

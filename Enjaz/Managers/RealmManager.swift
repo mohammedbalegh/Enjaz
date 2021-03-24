@@ -12,9 +12,30 @@ class RealmManager {
         try! RealmManager.realm.commitWrite()
     }
     
+    static func saveAspect(_ aspect: PersonalAspectsModel) {
+        RealmManager.realm.beginWrite()
+        RealmManager.realm.add(aspect)
+        try! RealmManager.realm.commitWrite()
+    }
+    
+    static func retrieveAspectsCount() -> Int {
+        let count = RealmManager.realm.objects(PersonalAspectsModel.self).map({ $0 }).count
+        return count
+    }
+    
+    static func retrieveAspect(id: Int) -> PersonalAspectsModel {
+        let items: PersonalAspectsModel = RealmManager.realm.object(ofType: PersonalAspectsModel.self, forPrimaryKey: id)!
+        return items
+    }
+    
     static func retrieveItems() -> [ItemModel] {
         let items: [ItemModel] = RealmManager.realm.objects(ItemModel.self).map({ $0 })
         return items
+    }
+    
+    static func retrievePersonalAspects() -> [PersonalAspectsModel] {
+        let aspects: [PersonalAspectsModel] = RealmManager.realm.objects(PersonalAspectsModel.self).sorted(byKeyPath: "date", ascending: true).map({ $0 })
+        return aspects
     }
     
     static func dropModelTable(_ model: Object.Type) {

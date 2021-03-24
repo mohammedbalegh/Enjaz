@@ -1,3 +1,5 @@
+import UIKit
+
 extension String {
 	
 	var test: Int {
@@ -36,5 +38,13 @@ extension String {
     
     static func isOrAre(count: Int) -> String {
         return count > 1 ? "are" : "is"
+    }
+   
+    func toImage() -> UIImage? {
+        if let decodedData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
+            let image = UIImage(data: decodedData)
+            return image
+        }
+        return nil
     }
 }

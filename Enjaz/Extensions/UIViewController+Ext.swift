@@ -13,6 +13,12 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action:#selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
         
     func focusOnNextTextFieldOnPressReturn(from textField: UITextField) {
         // Check if there is any other text-field in the view whose tag is +1 greater than the current text-field on which the return key was pressed. If yes then move the cursor to that next text-field. If no then dismiss the keyboard

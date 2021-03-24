@@ -56,7 +56,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         pickerPopup.picker.delegate = self
         pickerPopup.picker.dataSource = self
         
-        pickerPopup.dismissalHanlder = handleAdditionCategoryPopupDismissal
+        pickerPopup.dismissalHandler = handleAdditionCategoryPopupDismissal
         pickerPopup.selectBtn.addTarget(self, action: #selector(handleAdditionCategorySelection), for: .touchUpInside)
         
         return pickerPopup

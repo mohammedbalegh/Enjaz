@@ -29,7 +29,7 @@ class PickerBottomSheetView: BottomSheetView {
         return button
     }()
     
-    var dismissalHanlder: (() -> Void)?
+    var dismissalHandler: (() -> Void)?
     
     override func setup() {
         height = 270
@@ -79,6 +79,6 @@ class PickerBottomSheetView: BottomSheetView {
     
     @objc override func handleDismissal() {
         dismiss(animated: true)
-        dismissalHanlder?()
+        dismissalHandler?()
     }
 }

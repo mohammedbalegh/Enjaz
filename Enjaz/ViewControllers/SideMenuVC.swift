@@ -28,7 +28,7 @@ class SideMenuVC: UIViewController {
     }()
     
     let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
-    let noteBtn = SideMenuBtn(label: NSLocalizedString("Note", comment: ""), image: UIImage(named: "noteIcon"))
+    let personalAspectsBtn = SideMenuBtn(label: NSLocalizedString("Personal Aspects", comment: ""), image: UIImage(named: "noteIcon"))
     let goalsRatingBtn = SideMenuBtn(label: NSLocalizedString("Goals Rating", comment: ""), image: UIImage(named: "starIcon"))
     let rateAppBtn = SideMenuBtn(label: NSLocalizedString("Rate App", comment: ""), image: UIImage(named: "rateAppIcon"))
     let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
@@ -36,7 +36,7 @@ class SideMenuVC: UIViewController {
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [draftBtn, noteBtn, goalsRatingBtn, rateAppBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [draftBtn, personalAspectsBtn, goalsRatingBtn, rateAppBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -52,7 +52,6 @@ class SideMenuVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -64,6 +63,7 @@ class SideMenuVC: UIViewController {
         setupSubviews()
         
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
+        personalAspectsBtn.addTarget(self, action: #selector(handlePersonalAspectsBtn), for: .touchUpInside)
     }
     
     func setupSubviews() {
@@ -124,6 +124,10 @@ class SideMenuVC: UIViewController {
     
     @objc func handleDraftBtnTap() {
         navigationController?.pushViewController(DraftScreenVC(), animated: true)
+    }
+    
+    @objc func handlePersonalAspectsBtn() {
+        navigationController?.pushViewController(PersonalAspectsScreenVC(), animated: true)
     }
     
     @objc func handleDismissBtnTap() {

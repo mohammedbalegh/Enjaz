@@ -25,7 +25,6 @@ class SelfEvaluationLabel: UILabel {
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.minimumScaleFactor = 0.1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
