@@ -17,6 +17,8 @@
 		4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141504125A3FD2F00DC369A /* ChartSliderView.swift */; };
 		4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505725A45BE100DC369A /* TopMenuCell.swift */; };
 		4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */; };
+		41798C3C260B720400DF5ECF /* AboutTheAppTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C3B260B720400DF5ECF /* AboutTheAppTopView.swift */; };
+		41798C41260B7BAD00DF5ECF /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C40260B7BAD00DF5ECF /* PrivacyPolicyAndAboutAppScreenVC.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -89,7 +91,6 @@
 		BC67971625AAB371002B9A71 /* UIDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971525AAB370002B9A71 /* UIDirection.swift */; };
 		BC67971B25AAC3DB002B9A71 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971A25AAC3DB002B9A71 /* Vibration.swift */; };
 		BC67DFD425F8CC2B00183EFD /* DraftCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67DFD325F8CC2B00183EFD /* DraftCardCell.swift */; };
-		BC67DFD925F8DBB000183EFD /* tempArtilceThumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = BC67DFD825F8DBAF00183EFD /* tempArtilceThumbnail.png */; };
 		BC7271D825BC981500779C77 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7271D725BC981500779C77 /* UITextView+Ext.swift */; };
 		BC7271E025BDAB7500779C77 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7271DF25BDAB7500779C77 /* BottomSheetView.swift */; };
 		BC730277259B91BC007AEA96 /* BidirectionalCollection + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC730276259B91BC007AEA96 /* BidirectionalCollection + ext.swift */; };
@@ -199,6 +200,8 @@
 		4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarNavigationVC.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
+		41798C3B260B720400DF5ECF /* AboutTheAppTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTheAppTopView.swift; sourceTree = "<group>"; };
+		41798C40260B7BAD00DF5ECF /* PrivacyPolicyAndAboutAppScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAndAboutAppScreenVC.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
@@ -277,7 +280,6 @@
 		BC67971525AAB370002B9A71 /* UIDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDirection.swift; sourceTree = "<group>"; };
 		BC67971A25AAC3DB002B9A71 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		BC67DFD325F8CC2B00183EFD /* DraftCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftCardCell.swift; sourceTree = "<group>"; };
-		BC67DFD825F8DBAF00183EFD /* tempArtilceThumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tempArtilceThumbnail.png; path = ../../../../Downloads/tempArtilceThumbnail.png; sourceTree = "<group>"; };
 		BC7271D725BC981500779C77 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		BC7271DF25BDAB7500779C77 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		BC730276259B91BC007AEA96 /* BidirectionalCollection + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection + ext.swift"; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				4141504125A3FD2F00DC369A /* ChartSliderView.swift */,
 				BC7D6C7225A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift */,
 				BC8F2F5625A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift */,
+				41798C3B260B720400DF5ECF /* AboutTheAppTopView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */,
 				4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */,
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
+				41798C40260B7BAD00DF5ECF /* PrivacyPolicyAndAboutAppScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -685,7 +689,6 @@
 				41C646A9257397BA000327D5 /* AppDelegate.swift */,
 				41C646AB257397BA000327D5 /* SceneDelegate.swift */,
 				41C646B2257397BC000327D5 /* Assets.xcassets */,
-				BC67DFD825F8DBAF00183EFD /* tempArtilceThumbnail.png */,
 				41C646B4257397BC000327D5 /* LaunchScreen.storyboard */,
 				41C646B7257397BC000327D5 /* Info.plist */,
 			);
@@ -874,7 +877,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC5CBB7725B9CA820028FFC1 /* Localizable.strings in Resources */,
-				BC67DFD925F8DBB000183EFD /* tempArtilceThumbnail.png in Resources */,
 				41C646B6257397BC000327D5 /* LaunchScreen.storyboard in Resources */,
 				41C646B3257397BC000327D5 /* Assets.xcassets in Resources */,
 			);
@@ -1035,6 +1037,7 @@
 				BC5403C725FA16EF007A9F73 /* ArticleModel.swift in Sources */,
 				BC7271E025BDAB7500779C77 /* BottomSheetView.swift in Sources */,
 				BC32E8A625923D6D008DF8B7 /* UserModel.swift in Sources */,
+				41798C41260B7BAD00DF5ECF /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */,
 				BCD401B525FB3FBB00ABA183 /* VideoCardCell.swift in Sources */,
 				BC391145258E771A000E6273 /* ItemCardCell.swift in Sources */,
 				419120EE25909CC700CB7BF9 /* AdditionTypeScreenVC.swift in Sources */,
@@ -1101,6 +1104,7 @@
 				BC8F2F9025A9049600EF7EA4 /* ModelsConstants.swift in Sources */,
 				41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */,
 				4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */,
+				41798C3C260B720400DF5ECF /* AboutTheAppTopView.swift in Sources */,
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
 				41328F06258955CD00A86330 /* CardsViewHeader.swift in Sources */,
 				4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */,
