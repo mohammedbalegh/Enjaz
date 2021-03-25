@@ -51,6 +51,11 @@ class AboutTheAppTopView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
+        
+        twitterButton.addTarget(self, action: #selector(handleTwitterButtonTaped), for: .touchUpInside)
+        facebookButton.addTarget(self, action: #selector(handleFacebookButtonTaped), for: .touchUpInside)
+        instagramButton.addTarget(self, action: #selector(handleInstagramButtonTaped), for: .touchUpInside)
+        snapChatButton.addTarget(self, action: #selector(handleSnapChatButtonTaped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -85,5 +90,32 @@ class AboutTheAppTopView: UIView {
             buttonsStackView.heightAnchor.constraint(equalToConstant: buttonSize),
             buttonsStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
+    }
+    
+    // MARK: Event Handlers
+    
+    @objc func handleTwitterButtonTaped() {
+        if let url = URL(string: "https://twitter.com/") {
+            UIApplication.shared.open(url, options: [:])
+        }
+    }
+    
+    @objc func handleFacebookButtonTaped() {
+        if let url = URL(string: "https://www.facebook.com/") {
+            UIApplication.shared.open(url, options: [:])
+        }
+        
+    }
+    
+    @objc func handleInstagramButtonTaped() {
+        if let url = URL(string: "https://www.instagram.com/") {
+            UIApplication.shared.open(url, options: [:])
+        }
+    }
+    
+    @objc func handleSnapChatButtonTaped() {
+        if let url = URL(string: "https://www.snapchat.com/") {
+            UIApplication.shared.open(url, options: [:])
+        }
     }
 }
