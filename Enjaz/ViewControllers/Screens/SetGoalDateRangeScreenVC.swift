@@ -10,7 +10,7 @@ class SetGoalDateRangeScreenVC: SetDateAndTimeScreenVC {
     }
     
     override func setupSubviews() {
-        setPopoverBtnsDefaultLabels()
+        setupHeader()
         setupCalendarView()
         setupSaveButton()
     }

@@ -54,9 +54,13 @@ class CardsViewHeader: UIView {
         return cardsCountLabelHeight + CGFloat(5 * numberOfDigitsInCardsCount - 1)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupSubviews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setupSubviews() {

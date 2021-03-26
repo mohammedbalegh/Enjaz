@@ -24,9 +24,9 @@ extension UIStackView {
         let totalArrangedSubviewsRealEstate = CGFloat(numberOfArrangedSubviews) * arrangedSubviewMainAxisLength
         let totalSpacingRealEstate = spacing * CGFloat((numberOfArrangedSubviews - 1))
         
-        let stackViewHeight = totalArrangedSubviewsRealEstate + totalSpacingRealEstate
+        let stackViewMainAxisLength = totalArrangedSubviewsRealEstate + totalSpacingRealEstate
         
-        return stackViewHeight
+        return stackViewMainAxisLength
     }
     
 }

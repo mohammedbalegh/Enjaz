@@ -33,13 +33,9 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         title = NSLocalizedString("Date and Time", comment: "")
-        
-        setupSubviews()
-        
+                
         hourPicker.selectRow(12, inComponent: 0, animated: false)
-        handleMonthSelection(selectedIndex: currentMonth - 1)
         selectCurrentDay()
     }
 
@@ -72,7 +68,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
             calendarView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 35),
             calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             calendarView.widthAnchor.constraint(equalToConstant: CalendarView.width),
-            calendarView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.5),
+            calendarView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.75),
         ])
     }
     
@@ -118,6 +114,11 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         dismiss(animated: true)
     }
     
+    override func handleCalendarTypeSelection(selectedIndex: Int) {
+        super.handleCalendarTypeSelection(selectedIndex: selectedIndex)
+        selectCurrentDay()
+    }
+    
     @objc func handleSaveBtnTap() {
         guard calendarView.selectedMonthDayItemRow != nil else {
             alertPopup.showAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
@@ -140,8 +141,15 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
     // MARK: TOOLS
     
-    override func getCalendarViewPopoverBtnsRow() -> CalendarPopoverBtnsRow {
-        return CalendarPopoverBtnsRow(firstBtn: .calendarType, secondBtn: .month, thirdBtn: .year)
+    override func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {
+        calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .month, thirdBtn: .year)
+    }
+    
+    func selectCurrentDay() {
+        let currentDayIndexPath = IndexPath(row: currentDay - 1 + calendarView.monthDaysCollectionView.minimumSelectableItemRow, section: 0)
+        
+        calendarView.monthDaysCollectionView.selectItem(at: currentDayIndexPath, animated: true, scrollPosition: .centeredVertically)
+        calendarView.collectionView(calendarView.monthDaysCollectionView, didSelectItemAt: currentDayIndexPath)
     }
         
     func getSelectedDate(ofDay day: Int? = nil) -> Date {
@@ -210,6 +218,6 @@ extension SetDateAndTimeScreenVC: CalendarViewDelegate {
     }
     
     func didLongPressOnLastItemDuringMultipleSelection(_ calendarView: CalendarView) {
-        selectNextMonth()
+        switchToNextMonth()
     }
 }

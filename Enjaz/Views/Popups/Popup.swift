@@ -82,7 +82,7 @@ class Popup: UIView {
 	func animatePopupContainerIn() {
 		self.blurOverlay.alpha = 1
 		
-		UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
 			self.popupContainer.animate(opacityTo: 1, andScaleTo: 1)
 		}
 	}
@@ -90,6 +90,8 @@ class Popup: UIView {
 	func animatePopupContainerOut(CompletionHandler: @escaping (Bool) -> Void) {
 		UIView.animate(
 			withDuration: 0.1,
+            delay: 0,
+            options: .curveEaseIn,
 			animations: {
 				self.popupContainer.animate(opacityTo: 0, andScaleTo: self.popupContainerInitialScale)
 				self.blurOverlay.alpha = 0

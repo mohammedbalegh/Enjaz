@@ -26,8 +26,8 @@ class VideoCardCell: DraftCardCell {
         return button
     }()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func setupSubviews() {
+        super.setupSubviews()
         setupPlayBtn()
     }
     

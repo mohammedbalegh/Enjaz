@@ -42,6 +42,14 @@ class BottomSheetView: UIView {
     
     lazy var contentViewYOriginWhenPresenting = LayoutConstants.screenHeight - height
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setup() {
         let window = UIApplication.shared.windows[0]
         window.addSubview(self);

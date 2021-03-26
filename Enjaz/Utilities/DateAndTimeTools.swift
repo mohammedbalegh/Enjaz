@@ -87,7 +87,7 @@ class DateAndTimeTools {
     static func getComponentsOfUnixTimeStampDate(timeIntervalSince1970: TimeInterval, forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> DateComponents {
         let date = Date(timeIntervalSince1970: timeIntervalSince1970)
         let calendar = Calendar(identifier: calendarIdentifier)
-        let dateComponents = calendar.dateComponents([.day, .month, .year], from: date)
+        let dateComponents = calendar.dateComponents([.hour, .day, .month, .year], from: date)
         
         return dateComponents
     }

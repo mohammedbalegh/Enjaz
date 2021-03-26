@@ -51,7 +51,8 @@
 		BC1FFACF25F8C2E800A436CA /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1FFACE25F8C2E800A436CA /* CardsView.swift */; };
 		BC2018012603690C0060EFAF /* DraftMetaDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2018002603690C0060EFAF /* DraftMetaDataContainer.swift */; };
 		BC20180C260393F70060EFAF /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20180B260393F70060EFAF /* CalendarViewController.swift */; };
-		BC20181126039D650060EFAF /* MonthSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20181026039D650060EFAF /* MonthSwitcher.swift */; };
+		BC20181126039D650060EFAF /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20181026039D650060EFAF /* Switcher.swift */; };
+		BC20181C2604D08D0060EFAF /* WeekDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20181B2604D08D0060EFAF /* WeekDayCell.swift */; };
 		BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78A257739DB008FCC23 /* CarouselCardModel.swift */; };
 		BC2734BF2587B7B400EFB42C /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4142F78025759DE5008FCC23 /* CarouselCell.swift */; };
 		BC2BCE56259BE37D002FE716 /* ImagePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2BCE55259BE37D002FE716 /* ImagePickerPopup.swift */; };
@@ -87,7 +88,6 @@
 		BC5403C725FA16EF007A9F73 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5403C625FA16EF007A9F73 /* ArticleModel.swift */; };
 		BC556DD5259934C4000B2B0C /* ModalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC556DD4259934C3000B2B0C /* ModalHeader.swift */; };
 		BC5CBB7725B9CA820028FFC1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC5CBB7925B9CA820028FFC1 /* Localizable.strings */; };
-		BC61D5DE2590324400BF3C3D /* MonthNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC61D5DD2590324400BF3C3D /* MonthNames.swift */; };
 		BC67971125A914A3002B9A71 /* CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971025A914A2002B9A71 /* CalendarViewDelegate.swift */; };
 		BC67971625AAB371002B9A71 /* UIDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971525AAB370002B9A71 /* UIDirection.swift */; };
 		BC67971B25AAC3DB002B9A71 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971A25AAC3DB002B9A71 /* Vibration.swift */; };
@@ -103,7 +103,6 @@
 		BC7EFC0A25863CBB00F35312 /* ResetPasswordPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7EFC0925863CBB00F35312 /* ResetPasswordPopup.swift */; };
 		BC7EFC0F2586899400F35312 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7EFC0E2586899400F35312 /* UIStackView+Ext.swift */; };
 		BC7EFC1A2587AACE00F35312 /* SignupScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7EFC192587AACE00F35312 /* SignupScreenVC.swift */; };
-		BC80D2D6258E9D1B00E4F7B9 /* WeekDayNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80D2D5258E9D1B00E4F7B9 /* WeekDayNames.swift */; };
 		BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */; };
 		BC80D2E6258EAEDE00E4F7B9 /* MonthDayCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC80D2E5258EAEDE00E4F7B9 /* MonthDayCellModel.swift */; };
 		BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC863E26259CAE7C006B7F68 /* UserDefaultsManager.swift */; };
@@ -120,10 +119,12 @@
 		BC9F66AA259260FA00E17117 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F66A9259260FA00E17117 /* Auth.swift */; };
 		BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8D4392588255B00C7BC85 /* UITextField+Ext.swift */; };
 		BCAAC98425759622008B52C8 /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAAC98125759622008B52C8 /* LayoutConstants.swift */; };
+		BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */; };
 		BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */; };
 		BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */; };
 		BCB54CBD258C016400E0E54D /* ImageAndStickerPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CBC258C016400E0E54D /* ImageAndStickerPickerPopup.swift */; };
 		BCB54CC7258C07AB00E0E54D /* AdditionImageOrStickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CC6258C07AB00E0E54D /* AdditionImageOrStickerCell.swift */; };
+		BCB5D20D2605E71D004275A9 /* WeekDayLabelsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */; };
 		BCB98CED2588275200B64DC9 /* NewAdditionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB98CEC2588275200B64DC9 /* NewAdditionTextField.swift */; };
 		BCB98CF7258AB83800B64DC9 /* PickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB98CF6258AB83800B64DC9 /* PickerPopup.swift */; };
 		BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEE8502587C91000D8DE0A /* UsernameTextField.swift */; };
@@ -244,7 +245,8 @@
 		BC1FFACE25F8C2E800A436CA /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		BC2018002603690C0060EFAF /* DraftMetaDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMetaDataContainer.swift; sourceTree = "<group>"; };
 		BC20180B260393F70060EFAF /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		BC20181026039D650060EFAF /* MonthSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSwitcher.swift; sourceTree = "<group>"; };
+		BC20181026039D650060EFAF /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
+		BC20181B2604D08D0060EFAF /* WeekDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayCell.swift; sourceTree = "<group>"; };
 		BC2BCE55259BE37D002FE716 /* ImagePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerPopup.swift; sourceTree = "<group>"; };
 		BC2BCE5A259BE58B002FE716 /* StickerPickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPickerPopup.swift; sourceTree = "<group>"; };
 		BC2BCE5F259BE5BF002FE716 /* StickerIdConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerIdConstants.swift; sourceTree = "<group>"; };
@@ -279,7 +281,6 @@
 		BC5CBB7325B9C9900028FFC1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BC5CBB7825B9CA820028FFC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BC5CBB7A25B9CA890028FFC1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BC61D5DD2590324400BF3C3D /* MonthNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthNames.swift; sourceTree = "<group>"; };
 		BC67971025A914A2002B9A71 /* CalendarViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewDelegate.swift; sourceTree = "<group>"; };
 		BC67971525AAB370002B9A71 /* UIDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDirection.swift; sourceTree = "<group>"; };
 		BC67971A25AAC3DB002B9A71 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
@@ -295,7 +296,6 @@
 		BC7EFC0925863CBB00F35312 /* ResetPasswordPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordPopup.swift; sourceTree = "<group>"; };
 		BC7EFC0E2586899400F35312 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		BC7EFC192587AACE00F35312 /* SignupScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupScreenVC.swift; sourceTree = "<group>"; };
-		BC80D2D5258E9D1B00E4F7B9 /* WeekDayNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayNames.swift; sourceTree = "<group>"; };
 		BC80D2E0258EADA000E4F7B9 /* MonthDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDayCell.swift; sourceTree = "<group>"; };
 		BC80D2E5258EAEDE00E4F7B9 /* MonthDayCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDayCellModel.swift; sourceTree = "<group>"; };
 		BC863E26259CAE7C006B7F68 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -312,10 +312,12 @@
 		BC9F66A9259260FA00E17117 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BCA8D4392588255B00C7BC85 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		BCAAC98125759622008B52C8 /* LayoutConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
+		BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayCellModel.swift; sourceTree = "<group>"; };
 		BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextField.swift; sourceTree = "<group>"; };
 		BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
 		BCB54CBC258C016400E0E54D /* ImageAndStickerPickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAndStickerPickerPopup.swift; sourceTree = "<group>"; };
 		BCB54CC6258C07AB00E0E54D /* AdditionImageOrStickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionImageOrStickerCell.swift; sourceTree = "<group>"; };
+		BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayLabelsStackView.swift; sourceTree = "<group>"; };
 		BCB98CEC2588275200B64DC9 /* NewAdditionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionTextField.swift; sourceTree = "<group>"; };
 		BCB98CF6258AB83800B64DC9 /* PickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopup.swift; sourceTree = "<group>"; };
 		BCBEE8502587C91000D8DE0A /* UsernameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameTextField.swift; sourceTree = "<group>"; };
@@ -511,7 +513,8 @@
 				4141504125A3FD2F00DC369A /* ChartSliderView.swift */,
 				BC7D6C7225A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift */,
 				BC8F2F5625A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift */,
-				BC20181026039D650060EFAF /* MonthSwitcher.swift */,
+				BC20181026039D650060EFAF /* Switcher.swift */,
+				BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -677,8 +680,6 @@
 			isa = PBXGroup;
 			children = (
 				BCAAC98125759622008B52C8 /* LayoutConstants.swift */,
-				BC80D2D5258E9D1B00E4F7B9 /* WeekDayNames.swift */,
-				BC61D5DD2590324400BF3C3D /* MonthNames.swift */,
 				BC32E88B2590EC96008DF8B7 /* imageIdConstants.swift */,
 				BC2BCE5F259BE5BF002FE716 /* StickerIdConstants.swift */,
 				BC32E8902590EE8C008DF8B7 /* ItemCategoryConstants.swift */,
@@ -739,6 +740,7 @@
 				BC39114E258E776B000E6273 /* ItemModel.swift */,
 				41912095258ECDA200CB7BF9 /* HourModel.swift */,
 				BC80D2E5258EAEDE00E4F7B9 /* MonthDayCellModel.swift */,
+				BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */,
 				BC026C3C25900B23008222BD /* PopoverTableViewCellModel.swift */,
 				BC32E8A525923D6D008DF8B7 /* UserModel.swift */,
 				417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */,
@@ -763,6 +765,7 @@
 				BC67DFD325F8CC2B00183EFD /* DraftCardCell.swift */,
 				BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */,
 				BCD401B425FB3FBB00ABA183 /* VideoCardCell.swift */,
+				BC20181B2604D08D0060EFAF /* WeekDayCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1073,7 +1076,6 @@
 				BCBEE8682587D80200D8DE0A /* ResetCodeTextField.swift in Sources */,
 				BC7271D825BC981500779C77 /* UITextView+Ext.swift in Sources */,
 				BCEBF4AF259F965D0001EB40 /* ScreenNavigatorCellModel.swift in Sources */,
-				BC80D2D6258E9D1B00E4F7B9 /* WeekDayNames.swift in Sources */,
 				BCDD83FF2590CFE00026E113 /* NewAdditionInputFieldContainer.swift in Sources */,
 				BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */,
 				BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeader.swift in Sources */,
@@ -1086,6 +1088,7 @@
 				BC39116E258E95A5000E6273 /* ShowAllButton.swift in Sources */,
 				BC7EFC0A25863CBB00F35312 /* ResetPasswordPopup.swift in Sources */,
 				419121192592AF3F00CB7BF9 /* HourPickerView.swift in Sources */,
+				BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */,
 				BC026C3D25900B23008222BD /* PopoverTableViewCellModel.swift in Sources */,
 				BC5400A425799D1D009DC69B /* PrimaryBtn.swift in Sources */,
 				417EE8CE25A02E40002F71E5 /* MajorGoalsScreenVC.swift in Sources */,
@@ -1114,8 +1117,10 @@
 				BC8F2F9025A9049600EF7EA4 /* ModelsConstants.swift in Sources */,
 				BC20180C260393F70060EFAF /* CalendarViewController.swift in Sources */,
 				41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */,
+				BCB5D20D2605E71D004275A9 /* WeekDayLabelsStackView.swift in Sources */,
 				4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */,
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
+				BC20181C2604D08D0060EFAF /* WeekDayCell.swift in Sources */,
 				41328F06258955CD00A86330 /* CardsViewHeader.swift in Sources */,
 				4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */,
 				419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */,
@@ -1137,12 +1142,11 @@
 				BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */,
 				BCBEE85E2587D73000D8DE0A /* PasswordTextField.swift in Sources */,
 				BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */,
-				BC20181126039D650060EFAF /* MonthSwitcher.swift in Sources */,
+				BC20181126039D650060EFAF /* Switcher.swift in Sources */,
 				419121232593023000CB7BF9 /* ItemCardView.swift in Sources */,
 				4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				BC7EFC052586354E00F35312 /* Popup.swift in Sources */,
-				BC61D5DE2590324400BF3C3D /* MonthNames.swift in Sources */,
 				419120E92590948100CB7BF9 /* TypeCardBtn.swift in Sources */,
 				BC7EFC1A2587AACE00F35312 /* SignupScreenVC.swift in Sources */,
 				BC80D2E6258EAEDE00E4F7B9 /* MonthDayCellModel.swift in Sources */,

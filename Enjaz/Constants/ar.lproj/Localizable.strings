@@ -25,13 +25,18 @@
 "Description" = "الوصف";
 "Select" = "اختيار";
 
-// MARK: SetDateAndTimeScreen
+// MARK: CalendarViewController
 "Hijri Calendar" = "التقويم الهجري";
 "Georgian Calendar" = "التقويم الميلادي";
 "A day must be selected" = "يجب تحديد اليوم";
 "Selected date cannot be in the past" = "لا يمكن اختيار تاريخ في الماضي";
 "Monthly View" = "التقويم الشهري";
 "Weekly View" = "التقويم الاسبوعي";
+"First Week" = "الأسبوع الأول";
+"Second Week" = "الأسبوع الثاني";
+"Third Week" = "الأسبوع الثالث";
+"Fourth Week" = "الأسبوع الرابع";
+"Last Week" = "الأسبوع الاخير";
 
 // MARK: ArticlesScreen
 "Most Recent Articles" = "آخر المقالات";

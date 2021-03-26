@@ -22,14 +22,14 @@ class DraftCardCell: UICollectionViewCell {
         backgroundColor = .white
         layer.cornerRadius = cornerRadius
         applyLightShadow()
+        setupSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func setupSubviews() {
         setupThumbnail()
         setupArticleMetaDataContainer()
     }

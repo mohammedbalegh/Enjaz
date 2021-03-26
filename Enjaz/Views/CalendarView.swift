@@ -1,15 +1,22 @@
 import UIKit
 
 class CalendarView: UIView, UIGestureRecognizerDelegate {
-	
+        
     static let width = CGFloat(Int(LayoutConstants.screenWidth * 0.95) - (Int(LayoutConstants.screenWidth * 0.95) % 7))
     
-	var monthDayCellModels: [MonthDayCellModel] = []
+    var monthDayCellModels: [MonthDayCellModel] = []
+    var weekDayCellModels: [WeekDayCellModel] = []
     
-    var calendarPopoverBtnsRow = CalendarPopoverBtnsRow(firstBtn: nil, secondBtn: nil, thirdBtn: nil)
+    var weekDaysNumbers: [[String]] = []
     
-    let monthSwitcher = MonthSwitcher()
+    let monthDayCellReuseIdentifier = "monthDayCell"
+    let weekDayCellReuseIdentifier = "weekDayCell"
     
+    var calendarPopoverBtnsRow = CalendarPopoverBtnsRow()
+    
+    let monthSwitcher = Switcher()
+    let weekSwitcher = Switcher()
+        
     let selectedDaysLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -20,61 +27,80 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         label.text = NSLocalizedString("from", comment: "") + " - " + NSLocalizedString("to", comment: "") + " -"
         label.font = .systemFont(ofSize: PopoverBtn.fontSize)
         label.isHidden = true
+        label.textAlignment = .center
         
         return label
     }()
-	
-	lazy var weekDayLabelsHorizontalStack: UIStackView = {
-		let labels = generateWeekDayLabels()
-		
-		let stackView = UIStackView(arrangedSubviews: labels)
-		stackView.translatesAutoresizingMaskIntoConstraints = false
-		
-		stackView.alignment = .center
-		stackView.distribution = .fillEqually
-		return stackView
-	}()
-	
-	lazy var monthDaysCollectionView: MultipleCellSelectionCollectionView = {
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		layout.minimumLineSpacing = 0
-		layout.minimumInteritemSpacing = 0
-		layout.sectionHeadersPinToVisibleBounds = true
+    
+    let calendarContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 30
+        return view
+    }()
+    
+    let weekDayLabelsStackView = WeekDayLabelsStackView()
+    
+    lazy var monthDaysCollectionView: MultipleCellSelectionCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionHeadersPinToVisibleBounds = true
         let layoutItemWidth = CalendarView.width / 7
         layout.itemSize = CGSize(width: layoutItemWidth, height: (layoutItemWidth * 0.8).rounded())
-		
-		// Collection View
-		let collectionView = MultipleCellSelectionCollectionView(frame: .zero, collectionViewLayout: layout)
-		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		
-		collectionView.clipsToBounds = true
-		collectionView.backgroundColor = .none
+        
+        // Collection View
+        let collectionView = MultipleCellSelectionCollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.clipsToBounds = true
+        collectionView.backgroundColor = .none
         collectionView.allowsMultipleSelection = false
-        collectionView.isScrollEnabled = false
         
-		collectionView.delegate = self
-		collectionView.dataSource = self
-		
-		collectionView.register(MonthDayCell.self, forCellWithReuseIdentifier: monthDayCellReuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-		return collectionView
-	}()
-	
-    let monthDayCellReuseIdentifier = "monthDayCell"
+        collectionView.register(MonthDayCell.self, forCellWithReuseIdentifier: monthDayCellReuseIdentifier)
+        
+        return collectionView
+    }()
     
-    var allowsRangeSelection: Bool = false {
+    lazy var weekDaysCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionHeadersPinToVisibleBounds = true
+        let layoutItemWidth = CalendarView.width / 7
+        layout.itemSize = CGSize(width: layoutItemWidth, height: layoutItemWidth)
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.clipsToBounds = true
+        collectionView.backgroundColor = .none
+        collectionView.allowsMultipleSelection = false
+        collectionView.isHidden = true
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(WeekDayCell.self, forCellWithReuseIdentifier: weekDayCellReuseIdentifier)
+        
+        return collectionView
+    }()
+    
+    var allowsRangeSelection = false {
         didSet {
             monthDaysCollectionView.allowsMultipleSelection = allowsRangeSelection
             selectedDaysLabel.isHidden = !allowsRangeSelection
         }
     }
-        
+    
     var delegate: CalendarViewDelegate?
-    
-	// MARK: State
-    
-	var selectedMonthDayItemRow: Int?
+        
+    var selectedMonthDayItemRow: Int?
     var firstSelectedMonthDayItemRow: Int?
     var lastSelectedMonthDayItemRow: Int?
     
@@ -83,6 +109,35 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     var selectionGestureIsSwitchingToNextMonth: Bool = false
     var currentSelectionIsAcrossMultipleMonths: Bool = false
     var selectedMonthIsLastSelectableMonth: Bool = false
+    
+    var showInWeeklyView = false {
+        didSet {
+            let alreadyShowingCalendarInWeeklyView = showInWeeklyView && !weekDaysCollectionView.isHidden
+            if alreadyShowingCalendarInWeeklyView { return }
+            
+            calendarContainer.animateTwoConsecutiveAnimations(
+                withDuration: 0.3,
+                firstAnimation: { self.calendarContainer.animate(opacityTo: 0, andScaleTo: 0.85) },
+                secondAnimation: { self.calendarContainer.animate(opacityTo: 1, andScaleTo: 1) },
+                midAnimationCompletionHandler: {_ in
+                    self.weekDaysCollectionView.isHidden = !self.showInWeeklyView
+                    self.monthDaysCollectionView.isHidden = !self.weekDaysCollectionView.isHidden
+                    self.weekSwitcher.isHidden = self.weekDaysCollectionView.isHidden
+                    self.monthSwitcher.isHidden = self.monthDaysCollectionView.isHidden
+                    
+                    if self.showInWeeklyView {
+                        self.weekDayLabelsStackView.showWeekDayNumbers()
+                        self.weekDayLabelsStackView.spacing = 15
+                        self.calendarContainer.backgroundColor = .white
+                    } else {
+                        self.weekDayLabelsStackView.hideWeekDayNumbers()
+                        self.weekDayLabelsStackView.spacing = 0
+                        self.calendarContainer.backgroundColor = .none
+                    }
+                }
+            )
+        }
+    }
     
     var selectedDay: Int {
         return monthDayCellModels[selectedMonthDayItemRow ?? 0].dayNumber
@@ -113,11 +168,19 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }
     
     var nextMonthBtn: UIButton {
-        return monthSwitcher.nextMonthBtn
+        return monthSwitcher.nextBtn
     }
     
     var previousMonthBtn: UIButton {
-        return monthSwitcher.previousMonthBtn
+        return monthSwitcher.previousBtn
+    }
+    
+    var nextWeekBtn: UIButton {
+        return weekSwitcher.nextBtn
+    }
+    
+    var previousWeekBtn: UIButton {
+        return weekSwitcher.previousBtn
     }
     
     var calendarTypeLabel: String? {
@@ -138,12 +201,22 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
+    var selectedWeekLabel: String? {
+        get {
+            return weekSwitcher.label.text
+        }
+        set {
+            weekSwitcher.label.text = newValue
+        }
+    }
+    
     var selectedMonthLabel: String? {
         get {
             return monthPopoverBtn.label.text
         }
         set {
-            monthSwitcher.selectedMonthLabel.text = newValue
+            monthSwitcher.label.text = newValue
+            weekSwitcher.secondaryLabel.text = newValue
             monthPopoverBtn.label.text = newValue
         }
     }
@@ -153,7 +226,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
             return yearPopoverBtn.label.text
         }
         set {
-            monthSwitcher.selectedYearLabel.text = newValue
+            monthSwitcher.secondaryLabel.text = newValue
             yearPopoverBtn.label.text = newValue
         }
     }
@@ -164,24 +237,35 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-	init() {
-		super.init(frame: .zero)
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-	// MARK: View Setups
-	
-	override func layoutSubviews() {
-        super.layoutSubviews()
+    var firstWeekDayNumber: Int = 0
+    var lastWeekDayNumber: Int = 0
+    
+    var firstWeekDayColumnIndex: Int = 0
+    var lastWeekDayColumnIndex: Int = 0
+    
+    let hourLabels = ["12 AM"] + (1...11).map { "\($0) AM" } + ["12 PM"] + (1...11).map { "\($0) PM" }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSubviews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: View Setups
+    
+    func setupSubviews() {
         setupMonthSwitcher()
+        setupWeekSwitcher()
         setupPopoverCalendarBtnsRow()
         setupSelectedDaysLabel()
-        setupWeekDayLabelsHorizontalStack()
+        setupCalendarContainer()
+        setupWeekDayLabelsStackView()
         setupMonthDaysCollectionView()
-	}
+        setupWeekDaysCollectionView()
+    }
     
     func setupMonthSwitcher() {
         addSubview(monthSwitcher)
@@ -190,93 +274,97 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         NSLayoutConstraint.activate([
             monthSwitcher.topAnchor.constraint(equalTo: topAnchor),
             monthSwitcher.centerXAnchor.constraint(equalTo: centerXAnchor),
-            monthSwitcher.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
-            monthSwitcher.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            monthSwitcher.widthAnchor.constraint(equalToConstant: 190),
+            monthSwitcher.heightAnchor.constraint(greaterThanOrEqualToConstant: 55),
         ])
     }
-	    
+    
+    func setupWeekSwitcher() {
+        addSubview(weekSwitcher)
+        weekSwitcher.translatesAutoresizingMaskIntoConstraints = false
+        weekSwitcher.isHidden = true
+        
+        weekSwitcher.constrainEdgesToCorrespondingEdges(of: monthSwitcher, top: 0, leading: 0, bottom: 0, trailing: 0)
+    }
+    
     func setupPopoverCalendarBtnsRow() {
         addSubview(calendarPopoverBtnsRow)
         calendarPopoverBtnsRow.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            calendarPopoverBtnsRow.topAnchor.constraint(equalTo: monthSwitcher.bottomAnchor, constant: 15),
+            calendarPopoverBtnsRow.topAnchor.constraint(equalTo: monthSwitcher.bottomAnchor, constant: 10),
             calendarPopoverBtnsRow.centerXAnchor.constraint(equalTo: centerXAnchor),
             calendarPopoverBtnsRow.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
             calendarPopoverBtnsRow.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
-	
+    
     func setupSelectedDaysLabel() {
         addSubview(selectedDaysLabel)
         
         NSLayoutConstraint.activate([
-            selectedDaysLabel.topAnchor.constraint(equalTo: calendarPopoverBtnsRow.bottomAnchor, constant: 10),
+            selectedDaysLabel.topAnchor.constraint(equalTo: calendarPopoverBtnsRow.bottomAnchor, constant: 8),
             selectedDaysLabel.leadingAnchor.constraint(equalTo: calendarPopoverBtnsRow.leadingAnchor),
             selectedDaysLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
-            selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
+            selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: allowsRangeSelection ? 40 : 0),
         ])
     }
     
-	func setupWeekDayLabelsHorizontalStack() {
-		addSubview(weekDayLabelsHorizontalStack)
-		
-        let height: CGFloat = max(LayoutConstants.screenHeight * 0.065, 45)
-		weekDayLabelsHorizontalStack.layer.cornerRadius = height / 2
-		
-		NSLayoutConstraint.activate([
-            weekDayLabelsHorizontalStack.topAnchor.constraint(equalTo: selectedDaysLabel.bottomAnchor, constant: 20),
-			weekDayLabelsHorizontalStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-			weekDayLabelsHorizontalStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-			weekDayLabelsHorizontalStack.heightAnchor.constraint(equalToConstant: height),
-		])
-		
-		weekDayLabelsHorizontalStack.applyAccentColorGradient(size: CGSize(width: CalendarView.width, height: height), cornerRadius: weekDayLabelsHorizontalStack.layer.cornerRadius)
-	}
-	
-	func setupMonthDaysCollectionView() {
-		addSubview(monthDaysCollectionView)
-		
-		monthDaysCollectionView.isUserInteractionEnabled = true
+    func setupCalendarContainer() {
+        addSubview(calendarContainer)
+        calendarContainer.translatesAutoresizingMaskIntoConstraints = false
         
-		NSLayoutConstraint.activate([
-			monthDaysCollectionView.topAnchor.constraint(equalTo: weekDayLabelsHorizontalStack.bottomAnchor, constant: 5),
-			monthDaysCollectionView.widthAnchor.constraint(equalTo: widthAnchor),
-            monthDaysCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            monthDaysCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-		])
-	}
-	
-	// MARK: Tools
-    
-    func generateWeekDayLabels() -> [UILabel] {
-		var labels: [UILabel] = []
-		
-        let formatter = DateFormatter()
-        let weekDayNames = formatter.shortWeekdaySymbols ?? []
-        let islamicallyWeekDayNames = sortWeekDayNamesIslamically(weekDayNames)
-        
-		for weekDayName in islamicallyWeekDayNames {
-			let weekDayLabel = UILabel(frame: .zero)
-            
-			weekDayLabel.text = weekDayName
-			weekDayLabel.textColor = .white
-			weekDayLabel.font = .systemFont(ofSize: 13)
-			weekDayLabel.textAlignment = .center
-			
-			labels.append(weekDayLabel)
-		}
-		
-		return labels
-	}
-    
-    func sortWeekDayNamesIslamically(_ weekDayNames: [String]) -> [String] {
-        return [weekDayNames[6]] + weekDayNames.dropLast()
+        NSLayoutConstraint.activate([
+            calendarContainer.topAnchor.constraint(equalTo: selectedDaysLabel.bottomAnchor, constant: 12),
+            calendarContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            calendarContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            calendarContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
     }
-	
-	func updateMonthDaysModel(numberOfDaysInMonth: Int, startsAtColumnNumber firstColumn: Int) {
-		monthDayCellModels = generateMonthDaysCellModels(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstColumn)
-        monthDaysCollectionView.minimumSelectableItemRow = firstColumn
+    
+    func setupWeekDayLabelsStackView() {
+        calendarContainer.addSubview(weekDayLabelsStackView)
+        weekDayLabelsStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let height: CGFloat = max(LayoutConstants.screenHeight * 0.066, 45)
+        weekDayLabelsStackView.layer.cornerRadius = height / 2
+        
+        NSLayoutConstraint.activate([
+            weekDayLabelsStackView.centerXAnchor.constraint(equalTo: calendarContainer.centerXAnchor),
+            weekDayLabelsStackView.topAnchor.constraint(equalTo: calendarContainer.topAnchor, constant: 15),
+            weekDayLabelsStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: height),
+            weekDayLabelsStackView.widthAnchor.constraint(equalToConstant: CalendarView.width),
+        ])
+        
+        weekDayLabelsStackView.applyAccentColorGradient(size: CGSize(width: CalendarView.width, height: height), cornerRadius: weekDayLabelsStackView.layer.cornerRadius)
+    }
+        
+    func setupMonthDaysCollectionView() {
+        calendarContainer.addSubview(monthDaysCollectionView)
+        
+        monthDaysCollectionView.isUserInteractionEnabled = true
+        
+        NSLayoutConstraint.activate([
+            monthDaysCollectionView.centerXAnchor.constraint(equalTo: calendarContainer.centerXAnchor),
+            monthDaysCollectionView.topAnchor.constraint(equalTo: weekDayLabelsStackView.bottomAnchor, constant: 8),
+            monthDaysCollectionView.bottomAnchor.constraint(equalTo: calendarContainer.bottomAnchor),
+            monthDaysCollectionView.widthAnchor.constraint(equalToConstant: CalendarView.width),
+        ])
+    }
+    
+    func setupWeekDaysCollectionView() {
+        calendarContainer.addSubview(weekDaysCollectionView)
+        
+        weekDaysCollectionView.isUserInteractionEnabled = true
+        
+        weekDaysCollectionView.constrainEdgesToCorrespondingEdges(of: monthDaysCollectionView, top: 0, leading: 0, bottom: 0, trailing: 0)
+    }
+    
+    // MARK: Tools
+    
+    func handleNewMonthSelection(numberOfDaysInMonth: Int, startsAtColumnIndex firstColumnIndex: Int) {
+        
+        monthDaysCollectionView.minimumSelectableItemRow = firstColumnIndex
         selectedMonthDayItemRow = nil
         monthDaysCollectionView.deselectAllItems(animated: true)
         
@@ -284,65 +372,157 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
             monthDaysCollectionView.firstSelectedItemIndexPath = IndexPath(row: monthDaysCollectionView.minimumSelectableItemRow, section: 0)
         }
         
-		monthDaysCollectionView.reloadData()
-	}
-    	
-	func generateMonthDaysCellModels(numberOfDaysInMonth numberOfDays: Int, startsAtColumnNumber firstColumnNumber: Int) -> [MonthDayCellModel] {
-        let dayNumbers = Array(repeating: 0, count: firstColumnNumber) + (1...numberOfDays)
-        let monthDayCellModels: [MonthDayCellModel] = dayNumbers.map {
-            MonthDayCellModel(dayNumber: $0, includedItemsIndices: [])
+        let dayNumbers = getDayNumbers(numberOfDaysInMonth, firstColumnIndex)
+        
+        updateWeekDaysNumbers(dayNumbers: dayNumbers)
+        updateMonthDaysCellModels(dayNumbers: dayNumbers)
+    }
+    
+    func handleNewWeekSelection(selectedWeekIndex: Int) {
+        updateWeekDaysCellModels()
+        let selectedWeekDaysNumbers = weekDaysNumbers[selectedWeekIndex]
+        weekDayLabelsStackView.updateWeekDayNumbers(with: selectedWeekDaysNumbers)
+        (firstWeekDayNumber, lastWeekDayNumber) = getFirstAndLastNumbersInWeekDayNumberLabels(selectedWeekDaysNumbers)
+        selectedWeekLabel = "\(firstWeekDayNumber)-\(lastWeekDayNumber)"
+        firstWeekDayColumnIndex = selectedWeekDaysNumbers.contains("")
+            ? selectedWeekDaysNumbers.lastIndex { $0 == "" }! + 1
+            : 0
+        lastWeekDayColumnIndex = selectedWeekDaysNumbers.count - 1
+    }
+    
+    func getDayNumbers(_ numberOfDays: Int, _ firstColumnIndex: Int) -> [ClosedRange<Int>.Element] {
+        return Array(repeating: 0, count: firstColumnIndex) + (1...numberOfDays)
+    }
+    
+    func updateWeekDaysNumbers(dayNumbers: [Int]) {
+        weekDaysNumbers = []
+        
+        let stringDayNumbers = dayNumbers.map { return $0 == 0 ? "" : String($0)}
+        
+        for i in stride(from: 0, to: stringDayNumbers.count, by: 7) {
+            let weekNumbers = Array(stringDayNumbers[i...min(i + 6, stringDayNumbers.count - 1)])
+            weekDaysNumbers.append(weekNumbers)
         }
         
-        return monthDayCellModels
-	}
+        
+    }
+        
+    func getFirstAndLastNumbersInWeekDayNumberLabels(_ weekDayNumbers: [String]) -> (Int, Int) {
+        let firstNumberIndex = weekDayNumbers.firstIndex { $0 != "" }
+        let lastNumberIndex = weekDayNumbers.lastIndex { $0 != "" }
+        let firstNumber = Int(weekDayNumbers[firstNumberIndex!])!
+        let lastNumber = Int(weekDayNumbers[lastNumberIndex!])!
+        
+        return (firstNumber, lastNumber)
+    }
+        
+    func updateMonthDaysCellModels(dayNumbers: [Int]) {
+        monthDayCellModels = dayNumbers.map {
+            MonthDayCellModel(dayNumber: $0, includedItems: [])
+        }
+        
+        monthDaysCollectionView.reloadData()
+        monthDaysCollectionView.sizeToFit()
+    }
     
+    func updateWeekDaysCellModels() {
+        var index = 0
+        let numberOfCells = 24 * 7
+        weekDayCellModels = (0...numberOfCells - 1).map { _ in
+            let cellIsFirstCellOfRow = index % 7 == 0
+            let hourLabel = cellIsFirstCellOfRow ? hourLabels[index / 7] : ""
+            index += 1
+            
+            return WeekDayCellModel(hourLabel: hourLabel, includedItems: [])
+        }
+        
+        weekDaysCollectionView.reloadData()
+    }
     
-    func updateMonthDaysModelWithDueItems(itemRowsInMonthDaysCollectionViews: [Int]) {
-        guard !itemRowsInMonthDaysCollectionViews.isEmpty else { return }
+    func updateMonthDaysModelWithDueItems(itemsOfMonthDayRows: [Int: [ItemModel]]) {
+        guard !itemsOfMonthDayRows.isEmpty else { return }
         
         resetMonthDayCellModelsIncludedItems()
         
-        for i in 0...itemRowsInMonthDaysCollectionViews.count - 1 {
-            let itemRow = itemRowsInMonthDaysCollectionViews[i]
-            monthDayCellModels[itemRow].includedItemsIndices.append(i)
+        for itemRow in itemsOfMonthDayRows.keys {
+            guard let items = itemsOfMonthDayRows[itemRow] else { continue }
+            monthDayCellModels[itemRow].includedItems = items
         }
         
         monthDaysCollectionView.reloadData()
     }
     
+    func updateWeekDaysModelWithDueItems(itemsOfWeekDayRows: [Int: [ItemModel]]) {
+        guard !itemsOfWeekDayRows.isEmpty else { return }
+        
+        resetWeekDayCellModelsIncludedItems()
+        
+        for itemRow in itemsOfWeekDayRows.keys {
+            guard let items = itemsOfWeekDayRows[itemRow] else { continue }
+            weekDayCellModels[itemRow].includedItems = items
+        }
+        
+        weekDaysCollectionView.reloadData()
+    }
+    
     func resetMonthDayCellModelsIncludedItems() {
         monthDayCellModels = monthDayCellModels.map { monthDayCellModel in
             var updatedMonthDayCellModel = monthDayCellModel
-            updatedMonthDayCellModel.includedItemsIndices = []
+            updatedMonthDayCellModel.includedItems = []
             return updatedMonthDayCellModel
+        }
+    }
+    
+    func resetWeekDayCellModelsIncludedItems() {
+        weekDayCellModels = weekDayCellModels.map { weekDayCellModel in
+            var updatedWeekDayCellModel = weekDayCellModel
+            updatedWeekDayCellModel.includedItems = []
+            return updatedWeekDayCellModel
         }
     }
     
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
         selectedDaysLabel.text = "\(NSLocalizedString("from", comment: "")) \(firstDay) \(NSLocalizedString("to", comment: "")) \(lastDay)"
     }
+
+    func getWeekDayCellRowBy(weekDayIndex: Int, andHour hour: Int) -> Int {
+        assert((0...6) ~= weekDayIndex, "Invalid week day")
+        assert((0...23) ~= hour, "Invalid hour")
+        return hour * 7 + weekDayIndex + firstWeekDayColumnIndex
+    }
 }
 
-
 extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectionViewDataSource {
-		
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return monthDayCellModels.count
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: monthDayCellReuseIdentifier, for: indexPath) as! MonthDayCell
-		
-		cell.viewModel = monthDayCellModels[indexPath.row]
-        
-		return cell
-	}
     
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		selectedMonthDayItemRow = indexPath.row
-        collectionView.deselectAllItemsExceptAt(indexPath, animated: true)
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionView == monthDaysCollectionView ? monthDayCellModels.count : weekDayCellModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == monthDaysCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: monthDayCellReuseIdentifier, for: indexPath) as! MonthDayCell
+            
+            cell.viewModel = monthDayCellModels[indexPath.row]
+            
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekDayCellReuseIdentifier, for: indexPath) as! WeekDayCell
+        
+        cell.viewModel = weekDayCellModels[indexPath.row]
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == monthDaysCollectionView {
+            selectedMonthDayItemRow = indexPath.row
+            collectionView.deselectAllItemsExceptAt(indexPath, animated: true)
+        }
+        
         delegate?.calendarCollectionView(collectionView, didSelectItemAt: indexPath)
-	}
+    }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
@@ -358,7 +538,7 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
         
         let lowerRowBound = min(indexPath.row, firstSelectedItemIndexPath.row)
         let upperRowBound = max(indexPath.row, firstSelectedItemIndexPath.row)
-                
+        
         let lowerBoundCell = monthDaysCollectionView.cellForItem(at: IndexPath(row: lowerRowBound, section: 0))
         let upperBoundCell = monthDaysCollectionView.cellForItem(at: IndexPath(row: upperRowBound, section: 0))
         
@@ -383,7 +563,7 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
                 guard self.isLongPressingOnLastItem else { return }
                 self.handleLastItemLongPress()
                 self.isLongPressingOnLastItem = false
-           }
+            }
         } else {
             isLongPressingOnLastItem = false
         }
@@ -418,7 +598,7 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
     }
     
     func handleLastItemLongPress() {
-
+        
         guard !selectedMonthIsLastSelectableMonth else {
             monthDaysCollectionView.fadeOutAndIn(withDuration: 0.3)
             Vibration.error.vibrate()

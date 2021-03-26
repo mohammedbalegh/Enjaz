@@ -9,7 +9,7 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     
     let scrollView = UIScrollView()
     
-    var appLogo = AppLogo()
+    var appLogo = AppLogo(frame: .zero)
     
     let titleLabel: UILabel = {
         var label = UILabel(frame: .zero)

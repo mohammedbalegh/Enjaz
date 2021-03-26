@@ -6,8 +6,8 @@ class OAuthBtnsHorizontalStack: UIStackView {
     var twitterOAuthBtn = OAuthBtn(type: .twitter)
     var googleOAuthBtn = OAuthBtn(type: .google)
     
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         distribution = .fillEqually
         spacing = 15

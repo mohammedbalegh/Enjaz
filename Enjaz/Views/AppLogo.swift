@@ -1,8 +1,8 @@
 import UIKit
 
 class AppLogo: UIImageView {
-	init() {
-        super.init(frame: .zero)
+	override init(frame: CGRect) {
+        super.init(frame: frame)
 		image = UIImage(named: "logo")
 	}
 	

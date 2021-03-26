@@ -6,14 +6,16 @@ class CalendarViewController: UIViewController {
         let calendarView = CalendarView()
         calendarView.translatesAutoresizingMaskIntoConstraints = false
 
-        calendarView.calendarPopoverBtnsRow = getCalendarViewPopoverBtnsRow()
+        configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: calendarView.calendarPopoverBtnsRow)
         
         calendarView.calendarTypePopoverBtn.addTarget(self, action: #selector(handleCalendarTypePopoverBtnTap), for: .touchUpInside)
         calendarView.viewTypePopoverBtn.addTarget(self, action: #selector(handleViewTypePopoverBtn), for: .touchUpInside)
         calendarView.monthPopoverBtn.addTarget(self, action: #selector(handleMonthPopoverBtnTap), for: .touchUpInside)
         calendarView.yearPopoverBtn.addTarget(self, action: #selector(handleYearPopoverBtnTap), for: .touchUpInside)
-        calendarView.nextMonthBtn.addTarget(self, action: #selector(selectNextMonth), for: .touchUpInside)
-        calendarView.previousMonthBtn.addTarget(self, action: #selector(selectPreviousMonth), for: .touchUpInside)
+        calendarView.nextMonthBtn.addTarget(self, action: #selector(switchToNextMonth), for: .touchUpInside)
+        calendarView.previousMonthBtn.addTarget(self, action: #selector(switchToPreviousMonth), for: .touchUpInside)
+        calendarView.nextWeekBtn.addTarget(self, action: #selector(switchToNextWeek), for: .touchUpInside)
+        calendarView.previousWeekBtn.addTarget(self, action: #selector(switchToPreviousWeek), for: .touchUpInside)
         
         return calendarView
     }()
@@ -41,11 +43,14 @@ class CalendarViewController: UIViewController {
     
     var selectedCalendarTypeIndex = 0
     var selectedViewTypeIndex = 0
+    var selectedWeekIndex = 0
     var selectedMonthIndex = 0
     var selectedYearIndex = 0
     
     var firstSelectedDate: Date?
     var lastSelectedDate: Date?
+    
+    var numberOfWeeksInMonth: Int = 5
     
     var selectedYearIsLastSelectableYear: Bool {
         return selectedYearIndex == yearPopoverDataSource.count - 1
@@ -65,6 +70,30 @@ class CalendarViewController: UIViewController {
     
     var selectedMonthIsLastSelectableMonth: Bool {
         return selectedMonthIsLastMonthInYear && selectedYearIsLastSelectableYear
+    }
+    
+    var selectedMonthIsFirstSelectableMonth: Bool {
+        return selectedMonthIsFirstMonthInYear && selectedYearIsFirstSelectableYear
+    }
+        
+    var selectedWeekIsLastWeekInMonth: Bool {
+        return selectedWeekIndex == numberOfWeeksInMonth - 1
+    }
+    
+    var selectedWeekIsFirstWeekInMonth: Bool {
+        return selectedWeekIndex == 0
+    }
+    
+    var selectedWeekIsLastWeekInYear: Bool {
+        return selectedWeekIsLastWeekInMonth && selectedMonthIsLastMonthInYear
+    }
+    
+    var selectedWeekIsLastSelectableWeek: Bool {
+        return selectedWeekIsLastWeekInYear && selectedYearIsLastSelectableYear
+    }
+    
+    var selectedWeekIsFirstSelectableWeek: Bool {
+        return selectedWeekIndex == 0 && selectedMonthIsFirstMonthInYear && selectedYearIsFirstSelectableYear
     }
     
     var selectedCalendarIdentifier: Calendar.Identifier {
@@ -94,6 +123,8 @@ class CalendarViewController: UIViewController {
         return formatter.monthSymbols
     }
     
+    let weekNames = [NSLocalizedString("First Week", comment: ""), NSLocalizedString("Second Week", comment: ""), NSLocalizedString("Third Week", comment: ""), NSLocalizedString("Fourth Week", comment: ""), NSLocalizedString("Last Week", comment: "")]
+    
     var selectableYears: [String] {
         return (currentYear...currentYear + 5).map { String($0) }
     }
@@ -108,7 +139,6 @@ class CalendarViewController: UIViewController {
         setPopoverBtnsDefaultLabels()
         setupSubviews()
         handleMonthSelection(selectedIndex: currentMonth - 1)
-        selectCurrentDay()
     }
 
     func setupSubviews() {
@@ -119,10 +149,10 @@ class CalendarViewController: UIViewController {
         view.addSubview(calendarView)
         
         NSLayoutConstraint.activate([
-            calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 35),
-            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            calendarView.widthAnchor.constraint(equalToConstant: CalendarView.width),
-            calendarView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.5),
+            calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 22),
+            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            calendarView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.6),
         ])
     }
     
@@ -165,6 +195,8 @@ class CalendarViewController: UIViewController {
         
         calendarView.calendarTypeLabel = calendarTypePopoverDataSource[selectedIndex]
         calendarView.selectedMonthIsLastSelectableMonth = selectedMonthIsLastSelectableMonth
+        calendarView.previousMonthBtn.isEnabled = !selectedMonthIsFirstSelectableMonth
+        calendarView.nextMonthBtn.isEnabled = !selectedMonthIsLastSelectableMonth
         
         monthPopoverDataSource = monthsNames
         yearPopoverDataSource = selectableYears
@@ -173,18 +205,30 @@ class CalendarViewController: UIViewController {
         calendarView.selectedYearLabel = yearPopoverDataSource[selectedYearIndex]
         
         updateMonthDays()
-        selectCurrentDay()
     }
     
     func handleViewTypeSelection(selectedIndex: Int) {
         selectedViewTypeIndex = selectedIndex
         calendarView.viewTypeLabel = viewTypePopoverDataSource[selectedIndex]
+        handleWeekSelection(selectedIndex: 0)
+        
+        calendarView.showInWeeklyView = selectedIndex == 1
+    }
+    
+    func handleWeekSelection(selectedIndex: Int) {
+        selectedWeekIndex = selectedIndex
+        calendarView.previousWeekBtn.isEnabled = !selectedWeekIsFirstSelectableWeek
+        calendarView.nextWeekBtn.isEnabled = !selectedWeekIsLastSelectableWeek
+        calendarView.handleNewWeekSelection(selectedWeekIndex: selectedIndex)
     }
     
     func handleMonthSelection(selectedIndex: Int) {
         selectedMonthIndex = selectedIndex
         calendarView.selectedMonthLabel = monthPopoverDataSource[selectedIndex]
         calendarView.selectedMonthIsLastSelectableMonth = selectedMonthIsLastSelectableMonth
+        
+        calendarView.previousMonthBtn.isEnabled = !selectedMonthIsFirstSelectableMonth
+        calendarView.nextMonthBtn.isEnabled = !selectedMonthIsLastSelectableMonth
         
         updateMonthDays()
     }
@@ -201,9 +245,8 @@ class CalendarViewController: UIViewController {
         
     // MARK: TOOLS
     
-    func getCalendarViewPopoverBtnsRow() -> CalendarPopoverBtnsRow {
-        return CalendarPopoverBtnsRow(firstBtn: nil, secondBtn: nil, thirdBtn: nil)
-    }
+//  @abstract
+    func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {}
     
     func presentPopover(frame: CGRect, numberOfOptions: Int) {
         popoverTableVC.modalPresentationStyle = .popover
@@ -220,17 +263,10 @@ class CalendarViewController: UIViewController {
 
         present(popoverTableVC, animated: true)
     }
-    
-    func selectCurrentDay() {
-        let currentDayIndexPath = IndexPath(row: currentDay - 1 + calendarView.monthDaysCollectionView.minimumSelectableItemRow, section: 0)
         
-        calendarView.monthDaysCollectionView.selectItem(at: currentDayIndexPath, animated: true, scrollPosition: .centeredVertically)
-        calendarView.collectionView(calendarView.monthDaysCollectionView, didSelectItemAt: currentDayIndexPath)
-    }
-    
-    @objc func selectNextMonth() {
+    @objc func switchToNextMonth() {
         if selectedMonthIsLastMonthInYear {
-            guard !selectedYearIsLastSelectableYear else {
+            guard !selectedMonthIsLastSelectableMonth else {
                 calendarView.selectedMonthIsLastSelectableMonth = true
                 return
             }
@@ -244,11 +280,9 @@ class CalendarViewController: UIViewController {
         handleMonthSelection(selectedIndex: newSelectedMonthIndex)
     }
     
-    @objc func selectPreviousMonth() {
+    @objc func switchToPreviousMonth() {
         if selectedMonthIsFirstMonthInYear {
-            guard !selectedYearIsFirstSelectableYear else {
-                return
-            }
+            guard !selectedMonthIsFirstSelectableMonth else { return }
             
             let newSelectedYearIndex = selectedYearIndex - 1
             handleYearSelection(selectedIndex: newSelectedYearIndex)
@@ -257,6 +291,32 @@ class CalendarViewController: UIViewController {
         let newSelectedMonthIndex = selectedMonthIndex == 0 ? 11 : selectedMonthIndex - 1
         
         handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+    }
+    
+    @objc func switchToNextWeek() {
+        var newSelectedWeekIndex: Int!
+        if selectedWeekIsLastWeekInMonth {
+            guard !selectedWeekIsLastSelectableWeek else { return }
+            
+            newSelectedWeekIndex = (selectedWeekIndex + 1) % numberOfWeeksInMonth
+            switchToNextMonth()
+        }
+        
+        newSelectedWeekIndex = newSelectedWeekIndex ?? (selectedWeekIndex + 1) % numberOfWeeksInMonth
+        
+        handleWeekSelection(selectedIndex: newSelectedWeekIndex)
+    }
+    
+    @objc func switchToPreviousWeek() {
+        if selectedWeekIsFirstWeekInMonth {
+            guard !selectedWeekIsFirstSelectableWeek else { return }
+            
+            switchToPreviousMonth()
+        }
+        
+        let newSelectedWeekIndex = selectedWeekIndex == 0 ? numberOfWeeksInMonth - 1 : selectedWeekIndex - 1
+        
+        handleWeekSelection(selectedIndex: newSelectedWeekIndex)
     }
         
     func setPopoverBtnsDefaultLabels() {
@@ -272,7 +332,13 @@ class CalendarViewController: UIViewController {
         
         let (numberOfDaysInMonth, firstWeekDayNumber) = DateAndTimeTools.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarIdentifier: selectedCalendarIdentifier)
         
-        calendarView.updateMonthDaysModel(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)
+        numberOfWeeksInMonth = getNumberOfWeeksInMonth(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)
+        
+        calendarView.handleNewMonthSelection(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnIndex: firstWeekDayNumber - 1)
+    }
+    
+    func getNumberOfWeeksInMonth(numberOfDaysInMonth: Int, startsAtColumnNumber firstColumnNumber: Int) -> Int {
+        return Int(ceil(Double(numberOfDaysInMonth + firstColumnNumber) / 7))
     }
     
 }
@@ -282,7 +348,7 @@ extension CalendarViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-
+    
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
     }

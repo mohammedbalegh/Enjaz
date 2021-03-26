@@ -25,13 +25,18 @@
 "Description" = "Description";
 "Select" = "Select";
 
-// MARK: SetDateAndTimeScreen
+// MARK: CalendarViewController
 "Hijri Calendar" = "Hijri Calendar";
 "Georgian Calendar" = "Georgian Calendar";
 "A day must be selected" = "A day must be selected";
 "Selected date cannot be in the past" = "Selected date cannot be in the past";
 "Monthly View" = "Monthly View";
 "Weekly View" = "Weekly View";
+"First Week" = "First Week";
+"Second Week" = "Second Week";
+"Third Week" = "Third Week";
+"Fourth Week" = "Fourth Week";
+"Last Week" = "Last Week";
 
 // MARK: ArticlesScreen
 "Most Recent Articles" = "Most Recent Articles";

@@ -91,14 +91,12 @@ class TypeCardBtn: UIButton {
     
     func setupTypeTitle() {
         addSubview(typeTitle)
-        
-        let width = self.frame.width * 0.267
-        
+                
         NSLayoutConstraint.activate([
             typeTitle.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             typeTitle.topAnchor.constraint(equalTo: typeImage.bottomAnchor, constant: self.frame.height * 0.073),
-            typeTitle.widthAnchor.constraint(equalToConstant: width),
-            typeTitle.heightAnchor.constraint(equalToConstant: width * 0.6)
+            typeTitle.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+            typeTitle.heightAnchor.constraint(greaterThanOrEqualToConstant: 18)
         ])
     }
     

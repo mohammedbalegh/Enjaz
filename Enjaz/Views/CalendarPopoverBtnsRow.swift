@@ -53,20 +53,14 @@ class CalendarPopoverBtnsRow: UIView {
     
     override private init(frame: CGRect) {
         super.init(frame: frame)
-    }
-    
-    convenience init(firstBtn: PopoverBtnTypes? = nil, secondBtn: PopoverBtnTypes? = nil, thirdBtn: PopoverBtnTypes? = nil) {
-        self.init(frame: .zero)
-        
-        showSpecifiedBtns(firstBtn, secondBtn, thirdBtn)
+        setupSubviews()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func setupSubviews() {
         setupCalendarTypePopoverBtn()
         setupViewTypePopoverBtn()
         setupYearPopoverBtn()
@@ -117,7 +111,9 @@ class CalendarPopoverBtnsRow: UIView {
         ])
     }
     
-    private func showSpecifiedBtns(_ firstBtn: PopoverBtnTypes?, _ secondBtn: PopoverBtnTypes?, _ thirdBtn: PopoverBtnTypes?) {
+    func configureWithBtns(firstBtn: PopoverBtnTypes? = nil, secondBtn: PopoverBtnTypes? = nil, thirdBtn: PopoverBtnTypes? = nil) {
+        subviews.forEach { $0.isHidden = true }
+        
         for button in [firstBtn, secondBtn, thirdBtn] {
             switch button {
             case .calendarType:

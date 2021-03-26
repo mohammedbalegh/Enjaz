@@ -232,26 +232,34 @@ extension UIView {
     }
     
     func applyAccentColorGradient(size: CGSize, cornerRadius: CGFloat = 0, axis: NSLayoutConstraint.Axis = .horizontal) {
-        let layer: CAGradientLayer = CAGradientLayer()
-        layer.frame.size = size
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame.size = size
         
-        layer.cornerRadius = cornerRadius
+        gradientLayer.cornerRadius = cornerRadius
         
         let startColor = UIColor.gradientStartColor.cgColor
         let endColor = UIColor.gradientEndColor.cgColor
         
         if axis == .horizontal {
-            layer.startPoint = CGPoint(x: 0, y: 0.5)
-            layer.endPoint = CGPoint(x: 1, y: 0.5)
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
         } else {
-            layer.startPoint = CGPoint(x: 0.5, y: 0)
-            layer.endPoint = CGPoint(x: 0.5, y: 1)
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         }
         
-        layer.colors = [startColor, endColor]
-        self.layer.insertSublayer(layer, at: 0)
+        gradientLayer.colors = [startColor, endColor]
+        layer.insertSublayer(gradientLayer, at: 0)
     }
     
+    func toggleGradientLayer(show: Bool? = nil) {
+        for sublayer in layer.sublayers ?? [] {
+            if let gradientLayer = sublayer as? CAGradientLayer {
+                gradientLayer.isHidden = !(show ?? gradientLayer.isHidden)
+            }
+        }
+    }
+        
     func roundCorners(_ corners: [UIDirectionalRectCorner], withRadius radius: CGFloat? = nil) {
         if let radius = radius {
             layer.cornerRadius = radius
@@ -306,7 +314,7 @@ extension UIView {
     }
     
     /// Animates two consecutive animations while executing the `midAnimationCompletionHandler` between the two animations.
-    private func animateTwoConsecutiveAnimations(withDuration duration: TimeInterval,
+    func animateTwoConsecutiveAnimations(withDuration duration: TimeInterval,
                                                  firstAnimation: @escaping () -> Void,
                                                  secondAnimation: @escaping () -> Void,
                                                  midAnimationCompletionHandler: ( (_ : Bool) -> Void)? = nil,

@@ -12,17 +12,17 @@ class CustomAccessoryView: UIView {
         return button
     }()
     
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         backgroundColor = UIColor.systemGray5.withAlphaComponent(0.6)
+        setupSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func setupSubviews() {
         setupDoneBtn()
     }
     

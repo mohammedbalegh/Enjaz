@@ -2,7 +2,16 @@ import UIKit
 
 class NewAdditionInputFieldContainer: UIView {
     
-    var input: (UIView & NewAdditionInputFieldContainerInput)?
+    var input: (UIView & NewAdditionInputFieldContainerInput)? {
+        didSet {
+            guard let input = input else { return }
+            
+            addSubview(input)
+            input.translatesAutoresizingMaskIntoConstraints = false
+            
+            input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
+        }
+    }
     
     var fieldName: String = ""
     
@@ -22,14 +31,4 @@ class NewAdditionInputFieldContainer: UIView {
         layer.borderWidth = 1
         backgroundColor = .white
     }
-    
-    override func layoutSubviews() {
-        guard let input = input else { return }
-        
-        addSubview(input)
-        input.translatesAutoresizingMaskIntoConstraints = false
-        
-        input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
-    }
-        
 }

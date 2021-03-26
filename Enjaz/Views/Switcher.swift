@@ -1,19 +1,18 @@
 import UIKit
 
-class MonthSwitcher: UIStackView {
+class Switcher: UIStackView {
 
-    let previousMonthBtn: UIButton = {
+    let previousBtn: UIButton = {
         let arrowIcon = UIImage(systemName: "chevron.backward")
         let button = UIButton(type: .system)
         
-        button.frame.size = CGSize(width: 30, height: 30)
         button.setImage(arrowIcon, for: .normal)
         button.tintColor = .accentColor
         
         return button
     }()
     
-    let nextMonthBtn: UIButton = {
+    let nextBtn: UIButton = {
         let arrowIcon = UIImage(systemName: "chevron.forward")
         let button = UIButton(type: .system)
         
@@ -23,32 +22,34 @@ class MonthSwitcher: UIStackView {
         return button
     }()
     
-    let selectedMonthLabel: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.textColor = .darkText
+        label.textAlignment = .center
         return label
     }()
     
-    lazy var monthSwitcherStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [previousMonthBtn, selectedMonthLabel, nextMonthBtn])
+    lazy var LabelAndBtnsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [previousBtn, label, nextBtn])
         stackView.distribution = .fillProportionally
-        stackView.spacing = 16
         return stackView
     }()
     
-    let selectedYearLabel: UILabel = {
+    let secondaryLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 13)
+        label.textAlignment = .center
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         axis = .vertical
-        alignment = .center
-        addArrangedSubview(monthSwitcherStackView)
-        addArrangedSubview(selectedYearLabel)
+        alignment = .fill
+        distribution = .fillProportionally
+        addArrangedSubview(LabelAndBtnsStackView)
+        addArrangedSubview(secondaryLabel)
     }
     
     required init(coder: NSCoder) {
