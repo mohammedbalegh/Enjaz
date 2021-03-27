@@ -6,11 +6,11 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
             label.text = viewModel.label
             subLabel.text = viewModel.subLabel
-            iconImageView.image = viewModel.image
+            iconImageView.source = viewModel.imageSource
         }
     }
     
-    let iconImageView = UIImageView(frame: .zero)
+    let iconImageView = DynamicImageView()
     let label: UILabel = {
         let label = UILabel(frame: .zero)
         

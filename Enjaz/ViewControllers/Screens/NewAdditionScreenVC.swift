@@ -113,7 +113,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         return stackView
     }()
     
-    let taskCategoryModels = ItemCategoryConstants
+    var itemCategoryModels: [ItemCategoryModel] = []
     
     var alertPopup = AlertPopup(hideOnOverlayTap: true)
     
@@ -140,6 +140,11 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         definesPresentationContext = true
         
         setupSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        itemCategoryModels = RealmManager.retrieveItemCategories()
     }
     
     func setupSubviews() {
@@ -256,9 +261,9 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         itemCategory = selectedValueIndex
         
-        let selectedAdditionCategory = taskCategoryModels[selectedValueIndex]
+        let selectedAdditionCategory = itemCategoryModels[selectedValueIndex]
         
-        additionCategoryPopoverBtn.input?.inputText = selectedAdditionCategory
+        additionCategoryPopoverBtn.input?.inputText = selectedAdditionCategory.localized_name
         additionCategoryPickerBottomSheet.dismiss(animated: true)
     }
     
@@ -406,11 +411,11 @@ extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return taskCategoryModels.count
+        return itemCategoryModels.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return taskCategoryModels[row]
+        return itemCategoryModels[row].localized_name
     }
     
 }

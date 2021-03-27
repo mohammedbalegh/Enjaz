@@ -5,11 +5,13 @@ class TableViewCustomHeader: UITableViewCell {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
+        label.backgroundColor = .none
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .mainScreenBackgroundColor
         setupLabel()
     }
         

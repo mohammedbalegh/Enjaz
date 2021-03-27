@@ -11,9 +11,9 @@ class MonthGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
         
         view.backgroundColor = .mainScreenBackgroundColor
         screenNavigatorCellModels = [
-            ScreenNavigatorCellModel(image: UIImage(named: "completedGoalsIcon"), label: "أهداف منتهية", subLabel: "\(completedGoals.count) هدف"),
-            ScreenNavigatorCellModel(image: UIImage(named: "upcomingGoalsIcon"), label: "أهداف قادمة", subLabel: "\(upcomingGoals.count)  هدف"),
-            ScreenNavigatorCellModel(image: UIImage(named: "healthSideIcon"), label: "تقييم النفس", subLabel: "لا يوجد تقييم"),
+            ScreenNavigatorCellModel(imageSource: "completedGoalsIcon", label: "أهداف منتهية", subLabel: "\(completedGoals.count) هدف"),
+            ScreenNavigatorCellModel(imageSource: "upcomingGoalsIcon", label: "أهداف قادمة", subLabel: "\(upcomingGoals.count)  هدف"),
+            ScreenNavigatorCellModel(imageSource: "healthSideIcon", label: "تقييم النفس", subLabel: "لا يوجد تقييم"),
         ]
         
         tableViewTitle = "أهدافك"

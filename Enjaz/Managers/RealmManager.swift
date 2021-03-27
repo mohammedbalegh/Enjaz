@@ -6,6 +6,10 @@ class RealmManager {
     
     static let realm = try! Realm()
     
+    static var itemCategoriesCount: Int {
+        return retrieveItemCategories().count
+    }
+    
     static func saveItem(_ item: ItemModel) {
         RealmManager.realm.beginWrite()
         RealmManager.realm.add(item)
@@ -45,4 +49,28 @@ class RealmManager {
         return retrieveGoals(withCompletedEqualTo: false)
     }
     
+    static func saveItemCategories(_ itemCategories: [ItemCategoryModel]) {
+        RealmManager.realm.beginWrite()
+        for itemCategory in itemCategories {
+            RealmManager.realm.add(itemCategory)
+        }
+        try! RealmManager.realm.commitWrite()
+    }
+    
+    static func saveItemCategory(_ itemCategory: ItemCategoryModel) {
+        RealmManager.realm.beginWrite()
+        RealmManager.realm.add(itemCategory)
+        try! RealmManager.realm.commitWrite()
+    }
+    
+    static func retrieveItemCategories() -> [ItemCategoryModel] {
+        let itemCategories: [ItemCategoryModel] = RealmManager.realm.objects(ItemCategoryModel.self).map({ $0 })
+        return itemCategories
+    }
+    
+    static func retrieveItemCategoryById(_ id: Int) -> ItemCategoryModel? {
+        let itemCategory = RealmManager.realm.object(ofType: ItemCategoryModel.self, forPrimaryKey: id)
+        
+        return itemCategory
+    }
 }

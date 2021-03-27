@@ -19,7 +19,7 @@ class CalendarScreenVC: CalendarViewController {
     // MARK: Tools
         
     override func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {
-        calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .viewType, thirdBtn: .year)
+        calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .viewType)
     }
     
     func configureCalendarView() {

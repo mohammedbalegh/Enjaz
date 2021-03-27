@@ -69,15 +69,19 @@ class CardBodyView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 8
-        updateMask()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-        
+    
+    override func layoutSubviews() {
+         super.layoutSubviews()
+         self.backgroundColor = .white
+         self.layer.cornerRadius = 8
+         updateMask()
+     }
+    
     override func didMoveToWindow() {
         guard window != nil else { return }
         guard superview != nil else { return }

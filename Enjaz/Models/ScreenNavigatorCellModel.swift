@@ -1,7 +1,7 @@
 import UIKit
 
 struct ScreenNavigatorCellModel {
-    let image: UIImage?
+    let imageSource: String
     let label: String
     let subLabel: String
 }
