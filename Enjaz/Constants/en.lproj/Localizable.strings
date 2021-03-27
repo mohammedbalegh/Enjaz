@@ -37,6 +37,17 @@
 "No articles yet" = "No articles yet";
 "No videos yet" = "No videos yet";
 
+// MARK: ContactUsScreen
+"Client name" = "Client name";
+"Phone number" = "Phone number";
+"Message content" = "Message content";
+"Full name" = "Full name";
+"This is message example" = "This is message example";
+"Send" = "Send";
+"Name field can't be empty" = "Name field can't be empty";
+"Please enter a valid phone number" = "Please enter a valid phone number";
+"Message field can't be empty" = "Message field can't be empty";
+
 // MARK: SideMenu
 "Draft" = "Draft";
 "Note" = "Note";

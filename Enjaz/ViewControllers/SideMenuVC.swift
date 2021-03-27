@@ -48,6 +48,7 @@ class SideMenuVC: UIViewController {
     
     let signOutBtn = SideMenuBtn(label: NSLocalizedString("Sign Out", comment: ""), image: UIImage(named: "signOutIcon"))
     
+    
     var user = UserDefaultsManager.user
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +65,7 @@ class SideMenuVC: UIViewController {
         setupSubviews()
         
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
+        contactUsBtn.addTarget(self, action: #selector(handleContactUsBtnTap), for: .touchUpInside)
     }
     
     func setupSubviews() {
@@ -121,6 +123,10 @@ class SideMenuVC: UIViewController {
     }
     
     // MARK: Event Handlers
+    
+    @objc func handleContactUsBtnTap() {
+        navigationController?.pushViewController(ContactUsScreenVC(), animated: true)
+    }
     
     @objc func handleDraftBtnTap() {
         navigationController?.pushViewController(DraftScreenVC(), animated: true)
