@@ -46,6 +46,7 @@ class SelfEvaluationScreenVC: SelectableScreenVC {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
+        title = "تقييم النفس"
         
         
         setupSubviews()

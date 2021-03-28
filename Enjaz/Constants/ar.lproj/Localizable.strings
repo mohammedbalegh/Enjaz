@@ -44,6 +44,28 @@
 "No articles yet" = "لا يوجد مقالات حتى الآن";
 "No videos yet" = "لا يوجد فيدوهات حتى الآن";
 
+//MARK: PersonalAspectsScreen
+"Personal Aspects" = "الجوانب الشخصية";
+"Write what you know about your self" = "أكتب ما تعرفه عن نفسك هنا";
+"Who am i" = "من أنا";
+"My mission in life" = "رسالتي في الحياة";
+"Write your life mission" = "أكتب رسالتك في الحياة";
+"Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year" = "ترجم ما تعرفه عن نفسك من احلام و امنيات و تطلعات  و غيرها الي اهداف,لتحقق منها تقدم هذا العام";
+"Your life mission is you answer to the \"why\" question , what are the values that you stand behind, you life mission should be comprehensive, inspiring, and rememberable" = "رسالتك في الحياة هي إجابة عن سؤال لماذا ؟ما القيم التي تؤيدها و هل انت مستمر في تنفيذها , الرسالة تكون مختصرة و ملهمة و قابلة للتذكر";
+"My vision in life" = "رؤيتي في الحياة";
+"life vision answers the \"why\" and \"where\" , where will your feature be ?, what it will be like, what will you do in 5 or 10 years " = "الرؤية اتجيب عن سؤال \"اين\" و \" لماذا \" ؟أين سيكون المستقبل؟ كيف سيكون ؟ و ماذا ستقرم بعر خمس او عشر سنوات";
+"Write your life vision" = "أكتب رؤيتك في الحياة";
+
+//MARK: AddNote
+"Add Note" = "إضافة مفكرة";
+"Note title" = "عنوان المفكرة";
+"Note category" = "تصنيف المفكرة";
+"Write whats on your mind" = "أضف ما يدور في بالك";
+"Note category" = "تصنيف المفكرة";
+"Note title Can't be empty" = "يجب إدخال عنوان للمفكرة";
+"Note category can't be empty" = "برجاء اختياز تصنيف المفكرة";
+"Please write whats on your mind" = "برجاء إكتب ما يدور في بالك";
+
 // MARK: SideMenu Buttons
 "Draft" = "المدونة";
 "Note" = "المفكرة";

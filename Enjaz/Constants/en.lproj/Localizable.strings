@@ -44,6 +44,28 @@
 "No articles yet" = "No articles yet";
 "No videos yet" = "No videos yet";
 
+//MARK: PersonalAspectsScreen
+"Personal Aspects" = "Personal Aspects";
+"Write what you know about your self" = "Write what you know about your self";
+"Who am i" = "Who am i";
+"My mission in life" = "My mission in life";
+"Write your life mission" = "Write your life mission";
+"Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year" = "Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year";
+"Your life mission is you answer to the \"why\" question , what are the values that you stand behind, you life mission should be comprehensive, inspiring, and rememberable" = "Your life mission is you answer to the \"why\" question , what are the values that you stand behind, you life mission should be comprehensive, inspiring, and rememberable";
+"My vision in life" = "My vision in life";
+"life vision answers the \"why\" and \"where\" , where will your feature be ?, what it will be like, what will you do in 5 or 10 years " = "life vision answers the \"why\" and \"where\" , where will your feature be ?, what it will be like, what will you do in 5 or 10 years ";
+"Write your life vision" = "Write your life vision";
+
+//MARK: AddNote
+"Add Note" = "Add Note";
+"Note title" = "Note title";
+"Note category" = "Note category";
+"Write whats on your mind" = "Write whats on your mind";
+"Note category" = "Note category";
+"Note title can't be empty" = "Note title Can't be empty";
+"Note category can't be empty" = "Note category can't be empty";
+"Please write whats on your mind" = "Please write whats on your mind";
+
 // MARK: SideMenu
 "Draft" = "Draft";
 "Note" = "Note";
