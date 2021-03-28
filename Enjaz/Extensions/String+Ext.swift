@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import Foundation
-=======
 import UIKit
->>>>>>> origin/personalAspects
 
 extension String {
 	

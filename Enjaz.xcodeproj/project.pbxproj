@@ -535,13 +535,9 @@
 				4141504125A3FD2F00DC369A /* ChartSliderView.swift */,
 				BC7D6C7225A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift */,
 				BC8F2F5625A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift */,
-<<<<<<< HEAD
 				BC20181026039D650060EFAF /* Switcher.swift */,
 				BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */,
 				BC7FE4C9260F69630012F5F4 /* DynamicImageView.swift */,
-=======
-				41798C0E26089E6100DF5ECF /* NoteTitleTextField.swift */,
->>>>>>> origin/personalAspects
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -571,13 +567,7 @@
 				4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */,
 				4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */,
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
-<<<<<<< HEAD
 				BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */,
-=======
-				41798BE32604776B00DF5ECF /* PersonalAspectsScreenVC.swift */,
-				41798BF72607211B00DF5ECF /* AddNoteScreenVC.swift */,
-				41798BFF26072C0800DF5ECF /* NotesScreenVC.swift */,
->>>>>>> origin/personalAspects
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -783,11 +773,7 @@
 				BCEBF4AE259F965D0001EB40 /* ScreenNavigatorCellModel.swift */,
 				BC5403C625FA16EF007A9F73 /* ArticleModel.swift */,
 				BCD401A125FB3DBF00ABA183 /* VideoModel.swift */,
-<<<<<<< HEAD
 				BCABE44B260F49D000E790F2 /* ItemCategoryModel.swift */,
-=======
-				41798BED26048DC300DF5ECF /* PersonalAspectsModel.swift */,
->>>>>>> origin/personalAspects
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -806,11 +792,7 @@
 				BC67DFD325F8CC2B00183EFD /* DraftCardCell.swift */,
 				BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */,
 				BCD401B425FB3FBB00ABA183 /* VideoCardCell.swift */,
-<<<<<<< HEAD
 				BC20181B2604D08D0060EFAF /* WeekDayCell.swift */,
-=======
-				41798BE82604823300DF5ECF /* PersonalAspectsCell.swift */,
->>>>>>> origin/personalAspects
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1069,11 +1051,7 @@
 				417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */,
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
 				BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */,
-<<<<<<< HEAD
 				BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */,
-=======
-				41798BF82607211B00DF5ECF /* AddNoteScreenVC.swift in Sources */,
->>>>>>> origin/personalAspects
 				BC8F2F5725A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
 				BC32E88C2590EC96008DF8B7 /* imageIdConstants.swift in Sources */,
@@ -1169,11 +1147,7 @@
 				BCEBF48E259F76690001EB40 /* SelectGoalTypeScreenVC.swift in Sources */,
 				BCC429D625A2DCD900803CE9 /* NewAdditionInputFieldContainerInput.swift in Sources */,
 				BC8F2F9025A9049600EF7EA4 /* ModelsConstants.swift in Sources */,
-<<<<<<< HEAD
 				BC20180C260393F70060EFAF /* CalendarViewController.swift in Sources */,
-=======
-				41798BE92604823300DF5ECF /* PersonalAspectsCell.swift in Sources */,
->>>>>>> origin/personalAspects
 				41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */,
 				BCB5D20D2605E71D004275A9 /* WeekDayLabelsStackView.swift in Sources */,
 				4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */,
