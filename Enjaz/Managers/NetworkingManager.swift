@@ -204,6 +204,11 @@ class NetworkingManager {
         
         completionHandler(videos)
     }
+    
+    // @stub
+    static func sendEmail(name: String, phoneNumber: String, messageContent: String) {
+        
+    }
         
     private static func parseDataIntoDictionary(data: Data) -> [String: Any]? {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])

@@ -65,6 +65,16 @@
 "Note title Can't be empty" = "يجب إدخال عنوان للمفكرة";
 "Note category can't be empty" = "برجاء اختياز تصنيف المفكرة";
 "Please write whats on your mind" = "برجاء إكتب ما يدور في بالك";
+// MARK: ContactUsScreen
+"Client name" = "اسم العميل";
+"Phone number" = "رقم الهاتف";
+"Message content" = "نص الرسالة";
+"Full name" = "الاسم كامل";
+"This is message example" = "هذا مثال للرسالة";
+"Send" = "أرسال";
+"Name field can't be empty" = "يجب ادخال الاسم";
+"Please enter a valid phone number" = "برجاء إدخال رقم هاتف صحيح";
+"Message field can't be empty" = "يجب ادخال نص رسالة";
 
 // MARK: SideMenu Buttons
 "Draft" = "المدونة";

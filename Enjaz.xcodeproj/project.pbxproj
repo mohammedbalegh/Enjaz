@@ -133,6 +133,8 @@
 		BCAAC98425759622008B52C8 /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCAAC98125759622008B52C8 /* LayoutConstants.swift */; };
 		BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABE44B260F49D000E790F2 /* ItemCategoryModel.swift */; };
 		BCABE451260F52ED00E790F2 /* AppDataInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABE450260F52ED00E790F2 /* AppDataInitializer.swift */; };
+		BCACC4722614D461005F7F59 /* ContactUsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */; };
+		BCACC4772614D470005F7F59 /* ContactUsTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */; };
 		BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */; };
 		BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */; };
 		BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */; };
@@ -340,6 +342,8 @@
 		BCAAC98125759622008B52C8 /* LayoutConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
 		BCABE44B260F49D000E790F2 /* ItemCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategoryModel.swift; sourceTree = "<group>"; };
 		BCABE450260F52ED00E790F2 /* AppDataInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataInitializer.swift; sourceTree = "<group>"; };
+		BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsScreenVC.swift; sourceTree = "<group>"; };
+		BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsTextFieldView.swift; sourceTree = "<group>"; };
 		BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayCellModel.swift; sourceTree = "<group>"; };
 		BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextField.swift; sourceTree = "<group>"; };
 		BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
@@ -547,6 +551,7 @@
 				BC93D5902613CEB8005DE3AC /* NoteTitleTextField.swift */,
 				BC93D5952613CEBF005DE3AC /* noteCategoryView.swift */,
 				BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */,
+				BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
 				BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */,
 				BC541A562610DF3B00341BDE /* PersonalAspectsScreenVC.swift */,
+				BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1092,6 +1098,7 @@
 				BC9F669A25924B6900E17117 /* NetworkingUrls.swift in Sources */,
 				BCDE2EBF2587B4DC0040345E /* StartScreenVC.swift in Sources */,
 				4141500925A1875A00DC369A /* MonthGoalsScreenVC.swift in Sources */,
+				BCACC4722614D461005F7F59 /* ContactUsScreenVC.swift in Sources */,
 				BC5403C725FA16EF007A9F73 /* ArticleModel.swift in Sources */,
 				BC7271E025BDAB7500779C77 /* BottomSheetView.swift in Sources */,
 				BC32E8A625923D6D008DF8B7 /* UserModel.swift in Sources */,
@@ -1182,6 +1189,7 @@
 				41FC4C3C258AEEE100EA4DDF /* CardBodyView.swift in Sources */,
 				BCC4D017258054BF0024429B /* OAuthBtn.swift in Sources */,
 				BC54008225795B9D009DC69B /* RegexValidator.swift in Sources */,
+				BCACC4772614D470005F7F59 /* ContactUsTextFieldView.swift in Sources */,
 				41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */,
 				BCC429DB25A2E2FC00803CE9 /* NewAdditionInputFieldContainerBtn.swift in Sources */,
 				BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */,
