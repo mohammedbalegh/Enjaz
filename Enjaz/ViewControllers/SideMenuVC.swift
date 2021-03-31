@@ -30,13 +30,13 @@ class SideMenuVC: UIViewController {
     let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
     let noteBtn = SideMenuBtn(label: NSLocalizedString("Note", comment: ""), image: UIImage(named: "noteIcon"))
     let goalsRatingBtn = SideMenuBtn(label: NSLocalizedString("Goals Rating", comment: ""), image: UIImage(named: "starIcon"))
-    let rateAppBtn = SideMenuBtn(label: NSLocalizedString("Rate App", comment: ""), image: UIImage(named: "rateAppIcon"))
+    let userProfileBtn = SideMenuBtn(label: NSLocalizedString("User profile", comment: ""), image: UIImage(named: "userProfileIcon"))
     let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
     let privacyPolicyBtn = SideMenuBtn(label: NSLocalizedString("Privacy Policy", comment: ""), image: UIImage(named: "sheetIcon"))
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [draftBtn, noteBtn, goalsRatingBtn, rateAppBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [userProfileBtn,draftBtn, noteBtn, goalsRatingBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -64,6 +64,7 @@ class SideMenuVC: UIViewController {
         setupSubviews()
         
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
+        userProfileBtn.addTarget(self, action: #selector(handleUserProfileBtnTap), for: .touchUpInside)
     }
     
     func setupSubviews() {
@@ -121,6 +122,10 @@ class SideMenuVC: UIViewController {
     }
     
     // MARK: Event Handlers
+    
+    @objc func handleUserProfileBtnTap() {
+        navigationController?.pushViewController(UserProfileScreenVC(), animated: true)
+    }
     
     @objc func handleDraftBtnTap() {
         navigationController?.pushViewController(DraftScreenVC(), animated: true)

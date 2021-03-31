@@ -41,11 +41,16 @@
 "Draft" = "المدونة";
 "Note" = "المفكرة";
 "Goals Rating" = "تقييمات أهدافي";
-"Rate App" = "تقييم التطبيق";
+"User profile" = "بيانات المستخدم";
 "About App" = "عن التطبيق";
 "Privacy Policy" = "سياسة الخصوصية";
 "Contact Us" = "اتصل بنا";
 "Sign Out" = "تسجيل الخروج";
+
+//MARK: UserProfileScreen
+"Change password" = "تغير كلمة المرور";
+"Rewards and medals" = "الجوائز و الاوسمة";
+"Logout" = "تسجيل الخروج";
 
 // MARK: Item Categories
 "Religious" = "ديني";

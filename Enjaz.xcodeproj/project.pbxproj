@@ -17,6 +17,9 @@
 		4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141504125A3FD2F00DC369A /* ChartSliderView.swift */; };
 		4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505725A45BE100DC369A /* TopMenuCell.swift */; };
 		4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */; };
+		41798C612610BB5700DF5ECF /* UserProfileScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C602610BB5700DF5ECF /* UserProfileScreenVC.swift */; };
+		41798C662610C6BB00DF5ECF /* UserProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C652610C6BB00DF5ECF /* UserProfileButtonView.swift */; };
+		41798C6E261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C6D261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -89,7 +92,6 @@
 		BC67971625AAB371002B9A71 /* UIDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971525AAB370002B9A71 /* UIDirection.swift */; };
 		BC67971B25AAC3DB002B9A71 /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971A25AAC3DB002B9A71 /* Vibration.swift */; };
 		BC67DFD425F8CC2B00183EFD /* DraftCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67DFD325F8CC2B00183EFD /* DraftCardCell.swift */; };
-		BC67DFD925F8DBB000183EFD /* tempArtilceThumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = BC67DFD825F8DBAF00183EFD /* tempArtilceThumbnail.png */; };
 		BC7271D825BC981500779C77 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7271D725BC981500779C77 /* UITextView+Ext.swift */; };
 		BC7271E025BDAB7500779C77 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7271DF25BDAB7500779C77 /* BottomSheetView.swift */; };
 		BC730277259B91BC007AEA96 /* BidirectionalCollection + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC730276259B91BC007AEA96 /* BidirectionalCollection + ext.swift */; };
@@ -199,6 +201,9 @@
 		4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarNavigationVC.swift; sourceTree = "<group>"; };
 		4142F78025759DE5008FCC23 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
+		41798C602610BB5700DF5ECF /* UserProfileScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileScreenVC.swift; sourceTree = "<group>"; };
+		41798C652610C6BB00DF5ECF /* UserProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileButtonView.swift; sourceTree = "<group>"; };
+		41798C6D261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsAndMedalsScreenVC.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
@@ -277,7 +282,6 @@
 		BC67971525AAB370002B9A71 /* UIDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDirection.swift; sourceTree = "<group>"; };
 		BC67971A25AAC3DB002B9A71 /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 		BC67DFD325F8CC2B00183EFD /* DraftCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftCardCell.swift; sourceTree = "<group>"; };
-		BC67DFD825F8DBAF00183EFD /* tempArtilceThumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tempArtilceThumbnail.png; path = ../../../../Downloads/tempArtilceThumbnail.png; sourceTree = "<group>"; };
 		BC7271D725BC981500779C77 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		BC7271DF25BDAB7500779C77 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		BC730276259B91BC007AEA96 /* BidirectionalCollection + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BidirectionalCollection + ext.swift"; sourceTree = "<group>"; };
@@ -502,6 +506,7 @@
 				4141504125A3FD2F00DC369A /* ChartSliderView.swift */,
 				BC7D6C7225A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift */,
 				BC8F2F5625A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift */,
+				41798C652610C6BB00DF5ECF /* UserProfileButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,6 +536,8 @@
 				4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */,
 				4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */,
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
+				41798C602610BB5700DF5ECF /* UserProfileScreenVC.swift */,
+				41798C6D261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -685,7 +692,6 @@
 				41C646A9257397BA000327D5 /* AppDelegate.swift */,
 				41C646AB257397BA000327D5 /* SceneDelegate.swift */,
 				41C646B2257397BC000327D5 /* Assets.xcassets */,
-				BC67DFD825F8DBAF00183EFD /* tempArtilceThumbnail.png */,
 				41C646B4257397BC000327D5 /* LaunchScreen.storyboard */,
 				41C646B7257397BC000327D5 /* Info.plist */,
 			);
@@ -874,7 +880,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC5CBB7725B9CA820028FFC1 /* Localizable.strings in Resources */,
-				BC67DFD925F8DBB000183EFD /* tempArtilceThumbnail.png in Resources */,
 				41C646B6257397BC000327D5 /* LaunchScreen.storyboard in Resources */,
 				41C646B3257397BC000327D5 /* Assets.xcassets in Resources */,
 			);
@@ -1008,11 +1013,13 @@
 				BC8F2F8825A878B700EF7EA4 /* SetGoalDateRangeScreenVC.swift in Sources */,
 				BC4646E32587EC3100218D7A /* MainTabBar.swift in Sources */,
 				417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */,
+				41798C662610C6BB00DF5ECF /* UserProfileButtonView.swift in Sources */,
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
 				BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */,
 				BC8F2F5725A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
 				BC32E88C2590EC96008DF8B7 /* imageIdConstants.swift in Sources */,
+				41798C612610BB5700DF5ECF /* UserProfileScreenVC.swift in Sources */,
 				BCBEE8752587D89100D8DE0A /* EmailTextField.swift in Sources */,
 				BC1EB2BD25BE206F0021B983 /* AlertBottomSheetView.swift in Sources */,
 				BCDE2EA52587AD860040345E /* MonthlyPlanScreenVC.swift in Sources */,
@@ -1054,6 +1061,7 @@
 				BCDD83FA2590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift in Sources */,
 				BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */,
 				4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */,
+				41798C6E261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift in Sources */,
 				4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,
