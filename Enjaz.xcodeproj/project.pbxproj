@@ -122,6 +122,8 @@
 		BC93D5962613CEC0005DE3AC /* noteCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5952613CEBF005DE3AC /* noteCategoryView.swift */; };
 		BC93D5AC2614A887005DE3AC /* PersonalAspectsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5AB2614A887005DE3AC /* PersonalAspectsCell.swift */; };
 		BC93D5B12614A8AA005DE3AC /* AddNoteScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */; };
+		BC93D5B92614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */; };
+		BC93D5BE2614D22A005DE3AC /* AboutTheAppTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */; };
 		BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC963E6B259CF09100A1556B /* SideMenuVC.swift */; };
 		BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC963E70259D04C000A1556B /* SideMenuBtn.swift */; };
 		BC9F669A25924B6900E17117 /* NetworkingUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F669925924B6900E17117 /* NetworkingUrls.swift */; };
@@ -327,6 +329,8 @@
 		BC93D5952613CEBF005DE3AC /* noteCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noteCategoryView.swift; sourceTree = "<group>"; };
 		BC93D5AB2614A887005DE3AC /* PersonalAspectsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalAspectsCell.swift; sourceTree = "<group>"; };
 		BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteScreenVC.swift; sourceTree = "<group>"; };
+		BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAndAboutAppScreenVC.swift; sourceTree = "<group>"; };
+		BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTheAppTopView.swift; sourceTree = "<group>"; };
 		BC963E6B259CF09100A1556B /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		BC963E70259D04C000A1556B /* SideMenuBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuBtn.swift; sourceTree = "<group>"; };
 		BC9F669925924B6900E17117 /* NetworkingUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingUrls.swift; sourceTree = "<group>"; };
@@ -542,6 +546,7 @@
 				BC7FE4C9260F69630012F5F4 /* DynamicImageView.swift */,
 				BC93D5902613CEB8005DE3AC /* NoteTitleTextField.swift */,
 				BC93D5952613CEBF005DE3AC /* noteCategoryView.swift */,
+				BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 		BC0A87CE257583360045A54E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */,
 				BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */,
 				BC93D58B2613CE94005DE3AC /* NotesScreenVC.swift */,
 				419120ED25909CC700CB7BF9 /* AdditionTypeScreenVC.swift */,
@@ -1061,6 +1067,7 @@
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
 				BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */,
 				BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */,
+				BC93D5B92614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */,
 				BC8F2F5725A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift in Sources */,
 				BC93D5962613CEC0005DE3AC /* noteCategoryView.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
@@ -1199,6 +1206,7 @@
 				BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */,
 				BC7D6C7325A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift in Sources */,
 				417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */,
+				BC93D5BE2614D22A005DE3AC /* AboutTheAppTopView.swift in Sources */,
 				BC54007C25795B13009DC69B /* UIView+Ext.swift in Sources */,
 				BCBEE8592587D03E00D8DE0A /* ConfirmPasswordTextField.swift in Sources */,
 				BC93D5912613CEB8005DE3AC /* NoteTitleTextField.swift in Sources */,
