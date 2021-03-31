@@ -17,7 +17,7 @@ class UserProfileScreenVC: UIViewController {
     
     let medalsBtn: UserProfileButtonView = {
         let button = UserProfileButtonView()
-        button.button.setTitle(NSLocalizedString("Rewards and medals", comment: ""), for: .normal)
+        button.button.setTitle(NSLocalizedString("Awards and medals", comment: ""), for: .normal)
         button.btnIcon.image = UIImage(named: "medalIcon")
         button.button.addTarget(self, action: #selector(handleMedalsBtnTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class UserProfileScreenVC: UIViewController {
     }
     
     @objc func handleMedalsBtnTapped() {
-        navigationController?.pushViewController(RewardsAndMedalsScreenVC(), animated: true)
+        navigationController?.pushViewController(AwardsAndMedalsScreenVC(), animated: true)
     }
     
     func setupLogoutBtn() {

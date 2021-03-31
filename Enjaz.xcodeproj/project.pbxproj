@@ -19,7 +19,7 @@
 		4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */; };
 		41798C612610BB5700DF5ECF /* UserProfileScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C602610BB5700DF5ECF /* UserProfileScreenVC.swift */; };
 		41798C662610C6BB00DF5ECF /* UserProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C652610C6BB00DF5ECF /* UserProfileButtonView.swift */; };
-		41798C6E261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C6D261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift */; };
+		41798C6E261497EC00DF5ECF /* AwardsAndMedalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C6D261497EC00DF5ECF /* AwardsAndMedalsScreenVC.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -203,7 +203,7 @@
 		4142F78A257739DB008FCC23 /* CarouselCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardModel.swift; sourceTree = "<group>"; };
 		41798C602610BB5700DF5ECF /* UserProfileScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileScreenVC.swift; sourceTree = "<group>"; };
 		41798C652610C6BB00DF5ECF /* UserProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileButtonView.swift; sourceTree = "<group>"; };
-		41798C6D261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsAndMedalsScreenVC.swift; sourceTree = "<group>"; };
+		41798C6D261497EC00DF5ECF /* AwardsAndMedalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsAndMedalsScreenVC.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
@@ -537,7 +537,7 @@
 				4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */,
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
 				41798C602610BB5700DF5ECF /* UserProfileScreenVC.swift */,
-				41798C6D261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift */,
+				41798C6D261497EC00DF5ECF /* AwardsAndMedalsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1061,7 +1061,7 @@
 				BCDD83FA2590B1EE0026E113 /* NewAdditionScreenModalDelegate.swift in Sources */,
 				BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */,
 				4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */,
-				41798C6E261497EC00DF5ECF /* RewardsAndMedalsScreenVC.swift in Sources */,
+				41798C6E261497EC00DF5ECF /* AwardsAndMedalsScreenVC.swift in Sources */,
 				4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,

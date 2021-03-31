@@ -1,6 +1,6 @@
 import UIKit
 
-class RewardsAndMedalsScreenVC: UIViewController {
+class AwardsAndMedalsScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
