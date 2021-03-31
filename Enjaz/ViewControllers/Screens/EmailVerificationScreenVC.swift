@@ -115,12 +115,13 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         oneTimeCodeTextField.translatesAutoresizingMaskIntoConstraints = false
         
         oneTimeCodeTextField.configure()
+        oneTimeCodeTextField.didEnterLastCharacter = handleVerificationCodeEntered
                 
         NSLayoutConstraint.activate([
             oneTimeCodeTextField.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.1),
             oneTimeCodeTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             oneTimeCodeTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            oneTimeCodeTextField.heightAnchor.constraint(equalToConstant: LayoutConstants.inputHeight * 0.75),
+            oneTimeCodeTextField.heightAnchor.constraint(equalToConstant: 55),
         ])
     }
     
@@ -159,7 +160,10 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     }
     
     @objc func handleVerificationCodeEntered(resetCode: String) {
+        print("inside handleVerificationCodeEntered")
         guard let email = email else { return }
+        
+        print(email)
         
         guard isConnectedToInternet else {
             alertPopup.showAsInternetConnectionError()
@@ -167,7 +171,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         }
         
         view.isUserInteractionEnabled = false
-                    
+        
         Auth.verifyEmail(email, resetCode) { (error) in
             DispatchQueue.main.async {
                 self.view.isUserInteractionEnabled = true
@@ -175,6 +179,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
                 if let error = error {
                     print(error)
                     self.alertPopup.showAsError(withMessage: "الكود غير صحيح")
+                    return
                 }
             
                 self.navigateToMainTabBarController()
@@ -193,6 +198,6 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     }
     
     func navigateToMainTabBarController() {
-        navigationController?.pushViewController(UINavigationController(rootViewController: MainTabBarController()), animated: true)
+        navigationController?.pushViewController(MainTabBarController(), animated: true)
     }
 }
