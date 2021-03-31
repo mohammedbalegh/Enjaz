@@ -12,7 +12,7 @@ struct UserDefaultsManager {
             return UserDefaults.standard.bool(forKey: Keys.isLoggedIn)
         }
         set {
-            UserDefaults.standard.set(true, forKey: Keys.isLoggedIn)
+            UserDefaults.standard.set(newValue, forKey: Keys.isLoggedIn)
             UserDefaults.standard.synchronize()
         }
     }
@@ -32,6 +32,12 @@ struct UserDefaultsManager {
         }
         
         set {
+            guard let newValue = newValue else {
+                UserDefaults.standard.set(nil, forKey: Keys.user)
+                UserDefaults.standard.synchronize()
+                return
+            }
+            
             do {
                 let encoder = JSONEncoder()
                 let userData = try encoder.encode(newValue)

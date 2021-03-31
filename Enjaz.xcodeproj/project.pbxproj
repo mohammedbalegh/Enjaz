@@ -135,6 +135,9 @@
 		BCABE451260F52ED00E790F2 /* AppDataInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCABE450260F52ED00E790F2 /* AppDataInitializer.swift */; };
 		BCACC4722614D461005F7F59 /* ContactUsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */; };
 		BCACC4772614D470005F7F59 /* ContactUsTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */; };
+		BCACC48C2614D9B2005F7F59 /* UserProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */; };
+		BCACC4912614D9D3005F7F59 /* AwardsAndMedalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */; };
+		BCACC4962614D9DA005F7F59 /* UserProfileScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */; };
 		BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */; };
 		BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */; };
 		BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */; };
@@ -344,6 +347,9 @@
 		BCABE450260F52ED00E790F2 /* AppDataInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataInitializer.swift; sourceTree = "<group>"; };
 		BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsScreenVC.swift; sourceTree = "<group>"; };
 		BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsTextFieldView.swift; sourceTree = "<group>"; };
+		BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileButtonView.swift; path = Enjaz/Views/UserProfileButtonView.swift; sourceTree = SOURCE_ROOT; };
+		BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardsAndMedalsScreenVC.swift; sourceTree = "<group>"; };
+		BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileScreenVC.swift; sourceTree = "<group>"; };
 		BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayCellModel.swift; sourceTree = "<group>"; };
 		BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextField.swift; sourceTree = "<group>"; };
 		BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
@@ -552,6 +558,7 @@
 				BC93D5952613CEBF005DE3AC /* noteCategoryView.swift */,
 				BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */,
 				BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */,
+				BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -587,6 +594,8 @@
 				BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */,
 				BC541A562610DF3B00341BDE /* PersonalAspectsScreenVC.swift */,
 				BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */,
+				BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */,
+				BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1092,6 +1101,7 @@
 				BC9F66AA259260FA00E17117 /* Auth.swift in Sources */,
 				BC8F2F5C25A820CB00EF7EA4 /* MultipleCellSelectionCollectionViewDelegate.swift in Sources */,
 				BCAAC98425759622008B52C8 /* LayoutConstants.swift in Sources */,
+				BCACC48C2614D9B2005F7F59 /* UserProfileButtonView.swift in Sources */,
 				41912096258ECDA200CB7BF9 /* HourModel.swift in Sources */,
 				BC389450258521EC0039EE35 /* UIViewController+Ext.swift in Sources */,
 				BCBEE8632587D7CF00D8DE0A /* NewPasswordTextField.swift in Sources */,
@@ -1133,6 +1143,7 @@
 				BCDD83FF2590CFE00026E113 /* NewAdditionInputFieldContainer.swift in Sources */,
 				BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */,
 				BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeader.swift in Sources */,
+				BCACC4912614D9D3005F7F59 /* AwardsAndMedalsScreenVC.swift in Sources */,
 				BC54008F2579878C009DC69B /* LayoutTools.swift in Sources */,
 				BCB98CED2588275200B64DC9 /* NewAdditionTextField.swift in Sources */,
 				BC32E8962590EF03008DF8B7 /* ItemTypeConstants.swift in Sources */,
@@ -1203,6 +1214,7 @@
 				BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */,
 				BC20181126039D650060EFAF /* Switcher.swift in Sources */,
 				419121232593023000CB7BF9 /* ItemCardView.swift in Sources */,
+				BCACC4962614D9DA005F7F59 /* UserProfileScreenVC.swift in Sources */,
 				4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				BC7EFC052586354E00F35312 /* Popup.swift in Sources */,

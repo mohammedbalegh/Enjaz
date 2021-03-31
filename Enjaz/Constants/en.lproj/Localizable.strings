@@ -80,11 +80,16 @@
 "Draft" = "Draft";
 "Note" = "Note";
 "Goals Rating" = "Goals Rating";
-"Rate App" = "Rate App";
+"Profile" = "Profile";
 "About App" = "About App";
 "Privacy Policy" = "Privacy Policy";
 "Contact Us" = "Contact Us";
 "Sign Out" = "Sign Out";
+
+//MARK: UserProfileScreen
+"Change password" = "Change password";
+"Awards and medals" = "Awards and medals";
+"Logout" = "Logout";
 
 // MARK: Item Categories
 "Religious" = "Religious";

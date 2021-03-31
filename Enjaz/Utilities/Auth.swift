@@ -5,6 +5,21 @@ class Auth {
         case errorUnwrapping(value: String)
     }
     
+    static var resetPassword = NetworkingManager.resetPassword
+    static var requestEmailVerificationCode = NetworkingManager.requestEmailVerificationCode
+    static var verifyEmail = NetworkingManager.verifyEmail
+    static var accessToken: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: KeychainKeys.accessToken)
+        }
+    }
+    
+    static var userID: String? {
+        get {
+            return KeychainWrapper.standard.string(forKey: KeychainKeys.userId)
+        }
+    }
+    
     static func signup(user: UserModel, password: String, completionHandler: @escaping (_ user: UserModel?, _ error: Error?) -> Void) {
         NetworkingManager.signUp(user: user, password: password) { (token, user, error) in
             if let error = error {
@@ -56,23 +71,16 @@ class Auth {
         }
     }
     
-    static var resetPassword = NetworkingManager.resetPassword
-    static var requestEmailVerificationCode = NetworkingManager.requestEmailVerificationCode
-    static var verifyEmail = NetworkingManager.verifyEmail
-    static var accessToken: String? {
-        get {
-            return KeychainWrapper.standard.string(forKey: KeychainKeys.accessToken)
-        }
-    }
-    
-    static var userID: String? {
-        get {
-            return KeychainWrapper.standard.string(forKey: KeychainKeys.userId)
-        }
+    static func signOut() {
+        resetAccessTokenAndUserIdInKeyChain()
     }
     
     private static func saveAccessTokenAndUserIdToKeyChain(_ token: String, _ id: Int) {
         KeychainWrapper.standard.set(token, forKey: KeychainKeys.accessToken)
         KeychainWrapper.standard.set(id, forKey: KeychainKeys.userId)
+    }
+    
+    private static func resetAccessTokenAndUserIdInKeyChain() {
+        saveAccessTokenAndUserIdToKeyChain("", -1)
     }
 }

@@ -29,14 +29,13 @@ class SideMenuVC: UIViewController {
     
     let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
     let personalAspectsBtn = SideMenuBtn(label: NSLocalizedString("Personal Aspects", comment: ""), image: UIImage(named: "noteIcon"))
-    let goalsRatingBtn = SideMenuBtn(label: NSLocalizedString("Goals Rating", comment: ""), image: UIImage(named: "starIcon"))
-    let rateAppBtn = SideMenuBtn(label: NSLocalizedString("Rate App", comment: ""), image: UIImage(named: "rateAppIcon"))
+    let userProfileBtn = SideMenuBtn(label: NSLocalizedString("Profile", comment: ""), image: UIImage(named: "userProfileIcon"))
     let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
     let privacyPolicyBtn = SideMenuBtn(label: NSLocalizedString("Privacy Policy", comment: ""), image: UIImage(named: "sheetIcon"))
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [draftBtn, personalAspectsBtn, goalsRatingBtn, rateAppBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -68,6 +67,8 @@ class SideMenuVC: UIViewController {
         aboutAppBtn.addTarget(self, action: #selector(handleAboutAppBtnTapped), for: .touchUpInside)
         privacyPolicyBtn.addTarget(self, action: #selector(handlePrivacyPolicyBtn), for: .touchUpInside)
         contactUsBtn.addTarget(self, action: #selector(handleContactUsBtnTap), for: .touchUpInside)
+        userProfileBtn.addTarget(self, action: #selector(handleUserProfileBtnTap), for: .touchUpInside)
+        signOutBtn.addTarget(self, action: #selector(handleSignOutBtnTap), for: .touchUpInside)
     }
     
     func setupSubviews() {
@@ -145,6 +146,10 @@ class SideMenuVC: UIViewController {
         navigationController?.pushViewController(ContactUsScreenVC(), animated: true)
     }
     
+    @objc func handleUserProfileBtnTap() {
+        navigationController?.pushViewController(UserProfileScreenVC(), animated: true)
+    }
+    
     @objc func handleDraftBtnTap() {
         navigationController?.pushViewController(DraftScreenVC(), animated: true)
     }
@@ -155,5 +160,12 @@ class SideMenuVC: UIViewController {
     
     @objc func handleDismissBtnTap() {
         dismiss(animated: true)
+    }
+    
+    @objc func handleSignOutBtnTap() {
+        Auth.signOut()
+        UserDefaultsManager.user = nil
+        UserDefaultsManager.isLoggedIn = false
+        navigationController?.pushViewController(LoginScreenVC(), animated: true)
     }
 }

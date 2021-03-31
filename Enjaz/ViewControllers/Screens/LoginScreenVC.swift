@@ -26,6 +26,11 @@ class LoginScreenVC: AuthScreenVC {
         otherAuthMethodLabel.text = "لم تشترك بعد؟"
         otherAuthMethodBtn.setTitle("إنشاء حساب", for: .normal)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
         
     override func setupSubViews() {
         super.setupSubViews()
