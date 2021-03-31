@@ -17,7 +17,7 @@ class PersonalAspectsScreenVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .rootTabBarScreensBackgroundColor
+        collectionView.backgroundColor = .mainScreenBackgroundColor
         collectionView.register(PersonalAspectsCell.self, forCellWithReuseIdentifier: "personalAspectsCell")
         return collectionView
     }()
@@ -35,7 +35,7 @@ class PersonalAspectsScreenVC: UIViewController {
         
         title = NSLocalizedString("Personal Aspects", comment: "")
         
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         setup()
     }
     
@@ -108,11 +108,11 @@ extension PersonalAspectsScreenVC: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         let cell = collectionView.cellForItem(at: indexPath) as! PersonalAspectsCell
-        let vc = NotesScreenVC()
+        let notesScreenVC = NotesScreenVC()
 
-        vc.id = cell.id
+        notesScreenVC.id = cell.id
 
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(notesScreenVC, animated: true)
 
     }
     

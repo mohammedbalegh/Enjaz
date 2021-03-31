@@ -5,11 +5,12 @@ class PersonalAspectsCell: UICollectionViewCell {
     var viewModel: PersonalAspectsModel? {
         didSet {
             id = viewModel!.id
-            aspectBadge.image = viewModel?.badge.toImage()
+            aspectBadge.source = viewModel?.badge_image_source
             aspectTitle.text = viewModel?.title
-            aspectBrief.text = viewModel?.briefOrDate
-            if viewModel!.category.value != nil {
-                aspectCategory.text = ItemCategoryConstants[viewModel!.category.value!]
+            aspectBrief.text = viewModel?.brief_or_date
+            if let category = viewModel?.category.value  {
+                let itemCategory = RealmManager.retrieveItemCategoryById(category)
+                aspectCategory.text = itemCategory?.localized_name
             } else {
                 aspectCategory.text = ""
             }
@@ -18,11 +19,11 @@ class PersonalAspectsCell: UICollectionViewCell {
     
     var id: Int = 0
     
-    let aspectBadge: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+    let aspectBadge: DynamicImageView = {
+        let imageView = DynamicImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     let aspectTitle: UILabel = {

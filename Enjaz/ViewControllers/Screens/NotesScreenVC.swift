@@ -4,10 +4,10 @@ class NotesScreenVC: UIViewController {
     
     var id: Int = 0
     
-    var noteAvatar: UIImageView = {
-        var image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+    var noteAvatar: DynamicImageView = {
+        var imageView = DynamicImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     lazy var note = RealmManager.retrieveAspect(id: id)
@@ -33,9 +33,14 @@ class NotesScreenVC: UIViewController {
     }()
     
     lazy var editableTextView: EditableTextView = {
-        var text = EditableTextView(frame: .zero)
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
+        var textView = EditableTextView(frame: .zero)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.borderColor.cgColor
+        textView.layer.cornerRadius = 5
+        
+        return textView
     }()
     
     var submitChangesButton: UIButton = {
@@ -49,7 +54,7 @@ class NotesScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         setup()
         self.hideKeyboardWhenTappedAround()
     }
@@ -59,7 +64,7 @@ class NotesScreenVC: UIViewController {
     func setup() {
         
         title = note.title
-        noteAvatar.image = note.image.toImage()
+        noteAvatar.source = note.image_source
         noteDescription.text = note.aspect_description
         titleLabel.text = " " + note.title + "      "
         editableTextView.inputText = note.aspect_text
@@ -94,11 +99,7 @@ class NotesScreenVC: UIViewController {
     
     func setupEditableTextView() {
         view.addSubview(editableTextView)
-        
-        editableTextView.layer.borderWidth = 2
-        editableTextView.layer.borderColor = UIColor(hex: 0xB4B4B4).cgColor
-        editableTextView.layer.cornerRadius = 5
-        
+                
         NSLayoutConstraint.activate([
             editableTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
             editableTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

@@ -4,7 +4,7 @@ class AddNoteScreenVC: UIViewController {
     
     var selectedCategory: String?
     var selectedNoteCategoryIndex: Int = 0
-    var pickerCategories = ItemCategoryConstants
+    var itemCategoryModels: [ItemCategoryModel] = []
     
     var submitNewNoteBtn: UIButton = {
         var button = UIButton()
@@ -23,19 +23,19 @@ class AddNoteScreenVC: UIViewController {
     }()
     
     var titleTextField: NoteTitleTextField = {
-        var text = NoteTitleTextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
+        var textField = NoteTitleTextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
     
     var noteTextField: EditableTextView = {
-        var text = EditableTextView(frame: .zero)
-        text.placeholder = NSLocalizedString("Write whats on your mind", comment: "")
-        text.layer.borderWidth = 0.4
-        text.layer.cornerRadius = 5
-        text.layer.borderColor = UIColor(hex: 0xB4B4B4).cgColor
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
+        var textView = EditableTextView(frame: .zero)
+        textView.placeholder = NSLocalizedString("Write whats on your mind", comment: "")
+        textView.layer.borderWidth = 0.4
+        textView.layer.cornerRadius = 5
+        textView.layer.borderColor = UIColor.borderColor.cgColor
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
     }()
     
     lazy var notesCategoryPicker: PickerBottomSheetView = {
@@ -55,9 +55,14 @@ class AddNoteScreenVC: UIViewController {
         super.viewDidLoad()
         
         title = NSLocalizedString("Add Note", comment: "")
-        view.backgroundColor = .rootTabBarScreensBackgroundColor
+        view.backgroundColor = .mainScreenBackgroundColor
         self.hideKeyboardWhenTappedAround()
         setupSubView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        itemCategoryModels = RealmManager.retrieveItemCategories()
     }
     
     func setupSubView() {
@@ -79,9 +84,9 @@ class AddNoteScreenVC: UIViewController {
             let aspect = PersonalAspectsModel()
             
             aspect.title = titleTextField.textField.text ?? ""
-            aspect.briefOrDate = getCurrentDate()
-            aspect.image = (UIImage(named: "noteDefaultImage")?.toBase64())!
-            aspect.badge = (UIImage(named: "noteDefaultBadge")?.toBase64())!
+            aspect.brief_or_date = getCurrentDate()
+            aspect.image_source = "noteDefaultImage"
+            aspect.badge_image_source = "noteDefaultBadge"
             aspect.category.value = notesCategoryPicker.picker.selectedRow(inComponent: 0)
             aspect.aspect_description = getCurrentDate()
             aspect.aspect_text = noteTextField.text
@@ -98,7 +103,7 @@ class AddNoteScreenVC: UIViewController {
     
     @objc func handleNoteCategorySelection() {
         selectedNoteCategoryIndex = notesCategoryPicker.picker.selectedRow(inComponent: 0)
-        selectedCategory = pickerCategories[selectedNoteCategoryIndex]
+        selectedCategory = itemCategoryModels[selectedNoteCategoryIndex].localized_name
         noteCategoryButton.noteCategoryBtn.setTitleColor(.black, for: .normal)
         noteCategoryButton.noteCategoryBtn.setTitle(selectedCategory, for: .normal)
         notesCategoryPicker.dismiss(animated: true)
@@ -178,11 +183,11 @@ extension AddNoteScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerCategories.count
+        return itemCategoryModels.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerCategories[row]
+        return itemCategoryModels[row].localized_name
     }
     
 }
