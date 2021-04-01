@@ -4,9 +4,9 @@ class HomeScreenVC: UIViewController {
     
     // MARK: Properties
     
-    var taskModels: [ItemModel] = [] {
+    var goalModels: [ItemModel] = [] {
         didSet {
-            dailyTaskView.cardsCollectionView.reloadData()
+            dailyGoalView.cardsCollectionView.reloadData()
         }
     }
     
@@ -32,17 +32,17 @@ class HomeScreenVC: UIViewController {
         if mode == "am" {
             view.image.image = UIImage(named: "sunIcon")
             view.welcomeLabel.text = String(format: NSLocalizedString("Good morning %@!", comment: ""), firstName)
-            view.messageLabel.text = NSLocalizedString("Take a look at today's tasks and habits", comment: "")
+            view.messageLabel.text = NSLocalizedString("Take a look at today's goals and habits", comment: "")
         } else {
             view.image.image = UIImage(named: "moonIcon")
             view.welcomeLabel.text = String(format: NSLocalizedString("Good evening %@!", comment: ""), firstName)
-            view.messageLabel.text = NSLocalizedString("Take a look at today's remaining tasks", comment: "")
+            view.messageLabel.text = NSLocalizedString("Take a look at today's remaining goals", comment: "")
         }
         
         return view
     }()
     
-    lazy var dailyTaskView: CardsView = {
+    lazy var dailyGoalView: CardsView = {
         let cardsView = CardsView()
         cardsView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -51,8 +51,8 @@ class HomeScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         
         cardsView.title = NSLocalizedString("Today's goals", comment: "")
-        cardsView.noCardsMessage = NSLocalizedString("No tasks today", comment: "")
-        cardsView.cardsCount = taskModels.count
+        cardsView.noCardsMessage = NSLocalizedString("No goals today", comment: "")
+        cardsView.cardsCount = goalModels.count
         
         return cardsView
     }()
@@ -93,18 +93,18 @@ class HomeScreenVC: UIViewController {
         
     func setupSubviews()  {
         setupWelcomeBadge()
-        setupDailyTaskView()
+        setupDailyGoalView()
         setupDailyDemahView()
     }
     
-    func setupDailyTaskView() {
-        view.addSubview(dailyTaskView)
+    func setupDailyGoalView() {
+        view.addSubview(dailyGoalView)
         
         NSLayoutConstraint.activate([
-            dailyTaskView.topAnchor.constraint(equalTo: greetingMessageView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.06),
-            dailyTaskView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            dailyTaskView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dailyTaskView.heightAnchor.constraint(equalToConstant: itemsViewHeight)
+            dailyGoalView.topAnchor.constraint(equalTo: greetingMessageView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.06),
+            dailyGoalView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dailyGoalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dailyGoalView.heightAnchor.constraint(equalToConstant: itemsViewHeight)
             
         ])
     }
@@ -113,7 +113,7 @@ class HomeScreenVC: UIViewController {
         view.addSubview(dailyDemahView)
         
         NSLayoutConstraint.activate([
-            dailyDemahView.topAnchor.constraint(equalTo: dailyTaskView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.035),
+            dailyDemahView.topAnchor.constraint(equalTo: dailyGoalView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.035),
             dailyDemahView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dailyDemahView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             dailyDemahView.heightAnchor.constraint(equalToConstant: itemsViewHeight)
@@ -136,14 +136,14 @@ class HomeScreenVC: UIViewController {
     
     func updateScreen() {
         updateItemModels()
-        dailyTaskView.cardsCount = taskModels.count
+        dailyGoalView.cardsCount = goalModels.count
         dailyDemahView.cardsCount = demahModels.count
     }
     
     func getUpdatedItemsModel() -> ([ItemModel], [ItemModel]) {
         let itemModels = RealmManager.retrieveItems()
         
-        var updatedTaskModels: [ItemModel] = []
+        var updatedGoalModels: [ItemModel] = []
         var updatedDemahModels: [ItemModel] = []
         
         for item in itemModels {
@@ -152,20 +152,20 @@ class HomeScreenVC: UIViewController {
             
             guard itemIsDueToday && !item.is_completed else { continue }
             
-            if item.type == 0 {
-                updatedTaskModels.append(item)
+            if item.type == 3 {
+                updatedGoalModels.append(item)
             } else if item.type == 1 {
                 updatedDemahModels.append(item)
             }
         }
         
-        return (updatedTaskModels, updatedDemahModels)
+        return (updatedGoalModels, updatedDemahModels)
     }
     
     func updateItemModels() {
-        let (updatedTaskModels, updatedDemahModels) = getUpdatedItemsModel()
+        let (updatedGoalModels, updatedDemahModels) = getUpdatedItemsModel()
         
-        taskModels = updatedTaskModels
+        goalModels = updatedGoalModels
         demahModels = updatedDemahModels
     }
     
@@ -183,14 +183,14 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return collectionView == dailyDemahView.cardsCollectionView ? demahModels.count : taskModels.count
+        return collectionView == dailyDemahView.cardsCollectionView ? demahModels.count : goalModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardsReuseIdentifier, for: indexPath) as! ItemCardCell
         
-        let viewModels = collectionView == dailyDemahView.cardsCollectionView ? demahModels : taskModels
+        let viewModels = collectionView == dailyDemahView.cardsCollectionView ? demahModels : goalModels
         
         cell.viewModel = viewModels[indexPath.row]
         return cell

@@ -10,9 +10,9 @@
 "Today's demahs" = "ديمة اليوم";
 "Good morning %@!" = "صباح الخير %@!";
 "Good evening %@!" = "مساء الخير %@!";
-"Take a look at today's tasks and habits" = "أطلع على مهام وعادات اليوم";
-"Take a look at today's remaining tasks" = "أطلع على المهام المتبقية";
-"No tasks today" = "لا يوجد مهام اليوم";
+"Take a look at today's goals and habits" = "أطلع على أهداف وعادات اليوم";
+"Take a look at today's remaining goals" = "أطلع على الأهداف المتبقية";
+"No goals today" = "لا يوجد أهداف اليوم";
 "No demahs today" = "لا يوجد ديم اليوم";
 "Show All" = "عرض الكل";
 
@@ -65,6 +65,7 @@
 "Note title Can't be empty" = "يجب إدخال عنوان للمفكرة";
 "Note category can't be empty" = "برجاء اختياز تصنيف المفكرة";
 "Please write whats on your mind" = "برجاء إكتب ما يدور في بالك";
+
 // MARK: ContactUsScreen
 "Client name" = "اسم العميل";
 "Phone number" = "رقم الهاتف";
@@ -90,6 +91,23 @@
 "Change password" = "تغير كلمة المرور";
 "Awards and medals" = "الجوائز و الاوسمة";
 "Logout" = "تسجيل الخروج";
+
+// MARK: MonthlyPlanScreenVC
+"Tasks" = "المهام";
+"Demahs" = "الديمة";
+"Achievements" = "الإنجازات";
+
+//MARK: MonthItemsScreenVC
+"Today's Tasks" = "مهام اليوم";
+"Week's Tasks" = "مهام الاسبوع";
+"Month's Tasks" = "مهام الشهر";
+"Completed Tasks" = "مهام منتهية";
+"Today's Demahs" = "ديمة اليوم";
+"Week's Demahs" = "ديمة الاسبوع";
+"Month's Demahs" = "ديمة الشهر";
+"Completed Demahs" = "ديمة منتهية";
+"No tasks" = "لا يوجد مهام";
+"No demahs" = "لا يوجد ديمة";
 
 // MARK: Item Categories
 "Religious" = "ديني";

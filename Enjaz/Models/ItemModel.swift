@@ -8,7 +8,6 @@ class ItemModel: Object {
     @objc dynamic var category: Int = 0
     @objc dynamic var type: Int = 0
     @objc dynamic var is_completed: Bool = false
-    @objc dynamic var field_id: String = ""
     @objc dynamic var image_id: Int = 0
     @objc dynamic var sticker_id: Int = 0
 }

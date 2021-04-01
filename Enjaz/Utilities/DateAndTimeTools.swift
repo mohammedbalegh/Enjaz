@@ -92,4 +92,25 @@ class DateAndTimeTools {
         return dateComponents
     }
     
+    static func getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> (Double, Double) {
+        let currentYear = getCurrentYear(forCalendarIdentifier: calendarIdentifier)
+        let currentMonth = getCurrentMonth(forCalendarIdentifier: calendarIdentifier)
+        let (numberOfMonthDays, _) =  getNumberOfMonthDaysAndFirstWeekDay(ofYear: currentYear, andMonth: currentMonth, forCalendarIdentifier: calendarIdentifier)
+        
+        let firstDayUnixTimeStamp = generateDateObjectFromComponents(year: currentYear, month: currentMonth, day: 1, hour: 0, calendarIdentifier: calendarIdentifier).timeIntervalSince1970
+        
+        let lastDayUnixTimeStamp = generateDateObjectFromComponents(year: currentYear, month: currentMonth, day: numberOfMonthDays, hour: 23, calendarIdentifier: calendarIdentifier).timeIntervalSince1970
+                
+        return (firstDayUnixTimeStamp, lastDayUnixTimeStamp)
+    }
+    
+    static func isDateInCurrentWeek(date: Date, calendarIdentifier: Calendar.Identifier) -> Bool {
+        let calendar = Calendar(identifier: calendarIdentifier)
+        let currentComponents = calendar.dateComponents([.weekOfYear], from: Date())
+        let dateComponents = calendar.dateComponents([.weekOfYear], from: date)
+        guard let currentWeekOfYear = currentComponents.weekOfYear, let dateWeekOfYear = dateComponents.weekOfYear else { return false }
+        return currentWeekOfYear == dateWeekOfYear
+    }
+    
+    
 }

@@ -80,6 +80,8 @@
 		BC47809C259629AD00D21060 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47809B259629AD00D21060 /* State.swift */; };
 		BC4780A1259629BE00D21060 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4780A0259629BE00D21060 /* Actions.swift */; };
 		BC4780AB25962A1400D21060 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4780AA25962A1400D21060 /* Reducer.swift */; };
+		BC49B9FF261621D000665926 /* MonthTasksScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC49B9FE261621D000665926 /* MonthTasksScreenVC.swift */; };
+		BC49BA072616243D00665926 /* MonthDemahsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC49BA062616243D00665926 /* MonthDemahsScreenVC.swift */; };
 		BC5029A925F8B32E00407B16 /* DraftScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */; };
 		BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC540063257947A1009DC69B /* UIColor+Ext.swift */; };
 		BC540077257954CE009DC69B /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC540076257954CE009DC69B /* AuthTextField.swift */; };
@@ -138,6 +140,7 @@
 		BCACC48C2614D9B2005F7F59 /* UserProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */; };
 		BCACC4912614D9D3005F7F59 /* AwardsAndMedalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */; };
 		BCACC4962614D9DA005F7F59 /* UserProfileScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */; };
+		BCACC49B2614FEBF005F7F59 /* MonthItemsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCACC49A2614FEBF005F7F59 /* MonthItemsScreenVC.swift */; };
 		BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */; };
 		BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */; };
 		BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */; };
@@ -290,6 +293,8 @@
 		BC47809B259629AD00D21060 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		BC4780A0259629BE00D21060 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		BC4780AA25962A1400D21060 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		BC49B9FE261621D000665926 /* MonthTasksScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTasksScreenVC.swift; sourceTree = "<group>"; };
+		BC49BA062616243D00665926 /* MonthDemahsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDemahsScreenVC.swift; sourceTree = "<group>"; };
 		BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftScreenVC.swift; sourceTree = "<group>"; };
 		BC540063257947A1009DC69B /* UIColor+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		BC540076257954CE009DC69B /* AuthTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
@@ -350,6 +355,7 @@
 		BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileButtonView.swift; path = Enjaz/Views/UserProfileButtonView.swift; sourceTree = SOURCE_ROOT; };
 		BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardsAndMedalsScreenVC.swift; sourceTree = "<group>"; };
 		BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileScreenVC.swift; sourceTree = "<group>"; };
+		BCACC49A2614FEBF005F7F59 /* MonthItemsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthItemsScreenVC.swift; sourceTree = "<group>"; };
 		BCB02EED260A4B8E000FA158 /* WeekDayCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayCellModel.swift; sourceTree = "<group>"; };
 		BCB070DD25931FE4005346AE /* OneTimeCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneTimeCodeTextField.swift; sourceTree = "<group>"; };
 		BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
@@ -566,10 +572,6 @@
 		BC0A87CE257583360045A54E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */,
-				BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */,
-				BC93D58B2613CE94005DE3AC /* NotesScreenVC.swift */,
-				419120ED25909CC700CB7BF9 /* AdditionTypeScreenVC.swift */,
 				BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */,
 				BCC4D02925827F890024429B /* LoginScreenVC.swift */,
 				BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */,
@@ -582,6 +584,7 @@
 				41328EE225862DAD00A86330 /* MonthlyPlanScreenVC.swift */,
 				BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */,
 				BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */,
+				419120ED25909CC700CB7BF9 /* AdditionTypeScreenVC.swift */,
 				417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */,
 				417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */,
 				BCEBF48D259F76690001EB40 /* SelectGoalTypeScreenVC.swift */,
@@ -593,9 +596,14 @@
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
 				BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */,
 				BC541A562610DF3B00341BDE /* PersonalAspectsScreenVC.swift */,
+				BC93D58B2613CE94005DE3AC /* NotesScreenVC.swift */,
+				BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */,
+				BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */,
 				BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */,
 				BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */,
 				BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */,
+				BC49B9FE261621D000665926 /* MonthTasksScreenVC.swift */,
+				BC49BA062616243D00665926 /* MonthDemahsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -656,6 +664,7 @@
 				4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */,
 				BC36DBD025BC356600F57ED2 /* CardModalVC.swift */,
 				BC20180B260393F70060EFAF /* CalendarViewController.swift */,
+				BCACC49A2614FEBF005F7F59 /* MonthItemsScreenVC.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -1098,6 +1107,7 @@
 				BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */,
 				BC2BCE5B259BE58B002FE716 /* StickerPickerPopup.swift in Sources */,
 				41798C34260B073900DF5ECF /* UIButton+Ext.swift in Sources */,
+				BC49B9FF261621D000665926 /* MonthTasksScreenVC.swift in Sources */,
 				BC9F66AA259260FA00E17117 /* Auth.swift in Sources */,
 				BC8F2F5C25A820CB00EF7EA4 /* MultipleCellSelectionCollectionViewDelegate.swift in Sources */,
 				BCAAC98425759622008B52C8 /* LayoutConstants.swift in Sources */,
@@ -1135,6 +1145,7 @@
 				BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */,
 				4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */,
 				4141505825A45BE100DC369A /* TopMenuCell.swift in Sources */,
+				BC49BA072616243D00665926 /* MonthDemahsScreenVC.swift in Sources */,
 				BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */,
 				BCA8D43A2588255B00C7BC85 /* UITextField+Ext.swift in Sources */,
 				BCBEE8682587D80200D8DE0A /* ResetCodeTextField.swift in Sources */,
@@ -1163,6 +1174,7 @@
 				BC7EFC0F2586899400F35312 /* UIStackView+Ext.swift in Sources */,
 				BC2734BF2587B7B400EFB42C /* CarouselCell.swift in Sources */,
 				BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */,
+				BCACC49B2614FEBF005F7F59 /* MonthItemsScreenVC.swift in Sources */,
 				BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */,
 				BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */,
 				BCD401AA25FB3F2000ABA183 /* ArticleCardCell.swift in Sources */,

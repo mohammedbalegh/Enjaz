@@ -23,7 +23,7 @@ class RealmManager {
     }
     
     static func retrieveAspectsCount() -> Int {
-        let count = RealmManager.realm.objects(PersonalAspectsModel.self).map({ $0 }).count
+        let count = Array(RealmManager.realm.objects(PersonalAspectsModel.self)).count
         return count
     }
     
@@ -32,13 +32,26 @@ class RealmManager {
         return items
     }
     
+//    static func retrieveTasks() -> [ItemModel] {
+//        return retrieveItems(withFilter: "type = 0")
+//    }
+//    
+//    static func retrieveDemahs() -> [ItemModel] {
+//        return retrieveItems(withFilter: "type = 1")
+//    }
+    
     static func retrieveItems() -> [ItemModel] {
-        let items: [ItemModel] = RealmManager.realm.objects(ItemModel.self).map({ $0 })
+        let items: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).sorted(byKeyPath: "date", ascending: true))
+        return items
+    }
+    
+    static func retrieveItems(withFilter filter: String) -> [ItemModel] {
+        let items: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter(filter).sorted(byKeyPath: "date", ascending: true))
         return items
     }
     
     static func retrievePersonalAspects() -> [PersonalAspectsModel] {
-        let aspects: [PersonalAspectsModel] = RealmManager.realm.objects(PersonalAspectsModel.self).sorted(byKeyPath: "date", ascending: true).map({ $0 })
+        let aspects: [PersonalAspectsModel] = Array(RealmManager.realm.objects(PersonalAspectsModel.self).sorted(byKeyPath: "date", ascending: true))
         return aspects
     }
     
@@ -58,7 +71,7 @@ class RealmManager {
     private static func retrieveGoals(withCompletedEqualTo completed: Bool) -> [ItemModel] {
         
         let completionFilter = "is_completed == \(completed.description)"
-        let goals: [ItemModel] = RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == 3").map({ $0 })
+        let goals: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == 3"))
         return goals
     }
     
@@ -85,7 +98,7 @@ class RealmManager {
     }
     
     static func retrieveItemCategories() -> [ItemCategoryModel] {
-        let itemCategories: [ItemCategoryModel] = RealmManager.realm.objects(ItemCategoryModel.self).map({ $0 })
+        let itemCategories: [ItemCategoryModel] = Array(RealmManager.realm.objects(ItemCategoryModel.self))
         return itemCategories
     }
     

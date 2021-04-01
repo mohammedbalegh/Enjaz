@@ -142,7 +142,7 @@ extension MenuBarNavigationVC: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width / 4.4), height: (collectionView.frame.height))
+        return CGSize(width: (collectionView.frame.width / CGFloat(menuItems.count)) - 8, height: (collectionView.frame.height))
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

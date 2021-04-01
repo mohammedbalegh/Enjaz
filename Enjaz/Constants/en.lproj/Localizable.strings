@@ -10,9 +10,9 @@
 "Today's demahs" = "Today's demahs";
 "Good morning %@!" = "Good morning %@!";
 "Good evening %@!" = "Good evening %@!";
-"Take a look at today's tasks and habits" = "Take a look at today's tasks and habits";
-"Take a look at today's remaining tasks" = "Take a look at today's remaining tasks";
-"No tasks today" = "No tasks today";
+"Take a look at today's goals and habits" = "Take a look at today's goals and habits";
+"Take a look at today's remaining goals" = "Take a look at today's remaining goals";
+"No goals today" = "No goals today";
 "No demahs today" = "No demahs today";
 "Show All" = "Show All";
 
@@ -65,6 +65,7 @@
 "Note title can't be empty" = "Note title Can't be empty";
 "Note category can't be empty" = "Note category can't be empty";
 "Please write whats on your mind" = "Please write whats on your mind";
+
 // MARK: ContactUsScreen
 "Client name" = "Client name";
 "Phone number" = "Phone number";
@@ -91,6 +92,23 @@
 "Awards and medals" = "Awards and medals";
 "Logout" = "Logout";
 
+// MARK: MonthlyPlanScreenVC
+"Tasks" = "Tasks";
+"Demahs" = "Demahs";
+"Achievements" = "Achievements";
+
+//MARK: MonthItemsScreenVC
+"Today's Tasks" = "Today's Tasks";
+"Week's Tasks" = "Week's Tasks";
+"Month's Tasks" = "Month's Tasks";
+"Completed Tasks" = "Completed Tasks";
+"Today's Demahs" = "Today's Demahs";
+"Week's Demahs" = "Week's Demahs";
+"Month's Demahs" = "Month's Demahs";
+"Completed Demahs" = "Completed Demahs";
+"No tasks" = "No tasks";
+"No demahs" = "No demahs";
+
 // MARK: Item Categories
 "Religious" = "Religious";
 "Scientific" = "Scientific";
@@ -99,6 +117,13 @@
 "Career" = "Career";
 "Personal" = "Personal";
 "Financial" = "Financial";
+"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
+"Goals related to science, reading, courses and mind development" = "Goals related to science, reading, courses and mind development";
+"Goals related to your personal health, fitness and mental health" = "Goals related to your personal health, fitness and mental health";
+"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
+"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
+"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
+"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
 
 // MARK: Item Types
 "Task" = "Task";

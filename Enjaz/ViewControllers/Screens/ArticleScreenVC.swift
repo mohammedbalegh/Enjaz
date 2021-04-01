@@ -8,7 +8,7 @@ class ArticleScreenVC: UIViewController {
             articleHeaderImageView.image = articleModel.header
             draftMetaDataContainer.categoryLabel.text = articleModel.category
             draftMetaDataContainer.titleLabel.text = articleModel.title
-            draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: articleModel.date, withFormat: "dd/mm/yyyy", calendarIdentifier: .gregorian)
+            draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: articleModel.date, withFormat: "dd/MM/yyyy", calendarIdentifier: .gregorian)
             articleTextView.text = articleModel.article
         }
     }
