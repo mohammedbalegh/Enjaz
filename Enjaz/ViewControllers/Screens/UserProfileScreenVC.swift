@@ -61,7 +61,10 @@ class UserProfileScreenVC: UIViewController {
     }
     
     @objc func handleMedalsBtnTapped() {
-        navigationController?.pushViewController(AwardsAndMedalsScreenVC(), animated: true)
+        let vc = AwardsAndMedalsScreenVC()
+        vc.collectionTitle.text = NSLocalizedString("Choose a category", comment: "")
+        vc.currentState = .categoriesController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupLogoutBtn() {

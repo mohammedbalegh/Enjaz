@@ -20,6 +20,8 @@
 		41798BF32605740400DF5ECF /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798BF22605740400DF5ECF /* UIImage+Ext.swift */; };
 		41798C2F260B01D200DF5ECF /* NoteCategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C2E260B01D200DF5ECF /* NoteCategoryPickerView.swift */; };
 		41798C34260B073900DF5ECF /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C33260B073900DF5ECF /* UIButton+Ext.swift */; };
+		41798C8B2614FC2600DF5ECF /* AwardsAndsMedalsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C8A2614FC2600DF5ECF /* AwardsAndsMedalsCell.swift */; };
+		41798C902615EA1100DF5ECF /* MedalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C8F2615EA1100DF5ECF /* MedalModel.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -226,6 +228,8 @@
 		41798BF22605740400DF5ECF /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		41798C2E260B01D200DF5ECF /* NoteCategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCategoryPickerView.swift; sourceTree = "<group>"; };
 		41798C33260B073900DF5ECF /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
+		41798C8A2614FC2600DF5ECF /* AwardsAndsMedalsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsAndsMedalsCell.swift; sourceTree = "<group>"; };
+		41798C8F2615EA1100DF5ECF /* MedalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalModel.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
@@ -803,6 +807,7 @@
 				BCD401A125FB3DBF00ABA183 /* VideoModel.swift */,
 				BCABE44B260F49D000E790F2 /* ItemCategoryModel.swift */,
 				BC93D5862613CE1B005DE3AC /* PersonalAspectsModel.swift */,
+				41798C8F2615EA1100DF5ECF /* MedalModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -823,6 +828,7 @@
 				BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */,
 				BCD401B425FB3FBB00ABA183 /* VideoCardCell.swift */,
 				BC20181B2604D08D0060EFAF /* WeekDayCell.swift */,
+				41798C8A2614FC2600DF5ECF /* AwardsAndsMedalsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1179,9 +1185,11 @@
 				BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */,
 				BC67971625AAB371002B9A71 /* UIDirection.swift in Sources */,
 				419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */,
+				41798C902615EA1100DF5ECF /* MedalModel.swift in Sources */,
 				BCEBF48E259F76690001EB40 /* SelectGoalTypeScreenVC.swift in Sources */,
 				BCC429D625A2DCD900803CE9 /* NewAdditionInputFieldContainerInput.swift in Sources */,
 				BC8F2F9025A9049600EF7EA4 /* ModelsConstants.swift in Sources */,
+				41798C8B2614FC2600DF5ECF /* AwardsAndsMedalsCell.swift in Sources */,
 				BC20180C260393F70060EFAF /* CalendarViewController.swift in Sources */,
 				41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */,
 				BCB5D20D2605E71D004275A9 /* WeekDayLabelsStackView.swift in Sources */,
