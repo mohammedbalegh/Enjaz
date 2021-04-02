@@ -10,6 +10,10 @@ class RealmManager {
         return retrieveItemCategories().count
     }
     
+    static func itemMedalsCount(category: Int) -> Int {
+        return retrieveItemMedals(category: category).count
+    }
+    
     static func saveItem(_ item: ItemModel) {
         RealmManager.realm.beginWrite()
         RealmManager.realm.add(item)
@@ -25,6 +29,11 @@ class RealmManager {
     static func retrieveAspectsCount() -> Int {
         let count = Array(RealmManager.realm.objects(PersonalAspectsModel.self)).count
         return count
+    }
+    
+    static func retrieveItemMedals(category: Int) -> [MedalModel] {
+        let count = RealmManager.realm.objects(MedalModel.self).filter("category == \(category)").map({ $0 })
+        return Array(count)
     }
     
     static func retrieveAspect(id: Int) -> PersonalAspectsModel {
@@ -94,6 +103,12 @@ class RealmManager {
     static func saveItemCategory(_ itemCategory: ItemCategoryModel) {
         RealmManager.realm.beginWrite()
         RealmManager.realm.add(itemCategory)
+        try! RealmManager.realm.commitWrite()
+    }
+    
+    static func saveItemMedal(_ itemMedal: MedalModel) {
+        RealmManager.realm.beginWrite()
+        RealmManager.realm.add(itemMedal)
         try! RealmManager.realm.commitWrite()
     }
     
