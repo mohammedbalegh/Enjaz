@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = rootViewController
+        window?.rootViewController = CarouselVC()
         window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
     }
