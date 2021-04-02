@@ -44,7 +44,6 @@ class CardsViewHeader: UIView {
             guard let cardsCount = cardsCount else { return }
             cardsCountLabel.text = String(cardsCount)
             cardsCountLabelWidthConstraint?.constant = cardsCountLabelWidth
-            showAllButton.isHidden = cardsCount < 3
         }
     }
     

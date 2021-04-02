@@ -53,6 +53,7 @@ class HomeScreenVC: UIViewController {
         cardsView.title = NSLocalizedString("Today's goals", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No goals today", comment: "")
         cardsView.cardsCount = goalModels.count
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllGoalsBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -68,6 +69,7 @@ class HomeScreenVC: UIViewController {
         cardsView.title = NSLocalizedString("Today's demahs", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No demahs today", comment: "")
         cardsView.cardsCount = demahModels.count
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllDemahsBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -132,6 +134,16 @@ class HomeScreenVC: UIViewController {
         ])
     }
     
+    // MARK: Event Handlers
+    
+    @objc func handleShowAllGoalsBtnTap() {
+        navigateToShowAllItemsScreen(withModels: goalModels, title: dailyGoalView.title)
+    }
+    
+    @objc func handleShowAllDemahsBtnTap() {
+        navigateToShowAllItemsScreen(withModels: demahModels, title: dailyDemahView.title)
+    }
+    
     // MARK: Tools
     
     func updateScreen() {
@@ -172,10 +184,21 @@ class HomeScreenVC: UIViewController {
     func getHour() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "a"
-        formatter.amSymbol = "am"
+        formatter.amSymbol = "Am"
         formatter.pmSymbol = "Pm"
         let timeFromDate = formatter.string(from: Date())
         return timeFromDate
+    }
+        
+    func navigateToShowAllItemsScreen(withModels models: [ItemModel], title: String?) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let showAllItemsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
+        showAllItemsScreenVC.cardModels = models
+        showAllItemsScreenVC.title = title
+        
+        navigationController?.pushViewController(showAllItemsScreenVC, animated: true)
     }
 }
 

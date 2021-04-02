@@ -112,9 +112,6 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     
     var showInWeeklyView = false {
         didSet {
-            let alreadyShowingCalendarInWeeklyView = showInWeeklyView && !weekDaysCollectionView.isHidden
-            if alreadyShowingCalendarInWeeklyView { return }
-            
             calendarContainer.animateTwoConsecutiveAnimations(
                 withDuration: 0.3,
                 firstAnimation: { self.calendarContainer.animate(opacityTo: 0, andScaleTo: 0.85) },

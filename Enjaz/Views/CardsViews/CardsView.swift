@@ -22,7 +22,6 @@ class CardsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = "لا يوجد"
         label.font = .systemFont(ofSize: 18)
         label.textColor = .systemGray2
         label.textAlignment = .center
@@ -44,9 +43,12 @@ class CardsView: UIView {
     
     var cardsCount: Int? {
         didSet {
+            guard let cardsCount = cardsCount else { return }
+            
             header.cardsCount = cardsCount
             noCardsLabel.isHidden = cardsCount != 0
             cardsCollectionView.isHidden = !noCardsLabel.isHidden
+            header.showAllButton.isHidden = cardsCount < 3
         }
     }
     

@@ -167,6 +167,11 @@
 		BCD401AA25FB3F2000ABA183 /* ArticleCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */; };
 		BCD401B525FB3FBB00ABA183 /* VideoCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD401B425FB3FBB00ABA183 /* VideoCardCell.swift */; };
 		BCD401C025FB6E6000ABA183 /* ArticleScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */; };
+		BCD4494026166CED006FC8B7 /* ShowAllCardsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD4493F26166CED006FC8B7 /* ShowAllCardsScreenVC.swift */; };
+		BCD4494526168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD4494426168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift */; };
+		BCD4494A261692A4006FC8B7 /* ShowAllItemsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD44949261692A4006FC8B7 /* ShowAllItemsScreenVC.swift */; };
+		BCD4494F26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD4494E26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift */; };
+		BCD4495726169606006FC8B7 /* ShowAllIVideosScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD4495626169606006FC8B7 /* ShowAllIVideosScreenVC.swift */; };
 		BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */; };
 		BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D70258F95720032F2E4 /* EditableTextView.swift */; };
 		BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */; };
@@ -382,6 +387,11 @@
 		BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCardCell.swift; sourceTree = "<group>"; };
 		BCD401B425FB3FBB00ABA183 /* VideoCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCardCell.swift; sourceTree = "<group>"; };
 		BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleScreenVC.swift; sourceTree = "<group>"; };
+		BCD4493F26166CED006FC8B7 /* ShowAllCardsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllCardsScreenVC.swift; sourceTree = "<group>"; };
+		BCD4494426168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionViewHeaderCell.swift; sourceTree = "<group>"; };
+		BCD44949261692A4006FC8B7 /* ShowAllItemsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllItemsScreenVC.swift; sourceTree = "<group>"; };
+		BCD4494E26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllIArticlesScreenVC.swift; sourceTree = "<group>"; };
+		BCD4495626169606006FC8B7 /* ShowAllIVideosScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllIVideosScreenVC.swift; sourceTree = "<group>"; };
 		BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBtn.swift; sourceTree = "<group>"; };
 		BCD95D70258F95720032F2E4 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationScreenVC.swift; sourceTree = "<group>"; };
@@ -604,6 +614,10 @@
 				BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */,
 				BC49B9FE261621D000665926 /* MonthTasksScreenVC.swift */,
 				BC49BA062616243D00665926 /* MonthDemahsScreenVC.swift */,
+				BCD4493F26166CED006FC8B7 /* ShowAllCardsScreenVC.swift */,
+				BCD44949261692A4006FC8B7 /* ShowAllItemsScreenVC.swift */,
+				BCD4494E26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift */,
+				BCD4495626169606006FC8B7 /* ShowAllIVideosScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -832,6 +846,7 @@
 				BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */,
 				BCD401B425FB3FBB00ABA183 /* VideoCardCell.swift */,
 				BC20181B2604D08D0060EFAF /* WeekDayCell.swift */,
+				BCD4494426168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1156,6 +1171,7 @@
 				BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeader.swift in Sources */,
 				BCACC4912614D9D3005F7F59 /* AwardsAndMedalsScreenVC.swift in Sources */,
 				BC54008F2579878C009DC69B /* LayoutTools.swift in Sources */,
+				BCD4495726169606006FC8B7 /* ShowAllIVideosScreenVC.swift in Sources */,
 				BCB98CED2588275200B64DC9 /* NewAdditionTextField.swift in Sources */,
 				BC32E8962590EF03008DF8B7 /* ItemTypeConstants.swift in Sources */,
 				BC026C33258FFB8B008222BD /* PopoverTableVC.swift in Sources */,
@@ -1170,6 +1186,7 @@
 				BC026C3D25900B23008222BD /* PopoverTableViewCellModel.swift in Sources */,
 				BC5400A425799D1D009DC69B /* PrimaryBtn.swift in Sources */,
 				417EE8CE25A02E40002F71E5 /* MajorGoalsScreenVC.swift in Sources */,
+				BCD4494A261692A4006FC8B7 /* ShowAllItemsScreenVC.swift in Sources */,
 				BC7D6C7825A2780D00369FC5 /* AuthScreenVC.swift in Sources */,
 				BC7EFC0F2586899400F35312 /* UIStackView+Ext.swift in Sources */,
 				BC2734BF2587B7B400EFB42C /* CarouselCell.swift in Sources */,
@@ -1186,6 +1203,7 @@
 				BC32E8912590EE8C008DF8B7 /* DefaultItemCategories.swift in Sources */,
 				417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */,
 				BC36DBD125BC356600F57ED2 /* CardModalVC.swift in Sources */,
+				BCD4494F26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift in Sources */,
 				BC54008A2579622D009DC69B /* String+Ext.swift in Sources */,
 				BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */,
 				BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */,
@@ -1201,6 +1219,7 @@
 				BC540077257954CE009DC69B /* AuthTextField.swift in Sources */,
 				BC20181C2604D08D0060EFAF /* WeekDayCell.swift in Sources */,
 				41328F06258955CD00A86330 /* CardsViewHeader.swift in Sources */,
+				BCD4494526168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift in Sources */,
 				4141504225A3FD2F00DC369A /* ChartSliderView.swift in Sources */,
 				419120CA25903A1E00CB7BF9 /* RealmManager.swift in Sources */,
 				BC2BCE60259BE5BF002FE716 /* StickerIdConstants.swift in Sources */,
@@ -1208,6 +1227,7 @@
 				41798BF32605740400DF5ECF /* UIImage+Ext.swift in Sources */,
 				BC32E8A1259239B8008DF8B7 /* NetworkingManager.swift in Sources */,
 				BC06A7F4258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift in Sources */,
+				BCD4494026166CED006FC8B7 /* ShowAllCardsScreenVC.swift in Sources */,
 				BC026C0325E6CA59004B6DA3 /* CustomAccessoryView.swift in Sources */,
 				41FC4C3C258AEEE100EA4DDF /* CardBodyView.swift in Sources */,
 				BCC4D017258054BF0024429B /* OAuthBtn.swift in Sources */,

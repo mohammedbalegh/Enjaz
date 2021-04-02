@@ -334,13 +334,11 @@ extension UIView {
                                                 fadeOutAndIn: Bool = false,
                                                 midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
                                                 completionHandler: ((_ : Bool) -> Void)? = nil) {
-        
-        guard let superview = superview else { return }
-        
+                
         let translationDirection = CGFloat(mapUIHorizontalDirectionToDirectionalInt(direction))
         
         func translateAndToggleAlpha() {
-            translateViewHorizontally(by: translationDirection * superview.frame.width)
+            translateViewHorizontally(by: translationDirection * LayoutConstants.screenWidth)
             if fadeOutAndIn {
                 alpha = alpha == 0.5 ? 1 : 0.5
             }
@@ -348,7 +346,7 @@ extension UIView {
         
         func didCompleteFirstAnimation(completed : Bool) {
             midAnimationCompletionHandler?(completed)
-            translateViewHorizontally(by: translationDirection * CalendarView.width * -2)
+            translateViewHorizontally(by: translationDirection * LayoutConstants.screenWidth * -2)
         }
         
         animateTwoConsecutiveAnimations(

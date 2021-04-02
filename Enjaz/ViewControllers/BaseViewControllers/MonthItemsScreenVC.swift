@@ -26,6 +26,7 @@ class MonthItemsScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         
         cardsView.cardsCount = dayItemModels.count
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllDayItemsBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -39,6 +40,7 @@ class MonthItemsScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         
         cardsView.cardsCount = dayItemModels.count
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllWeekItemsBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -52,6 +54,7 @@ class MonthItemsScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         
         cardsView.cardsCount = dayItemModels.count
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllMonthItemsBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -65,6 +68,7 @@ class MonthItemsScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         
         cardsView.cardsCount = dayItemModels.count
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllCompletedItemsBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -120,9 +124,27 @@ class MonthItemsScreenVC: UIViewController {
         ])
     }
     
-//  MARK: Tools
+    // MARK: Event Handlers
     
-//  @abstract
+    @objc func handleShowAllDayItemsBtnTap() {
+        navigateToShowAllItemsScreen(withModels: dayItemModels, title: dayItemsView.title)
+    }
+    
+    @objc func handleShowAllWeekItemsBtnTap() {
+        navigateToShowAllItemsScreen(withModels: weekItemModels, title: weekItemsView.title)
+    }
+    
+    @objc func handleShowAllMonthItemsBtnTap() {
+        navigateToShowAllItemsScreen(withModels: monthItemModels, title: monthItemsView.title)
+    }
+    
+    @objc func handleShowAllCompletedItemsBtnTap() {
+        navigateToShowAllItemsScreen(withModels: completedItemModels, title: completedItemsView.title)
+    }
+        
+    // MARK: Tools
+    
+    // @abstract
     func setItemCardViewsTitles() {}
         
     func updateScreen() {
@@ -152,6 +174,17 @@ class MonthItemsScreenVC: UIViewController {
                 cardsView.cardsCount = cardsViewModels.count
             }
         }
+    }
+    
+    func navigateToShowAllItemsScreen(withModels models: [ItemModel], title: String?) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let showAllItemsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
+        showAllItemsScreenVC.cardModels = models
+        showAllItemsScreenVC.title = title
+        
+        navigationController?.pushViewController(showAllItemsScreenVC, animated: true)
     }
     
 }

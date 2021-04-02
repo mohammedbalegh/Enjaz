@@ -28,6 +28,7 @@ class DraftScreenVC: UIViewController {
         cardsView.title = NSLocalizedString("Most Recent Articles", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No articles yet", comment: "")
         cardsView.header.cardsCountLabel.isHidden = true
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllArticlesBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -42,6 +43,7 @@ class DraftScreenVC: UIViewController {
         cardsView.title = NSLocalizedString("Most Recent Videos", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No videos yet", comment: "")
         cardsView.header.cardsCountLabel.isHidden = true
+        cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllVideosBtnTap), for: .touchUpInside)
         
         return cardsView
     }()
@@ -104,6 +106,16 @@ class DraftScreenVC: UIViewController {
         ])
     }
     
+    // MARK: Event Handlers
+    
+    @objc func handleShowAllArticlesBtnTap() {
+        navigateToShowAllCardsScreen(withModels: articleModels, title: articlesView.title)
+    }
+    
+    @objc func handleShowAllVideosBtnTap() {
+        navigateToShowAllCardsScreen(withModels: videoModels, title: videosView.title)
+    }
+    
     // MARK: Tools
         
     func updateScreen() {
@@ -132,6 +144,21 @@ class DraftScreenVC: UIViewController {
         articleScreen.articleModel = articleModel
         navigationController?.pushViewController(articleScreen, animated: true)
     }
+    
+    func navigateToShowAllCardsScreen(withModels models: [Any], title: String?) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let showAllCardsScreenVC = models is [ArticleModel]
+            ? ShowAllIArticlesScreenVC(collectionViewLayout: layout)
+            : ShowAllIVideosScreenVC(collectionViewLayout: layout)
+        
+        showAllCardsScreenVC.cardModels = models
+        showAllCardsScreenVC.title = title
+        
+        navigationController?.pushViewController(showAllCardsScreenVC, animated: true)
+    }
+    
 }
 
 extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {

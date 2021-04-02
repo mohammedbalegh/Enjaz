@@ -204,10 +204,13 @@ class CalendarViewController: UIViewController {
         calendarView.selectedMonthLabel = monthPopoverDataSource[selectedMonthIndex]
         calendarView.selectedYearLabel = yearPopoverDataSource[selectedYearIndex]
         
+        handleViewTypeSelection(selectedIndex: 0)
         updateMonthDays()
     }
     
     func handleViewTypeSelection(selectedIndex: Int) {
+        guard selectedIndex != selectedViewTypeIndex else { return }
+        
         selectedViewTypeIndex = selectedIndex
         calendarView.viewTypeLabel = viewTypePopoverDataSource[selectedIndex]
         handleWeekSelection(selectedIndex: 0)
@@ -245,7 +248,7 @@ class CalendarViewController: UIViewController {
         
     // MARK: TOOLS
     
-//  @abstract
+    // @abstract
     func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {}
     
     func presentPopover(frame: CGRect, numberOfOptions: Int) {
@@ -276,8 +279,9 @@ class CalendarViewController: UIViewController {
         }
         
         let newSelectedMonthIndex = (selectedMonthIndex + 1) % 12
-        
-        handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+        calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .trailingToLeading, fadeOutAndIn: true, midAnimationCompletionHandler:  {_ in
+            self.handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+        })
     }
     
     @objc func switchToPreviousMonth() {
@@ -290,7 +294,9 @@ class CalendarViewController: UIViewController {
         
         let newSelectedMonthIndex = selectedMonthIndex == 0 ? 11 : selectedMonthIndex - 1
         
-        handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+        calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .leadingToTrailing, fadeOutAndIn: true, midAnimationCompletionHandler: {_ in
+            self.handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+        })
     }
     
     @objc func switchToNextWeek() {
@@ -304,7 +310,9 @@ class CalendarViewController: UIViewController {
         
         newSelectedWeekIndex = newSelectedWeekIndex ?? (selectedWeekIndex + 1) % numberOfWeeksInMonth
         
-        handleWeekSelection(selectedIndex: newSelectedWeekIndex)
+        calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .trailingToLeading, fadeOutAndIn: true, midAnimationCompletionHandler:  {_ in
+            self.handleWeekSelection(selectedIndex: newSelectedWeekIndex)
+        })
     }
     
     @objc func switchToPreviousWeek() {
@@ -316,7 +324,9 @@ class CalendarViewController: UIViewController {
         
         let newSelectedWeekIndex = selectedWeekIndex == 0 ? numberOfWeeksInMonth - 1 : selectedWeekIndex - 1
         
-        handleWeekSelection(selectedIndex: newSelectedWeekIndex)
+        calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .leadingToTrailing, fadeOutAndIn: true, midAnimationCompletionHandler: {_ in
+            self.handleWeekSelection(selectedIndex: newSelectedWeekIndex)
+        })
     }
         
     func setPopoverBtnsDefaultLabels() {
