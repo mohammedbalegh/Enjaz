@@ -108,14 +108,19 @@ extension AwardsAndMedalsScreenVC: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? AwardsAndsMedalsCell else {
-            return }
-        let vc = AwardsAndMedalsScreenVC()
-        vc.title = NSLocalizedString("Awards and medals", comment: "")
-        vc.itemCategory = cell.id
-        vc.currentState = .medalsController
-        vc.collectionTitle.text = NSLocalizedString("Awards and medals", comment: "")
-        navigationController?.pushViewController(vc, animated: true)
+        switch currentState {
+        case .categoriesController:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? AwardsAndsMedalsCell else {
+                return }
+            let vc = AwardsAndMedalsScreenVC()
+            vc.title = NSLocalizedString("Awards and medals", comment: "")
+            vc.itemCategory = cell.id
+            vc.currentState = .medalsController
+            vc.collectionTitle.text = NSLocalizedString("Awards and medals", comment: "")
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
