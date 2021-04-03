@@ -22,6 +22,9 @@
 		41798C902615EA1100DF5ECF /* MedalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C8F2615EA1100DF5ECF /* MedalModel.swift */; };
 		41798CAD2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CAC2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift */; };
 		41798CB22617C59B00DF5ECF /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CB12617C59B00DF5ECF /* DailyViewCell.swift */; };
+		41798CC32618861300DF5ECF /* AchievementsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CC22618861300DF5ECF /* AchievementsScreenVC.swift */; };
+		41798CC826188B2B00DF5ECF /* AchievementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CC726188B2B00DF5ECF /* AchievementsCell.swift */; };
+		41798CCD2618C9D700DF5ECF /* AchievementsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CCC2618C9D700DF5ECF /* AchievementsCardView.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -242,6 +245,9 @@
 		41798C8F2615EA1100DF5ECF /* MedalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalModel.swift; sourceTree = "<group>"; };
 		41798CAC2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
 		41798CB12617C59B00DF5ECF /* DailyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCell.swift; sourceTree = "<group>"; };
+		41798CC22618861300DF5ECF /* AchievementsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsScreenVC.swift; sourceTree = "<group>"; };
+		41798CC726188B2B00DF5ECF /* AchievementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsCell.swift; sourceTree = "<group>"; };
+		41798CCC2618C9D700DF5ECF /* AchievementsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsCardView.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
@@ -589,6 +595,7 @@
 				BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */,
 				BCD4497626177707006FC8B7 /* SwitchView.swift */,
 				BC3C5D4E26186250000EE002 /* DailyView.swift */,
+				41798CCC2618C9D700DF5ECF /* AchievementsCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -633,6 +640,7 @@
 				BCD4495626169606006FC8B7 /* ShowAllIVideosScreenVC.swift */,
 				BCCCC67F2618207D000F8C76 /* AddCategoryScreenVC.swift */,
 				BC3C5D56261862B7000EE002 /* CarouselVC.swift */,
+				41798CC22618861300DF5ECF /* AchievementsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -865,6 +873,7 @@
 				BCD4494426168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift */,
 				BCD44965261748E2006FC8B7 /* AwardsAndMedalsCell.swift */,
 				41798CB12617C59B00DF5ECF /* DailyViewCell.swift */,
+				41798CC726188B2B00DF5ECF /* AchievementsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1127,6 +1136,7 @@
 				BCD4497726177707006FC8B7 /* SwitchView.swift in Sources */,
 				BC8F2F5725A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift in Sources */,
 				BC93D5962613CEC0005DE3AC /* noteCategoryView.swift in Sources */,
+				41798CC32618861300DF5ECF /* AchievementsScreenVC.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
 				BC32E88C2590EC96008DF8B7 /* imageIdConstants.swift in Sources */,
 				BCBEE8752587D89100D8DE0A /* EmailTextField.swift in Sources */,
@@ -1230,6 +1240,7 @@
 				BC863E27259CAE7C006B7F68 /* UserDefaultsManager.swift in Sources */,
 				BC67971625AAB371002B9A71 /* UIDirection.swift in Sources */,
 				419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */,
+				41798CCD2618C9D700DF5ECF /* AchievementsCardView.swift in Sources */,
 				41798C902615EA1100DF5ECF /* MedalModel.swift in Sources */,
 				BCEBF48E259F76690001EB40 /* MyGoalsScreenVC.swift in Sources */,
 				BCC429D625A2DCD900803CE9 /* NewAdditionInputFieldContainerInput.swift in Sources */,
@@ -1273,6 +1284,7 @@
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				BC7EFC052586354E00F35312 /* Popup.swift in Sources */,
 				BC541A572610DF3C00341BDE /* PersonalAspectsScreenVC.swift in Sources */,
+				41798CC826188B2B00DF5ECF /* AchievementsCell.swift in Sources */,
 				419120E92590948100CB7BF9 /* TypeCardBtn.swift in Sources */,
 				BC7EFC1A2587AACE00F35312 /* SignupScreenVC.swift in Sources */,
 				41798C2F260B01D200DF5ECF /* NoteCategoryPickerView.swift in Sources */,
