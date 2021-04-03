@@ -233,7 +233,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         let newPassword = newPasswordTextField.text
         
         guard isConnectedToInternet else {
-            alertPopup.showAsInternetConnectionError()
+            alertPopup.presentAsInternetConnectionError()
             return
         }
         
@@ -241,10 +241,10 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-                    self.alertPopup.showAsError(withMessage: "الكود غير صحيح")
+                    self.alertPopup.presentAsError(withMessage: "الكود غير صحيح")
                 }
                 
-                self.resetPasswordPopup.show()
+                self.resetPasswordPopup.present()
             }
         }
     }

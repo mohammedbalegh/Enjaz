@@ -75,11 +75,11 @@ class AddNoteScreenVC: UIViewController {
     @objc func handlesSubmitNewNoteBtn() {
         let alertPopup = AlertPopup(hideOnOverlayTap: true)
         if titleTextField.textField.text == "" {
-            alertPopup.showAsError(withMessage: NSLocalizedString("Note title Can't be empty", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Note title Can't be empty", comment: ""))
         } else if noteCategoryButton.noteCategoryBtn.currentTitle == NSLocalizedString("Note category", comment: "")  {
-            alertPopup.showAsError(withMessage: NSLocalizedString("Note category can't be empty", comment:  ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Note category can't be empty", comment:  ""))
         }  else if noteTextField.text == NSLocalizedString("Write whats on your mind", comment: "") {
-            alertPopup.showAsError(withMessage: NSLocalizedString("Please write whats on your mind", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Please write whats on your mind", comment: ""))
         } else  {
             let aspect = PersonalAspectsModel()
             

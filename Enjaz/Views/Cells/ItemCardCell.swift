@@ -14,7 +14,7 @@ class ItemCardCell: UICollectionViewCell {
             }
             
             let itemCategory = RealmManager.retrieveItemCategoryById(viewModel.category)
-            
+                                    
             cardView.cardBody.categoryLabel.text = itemCategory?.localized_name
             cardView.cardBody.titleLabel.text = viewModel.name
             let date = Date(timeIntervalSince1970: viewModel.date)

@@ -348,9 +348,7 @@ class CalendarViewController: UIViewController {
         }
         
         let newSelectedWeekIndex = selectedWeekIndex == 0 ? numberOfWeeksInMonth - 1 : selectedWeekIndex - 1
-        
-        print("numberOfWeeksInMonth inside switchToPreviousWeek \(numberOfWeeksInMonth)")
-        
+                
         calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .leadingToTrailing, fadeOutAndIn: true, midAnimationCompletionHandler: {_ in
             self.handleWeekSelection(selectedIndex: newSelectedWeekIndex)
         })
@@ -369,9 +367,7 @@ class CalendarViewController: UIViewController {
         
         let (numberOfDaysInMonth, firstWeekDayNumber) = DateAndTimeTools.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarIdentifier: selectedCalendarIdentifier)
         
-        numberOfWeeksInMonth = getNumberOfWeeksInMonth(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)
-        print("numberOfWeeksInMonth inside updateMonthDays \(numberOfWeeksInMonth)")
-        
+        numberOfWeeksInMonth = getNumberOfWeeksInMonth(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)        
         calendarView.handleNewMonthSelection(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnIndex: firstWeekDayNumber - 1)
     }
     

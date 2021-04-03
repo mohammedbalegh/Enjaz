@@ -85,21 +85,21 @@ class AlertPopup: Popup {
         ])
     }
     
-    func show(withImage image: UIImage?, title: String, message: String) {
+    func present(withImage image: UIImage?, title: String, message: String) {
         imageView.image = image
         titleLabel.text = title
         messageLabel.text = message
-        show()
+        present()
     }
     
-    func showAsError(withMessage message: String) {
+    func presentAsError(withMessage message: String) {
         let image = UIImage(named: "errorImage")
         let title = NSLocalizedString("Error", comment: "")
-        show(withImage: image, title: title, message: message)
+        present(withImage: image, title: title, message: message)
     }
     
-    func showAsInternetConnectionError() {
-        showAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
+    func presentAsInternetConnectionError() {
+        presentAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
     }
     
 }

@@ -64,7 +64,7 @@ class Popup: UIView {
 		blurOverlay.addGestureRecognizer(tap)
 	}
 	
-	func show() {
+	func present() {
 		let window = UIApplication.shared.windows[0]
 		window.addSubview(self);
         setup()

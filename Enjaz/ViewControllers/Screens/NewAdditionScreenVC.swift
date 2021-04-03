@@ -1,13 +1,11 @@
 import UIKit
 import SPAlert
 
-class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
+class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModalDelegate {
     // MARK: Properties
     
     let scrollView = UIScrollView()
-    
-    let scrollViewContentView = UIView()
-    
+        
     let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
     
     let setStickerBtn = RoundBtn(image: UIImage(named: "stickerIconBlue"), size: LayoutConstants.screenHeight * 0.03)
@@ -150,11 +148,10 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         return repeatSwitchView.switch.isOn
     }
     
+    var selectedItemCategoryIndex: Int?
+    
     var itemCategory: Int?
     var itemDates: [Double]?
-    var itemDate: Double? {
-        return itemDates?[0]
-    }
     var itemType: Int!
     var itemImageId: Int?
     var itemStickerId: Int?
@@ -187,7 +184,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         setupSetImageButton()
         setupSetStickerButton()
         setupTextFieldsVerticalStack()
-        setupAdditionDescriptionTextField()
+        setupAdditionDescriptionTextView()
         setupSaveBtn()
     }
     
@@ -243,7 +240,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         ])
     }
     
-    func setupAdditionDescriptionTextField() {
+    func setupAdditionDescriptionTextView() {
         scrollView.addSubview(additionDescriptionTextView)
         additionDescriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -271,12 +268,12 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     
     @objc func handleSetImageBtnTap() {
         dismissKeyboard()
-        imagePickerPopup.show()
+        imagePickerPopup.present()
     }
     
     @objc func handleSetStickerBtnTap() {
         dismissKeyboard()
-        stickerPickerPopup.show()
+        stickerPickerPopup.present()
     }
     
     func handleImageSelection(selectedId: Int) {
@@ -305,7 +302,8 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         let selectedValueIndex = additionCategoryPickerBottomSheet.picker.selectedRow(inComponent: 0)
         
-        itemCategory = selectedValueIndex
+        itemCategory = itemCategoryModels[selectedValueIndex].id
+        selectedItemCategoryIndex = selectedValueIndex
         
         let selectedAdditionCategory = itemCategoryModels[selectedValueIndex]
         
@@ -314,7 +312,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }
     
     func handleAdditionCategoryPopupDismissal() {
-        additionCategoryPickerBottomSheet.picker.selectRow(itemCategory ?? 0, inComponent: 0, animated: false)
+        additionCategoryPickerBottomSheet.picker.selectRow(selectedItemCategoryIndex ?? 0, inComponent: 0, animated: false)
     }
     
     @objc func handleAdditionDateAndTimeInputTap() {
@@ -353,7 +351,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         }
         
         saveItem()
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: true)
         
         let successMessage = generateSuccessMessage(itemTypeName: itemTypeName)
         SPAlert.present(title: successMessage, preset: .done)
@@ -398,7 +396,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     
     func generateSuccessMessage(itemTypeName: String) -> String {
         if Locale.current.languageCode == "ar" {
-            return "تمت إضافة \(itemTypeName) بنجاح"
+            return "تم إضافة ال\(itemTypeName) بنجاح"
         }
         
         return "\(itemTypeName) was added successfully"

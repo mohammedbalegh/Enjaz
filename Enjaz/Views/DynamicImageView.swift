@@ -32,7 +32,6 @@ class DynamicImageView: UIImageView {
             
             task.resume()
         } else {
-            print(source)
             image = UIImage(named: source)
         }
     }

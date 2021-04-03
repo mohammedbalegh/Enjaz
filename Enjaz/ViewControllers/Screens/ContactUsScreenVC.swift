@@ -66,15 +66,15 @@ class ContactUsScreenVC: UIViewController {
         
         if clientNameView.inputTextView.textColor == UIColor.placeholderText || clientNameView.inputTextView.text.isEmpty {
             
-            alertPopup.showAsError(withMessage: NSLocalizedString("Name field can't be empty", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Name field can't be empty", comment: ""))
             
         } else if !phoneNumberView.inputTextView.text.isPhone() {
             
-            alertPopup.showAsError(withMessage: NSLocalizedString("Please enter a valid phone number", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Please enter a valid phone number", comment: ""))
             
         } else if messageContentView.inputTextView.textColor == UIColor.placeholderText || messageContentView.inputTextView.text.isEmpty {
             
-            alertPopup.showAsError(withMessage: NSLocalizedString("Message field can't be empty" , comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Message field can't be empty" , comment: ""))
             
         } else {
             NetworkingManager.sendEmail(name: clientNameView.inputTextView.text, phoneNumber: phoneNumberView.inputTextView.text, messageContent: messageContentView.inputTextView.text)

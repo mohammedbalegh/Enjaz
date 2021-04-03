@@ -10,7 +10,6 @@
 		41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EF9258843CD00A86330 /* GreetingMessageView.swift */; };
 		41328F06258955CD00A86330 /* CardsViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CardsViewHeader.swift */; };
 		4141500925A1875A00DC369A /* MonthGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */; };
-		4141501125A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */; };
 		4141502425A2AAA200DC369A /* SelfEvaluationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */; };
 		4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */; };
 		4141503225A2C71700DC369A /* SelfEvaluationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141503125A2C71700DC369A /* SelfEvaluationChart.swift */; };
@@ -163,6 +162,7 @@
 		BCC4D017258054BF0024429B /* OAuthBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4D016258054BE0024429B /* OAuthBtn.swift */; };
 		BCC4D02A25827F890024429B /* LoginScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC4D02925827F890024429B /* LoginScreenVC.swift */; };
 		BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */; };
+		BCCCC6802618207D000F8C76 /* AddCategoryScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCCC67F2618207D000F8C76 /* AddCategoryScreenVC.swift */; };
 		BCD1B1252592AF4E0070819B /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1B1242592AF4E0070819B /* KeychainKeys.swift */; };
 		BCD401A225FB3DBF00ABA183 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD401A125FB3DBF00ABA183 /* VideoModel.swift */; };
 		BCD401AA25FB3F2000ABA183 /* ArticleCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */; };
@@ -191,7 +191,6 @@
 		BCEBF4AA259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */; };
 		BCEBF4AF259F965D0001EB40 /* ScreenNavigatorCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4AE259F965D0001EB40 /* ScreenNavigatorCellModel.swift */; };
 		BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */; };
-		BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */; };
 		BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */; };
 		BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */; };
 		E298AC267A0982FAD37AF7AE /* Pods_Enjaz_EnjazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */; };
@@ -225,7 +224,6 @@
 		41328EF9258843CD00A86330 /* GreetingMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingMessageView.swift; sourceTree = "<group>"; };
 		41328F05258955CD00A86330 /* CardsViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewHeader.swift; sourceTree = "<group>"; };
 		4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGoalsScreenVC.swift; sourceTree = "<group>"; };
-		4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAndCompletedGoalsScreenVC.swift; sourceTree = "<group>"; };
 		4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationScreenVC.swift; sourceTree = "<group>"; };
 		4141502925A2AC2100DC369A /* SelfEvaluationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationLabel.swift; sourceTree = "<group>"; };
 		4141503125A2C71700DC369A /* SelfEvaluationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfEvaluationChart.swift; sourceTree = "<group>"; };
@@ -386,6 +384,7 @@
 		BCC4D016258054BE0024429B /* OAuthBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthBtn.swift; sourceTree = "<group>"; };
 		BCC4D02925827F890024429B /* LoginScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenVC.swift; sourceTree = "<group>"; };
 		BCCA217A2588106C003A18DA /* NewAdditionScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdditionScreenVC.swift; sourceTree = "<group>"; };
+		BCCCC67F2618207D000F8C76 /* AddCategoryScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryScreenVC.swift; sourceTree = "<group>"; };
 		BCD1B1242592AF4E0070819B /* KeychainKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainKeys.swift; sourceTree = "<group>"; };
 		BCD401A125FB3DBF00ABA183 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		BCD401A925FB3F2000ABA183 /* ArticleCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCardCell.swift; sourceTree = "<group>"; };
@@ -410,7 +409,6 @@
 		BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorWithDynamicDataTableVC.swift; sourceTree = "<group>"; };
 		BCEBF4AE259F965D0001EB40 /* ScreenNavigatorCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorCellModel.swift; sourceTree = "<group>"; };
 		BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCustomHeader.swift; sourceTree = "<group>"; };
-		BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableScreenVC.swift; sourceTree = "<group>"; };
 		BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalScreenVC.swift; sourceTree = "<group>"; };
 		BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorTableViewCell.swift; sourceTree = "<group>"; };
 		C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz_EnjazUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -608,7 +606,6 @@
 				BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */,
 				BC8F2F8725A878B700EF7EA4 /* SetDateRangeScreenVC.swift */,
 				4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */,
-				4141501025A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift */,
 				4141502325A2AAA200DC369A /* SelfEvaluationScreenVC.swift */,
 				BC5029A825F8B32E00407B16 /* DraftScreenVC.swift */,
 				BCD401BF25FB6E6000ABA183 /* ArticleScreenVC.swift */,
@@ -625,6 +622,7 @@
 				BCD44949261692A4006FC8B7 /* ShowAllItemsScreenVC.swift */,
 				BCD4494E26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift */,
 				BCD4495626169606006FC8B7 /* ShowAllIVideosScreenVC.swift */,
+				BCCCC67F2618207D000F8C76 /* AddCategoryScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -681,7 +679,6 @@
 				BC93769525A133E800048BEF /* KeyboardHandlingViewController.swift */,
 				BC7D6C7725A2780D00369FC5 /* AuthScreenVC.swift */,
 				BCEBF4A9259F95910001EB40 /* ScreenNavigatorWithDynamicDataTableVC.swift */,
-				BCEBF4C3259FE6F50001EB40 /* SelectableScreenVC.swift */,
 				4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */,
 				BC36DBD025BC356600F57ED2 /* CardModalVC.swift */,
 				BC20180B260393F70060EFAF /* CalendarViewController.swift */,
@@ -1113,7 +1110,6 @@
 				BC4646E32587EC3100218D7A /* MainTabBar.swift in Sources */,
 				417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */,
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
-				BCEBF4C4259FE6F50001EB40 /* SelectableScreenVC.swift in Sources */,
 				BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */,
 				BC93D5B92614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */,
 				BCD4497726177707006FC8B7 /* SwitchView.swift in Sources */,
@@ -1252,7 +1248,6 @@
 				BC93D58C2613CE94005DE3AC /* NotesScreenVC.swift in Sources */,
 				BC4780AB25962A1400D21060 /* Reducer.swift in Sources */,
 				BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */,
-				4141501125A29D0A00DC369A /* UpcomingAndCompletedGoalsScreenVC.swift in Sources */,
 				BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */,
 				BCBEE85E2587D73000D8DE0A /* PasswordTextField.swift in Sources */,
 				BCCA217B2588106C003A18DA /* NewAdditionScreenVC.swift in Sources */,
@@ -1284,6 +1279,7 @@
 				BC67DFD425F8CC2B00183EFD /* DraftCardCell.swift in Sources */,
 				BC5029A925F8B32E00407B16 /* DraftScreenVC.swift in Sources */,
 				BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */,
+				BCCCC6802618207D000F8C76 /* AddCategoryScreenVC.swift in Sources */,
 				BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */,
 				BCD401C025FB6E6000ABA183 /* ArticleScreenVC.swift in Sources */,
 				BCC429E025A2F09000803CE9 /* UICollectionView+Ext.swift in Sources */,

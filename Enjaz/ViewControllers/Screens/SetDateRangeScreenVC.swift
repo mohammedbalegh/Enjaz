@@ -19,7 +19,7 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
     override func handleSaveBtnTap() {
         
         guard let firstSelectedDate = firstSelectedDate, let lastSelectedDate = lastSelectedDate, firstSelectedDate != lastSelectedDate else {
-            alertPopup.showAsError(withMessage: NSLocalizedString("A date range must be selected", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("A date range must be selected", comment: ""))
             return
         }
         
@@ -27,7 +27,7 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
         let firstSelectedDateUnixTimeStamp = firstSelectedDate.timeIntervalSince1970
         
         if firstSelectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-            alertPopup.showAsError(withMessage: NSLocalizedString("Selected date range cannot be in the past", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Selected date range cannot be in the past", comment: ""))
             return
         }
         

@@ -53,9 +53,16 @@
 "Fourth Week" = "الأسبوع الرابع";
 "Last Week" = "الأسبوع الاخير";
 
-// MARK: MyGoalsScreen
+// MARK: GoalsScreen
+"My Goals" = "أهدافي";
+"Goals Bank" = "بنك الأهداف";
 "Choose goal category" = "اختر مجال الهدف";
 "Add new category" = "إضافة مجال جديد";
+"Category Name" = "اسم المجال";
+"Category name must be entered" = "يجب ادخال اسم المجال";
+"Are you sure you want to delete category?" = "هل أنت متأكد من مسح المجال؟";
+"All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone." = "جميع الأهداف، الديمة، الإنجازات و المهام المرتبطة بالمجال سيتم مسحها أيضا. لا يمكن التراجع عن هذا الإجراء.";
+"Delete Category" = "مسح المجال";
 
 // MARK: ArticlesScreen
 "Most Recent Articles" = "آخر المقالات";
@@ -164,3 +171,4 @@
 "to" = "إلى";
 "Ok" = "حسنًا";
 "Done" = "تم";
+"optional" = "اختياري";

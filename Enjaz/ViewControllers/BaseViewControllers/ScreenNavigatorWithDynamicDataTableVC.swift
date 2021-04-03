@@ -8,16 +8,7 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     var addBtnTitle: String?
     var addBtnTapHandler: Selector?
     
-    var screenNavigatorCellModels: [ScreenNavigatorCellModel] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    var id: Int?
-    
-    var targetViewController: SelectableScreenVC?
-    var targetTableViewController: ScreenNavigatorWithDynamicDataTableVC?
+    var screenNavigatorCellModels: [ScreenNavigatorCellModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +45,7 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 62
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,18 +55,5 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
         
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row < 2, let targetTableViewController = targetTableViewController {
-            targetTableViewController.id = indexPath.row
-            navigationController?.pushViewController(targetTableViewController, animated: true)
-            return
-        }
-        
-        
-        if let targetViewController = targetViewController {
-            targetViewController.id = indexPath.row
-            navigationController?.pushViewController(targetViewController, animated: true)
-        }
-    }
+    
 }

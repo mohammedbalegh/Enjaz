@@ -234,7 +234,7 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ItemCardCell
-        self.cardPopup.show()
+        self.cardPopup.present()
         cardPopup.viewModel = cell.cardView
     }
     

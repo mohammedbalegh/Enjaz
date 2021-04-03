@@ -1,7 +1,7 @@
 
 import UIKit
 
-class SelfEvaluationScreenVC: SelectableScreenVC {
+class SelfEvaluationScreenVC: UIViewController {
     
     let whatYouLearnedLabel: SelfEvaluationLabel = {
         let label = SelfEvaluationLabel()

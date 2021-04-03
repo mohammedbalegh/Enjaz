@@ -69,19 +69,19 @@ class RealmManager {
         }
     }
     
-    private static func retrieveGoals(withCompletedEqualTo completed: Bool) -> [ItemModel] {
+    private static func retrieveGoals(withCompletedEqualTo completed: Bool, andCategoryEqualTo category: ItemCategoryModel) -> [ItemModel] {
         
         let completionFilter = "is_completed == \(completed.description)"
-        let goals: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == \(ItemType.goal.id)"))
+        let goals: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter("\(completionFilter) AND type == \(ItemType.goal.id) AND category == \(category.id)"))
         return goals
     }
     
-    static func retrieveCompletedGoals() -> [ItemModel] {
-        return retrieveGoals(withCompletedEqualTo: true)
+    static func retrieveCompletedGoals(ofCategory category: ItemCategoryModel) -> [ItemModel] {
+        return retrieveGoals(withCompletedEqualTo: true, andCategoryEqualTo: category)
     }
     
-    static func retrieveUpcomingGoals() -> [ItemModel] {
-        return retrieveGoals(withCompletedEqualTo: false)
+    static func retrieveUpcomingGoals(ofCategory category: ItemCategoryModel) -> [ItemModel] {
+        return retrieveGoals(withCompletedEqualTo: false, andCategoryEqualTo: category)
     }
     
     static func saveItemCategories(_ itemCategories: [ItemCategoryModel]) {
@@ -96,6 +96,22 @@ class RealmManager {
         RealmManager.realm.beginWrite()
         RealmManager.realm.add(itemCategory)
         try! RealmManager.realm.commitWrite()
+    }
+    
+    static func deleteItemCategory(categoryId: Int) {
+        let allItemsRelatedToCategory = getAllItemsRelatedTo(categoryId: categoryId)
+        if let itemCategoryToBeDeleted = RealmManager.retrieveItemCategoryById(categoryId) {
+            RealmManager.realm.beginWrite()
+            RealmManager.realm.delete(itemCategoryToBeDeleted)
+            RealmManager.realm.delete(allItemsRelatedToCategory)
+            try! RealmManager.realm.commitWrite()
+        }
+    }
+    
+    private static func getAllItemsRelatedTo(categoryId: Int) -> [ItemModel] {
+        let itemsRelatedToCategory = retrieveItems(withFilter: "category == \(categoryId)")
+        
+        return itemsRelatedToCategory
     }
     
     static func saveItemMedal(_ itemMedal: MedalModel) {

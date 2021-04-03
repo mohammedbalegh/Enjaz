@@ -15,7 +15,7 @@ class TableViewCustomHeader: UITableViewHeaderFooterView {
         button.setTitleColor(.accentColor, for: .normal)
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.accentColor.cgColor
-        button.layer.cornerRadius = 2
+        button.layer.cornerRadius = 3
         button.isHidden = true
         
         return button
@@ -51,7 +51,7 @@ class TableViewCustomHeader: UITableViewHeaderFooterView {
             addBtn.centerYAnchor.constraint(equalTo: label.centerYAnchor),
             addBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -14),
             addBtn.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35),
-            addBtn.heightAnchor.constraint(equalToConstant: 35),
+            addBtn.heightAnchor.constraint(equalToConstant: 32),
         ])
     }
 }

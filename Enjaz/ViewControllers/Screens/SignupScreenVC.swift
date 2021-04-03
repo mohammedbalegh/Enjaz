@@ -29,7 +29,7 @@ class SignupScreenVC: AuthScreenVC {
         let user = UserModel(id: -1, name: name, username: username, email: email, my_msg: "", my_view: "", about_me: "")
         
         guard isConnectedToInternet else {
-            alertPopup.showAsInternetConnectionError()
+            alertPopup.presentAsInternetConnectionError()
             return
         }
         
@@ -43,7 +43,7 @@ class SignupScreenVC: AuthScreenVC {
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.showAsError(withMessage: "اسم المستخدم أو البريد الإلكتروني مسجل بالفعل")
+                    self.alertPopup.presentAsError(withMessage: "اسم المستخدم أو البريد الإلكتروني مسجل بالفعل")
                     return
                 }
                 

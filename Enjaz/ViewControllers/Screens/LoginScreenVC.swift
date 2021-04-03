@@ -62,7 +62,7 @@ class LoginScreenVC: AuthScreenVC {
         let password = passwordTextField.text
         
         guard isConnectedToInternet else {
-            alertPopup.showAsInternetConnectionError()
+            alertPopup.presentAsInternetConnectionError()
             return
         }
         
@@ -76,7 +76,7 @@ class LoginScreenVC: AuthScreenVC {
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.showAsError(withMessage: "اسم المستخدم أو كلمة السر غير صحيحين")
+                    self.alertPopup.presentAsError(withMessage: "اسم المستخدم أو كلمة السر غير صحيحين")
                     return
                 }
                 

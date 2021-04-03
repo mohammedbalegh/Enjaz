@@ -52,9 +52,16 @@
 "Fourth Week" = "Fourth Week";
 "Last Week" = "Last Week";
 
-// MARK: MyGoalsScreen
+// MARK: GoalsScreen
+"My Goals" = "My Goals";
+"Goals Bank" = "Goals Bank";
 "Choose goal category" = "Choose goal category";
 "Add new category" = "Add new category";
+"Category Name" = "Category Name";
+"Category name must be entered" = "Category name must be entered";
+"Are you sure you want to delete category?" = "Are you sure you want to delete category?";
+"All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone." = "All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone.";
+"Delete Category" = "Delete Category";
 
 // MARK: ArticlesScreen
 "Most Recent Articles" = "Most Recent Articles";
@@ -162,3 +169,4 @@
 "to" = "to";
 "Ok" = "Ok";
 "Done" = "Done";
+"optional" = "optional";

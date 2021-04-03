@@ -143,7 +143,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         guard let password = password, let email = email else { return }
         
         guard isConnectedToInternet else {
-            alertPopup.showAsInternetConnectionError()
+            alertPopup.presentAsInternetConnectionError()
             return
         }
         
@@ -151,7 +151,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-                    self.alertPopup.showAsError(withMessage: "البريد الإلكتروني غير مسجل")
+                    self.alertPopup.presentAsError(withMessage: "البريد الإلكتروني غير مسجل")
                 }
                                 
                 self.oneTimeCodeTextField.didEnterLastCharacter = self.handleVerificationCodeEntered
@@ -166,7 +166,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         print(email)
         
         guard isConnectedToInternet else {
-            alertPopup.showAsInternetConnectionError()
+            alertPopup.presentAsInternetConnectionError()
             return
         }
         
@@ -178,7 +178,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.showAsError(withMessage: "الكود غير صحيح")
+                    self.alertPopup.presentAsError(withMessage: "الكود غير صحيح")
                     return
                 }
             

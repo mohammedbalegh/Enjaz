@@ -7,8 +7,8 @@ class GoalsScreenVC: MenuBarNavigationVC {
         super.viewDidLoad()
         
         
-        menuItems = ["الاهداف الكبري", "إضافة هدف", "أهداف الشهر", "بنك الاهداف",]
-        controllerViews = [MajorGoalsScreenVC(), MyGoalsScreenVC(), MonthGoalsScreenVC(), GoalsBankScreenVC()]
+        menuItems = [NSLocalizedString("My Goals", comment: ""), NSLocalizedString("Goals Bank", comment: "")]
+        controllerViews = [MyGoalsScreenVC(), GoalsBankScreenVC()]
     }
     
 }

@@ -122,7 +122,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
     @objc func handleSaveBtnTap() {
         guard calendarView.selectedMonthDayItemRow != nil else {
-            alertPopup.showAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
             return
         }
         
@@ -132,7 +132,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         let selectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
         
         if selectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-            alertPopup.showAsError(withMessage: NSLocalizedString("Selected date cannot be in the past", comment: ""))
+            alertPopup.presentAsError(withMessage: NSLocalizedString("Selected date cannot be in the past", comment: ""))
             return
         }
         
