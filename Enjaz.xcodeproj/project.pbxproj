@@ -20,6 +20,8 @@
 		41798C2F260B01D200DF5ECF /* NoteCategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C2E260B01D200DF5ECF /* NoteCategoryPickerView.swift */; };
 		41798C34260B073900DF5ECF /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C33260B073900DF5ECF /* UIButton+Ext.swift */; };
 		41798C902615EA1100DF5ECF /* MedalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798C8F2615EA1100DF5ECF /* MedalModel.swift */; };
+		41798CAD2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CAC2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift */; };
+		41798CB22617C59B00DF5ECF /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41798CB12617C59B00DF5ECF /* DailyViewCell.swift */; };
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
@@ -75,6 +77,8 @@
 		BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */; };
 		BC391166258E90A5000E6273 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391165258E90A5000E6273 /* CalendarView.swift */; };
 		BC39116E258E95A5000E6273 /* ShowAllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39116D258E95A5000E6273 /* ShowAllButton.swift */; };
+		BC3C5D4F26186250000EE002 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C5D4E26186250000EE002 /* DailyView.swift */; };
+		BC3C5D57261862B7000EE002 /* CarouselVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C5D56261862B7000EE002 /* CarouselVC.swift */; };
 		BC4646DE2587EBCF00218D7A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED3258622DC00A86330 /* MainTabBarController.swift */; };
 		BC4646E32587EC3100218D7A /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4646E22587EC3100218D7A /* MainTabBar.swift */; };
 		BC47809C259629AD00D21060 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47809B259629AD00D21060 /* State.swift */; };
@@ -236,6 +240,8 @@
 		41798C2E260B01D200DF5ECF /* NoteCategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCategoryPickerView.swift; sourceTree = "<group>"; };
 		41798C33260B073900DF5ECF /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
 		41798C8F2615EA1100DF5ECF /* MedalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalModel.swift; sourceTree = "<group>"; };
+		41798CAC2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndSnapFlowLayout.swift; sourceTree = "<group>"; };
+		41798CB12617C59B00DF5ECF /* DailyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCell.swift; sourceTree = "<group>"; };
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
@@ -296,6 +302,8 @@
 		BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateAndTimeScreenVC.swift; sourceTree = "<group>"; };
 		BC391165258E90A5000E6273 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		BC39116D258E95A5000E6273 /* ShowAllButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAllButton.swift; sourceTree = "<group>"; };
+		BC3C5D4E26186250000EE002 /* DailyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		BC3C5D56261862B7000EE002 /* CarouselVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselVC.swift; sourceTree = "<group>"; };
 		BC4646E22587EC3100218D7A /* MainTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
 		BC47809B259629AD00D21060 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		BC4780A0259629BE00D21060 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
@@ -580,6 +588,7 @@
 				BCACC4762614D470005F7F59 /* ContactUsTextFieldView.swift */,
 				BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */,
 				BCD4497626177707006FC8B7 /* SwitchView.swift */,
+				BC3C5D4E26186250000EE002 /* DailyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -623,6 +632,7 @@
 				BCD4494E26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift */,
 				BCD4495626169606006FC8B7 /* ShowAllIVideosScreenVC.swift */,
 				BCCCC67F2618207D000F8C76 /* AddCategoryScreenVC.swift */,
+				BC3C5D56261862B7000EE002 /* CarouselVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -669,6 +679,7 @@
 				BC67971525AAB370002B9A71 /* UIDirection.swift */,
 				BC67971A25AAC3DB002B9A71 /* Vibration.swift */,
 				BCABE450260F52ED00E790F2 /* AppDataInitializer.swift */,
+				41798CAC2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -853,6 +864,7 @@
 				BC20181B2604D08D0060EFAF /* WeekDayCell.swift */,
 				BCD4494426168A99006FC8B7 /* CardsCollectionViewHeaderCell.swift */,
 				BCD44965261748E2006FC8B7 /* AwardsAndMedalsCell.swift */,
+				41798CB12617C59B00DF5ECF /* DailyViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1120,6 +1132,7 @@
 				BCBEE8752587D89100D8DE0A /* EmailTextField.swift in Sources */,
 				BC1EB2BD25BE206F0021B983 /* AlertBottomSheetView.swift in Sources */,
 				BCDE2EA52587AD860040345E /* MonthlyPlanScreenVC.swift in Sources */,
+				BC3C5D4F26186250000EE002 /* DailyView.swift in Sources */,
 				BC39114A258E773E000E6273 /* CardPopup.swift in Sources */,
 				BC93769625A133E800048BEF /* KeyboardHandlingViewController.swift in Sources */,
 				BCB54CC7258C07AB00E0E54D /* AdditionImageOrStickerCell.swift in Sources */,
@@ -1159,6 +1172,7 @@
 				BC2018012603690C0060EFAF /* DraftMetaDataContainer.swift in Sources */,
 				BC391166258E90A5000E6273 /* CalendarView.swift in Sources */,
 				BC4780A1259629BE00D21060 /* Actions.swift in Sources */,
+				41798CB22617C59B00DF5ECF /* DailyViewCell.swift in Sources */,
 				BC7FE4CA260F69630012F5F4 /* DynamicImageView.swift in Sources */,
 				BC80D2E1258EADA000E4F7B9 /* MonthDayCell.swift in Sources */,
 				BCD401A225FB3DBF00ABA183 /* VideoModel.swift in Sources */,
@@ -1242,6 +1256,7 @@
 				BC54008225795B9D009DC69B /* RegexValidator.swift in Sources */,
 				BCACC4772614D470005F7F59 /* ContactUsTextFieldView.swift in Sources */,
 				41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */,
+				BC3C5D57261862B7000EE002 /* CarouselVC.swift in Sources */,
 				BCC429DB25A2E2FC00803CE9 /* NewAdditionInputFieldContainerBtn.swift in Sources */,
 				BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */,
 				BC730277259B91BC007AEA96 /* BidirectionalCollection + ext.swift in Sources */,
@@ -1278,6 +1293,7 @@
 				BC1FFACF25F8C2E800A436CA /* CardsView.swift in Sources */,
 				BC67DFD425F8CC2B00183EFD /* DraftCardCell.swift in Sources */,
 				BC5029A925F8B32E00407B16 /* DraftScreenVC.swift in Sources */,
+				41798CAD2617B4A500DF5ECF /* ZoomAndSnapFlowLayout.swift in Sources */,
 				BC540064257947A1009DC69B /* UIColor+Ext.swift in Sources */,
 				BCCCC6802618207D000F8C76 /* AddCategoryScreenVC.swift in Sources */,
 				BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */,
