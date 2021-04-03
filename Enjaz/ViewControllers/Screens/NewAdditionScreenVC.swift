@@ -62,6 +62,19 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         return pickerPopup
     }()
     
+    lazy var repeatSwitchView: SwitchView = {
+        let switchView = SwitchView(frame: .zero)
+        switchView.translatesAutoresizingMaskIntoConstraints = false
+        
+        switchView.label.text = String(format: NSLocalizedString("Repeat the %@", comment: ""), itemTypeName.lowercased())
+        switchView.descriptionLabel.text = String(format: NSLocalizedString("In case the %@ repeats more than once", comment: ""), itemTypeName.lowercased())
+        switchView.layoutMargins = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        switchView.isLayoutMarginsRelativeArrangement = true
+        switchView.switch.addTarget(self, action: #selector(handleRepeatSwitchValueChange), for: .valueChanged)
+        
+        return switchView
+    }()
+    
     lazy var additionDateAndTimeInput: NewAdditionInputFieldContainer = {
         let containerView = NewAdditionInputFieldContainer(frame: .zero)
         
@@ -108,10 +121,16 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.spacing = 35
+        stackView.spacing = 25
+        
+        if stackView.arrangedSubviews.contains(repeatSwitchView) {
+            stackView.setCustomSpacing(0, after: repeatSwitchView)
+        }
         
         return stackView
     }()
+        
+    let saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
     
     var itemCategoryModels: [ItemCategoryModel] = []
     
@@ -120,18 +139,32 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     // MARK: State
     
     var itemName: String {
-        get { return additionNameTextField.input?.inputText ?? "" }
+        return additionNameTextField.input?.inputText ?? ""
     }
     
     var itemDescription: String {
-        get { return additionDescriptionTextView.input?.inputText ?? ""}
+        return additionDescriptionTextView.input?.inputText ?? ""
+    }
+    
+    var repetitionIsTurnedOn: Bool {
+        return repeatSwitchView.switch.isOn
     }
     
     var itemCategory: Int?
-    var itemDate: Double?
-    var itemType: Int?
+    var itemDates: [Double]?
+    var itemDate: Double? {
+        return itemDates?[0]
+    }
+    var itemType: Int!
     var itemImageId: Int?
     var itemStickerId: Int?
+    
+    var itemTypeName: String {
+        if let itemType = itemType {
+            return ItemType.getTypeById(id: itemType).name
+        }
+        return ""
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,11 +172,13 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         view.backgroundColor = .mainScreenBackgroundColor
         definesPresentationContext = true
         
+        removeRepetitionSwitchForTypeThatDontSupportRepetition()
         setupSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = String(format: NSLocalizedString("Add %@", comment: ""), itemTypeName)
         itemCategoryModels = RealmManager.retrieveItemCategories()
     }
     
@@ -153,6 +188,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         setupSetStickerButton()
         setupTextFieldsVerticalStack()
         setupAdditionDescriptionTextField()
+        setupSaveBtn()
     }
     
     func setupScrollView() {
@@ -215,11 +251,21 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
             additionDescriptionTextView.topAnchor.constraint(equalTo: textFieldsVerticalStack.bottomAnchor, constant: textFieldsVerticalStack.spacing),
             additionDescriptionTextView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             additionDescriptionTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
-            additionDescriptionTextView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.17),
+            additionDescriptionTextView.heightAnchor.constraint(equalToConstant: 135),
             additionDescriptionTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -(LayoutConstants.tabBarHeight + 20)),
         ])
     }
     
+    func setupSaveBtn() {
+        view.addSubview(saveBtn)
+        
+        NSLayoutConstraint.activate([
+            saveBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+        ])
+        
+        saveBtn.addTarget(self, action: #selector(handleSaveBtnTap), for: .touchUpInside)
+    }
     
     // MARK: Event handlers
     
@@ -274,46 +320,41 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     @objc func handleAdditionDateAndTimeInputTap() {
         dismissKeyboard()
         
-        let setDateAndTimeScreenVC = itemType == 3 ? SetGoalDateRangeScreenVC() : SetDateAndTimeScreenVC()
+        let setDateAndTimeScreenVC = repetitionIsTurnedOn ? SetDateRangeScreenVC() : SetDateAndTimeScreenVC()
         
         setDateAndTimeScreenVC.delegate = self
         present(setDateAndTimeScreenVC, animated: true, completion: nil)
     }
     
-    func handleDateAndTimeSaveBtnTap(selectedTimeStamp: Double, calendarIdentifier: Calendar.Identifier ) {
-        self.itemDate = selectedTimeStamp
-        let selectedDate = Date(timeIntervalSince1970: selectedTimeStamp)
-        let formattedDate = DateAndTimeTools.getReadableDate(from: selectedDate, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: calendarIdentifier)
+    @objc func handleRepeatSwitchValueChange() {
+        itemDates = nil
+        (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.placeholderText, for: .normal)
+        additionDateAndTimeInput.input?.inputText = repetitionIsTurnedOn
+            ? NSLocalizedString("Date (from - to)", comment: "")
+            : additionDateAndTimeInput.fieldName
+    }
+    
+    func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [Double], readableDate: String ) {
+        self.itemDates = selectedDatesTimeStamps
         
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.black, for: .normal)
-        
-        additionDateAndTimeInput.input?.inputText = formattedDate
+        additionDateAndTimeInput.input?.inputText = readableDate
     }
     
     @objc func handleSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
-        if !nonProvidedRequiredFieldNames.isEmpty {
-            let nonProvidedRequiredFieldNamesAsSentence = nonProvidedRequiredFieldNames.joinAsSentence(languageIsArabic: true)
+        
+        guard nonProvidedRequiredFieldNames.isEmpty else {
+            let nonProvidedRequiredFieldNamesAsSentence = nonProvidedRequiredFieldNames.joinAsSentence()
             let errorMessage = generateRequiredFieldNamesErrorMessage(requiredFieldNamesAsSentence: nonProvidedRequiredFieldNamesAsSentence, numberOfNonProvidedRequiredFields: nonProvidedRequiredFieldNames.count)
             
             AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)
             return
         }
         
-        let additionTypeScreenVC = AdditionTypeScreenVC()
-        additionTypeScreenVC.delegate = self
-        
-        present(additionTypeScreenVC, animated: true)
-    }
-    
-    func handleTypeSaveBtnTap(id: Int) {
-        itemType = id
-        
         saveItem()
-        resetViewController()
-        switchToHomeScreenTab()
+        navigationController?.popViewController(animated: false)
         
-        let itemTypeName = ItemTypeConstants[id] ?? ""
         let successMessage = generateSuccessMessage(itemTypeName: itemTypeName)
         SPAlert.present(title: successMessage, preset: .done)
     }
@@ -321,15 +362,24 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     // MARK: Tools
     
     func getTextFieldsStackArrangedSubviews() -> [UIView] {
-        return [additionNameTextField, additionCategoryPopoverBtn, additionDateAndTimeInput]
+        return [additionNameTextField, additionCategoryPopoverBtn, repeatSwitchView, additionDateAndTimeInput]
     }
     
+    func removeRepetitionSwitchForTypeThatDontSupportRepetition() {
+        let itemTypeSupportsRepetition = itemType == ItemType.goal.id || itemType == ItemType.task.id
+                
+        if !itemTypeSupportsRepetition {
+            textFieldsVerticalStack.removeArrangedSubview(repeatSwitchView)
+            repeatSwitchView.removeFromSuperview()
+        }
+    }
+        
     func getNonProvidedRequiredFieldNames() -> [String] {
         var nonProvidedRequiredFieldNames: [String] = []
         
         let nameIsProvided = !itemName.isEmpty
         let categoryIsProvided = itemCategory != nil
-        let dateIsProvided = itemDate != nil
+        let dateIsProvided = itemDates != nil
         
         if !nameIsProvided { nonProvidedRequiredFieldNames.append(additionNameTextField.fieldName) }
         if !categoryIsProvided { nonProvidedRequiredFieldNames.append(additionCategoryPopoverBtn.fieldName) }
@@ -337,7 +387,7 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
         
         return nonProvidedRequiredFieldNames
     }
-    
+        
     func generateRequiredFieldNamesErrorMessage(requiredFieldNamesAsSentence: String, numberOfNonProvidedRequiredFields: Int) -> String {
         if Locale.current.languageCode == "ar" {
             return "يجب ادخال \(requiredFieldNamesAsSentence)."
@@ -355,53 +405,30 @@ class NewAdditionScreenVC: SelectableScreenVC, NewAdditionScreenModalDelegate {
     }
     
     func saveItem() {
-        let item = ItemModel()
+        var index = 0
+        var firstItemId: Int!
         
-        item.name = itemName
-        item.category = itemCategory ?? 0
-        item.type = itemType ?? 0
-        item.date = itemDate ?? 0
-        item.item_description = itemDescription
-        item.image_id = itemImageId ?? -1
-        item.sticker_id = itemStickerId ?? -1
+        for date in itemDates! {
+            let item = ItemModel()
+            
+            item.name = itemName
+            item.category = itemCategory!
+            item.type = itemType
+            item.date = date
+            item.item_description = itemDescription
+            item.image_id = itemImageId ?? -1
+            item.sticker_id = itemStickerId ?? -1
+            if index == 0 {
+                firstItemId = item.id
+            } else {
+                item.originalItemId = firstItemId
+            }
+            
+            RealmManager.saveItem(item)
+            index += 1
+        }
+    }
         
-        RealmManager.saveItem(item)
-    }
-    
-    func resetViewController() {
-        resetViewControllerStateValues()
-        resetSubviews()
-    }
-    
-    func resetViewControllerStateValues() {
-        itemCategory = nil
-        itemDate = nil
-        itemType = nil
-        itemImageId = nil
-        itemStickerId = nil
-    }
-    
-    func resetSubviews() {
-        setImageBtn.setImage(UIImage(named: "imageIcon"), for: .normal)
-                
-        imagePickerPopup.collectionView.deselectAllItems(animated: false)
-        stickerPickerPopup.collectionView.deselectAllItems(animated: false)
-        additionCategoryPickerBottomSheet.picker.selectRow(0, inComponent: 0, animated: false)
-        
-        
-        additionNameTextField.input?.inputText = ""
-        additionCategoryPopoverBtn.input?.inputText = additionCategoryPopoverBtn.fieldName
-        additionDateAndTimeInput.input?.inputText = additionDateAndTimeInput.fieldName
-        additionDescriptionTextView.input?.inputText = ""
-        
-        (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .placeholderText
-        (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.placeholderText, for: .normal)
-    }
-    
-    func switchToHomeScreenTab() {
-        tabBarController?.selectedIndex = 0
-    }
-    
 }
 
 extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {

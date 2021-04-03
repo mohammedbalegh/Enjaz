@@ -99,7 +99,18 @@ class CalendarScreenVC: CalendarViewController {
         
         calendarView.updateWeekDaysModelWithDueItems(itemsOfWeekDayRows: itemsOfWeekDayRows)
     }
+    
+    func getIncludedItemsForMonthDays() {
+        var monthDaysIncludedItems: [[ItemModel]] = []
         
+        for monthDayCellModel in calendarView.monthDayCellModels {
+            guard monthDayCellModel.dayNumber == 0 else { continue }
+            
+            monthDaysIncludedItems.append(monthDayCellModel.includedItems)
+        }
+    }
+    
+    
 }
 
 extension CalendarScreenVC: CalendarViewDelegate {
@@ -107,8 +118,10 @@ extension CalendarScreenVC: CalendarViewDelegate {
         if selectedViewTypeIndex == 1 { return }
         calendarCollectionView.deselectAllItems(animated: false)
         
-        for item in (calendarCollectionView.cellForItem(at: indexPath) as! MonthDayCell).viewModel?.includedItems ?? [] {
-            print(item)
+        let cellItems = (calendarCollectionView.cellForItem(at: indexPath) as! MonthDayCell).viewModel?.includedItems ?? []
+        
+        for item in cellItems {
+            let itemHour = DateAndTimeTools.getComponentsOfUnixTimeStampDate(timeIntervalSince1970: item.date, forCalendarIdentifier: Calendar.current.identifier).hour
         }
     }
 }

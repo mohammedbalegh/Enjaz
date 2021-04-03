@@ -89,7 +89,7 @@ class MainTabBarController: UITabBarController {
     }()
 
     var screenTitles: [String]?
-	let newAdditionScreenVC = NewAdditionScreenVC()
+    let additionTypeScreenVC = AdditionTypeScreenVC()
     let tabBarHeight = LayoutConstants.tabBarHeight
 	
 	// Override selectedViewController for User initiated changes
@@ -147,10 +147,10 @@ class MainTabBarController: UITabBarController {
 		setTabBarIcon(for: monthlyPlanScreenVC, withImageName: "graphIcon")
         setTabBarIcon(for: goalsScreenVC, withImageName: "categoryIcon")
 		
-		viewControllers = [homeScreenVC, calendarScreenVC, newAdditionScreenVC, monthlyPlanScreenVC, goalsScreenVC]
+		viewControllers = [homeScreenVC, calendarScreenVC, additionTypeScreenVC, monthlyPlanScreenVC, goalsScreenVC]
         screenTitles = [NSLocalizedString("Home", comment: ""),
                         NSLocalizedString("Calendar", comment: ""),
-                        NSLocalizedString("New Addition", comment: ""),
+                        NSLocalizedString("Choose Addition Type", comment: ""),
                         NSLocalizedString("Monthly Plan", comment: ""),
                         NSLocalizedString("Goals", comment: "")]
         
@@ -181,13 +181,29 @@ class MainTabBarController: UITabBarController {
     // MARK: Event Handlers
     
 	@objc func handleFloatingBtnTap() {
-		let newAdditionScreenIsSelected = selectedIndex == 2
-		if newAdditionScreenIsSelected {
-			newAdditionScreenVC.handleSaveBtnTap()
+        let additionStackIsSelected = selectedIndex == 2
+        
+		if additionStackIsSelected {
+            handleAdditionTypeScreenSelectionBtnTap()
 			return
 		}
-		navigateToNewAdditionScreen()
+        
+		navigateToAdditionTypeScreen()
 	}
+    
+    func handleAdditionTypeScreenSelectionBtnTap() {
+        if additionTypeScreenVC.selectedTypeId == -1 {
+            AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("No type has been selected", comment: ""))
+            return
+        }
+        
+        let newAdditionScreenVC = NewAdditionScreenVC()
+        
+        newAdditionScreenVC.itemType = additionTypeScreenVC.selectedTypeId
+        
+        navigationController?.pushViewController(newAdditionScreenVC, animated: true)
+        additionTypeScreenVC.resetCardSelection()
+    }
 	
     @objc func handleMenuBtnTap() {
         guard let sideMenu = sideMenu else { return }
@@ -195,7 +211,7 @@ class MainTabBarController: UITabBarController {
     }
     
 	// MARK: Tools
-    
+        
 	// Handle new selection
 	func tabChangedTo(selectedIndex: Int) {
 		let newAdditionScreenIsSelected = selectedIndex == 2
@@ -208,7 +224,7 @@ class MainTabBarController: UITabBarController {
 
         navBarTitleLabel.text = screenTitles?[selectedIndex]
 	}
-	
+    
 	func setupFloatingBtnAsNewAdditionScreenTabBarItem() {
 		floatingBtn.setBackgroundImage(UIImage(named:"floatingNewAdditionBtn"), for: .normal)
 	}
@@ -217,7 +233,7 @@ class MainTabBarController: UITabBarController {
 		floatingBtn.setBackgroundImage(UIImage(named: "floatingSaveButton"), for: .normal)
 	}
 	
-	func navigateToNewAdditionScreen() {
+	func navigateToAdditionTypeScreen() {
 		selectedIndex = 2
 	}
 }

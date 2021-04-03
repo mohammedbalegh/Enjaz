@@ -164,9 +164,9 @@ class HomeScreenVC: UIViewController {
             
             guard itemIsDueToday && !item.is_completed else { continue }
             
-            if item.type == 3 {
+            if item.type == ItemType.goal.id {
                 updatedGoalModels.append(item)
-            } else if item.type == 1 {
+            } else if item.type == ItemType.demah.id {
                 updatedDemahModels.append(item)
             }
         }

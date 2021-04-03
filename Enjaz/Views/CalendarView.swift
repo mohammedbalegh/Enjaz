@@ -91,10 +91,13 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         return collectionView
     }()
     
+    var selectedDaysLabelHeightConstraint: NSLayoutConstraint!
+    
     var allowsRangeSelection = false {
         didSet {
             monthDaysCollectionView.allowsMultipleSelection = allowsRangeSelection
             selectedDaysLabel.isHidden = !allowsRangeSelection
+            selectedDaysLabelHeightConstraint.constant = allowsRangeSelection ? 40 : 0
         }
     }
     
@@ -299,11 +302,13 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     func setupSelectedDaysLabel() {
         addSubview(selectedDaysLabel)
         
+        selectedDaysLabelHeightConstraint = selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: allowsRangeSelection ? 40 : 0)
+        
         NSLayoutConstraint.activate([
             selectedDaysLabel.topAnchor.constraint(equalTo: calendarPopoverBtnsRow.bottomAnchor, constant: 8),
             selectedDaysLabel.leadingAnchor.constraint(equalTo: calendarPopoverBtnsRow.leadingAnchor),
             selectedDaysLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
-            selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: allowsRangeSelection ? 40 : 0),
+            selectedDaysLabelHeightConstraint,
         ])
     }
     

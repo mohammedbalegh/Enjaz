@@ -2,9 +2,11 @@ import UIKit
 
 class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     
-    let customHeaderIdentifier = "customHeaderIdentifier"
     let navigationBtnIdentifier = "navigationBtnIdentifier"
     var tableViewTitle: String?
+    
+    var addBtnTitle: String?
+    var addBtnTapHandler: Selector?
     
     var screenNavigatorCellModels: [ScreenNavigatorCellModel] = [] {
         didSet {
@@ -23,7 +25,6 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: LayoutConstants.tabBarHeight, right: 0)
         
-        tableView.register(TableViewCustomHeader.self, forCellReuseIdentifier: customHeaderIdentifier)
         tableView.register(ScreenNavigatorTableViewCell.self, forCellReuseIdentifier: navigationBtnIdentifier)
     }
     
@@ -35,26 +36,28 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : screenNavigatorCellModels.count
+        return screenNavigatorCellModels.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let tableViewCustomHeader = TableViewCustomHeader(reuseIdentifier: "header")
+        tableViewCustomHeader.label.text = tableViewTitle
+        return tableViewCustomHeader
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 50 : 65
+        return 65
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: customHeaderIdentifier, for: indexPath) as! TableViewCustomHeader
-            
-            cell.label.text = tableViewTitle
-            
-            return cell
-        }
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: navigationBtnIdentifier, for: indexPath) as! ScreenNavigatorTableViewCell
         
         cell.viewModel = screenNavigatorCellModels[indexPath.row]
@@ -63,8 +66,6 @@ class ScreenNavigatorWithDynamicDataTableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section != 0 else { return }
-        
         if indexPath.row < 2, let targetTableViewController = targetTableViewController {
             targetTableViewController.id = indexPath.row
             navigationController?.pushViewController(targetTableViewController, animated: true)

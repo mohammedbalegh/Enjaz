@@ -4,59 +4,49 @@ import UIKit
 class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     
     var chosenCard = 0
-    
-    lazy var header: ModalHeader = {
-        let header = ModalHeader(frame: .zero)
-        header.translatesAutoresizingMaskIntoConstraints = false
         
-        header.titleLabel.text = "اختر نوع الإضافة"
-        header.dismissButton.addTarget(self, action: #selector(dismissModal), for: .touchUpInside)
-        
-        return header
-    }()
-    
-    lazy var taskCard: TypeCardBtn = {
+    lazy var goalCard: TypeCardBtn = {
         let card = TypeCardBtn()
         card.delegate = self
-        card.id = 0
-        card.typeImage.image = UIImage(named: "taskIcon")
-        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
-        card.typeDescription.text = "ان كان لديك مهمة تريد انجازها خلال وقت معين"
+        card.id = ItemType.goal.id
+        card.typeImage.image = UIImage(named: "goalIcon")
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeDescription.text = NSLocalizedString("If you have a goal that you want to achieve in a specific field", comment: "")
         return card
     }()
     
     lazy var demahCard: TypeCardBtn = {
         let card = TypeCardBtn()
         card.delegate = self
-        card.id = 1
+        card.id = ItemType.demah.id
         card.typeImage.image = UIImage(named: "demahIcon")
-        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
-        card.typeDescription.text = "اذا كان لديك عادة متكررة خلال فترة معينة"
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeDescription.text = NSLocalizedString("If you have a habit throughout a specific period", comment: "")
         return card
     }()
     
     lazy var achievementCard: TypeCardBtn = {
         let card = TypeCardBtn()
         card.delegate = self
-        card.id = 2
+        card.id = ItemType.achievement.id
         card.typeImage.image = UIImage(named: "achievementIcon")
-        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
-        card.typeDescription.text = "ان كان لديك أنجاز تريد تحقيقه خلال وقت معين"
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeDescription.text = NSLocalizedString("If you have an achievement that you want to complete in a specific time", comment: "")
         return card
     }()
     
-    lazy var goalCard: TypeCardBtn = {
+    lazy var taskCard: TypeCardBtn = {
         let card = TypeCardBtn()
         card.delegate = self
-        card.id = 3
-        card.typeImage.image = UIImage(named: "goalIcon")
-        card.typeTitle.text = ItemTypeConstants[card.id] ?? ""
-        card.typeDescription.text = "ان كان لديك هدف في مجال معين تريد تحقيقه "
+        card.id = ItemType.task.id
+        card.typeImage.image = UIImage(named: "taskIcon")
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeDescription.text = NSLocalizedString("If you have a task that want to complete in a specific time", comment: "")
         return card
     }()
     
-    lazy var stackTaskDemah: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [taskCard, demahCard])
+    lazy var goalDemahStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [goalCard, demahCard])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.distribution  = .fillEqually
@@ -65,8 +55,8 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         return stackView
     }()
     
-    lazy var stackAchievementGoal: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [achievementCard, goalCard])
+    lazy var achievementTaskStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [achievementCard, taskCard])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.distribution  = .fillEqually
@@ -74,9 +64,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         
         return stackView
     }()
-    
-    let saveBtn = PrimaryBtn(label: "حفظ", theme: .blue, size: .large)
-    
+        
     let alertPopup = AlertPopup(hideOnOverlayTap: true)
     
     var selectedTypeId = -1
@@ -88,61 +76,37 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         super.viewDidLoad()
         
         view.backgroundColor = .mainScreenBackgroundColor
-        
+                
         setupSubviews()
     }
-    
+        
     func setupSubviews() {
-        setupHeader()
-        setupStackTaskDemah()
-        setupStackAchievementGoal()
-        setupSaveBtn()
+        setupGoalDemahStack()
+        setupStackAchievementTaskStack()
     }
-    
-    func setupHeader() {
-        view.addSubview(header)
         
+    func setupGoalDemahStack() {
+        view.addSubview(goalDemahStack)
+                
         NSLayoutConstraint.activate([
-            header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            header.topAnchor.constraint(equalTo: view.topAnchor),
-            header.heightAnchor.constraint(equalToConstant: 50),
+            goalDemahStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            goalDemahStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            goalDemahStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            goalDemahStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
         ])
     }
     
-    func setupStackTaskDemah() {
-        view.addSubview(stackTaskDemah)
+    func setupStackAchievementTaskStack() {
+        view.addSubview(achievementTaskStack)
                 
         NSLayoutConstraint.activate([
-            stackTaskDemah.topAnchor.constraint(equalTo: header.bottomAnchor, constant: LayoutConstants.screenHeight * 0.1),
-            stackTaskDemah.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackTaskDemah.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            stackTaskDemah.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
+            achievementTaskStack.topAnchor.constraint(equalTo: goalDemahStack.bottomAnchor, constant: LayoutConstants.screenHeight * 0.03),
+            achievementTaskStack.centerXAnchor.constraint(equalTo: goalDemahStack.centerXAnchor),
+            achievementTaskStack.widthAnchor.constraint(equalTo: goalDemahStack.widthAnchor),
+            achievementTaskStack.heightAnchor.constraint(equalTo: goalDemahStack.heightAnchor),
         ])
     }
-    
-    func setupStackAchievementGoal() {
-        view.addSubview(stackAchievementGoal)
-                
-        NSLayoutConstraint.activate([
-            stackAchievementGoal.topAnchor.constraint(equalTo: stackTaskDemah.bottomAnchor, constant: LayoutConstants.screenHeight * 0.03),
-            stackAchievementGoal.centerXAnchor.constraint(equalTo: stackTaskDemah.centerXAnchor),
-            stackAchievementGoal.widthAnchor.constraint(equalTo: stackTaskDemah.widthAnchor),
-            stackAchievementGoal.heightAnchor.constraint(equalTo: stackTaskDemah.heightAnchor),
-        ])
-    }
-    
-    func setupSaveBtn() {
-        view.addSubview(saveBtn)
-                
-        NSLayoutConstraint.activate([
-            saveBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-        ])
         
-        saveBtn.addTarget(self, action: #selector(handleSaveBtnTap), for: .touchUpInside)
-    }
-    
     func handleCardSelection(cardId selectedCardId: Int) {
         selectedTypeId = selectedCardId
         taskCard.selectedId = selectedCardId
@@ -150,19 +114,12 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         goalCard.selectedId = selectedCardId
         achievementCard.selectedId = selectedCardId
     }
-    
-    
-    @objc func handleSaveBtnTap() {
-        if selectedTypeId == -1 {
-            alertPopup.showAsError(withMessage: "لم يتم اختيار نوع")
-            return
-        }
-        
-        delegate?.handleTypeSaveBtnTap(id: selectedTypeId)
-        dismissModal()
-    }
-    
-    @objc func dismissModal() {
-        dismiss(animated: true)
+ 
+    func resetCardSelection() {
+        selectedTypeId = -1
+        taskCard.selectedId = -1
+        demahCard.selectedId = -1
+        goalCard.selectedId = -1
+        achievementCard.selectedId = -1
     }
 }

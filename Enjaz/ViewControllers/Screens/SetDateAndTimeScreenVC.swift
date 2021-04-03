@@ -34,7 +34,8 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Date and Time", comment: "")
-                
+        
+        calendarView.delegate = self
         hourPicker.selectRow(12, inComponent: 0, animated: false)
         selectCurrentDay()
     }
@@ -42,7 +43,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     override func setupSubviews() {
         setupHeader()
         super.setupSubviews()
-        setupSaveButton()
+        setupSaveBtn()
         setupIndicator()
         setupHourPicker()
     }
@@ -72,7 +73,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         ])
     }
     
-    func setupSaveButton() {
+    func setupSaveBtn() {
         view.addSubview(saveBtn)
         
         NSLayoutConstraint.activate([
@@ -135,7 +136,9 @@ class SetDateAndTimeScreenVC: CalendarViewController {
             return
         }
         
-        delegate?.handleDateAndTimeSaveBtnTap(selectedTimeStamp: selectedDateUnixTimeStamp, calendarIdentifier: selectedCalendarIdentifier)
+        let readableDate = DateAndTimeTools.getReadableDate(from: selectedDate, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
+        
+        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [selectedDateUnixTimeStamp], readableDate: readableDate)
         dismiss(animated: true)
     }
     
@@ -207,6 +210,12 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 }
 
 extension SetDateAndTimeScreenVC: CalendarViewDelegate {
+    func calendarCollectionView(_ calendarCollectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        firstSelectedDate = nil
+        lastSelectedDate = nil
+        updateCalendarViewSelectedDaysLabel()
+    }
+    
     func didUpdateFirstSelectedMonthDayItemRow(_ calendarView: CalendarView) {
         firstSelectedDate = getFirstSelectedDate()
         updateCalendarViewSelectedDaysLabel()
@@ -218,6 +227,6 @@ extension SetDateAndTimeScreenVC: CalendarViewDelegate {
     }
     
     func didLongPressOnLastItemDuringMultipleSelection(_ calendarView: CalendarView) {
-        switchToNextMonth()
+        switchToNextMonth(animated: false)
     }
 }

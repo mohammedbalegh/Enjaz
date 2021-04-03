@@ -1,18 +1,32 @@
 import UIKit
 
-class TableViewCustomHeader: UITableViewCell {
+class TableViewCustomHeader: UITableViewHeaderFooterView {
     let label: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .lightGray
-        label.backgroundColor = .none
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    let addBtn: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.setTitleColor(.accentColor, for: .normal)
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.accentColor.cgColor
+        button.layer.cornerRadius = 2
+        button.isHidden = true
+        
+        return button
+    }()
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         backgroundColor = .mainScreenBackgroundColor
+        contentView.backgroundColor = .mainScreenBackgroundColor
         setupLabel()
+        setupAddBtn()
     }
         
     required init?(coder: NSCoder) {
@@ -24,9 +38,20 @@ class TableViewCustomHeader: UITableViewCell {
                 
         NSLayoutConstraint.activate([
             label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: frame.width * 0.025),
-            label.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
+            label.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.5),
             label.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
+        ])
+    }
+    
+    func setupAddBtn() {
+        addSubview(addBtn)
+                
+        NSLayoutConstraint.activate([
+            addBtn.centerYAnchor.constraint(equalTo: label.centerYAnchor),
+            addBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -14),
+            addBtn.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35),
+            addBtn.heightAnchor.constraint(equalToConstant: 35),
         ])
     }
 }

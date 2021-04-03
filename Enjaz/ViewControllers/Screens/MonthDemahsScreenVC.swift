@@ -4,7 +4,7 @@ class MonthDemahsScreenVC: MonthItemsScreenVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemsType = 1
+        itemsType = ItemType.demah.id
     }
     
     override func setItemCardViewsTitles() {

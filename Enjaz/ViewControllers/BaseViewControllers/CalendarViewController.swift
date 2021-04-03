@@ -12,10 +12,10 @@ class CalendarViewController: UIViewController {
         calendarView.viewTypePopoverBtn.addTarget(self, action: #selector(handleViewTypePopoverBtn), for: .touchUpInside)
         calendarView.monthPopoverBtn.addTarget(self, action: #selector(handleMonthPopoverBtnTap), for: .touchUpInside)
         calendarView.yearPopoverBtn.addTarget(self, action: #selector(handleYearPopoverBtnTap), for: .touchUpInside)
-        calendarView.nextMonthBtn.addTarget(self, action: #selector(switchToNextMonth), for: .touchUpInside)
-        calendarView.previousMonthBtn.addTarget(self, action: #selector(switchToPreviousMonth), for: .touchUpInside)
-        calendarView.nextWeekBtn.addTarget(self, action: #selector(switchToNextWeek), for: .touchUpInside)
-        calendarView.previousWeekBtn.addTarget(self, action: #selector(switchToPreviousWeek), for: .touchUpInside)
+        calendarView.nextMonthBtn.addTarget(self, action: #selector(handleNextMonthBtnTap), for: .touchUpInside)
+        calendarView.previousMonthBtn.addTarget(self, action: #selector(handlePreviousMonthBtnTap), for: .touchUpInside)
+        calendarView.nextWeekBtn.addTarget(self, action: #selector(handleNextWeekBtnTap), for: .touchUpInside)
+        calendarView.previousWeekBtn.addTarget(self, action: #selector(handlePreviousWeekBtnTap), for: .touchUpInside)
         
         return calendarView
     }()
@@ -245,6 +245,22 @@ class CalendarViewController: UIViewController {
         
         updateMonthDays()
     }
+    
+    @objc func handleNextMonthBtnTap() {
+        switchToNextMonth(animated: true)
+    }
+
+    @objc func handlePreviousMonthBtnTap() {
+        switchToPreviousMonth(animated: true)
+    }
+
+    @objc func handleNextWeekBtnTap() {
+        switchToNextWeek()
+    }
+
+    @objc func handlePreviousWeekBtnTap() {
+        switchToPreviousWeek()
+    }
         
     // MARK: TOOLS
     
@@ -266,8 +282,8 @@ class CalendarViewController: UIViewController {
 
         present(popoverTableVC, animated: true)
     }
-        
-    @objc func switchToNextMonth() {
+
+    func switchToNextMonth(animated: Bool) {
         if selectedMonthIsLastMonthInYear {
             guard !selectedMonthIsLastSelectableMonth else {
                 calendarView.selectedMonthIsLastSelectableMonth = true
@@ -279,12 +295,17 @@ class CalendarViewController: UIViewController {
         }
         
         let newSelectedMonthIndex = (selectedMonthIndex + 1) % 12
-        calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .trailingToLeading, fadeOutAndIn: true, midAnimationCompletionHandler:  {_ in
-            self.handleMonthSelection(selectedIndex: newSelectedMonthIndex)
-        })
+                
+        if animated {
+            calendarView.monthDaysCollectionView.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .trailingToLeading, fadeOutAndIn: true, midAnimationCompletionHandler:  {_ in
+                self.handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+            })
+        } else {
+            handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+        }
     }
     
-    @objc func switchToPreviousMonth() {
+    func switchToPreviousMonth(animated: Bool) {
         if selectedMonthIsFirstMonthInYear {
             guard !selectedMonthIsFirstSelectableMonth else { return }
             
@@ -294,18 +315,22 @@ class CalendarViewController: UIViewController {
         
         let newSelectedMonthIndex = selectedMonthIndex == 0 ? 11 : selectedMonthIndex - 1
         
-        calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .leadingToTrailing, fadeOutAndIn: true, midAnimationCompletionHandler: {_ in
-            self.handleMonthSelection(selectedIndex: newSelectedMonthIndex)
-        })
+        if animated {
+            calendarView.monthDaysCollectionView.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .leadingToTrailing, fadeOutAndIn: true, midAnimationCompletionHandler: {_ in
+                self.handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+            })
+        } else {
+            handleMonthSelection(selectedIndex: newSelectedMonthIndex)
+        }
     }
     
-    @objc func switchToNextWeek() {
+    func switchToNextWeek() {
         var newSelectedWeekIndex: Int!
         if selectedWeekIsLastWeekInMonth {
             guard !selectedWeekIsLastSelectableWeek else { return }
             
             newSelectedWeekIndex = (selectedWeekIndex + 1) % numberOfWeeksInMonth
-            switchToNextMonth()
+            switchToNextMonth(animated: false)
         }
         
         newSelectedWeekIndex = newSelectedWeekIndex ?? (selectedWeekIndex + 1) % numberOfWeeksInMonth
@@ -315,14 +340,16 @@ class CalendarViewController: UIViewController {
         })
     }
     
-    @objc func switchToPreviousWeek() {
+    func switchToPreviousWeek() {
         if selectedWeekIsFirstWeekInMonth {
             guard !selectedWeekIsFirstSelectableWeek else { return }
             
-            switchToPreviousMonth()
+            switchToPreviousMonth(animated: false)
         }
         
         let newSelectedWeekIndex = selectedWeekIndex == 0 ? numberOfWeeksInMonth - 1 : selectedWeekIndex - 1
+        
+        print("numberOfWeeksInMonth inside switchToPreviousWeek \(numberOfWeeksInMonth)")
         
         calendarView.calendarContainer.translateHorizontallyOutAndInSuperView(withDuration: 0.25, atDirection: .leadingToTrailing, fadeOutAndIn: true, midAnimationCompletionHandler: {_ in
             self.handleWeekSelection(selectedIndex: newSelectedWeekIndex)
@@ -343,6 +370,7 @@ class CalendarViewController: UIViewController {
         let (numberOfDaysInMonth, firstWeekDayNumber) = DateAndTimeTools.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarIdentifier: selectedCalendarIdentifier)
         
         numberOfWeeksInMonth = getNumberOfWeeksInMonth(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)
+        print("numberOfWeeksInMonth inside updateMonthDays \(numberOfWeeksInMonth)")
         
         calendarView.handleNewMonthSelection(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnIndex: firstWeekDayNumber - 1)
     }

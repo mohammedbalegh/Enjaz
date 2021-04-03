@@ -41,14 +41,6 @@ class RealmManager {
         return items
     }
     
-//    static func retrieveTasks() -> [ItemModel] {
-//        return retrieveItems(withFilter: "type = 0")
-//    }
-//    
-//    static func retrieveDemahs() -> [ItemModel] {
-//        return retrieveItems(withFilter: "type = 1")
-//    }
-    
     static func retrieveItems() -> [ItemModel] {
         let items: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).sorted(byKeyPath: "date", ascending: true))
         return items
@@ -80,7 +72,7 @@ class RealmManager {
     private static func retrieveGoals(withCompletedEqualTo completed: Bool) -> [ItemModel] {
         
         let completionFilter = "is_completed == \(completed.description)"
-        let goals: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == 3"))
+        let goals: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter(completionFilter).filter("type == \(ItemType.goal.id)"))
         return goals
     }
     

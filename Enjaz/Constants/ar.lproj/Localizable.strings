@@ -16,7 +16,16 @@
 "No demahs today" = "لا يوجد ديم اليوم";
 "Show All" = "عرض الكل";
 
+// MARK: AdditionTypeScreen
+"Choose Addition Type" = "اختر نوع الإضافة";
+"If you have a goal that you want to achieve in a specific field" = "ان كان لديك هدف في مجال معين تريد تحقيقه";
+"If you have a habit throughout a specific period" = "اذا كان لديك عادة متكررة خلال فترة معينة";
+"If you have an achievement that you want to complete in a specific time" = "ان كان لديك أنجاز تريد تحقيقه خلال وقت معين";
+"If you have a task that want to complete in a specific time" = "ان كان لديك مهمة تريد انجازها خلال وقت معين";
+"No type has been selected" = "لم يتم اختيار نوع";
+
 // MARK: NewAdditionScreen
+"Add %@" = "إضافة %@";
 "Select Image" = "اختر صورة مناسبة";
 "Select Sticker" = "اختر الاستكير المناسب";
 "Addition Name" = "اسم الإضافة";
@@ -24,12 +33,18 @@
 "Date and Time" = "التاريخ و الوقت";
 "Description" = "الوصف";
 "Select" = "اختيار";
+"Repeat the %@" = "تكرار ال%@";
+"In case the %@ repeats more than once" = "في حالة تكرار ال%@ أكثر من مرة";
+"Date (from - to)" = "التاريخ (من - إلى)";
+
 
 // MARK: CalendarViewController
 "Hijri Calendar" = "التقويم الهجري";
 "Georgian Calendar" = "التقويم الميلادي";
 "A day must be selected" = "يجب تحديد اليوم";
+"A date range must be selected" = "يجب تحديد بداية و نهاية أيام التكرار";
 "Selected date cannot be in the past" = "لا يمكن اختيار تاريخ في الماضي";
+"Selected date range cannot be in the past" = "الأيام المحددة لا يمكن أن تكون في الماضي";
 "Monthly View" = "التقويم الشهري";
 "Weekly View" = "التقويم الاسبوعي";
 "First Week" = "الأسبوع الأول";
@@ -37,6 +52,10 @@
 "Third Week" = "الأسبوع الثالث";
 "Fourth Week" = "الأسبوع الرابع";
 "Last Week" = "الأسبوع الاخير";
+
+// MARK: MyGoalsScreen
+"Choose goal category" = "اختر مجال الهدف";
+"Add new category" = "إضافة مجال جديد";
 
 // MARK: ArticlesScreen
 "Most Recent Articles" = "آخر المقالات";

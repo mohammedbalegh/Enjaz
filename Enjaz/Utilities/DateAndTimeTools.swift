@@ -112,5 +112,7 @@ class DateAndTimeTools {
         return currentWeekOfYear == dateWeekOfYear
     }
     
-    
+    static func getNumberOfDaysBetween(_ firstDate: Date, _ secondDate: Date) -> Int? {
+        return Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day
+    }
 }

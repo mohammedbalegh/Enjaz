@@ -8,7 +8,7 @@ class GoalsScreenVC: MenuBarNavigationVC {
         
         
         menuItems = ["الاهداف الكبري", "إضافة هدف", "أهداف الشهر", "بنك الاهداف",]
-        controllerViews = [MajorGoalsScreenVC(),SelectGoalTypeScreenVC(),MonthGoalsScreenVC(),GoalsBankScreenVC()]
+        controllerViews = [MajorGoalsScreenVC(), MyGoalsScreenVC(), MonthGoalsScreenVC(), GoalsBankScreenVC()]
     }
     
 }

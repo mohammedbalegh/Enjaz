@@ -4,7 +4,7 @@ class MonthTasksScreenVC: MonthItemsScreenVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemsType = 0
+        itemsType = ItemType.task.id
     }
     
     override func setItemCardViewsTitles() {

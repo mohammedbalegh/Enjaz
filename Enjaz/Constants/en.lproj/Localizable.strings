@@ -16,7 +16,16 @@
 "No demahs today" = "No demahs today";
 "Show All" = "Show All";
 
+// MARK: AdditionTypeScreen
+"Choose Addition Type" = "Choose Addition Type";
+"If you have a goal that you want to achieve in a specific field" = "If you have a goal that you want to achieve in a specific field";
+"If you have a habit throughout a specific period" = "If you have a habit throughout a specific period";
+"If you have an achievement that you want to complete in a specific time" = "If you have an achievement that you want to complete in a specific time";
+"If you have a task that want to complete in a specific time" = "If you have a task that want to complete in a specific time";
+"No type has been selected" = "No type has been selected";
+
 // MARK: NewAdditionScreen
+"Add %@" = "Add %@";
 "Select Image" = "Select Image";
 "Select Sticker" = "Select Sticker";
 "Addition Name" = "Addition Name";
@@ -24,12 +33,17 @@
 "Date and Time" = "Date and Time";
 "Description" = "Description";
 "Select" = "Select";
+"Repeat the %@" = "Repeat the %@";
+"In case the %@ repeats more than once" = "In case the %@ repeats more than once";
+"Date (from - to)" = "Date (from - to)";
 
 // MARK: CalendarViewController
 "Hijri Calendar" = "Hijri Calendar";
 "Georgian Calendar" = "Georgian Calendar";
 "A day must be selected" = "A day must be selected";
+"A date range must be selected" = "A date range must be selected";
 "Selected date cannot be in the past" = "Selected date cannot be in the past";
+"Selected date range cannot be in the past" = "Selected date range cannot be in the past";
 "Monthly View" = "Monthly View";
 "Weekly View" = "Weekly View";
 "First Week" = "First Week";
@@ -37,6 +51,10 @@
 "Third Week" = "Third Week";
 "Fourth Week" = "Fourth Week";
 "Last Week" = "Last Week";
+
+// MARK: MyGoalsScreen
+"Choose goal category" = "Choose goal category";
+"Add new category" = "Add new category";
 
 // MARK: ArticlesScreen
 "Most Recent Articles" = "Most Recent Articles";
