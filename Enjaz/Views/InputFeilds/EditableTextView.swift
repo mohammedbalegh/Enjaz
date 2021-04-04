@@ -20,7 +20,9 @@ class EditableTextView: UITextView, UITextViewDelegate, InputField {
                 return
             }
             
+            textViewDidBeginEditing(self)
             text = newValue
+            textViewDidEndEditing(self)
         }
     }
     

@@ -2,7 +2,7 @@ import UIKit
 
 class AchievementsScreenVC: UIViewController {
     
-    var achievements: [ItemModel] = [] {
+    var achievementModels: [ItemModel] = [] {
         didSet {
             achievementsCarousel.reloadData()
         }
@@ -44,7 +44,7 @@ class AchievementsScreenVC: UIViewController {
         
         updateItemModels()
         
-        if achievements.count == 0 {
+        if achievementModels.count == 0 {
             noAchievementsLabel.isHidden = false
         } else {
             noAchievementsLabel.isHidden = true
@@ -79,22 +79,8 @@ class AchievementsScreenVC: UIViewController {
         ])
     }
     
-    func getUpdatedAchievementsModel() -> [ItemModel] {
-        let itemModels = RealmManager.retrieveItems(withFilter: "type == 2")
-        
-        var updatedAchievements: [ItemModel] = []
-        
-        for item in itemModels {
-            updatedAchievements.append(item)
-        }
-        
-        return updatedAchievements
-    }
-    
     func updateItemModels() {
-        let updatedAchievements = getUpdatedAchievementsModel()
-        
-        achievements = updatedAchievements
+        achievementModels = RealmManager.retrieveItems(withFilter: "type == \(ItemType.achievement.id)")
     }
     
     func snapToCenter() {
@@ -108,12 +94,12 @@ class AchievementsScreenVC: UIViewController {
 extension AchievementsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return achievements.count
+        return achievementModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "achievementsCell", for: indexPath) as! AchievementsCell
-        cell.viewModel = achievements[indexPath.row]
+        cell.viewModel = achievementModels[indexPath.row]
         return cell
     }
     

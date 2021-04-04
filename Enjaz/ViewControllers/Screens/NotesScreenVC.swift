@@ -67,6 +67,7 @@ class NotesScreenVC: UIViewController {
         noteAvatar.source = note.image_source
         noteDescription.text = note.aspect_description
         titleLabel.text = " " + note.title + "      "
+        editableTextView.placeholder = note.placeholder
         editableTextView.inputText = note.aspect_text
         
         
@@ -78,8 +79,8 @@ class NotesScreenVC: UIViewController {
     }
     
     @objc func submitNoteChanges() {
-        try! RealmManager.realm.write{
-            note.aspect_text = editableTextView.text
+        try! RealmManager.realm.write {
+            note.aspect_text = editableTextView.inputText
         }
         navigationController?.popViewController(animated: true)
     }

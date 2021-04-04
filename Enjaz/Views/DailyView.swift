@@ -11,7 +11,6 @@ class DailyView: UIView {
         return cv
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -32,10 +31,10 @@ class DailyView: UIView {
         addSubview(carouselCollectionView)
         
         NSLayoutConstraint.activate([
-            carouselCollectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: LayoutConstants.screenHeight * 0.166),
-            carouselCollectionView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.73),
-            carouselCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            carouselCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            carouselCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: LayoutConstants.screenHeight * 0.166),
+            carouselCollectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.72),
+            carouselCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            carouselCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
