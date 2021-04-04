@@ -6,6 +6,18 @@ extension UIView {
         fatalError("Attempting to set constraints to a \(type(of: self)) before adding it to a superView")
     }
     
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 1
+        
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
     func fillScreen() {
         guard let superview = superview else {
             throwNoSuperviewError()
@@ -259,7 +271,7 @@ extension UIView {
             }
         }
     }
-        
+    
     func roundCorners(_ corners: [UIDirectionalRectCorner], withRadius radius: CGFloat? = nil) {
         if let radius = radius {
             layer.cornerRadius = radius
@@ -315,10 +327,10 @@ extension UIView {
     
     /// Animates two consecutive animations while executing the `midAnimationCompletionHandler` between the two animations.
     func animateTwoConsecutiveAnimations(withDuration duration: TimeInterval,
-                                                 firstAnimation: @escaping () -> Void,
-                                                 secondAnimation: @escaping () -> Void,
-                                                 midAnimationCompletionHandler: ( (_ : Bool) -> Void)? = nil,
-                                                 completionHandler: ( (_ : Bool) -> Void)? = nil) {
+                                         firstAnimation: @escaping () -> Void,
+                                         secondAnimation: @escaping () -> Void,
+                                         midAnimationCompletionHandler: ( (_ : Bool) -> Void)? = nil,
+                                         completionHandler: ( (_ : Bool) -> Void)? = nil) {
         
         func didCompleteFirstAnimation(completed : Bool) {
             midAnimationCompletionHandler?(completed)
@@ -334,7 +346,7 @@ extension UIView {
                                                 fadeOutAndIn: Bool = false,
                                                 midAnimationCompletionHandler: ((_ : Bool) -> Void)? = nil,
                                                 completionHandler: ((_ : Bool) -> Void)? = nil) {
-                
+        
         let translationDirection = CGFloat(mapUIHorizontalDirectionToDirectionalInt(direction))
         
         func translateAndToggleAlpha() {

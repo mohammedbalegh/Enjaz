@@ -102,6 +102,13 @@
 "Please enter a valid phone number" = "برجاء إدخال رقم هاتف صحيح";
 "Message field can't be empty" = "يجب ادخال نص رسالة";
 
+//MARK: SelfEvaluationScreen
+"Self Evaluation" = "تقيم النفس";
+"What have you learned" = "ماذا تعلمت";
+"What changed in you" = "ما الذي تغير فيك";
+"How do you feel" = "ما هي مشاعرك";
+"Rate your progress in this field" = "قيم نفسك بحسب إنجازاتك لأهدافك و تقدمك في المجالات";
+
 // MARK: SideMenu Buttons
 "Draft" = "المدونة";
 "Note" = "المفكرة";
@@ -126,6 +133,11 @@
 //MARK: AchievementsScreenVC
 "No achievements to show" = "لا يوجد إنجازات";
 
+//MARK: GoalsScreen
+"Major goals" = "أهداف كبري";
+"My goal in life regarding " = "هدفي في الحياة الخاص بالجانب ال";
+"side" = "الجانب ال";
+
 //MARK: MonthItemsScreenVC
 "Today's Tasks" = "مهام اليوم";
 "Week's Tasks" = "مهام الاسبوع";
@@ -137,6 +149,12 @@
 "Completed Demahs" = "ديمة منتهية";
 "No tasks" = "لا يوجد مهام";
 "No demahs" = "لا يوجد ديمة";
+
+//MARK: MonthGoalsScreenVC
+"Finished goals" = "أهداف منتهية";
+"Upcoming goals" = "أهداف قادمة";
+"Goal" = "أهداف";
+"Add new goal" = "إضافة هدف جديد";
 
 // MARK: Item Categories
 "Religious" = "ديني";
@@ -153,7 +171,6 @@
 "Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
 "Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
 "Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
-
 
 // MARK: Item Types
 "Task" = "مهمة";

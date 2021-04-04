@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MajorGoalsCell: UICollectionViewCell {
+class MajorGoalsView: UIView {
     
     var viewModel: MajorGoalsModel? {
         didSet {
@@ -22,6 +22,8 @@ class MajorGoalsCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .gray
         label.textAlignment = .center
+        label.lineBreakMode = .byWordWrapping 
+        label.numberOfLines = 0
         label.font = label.font.withSize(12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -65,10 +67,10 @@ class MajorGoalsCell: UICollectionViewCell {
         addSubview(majorDescription)
         
         NSLayoutConstraint.activate([
-            majorDescription.topAnchor.constraint(equalTo: badge.bottomAnchor, constant: 5),
+            majorDescription.topAnchor.constraint(equalTo: badge.bottomAnchor, constant: 15),
             majorDescription.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             majorDescription.widthAnchor.constraint(lessThanOrEqualTo: self.widthAnchor),
-            majorDescription.heightAnchor.constraint(equalToConstant: 15),
+            majorDescription.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
     
@@ -80,10 +82,10 @@ class MajorGoalsCell: UICollectionViewCell {
         textField.layer.cornerRadius = 5
         
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: majorDescription.bottomAnchor, constant: 5),
+            textField.topAnchor.constraint(equalTo: majorDescription.bottomAnchor, constant: 15),
             textField.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             textField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                                        textField.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.24),
+            textField.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
     

@@ -28,7 +28,7 @@
 		417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */; };
 		417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE894259C2566002F71E5 /* GoalsTableCell.swift */; };
 		417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */; };
-		417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */; };
+		417EE8C925A01C17002F71E5 /* MajorGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8C825A01C17002F71E5 /* MajorGoalsView.swift */; };
 		417EE8CE25A02E40002F71E5 /* MajorGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */; };
 		417EE8D925A13262002F71E5 /* MajorGoalsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */; };
 		41912096258ECDA200CB7BF9 /* HourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41912095258ECDA200CB7BF9 /* HourModel.swift */; };
@@ -253,7 +253,7 @@
 		417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsBankScreenVC.swift; sourceTree = "<group>"; };
 		417EE894259C2566002F71E5 /* GoalsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableCell.swift; sourceTree = "<group>"; };
 		417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewBadge.swift; sourceTree = "<group>"; };
-		417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsCell.swift; sourceTree = "<group>"; };
+		417EE8C825A01C17002F71E5 /* MajorGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsView.swift; sourceTree = "<group>"; };
 		417EE8CD25A02E40002F71E5 /* MajorGoalsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsScreenVC.swift; sourceTree = "<group>"; };
 		417EE8D825A13262002F71E5 /* MajorGoalsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MajorGoalsModel.swift; sourceTree = "<group>"; };
 		41912095258ECDA200CB7BF9 /* HourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourModel.swift; sourceTree = "<group>"; };
@@ -586,6 +586,7 @@
 				417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */,
 				BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeader.swift */,
 				4141503125A2C71700DC369A /* SelfEvaluationChart.swift */,
+				417EE8C825A01C17002F71E5 /* MajorGoalsView.swift */,
 				4141504125A3FD2F00DC369A /* ChartSliderView.swift */,
 				BC7D6C7225A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift */,
 				BC8F2F5625A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift */,
@@ -864,7 +865,6 @@
 			isa = PBXGroup;
 			children = (
 				BC93D5AB2614A887005DE3AC /* PersonalAspectsCell.swift */,
-				417EE8C825A01C17002F71E5 /* MajorGoalsCell.swift */,
 				4142F78025759DE5008FCC23 /* CarouselCell.swift */,
 				BCB54CC6258C07AB00E0E54D /* AdditionImageOrStickerCell.swift */,
 				BC391144258E771A000E6273 /* ItemCardCell.swift */,
@@ -1135,7 +1135,7 @@
 				BCB54CBD258C016400E0E54D /* ImageAndStickerPickerPopup.swift in Sources */,
 				BC8F2F8825A878B700EF7EA4 /* SetDateRangeScreenVC.swift in Sources */,
 				BC4646E32587EC3100218D7A /* MainTabBar.swift in Sources */,
-				417EE8C925A01C17002F71E5 /* MajorGoalsCell.swift in Sources */,
+				417EE8C925A01C17002F71E5 /* MajorGoalsView.swift in Sources */,
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
 				BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */,
 				BC93D5B92614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */,
