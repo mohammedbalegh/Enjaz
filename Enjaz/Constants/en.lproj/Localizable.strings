@@ -123,6 +123,9 @@
 "Demahs" = "Demahs";
 "Achievements" = "Achievements";
 
+//MARK: AchievementsScreenVC
+"No achievements to show" = "No achievements to show";
+
 //MARK: MonthItemsScreenVC
 "Today's Tasks" = "Today's Tasks";
 "Week's Tasks" = "Week's Tasks";

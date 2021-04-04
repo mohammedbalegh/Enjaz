@@ -13,7 +13,7 @@ class MonthlyPlanScreenVC: MenuBarNavigationVC {
             NSLocalizedString("Achievements", comment: ""),
         ]
         
-        controllerViews = [MonthTasksScreenVC(), MonthDemahsScreenVC(), UIViewController()]
+        controllerViews = [MonthTasksScreenVC(), MonthDemahsScreenVC(), AchievementsScreenVC()]
     }
     
 }

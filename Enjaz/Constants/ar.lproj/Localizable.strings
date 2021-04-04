@@ -37,7 +37,6 @@
 "In case the %@ repeats more than once" = "في حالة تكرار ال%@ أكثر من مرة";
 "Date (from - to)" = "التاريخ (من - إلى)";
 
-
 // MARK: CalendarViewController
 "Hijri Calendar" = "التقويم الهجري";
 "Georgian Calendar" = "التقويم الميلادي";
@@ -123,6 +122,9 @@
 "Tasks" = "المهام";
 "Demahs" = "الديمة";
 "Achievements" = "الإنجازات";
+
+//MARK: AchievementsScreenVC
+"No achievements to show" = "لا يوجد إنجازات";
 
 //MARK: MonthItemsScreenVC
 "Today's Tasks" = "مهام اليوم";
