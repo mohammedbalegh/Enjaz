@@ -1,5 +1,5 @@
 import Foundation
 
-protocol NewAdditionScreenModalDelegate {
+protocol AddItemScreenModalDelegate {
     func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [Double], readableDate: String)
 }

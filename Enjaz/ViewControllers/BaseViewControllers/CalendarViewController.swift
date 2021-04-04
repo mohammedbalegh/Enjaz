@@ -130,7 +130,7 @@ class CalendarViewController: UIViewController {
     }
     
     var alertPopup = AlertPopup(hideOnOverlayTap: true)
-    var delegate: NewAdditionScreenModalDelegate?
+    var delegate: AddItemScreenModalDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

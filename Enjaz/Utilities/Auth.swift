@@ -1,6 +1,6 @@
 import SwiftKeychainWrapper
 
-class Auth {
+struct Auth {
     enum unwrappingError: Error {
         case errorUnwrapping(value: String)
     }

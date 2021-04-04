@@ -24,8 +24,6 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         label.textColor = PopoverBtn.defaultTintColor
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.text = NSLocalizedString("from", comment: "") + " - " + NSLocalizedString("to", comment: "") + " -"
-        label.font = .systemFont(ofSize: PopoverBtn.fontSize)
         label.isHidden = true
         label.textAlignment = .center
         
@@ -97,7 +95,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         didSet {
             monthDaysCollectionView.allowsMultipleSelection = allowsRangeSelection
             selectedDaysLabel.isHidden = !allowsRangeSelection
-            selectedDaysLabelHeightConstraint.constant = allowsRangeSelection ? 40 : 0
+            selectedDaysLabelHeightConstraint.constant = allowsRangeSelection ? 30 : 0
         }
     }
     
@@ -302,7 +300,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     func setupSelectedDaysLabel() {
         addSubview(selectedDaysLabel)
         
-        selectedDaysLabelHeightConstraint = selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: allowsRangeSelection ? 40 : 0)
+        selectedDaysLabelHeightConstraint = selectedDaysLabel.heightAnchor.constraint(lessThanOrEqualToConstant: allowsRangeSelection ? 30 : 0)
         
         NSLayoutConstraint.activate([
             selectedDaysLabel.topAnchor.constraint(equalTo: calendarPopoverBtnsRow.bottomAnchor, constant: 8),
@@ -317,7 +315,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         calendarContainer.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            calendarContainer.topAnchor.constraint(equalTo: selectedDaysLabel.bottomAnchor, constant: 12),
+            calendarContainer.topAnchor.constraint(equalTo: selectedDaysLabel.bottomAnchor, constant: 5),
             calendarContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
             calendarContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
             calendarContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -484,7 +482,9 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }
     
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
-        selectedDaysLabel.text = "\(NSLocalizedString("from", comment: "")) \(firstDay) \(NSLocalizedString("to", comment: "")) \(lastDay)"
+        let from = NSLocalizedString("from", comment: "")
+        let to = NSLocalizedString("to", comment: "")
+        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accentColor, withSize: 13)
     }
 
     func getWeekDayCellRowBy(weekDayIndex: Int, andHour hour: Int) -> Int {

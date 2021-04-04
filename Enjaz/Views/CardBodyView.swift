@@ -29,7 +29,7 @@ class CardBodyView: UIView {
         return label
     }()
     
-    let timeLabel: UILabel = {
+    let dateAndTimeLabel: UILabel = {
         let label = UILabel()
         label.font = label.font.withSize(13)
         label.textAlignment = .center
@@ -105,9 +105,9 @@ class CardBodyView: UIView {
     func setupSubviews() {
         setupTitleLabel()
         setupCategoryLabel()
+        setupCheckMark()
         setupTimeLabel()
         setupDescriptionLabel()
-        setupCheckMark()
     }
     
     func setupTitleLabel() {
@@ -145,41 +145,14 @@ class CardBodyView: UIView {
         categoryLabel.layer.cornerRadius = height / 2;
     }
     
-    func setupDescriptionLabel() {
-        addSubview(descriptionLabel)
-                
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 4),
-            descriptionLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: 20),
-        ])
-    }
-    
-    func setupTimeLabel() {
-        addSubview(timeLabel)
-
-        
-        NSLayoutConstraint.activate([
-            timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-            timeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            timeLabel.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.444),
-            timeLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 0.7),
-        ])
-    }
-    
     func setupCheckMark() {
         addSubview(checkButton)
         
         checkButton.isHidden = true
-        let size = LayoutConstants.screenWidth * 0.059
-        
-        
-        
-        layoutIfNeeded()
-        
+        let size: CGFloat = 20
+                
         NSLayoutConstraint.activate([
-            checkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            checkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5),
             checkButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             checkButton.widthAnchor.constraint(equalToConstant: size),
             checkButton.heightAnchor.constraint(equalToConstant: size)
@@ -188,6 +161,31 @@ class CardBodyView: UIView {
         checkButton.layer.cornerRadius = size / 2
         
     }
+    
+    func setupTimeLabel() {
+        addSubview(dateAndTimeLabel)
+
+        
+        NSLayoutConstraint.activate([
+            dateAndTimeLabel.bottomAnchor.constraint(equalTo: checkButton.topAnchor, constant: -5),
+            dateAndTimeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            dateAndTimeLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.95),
+            dateAndTimeLabel.heightAnchor.constraint(equalToConstant: 16),
+        ])
+    }
+        
+    func setupDescriptionLabel() {
+        addSubview(descriptionLabel)
+                
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 5),
+            descriptionLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
+            descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: dateAndTimeLabel.topAnchor, constant: -5),
+        ])
+    }
+    
+    
 }
 
 

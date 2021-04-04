@@ -154,7 +154,7 @@ class MainTabBarController: UITabBarController {
                         NSLocalizedString("Monthly Plan", comment: ""),
                         NSLocalizedString("Goals", comment: "")]
         
-		// Disable the NewAdditionScreen tab bar item, because the screen is accessed through the floating button.
+		// Disable the additionTypeScreen tab bar item, because the screen is accessed through the floating button.
 		tabBar.items?[2].isEnabled = false
 	}
 		
@@ -197,11 +197,11 @@ class MainTabBarController: UITabBarController {
             return
         }
         
-        let newAdditionScreenVC = NewAdditionScreenVC()
+        let addItemScreenVC = AddItemScreenVC()
         
-        newAdditionScreenVC.itemType = additionTypeScreenVC.selectedTypeId
+        addItemScreenVC.itemType = additionTypeScreenVC.selectedTypeId
         
-        navigationController?.pushViewController(newAdditionScreenVC, animated: true)
+        navigationController?.pushViewController(addItemScreenVC, animated: true)
         additionTypeScreenVC.resetCardSelection()
     }
 	
@@ -214,22 +214,22 @@ class MainTabBarController: UITabBarController {
         
 	// Handle new selection
 	func tabChangedTo(selectedIndex: Int) {
-		let newAdditionScreenIsSelected = selectedIndex == 2
+		let additionTypeScreenIsSelected = selectedIndex == 2
 		
-		newAdditionScreenIsSelected
-			? setupFloatingBtnAsNewAdditionScreenSaveBtn()
-			: setupFloatingBtnAsNewAdditionScreenTabBarItem()
+        additionTypeScreenIsSelected
+			? setupFloatingBtnAsSelectBtn()
+			: setupFloatingBtnAsTabBarItem()
 		
         navigationItem.titleView = selectedIndex == 0 ? dateVerticalStack : navBarTitleLabel
 
         navBarTitleLabel.text = screenTitles?[selectedIndex]
 	}
     
-	func setupFloatingBtnAsNewAdditionScreenTabBarItem() {
+	func setupFloatingBtnAsTabBarItem() {
 		floatingBtn.setBackgroundImage(UIImage(named:"floatingNewAdditionBtn"), for: .normal)
 	}
 	
-	func setupFloatingBtnAsNewAdditionScreenSaveBtn() {
+	func setupFloatingBtnAsSelectBtn() {
 		floatingBtn.setBackgroundImage(UIImage(named: "floatingSaveButton"), for: .normal)
 	}
 	

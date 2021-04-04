@@ -38,15 +38,6 @@ class NetworkingManager {
     }
     
     static func logIn(username: String, password: String, completionHandler: @escaping (_ token: String?, _ user: [String: Any]?, _ error: Error?) -> Void) {
-        let user: [String : Any] = [
-            "id": 43532456,
-            "username": "AbdlrhmanElmhdy",
-            "full_name": "Abdelrhman Elmahdy",
-            "email": "AbdlrhmanElmahdy@gmail.com",
-        ]
-        completionHandler("test", user, nil)
-        return
-        
         let url = URL(string: NetworkingUrls.apiLoginUrl)
         let data = [
             "username": username,

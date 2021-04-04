@@ -1,6 +1,6 @@
 import Foundation
 
-class AppDataInitializer {
+struct AppDataInitializer {
     static func initializeItemCategories() {
         let itemCategoriesAreEmpty = RealmManager.itemCategoriesCount == 0
         guard itemCategoriesAreEmpty else { return }

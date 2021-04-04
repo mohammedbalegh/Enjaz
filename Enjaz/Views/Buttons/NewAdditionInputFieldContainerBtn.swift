@@ -1,6 +1,6 @@
 import UIKit
 
-class NewAdditionInputFieldContainerBtn: UIButton, NewAdditionInputFieldContainerInput {
+class NewAdditionInputFieldContainerBtn: UIButton, InputField {
     
     var inputText: String? {
         get {

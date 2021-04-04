@@ -8,7 +8,7 @@ class VideoCardCell: DraftCardCell {
             self.thumbnail.image = viewModel.thumbnail
             self.draftMetaDataContainer.categoryLabel.text = viewModel.category
             self.draftMetaDataContainer.titleLabel.text = viewModel.title
-            self.draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: viewModel.date, withFormat: "dd/MM/yyyy", calendarIdentifier: .gregorian)
+            self.draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: viewModel.date, withFormat: "d/M/yyyy", calendarIdentifier: .gregorian)
         }
     }
     

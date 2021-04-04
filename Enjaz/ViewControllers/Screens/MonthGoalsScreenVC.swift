@@ -10,12 +10,15 @@ class MonthGoalsScreenVC: ScreenNavigatorWithDynamicDataTableVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let category = category else { fatalError("Invalid category") }
-            
-        completedGoals = RealmManager.retrieveCompletedGoals(ofCategory: category)
-        upcomingGoals = RealmManager.retrieveUpcomingGoals(ofCategory: category)
-                
         view.backgroundColor = .mainScreenBackgroundColor
+        
+        guard let category = category else { fatalError("Invalid category") }
+        
+        let allOriginalCategoryGoals = RealmManager.retrieveItems(withFilter: "type == \(ItemType.goal.id) AND category == \(category.id)").filterOutNonOriginalItems()
+        
+        completedGoals = allOriginalCategoryGoals.filter { $0.is_completed }
+        upcomingGoals = allOriginalCategoryGoals.filter { !$0.is_completed && $0.date > Date().timeIntervalSince1970 }
+        
         screenNavigatorCellModels = [
             ScreenNavigatorCellModel(imageSource: "completedGoalsIcon", label: "أهداف منتهية", subLabel: "\(completedGoals.count) هدف"),
             ScreenNavigatorCellModel(imageSource: "upcomingGoalsIcon", label: "أهداف قادمة", subLabel: "\(upcomingGoals.count)  هدف"),

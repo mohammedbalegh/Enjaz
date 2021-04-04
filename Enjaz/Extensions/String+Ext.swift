@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 extension String {
     
@@ -6,21 +6,23 @@ extension String {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
         if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
             return match.range.length == self.utf16.count
-        } else {
-            return false
         }
+        
+        return false
+    }
+    
+    var isPhoneNumber: Bool {
+        if self.isAllDigits() {
+            let phoneRegex = "[0-9]{6,14}"
+            let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+            return  predicate.evaluate(with: self)
+        }
+        
+        return false
     }
     
     subscript (i: Int) -> String {
         return self[i ..< i + 1]
-    }
-    
-    func substring(fromIndex startingIndex: Int) -> String {
-        return self[min(startingIndex, count) ..< count]
-    }
-    
-    func substring(toIndex endingIndex: Int) -> String {
-        return self[0 ..< max(0, endingIndex)]
     }
     
     subscript (r: Range<Int>) -> String {
@@ -33,26 +35,29 @@ extension String {
         return String(self[start ..< end])
     }
     
-    func capitalizeFirstLetter() -> String {
-        return prefix(1).capitalized + dropFirst()
-    }
-    
-    func capitalizeOnlyFirstLetter() -> String {
-        return prefix(1).capitalized + dropFirst().lowercased()
-    }
-    
     static func isOrAre(count: Int) -> String {
         return count > 1 ? "are" : "is"
     }
     
-    public func isPhone()->Bool {
-        if self.isAllDigits() == true {
-            let phoneRegex = "[0-9]{6,14}"
-            let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-            return  predicate.evaluate(with: self)
-        }else {
-            return false
+    static func generateRequiredFieldNamesErrorMessage(requiredFieldNames: [String]?) -> String? {
+        guard let requiredFieldNames = requiredFieldNames, !requiredFieldNames.isEmpty else { return nil }
+        
+        let requiredFieldNamesAsSentence = requiredFieldNames.joinAsSentence()
+        let numberOfNonProvidedRequiredFields = requiredFieldNames.count
+        
+        if Locale.current.languageCode == "ar" {
+            return "يجب ادخال \(requiredFieldNamesAsSentence)."
         }
+        
+        return "\(requiredFieldNamesAsSentence) field\(numberOfNonProvidedRequiredFields > 1 ? "s" : "") \(String.isOrAre(count: numberOfNonProvidedRequiredFields)) required.".capitalizeOnlyFirstLetter()
+    }
+    
+    static func generateAdditionSuccessMessage(type: String) -> String {
+        if Locale.current.languageCode == "ar" {
+            return "تم إضافة ال\(type) بنجاح"
+        }
+        
+        return "\(type) was added successfully"
     }
     
     private func isAllDigits()->Bool {
@@ -62,4 +67,31 @@ extension String {
         return  self == filtered
     }
     
+    func substring(fromIndex startingIndex: Int) -> String {
+        return self[min(startingIndex, count) ..< count]
+    }
+    
+    func substring(toIndex endingIndex: Int) -> String {
+        return self[0 ..< max(0, endingIndex)]
+    }
+    
+    func capitalizeFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+    
+    func capitalizeOnlyFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst().lowercased()
+    }
+    
+    func attributedStringWithColor(_ strings: [String], color: UIColor, withSize size: CGFloat = 16) -> NSAttributedString {
+        let font: UIFont = .systemFont(ofSize: size)
+        let attributedString = NSMutableAttributedString(string: self, attributes: [.font : font])
+        
+        for string in strings {
+            let range = (self as NSString).range(of: string)
+            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        }
+        
+        return attributedString
+    }
 }

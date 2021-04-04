@@ -116,7 +116,7 @@ class AddNoteScreenVC: UIViewController {
     func getCurrentDate() -> String {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "h:m a   MM/dd/yyyy"
+        formatter.dateFormat = "h:m a   M/d/yyyy"
         let result = formatter.string(from: date)
         return result
     }

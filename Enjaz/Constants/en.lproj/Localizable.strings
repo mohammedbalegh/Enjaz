@@ -24,7 +24,7 @@
 "If you have a task that want to complete in a specific time" = "If you have a task that want to complete in a specific time";
 "No type has been selected" = "No type has been selected";
 
-// MARK: NewAdditionScreen
+// MARK: AddItemScreen
 "Add %@" = "Add %@";
 "Select Image" = "Select Image";
 "Select Sticker" = "Select Sticker";
@@ -96,7 +96,7 @@
 "Phone number" = "Phone number";
 "Message content" = "Message content";
 "Full name" = "Full name";
-"This is message example" = "This is message example";
+"Type your message here" = "Type your message here";
 "Send" = "Send";
 "Name field can't be empty" = "Name field can't be empty";
 "Please enter a valid phone number" = "Please enter a valid phone number";
@@ -170,3 +170,4 @@
 "Ok" = "Ok";
 "Done" = "Done";
 "optional" = "optional";
+"category" = "category";

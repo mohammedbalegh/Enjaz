@@ -1,6 +1,6 @@
 import UIKit
 
-class EditableTextView: UITextView, UITextViewDelegate, NewAdditionInputFieldContainerInput {
+class EditableTextView: UITextView, UITextViewDelegate, InputField {
 	    
 	var placeholder = "" {
 		didSet {

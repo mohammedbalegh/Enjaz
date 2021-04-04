@@ -1,6 +1,6 @@
 import Foundation
 
-class DateAndTimeTools {
+struct DateAndTimeTools {
     
     static func getCurrentDay(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> Int {
         return getCurrentCalendarComponent(for: .day, andCalendarIdentifier: calendarIdentifier)

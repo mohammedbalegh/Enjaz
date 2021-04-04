@@ -1,6 +1,6 @@
 import UIKit
 
-class AddGoalScreenVC: NewAdditionScreenVC {
+class AddGoalScreenVC: AddItemScreenVC {
     
     var category: ItemCategoryModel?
     

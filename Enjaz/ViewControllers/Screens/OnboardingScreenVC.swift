@@ -88,7 +88,6 @@ class OnboardingScreenVC: UIViewController {
         setupSecondaryLabel()
         setupMainLabel()
         setupPageControl()
-        //        timer()
     }
     
     func setupPageControl() {

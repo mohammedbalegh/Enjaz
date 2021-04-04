@@ -15,7 +15,7 @@ class CardPopup: Popup {
             cardView.cardBody.categoryLabel.text = viewModel.cardBody.categoryLabel.text
             cardView.cardBody.titleLabel.text = viewModel.cardBody.titleLabel.text
             cardView.cardBody.descriptionLabel.text = viewModel.cardBody.descriptionLabel.text
-            cardView.cardBody.timeLabel.text = viewModel.cardBody.timeLabel.text
+            cardView.cardBody.dateAndTimeLabel.attributedText = viewModel.cardBody.dateAndTimeLabel.attributedText
         }
     }
     

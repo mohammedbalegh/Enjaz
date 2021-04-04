@@ -69,7 +69,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
     
     var selectedTypeId = -1
     
-    var delegate: NewAdditionScreenModalDelegate?
+    var delegate: AddItemScreenModalDelegate?
     
     
     override func viewDidLoad() {

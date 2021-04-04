@@ -1,7 +1,7 @@
 import UIKit
 import SPAlert
 
-class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModalDelegate {
+class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegate {
     // MARK: Properties
     
     let scrollView = UIScrollView()
@@ -13,14 +13,14 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
     let imagePickerPopup = ImagePickerPopup(hideOnOverlayTap: true)
     let stickerPickerPopup = StickerPickerPopup(hideOnOverlayTap: true)
     
-    lazy var additionNameTextField: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: .zero)
+    lazy var additionNameTextField: InputFieldContainer = {
+        let containerView = InputFieldContainer(frame: .zero)
         
         let fieldName = NSLocalizedString("Addition Name", comment: "")
         containerView.fieldName = fieldName
         
-        let textField = NewAdditionTextField(fieldName: fieldName)
-        
+        let textField = InputFieldContainerTextField()
+        textField.placeholder = fieldName
         textField.delegate = self
         
         containerView.input = textField
@@ -28,8 +28,8 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         return containerView
     }()
     
-    lazy var additionCategoryPopoverBtn: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: .zero)
+    lazy var additionCategoryPopoverBtn: InputFieldContainer = {
+        let containerView = InputFieldContainer(frame: .zero)
         
         let button = PopoverBtn(frame: .zero)
         button.configure(withSize: .large)
@@ -73,8 +73,8 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         return switchView
     }()
     
-    lazy var additionDateAndTimeInput: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: .zero)
+    lazy var additionDateAndTimeInput: InputFieldContainer = {
+        let containerView = InputFieldContainer(frame: .zero)
         
         let fieldName = NSLocalizedString("Date and Time", comment: "")
         containerView.fieldName = fieldName
@@ -95,8 +95,23 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         return containerView
     }()
     
-    lazy var additionDescriptionTextView: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: .zero)
+    lazy var textFieldsVerticalStack: UIStackView = {
+        var stackView = UIStackView(arrangedSubviews: getTextFieldsStackArrangedSubviews())
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 25
+        
+        if stackView.arrangedSubviews.contains(repeatSwitchView) {
+            stackView.setCustomSpacing(0, after: repeatSwitchView)
+        }
+        
+        return stackView
+    }()
+    
+    lazy var additionDescriptionTextView: InputFieldContainer = {
+        let containerView = InputFieldContainer(frame: .zero)
         
         let textView = EditableTextView(frame: .zero)
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -112,22 +127,7 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         
         return containerView
     }()
-    
-    lazy var textFieldsVerticalStack: UIStackView = {
-        var stackView = UIStackView(arrangedSubviews: getTextFieldsStackArrangedSubviews())
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 25
-        
-        if stackView.arrangedSubviews.contains(repeatSwitchView) {
-            stackView.setCustomSpacing(0, after: repeatSwitchView)
-        }
-        
-        return stackView
-    }()
-        
+            
     let saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
     
     var itemCategoryModels: [ItemCategoryModel] = []
@@ -342,10 +342,7 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
     @objc func handleSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         
-        guard nonProvidedRequiredFieldNames.isEmpty else {
-            let nonProvidedRequiredFieldNamesAsSentence = nonProvidedRequiredFieldNames.joinAsSentence()
-            let errorMessage = generateRequiredFieldNamesErrorMessage(requiredFieldNamesAsSentence: nonProvidedRequiredFieldNamesAsSentence, numberOfNonProvidedRequiredFields: nonProvidedRequiredFieldNames.count)
-            
+        if let errorMessage = String.generateRequiredFieldNamesErrorMessage(requiredFieldNames: nonProvidedRequiredFieldNames) {
             AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)
             return
         }
@@ -353,7 +350,7 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         saveItem()
         navigationController?.popViewController(animated: true)
         
-        let successMessage = generateSuccessMessage(itemTypeName: itemTypeName)
+        let successMessage = String.generateAdditionSuccessMessage(type: itemTypeName)
         SPAlert.present(title: successMessage, preset: .done)
     }
     
@@ -385,28 +382,14 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         
         return nonProvidedRequiredFieldNames
     }
-        
-    func generateRequiredFieldNamesErrorMessage(requiredFieldNamesAsSentence: String, numberOfNonProvidedRequiredFields: Int) -> String {
-        if Locale.current.languageCode == "ar" {
-            return "يجب ادخال \(requiredFieldNamesAsSentence)."
-        }
-        
-        return "\(requiredFieldNamesAsSentence) field\(numberOfNonProvidedRequiredFields > 1 ? "s" : "") \(String.isOrAre(count: numberOfNonProvidedRequiredFields)) required.".capitalizeOnlyFirstLetter()
-    }
-    
-    func generateSuccessMessage(itemTypeName: String) -> String {
-        if Locale.current.languageCode == "ar" {
-            return "تم إضافة ال\(itemTypeName) بنجاح"
-        }
-        
-        return "\(itemTypeName) was added successfully"
-    }
     
     func saveItem() {
         var index = 0
         var firstItemId: Int!
         
-        for date in itemDates! {
+        guard let itemDates = itemDates else { return }
+        
+        for date in itemDates {
             let item = ItemModel()
             
             item.name = itemName
@@ -418,6 +401,9 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
             item.sticker_id = itemStickerId ?? -1
             if index == 0 {
                 firstItemId = item.id
+                if itemDates.count > 1 {
+                    item.endDate = itemDates.last!
+                }
             } else {
                 item.originalItemId = firstItemId
             }
@@ -429,7 +415,7 @@ class NewAdditionScreenVC: KeyboardHandlingViewController, NewAdditionScreenModa
         
 }
 
-extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
+extension AddItemScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -445,7 +431,7 @@ extension NewAdditionScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
 }
 
-extension NewAdditionScreenVC: UITextFieldDelegate {
+extension AddItemScreenVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false

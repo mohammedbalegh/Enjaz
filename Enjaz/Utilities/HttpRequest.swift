@@ -1,6 +1,6 @@
 import Foundation
 
-class HttpRequest {
+struct HttpRequest {
     enum HttpMethod: String {
         case get = "GET"
         case post = "POST"

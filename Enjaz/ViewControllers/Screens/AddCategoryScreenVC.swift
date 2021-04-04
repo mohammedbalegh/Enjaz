@@ -1,20 +1,20 @@
 import UIKit
 import SPAlert
 
-class AddCategoryScreenVC: UIViewController {
+class AddCategoryScreenVC: KeyboardHandlingViewController {
 
     let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
         
     let imagePickerPopup = ImagePickerPopup(hideOnOverlayTap: true)
     
-    lazy var categoryNameTextField: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: .zero)
+    lazy var categoryNameTextField: InputFieldContainer = {
+        let containerView = InputFieldContainer(frame: .zero)
         
         let fieldName = NSLocalizedString("Category Name", comment: "")
         containerView.fieldName = fieldName
         
-        let textField = NewAdditionTextField(fieldName: fieldName)
-        
+        let textField = InputFieldContainerTextField()
+        textField.placeholder = fieldName
         textField.delegate = self
         
         containerView.input = textField
@@ -22,8 +22,8 @@ class AddCategoryScreenVC: UIViewController {
         return containerView
     }()
     
-    lazy var categoryDescriptionTextView: NewAdditionInputFieldContainer = {
-        let containerView = NewAdditionInputFieldContainer(frame: .zero)
+    lazy var categoryDescriptionTextView: InputFieldContainer = {
+        let containerView = InputFieldContainer(frame: .zero)
         
         let textView = EditableTextView(frame: .zero)
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -154,19 +154,9 @@ class AddCategoryScreenVC: UIViewController {
         
         navigationController?.popViewController(animated: true)
         
-        let successMessage = generateSuccessMessage()
+        let successMessage = String.generateAdditionSuccessMessage(type: NSLocalizedString("category", comment: ""))
         SPAlert.present(title: successMessage, preset: .done)
     }
-    
-    
-    func generateSuccessMessage() -> String {
-        if Locale.current.languageCode == "ar" {
-            return "تم إضافة المجال بنجاح"
-        }
-        
-        return "Category was added successfully"
-    }
-
 }
 
 extension AddCategoryScreenVC: UITextFieldDelegate {

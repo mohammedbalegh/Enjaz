@@ -1,6 +1,9 @@
 import UIKit
+import SPAlert
 
-class ContactUsScreenVC: UIViewController {
+class ContactUsScreenVC: KeyboardHandlingViewController {
+    
+    let scrollView = UIScrollView()
     
     let submitBtn: PrimaryBtn = {
         let button = PrimaryBtn(label: NSLocalizedString("Send", comment: ""), theme: .blue, size: .large)
@@ -9,33 +12,54 @@ class ContactUsScreenVC: UIViewController {
         return button
     }()
     
-    let clientNameView: ContactUsTextFieldView = {
-        let view = ContactUsTextFieldView()
+    lazy var clientNameView: TitledInputFieldContainer = {
+        let textField = InputFieldContainerTextField()
+        textField.placeholder = NSLocalizedString("Full name", comment: "")
+        textField.delegate = self
+        textField.tag = 0
+        textField.returnKeyType = .next
         
-        view.titleLabel.text =  NSLocalizedString("Client name", comment: "")
-        view.placeholder = NSLocalizedString("Full name", comment: "")
-        view.inputTextView.keyboardType = .alphabet
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let containerView = TitledInputFieldContainer(input: textField, title: NSLocalizedString("Client name", comment: ""))
+        
+        return containerView
     }()
     
-    let phoneNumberView: ContactUsTextFieldView = {
-        let view = ContactUsTextFieldView()
+    lazy var phoneNumberView: TitledInputFieldContainer = {
+        let textField = InputFieldContainerTextField()
+        textField.placeholder = "+2010 000 000 00"
+        textField.keyboardType = .asciiCapableNumberPad
+        textField.delegate = self
+        textField.tag = 1
+        textField.returnKeyType = .next
         
-        view.titleLabel.text =  NSLocalizedString("Phone number", comment: "")
-        view.placeholder = "+2010 000 000 00"
-        view.inputTextView.keyboardType = .asciiCapableNumberPad
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let containerView = TitledInputFieldContainer(input: textField, title: NSLocalizedString("Phone number", comment: ""))
+        
+        return containerView
     }()
     
-    let messageContentView: ContactUsTextFieldView = {
-        let view = ContactUsTextFieldView()
+    lazy var clientNameAndPhoneNumberStack: UIStackView = {
+        var stackView = UIStackView(arrangedSubviews: [clientNameView, phoneNumberView])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.placeholder = NSLocalizedString("This is message example", comment: "")
-        view.titleLabel.text =  NSLocalizedString("Message content", comment: "")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 20
+                
+        return stackView
+    }()
+    
+    let messageContentView: TitledInputFieldContainer = {
+        let textView = EditableTextView(frame: .zero)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        textView.placeholder = NSLocalizedString("Type your message here", comment: "")
+        textView.font = .systemFont(ofSize: 18)
+        textView.tag = 2
+        
+        let containerView = TitledInputFieldContainer(input: textView, title: NSLocalizedString("Message content", comment: ""))
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return containerView
     }()
     
     let contactUsImage: UIImageView = {
@@ -44,6 +68,18 @@ class ContactUsScreenVC: UIViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
+    
+    var name: String {
+        return clientNameView.input?.inputText ?? ""
+    }
+    
+    var phoneNumber: String {
+        return phoneNumberView.input?.inputText ?? ""
+    }
+    
+    var messageContent: String {
+        return messageContentView.input?.inputText ?? ""
+    }
       
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,89 +90,120 @@ class ContactUsScreenVC: UIViewController {
     }
     
     func setupSubViews() {
+        setupScrollView()
         setupContactUsImage()
-        setupClientNameView()
-        setupPhoneNumberView()
+        setupClientNameAndPhoneNumberStack()
         setupMessageContentView()
         setupSubmitBtn()
     }
     
-    @objc func handleSubmitBtnTapped() {
-        let alertPopup = AlertPopup(hideOnOverlayTap: true)
-        
-        if clientNameView.inputTextView.textColor == UIColor.placeholderText || clientNameView.inputTextView.text.isEmpty {
-            
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Name field can't be empty", comment: ""))
-            
-        } else if !phoneNumberView.inputTextView.text.isPhone() {
-            
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Please enter a valid phone number", comment: ""))
-            
-        } else if messageContentView.inputTextView.textColor == UIColor.placeholderText || messageContentView.inputTextView.text.isEmpty {
-            
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Message field can't be empty" , comment: ""))
-            
-        } else {
-            NetworkingManager.sendEmail(name: clientNameView.inputTextView.text, phoneNumber: phoneNumberView.inputTextView.text, messageContent: messageContentView.inputTextView.text)
-            navigationController?.popViewController(animated: true)
-        }
-        
-    }
-    
-    func setupSubmitBtn() {
-        view.addSubview(submitBtn)
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            submitBtn.topAnchor.constraint(equalTo: messageContentView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.038),
-            submitBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: keyboardPlaceHolderView.topAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
         ])
     }
-    
-    func setupMessageContentView() {
-        view.addSubview(messageContentView)
-        
-        NSLayoutConstraint.activate([
-            messageContentView.topAnchor.constraint(equalTo: phoneNumberView.bottomAnchor, constant: 15),
-            messageContentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            messageContentView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.209),
-            messageContentView.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.855)
-        ])
-    }
-    
-    func setupPhoneNumberView() {
-        view.addSubview(phoneNumberView)
-        
-        NSLayoutConstraint.activate([
-            phoneNumberView.topAnchor.constraint(equalTo: clientNameView.bottomAnchor, constant: 15),
-            phoneNumberView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            phoneNumberView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.1),
-            phoneNumberView.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.855)
-        ])
-    }
-    
-    func setupClientNameView() {
-        view.addSubview(clientNameView)
-        
-        NSLayoutConstraint.activate([
-            clientNameView.topAnchor.constraint(equalTo: contactUsImage.bottomAnchor, constant: LayoutConstants.screenHeight * 0.044),
-            clientNameView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            clientNameView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.1),
-            clientNameView.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.855)
-        ])
-    }
-    
+            
     func setupContactUsImage() {
-        view.addSubview(contactUsImage)
+        scrollView.addSubview(contactUsImage)
         
         let size = LayoutConstants.screenWidth * 0.257
         
         NSLayoutConstraint.activate([
-            contactUsImage.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.147),
+            contactUsImage.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contactUsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             contactUsImage.heightAnchor.constraint(equalToConstant: size),
             contactUsImage.widthAnchor.constraint(equalToConstant: size)
         ])
     }
     
+    func setupClientNameAndPhoneNumberStack() {
+        scrollView.addSubview(clientNameAndPhoneNumberStack)
+        
+        let height = clientNameAndPhoneNumberStack.calculateHeightBasedOn(arrangedSubviewHeight: LayoutConstants.inputHeight + 35)
+        
+        NSLayoutConstraint.activate([
+            clientNameAndPhoneNumberStack.topAnchor.constraint(equalTo: contactUsImage.bottomAnchor, constant: LayoutConstants.screenHeight * 0.044),
+            clientNameAndPhoneNumberStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            clientNameAndPhoneNumberStack.heightAnchor.constraint(equalToConstant: height),
+            clientNameAndPhoneNumberStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+        ])
+    }
+        
+    func setupMessageContentView() {
+        scrollView.addSubview(messageContentView)
+        
+        NSLayoutConstraint.activate([
+            messageContentView.topAnchor.constraint(equalTo: phoneNumberView.bottomAnchor, constant: 15),
+            messageContentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            messageContentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            messageContentView.heightAnchor.constraint(equalToConstant: 170),
+            messageContentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -(LayoutConstants.tabBarHeight + 20)),
+        ])
+    }
+    
+    func setupSubmitBtn() {
+        view.addSubview(submitBtn)
+        
+        NSLayoutConstraint.activate([
+            submitBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            submitBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    @objc func handleSubmitBtnTapped() {
+        guard phoneNumber.isPhoneNumber else {
+            AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Please enter a valid phone number", comment: ""))
+            return
+        }
+        
+        let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
+        
+        if let errorMessage = String.generateRequiredFieldNamesErrorMessage(requiredFieldNames: nonProvidedRequiredFieldNames) {
+            AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)
+            return
+        }
+        
+        NetworkingManager.sendEmail(name: name, phoneNumber: phoneNumber, messageContent: messageContent)
+        navigationController?.popViewController(animated: true)
+        
+        let successMessage = generateSuccessMessage()
+        SPAlert.present(title: successMessage, preset: .done)
+    }
+    
+    func getNonProvidedRequiredFieldNames() -> [String] {
+        var nonProvidedRequiredFieldNames: [String] = []
+        
+        let nameIsProvided = !name.isEmpty
+        let phoneNumberIsProvided = !phoneNumber.isEmpty
+        let messageContentIsProvided = !messageContent.isEmpty
+        
+        if !nameIsProvided { nonProvidedRequiredFieldNames.append(clientNameView.title!) }
+        if !phoneNumberIsProvided { nonProvidedRequiredFieldNames.append(phoneNumberView.title!) }
+        if !messageContentIsProvided { nonProvidedRequiredFieldNames.append(messageContentView.title!) }
+        
+        return nonProvidedRequiredFieldNames
+    }
+    
+    func generateSuccessMessage() -> String {
+        if Locale.current.languageCode == "ar" {
+            return "تم الارسال بنجاح"
+        }
+        
+        return "Message has been sent successfully"
+    }
+    
+    
+}
+
+extension ContactUsScreenVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        focusOnNextTextFieldOnPressReturn(from: textField)
+        return false
+    }
 }

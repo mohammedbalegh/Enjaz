@@ -1,6 +1,6 @@
 import UIKit
 
-class PopoverBtn: UIButton, NewAdditionInputFieldContainerInput {
+class PopoverBtn: UIButton, InputField {
     
     enum PopoverBtnSizeType {
         case small, large

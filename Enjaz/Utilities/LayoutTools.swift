@@ -1,6 +1,6 @@
 import UIKit
 
-class LayoutTools {
+struct LayoutTools {
     
     static func getCurrentLayoutDirection(for view: UIView) -> UIUserInterfaceLayoutDirection {
         let attribute = view.semanticContentAttribute

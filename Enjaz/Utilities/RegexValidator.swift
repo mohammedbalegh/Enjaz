@@ -1,6 +1,6 @@
 import Foundation
 
-class RegexValidator {
+struct RegexValidator {
     
 	static func validateUsername(candidate: String) -> Bool {
 		let userName = "^\\w{7,18}$"

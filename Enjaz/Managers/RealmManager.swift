@@ -46,6 +46,11 @@ class RealmManager {
         return items
     }
     
+    static func retrieveItemById(_ id: Int) -> ItemModel? {
+        let item = RealmManager.realm.object(ofType: ItemModel.self, forPrimaryKey: id)
+        return item
+    }
+    
     static func retrieveItems(withFilter filter: String) -> [ItemModel] {
         let items: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter(filter).sorted(byKeyPath: "date", ascending: true))
         return items
@@ -67,21 +72,6 @@ class RealmManager {
         try? realm.write {
             realm.deleteAll()
         }
-    }
-    
-    private static func retrieveGoals(withCompletedEqualTo completed: Bool, andCategoryEqualTo category: ItemCategoryModel) -> [ItemModel] {
-        
-        let completionFilter = "is_completed == \(completed.description)"
-        let goals: [ItemModel] = Array(RealmManager.realm.objects(ItemModel.self).filter("\(completionFilter) AND type == \(ItemType.goal.id) AND category == \(category.id)"))
-        return goals
-    }
-    
-    static func retrieveCompletedGoals(ofCategory category: ItemCategoryModel) -> [ItemModel] {
-        return retrieveGoals(withCompletedEqualTo: true, andCategoryEqualTo: category)
-    }
-    
-    static func retrieveUpcomingGoals(ofCategory category: ItemCategoryModel) -> [ItemModel] {
-        return retrieveGoals(withCompletedEqualTo: false, andCategoryEqualTo: category)
     }
     
     static func saveItemCategories(_ itemCategories: [ItemCategoryModel]) {

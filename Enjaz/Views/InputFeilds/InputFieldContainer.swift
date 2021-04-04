@@ -1,19 +1,15 @@
 import UIKit
 
-class NewAdditionInputFieldContainer: UIView {
+class InputFieldContainer: UIView {
     
-    var input: (UIView & NewAdditionInputFieldContainerInput)? {
+    var input: (UIView & InputField)? {
         didSet {
-            guard let input = input else { return }
-            
-            addSubview(input)
-            input.translatesAutoresizingMaskIntoConstraints = false
-            
-            input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
+            setupSubViews()
         }
     }
     
     var fieldName: String = ""
+    var placeHolder: String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,5 +26,17 @@ class NewAdditionInputFieldContainer: UIView {
         layer.borderColor = UIColor.borderColor.cgColor
         layer.borderWidth = 1
         backgroundColor = .white
+    }
+    
+    func setupSubViews() {
+        setupInputView()
+    }
+    
+    func setupInputView() {
+        guard let input = input else { return }
+        addSubview(input)
+        input.translatesAutoresizingMaskIntoConstraints = false
+        
+        input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
     }
 }

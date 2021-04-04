@@ -24,7 +24,7 @@
 "If you have a task that want to complete in a specific time" = "ان كان لديك مهمة تريد انجازها خلال وقت معين";
 "No type has been selected" = "لم يتم اختيار نوع";
 
-// MARK: NewAdditionScreen
+// MARK: AddItemScreen
 "Add %@" = "إضافة %@";
 "Select Image" = "اختر صورة مناسبة";
 "Select Sticker" = "اختر الاستكير المناسب";
@@ -97,7 +97,7 @@
 "Phone number" = "رقم الهاتف";
 "Message content" = "نص الرسالة";
 "Full name" = "الاسم كامل";
-"This is message example" = "هذا مثال للرسالة";
+"Type your message here" = "اكتب رسالتك هنا";
 "Send" = "أرسال";
 "Name field can't be empty" = "يجب ادخال الاسم";
 "Please enter a valid phone number" = "برجاء إدخال رقم هاتف صحيح";
@@ -172,3 +172,4 @@
 "Ok" = "حسنًا";
 "Done" = "تم";
 "optional" = "اختياري";
+"category" = "مجال";
