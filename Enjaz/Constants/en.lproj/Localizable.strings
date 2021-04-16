@@ -122,6 +122,10 @@
 "Tasks" = "Tasks";
 "Demahs" = "Demahs";
 "Achievements" = "Achievements";
+"of" = "of";
+"tasks" = "tasks";
+"Tasks of the month" = "Tasks of the month";
+"What tasks have you finished" = "What tasks have you finished";
 
 //MARK: AchievementsScreenVC
 "No achievements to show" = "No achievements to show";

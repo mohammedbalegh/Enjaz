@@ -122,6 +122,10 @@
 "Tasks" = "المهام";
 "Demahs" = "الديمة";
 "Achievements" = "الإنجازات";
+"of" = "من";
+"tasks" = "مهمة";
+"Tasks of the month" = "مهام الشهر";
+"What tasks have you finished" = "ما تم إنجازه من المهام";
 
 //MARK: AchievementsScreenVC
 "No achievements to show" = "لا يوجد إنجازات";

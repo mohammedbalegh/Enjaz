@@ -44,6 +44,7 @@
 		41C646B6257397BC000327D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B4257397BC000327D5 /* LaunchScreen.storyboard */; };
 		41C646C1257397BC000327D5 /* EnjazTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646C0257397BC000327D5 /* EnjazTests.swift */; };
 		41C646CC257397BC000327D5 /* EnjazUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646CB257397BC000327D5 /* EnjazUITests.swift */; };
+		41CBAE822628C35B00910329 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CBAE812628C35B00910329 /* ProgressBarView.swift */; };
 		41FC4C3C258AEEE100EA4DDF /* CardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */; };
 		5B03A4949ACB93F510BD99A5 /* Pods_EnjazTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */; };
 		B61A3C4C529626847E9C2840 /* Pods_Enjaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 723889AF92353456503E9347 /* Pods_Enjaz.framework */; };
@@ -275,6 +276,7 @@
 		41C646C7257397BC000327D5 /* EnjazUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnjazUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646CB257397BC000327D5 /* EnjazUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnjazUITests.swift; sourceTree = "<group>"; };
 		41C646CD257397BC000327D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41CBAE812628C35B00910329 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBodyView.swift; sourceTree = "<group>"; };
 		592DE1D8471E3CABF9D8C42D /* Pods-EnjazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnjazTests.debug.xcconfig"; path = "Target Support Files/Pods-EnjazTests/Pods-EnjazTests.debug.xcconfig"; sourceTree = "<group>"; };
 		723889AF92353456503E9347 /* Pods_Enjaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -600,6 +602,7 @@
 				BCD4497626177707006FC8B7 /* SwitchView.swift */,
 				BC3C5D4E26186250000EE002 /* DailyView.swift */,
 				41798CCC2618C9D700DF5ECF /* AchievementsCardView.swift */,
+				41CBAE812628C35B00910329 /* ProgressBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1223,6 +1226,7 @@
 				BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */,
 				BC026C3D25900B23008222BD /* PopoverTableViewCellModel.swift in Sources */,
 				BC5400A425799D1D009DC69B /* PrimaryBtn.swift in Sources */,
+				41CBAE822628C35B00910329 /* ProgressBarView.swift in Sources */,
 				417EE8CE25A02E40002F71E5 /* MajorGoalsScreenVC.swift in Sources */,
 				BCD4494A261692A4006FC8B7 /* ShowAllItemsScreenVC.swift in Sources */,
 				BC7D6C7825A2780D00369FC5 /* AuthScreenVC.swift in Sources */,
