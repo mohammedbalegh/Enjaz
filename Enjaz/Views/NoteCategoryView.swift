@@ -1,7 +1,7 @@
 
 import UIKit
 
-class noteCategoryView: UIView {
+class NoteCategoryView: UIView {
     
     var components: [String] = []
     let size = LayoutConstants.screenWidth * 0.03
@@ -110,7 +110,7 @@ class noteCategoryView: UIView {
     }
 }
 
-extension noteCategoryView {
+extension NoteCategoryView {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

@@ -5,8 +5,8 @@ class WeekDayCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             hourLabel.text = viewModel.hourLabel
-                firstIncludedImageView.image = viewModel.includesItems
-                    ? UIImage(named: imageIdConstants[viewModel.includedItems[0].image_id] ?? "")
+                firstItemImageView.image = viewModel.includesItems
+                    ? UIImage.getImageFrom(RealmManager.retrieveItemImageSourceById(viewModel.includedItems[0].image_id) ?? "")
                     : nil
             imageViewContainer.isHidden = !viewModel.includesItems
             otherIncludedItemsLabel.isHidden = !(viewModel.includedItems.count > 1)
@@ -32,16 +32,7 @@ class WeekDayCell: UICollectionViewCell {
         label.textColor = .systemGray
         return label
     }()
-    
-    let otherIncludedItemsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 8.5)
-        label.textColor = .accentColor
-        label.isHidden = true
-        return label
-    }()
-    
+        
     let imageViewContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -53,13 +44,22 @@ class WeekDayCell: UICollectionViewCell {
         return view
     }()
     
-    let firstIncludedImageView: UIImageView = {
+    let firstItemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         
         return imageView
+    }()
+    
+    let otherIncludedItemsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 8.5)
+        label.textColor = .accentColor
+        label.isHidden = true
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -82,9 +82,9 @@ class WeekDayCell: UICollectionViewCell {
     func setupSubViews() {
         contentView.addSubview(containerView)
         setupHourLabel()
-        setupOtherIncludedItemsLabel()
         setupImageViewContainer()
-        setupFirstIncludedImageView()
+        setupFirstItemImageView()
+        setupOtherIncludedItemsLabel()
     }
     
     func setupHourLabel() {
@@ -95,17 +95,6 @@ class WeekDayCell: UICollectionViewCell {
             hourLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             hourLabel.widthAnchor.constraint(lessThanOrEqualTo: containerView.widthAnchor),
             hourLabel.heightAnchor.constraint(lessThanOrEqualTo: containerView.heightAnchor),
-        ])
-    }
-        
-    func setupOtherIncludedItemsLabel() {
-        containerView.addSubview(otherIncludedItemsLabel)
-        
-        NSLayoutConstraint.activate([
-            otherIncludedItemsLabel.topAnchor.constraint(equalTo: hourLabel.topAnchor),
-            otherIncludedItemsLabel.leadingAnchor.constraint(equalTo: hourLabel.trailingAnchor, constant: 1),
-            otherIncludedItemsLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            otherIncludedItemsLabel.heightAnchor.constraint(lessThanOrEqualTo: containerView.heightAnchor),
         ])
     }
     
@@ -123,9 +112,20 @@ class WeekDayCell: UICollectionViewCell {
         imageViewContainer.layer.cornerRadius = size / 2
     }
     
-    func setupFirstIncludedImageView() {
-        imageViewContainer.addSubview(firstIncludedImageView)
+    func setupFirstItemImageView() {
+        imageViewContainer.addSubview(firstItemImageView)
         
-        firstIncludedImageView.constrainEdgesToCorrespondingEdges(of: imageViewContainer, top: 6, leading: 6, bottom: -6, trailing: -6)
+        firstItemImageView.constrainEdgesToCorrespondingEdges(of: imageViewContainer, top: 6, leading: 6, bottom: -6, trailing: -6)
+    }
+    
+    func setupOtherIncludedItemsLabel() {
+        containerView.addSubview(otherIncludedItemsLabel)
+        
+        NSLayoutConstraint.activate([
+            otherIncludedItemsLabel.topAnchor.constraint(equalTo: hourLabel.topAnchor),
+            otherIncludedItemsLabel.leadingAnchor.constraint(equalTo: hourLabel.trailingAnchor, constant: 1),
+            otherIncludedItemsLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            otherIncludedItemsLabel.heightAnchor.constraint(lessThanOrEqualTo: containerView.heightAnchor),
+        ])
     }
 }

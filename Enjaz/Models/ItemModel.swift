@@ -10,7 +10,6 @@ class ItemModel: Object {
     @objc dynamic var type: Int = 0
     @objc dynamic var is_completed: Bool = false
     @objc dynamic var image_id: Int = 0
-    @objc dynamic var sticker_id: Int = 0
     @objc dynamic var originalItemId: Int = -1
     
     @objc dynamic var isOriginal: Bool { originalItemId == -1 }

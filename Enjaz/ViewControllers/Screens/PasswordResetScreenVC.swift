@@ -254,7 +254,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     }
     
     @objc func handlePopupBackToLoginScreenBtnTap() {
-        resetPasswordPopup.hide()
+        resetPasswordPopup.dismiss()
         navigateBackToLoginScreen()
     }
     

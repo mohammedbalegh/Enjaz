@@ -5,37 +5,38 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
 
     let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
         
-    let imagePickerPopup = ImagePickerPopup(hideOnOverlayTap: true)
+	lazy var imagePickerPopup: ItemImagePickerPopup = {
+		let popup = ItemImagePickerPopup(hideOnOverlayTap: true)
+		popup.imageCellModels = RealmManager.retrieveItemImages().map { $0.image_source }
+		popup.delegate = self
+		return popup
+	}()
     
     lazy var categoryNameTextField: InputFieldContainer = {
-        let containerView = InputFieldContainer(frame: .zero)
-        
         let fieldName = NSLocalizedString("Category Name", comment: "")
-        containerView.fieldName = fieldName
-        
+		
         let textField = InputFieldContainerTextField()
         textField.placeholder = fieldName
         textField.delegate = self
-        
+		
+		let containerView = InputFieldContainer(frame: .zero)
+		containerView.fieldName = fieldName
         containerView.input = textField
         
         return containerView
     }()
     
     lazy var categoryDescriptionTextView: InputFieldContainer = {
-        let containerView = InputFieldContainer(frame: .zero)
-        
-        let textView = EditableTextView(frame: .zero)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        textView.font = .systemFont(ofSize: 18)
-        
-        let fieldName = NSLocalizedString("Description", comment: "") + " (\(NSLocalizedString("optional", comment: ""))"
+        let fieldName = NSLocalizedString("Description", comment: "") + " (\(NSLocalizedString("optional", comment: "")))"
+		
+		let textField = InputFieldContainerTextField()
+		textField.placeholder = fieldName
+		textField.delegate = self
+		
+		let containerView = InputFieldContainer(frame: .zero)
         containerView.fieldName = fieldName
-        
-        textView.placeholder = fieldName
-        
-        containerView.input = textView
+                
+        containerView.input = textField
         
         return containerView
     }()
@@ -53,8 +54,10 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     
     let saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
     
+	var nonDefaultItemImage: ItemImageModel?
+	
     var categoryImageId: Int?
-        
+	
     var categoryName: String {
         return categoryNameTextField.input?.inputText ?? ""
     }
@@ -64,10 +67,11 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     }
     
     var categoryImageSource: String {
-        if let categoryImageId = categoryImageId { return imageIdConstants[categoryImageId]! }
+		if let itemImage = nonDefaultItemImage { return itemImage.image_source }
+        if let categoryImageId = categoryImageId { return RealmManager.retrieveItemImageSourceById(categoryImageId)! }
         return "defaultCategoryImage"
     }
-    
+	    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Add new category", comment: "")
@@ -89,9 +93,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
             setImageBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             setImageBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        
-        imagePickerPopup.imageSelectionHandler = handleImageSelection
-        
+		
         setImageBtn.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
     }
     
@@ -125,24 +127,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
         dismissKeyboard()
         imagePickerPopup.present()
     }
-    
-    
-    func handleImageSelection(selectedId: Int) {
-        categoryImageId = selectedId
         
-        if let imageName = imageIdConstants[selectedId] {
-            setImageBtn.setImage(UIImage(named: imageName), for: .normal)
-        }
-        
-        imagePickerPopup.hide()
-    }
-    
-    fileprivate func saveItemCategory() {
-        let itemCategory = ItemCategoryModel(name: categoryName, category_description: categoryDescription, imageSource: categoryImageSource, isDefault: false)
-        
-        RealmManager.saveItemCategory(itemCategory)
-    }
-    
     @objc func handleSaveBtnTap() {
         guard !categoryName.isEmpty else {
             AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Category name must be entered", comment: ""))
@@ -157,6 +142,16 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
         let successMessage = String.generateAdditionSuccessMessage(type: NSLocalizedString("category", comment: ""))
         SPAlert.present(title: successMessage, preset: .done)
     }
+	
+	func saveItemCategory() {
+		if let itemImage = nonDefaultItemImage {
+			RealmManager.saveItemImage(itemImage)
+		}
+		
+		let itemCategory = ItemCategoryModel(name: categoryName, category_description: categoryDescription, imageSource: categoryImageSource, isDefault: false)
+		
+		RealmManager.saveItemCategory(itemCategory)
+	}
 }
 
 extension AddCategoryScreenVC: UITextFieldDelegate {
@@ -164,4 +159,34 @@ extension AddCategoryScreenVC: UITextFieldDelegate {
         textField.resignFirstResponder()
         return false
     }
+}
+
+extension AddCategoryScreenVC: ItemImagePickerPopupDelegate {
+	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImage imageId: Int) {
+		nonDefaultItemImage = nil
+		categoryImageId = imageId
+		setImageBtn.setImage(UIImage.getImageFrom(categoryImageSource), for: .normal)
+		imagePickerPopup.dismiss()
+	}
+	
+	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImageSource sourceType: UIImagePickerController.SourceType) {
+		itemImagePickerPopup.dismiss()
+		let imagePickerController = UIImagePickerController()
+		imagePickerController.sourceType = sourceType
+		imagePickerController.allowsEditing = true
+		imagePickerController.delegate = self
+		present(imagePickerController, animated: true)
+	}
+}
+
+extension AddCategoryScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		picker.dismiss(animated: true)
+		guard let image = info[.editedImage] as? UIImage else { return }
+		guard let imageData = image.scalePreservingAspectRatio(targetSize: CGSize(width: 132, height: 125)).toBase64() else { return }
+				
+		nonDefaultItemImage = ItemImageModel(imageSource: imageData, isDefault: false)
+		categoryImageId = nonDefaultItemImage!.id
+		setImageBtn.setImage(UIImage.getImageFrom(imageData), for: .normal)
+	}
 }

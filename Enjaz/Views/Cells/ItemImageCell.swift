@@ -1,6 +1,6 @@
 import UIKit
 
-class AdditionImageOrStickerCell: UICollectionViewCell {
+class ItemImageCell: UICollectionViewCell {
 	
 	var image: UIImage? {
 		didSet {

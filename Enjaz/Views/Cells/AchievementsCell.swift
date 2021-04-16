@@ -6,7 +6,7 @@ class AchievementsCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            medalImage.image = UIImage(named: ((stickerIdConstants[viewModel.sticker_id] ?? imageIdConstants[viewModel.image_id]) ?? ""))
+            medalImage.image = UIImage.getImageFrom(RealmManager.retrieveItemImageSourceById(viewModel.image_id) ?? "")
             achievementsCardInfo.titleLabel.text = viewModel.name
             achievementsCardInfo.categoryLabel.text = RealmManager.retrieveItemCategoryById(viewModel.category)?.localized_name
             let date = Date(timeIntervalSince1970: viewModel.date)

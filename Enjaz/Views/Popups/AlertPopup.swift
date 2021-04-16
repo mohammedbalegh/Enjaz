@@ -36,22 +36,9 @@ class AlertPopup: Popup {
     }()
     
     override func popupContainerDidShow() {
-        setupPopupContainer()
         setupSuccessImage()
         setupTitleLabel()
         setupMessageLabel()
-    }
-    
-    func setupPopupContainer() {
-        popupContainer.backgroundColor = .white
-        popupContainer.layer.cornerRadius = 20
-        
-        NSLayoutConstraint.activate([
-            popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
-            popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
-        ])
     }
     
     func setupSuccessImage() {

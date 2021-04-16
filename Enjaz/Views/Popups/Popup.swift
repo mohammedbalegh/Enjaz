@@ -49,18 +49,31 @@ class Popup: UIView {
 		if hideOnOverlayTap { setOverlayHideGestureRecognizer() }
 		
 		addSubview(popupContainer)
+        setupPopupContainer()
 		animatePopupContainerIn()
 		
 		popupContainerDidShow()
 	}
-		
+	
+    func setupPopupContainer() {
+        popupContainer.backgroundColor = .white
+        popupContainer.layer.cornerRadius = 20
+        
+        NSLayoutConstraint.activate([
+            popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
+            popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
+        ])
+    }
+    
 	// @absract
 	func popupContainerDidShow() {}
 	
 	// MARK: Tools
 	
 	func setOverlayHideGestureRecognizer() {
-		let tap = UITapGestureRecognizer(target: self, action: #selector(hide))
+		let tap = UITapGestureRecognizer(target: self, action: #selector(dismiss))
 		blurOverlay.addGestureRecognizer(tap)
 	}
 	
@@ -70,10 +83,10 @@ class Popup: UIView {
         setup()
 	}
 	
-	@objc func hide() {
+	@objc func dismiss() {
 		guard superview != nil else { return }
 		
-		animatePopupContainerOut() { finished in
+		animatePopupContainerOut() { _ in
 			self.removeFromSuperview()
             self.popupDismissalHandler?()
 		}
@@ -87,7 +100,7 @@ class Popup: UIView {
 		}
 	}
 	
-	func animatePopupContainerOut(CompletionHandler: @escaping (Bool) -> Void) {
+	func animatePopupContainerOut(completionHandler: @escaping (Bool) -> Void) {
 		UIView.animate(
 			withDuration: 0.1,
             delay: 0,
@@ -96,7 +109,7 @@ class Popup: UIView {
 				self.popupContainer.animate(opacityTo: 0, andScaleTo: self.popupContainerInitialScale)
 				self.blurOverlay.alpha = 0
 			},
-			completion: CompletionHandler
+			completion: completionHandler
 		)
 	}
 }

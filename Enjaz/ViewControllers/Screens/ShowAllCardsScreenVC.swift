@@ -7,7 +7,7 @@ class ShowAllCardsScreenVC: UICollectionViewController, UICollectionViewDelegate
     
     var cardModels: [Any] = []
 
-    let cardPopup = CardPopup(hideOnOverlayTap: true)
+    let itemCardPopup = ItemCardPopup(hideOnOverlayTap: true)
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,7 @@ class ShowAllCardsScreenVC: UICollectionViewController, UICollectionViewDelegate
         self.collectionView!.register(CardsCollectionViewHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
         registerCardCell()
     }
+	
     // @abstarct
     func registerCardCell() {}
 

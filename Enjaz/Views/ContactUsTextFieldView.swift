@@ -60,7 +60,6 @@ class ContactUsTextFieldView: UIView, UITextViewDelegate {
     }
     
     func setupSubViews() {
-        
         setupTextView()
         setupTextField()
     }

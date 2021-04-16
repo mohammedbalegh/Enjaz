@@ -14,7 +14,6 @@
 "Take a look at today's remaining goals" = "أطلع على الأهداف المتبقية";
 "No goals today" = "لا يوجد أهداف اليوم";
 "No demahs today" = "لا يوجد ديم اليوم";
-"Show All" = "عرض الكل";
 
 // MARK: AdditionTypeScreen
 "Choose Addition Type" = "اختر نوع الإضافة";
@@ -154,7 +153,6 @@
 "Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
 "Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
 
-
 // MARK: Item Types
 "Task" = "مهمة";
 "Demah" = "ديمة";
@@ -175,3 +173,7 @@
 "Done" = "تم";
 "optional" = "اختياري";
 "category" = "مجال";
+"Show All" = "عرض الكل";
+"Hide Rest" = "اخفاء البقية";
+"Camera" = "الكاميرا";
+"Photos" = "الصور";

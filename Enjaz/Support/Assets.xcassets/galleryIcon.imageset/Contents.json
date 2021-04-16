@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "stickerIconWhite.png",
+      "filename" : "galleryIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "stickerIconWhite@2x.png",
+      "filename" : "galleryIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "stickerIconWhite@3x.png",
+      "filename" : "galleryIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

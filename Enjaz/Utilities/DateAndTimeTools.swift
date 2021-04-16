@@ -1,6 +1,7 @@
 import Foundation
 
 struct DateAndTimeTools {
+    static let twelveHourFormatHourLabels = ["12 AM"] + (1...11).map { "\($0) AM" } + ["12 PM"] + (1...11).map { "\($0) PM" }
     
     static func getCurrentDay(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> Int {
         return getCurrentCalendarComponent(for: .day, andCalendarIdentifier: calendarIdentifier)

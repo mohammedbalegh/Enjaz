@@ -84,7 +84,7 @@ class MonthItemsScreenVC: UIViewController {
         return stackView
     }()
     
-    let cardPopup = CardPopup(hideOnOverlayTap: true)
+    let itemCardPopup = ItemCardPopup(hideOnOverlayTap: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,9 +219,10 @@ extension MonthItemsScreenVC: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! ItemCardCell
-        cardPopup.viewModel = cell.cardView
-        cardPopup.present()
+        let viewModels = getViewModels(for: collectionView)
+        itemCardPopup.itemModels = [viewModels[indexPath.row]]
+		itemCardPopup.itemsUpdateHandler = updateScreen
+        itemCardPopup.present()
     }
     
     func getViewModels(for collectionView: UICollectionView) -> [ItemModel] {

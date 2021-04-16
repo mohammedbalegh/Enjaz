@@ -23,7 +23,6 @@ class TableViewCustomHeader: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        backgroundColor = .mainScreenBackgroundColor
         contentView.backgroundColor = .mainScreenBackgroundColor
         setupLabel()
         setupAddBtn()

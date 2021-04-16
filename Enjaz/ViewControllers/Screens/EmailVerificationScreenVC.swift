@@ -160,7 +160,6 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     }
     
     @objc func handleVerificationCodeEntered(resetCode: String) {
-        print("inside handleVerificationCodeEntered")
         guard let email = email else { return }
         
         print(email)

@@ -380,6 +380,7 @@ extension UIView {
     func roundAsCircle() {
         self.layer.cornerRadius = self.frame.height / 2;
         self.layer.masksToBounds = true
+		self.clipsToBounds = true
     }
 }
 

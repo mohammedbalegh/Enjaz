@@ -12,6 +12,7 @@ class RoundBtn: UIButton {
 		if let size = size {
 			self.size = size
 		}
+		clipsToBounds = true
 		setup()
 	}
 	

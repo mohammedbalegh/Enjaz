@@ -82,16 +82,25 @@ extension String {
     func capitalizeOnlyFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst().lowercased()
     }
-    
-    func attributedStringWithColor(_ strings: [String], color: UIColor, withSize size: CGFloat = 16) -> NSAttributedString {
+        
+    func attributedStringWithColor(_ subStrings: [String], color: UIColor, stringSize size: CGFloat = 16, coloredSubstringsSize: CGFloat = 16) -> NSAttributedString {
         let font: UIFont = .systemFont(ofSize: size)
         let attributedString = NSMutableAttributedString(string: self, attributes: [.font : font])
         
-        for string in strings {
-            let range = (self as NSString).range(of: string)
-            attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        for subString in subStrings {
+            let range = (self as NSString).range(of: subString)
+            let subStringFont: UIFont = .systemFont(ofSize: coloredSubstringsSize)
+            attributedString.addAttributes([.foregroundColor: color, .font: subStringFont], range: range)
         }
         
         return attributedString
     }
+	
+	func toImage() -> UIImage? {
+		if let decodedData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
+			let image = UIImage(data: decodedData)
+			return image
+		}
+		return nil
+	}
 }

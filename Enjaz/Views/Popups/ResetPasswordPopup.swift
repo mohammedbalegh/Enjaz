@@ -33,13 +33,12 @@ class ResetPasswordPopup: Popup {
 	}()
 			
 	override func popupContainerDidShow() {
-		setupPopupContainer()
 		setupSuccessImage()
 		setupLabel()
 		setupBackToLoginBtn()
 	}
 	
-	func setupPopupContainer() {
+	override func setupPopupContainer() {
 		popupContainer.backgroundColor = .accentColor
 		popupContainer.layer.cornerRadius = 20
 		

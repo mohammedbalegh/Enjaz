@@ -9,7 +9,7 @@ class EditableTextView: UITextView, UITextViewDelegate, InputField {
 			}
 		}
 	}
-        
+    
     var inputText: String? {
         get {
             return text == placeholder ? "" : text

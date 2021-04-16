@@ -241,7 +241,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     var firstWeekDayColumnIndex: Int = 0
     var lastWeekDayColumnIndex: Int = 0
     
-    let hourLabels = ["12 AM"] + (1...11).map { "\($0) AM" } + ["12 PM"] + (1...11).map { "\($0) PM" }
+    let hourLabels = DateAndTimeTools.twelveHourFormatHourLabels
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -484,7 +484,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
         let from = NSLocalizedString("from", comment: "")
         let to = NSLocalizedString("to", comment: "")
-        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accentColor, withSize: 13)
+        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accentColor, stringSize: 13)
     }
 
     func getWeekDayCellRowBy(weekDayIndex: Int, andHour hour: Int) -> Int {

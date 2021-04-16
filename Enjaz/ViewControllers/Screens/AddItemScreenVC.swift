@@ -7,12 +7,14 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     let scrollView = UIScrollView()
         
     let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
-    
-    let setStickerBtn = RoundBtn(image: UIImage(named: "stickerIconBlue"), size: LayoutConstants.screenHeight * 0.03)
-    
-    let imagePickerPopup = ImagePickerPopup(hideOnOverlayTap: true)
-    let stickerPickerPopup = StickerPickerPopup(hideOnOverlayTap: true)
-    
+        
+	lazy var imagePickerPopup: ItemImagePickerPopup = {
+		let popup = ItemImagePickerPopup(hideOnOverlayTap: true)
+		popup.delegate = self
+		popup.imageCellModels = RealmManager.retrieveItemImages().map { $0.image_source }
+		return popup
+	}()
+	
     lazy var additionNameTextField: InputFieldContainer = {
         let containerView = InputFieldContainer(frame: .zero)
         
@@ -154,7 +156,8 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     var itemDates: [Double]?
     var itemType: Int!
     var itemImageId: Int?
-    var itemStickerId: Int?
+	
+	var nonDefaultItemImage: ItemImageModel?
     
     var itemTypeName: String {
         if let itemType = itemType {
@@ -182,7 +185,6 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     func setupSubviews() {
         setupScrollView()
         setupSetImageButton()
-        setupSetStickerButton()
         setupTextFieldsVerticalStack()
         setupAdditionDescriptionTextView()
         setupSaveBtn()
@@ -208,25 +210,9 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
             setImageBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
         
-        imagePickerPopup.imageSelectionHandler = handleImageSelection
-        
         setImageBtn.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
     }
-    
-    func setupSetStickerButton() {
-        setImageBtn.addSubview(setStickerBtn)
         
-        setStickerBtn.backgroundColor = .white
-        setStickerBtn.layer.borderWidth = 1
-        setStickerBtn.layer.borderColor = UIColor.accentColor.cgColor
-        
-        setStickerBtn.constrainToSuperviewCorner(at: .bottomTrailing)
-        
-        stickerPickerPopup.imageSelectionHandler = handleStickerSelection
-        
-        setStickerBtn.addTarget(self, action: #selector(handleSetStickerBtnTap), for: .touchUpInside)
-    }
-    
     func setupTextFieldsVerticalStack() {
         scrollView.addSubview(textFieldsVerticalStack)
         
@@ -270,33 +256,12 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         dismissKeyboard()
         imagePickerPopup.present()
     }
-    
-    @objc func handleSetStickerBtnTap() {
-        dismissKeyboard()
-        stickerPickerPopup.present()
-    }
-    
-    func handleImageSelection(selectedId: Int) {
-        itemImageId = selectedId
-        
-        if let imageName = imageIdConstants[selectedId] {
-            setImageBtn.setImage(UIImage(named: imageName), for: .normal)
-        }
-        
-        imagePickerPopup.hide()
-    }
-    
-    func handleStickerSelection(selectedId: Int) {
-        itemStickerId = selectedId
-        
-        stickerPickerPopup.hide()
-    }
-    
+	        
     @objc func handleAdditionCategoryPickerTap() {
         dismissKeyboard()
         additionCategoryPickerBottomSheet.present(animated: true)
     }
-    
+    	
     @objc func handleAdditionCategorySelection() {
         (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .black
         
@@ -347,6 +312,10 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
             return
         }
         
+		if let itemImage = nonDefaultItemImage {
+			RealmManager.saveItemImage(itemImage)
+		}
+		
         saveItem()
         navigationController?.popViewController(animated: true)
         
@@ -384,12 +353,11 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     }
     
     func saveItem() {
-        var index = 0
         var firstItemId: Int!
         
         guard let itemDates = itemDates else { return }
         
-        for date in itemDates {
+		for (index, date) in itemDates.enumerated() {
             let item = ItemModel()
             
             item.name = itemName
@@ -398,7 +366,6 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
             item.date = date
             item.item_description = itemDescription
             item.image_id = itemImageId ?? -1
-            item.sticker_id = itemStickerId ?? -1
             if index == 0 {
                 firstItemId = item.id
                 if itemDates.count > 1 {
@@ -409,7 +376,6 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
             }
             
             RealmManager.saveItem(item)
-            index += 1
         }
     }
         
@@ -436,4 +402,36 @@ extension AddItemScreenVC: UITextFieldDelegate {
         textField.resignFirstResponder()
         return false
     }
+}
+
+extension AddItemScreenVC: ItemImagePickerPopupDelegate {
+	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImage imageId: Int) {
+		itemImageId = imageId
+		
+		if let imageName = RealmManager.retrieveItemImageSourceById(imageId) {
+			setImageBtn.setImage(UIImage.getImageFrom(imageName), for: .normal)
+		}
+		
+		imagePickerPopup.dismiss()
+	}
+	
+	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImageSource sourceType: UIImagePickerController.SourceType) {
+		let imagePickerController = UIImagePickerController()
+		imagePickerController.sourceType = sourceType
+		imagePickerController.allowsEditing = true
+		imagePickerController.delegate = self
+		present(imagePickerController, animated: true)
+	}
+}
+
+extension AddItemScreenVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		picker.dismiss(animated: true)
+		guard let image = info[.editedImage] as? UIImage else { return }
+		guard let imageData = image.scalePreservingAspectRatio(targetSize: CGSize(width: 132, height: 125)).toBase64() else { return }
+		
+		nonDefaultItemImage = ItemImageModel(imageSource: imageData, isDefault: false)
+		itemImageId = nonDefaultItemImage!.id
+		setImageBtn.setImage(UIImage.getImageFrom(imageData), for: .normal)
+	}
 }

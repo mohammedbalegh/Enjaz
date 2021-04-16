@@ -8,6 +8,7 @@ class PickerPopup: Popup {
 		
 		return picker
 	}()
+    
 	var selectBtn: UIButton = {
 		let button = UIButton(type: .system)
 		button.translatesAutoresizingMaskIntoConstraints = false
@@ -20,12 +21,11 @@ class PickerPopup: Popup {
 	}()
 	
 	override func popupContainerDidShow() {
-		setupPopupContainer()
 		setupPicker()
 		setupSelectBtn()
 	}
 	
-	func setupPopupContainer() {
+    override func setupPopupContainer() {
 		popupContainer.backgroundColor = .white
 		popupContainer.layer.cornerRadius = 20
 		

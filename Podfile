@@ -8,7 +8,6 @@ target 'Enjaz' do
   pod 'SwiftKeychainWrapper', '~> 4.0'
   pod 'ReSwift'
   pod 'SideMenu'
-  pod 'lottie-ios'
   pod 'SPAlert'
 
   target 'EnjazTests' do

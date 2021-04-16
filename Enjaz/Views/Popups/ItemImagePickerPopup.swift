@@ -1,12 +1,28 @@
 import UIKit
 
-class ImageAndStickerPickerPopup: Popup {
+class ItemImagePickerPopup: Popup {
+	let imageCellReuseIdentifier = "imageCell"
+	let imageSourceReuseIdentifier = "imageSourceCell"
+	
+	let itemImagePickerImageSourceCellModels = [
+		ItemImagePickerImageSourceCellModel(imageSource: "cameraIcon", label: NSLocalizedString("Camera", comment: "")),
+		ItemImagePickerImageSourceCellModel(imageSource: "galleryIcon", label: NSLocalizedString("Photos", comment: "")),
+	]
+	
+	var delegate: ItemImagePickerPopupDelegate?
+	
+	var imageCellModels: [String] = [] {
+		didSet {
+			collectionView.reloadData()
+		}
+	}
 	
 	lazy var imageIconOrSticker: RoundBtn = {
 		let button = RoundBtn(image: nil, size: LayoutConstants.screenHeight * 0.11)
 		button.isUserInteractionEnabled = false
 		return button
 	}()
+	
 	var titleLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
@@ -15,6 +31,7 @@ class ImageAndStickerPickerPopup: Popup {
 		
 		return label
 	}()
+	
 	lazy var collectionView: UICollectionView = {
 		// Layout
 		let layout = UICollectionViewFlowLayout()
@@ -32,39 +49,38 @@ class ImageAndStickerPickerPopup: Popup {
 		
 		collectionView.clipsToBounds = true
 		collectionView.backgroundColor = .white
-				
-		collectionView.register(AdditionImageOrStickerCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
+		collectionView.register(ItemImagePickerImageSourceCell.self, forCellWithReuseIdentifier: imageSourceReuseIdentifier)
+		collectionView.register(ItemImageCell.self, forCellWithReuseIdentifier: imageCellReuseIdentifier)
 		
 		return collectionView
 	}()
+	
 	let popupContainerWidth = LayoutConstants.screenWidth * 0.85
 	let collectionViewSectionHorizontalInset: CGFloat = 10
 	lazy var collectionViewWidth = popupContainerWidth * 0.7 + collectionViewSectionHorizontalInset * 2
-	let reuseIdentifier = "imageAndStickerCell"
 	
 	let imageTitleLabel = NSLocalizedString("Select Image", comment: "")
-	let stickerTitleLabel = NSLocalizedString("Select Sticker", comment: "")
-	
-    var imageSelectionHandler: ((_ selectedId: Int) -> Void)?
-	
+		
 	// MARK: State
 	var selectedImageModelIndex: Int?
-	var selectedStickerModelIndex: Int?
-		
+	
 	override func popupContainerDidShow() {
         configure()
-		setupPopupContainer()
 		setupImageIcon()
 		setupTitleLabel()
 		setupCollectionView()
 	}
     
-	// @abstract
     func configure() {
-        fatalError("Subclasses need to implement the `configure()` method.")
+		titleLabel.text = imageTitleLabel
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		titleLabel.text = imageTitleLabel
+		imageIconOrSticker.setImage(UIImage(named: "imageIcon"), for: .normal)
     }
     
-	func setupPopupContainer() {
+    override func setupPopupContainer() {
 		popupContainer.backgroundColor = .white
 		popupContainer.layer.cornerRadius = 20
 		
@@ -104,4 +120,37 @@ class ImageAndStickerPickerPopup: Popup {
 			collectionView.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor),
 		])
 	}
+}
+
+extension ItemImagePickerPopup: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return itemImagePickerImageSourceCellModels.count + imageCellModels.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		if indexPath.row < itemImagePickerImageSourceCellModels.count {
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageSourceReuseIdentifier, for: indexPath) as! ItemImagePickerImageSourceCell
+			
+			cell.viewModel = itemImagePickerImageSourceCellModels[indexPath.row]
+			
+			return cell
+		}
+		
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageCellReuseIdentifier, for: indexPath) as! ItemImageCell
+		
+		let imageName = imageCellModels[indexPath.row - itemImagePickerImageSourceCellModels.count]
+		cell.image = UIImage(named: imageName)
+		
+		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		if indexPath.row < itemImagePickerImageSourceCellModels.count {
+			delegate?.ImagePickerPopup(self, didSelectImageSource: indexPath.row == 0 ? .camera : .photoLibrary)
+			return
+		}
+		
+		delegate?.ImagePickerPopup(self, didSelectImage: indexPath.row - itemImagePickerImageSourceCellModels.count)
+	}
+	
 }

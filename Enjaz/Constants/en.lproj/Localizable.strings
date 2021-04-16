@@ -14,7 +14,6 @@
 "Take a look at today's remaining goals" = "Take a look at today's remaining goals";
 "No goals today" = "No goals today";
 "No demahs today" = "No demahs today";
-"Show All" = "Show All";
 
 // MARK: AdditionTypeScreen
 "Choose Addition Type" = "Choose Addition Type";
@@ -174,3 +173,7 @@
 "Done" = "Done";
 "optional" = "optional";
 "category" = "category";
+"Show All" = "Show All";
+"Hide Rest" = "Hide Rest";
+"Camera" = "Camera";
+"Photos" = "Photos";

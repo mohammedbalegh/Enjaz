@@ -2,18 +2,17 @@ import UIKit
 
 class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
 
+    static let itemSize = CGSize(width: LayoutConstants.screenWidth * 0.67, height: LayoutConstants.screenHeight * 0.55)
+    static let zoomFactor: CGFloat = 0.3
     let activeDistance: CGFloat = 200
-    let zoomFactor: CGFloat = 0.3
+    
 
-    override init() {
+    init(itemSize: CGSize? = nil) {
         super.init()
-
-        scrollDirection = .horizontal
-        minimumLineSpacing = 60
-        let width = LayoutConstants.screenWidth * 0.65
-        let height = LayoutConstants.screenHeight * 0.623
-        itemSize = CGSize(width: width, height: height)
         
+        scrollDirection = .horizontal
+        minimumLineSpacing = 55
+        self.itemSize = itemSize ?? ZoomAndSnapFlowLayout.itemSize
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +38,7 @@ class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
             let normalizedDistance = distance / activeDistance
 
             if distance.magnitude < activeDistance {
-                let zoom = 1 + zoomFactor * (1 - normalizedDistance.magnitude)
+                let zoom = 1 + ZoomAndSnapFlowLayout.zoomFactor * (1 - normalizedDistance.magnitude)
                 attributes.transform3D = CATransform3DMakeScale(zoom, zoom, 1)
                 attributes.zIndex = Int(zoom.rounded())
             }

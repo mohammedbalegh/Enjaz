@@ -10,6 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureNavigationBarAppearance()
         monitorInternetConnection()
         AppDataInitializer.initializeItemCategories()
+		AppDataInitializer.initializeItemImages()
         AppDataInitializer.initializePersonalAspects()
         
         return true

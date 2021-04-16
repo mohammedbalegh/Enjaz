@@ -7,9 +7,16 @@ struct AppDataInitializer {
         
         RealmManager.saveItemCategories(DEFAULT_ITEM_CATEGORIES)
     }
+	
+	static func initializeItemImages() {
+		let itemImagesAreEmpty = RealmManager.itemImagesCount == 0
+		guard itemImagesAreEmpty else { return }
+		
+		RealmManager.saveItemImages(DEFAULT_ITEM_IMAGES)
+	}
     
     static func initializePersonalAspects() {
-        if RealmManager.retrieveAspectsCount() == 0 {
+        if RealmManager.personalAspectsCount == 0 {
             addMainAspects(title: "Who am i", brief: "Write what you know about your self", image: "whoAmIImage", badge: "whoAmIBadge", description: "Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year")
             
             addMainAspects(title: "My mission in life", brief: "Write your life mission", image: "lifeMissionImage", badge: "lifeMissionBadge", description: "Your life mission is you answer to the \"why\" question , what are the values that you stand behind, you life mission should be comprehensive, inspiring, and rememberable")

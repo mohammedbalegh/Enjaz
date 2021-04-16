@@ -1,7 +1,7 @@
 import UIKit
 
 class ShowAllItemsScreenVC: ShowAllCardsScreenVC {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -12,18 +12,23 @@ class ShowAllItemsScreenVC: ShowAllCardsScreenVC {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardsReuseIdentifier, for: indexPath) as! ItemCardCell
-    
+        
         guard let itemModels = cardModels as? [ItemModel] else { return cell }
         
         cell.viewModel = itemModels[indexPath.row]
-    
+        
         return cell
     }
     
+	func popViewController() {
+		navigationController?.popViewController(animated: true)
+	}
+	
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! ItemCardCell
-        self.cardPopup.present()
-        cardPopup.viewModel = cell.cardView
+        guard let itemModel = cardModels[indexPath.row] as? ItemModel else { return }
+        itemCardPopup.itemModels =  [itemModel]
+		itemCardPopup.itemsUpdateHandler = popViewController
+        self.itemCardPopup.present()
     }
-
+    
 }

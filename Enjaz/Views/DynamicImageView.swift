@@ -7,6 +7,13 @@ class DynamicImageView: UIImageView {
             setImage(from: source)
         }
     }
+	
+	override var frame: CGRect {
+		didSet {
+			layer.cornerRadius = frame.height / 2
+			clipsToBounds = true
+		}
+	}
     
     init(source: String? = nil) {
         super.init(frame: .zero)
@@ -19,21 +26,22 @@ class DynamicImageView: UIImageView {
     
     func setImage(from source: String?) {
         guard let source = source else { return }
-        if source.isURL {
-            guard let url = URL(string: source) else { return }
-            
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let data = data, error == nil else { return }
-                
-                DispatchQueue.main.async() {
-                    self.image = UIImage(data: data)
-                }
-            }
-            
-            task.resume()
-        } else {
-            image = UIImage(named: source)
-        }
+		
+		if source.isURL {
+			guard let url = URL(string: source) else { return }
+			
+			let task = URLSession.shared.dataTask(with: url) { data, response, error in
+				guard let data = data, error == nil else { return }
+				
+				DispatchQueue.main.async() {
+					self.image = UIImage(data: data)
+				}
+			}
+			
+			task.resume()
+		} else {
+			self.image = UIImage.getImageFrom(source)
+		}
     }
 
 }

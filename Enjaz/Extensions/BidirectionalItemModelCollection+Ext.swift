@@ -48,7 +48,6 @@ extension BidirectionalCollection where Element: ItemModel {
         newItem.type = item.type
         newItem.is_completed = isCompleted
         newItem.image_id = item.image_id
-        newItem.sticker_id = item.sticker_id
         newItem.originalItemId = item.originalItemId
         
         return newItem

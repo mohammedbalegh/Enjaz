@@ -197,9 +197,9 @@ class NetworkingManager {
         let image = UIImage(named: "tempArticleThumbnail")
         
         let videos = [
-            VideoModel(thumbnail: image, category: "Religious", title: "Viceo Title", date: Date(), videoUrl: ""),
-            VideoModel(thumbnail: image, category: "Religious", title: "Viceo Title", date: Date(), videoUrl: ""),
-            VideoModel(thumbnail: image, category: "Religious", title: "Viceo Title", date: Date(), videoUrl: ""),
+            VideoModel(thumbnail: image, category: "Religious", title: "Video Title", date: Date(), videoUrl: ""),
+            VideoModel(thumbnail: image, category: "Religious", title: "Video Title", date: Date(), videoUrl: ""),
+            VideoModel(thumbnail: image, category: "Religious", title: "Video Title", date: Date(), videoUrl: ""),
         ]
         
         completionHandler(videos)

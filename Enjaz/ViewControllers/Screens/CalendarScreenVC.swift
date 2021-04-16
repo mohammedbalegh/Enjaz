@@ -4,12 +4,22 @@ class CalendarScreenVC: CalendarViewController {
     
     var currentMonthItems: [ItemModel] = []
     var currentWeekItems: [ItemModel] = []
-    
+        
+    let dailyViewPopup = DailyViewPopup(hideOnOverlayTap: true)
+	lazy var itemCardPopup: ItemCardPopup = {
+		let popup = ItemCardPopup(hideOnOverlayTap: true)
+		popup.itemsUpdateHandler = updateItems
+		return popup
+	}()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainScreenBackgroundColor
         
-        configureCalendarView()
+		// Present then dismiss the popup secretly, because First time the popup is presented the auto scroll doesn't work.
+		dailyViewPopup.itemSelectionHandler = handleDailyViewPopupDismissal
+		secretlyPresentAndDismissDailyViewPopup()
+		configureCalendarView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +52,15 @@ class CalendarScreenVC: CalendarViewController {
         updateMonthItems()
         updateWeekItems()
     }
+	
+	func secretlyPresentAndDismissDailyViewPopup() {
+		dailyViewPopup.isHidden = true
+		dailyViewPopup.popupDismissalHandler = {
+			self.dailyViewPopup.isHidden = false
+		}
+		dailyViewPopup.present()
+		dailyViewPopup.dismiss()
+	}
         
     func updateMonthItems() {
         let itemModels = RealmManager.retrieveItems()
@@ -100,28 +119,42 @@ class CalendarScreenVC: CalendarViewController {
         calendarView.updateWeekDaysModelWithDueItems(itemsOfWeekDayRows: itemsOfWeekDayRows)
     }
     
-    func getIncludedItemsForMonthDays() {
+    func getIncludedItemsForMonthDays() -> [[ItemModel]] {
         var monthDaysIncludedItems: [[ItemModel]] = []
         
         for monthDayCellModel in calendarView.monthDayCellModels {
-            guard monthDayCellModel.dayNumber == 0 else { continue }
+            guard monthDayCellModel.dayNumber != 0 else { continue }
             
             monthDaysIncludedItems.append(monthDayCellModel.includedItems)
         }
+                
+        return monthDaysIncludedItems
     }
     
+	func handleDailyViewPopupDismissal(items: [ItemModel]) {
+		itemCardPopup.itemModels = items
+		itemCardPopup.present()
+	}
     
 }
 
 extension CalendarScreenVC: CalendarViewDelegate {
     func calendarCollectionView(_ calendarCollectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedViewTypeIndex == 1 { return }
+        if selectedViewTypeIndex == 1 {
+            let cell = calendarCollectionView.cellForItem(at: indexPath) as? WeekDayCell
+            guard let itemModels = cell?.viewModel?.includedItems else { return }
+            itemCardPopup.itemModels = itemModels
+            itemCardPopup.present()
+            return
+        }
+        
         calendarCollectionView.deselectAllItems(animated: false)
         
-        let cellItems = (calendarCollectionView.cellForItem(at: indexPath) as! MonthDayCell).viewModel?.includedItems ?? []
-        
-        for item in cellItems {
-            let itemHour = DateAndTimeTools.getComponentsOfUnixTimeStampDate(timeIntervalSince1970: item.date, forCalendarIdentifier: Calendar.current.identifier).hour
-        }
+        dailyViewPopup.selectedMonth = selectedMonthIndex + 1
+        dailyViewPopup.selectedYear = currentYear + selectedYearIndex
+        dailyViewPopup.selectedDay = calendarView.monthDayCellModels[indexPath.row].dayNumber
+        dailyViewPopup.selectedCalendarIdentifier = selectedCalendarIdentifier
+        dailyViewPopup.monthDaysIncludedItems = getIncludedItemsForMonthDays()
+        dailyViewPopup.present()
     }
 }

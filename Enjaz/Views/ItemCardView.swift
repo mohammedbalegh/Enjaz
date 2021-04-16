@@ -1,43 +1,63 @@
-
 import UIKit
 
 class ItemCardView: UIView {
     
-    let imageContainer = UIView(frame: .zero)
+    var viewModel: ItemModel? {
+        didSet {
+            guard let viewModel = viewModel else { return }
+            
+			cardBody.item = viewModel
+			
+            if let imageName = RealmManager.retrieveItemImageSourceById(viewModel.image_id) {
+                imageView.image = UIImage.getImageFrom(imageName)
+            } else {
+                imageView.image = nil
+            }
+            
+            let itemCategory = RealmManager.retrieveItemCategoryById(viewModel.category)
+						
+            cardBody.categoryLabel.text = " \(itemCategory?.localized_name ?? "") "
+            cardBody.titleLabel.text = viewModel.name
+            cardBody.descriptionLabel.text = viewModel.item_description
+            setDateAndTimeLabelText(viewModel)
+        }
+    }
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        
-        imageView.layer.masksToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        
-        return imageView
-    }()
-
-    let cardBody: CardBodyView = {
-        let view = CardBodyView()
-        view.layer.cornerRadius = 8
+    
+    let imageContainer: UIView = {
+        let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor(hex: 0xF2F2F2)
+        
         return view
     }()
     
-    var imageViewSize: CGFloat?
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
+    lazy var cardBody: CardBodyView = {
+        let view = CardBodyView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+		view.layer.cornerRadius = frame.width * 0.08
+		view.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.2).cgColor
+		view.layer.borderWidth = 0.5
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func didMoveToWindow() {
-        guard window != nil else { return }
-        guard superview != nil else { return }
-        
-        setupSubviews()
     }
     
     func setupSubviews() {
@@ -48,21 +68,15 @@ class ItemCardView: UIView {
     
     func setupImageContainer() {
         addSubview(imageContainer)
-        imageContainer.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageContainer.clipsToBounds = true
-        
-        imageContainer.backgroundColor = UIColor(hex: 0xF2F2F2)
         
         NSLayoutConstraint.activate([
             imageContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageContainer.bottomAnchor.constraint(equalTo: self.topAnchor, constant: (LayoutConstants.screenHeight * 0.09)),
-            imageContainer.widthAnchor.constraint(equalTo: superview!.widthAnchor, multiplier: 0.41),
+            imageContainer.topAnchor.constraint(equalTo: topAnchor),
+            imageContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.41),
             imageContainer.heightAnchor.constraint(equalTo: imageContainer.widthAnchor),
         ])
         
         layoutIfNeeded()
-        
         imageContainer.layer.cornerRadius = imageContainer.frame.height / 2;
     }
 
@@ -76,13 +90,40 @@ class ItemCardView: UIView {
     
     func setupCardBody() {
         addSubview(cardBody)
-        
-        
+                
         NSLayoutConstraint.activate([
+            cardBody.topAnchor.constraint(equalTo: imageContainer.centerYAnchor, constant: frame.height * 0.06),
             cardBody.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            cardBody.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cardBody.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            cardBody.heightAnchor.constraint(equalTo: superview!.heightAnchor, multiplier: 0.703)
+            cardBody.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
+    }
+    
+    func setDateAndTimeLabelText(_ viewModel: ItemModel) {
+        let itemDate = Date(timeIntervalSince1970: viewModel.date)
+        let dateFormat: String = {
+            if viewModel.isRepeated { return "d/M/yy" }
+            if Calendar.current.isDateInToday(itemDate) { return "hh:00  aa" }
+            return "d/M/yyyy hh:00  aa"
+        }()
+        
+        let readableStartDate = DateAndTimeTools.getReadableDate(from: itemDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
+        let readableEndDate: String = {
+            guard viewModel.isRepeated else { return "" }
+            
+            let itemEndDate = Date(timeIntervalSince1970: viewModel.endDate)
+            return DateAndTimeTools.getReadableDate(from: itemEndDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
+        }()
+        
+        let from = NSLocalizedString("from", comment: "")
+        let to = NSLocalizedString("to", comment: "")
+        
+        let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accentColor, stringSize: 11)
+        
+        let itemReadableDate = viewModel.isRepeated
+            ? rangeDate
+            : NSAttributedString(string: readableStartDate)
+        
+        cardBody.dateAndTimeLabel.attributedText = itemReadableDate
     }
 }

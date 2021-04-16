@@ -18,7 +18,7 @@ class HomeScreenVC: UIViewController {
     
     let cardsReuseIdentifier = "cardCell"
     
-    let cardPopup = CardPopup(hideOnOverlayTap: true)
+    let itemCardPopup = ItemCardPopup(hideOnOverlayTap: true)
     let itemsViewHeight = LayoutConstants.screenHeight * 0.27
     
     lazy var greetingMessageView: GreetingMessageView = {
@@ -205,15 +205,13 @@ class HomeScreenVC: UIViewController {
 extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return collectionView == dailyDemahView.cardsCollectionView ? demahModels.count : goalModels.count
+        let viewModels = getViewModels(for: collectionView)
+        return viewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardsReuseIdentifier, for: indexPath) as! ItemCardCell
-        
-        let viewModels = collectionView == dailyDemahView.cardsCollectionView ? demahModels : goalModels
+        let viewModels = getViewModels(for: collectionView)
         
         cell.viewModel = viewModels[indexPath.row]
         return cell
@@ -233,9 +231,18 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! ItemCardCell
-        self.cardPopup.present()
-        cardPopup.viewModel = cell.cardView
+        let viewModels = getViewModels(for: collectionView)
+        itemCardPopup.itemModels =  [viewModels[indexPath.row]]
+		itemCardPopup.itemsUpdateHandler = updateScreen
+        self.itemCardPopup.present()
+    }
+    
+    func getViewModels(for collectionView: UICollectionView) -> [ItemModel] {
+        switch collectionView {
+        case dailyGoalView.cardsCollectionView: return goalModels
+        case dailyDemahView.cardsCollectionView: return demahModels
+        default: return []
+        }
     }
     
 }
