@@ -5,19 +5,23 @@ enum ItemType {
     case demah
     case achievement
     case task
-    
-    var name: String {
-        switch self {
-        case .goal:
-            return NSLocalizedString("Goal", comment: "")
-        case .demah:
-            return NSLocalizedString("Demah", comment: "")
-        case .achievement:
-            return NSLocalizedString("Achievement", comment: "")
-        case .task:
-            return NSLocalizedString("Task", comment: "")
-        }
-    }
+	
+	var name: String {
+		switch self {
+		case .goal:
+			return "Goal"
+		case .demah:
+			return "Demah"
+		case .achievement:
+			return "Achievement"
+		case .task:
+			return "Task"
+		}
+	}
+	
+	var localizedName: String {
+		return NSLocalizedString(name, comment: "")
+	}
     
     var id: Int {
         switch self {

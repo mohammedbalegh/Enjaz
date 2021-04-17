@@ -161,7 +161,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     
     var itemTypeName: String {
         if let itemType = itemType {
-            return ItemType.getTypeById(id: itemType).name
+            return ItemType.getTypeById(id: itemType).localizedName
         }
         return ""
     }

@@ -121,21 +121,19 @@
 "Tasks" = "المهام";
 "Demahs" = "الديمة";
 "Achievements" = "الإنجازات";
+"of" = "من";
+"%@ of the month" = "%@ الشهر";
+"What %@ have you finished" = "ما تم إنجازه من %@";
 
 //MARK: AchievementsScreenVC
 "No achievements to show" = "لا يوجد إنجازات";
 
 //MARK: MonthItemsScreenVC
-"Today's Tasks" = "مهام اليوم";
-"Week's Tasks" = "مهام الاسبوع";
-"Month's Tasks" = "مهام الشهر";
-"Completed Tasks" = "مهام منتهية";
-"Today's Demahs" = "ديمة اليوم";
-"Week's Demahs" = "ديمة الاسبوع";
-"Month's Demahs" = "ديمة الشهر";
-"Completed Demahs" = "ديمة منتهية";
-"No tasks" = "لا يوجد مهام";
-"No demahs" = "لا يوجد ديمة";
+"Today's %@" = "%@ اليوم";
+"Week's %@" = "%@ الاسبوع";
+"Month's %@" = "%@ الشهر";
+"Completed %@" = "%@ منتهية";
+"No %@" = "لا يوجد %@";
 
 // MARK: Item Categories
 "Religious" = "ديني";

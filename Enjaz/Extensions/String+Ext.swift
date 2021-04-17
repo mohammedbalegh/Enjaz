@@ -103,4 +103,16 @@ extension String {
 		}
 		return nil
 	}
+	
+	func pluralizeInEnglishBasedOn(count: Int) -> String {
+		return count > 1 ? self + "s" : self
+	}
+	
+	func pluralizeInEnglish() -> String {
+		return self + "s"
+	}
+	
+	func removeDefinitionArticle() -> String {
+		return self.replacingOccurrences(of: "the", with: "").replacingOccurrences(of: "ال", with: "")
+	}
 }

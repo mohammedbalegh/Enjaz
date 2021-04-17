@@ -55,6 +55,7 @@
 		BC06A7F4258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC06A7F3258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift */; };
 		BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0A87CF2575836F0045A54E /* AppLogo.swift */; };
 		BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AA7172594D3B9008AF315 /* AlertPopup.swift */; };
+		BC1A15ED262A41570012BE05 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1A15EC262A41570012BE05 /* ProgressBarView.swift */; };
 		BC1EB2BD25BE206F0021B983 /* AlertBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1EB2BC25BE206F0021B983 /* AlertBottomSheetView.swift */; };
 		BC1FFACF25F8C2E800A436CA /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1FFACE25F8C2E800A436CA /* CardsView.swift */; };
 		BC2018012603690C0060EFAF /* DraftMetaDataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2018002603690C0060EFAF /* DraftMetaDataContainer.swift */; };
@@ -295,6 +296,7 @@
 		BC06A7F3258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverBtnsRow.swift; sourceTree = "<group>"; };
 		BC0A87CF2575836F0045A54E /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		BC0AA7172594D3B9008AF315 /* AlertPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopup.swift; sourceTree = "<group>"; };
+		BC1A15EC262A41570012BE05 /* ProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		BC1EB2BC25BE206F0021B983 /* AlertBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBottomSheetView.swift; sourceTree = "<group>"; };
 		BC1FFACE25F8C2E800A436CA /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		BC2018002603690C0060EFAF /* DraftMetaDataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMetaDataContainer.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				41798CCC2618C9D700DF5ECF /* AchievementsCardView.swift */,
 				BC8846CB261B56B6005C6AAF /* DailyViewTableViewCustomHeader.swift */,
 				BCF2F73E2620CE09006275AA /* CircularView.swift */,
+				BC1A15EC262A41570012BE05 /* ProgressBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1330,6 +1333,7 @@
 				BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */,
 				BC7D6C7325A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift in Sources */,
 				417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */,
+				BC1A15ED262A41570012BE05 /* ProgressBarView.swift in Sources */,
 				BC93D5BE2614D22A005DE3AC /* AboutTheAppTopView.swift in Sources */,
 				BC54007C25795B13009DC69B /* UIView+Ext.swift in Sources */,
 				BCF2F7492620D968006275AA /* DefaultItemImages.swift in Sources */,

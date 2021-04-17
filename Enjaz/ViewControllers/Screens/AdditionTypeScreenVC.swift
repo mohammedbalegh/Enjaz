@@ -10,7 +10,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = ItemType.goal.id
         card.typeImage.image = UIImage(named: "goalIcon")
-        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have a goal that you want to achieve in a specific field", comment: "")
         return card
     }()
@@ -20,7 +20,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = ItemType.demah.id
         card.typeImage.image = UIImage(named: "demahIcon")
-        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have a habit throughout a specific period", comment: "")
         return card
     }()
@@ -30,7 +30,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = ItemType.achievement.id
         card.typeImage.image = UIImage(named: "achievementIcon")
-        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have an achievement that you want to complete in a specific time", comment: "")
         return card
     }()
@@ -40,7 +40,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.delegate = self
         card.id = ItemType.task.id
         card.typeImage.image = UIImage(named: "taskIcon")
-        card.typeTitle.text = ItemType.getTypeById(id: card.id).name
+        card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have a task that want to complete in a specific time", comment: "")
         return card
     }()

@@ -121,21 +121,19 @@
 "Tasks" = "Tasks";
 "Demahs" = "Demahs";
 "Achievements" = "Achievements";
+"of" = "of";
+"%@ of the month" = "%@ of the month";
+"What %@ have you finished" = "What %@ have you finished";
 
 //MARK: AchievementsScreenVC
 "No achievements to show" = "No achievements to show";
 
 //MARK: MonthItemsScreenVC
-"Today's Tasks" = "Today's Tasks";
-"Week's Tasks" = "Week's Tasks";
-"Month's Tasks" = "Month's Tasks";
-"Completed Tasks" = "Completed Tasks";
-"Today's Demahs" = "Today's Demahs";
-"Week's Demahs" = "Week's Demahs";
-"Month's Demahs" = "Month's Demahs";
-"Completed Demahs" = "Completed Demahs";
-"No tasks" = "No tasks";
-"No demahs" = "No demahs";
+"Today's %@" = "Today's %@";
+"Week's %@" = "Week's %@";
+"Month's %@" = "Month's %@";
+"Completed %@" = "Completed %@";
+"No %@" = "No %@";
 
 // MARK: Item Categories
 "Religious" = "Religious";

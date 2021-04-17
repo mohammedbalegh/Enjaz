@@ -15,8 +15,10 @@ class MonthItemsScreenVC: UIViewController {
     var currentMonthItems: [ItemModel] = []
     
     let scrollView = UIScrollView()
-    var itemsType: Int!
+    var itemsType: ItemType!
     
+	lazy var progressBar = ProgressBarView(itemType: itemsType)
+	
     lazy var dayItemsView: CardsView = {
         let cardsView = CardsView()
         cardsView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +103,7 @@ class MonthItemsScreenVC: UIViewController {
     
     func setupSubViews() {
         setupScrollView()
+		setupProgressBarView()
         setupItemViewsStack()
     }
     
@@ -109,6 +112,18 @@ class MonthItemsScreenVC: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.fillSuperView()
     }
+	
+	func setupProgressBarView() {
+		scrollView.addSubview(progressBar)
+		progressBar.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint.activate([
+			progressBar.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			progressBar.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 25),
+			progressBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+			progressBar.heightAnchor.constraint(equalToConstant: 130),
+		])
+	}
     
     func setupItemViewsStack() {
         scrollView.addSubview(itemViewsStack)
@@ -116,9 +131,9 @@ class MonthItemsScreenVC: UIViewController {
         let height = itemViewsStack.calculateHeightBasedOn(arrangedSubviewHeight: 240)
         
         NSLayoutConstraint.activate([
-            itemViewsStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40),
+            itemViewsStack.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 40),
             itemViewsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            itemViewsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            itemViewsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -60),
             itemViewsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             itemViewsStack.heightAnchor.constraint(equalToConstant: height),
         ])
@@ -144,18 +159,32 @@ class MonthItemsScreenVC: UIViewController {
         
     // MARK: Tools
     
-    // @abstract
-    func setItemCardViewsTitles() {}
+    func setItemCardViewsTitles() {
+		let localizedPluralItemTypeName = NSLocalizedString(itemsType.name.pluralizeInEnglish(), comment: "").removeDefinitionArticle().lowercased()
+		
+		dayItemsView.title = String(format: NSLocalizedString("Today's %@", comment: ""), localizedPluralItemTypeName)
+		weekItemsView.title = String(format: NSLocalizedString("Week's %@", comment: ""), localizedPluralItemTypeName)
+		monthItemsView.title = String(format: NSLocalizedString("Month's %@", comment: ""), localizedPluralItemTypeName)
+		completedItemsView.title = String(format: NSLocalizedString("Completed %@", comment: ""), localizedPluralItemTypeName)
+		
+		let localizedNoItemsMessage = String(format: NSLocalizedString("No %@", comment: ""), localizedPluralItemTypeName)
+		
+		dayItemsView.noCardsMessage = localizedNoItemsMessage
+		weekItemsView.noCardsMessage = localizedNoItemsMessage
+		monthItemsView.noCardsMessage = localizedNoItemsMessage
+		completedItemsView.noCardsMessage = localizedNoItemsMessage
+	}
         
     func updateScreen() {
         updateItemModels()
         updateItemViews()
+		progressBar.updateProgressView(totalNumberOfItems: monthItemModels.count, numberOfCompletedItems: completedItemModels.count)
     }
     
     func updateItemModels() {
         let (firstDayUnixTimeStamp, lastDayUnixTimeStamp) = DateAndTimeTools.getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier: Calendar.current.identifier)
         
-        currentMonthItems = RealmManager.retrieveItems(withFilter: "date >= \(firstDayUnixTimeStamp) AND date <= \(lastDayUnixTimeStamp)").filter { $0.type == itemsType }
+		currentMonthItems = RealmManager.retrieveItems(withFilter: "date >= \(firstDayUnixTimeStamp) AND date <= \(lastDayUnixTimeStamp)").filter { $0.type == itemsType.id }
                 
         dayItemModels = currentMonthItems.filter { Calendar.current.isDateInToday(Date(timeIntervalSince1970: $0.date)) }
         
