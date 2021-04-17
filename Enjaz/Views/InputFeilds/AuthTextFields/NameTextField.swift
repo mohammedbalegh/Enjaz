@@ -11,7 +11,7 @@ class NameTextField: AuthTextField {
 		minimumLength = 2
 		canStartWithNumber = false
 
-		fieldName = "الاسم الشخصي (ثنائي)"
+		fieldName = NSLocalizedString("Full name", comment: "")
 		textField.textContentType = .name
 		icon.image = UIImage(named: "personIcon")
 	}

@@ -5,6 +5,48 @@
 "Monthly Plan" = "Monthly Plan";
 "Goals" = "Goals";
 
+// MARK: StartScreen
+"Start" = "Start";
+
+//MARK: LoginScreen
+"Forgot your password?" = "Forgot your password?";
+"Login" = "Login";
+"Enter your username and password" = "Enter your username and password";
+"Not an existing user?" = "Not an existing user?";
+"Create an account" = "Create an account";
+"Incorrect username or password" = "Incorrect username or password";
+"cant not be empty" = "can not be empty";
+"Can not start with a number" = "Can not start with a number";
+"Should be" = "Should be";
+"letters at least" = "letters at least";;
+
+//MARK: SignupScreen
+"Enter your account details" = "Enter your account details";
+"Already have an account?" = "Already have an account?";
+"Username or email already taken" = "Username or email already taken";
+"Username" = "Username";
+"Incorrect username" = "Incorrect username";
+"Full name" = "Full name";
+"Email" = "Email";
+"Incorrect email" = "Incorrect email";
+"Password" = "Password";
+"Confirm password" = "Confirm password";
+"The password does not match" = "The password does not match";
+
+//MARK: PasswordResetScreen
+"Recover password" = "Recover password";
+"Please Enter your email to send the verification code" = "Please Enter your email to send the verification code";
+"Next" = "Next";
+"Back" = "Back";
+"Incorrect code" = "Incorrect code";
+"Start now" = "Start now";
+
+//MARK: EmailVerificationScreen
+"Enter verification code" = "Enter verification code";
+"Verification code sent to your email" = "Verification code sent to your email";
+"The email you entered does not exist" = "The email you entered does not exist";
+"Incorrect code" = "Incorrect code";
+
 // MARK: HomeScreen
 "Today's goals" = "Today's goals";
 "Today's demahs" = "Today's demahs";

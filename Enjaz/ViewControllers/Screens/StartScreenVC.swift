@@ -17,7 +17,7 @@ class StartScreenVC: UIViewController {
         return imageView
     }()
     
-    var startBtn = PrimaryBtn(label: "ابدأ", theme: .blue, size: .small)
+    var startBtn = PrimaryBtn(label: NSLocalizedString("Start", comment: ""), theme: .blue, size: .small)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

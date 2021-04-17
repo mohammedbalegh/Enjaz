@@ -5,6 +5,48 @@
 "Monthly Plan" = "الخطة الشهرية";
 "Goals" = "الأهداف";
 
+// MARK: StartScreen
+"Start" = "إبدأ";
+
+//MARK: LoginScreen
+"Forgot your password?" = "نسيت كلمة السر؟";
+"Login" = "تسجيل الدخول";
+"Enter your username and password" = "ادخل اسم المستخدم و كلمة السر";
+"Not an existing user?" = "لم تشترك بعد؟";
+"Create an account" = "إنشاء حساب";
+"Incorrect username or password" = "اسم المستخدم أو كلمة السر غير صحيحين";
+"can not be empty" = "لا يمكن أن يتُرك فارغاً";
+"Can not start with a number" = "لا يمكن أن يبدأ برقم";
+"Should be" = "يجب أن يكون";
+"letters at least" = "حرف على الأقل";
+
+//MARK: SignupScreen
+"Enter your account details" = "ادخل بيانات الحساب";
+"Already have an account?" = "لديك حساب بالفعل؟";
+"Username or email already taken" = "اسم المستخدم أو البريد الإلكتروني مسجل بالفعل";
+"Username" = "اسم المستخدم";
+"Incorrect username" = "اسم المستخدم غير صحيح";
+"Full name" = "الاسم الشخصي (ثنائي)";
+"Email" = "البريد الإلكتروني";
+"Incorrect email" = "البريد الإلكتروني غير صحيح";
+"Password" = "الرمز السري";
+"Confirm password" = "تأكيد الرمز السري";
+"The password does not match" = "كلمتي السر غير متطابقين";
+
+//MARK: PasswordResetScreen
+"Recover password" = "استرجاع كلمة المرور";
+"Please Enter your email to send the verification code" = "من فضلك أدخل البريد الإلكتروني حتى يتم إرسال\n كود التأكيد لك ويتم تأكيد الحساب";
+"Next" = "التالي";
+"Back" = "الرجوع";
+"Incorrect code" = "الكود غير صحيح";
+"Start now" = "أبدأ الان";
+
+//MARK: EmailVerificationScreen
+"Enter verification code" = "ادخل رمز التأكيد";
+"Verification code sent to your email" = "لقد أرسلنا رمز إلى البريد الإلكتروني";
+"The email you entered does not exist" = "البريد الإلكتروني غير مسجل";
+"Incorrect code" = "الكود غير صحيح";
+
 // MARK: HomeScreen
 "Today's goals" = "مهام اليوم";
 "Today's demahs" = "ديمة اليوم";
