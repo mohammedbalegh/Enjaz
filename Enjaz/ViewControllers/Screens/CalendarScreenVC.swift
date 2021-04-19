@@ -140,9 +140,10 @@ class CalendarScreenVC: CalendarViewController {
 
 extension CalendarScreenVC: CalendarViewDelegate {
     func calendarCollectionView(_ calendarCollectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if selectedViewTypeIndex == 1 {
+		let weeklyViewIsShown = selectedViewTypeIndex == 1
+        if weeklyViewIsShown {
             let cell = calendarCollectionView.cellForItem(at: indexPath) as? WeekDayCell
-            guard let itemModels = cell?.viewModel?.includedItems else { return }
+			guard let itemModels = cell?.viewModel?.includedItems, !itemModels.isEmpty else { return }
             itemCardPopup.itemModels = itemModels
             itemCardPopup.present()
             return

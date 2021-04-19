@@ -101,6 +101,13 @@
 "Please enter a valid phone number" = "برجاء إدخال رقم هاتف صحيح";
 "Message field can't be empty" = "يجب ادخال نص رسالة";
 
+//MARK: SelfEvaluationScreen
+"Self Evaluation" = "تقيم النفس";
+"What have you learned" = "ماذا تعلمت";
+"What changed in you" = "ما الذي تغير فيك";
+"How do you feel" = "ما هي مشاعرك";
+"Rate your progress in this field" = "قيم نفسك بحسب إنجازاتك لأهدافك و تقدمك في المجالات";
+
 // MARK: SideMenu Buttons
 "Draft" = "المدونة";
 "Note" = "المفكرة";
@@ -128,12 +135,23 @@
 //MARK: AchievementsScreenVC
 "No achievements to show" = "لا يوجد إنجازات";
 
+//MARK: GoalsScreen
+"Major goals" = "أهداف كبري";
+"My goal in life regarding " = "هدفي في الحياة الخاص بالجانب ال";
+"side" = "الجانب ال";
+
 //MARK: MonthItemsScreenVC
 "Today's %@" = "%@ اليوم";
 "Week's %@" = "%@ الاسبوع";
 "Month's %@" = "%@ الشهر";
 "Completed %@" = "%@ منتهية";
 "No %@" = "لا يوجد %@";
+
+//MARK: MonthGoalsScreenVC
+"Finished goals" = "أهداف منتهية";
+"Upcoming goals" = "أهداف قادمة";
+"Goal" = "أهداف";
+"Add new goal" = "إضافة هدف جديد";
 
 // MARK: Item Categories
 "Religious" = "ديني";

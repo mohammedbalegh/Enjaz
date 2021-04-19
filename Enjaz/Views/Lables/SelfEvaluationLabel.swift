@@ -73,7 +73,7 @@ class SelfEvaluationLabel: UILabel {
             label.widthAnchor.constraint(equalTo: self.widthAnchor),
             label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.heightAnchor.constraint(equalToConstant: 10)
+            label.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 }

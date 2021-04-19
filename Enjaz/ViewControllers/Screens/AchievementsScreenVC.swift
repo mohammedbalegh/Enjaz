@@ -18,23 +18,29 @@ class AchievementsScreenVC: UIViewController {
         return label
     }()
     
-    let achievementsCarousel: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(AchievementsCell.self, forCellWithReuseIdentifier: "achievementsCell")
-        cv.decelerationRate = UIScrollView.DecelerationRate.fast
-        cv.backgroundColor = .clear
-        cv.showsHorizontalScrollIndicator = false
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
+    lazy var achievementsCarousel: UICollectionView = {
+        let layout = ZoomAndSnapFlowLayout(itemSize: carouselItemSize)
+		layout.zoomFactor = 0
+		layout.minimumLineSpacing = 20
+		
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		
+		collectionView.delegate = self
+		collectionView.dataSource = self
+        
+        collectionView.decelerationRate = .fast
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+		collectionView.register(AchievementsCell.self, forCellWithReuseIdentifier: "achievementsCell")
+        
+        return collectionView
     }()
+	
+	let carouselItemSize = CGSize(width: LayoutConstants.screenWidth * 0.777, height: LayoutConstants.screenHeight * 0.564 )
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        achievementsCarousel.delegate = self
-        achievementsCarousel.dataSource = self
         
         setupSubViews()
     }
@@ -72,10 +78,10 @@ class AchievementsScreenVC: UIViewController {
         view.addSubview(achievementsCarousel)
         
         NSLayoutConstraint.activate([
-            achievementsCarousel.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.1),
+            achievementsCarousel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             achievementsCarousel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             achievementsCarousel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            achievementsCarousel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.131))
+			achievementsCarousel.heightAnchor.constraint(equalToConstant: carouselItemSize.height)
         ])
     }
     
@@ -83,15 +89,9 @@ class AchievementsScreenVC: UIViewController {
         achievementModels = RealmManager.retrieveItems(withFilter: "type == \(ItemType.achievement.id)")
     }
     
-    func snapToCenter() {
-        let centerPoint = view.convert(view.center, to: achievementsCarousel)
-        guard let centerIndexPath = achievementsCarousel.indexPathForItem(at:centerPoint) else { return }
-        achievementsCarousel.scrollToItem(at: centerIndexPath, at: .centeredHorizontally, animated: true)
-    }
-
 }
 
-extension AchievementsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+extension AchievementsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return achievementModels.count
@@ -102,22 +102,5 @@ extension AchievementsScreenVC: UICollectionViewDelegate, UICollectionViewDataSo
         cell.viewModel = achievementModels[indexPath.row]
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: LayoutConstants.screenWidth * 0.777, height: LayoutConstants.screenHeight * 0.564 )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
-        return UIEdgeInsets(top: 0, left: LayoutConstants.screenWidth * 0.111, bottom: 0, right: LayoutConstants.screenWidth * 0.111)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.snapToCenter()
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.snapToCenter()
-    }
-
+	
 }

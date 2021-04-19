@@ -84,10 +84,10 @@ class AchievementsCell: UICollectionViewCell {
         addSubview(medalImage)
         
         NSLayoutConstraint.activate([
-            medalImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+            medalImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 60),
             medalImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            medalImage.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.4),
-            medalImage.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.228)
+			medalImage.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65),
+            medalImage.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.28),
         ])
     }
     

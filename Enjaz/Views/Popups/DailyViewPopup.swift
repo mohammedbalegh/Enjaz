@@ -39,16 +39,13 @@ class DailyViewPopup: Popup {
 			dailyView.itemSelectionHandler = itemSelectionHandler
 		}
 	}
-	
-	var selectedItem: ItemModel?
-	
+		
     override func popupContainerDidShow() {
         setupDailyView()
     }
 	
 	override func present() {
 		super.present()
-//		selectedItem = nil
 	}
 	    
     override func setupPopupContainer() {

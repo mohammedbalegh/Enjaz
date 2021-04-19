@@ -101,6 +101,13 @@
 "Please enter a valid phone number" = "Please enter a valid phone number";
 "Message field can't be empty" = "Message field can't be empty";
 
+//MARK: SelfEvaluationScreen
+"Self Evaluation" = "Self Evaluation";
+"What have you learned" = "What have you learned";
+"What changed in you" = "What changed in you";
+"How do you feel" = "How do you feel";
+"Rate your progress in this field" = "Rate your progress in this field";
+
 // MARK: SideMenu
 "Draft" = "Draft";
 "Note" = "Note";
@@ -128,12 +135,23 @@
 //MARK: AchievementsScreenVC
 "No achievements to show" = "No achievements to show";
 
+//MARK: GoalsScreen
+"Major goals" = "Major goals";
+"My goal in life regarding " = "My goal in life regarding ";
+"side" = "side";
+
 //MARK: MonthItemsScreenVC
 "Today's %@" = "Today's %@";
 "Week's %@" = "Week's %@";
 "Month's %@" = "Month's %@";
 "Completed %@" = "Completed %@";
 "No %@" = "No %@";
+
+//MARK: MonthGoalsScreenVC
+"Finished goals" = "Finished goals";
+"Upcoming goals" = "Upcoming goals";
+"Goal" = "Goal";
+"Add new goal" = "Add new goal";
 
 // MARK: Item Categories
 "Religious" = "Religious";

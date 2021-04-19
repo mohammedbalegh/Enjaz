@@ -4,7 +4,7 @@ class ItemCardPopup: Popup {
     let itemWidth = LayoutConstants.screenWidth * 0.6
     let itemHeight = LayoutConstants.screenHeight * 0.35
     let itemCardCellReuseIdentifier = "itemCardCell"
-    
+	
     var itemModels: [ItemModel] = [] {
         didSet {
             cardsCarouselCollectionView.reloadData()

@@ -1,73 +1,78 @@
 
 import UIKit
 
-class MajorGoalsScreenVC: KeyboardHandlingViewController {
+class MajorGoalsScreenVC: KeyboardHandlingViewController{
     
-    var majors: [MajorGoalsModel] = [MajorGoalsModel(image: "kaabaIcon", title: "الجانب الديني", description: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي"),
-    MajorGoalsModel(image: "bookIcon", title: "الجانب العلمي", description: "الاهداف المرتبطة بالعلم و التعلم و القراءة و الدورات و تنمية العقل"), MajorGoalsModel(image: "stethoscopeIcon", title: "الجانب الصحي", description: "الاهداف المرتبطة بصحتك الشخصية و اللياقة البدنية و الصحة النفسية"),
-    MajorGoalsModel(image: "kaabaIcon", title: "الجانب الاجتماعي", description: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي"),MajorGoalsModel(image: "kaabaIcon", title: "الجانب المهني", description: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي"),MajorGoalsModel(image: "kaabaIcon", title: "الجانب الشخصي", description: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي"),MajorGoalsModel(image: "kaabaIcon", title: "الجانب المالي", description: "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي")]
+    let defaults = UserDefaults.standard
+    var categoryId: Int = 0
     
-    lazy var majorsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        collectionView.register(MajorGoalsCell.self, forCellWithReuseIdentifier: "majorGoalsCell")
-        collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: LayoutConstants.tabBarHeight, right: 0)
-        
-        return collectionView
+    var submitChangesButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named:"checkButton"), for: .normal)
+        button.addTarget(self, action: #selector(submitNoteChanges), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
+    let majorGoalView: MajorGoalsView = {
+        let view = MajorGoalsView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .mainScreenBackgroundColor
         
-        majorsCollectionView.delegate = self
-        majorsCollectionView.dataSource = self
+        title = NSLocalizedString("Major goals", comment: "")
         
         setupSubviews()
+        getGoalCategory()
     }
     
     func setupSubviews() {
-        setupMajorsCollectionView()
+        setupMajorGoalView()
+        setupSubmitNoteChanges()
     }
     
-    func setupMajorsCollectionView() {
-        view.addSubview(majorsCollectionView)
+    func getGoalCategory() {
+        let category = RealmManager.retrieveItemCategoryById(categoryId)
+        majorGoalView.badge.badgeTitle.text = category?.localized_name
+        majorGoalView.majorDescription.text = category?.localized_description
+    }
+    
+    @objc func submitNoteChanges() {
+        defaults.set(majorGoalView.textField.text, forKey: "MajorGoalOfCategory\(categoryId)")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func setupSubmitNoteChanges() {
+        view.addSubview(submitChangesButton)
         
-        majorsCollectionView.backgroundColor = .mainScreenBackgroundColor
+        let size = LayoutConstants.screenWidth * 0.151
         
         NSLayoutConstraint.activate([
-            majorsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            majorsCollectionView.bottomAnchor.constraint(equalTo: keyboardPlaceHolderView.topAnchor),
-            majorsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            majorsCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
+            submitChangesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.06)),
+            submitChangesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            submitChangesButton.widthAnchor.constraint(equalToConstant: size),
+            submitChangesButton.heightAnchor.constraint(equalToConstant: size)
         ])
     }
     
-}
-
-extension MajorGoalsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return majors.count
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-      return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "majorGoalsCell", for: indexPath) as! MajorGoalsCell
-        cell.viewModel = majors[indexPath.row]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width / 1.2), height: (collectionView.frame.height / 2.5))
+    func setupMajorGoalView() {
+        view.addSubview(majorGoalView)
+        
+        majorGoalView.textField.text = defaults.string(forKey: "MajorGoalOfCategory\(categoryId)")
+        majorGoalView.textField.textColor = .darkText
+        
+        NSLayoutConstraint.activate([
+            majorGoalView.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.164),
+            majorGoalView.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.885),
+            majorGoalView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            majorGoalView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.47)
+        
+        ])
+        
     }
     
 }

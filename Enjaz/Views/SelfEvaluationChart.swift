@@ -3,35 +3,51 @@ import UIKit
 
 class SelfEvaluationChart: UIView {
     
-    let categories = ["المالي","الشخصي","المهني","الاجتماعي","الصحي","الثقافي","الديني"]
+    let categories = ["0%","25%","50%","75%","100%",]
+    
+    let rateYourSelfLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = NSLocalizedString("Rate your progress in this field", comment: "")
+        label.textColor = .lightGray
+        label.font = .systemFont(ofSize: 12)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     let percentageStack: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    let categoriesStack: UIStackView = {
-        let stack = UIStackView()
         stack.axis = .horizontal
-        stack.distribution = .fillEqually
+        stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    let slidersStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.transform = CGAffineTransform(rotationAngle: -(.pi / 2))
-        stack.distribution = .fillProportionally
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+    let slider: UISlider = {
+        let slider = UISlider()
+        slider.value = 0
+        slider.isContinuous = true
+        slider.isUserInteractionEnabled = true
+        slider.maximumValue = 100
+        slider.minimumValue = 0
+        slider.maximumTrackTintColor = UIColor(hex: 0x707070)
+        slider.minimumTrackTintColor = UIColor.accentColor
+        slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
+        layer.shadowRadius = 4
+        layer.shadowColor = UIColor(hex: 0xD6D6D6).cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        layer.shadowOpacity = 1.0
+        layer.masksToBounds = false
+        
         setupSubviews()
     }
     
@@ -40,84 +56,65 @@ class SelfEvaluationChart: UIView {
     }
     
     func setupSubviews() {
-        setupSlider()
-        setupCategoriesStack()
+        setupRateYourSelfLabel()
         setupPercentageStack()
+        setupSlider()
+    }
+    
+    @objc func sliderValueChanged() {
+        print(slider.value)
     }
     
     func createLabel(_ text: String) -> UILabel {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = label.font.withSize(7)
+        label.font = label.font.withSize(10)
         label.textColor = .lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "\(text)"
         return label
     }
     
-    func createSlider(with: Int) -> ChartSliderView {
-        let slider = ChartSliderView(frame: .zero, category: categories[with - 1])
-        slider.setValue(UserDefaults.standard.float(forKey: "\(categories[with - 1])"), animated: true)
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        return slider
+    func setupRateYourSelfLabel() {
+        addSubview(rateYourSelfLabel)
+        
+        NSLayoutConstraint.activate([
+            rateYourSelfLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            rateYourSelfLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            rateYourSelfLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
+            rateYourSelfLabel.heightAnchor.constraint(equalToConstant: 15)
+        ])
     }
     
     func setupSlider() {
-        addSubview(slidersStackView)
-        
-        for index in 1...7 {
-            let slider = createSlider(with: index)
-            slider.tintColor = .accentColor
-            slidersStackView.addArrangedSubview(slider)
-        }
+        addSubview(slider)
         
         NSLayoutConstraint.activate([
-            slidersStackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            slidersStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -(LayoutConstants.screenHeight * 0.02)),
-            slidersStackView.heightAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.785),
-            slidersStackView.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.85)
+            slider.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            slider.bottomAnchor.constraint(equalTo: percentageStack.topAnchor, constant: -30),
+            slider.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.02),
+            slider.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.8),
         ])
-    }
-    
-    func setupCategoriesStack() {
-        addSubview(categoriesStack)
-        
-        for text in categories {
-            let label = createLabel(text)
-            categoriesStack.addArrangedSubview(label)
-        }
-        
-        NSLayoutConstraint.activate([
-            categoriesStack.widthAnchor.constraint(equalTo: slidersStackView.heightAnchor),
-            categoriesStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            categoriesStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            categoriesStack.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15),
-        ])
-        
-        layoutIfNeeded()
-        
-        categoriesStack.addTopBorder(withColor: .lightGray, andWidth: 1)
     }
     
     func setupPercentageStack() {
         addSubview(percentageStack)
 
         
-        for percentage in stride(from: 100, to: -10, by: -10) {
-            let label = createLabel("\(percentage)%")
-            percentageStack.addArrangedSubview(label)
+        for percentage in categories {
+            percentageStack.addArrangedSubview(createLabel(percentage))
         }
         
         NSLayoutConstraint.activate([
-            percentageStack.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            percentageStack.topAnchor.constraint(equalTo: self.topAnchor),
-            percentageStack.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.256),
-            percentageStack.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.06),
+            percentageStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            percentageStack.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            percentageStack.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.02),
+            percentageStack.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.8),
         ])
         
         layoutIfNeeded()
         
-        percentageStack.addRightBorder(withColor: .lightGray, andWidth: 1)
+        percentageStack.addTopBorder(withColor: UIColor(hex: 0x707070), andWidth: 1)
     }
     
 }

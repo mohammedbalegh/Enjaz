@@ -43,7 +43,7 @@ class ProgressBarView: UIView {
         var view = UIProgressView(progressViewStyle: .bar)
         view.trackTintColor = UIColor(hex: 0xD0E9FA)
 		view.tintColor = .accentColor
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 4
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
