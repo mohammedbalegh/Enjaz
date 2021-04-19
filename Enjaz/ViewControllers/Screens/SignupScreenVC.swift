@@ -7,11 +7,11 @@ class SignupScreenVC: AuthScreenVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "إنشاء حساب"
-        subTitleLabel.text = "ادخل بيانات الحساب"
-        authenticationBtn.setTitle("إنشاء حساب", for: .normal)
-        otherAuthMethodLabel.text = "لديك حساب بالفعل؟"
-        otherAuthMethodBtn.setTitle("تسجيل الدخول", for: .normal)
+        titleLabel.text = NSLocalizedString("Create an account", comment: "")
+        subTitleLabel.text = NSLocalizedString("Enter your account details", comment: "")
+        authenticationBtn.setTitle(NSLocalizedString("Create an account", comment: ""), for: .normal)
+        otherAuthMethodLabel.text = NSLocalizedString("Already have an account?", comment: "")
+        otherAuthMethodBtn.setTitle(NSLocalizedString("Login", comment: ""), for: .normal)
     }
     
     // MARK: Event Handlers

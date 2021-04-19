@@ -17,7 +17,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     var titleLabel: UILabel = {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "استرجاع كلمة المرور"
+        label.text = NSLocalizedString("Recover password", comment: "")
         let fontSize: CGFloat = max(23, LayoutConstants.screenHeight * 0.025)
         label.font = UIFont.systemFont(ofSize: fontSize)
         label.textColor = .accentColor
@@ -31,7 +31,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "من فضلك أدخل البريد الإلكتروني حتى يتم إرسال\n كود التأكيد لك ويتم تأكيد الحساب"
+        label.text = NSLocalizedString("Please Enter your email to send the verification code", comment: "")
         let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
         label.font = UIFont.systemFont(ofSize: fontSize)
         label.textColor = .gray
@@ -86,7 +86,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     }()
     
     lazy var nextBtn: PrimaryBtn = {
-        var button = PrimaryBtn(label: "التالي", theme: .blue, size: .large)
+        var button = PrimaryBtn(label: NSLocalizedString("Next", comment: ""), theme: .blue, size: .large)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
         return button
@@ -95,7 +95,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     lazy var backBtn: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("الرجوع", for: .normal)
+        button.setTitle(NSLocalizedString("Next", comment: ""), for: .normal)
         button.setTitleColor(.accentColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
@@ -241,7 +241,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: "الكود غير صحيح")
+                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect code", comment: ""))
                 }
                 
                 self.resetPasswordPopup.present()
@@ -261,13 +261,13 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     // MARK: Tools
     
     func updateNextBtn() {
-        nextBtn.setTitle("ابدأ الآن", for: .normal)
+        nextBtn.setTitle(NSLocalizedString("Start now", comment: ""), for: .normal)
         nextBtn.removeTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
         nextBtn.addTarget(self, action: #selector(handleStartBtnTap), for: .touchUpInside)
     }
     
     func updateSubTitle() {
-        subTitleLabel.text = "ادخل اسم المستخدم و كلمة السر"
+        subTitleLabel.text = NSLocalizedString("Enter your username and password", comment: "")
     }
     
     func updateTextFieldsVerticalStack() {

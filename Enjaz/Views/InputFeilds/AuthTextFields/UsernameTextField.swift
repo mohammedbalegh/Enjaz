@@ -11,10 +11,10 @@ class UsernameTextField: AuthTextField {
 		minimumLength = 6
 		canStartWithNumber = false
 		
-		fieldName = "اسم المستخدم"
+        fieldName = NSLocalizedString("Username", comment: "")
 		textField.textContentType = .username
 		icon.image = UIImage(named: "personIcon")
 		validator = RegexValidator.validateUsername
-		defaultErrorMessage = "اسم المستخدم غير صحيح"
+		defaultErrorMessage = NSLocalizedString("Incorrect username", comment: "")
 	}
 }

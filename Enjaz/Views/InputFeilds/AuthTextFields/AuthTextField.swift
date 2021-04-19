@@ -121,17 +121,17 @@ class AuthTextField : UIView {
 	
 	func validate() -> Bool {
 		if text.count == 0 {
-			showErrorMessage(errorMessage: "\(fieldNounName) لا يمكن أن يتُرك فارغاً")
+			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("cant not be empty", comment: ""))")
 			return false
 		}
 		
 		if !canStartWithNumber && Character(text[0]).isNumber {
-			showErrorMessage(errorMessage: "\(fieldNounName) لا يمكن أن يبدأ برقم")
+			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("Can not start with a number", comment: ""))")
 			return false
 		}
 		
 		if text.count < minimumLength {
-			showErrorMessage(errorMessage: "\(fieldNounName) يجب أن يكون \(minimumLength) حرف على الأقل")
+			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("Should be", comment: "")) \(minimumLength) \(NSLocalizedString("", comment: ""))")
 			return false
 		}
 

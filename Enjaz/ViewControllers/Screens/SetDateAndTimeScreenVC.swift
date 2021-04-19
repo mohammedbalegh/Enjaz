@@ -92,7 +92,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         
         NSLayoutConstraint.activate([
             hourPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            hourPicker.bottomAnchor.constraint(equalTo: saveBtn.topAnchor, constant: LayoutConstants.screenWidth * 0.1),
+            hourPicker.bottomAnchor.constraint(equalTo: saveBtn.topAnchor, constant: LayoutConstants.screenWidth * 0.2),
             hourPicker.heightAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.87),
             hourPicker.widthAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.085)
         ])
@@ -103,7 +103,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         
         NSLayoutConstraint.activate([
             indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            indicator.bottomAnchor.constraint(equalTo: saveBtn.topAnchor, constant: -(LayoutConstants.screenWidth * 0.25)),
+            indicator.bottomAnchor.constraint(equalTo: saveBtn.topAnchor, constant: -(LayoutConstants.screenWidth * 0.14)),
             indicator.widthAnchor.constraint(equalToConstant: pickerHeight),
             indicator.heightAnchor.constraint(equalToConstant: pickerHeight * 1.7)
         ])

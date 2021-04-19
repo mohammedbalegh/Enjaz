@@ -16,7 +16,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     var titleLabel: UILabel = {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "ادخل رمز التأكيد"
+        label.text = NSLocalizedString("Enter verification code", comment: "")
         let fontSize: CGFloat = max(23, LayoutConstants.screenHeight * 0.025)
         label.font = UIFont.systemFont(ofSize: fontSize)
         label.textColor = .accentColor
@@ -30,7 +30,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "لقد أرسلنا رمز إلى البريد الإلكتروني"
+        label.text = NSLocalizedString("Verification code sent to your email", comment: "")
         let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
         label.font = UIFont.systemFont(ofSize: fontSize)
         label.textColor = .gray
@@ -42,7 +42,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     lazy var backBtn: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("الرجوع", for: .normal)
+        button.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
         button.setTitleColor(.accentColor, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
@@ -151,7 +151,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: "البريد الإلكتروني غير مسجل")
+                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("The email you entered does not exist", comment: ""))
                 }
                                 
                 self.oneTimeCodeTextField.didEnterLastCharacter = self.handleVerificationCodeEntered
@@ -177,7 +177,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: "الكود غير صحيح")
+                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect code", comment: ""))
                     return
                 }
             

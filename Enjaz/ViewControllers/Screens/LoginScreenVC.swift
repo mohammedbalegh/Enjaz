@@ -6,7 +6,7 @@ class LoginScreenVC: AuthScreenVC {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("نسيت كلمة السر؟", for: .normal)
+        button.setTitle(NSLocalizedString("Forgot your password?", comment: ""), for: .normal)
         button.setTitleColor(.gray, for: .normal)
         let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
         button.titleLabel?.font = .systemFont(ofSize: fontSize)
@@ -20,11 +20,11 @@ class LoginScreenVC: AuthScreenVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = "تسجيل الدخول"
-        subTitleLabel.text = "ادخل اسم المستخدم و كلمة السر"
-        authenticationBtn.setTitle("تسجيل الدخول", for: .normal)
-        otherAuthMethodLabel.text = "لم تشترك بعد؟"
-        otherAuthMethodBtn.setTitle("إنشاء حساب", for: .normal)
+        titleLabel.text = NSLocalizedString("Login", comment: "")
+        subTitleLabel.text = NSLocalizedString("Enter your username and password", comment: "")
+        authenticationBtn.setTitle(NSLocalizedString("Login", comment: ""), for: .normal)
+        otherAuthMethodLabel.text = NSLocalizedString("Not an existing user?", comment: "")
+        otherAuthMethodBtn.setTitle(NSLocalizedString("Create an account", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +76,7 @@ class LoginScreenVC: AuthScreenVC {
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: "اسم المستخدم أو كلمة السر غير صحيحين")
+                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect username or password", comment: ""))
                     return
                 }
                 
