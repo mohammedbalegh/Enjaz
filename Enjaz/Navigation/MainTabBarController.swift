@@ -109,7 +109,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
 		super.viewDidLoad()
 		view.tintColor = .accentColor
-                
+        
         navigationItem.titleView = dateVerticalStack
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationsButton)
@@ -221,6 +221,10 @@ class MainTabBarController: UITabBarController {
 			: setupFloatingBtnAsTabBarItem()
 		
         navigationItem.titleView = selectedIndex == 0 ? dateVerticalStack : navBarTitleLabel
+        
+        if selectedIndex != 3 {
+            navigationItem.searchController = nil
+        }
 
         navBarTitleLabel.text = screenTitles?[selectedIndex]
 	}

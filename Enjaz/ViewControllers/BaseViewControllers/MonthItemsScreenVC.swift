@@ -92,6 +92,7 @@ class MonthItemsScreenVC: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .mainScreenBackgroundColor
+        
         setItemCardViewsTitles()
         setupSubViews()
     }

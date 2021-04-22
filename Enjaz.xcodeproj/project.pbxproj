@@ -44,6 +44,9 @@
 		41C646B6257397BC000327D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B4257397BC000327D5 /* LaunchScreen.storyboard */; };
 		41C646C1257397BC000327D5 /* EnjazTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646C0257397BC000327D5 /* EnjazTests.swift */; };
 		41C646CC257397BC000327D5 /* EnjazUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646CB257397BC000327D5 /* EnjazUITests.swift */; };
+		41DB3893262E5A600042FC5B /* SearchControllerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB3892262E5A600042FC5B /* SearchControllerVC.swift */; };
+		41DB389B262E5B810042FC5B /* ItemsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB389A262E5B810042FC5B /* ItemsTableView.swift */; };
+		41DB38A0262E7F800042FC5B /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DB389F262E7F800042FC5B /* ItemsTableViewCell.swift */; };
 		41FC4C3C258AEEE100EA4DDF /* CardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */; };
 		5B03A4949ACB93F510BD99A5 /* Pods_EnjazTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */; };
 		B61A3C4C529626847E9C2840 /* Pods_Enjaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 723889AF92353456503E9347 /* Pods_Enjaz.framework */; };
@@ -284,6 +287,9 @@
 		41C646C7257397BC000327D5 /* EnjazUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnjazUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646CB257397BC000327D5 /* EnjazUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnjazUITests.swift; sourceTree = "<group>"; };
 		41C646CD257397BC000327D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41DB3892262E5A600042FC5B /* SearchControllerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerVC.swift; sourceTree = "<group>"; };
+		41DB389A262E5B810042FC5B /* ItemsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableView.swift; sourceTree = "<group>"; };
+		41DB389F262E7F800042FC5B /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		41FC4C3B258AEEE100EA4DDF /* CardBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBodyView.swift; sourceTree = "<group>"; };
 		592DE1D8471E3CABF9D8C42D /* Pods-EnjazTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnjazTests.debug.xcconfig"; path = "Target Support Files/Pods-EnjazTests/Pods-EnjazTests.debug.xcconfig"; sourceTree = "<group>"; };
 		723889AF92353456503E9347 /* Pods_Enjaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -623,6 +629,7 @@
 				BC8846CB261B56B6005C6AAF /* DailyViewTableViewCustomHeader.swift */,
 				BCF2F73E2620CE09006275AA /* CircularView.swift */,
 				BC1A15EC262A41570012BE05 /* ProgressBarView.swift */,
+				41DB389A262E5B810042FC5B /* ItemsTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -740,6 +747,7 @@
 				BC0A87CE257583360045A54E /* Screens */,
 				BC026C32258FFB8B008222BD /* PopoverTableVC.swift */,
 				BC963E6B259CF09100A1556B /* SideMenuVC.swift */,
+				41DB3892262E5A600042FC5B /* SearchControllerVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -907,6 +915,7 @@
 				41798CB12617C59B00DF5ECF /* DailyViewCell.swift */,
 				41798CC726188B2B00DF5ECF /* AchievementsCell.swift */,
 				BC8846B6261A432E005C6AAF /* HourTableViewCell.swift */,
+				41DB389F262E7F800042FC5B /* ItemsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1171,6 +1180,7 @@
 				BCF2F7782620FAC5006275AA /* ItemImagePickerImageSourceCellModel.swift in Sources */,
 				BC93D5962613CEC0005DE3AC /* NoteCategoryView.swift in Sources */,
 				41798CC32618861300DF5ECF /* AchievementsScreenVC.swift in Sources */,
+				41DB389B262E5B810042FC5B /* ItemsTableView.swift in Sources */,
 				BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */,
 				BCBEE8752587D89100D8DE0A /* EmailTextField.swift in Sources */,
 				BC1EB2BD25BE206F0021B983 /* AlertBottomSheetView.swift in Sources */,
@@ -1286,6 +1296,7 @@
 				BCC429D625A2DCD900803CE9 /* InputField.swift in Sources */,
 				BC8F2F9025A9049600EF7EA4 /* ModelsConstants.swift in Sources */,
 				BC20180C260393F70060EFAF /* CalendarViewController.swift in Sources */,
+				41DB38A0262E7F800042FC5B /* ItemsTableViewCell.swift in Sources */,
 				41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */,
 				BCB5D20D2605E71D004275A9 /* WeekDayLabelsStackView.swift in Sources */,
 				4141502A25A2AC2100DC369A /* SelfEvaluationLabel.swift in Sources */,
@@ -1320,6 +1331,7 @@
 				BC20181126039D650060EFAF /* Switcher.swift in Sources */,
 				419121232593023000CB7BF9 /* ItemCardView.swift in Sources */,
 				BCACC4962614D9DA005F7F59 /* UserProfileScreenVC.swift in Sources */,
+				41DB3893262E5A600042FC5B /* SearchControllerVC.swift in Sources */,
 				4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				BC7EFC052586354E00F35312 /* Popup.swift in Sources */,

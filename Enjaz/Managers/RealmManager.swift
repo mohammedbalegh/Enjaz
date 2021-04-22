@@ -58,6 +58,11 @@ class RealmManager {
         let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter(filter).sorted(byKeyPath: "date", ascending: true))
         return items
     }
+    
+    static func retrieveItemsBySearch(contains filter: String) -> [ItemModel] {
+        let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter("name contains[c] %@", filter).sorted(byKeyPath: "date", ascending: true))
+        return items
+    }
 	
 	static func deleteItems(withFilter filter: String) {
 		let items: [ItemModel] = retrieveItems(withFilter: filter)

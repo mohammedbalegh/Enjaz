@@ -19,7 +19,7 @@ class ItemCardView: UIView {
             cardBody.categoryLabel.text = " \(itemCategory?.localized_name ?? "") "
             cardBody.titleLabel.text = viewModel.name
             cardBody.descriptionLabel.text = viewModel.item_description
-            setDateAndTimeLabelText(viewModel)
+            cardBody.dateAndTimeLabel.attributedText = DateAndTimeTools.setDateAndTimeLabelText(viewModel)
         }
     }
     
@@ -97,33 +97,5 @@ class ItemCardView: UIView {
             cardBody.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             cardBody.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
-    }
-    
-    func setDateAndTimeLabelText(_ viewModel: ItemModel) {
-        let itemDate = Date(timeIntervalSince1970: viewModel.date)
-        let dateFormat: String = {
-            if viewModel.isRepeated { return "d/M/yy" }
-            if Calendar.current.isDateInToday(itemDate) { return "hh:00  aa" }
-            return "d/M/yyyy hh:00  aa"
-        }()
-        
-        let readableStartDate = DateAndTimeTools.getReadableDate(from: itemDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
-        let readableEndDate: String = {
-            guard viewModel.isRepeated else { return "" }
-            
-            let itemEndDate = Date(timeIntervalSince1970: viewModel.endDate)
-            return DateAndTimeTools.getReadableDate(from: itemEndDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
-        }()
-        
-        let from = NSLocalizedString("from", comment: "")
-        let to = NSLocalizedString("to", comment: "")
-        
-        let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accentColor, stringSize: 11)
-        
-        let itemReadableDate = viewModel.isRepeated
-            ? rangeDate
-            : NSAttributedString(string: readableStartDate)
-        
-        cardBody.dateAndTimeLabel.attributedText = itemReadableDate
     }
 }
