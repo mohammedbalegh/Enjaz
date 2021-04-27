@@ -61,8 +61,8 @@ extension HourPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
             hour.textColor = .white
             period.textColor = .white
         } else {
-            hour.textColor = .darkGray
-            period.textColor = .gray
+            hour.textColor = .highContrastGray
+            period.textColor = .systemGray
         }
         
         view.transform = CGAffineTransform(rotationAngle: -(90 * (.pi / 180)))

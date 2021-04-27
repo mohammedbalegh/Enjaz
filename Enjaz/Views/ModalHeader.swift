@@ -6,7 +6,7 @@ class ModalHeader: UIView {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .lowContrastGray
         
         return view
     }()
@@ -16,7 +16,7 @@ class ModalHeader: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.font = .systemFont(ofSize: 25)
-        label.textColor = .darkGray
+        label.textColor = .highContrastText
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.6
         
@@ -30,7 +30,7 @@ class ModalHeader: UIView {
         button.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16.5)
         button.titleLabel?.textAlignment = .center
-        button.tintColor = .accentColor
+        button.tintColor = .accent
         
         return button
     }()

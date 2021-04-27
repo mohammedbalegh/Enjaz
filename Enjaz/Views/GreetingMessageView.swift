@@ -13,7 +13,7 @@ class GreetingMessageView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = .lightGray
+        label.textColor = .lowContrastGray
         label.font = label.font.withSize(16)
         label.adjustsFontSizeToFitWidth = true
         
@@ -24,7 +24,7 @@ class GreetingMessageView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.font = label.font.withSize(16)
         label.adjustsFontSizeToFitWidth = true
         

@@ -3,15 +3,23 @@ import SPAlert
 
 class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegate {
     // MARK: Properties
-    
+	
+	lazy var thumb: UIView = {
+		let width: CGFloat = 35, height: CGFloat = 5
+		let thumb = UIView(frame: CGRect(x: view.frame.width / 2 - width / 2, y: 5, width: width, height: height))
+		thumb.layer.cornerRadius = height / 2
+		thumb.backgroundColor = .lowContrastGray
+		return thumb
+	}()
+	
     let scrollView = UIScrollView()
-        
+	
     let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
         
 	lazy var imagePickerPopup: ItemImagePickerPopup = {
-		let popup = ItemImagePickerPopup(hideOnOverlayTap: true)
+		let popup = ItemImagePickerPopup()
 		popup.delegate = self
-		popup.imageCellModels = RealmManager.retrieveItemImages().map { $0.image_source }
+		popup.imageCellModels = RealmManager.retrieveDefaultItemImages().map { $0.image_source }
 		return popup
 	}()
 	
@@ -51,15 +59,14 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     }()
     
     lazy var additionCategoryPickerBottomSheet: PickerBottomSheetView = {
-        let pickerPopup = PickerBottomSheetView()
+        let pickerBottomSheet = PickerBottomSheetView()
         
-        pickerPopup.picker.delegate = self
-        pickerPopup.picker.dataSource = self
+		pickerBottomSheet.picker.delegate = self
+		pickerBottomSheet.picker.dataSource = self
         
-        pickerPopup.dismissalHandler = handleAdditionCategoryPopupDismissal
-        pickerPopup.selectBtn.addTarget(self, action: #selector(handleAdditionCategorySelection), for: .touchUpInside)
+		pickerBottomSheet.selectBtn.addTarget(self, action: #selector(handleAdditionCategorySelection), for: .touchUpInside)
         
-        return pickerPopup
+        return pickerBottomSheet
     }()
     
     lazy var repeatSwitchView: SwitchView = {
@@ -134,7 +141,10 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     
     var itemCategoryModels: [ItemCategoryModel] = []
     
-    var alertPopup = AlertPopup(hideOnOverlayTap: true)
+    var alertPopup = AlertPopup()
+	
+	var delegate: AddItemScreenDelegate?
+	
     
     // MARK: State
     
@@ -168,10 +178,14 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .mainScreenBackgroundColor
+				        
+		view.backgroundColor = isModal ? .modalScreenBackground : .background
         definesPresentationContext = true
-        
+		
+		if !isModal {
+			thumb.frame = .zero
+		}
+		
         removeRepetitionSwitchForTypeThatDontSupportRepetition()
         setupSubviews()
     }
@@ -180,33 +194,44 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         super.viewWillAppear(animated)
         title = String(format: NSLocalizedString("Add %@", comment: ""), itemTypeName)
         itemCategoryModels = RealmManager.retrieveItemCategories()
+		
+		let window = UIApplication.shared.windows[0]
+		window.backgroundColor = .black
     }
-    
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		let window = UIApplication.shared.windows[0]
+		window.backgroundColor = .background
+	}
+	
     func setupSubviews() {
         setupScrollView()
         setupSetImageButton()
         setupTextFieldsVerticalStack()
         setupAdditionDescriptionTextView()
         setupSaveBtn()
+		view.addSubview(thumb)
     }
     
     func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+		scrollView.keyboardDismissMode = .interactive
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: keyboardPlaceHolderView.topAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
+			scrollView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
         ])
     }
-        
+	
     func setupSetImageButton() {
         scrollView.addSubview(setImageBtn)
         
         NSLayoutConstraint.activate([
-            setImageBtn.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+			setImageBtn.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20 + thumb.frame.height),
             setImageBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
         
@@ -254,16 +279,17 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     
     @objc func handleSetImageBtnTap() {
         dismissKeyboard()
-        imagePickerPopup.present()
+        imagePickerPopup.present(animated: true)
     }
 	        
     @objc func handleAdditionCategoryPickerTap() {
         dismissKeyboard()
+		additionCategoryPickerBottomSheet.picker.selectRow(selectedItemCategoryIndex ?? 0, inComponent: 0, animated: false)
         additionCategoryPickerBottomSheet.present(animated: true)
     }
     	
     @objc func handleAdditionCategorySelection() {
-        (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .black
+        (additionCategoryPopoverBtn.input as? PopoverBtn)?.label.textColor = .invertedSystemBackground
         
         let selectedValueIndex = additionCategoryPickerBottomSheet.picker.selectedRow(inComponent: 0)
         
@@ -275,18 +301,14 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         additionCategoryPopoverBtn.input?.inputText = selectedAdditionCategory.localized_name
         additionCategoryPickerBottomSheet.dismiss(animated: true)
     }
-    
-    func handleAdditionCategoryPopupDismissal() {
-        additionCategoryPickerBottomSheet.picker.selectRow(selectedItemCategoryIndex ?? 0, inComponent: 0, animated: false)
-    }
-    
+        
     @objc func handleAdditionDateAndTimeInputTap() {
         dismissKeyboard()
         
         let setDateAndTimeScreenVC = repetitionIsTurnedOn ? SetDateRangeScreenVC() : SetDateAndTimeScreenVC()
-        
+		
         setDateAndTimeScreenVC.delegate = self
-        present(setDateAndTimeScreenVC, animated: true, completion: nil)
+		present(setDateAndTimeScreenVC, animated: true)
     }
     
     @objc func handleRepeatSwitchValueChange() {
@@ -300,15 +322,15 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [Double], readableDate: String ) {
         self.itemDates = selectedDatesTimeStamps
         
-        (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.black, for: .normal)
+        (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.invertedSystemBackground, for: .normal)
         additionDateAndTimeInput.input?.inputText = readableDate
     }
-    
-    @objc func handleSaveBtnTap() {
+	
+	@objc func handleSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         
         if let errorMessage = String.generateRequiredFieldNamesErrorMessage(requiredFieldNames: nonProvidedRequiredFieldNames) {
-            AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)
+			showErrorMessage(errorMessage)
             return
         }
         
@@ -316,21 +338,32 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 			RealmManager.saveItemImage(itemImage)
 		}
 		
+		NotificationsManager.requestNotificationsPermission()
         saveItem()
-        navigationController?.popViewController(animated: true)
-        
+				
+		if isModal {
+			dismiss(animated: true)
+			delegate?.didAddItem(self)
+		} else {
+			navigationController?.popViewController(animated: true)
+		}
+		
         let successMessage = String.generateAdditionSuccessMessage(type: itemTypeName)
         SPAlert.present(title: successMessage, preset: .done)
     }
     
     // MARK: Tools
+	
+	@objc func handleDismissBtnTap() {
+		dismiss(animated: true)
+	}
     
     func getTextFieldsStackArrangedSubviews() -> [UIView] {
         return [additionNameTextField, additionCategoryPopoverBtn, repeatSwitchView, additionDateAndTimeInput]
     }
     
     func removeRepetitionSwitchForTypeThatDontSupportRepetition() {
-        let itemTypeSupportsRepetition = itemType == ItemType.goal.id || itemType == ItemType.task.id
+        let itemTypeSupportsRepetition = itemType == ItemType.goal.id || itemType == ItemType.task.id || itemType == ItemType.demah.id
                 
         if !itemTypeSupportsRepetition {
             textFieldsVerticalStack.removeArrangedSubview(repeatSwitchView)
@@ -351,6 +384,14 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         
         return nonProvidedRequiredFieldNames
     }
+	
+	func showErrorMessage(_ errorMessage: String) {
+		if isModal {
+			alertPopup.presentAsError(withMessage: errorMessage)
+		} else {
+			AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)
+		}
+	}
     
     func saveItem() {
         var firstItemId: Int!
@@ -365,7 +406,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
             item.type = itemType
             item.date = date
             item.item_description = itemDescription
-            item.image_id = itemImageId ?? -1
+			item.image_id = itemImageId ?? ItemType.getTypeById(id: itemType).imageId
             if index == 0 {
                 firstItemId = item.id
                 if itemDates.count > 1 {
@@ -374,11 +415,12 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
             } else {
                 item.originalItemId = firstItemId
             }
-            
+			
             RealmManager.saveItem(item)
+			NotificationsManager.scheduleNotification(forItem: item)
         }
     }
-        
+	
 }
 
 extension AddItemScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -412,7 +454,7 @@ extension AddItemScreenVC: ItemImagePickerPopupDelegate {
 			setImageBtn.setImage(UIImage.getImageFrom(imageName), for: .normal)
 		}
 		
-		imagePickerPopup.dismiss()
+		imagePickerPopup.dismiss(animated: true)
 	}
 	
 	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImageSource sourceType: UIImagePickerController.SourceType) {
@@ -430,7 +472,8 @@ extension AddItemScreenVC: UIImagePickerControllerDelegate, UINavigationControll
 		guard let image = info[.editedImage] as? UIImage else { return }
 		guard let imageData = image.scalePreservingAspectRatio(targetSize: CGSize(width: 132, height: 125)).toBase64() else { return }
 		
-		nonDefaultItemImage = ItemImageModel(imageSource: imageData, isDefault: false)
+		imagePickerPopup.dismiss(animated: true)
+		nonDefaultItemImage = ItemImageModel(imageSource: imageData, isDefault: false, isSelectable: false)
 		itemImageId = nonDefaultItemImage!.id
 		setImageBtn.setImage(UIImage.getImageFrom(imageData), for: .normal)
 	}

@@ -20,7 +20,7 @@ class WeekDayCell: UICollectionViewCell {
         let rightInset: CGFloat = 1 - leftInset
         
         let view = UIView(frame: contentView.frame.inset(by: UIEdgeInsets(top: 1, left: leftInset, bottom: 0, right: rightInset)))
-        view.backgroundColor = .white
+        view.backgroundColor = .tertiaryBackground
         
         return view
     }()
@@ -37,7 +37,7 @@ class WeekDayCell: UICollectionViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.backgroundColor = .accentColor
+        view.backgroundColor = .accent
         view.isHidden = true
         view.clipsToBounds = true
         
@@ -57,14 +57,14 @@ class WeekDayCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 8.5)
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.isHidden = true
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        		
         setup()
     }
     
@@ -74,7 +74,7 @@ class WeekDayCell: UICollectionViewCell {
     
     func setup() {
         clipsToBounds = true
-        contentView.backgroundColor = .mainScreenBackgroundColor
+		contentView.backgroundColor = .background | UIColor.border.withAlphaComponent(0.3)
         
         setupSubViews()
     }

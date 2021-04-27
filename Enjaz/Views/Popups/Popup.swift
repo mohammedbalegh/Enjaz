@@ -4,10 +4,10 @@ class Popup: UIView {
     
 	// MARK: Properties
 	
-	let blurOverlay: UIVisualEffectView = {
-		let blurEffect = UIBlurEffect(style: .dark)
-		let visualEffectView = UIVisualEffectView(effect: blurEffect)
+	lazy var blurOverlay: UIVisualEffectView = {
+		let blurEffect = UIBlurEffect(style: blurEffectStyle)
 		
+		let visualEffectView = UIVisualEffectView(effect: blurEffect)
 		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
 		
 		return visualEffectView
@@ -15,48 +15,51 @@ class Popup: UIView {
     
 	lazy var popupContainer: UIView = {
 		let view = UIView(frame: .zero)
+		view.translatesAutoresizingMaskIntoConstraints = false
 		
-		view.backgroundColor = .white
+		view.backgroundColor = .secondaryBackground
 		view.layer.cornerRadius = 10
 		view.alpha = 0
-		view.transform = CGAffineTransform(scaleX: popupContainerInitialScale, y: popupContainerInitialScale)
-		
-		view.translatesAutoresizingMaskIntoConstraints = false
+		view.scale(to: popupContainerInitialScale)
 		
 		return view
 	}()
+	
+	internal lazy var overlayTapGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleOverlayAndDismissBtnTab))
+	
+	var blurEffectStyle: UIBlurEffect.Style {
+		return traitCollection.userInterfaceStyle == .dark ? .light : .dark
+	}
     
 	let popupContainerInitialScale: CGFloat = 1.2
-	var hideOnOverlayTap: Bool
 	var popupDismissalHandler: (() -> Void)?
 	
-	init(hideOnOverlayTap: Bool = true) {
-		self.hideOnOverlayTap = hideOnOverlayTap
+	var hideOnOverlayTap: Bool = true {
+		didSet {
+			overlayTapGestureRecognizer.isEnabled = hideOnOverlayTap
+		}
+	}
+		
+	init() {
 		super.init(frame: .zero)
+		setupSubViews()
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+		
 	// MARK: views setups
 			
-	func setup() {
-		fillScreen()
-		
+	func setupSubViews() {
 		addSubview(blurOverlay)
 		blurOverlay.fillSuperView()
-		if hideOnOverlayTap { setOverlayHideGestureRecognizer() }
 		
 		addSubview(popupContainer)
         setupPopupContainer()
-		animatePopupContainerIn()
-		
-		popupContainerDidShow()
 	}
 	
-    func setupPopupContainer() {
-        popupContainer.backgroundColor = .white
+	internal func setupPopupContainer() {
         popupContainer.layer.cornerRadius = 20
         
         NSLayoutConstraint.activate([
@@ -66,37 +69,56 @@ class Popup: UIView {
             popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
         ])
     }
-    
-	// @absract
-	func popupContainerDidShow() {}
+	
+	@objc func handleOverlayAndDismissBtnTab() {
+		dismiss(animated: true)
+	}
 	
 	// MARK: Tools
-	
-	func setOverlayHideGestureRecognizer() {
-		let tap = UITapGestureRecognizer(target: self, action: #selector(dismiss))
-		blurOverlay.addGestureRecognizer(tap)
-	}
-	
-	func present() {
+			
+	func present(animated: Bool) {
 		let window = UIApplication.shared.windows[0]
-		window.addSubview(self);
-        setup()
-	}
-	
-	@objc func dismiss() {
-		guard superview != nil else { return }
-		
-		animatePopupContainerOut() { _ in
-			self.removeFromSuperview()
-            self.popupDismissalHandler?()
+		window.addSubview(self)
+				
+		prepareForPresentation(animated)
+				
+		if animated {
+			animatePopupContainerIn()
+		} else {
+			popupContainer.alpha = 1
 		}
 	}
 	
-	func animatePopupContainerIn() {
-		self.blurOverlay.alpha = 1
+	func dismiss(animated: Bool) {
+		guard superview != nil else { return }
 		
+		func animationCompletionHandler(completed: Bool) {
+			self.removeFromSuperview()
+			self.popupDismissalHandler?()
+		}
+		
+		if animated {
+			animatePopupContainerOut(completionHandler: animationCompletionHandler)
+		} else {
+			animationCompletionHandler(completed: true)
+		}
+	}
+	
+	internal func prepareForPresentation(_ animated: Bool) {
+		if !(blurOverlay.gestureRecognizers?.contains(overlayTapGestureRecognizer) ?? false) {
+			blurOverlay.addGestureRecognizer(overlayTapGestureRecognizer)
+		}
+		
+		popupContainer.scale(to: animated ? popupContainerInitialScale : 1)
+		blurOverlay.alpha = 1
+		
+		fillScreen()
+	}
+	
+	internal func animatePopupContainerIn() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
-			self.popupContainer.animate(opacityTo: 1, andScaleTo: 1)
+			self.popupContainer.alpha = 1
+			self.popupContainer.scale(to: 1)
 		}
 	}
 	
@@ -106,10 +128,15 @@ class Popup: UIView {
             delay: 0,
             options: .curveEaseIn,
 			animations: {
-				self.popupContainer.animate(opacityTo: 0, andScaleTo: self.popupContainerInitialScale)
+				self.popupContainer.alpha = 0
+				self.popupContainer.scale(to: self.popupContainerInitialScale)
 				self.blurOverlay.alpha = 0
 			},
 			completion: completionHandler
 		)
+	}
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		blurOverlay.effect = UIBlurEffect(style: blurEffectStyle)
 	}
 }

@@ -83,7 +83,7 @@ class CardsView: UIView {
         addSubview(cardsCollectionView)
         
         NSLayoutConstraint.activate([
-            cardsCollectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 0),
+            cardsCollectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 5),
             cardsCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             cardsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cardsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)

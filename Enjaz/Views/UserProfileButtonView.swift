@@ -1,35 +1,36 @@
 import UIKit
 
 class UserProfileButtonView: UIView {
-    
+    	
     let arrowIcon: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "leftArrowIcon")
-        image.translatesAutoresizingMaskIntoConstraints = false
+		image.translatesAutoresizingMaskIntoConstraints = false
+		image.image = UIImage(systemName: "chevron.forward")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
         return image
     }()
     
     let button: UIButton = {
         let button = UIButton()
+		button.translatesAutoresizingMaskIntoConstraints = false
         button.contentHorizontalAlignment = .leading
-        button.setTitleColor(.lightGray, for: .normal)
+        button.setTitleColor(.lowContrastGray, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+	
     let btnIcon: UIImageView = {
         let image = UIImageView()
+		image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.translatesAutoresizingMaskIntoConstraints = false
         return  image
     }()
+	
+	let bottomBorder = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupSubViews()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -40,44 +41,53 @@ class UserProfileButtonView: UIView {
         setupBtnIcon()
         setupButton()
         setupArrowIcon()
+		setupBottomBorder()
     }
-    
-    func setupArrowIcon() {
-        addSubview(arrowIcon)
+	
+	func setupBtnIcon() {
+		addSubview(btnIcon)
+		
+		NSLayoutConstraint.activate([
+			btnIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+			btnIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+			btnIcon.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.032),
+			btnIcon.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.05)
+		])
+	}
         
-        arrowIcon.backgroundColor = .white
-        
-        NSLayoutConstraint.activate([
-            arrowIcon.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            arrowIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            arrowIcon.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.0164),
-            arrowIcon.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.0213)
-        ])
-    }
-    
     func setupButton() {
         addSubview(button)
 
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(equalTo: btnIcon.trailingAnchor, constant: 20),
             button.topAnchor.constraint(equalTo: self.topAnchor),
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+			button.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -0.5),
             button.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-        
-        ])
-        
+        ])		
     }
-    
-    func setupBtnIcon() {
-        addSubview(btnIcon)
-        
-        NSLayoutConstraint.activate([
-            btnIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            btnIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            btnIcon.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.032),
-            btnIcon.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.05)
-        
-        ])
-    }
+    	
+	func setupArrowIcon() {
+		addSubview(arrowIcon)
+		
+		NSLayoutConstraint.activate([
+			arrowIcon.trailingAnchor.constraint(equalTo: trailingAnchor),
+			arrowIcon.centerYAnchor.constraint(equalTo: centerYAnchor),
+			arrowIcon.heightAnchor.constraint(equalToConstant: 20),
+			arrowIcon.widthAnchor.constraint(lessThanOrEqualToConstant: 35),
+		])
+	}
+	
+	func setupBottomBorder() {
+		addSubview(bottomBorder)
+		bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+		bottomBorder.backgroundColor = .lowContrastGray
+		
+		NSLayoutConstraint.activate([
+			bottomBorder.topAnchor.constraint(equalTo: button.bottomAnchor),
+			bottomBorder.leadingAnchor.constraint(equalTo: button.leadingAnchor),
+			bottomBorder.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+			bottomBorder.heightAnchor.constraint(equalToConstant: 0.5),
+		])
+	}
     
 }

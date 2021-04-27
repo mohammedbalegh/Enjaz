@@ -22,7 +22,7 @@ class MajorGoalsScreenVC: KeyboardHandlingViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         
         title = NSLocalizedString("Major goals", comment: "")
         
@@ -63,7 +63,7 @@ class MajorGoalsScreenVC: KeyboardHandlingViewController{
         view.addSubview(majorGoalView)
         
         majorGoalView.textField.text = defaults.string(forKey: "MajorGoalOfCategory\(categoryId)")
-        majorGoalView.textField.textColor = .darkText
+        majorGoalView.textField.textColor = .highContrastText
         
         NSLayoutConstraint.activate([
             majorGoalView.topAnchor.constraint(equalTo: view.topAnchor, constant: LayoutConstants.screenHeight * 0.164),

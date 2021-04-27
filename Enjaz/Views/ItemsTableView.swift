@@ -2,16 +2,20 @@ import UIKit
 
 class ItemsTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
-    var items: [ItemModel] = []
+	var items: [ItemModel] = [] {
+		didSet {
+			reloadData()
+		}
+	}
     
-    let itemCardPopup = ItemCardPopup(hideOnOverlayTap: true)
+    let itemCardPopup = ItemCardPopup()
     
     init() {
         super.init(frame: .zero, style: .plain)
         delegate = self
         dataSource = self
         rowHeight = 70
-        
+		tableFooterView = UIView()
     }
     
     required init?(coder: NSCoder) {
@@ -25,6 +29,7 @@ class ItemsTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as! ItemsTableViewCell
         cell.itemModel =  items[indexPath.row]
+		cell.selectionStyle = .none
         return cell
     }
     
@@ -36,6 +41,6 @@ class ItemsTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         }
         
         itemCardPopup.itemModels = [items[indexPath.row]]
-        itemCardPopup.present()
+        itemCardPopup.present(animated: true)
     }
 }

@@ -8,7 +8,7 @@ extension UIView {
     
     func dropShadow(scale: Bool = true) {
         layer.masksToBounds = false
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.invertedSystemBackground.cgColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: -1, height: 1)
         layer.shadowRadius = 1
@@ -178,37 +178,37 @@ extension UIView {
     }
     
     func addTopBorder(withColor color: UIColor, andWidth width: CGFloat) {
-        let border = CALayer()
-        border.backgroundColor = color.cgColor
+        let border = UIView()
+        border.backgroundColor = color
         border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: width)
-        layer.addSublayer(border)
+		self.addSubview(border)
     }
     
     func addRightBorder(withColor color: UIColor, andWidth width: CGFloat) {
-        let border = CALayer()
-        border.backgroundColor = color.cgColor
+        let border = UIView()
+        border.backgroundColor = color
         border.frame = CGRect(x: frame.size.width - width, y: 0, width: width, height: frame.size.height)
-        layer.addSublayer(border)
+		self.addSubview(border)
     }
     
     func addBottomBorder(withColor color: UIColor, andWidth width: CGFloat) {
-        let border = CALayer()
-        border.backgroundColor = color.cgColor
+        let border = UIView()
+        border.backgroundColor = color
         border.frame = CGRect(x: 0, y: frame.size.height - width, width: frame.size.width, height: width)
-        layer.addSublayer(border)
+        self.addSubview(border)
     }
     
     func addLeftBorder(withColor color: UIColor, andWidth width: CGFloat) {
-        let border = CALayer()
-        border.backgroundColor = color.cgColor
+		let border = UIView()
+        border.backgroundColor = color
         border.frame = CGRect(x: 0, y: 0, width: width, height: frame.size.height)
-        layer.addSublayer(border)
+		self.addSubview(border)
     }
 }
 
 // MARK: Effects
 extension UIView {
-    private static let blurEffectTag = -1
+	static let blurEffectTag = -1
     
     func addBlurEffect(style: UIBlurEffect.Style) {
         let blurEffect = UIBlurEffect(style: style)
@@ -236,7 +236,7 @@ extension UIView {
     }
     
     func applyLightShadow() {
-        layer.shadowColor = UIColor(hex: 0x979797).cgColor
+        layer.shadowColor = UIColor.lightShadow.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowOpacity = 0.25
         layer.shadowRadius = 9
@@ -249,8 +249,8 @@ extension UIView {
         
         gradientLayer.cornerRadius = cornerRadius
         
-        let startColor = UIColor.gradientStartColor.cgColor
-        let endColor = UIColor.gradientEndColor.cgColor
+        let startColor = UIColor.accentGradientStart.cgColor
+        let endColor = UIColor.accentGradientEnd.cgColor
         
         if axis == .horizontal {
             gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
@@ -263,6 +263,16 @@ extension UIView {
         gradientLayer.colors = [startColor, endColor]
         layer.insertSublayer(gradientLayer, at: 0)
     }
+	
+	func updateAccentColorGradient() {
+		guard let sublayers = layer.sublayers else { return }
+		
+		for layer in sublayers {
+			if let gradientLayer = layer as? CAGradientLayer {
+				gradientLayer.colors = [UIColor.accentGradientStart.cgColor, UIColor.accentGradientEnd.cgColor]
+			}
+		}
+	}
     
     func toggleGradientLayer(show: Bool? = nil) {
         for sublayer in layer.sublayers ?? [] {
@@ -291,15 +301,14 @@ extension UIView {
     func roundCorner(_ corner: UIDirectionalRectCorner, withRadius radius: CGFloat? = nil) {
         roundCorners([corner], withRadius: radius)
     }
+	
+	func scale(to scale: CGFloat) {
+		self.transform = CGAffineTransform(scaleX: scale, y: scale)
+	}
 }
 
 // MARK: Animations and Transformations
 extension UIView {
-    func animate(opacityTo alpha: CGFloat, andScaleTo scale: CGFloat) {
-        self.alpha = alpha
-        self.transform = CGAffineTransform(scaleX: scale, y: scale)
-    }
-    
     func translateViewVertically(by translation: CGFloat) {
         self.frame.origin.y -= translation
     }
@@ -416,5 +425,5 @@ extension UIView {
         }
         
         return nil
-    }
+    }	
 }

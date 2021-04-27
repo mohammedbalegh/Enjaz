@@ -1,6 +1,6 @@
 import UIKit
 
-class NetworkingManager {
+struct NetworkingManager {
     enum StatusCodeError: Error {
         case statusCode(code: Int)
     }

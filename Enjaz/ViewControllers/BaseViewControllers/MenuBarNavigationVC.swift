@@ -2,38 +2,41 @@
 import UIKit
 
 class MenuBarNavigationVC: UIViewController {
-
-    enum selectStatus {
-        case selected
-        case deSelected
-    }
-    
-    var initialized = false
-    
+	
+	var initialized = false
+	var showSmallTabBar = false
+	
     var menuItems: [String] = [] {
         didSet {
-            topMenu.reloadData()
+            tabMenu.reloadData()
         }
     }
-    var controllerViews: [UIViewController] = [] {
+	
+    var viewControllers: [UIViewController] = [] {
         didSet {
-            topMenu.reloadData()
+            tabMenu.reloadData()
         }
     }
     
     fileprivate var currentViewController: UIViewController?
     
-    lazy var topMenu: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.semanticContentAttribute = .forceRightToLeft
-        cv.register(TopMenuCell.self, forCellWithReuseIdentifier: "topMenuCell")
-        cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .clear
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
+	lazy var tabMenu: UICollectionView = {
+		let layout = UICollectionViewFlowLayout()
+		let collectionViewWidth = view.frame.width * 0.94
+		let collectionViewHeight: CGFloat = 43
+		let height: CGFloat = showSmallTabBar ? 25 : collectionViewHeight
+		layout.itemSize = CGSize(width: collectionViewWidth / CGFloat(menuItems.count) - 8, height: height)
+		layout.scrollDirection = .horizontal
+		
+		let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: collectionViewWidth, height: collectionViewHeight), collectionViewLayout: layout)
+		collectionView.backgroundColor = .clear
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		collectionView.showsHorizontalScrollIndicator = false
+		collectionView.register(TabMenuCell.self, forCellWithReuseIdentifier: "cell")
+
+		return collectionView
+	}()
     
     let container: UIView = {
         let container = UIView()
@@ -44,114 +47,91 @@ class MenuBarNavigationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainScreenBackgroundColor
-        topMenu.delegate = self
-        topMenu.dataSource = self
-        setupSubviews()
+        view.backgroundColor = .background
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        selectFirstCell()
-    }
         
+		if !initialized {
+			selectFirstCell()
+			initialized = true
+		}
+    }
+	
     func selectFirstCell() {
-        if initialized == false {
-            presentController(controllerViews[0])
-            getSelectedCell(at: [0,0], selectCell: .selected)
-            initialized = true
-        }
+		let firstCellIndexPath = IndexPath(row: 0, section: 0)
+		tabMenu.selectItem(at: firstCellIndexPath, animated: false, scrollPosition: .left)
+		collectionView(tabMenu, didSelectItemAt: firstCellIndexPath)
     }
-    
-    func setupSubviews() {
-        setTopMenu()
-    }
-    
+	
     func presentController(_ controller: UIViewController) {
-        if controller == currentViewController { return }
-        removeCurrentViewController()
-        addChild(controller)
-        view.addSubview(controller.view)
+        guard controller != currentViewController else { return }
+		
+		controller.navigationItem.titleView = tabMenu
+		let presentedNavigationController = UINavigationController(rootViewController: controller)
+		
+		// Remove the bottom border of the navigationBar
+		presentedNavigationController.navigationBar.setBackgroundImage(UIImage(named: "navBarBackground"), for: .default)
+		presentedNavigationController.navigationBar.shadowImage = UIImage()
+		
+		transition(to: presentedNavigationController)
         currentViewController = controller
-        setupChildViewController()
-        controller.didMove(toParent: self)
     }
-    
-    func removeCurrentViewController() {
-        currentViewController?.willMove(toParent: nil)
-        currentViewController?.view.removeFromSuperview()
-        currentViewController?.removeFromParent()
-    }
-    
-    func getSelectedCell(at indexPath: IndexPath, selectCell: selectStatus) {
-        guard let cell = topMenu.cellForItem(at: indexPath) as? TopMenuCell else {
-            return
-        }
-        if selectCell == .selected {
-            cell.label.textColor = .accentColor
-            cell.addBottomBorder(withColor: .accentColor, andWidth: 2)
-        } else {
-            cell.label.textColor = .lightGray
-            cell.addBottomBorder(withColor: .mainScreenBackgroundColor, andWidth: 2)
-        }
-    }
-    
-    func setupChildViewController() {
-        
-        currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            currentViewController!.view.topAnchor.constraint(equalTo: topMenu.bottomAnchor),
-            currentViewController!.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            currentViewController!.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            currentViewController!.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-    
-    func setTopMenu() {
-        
-        container.addSubview(topMenu)
-        topMenu.fillSuperView()
-        
-        view.addSubview(container)
-        
-        NSLayoutConstraint.activate([
-            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            container.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            container.heightAnchor.constraint(equalToConstant: 30),
-            container.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-
-        container.layoutIfNeeded()
-        
-        container.addBottomBorder(withColor: .lightGray, andWidth: 0.5)
-    }
+	
+	func transition(to toVC: UIViewController) {
+		if let fromVC = children.first {
+			transitionWithAnimation(fromVC: fromVC, toVC: toVC)
+		} else {
+			addWithoutAnimation(child: toVC)
+		}
+	}
+	
+	func addWithoutAnimation(child toVC: UIViewController) {
+		addChild(toVC)
+		view.addSubview(toVC.view)
+		toVC.view.frame = view.bounds
+		toVC.didMove(toParent: self)
+	}
+	
+	func transitionWithAnimation(fromVC: UIViewController, toVC: UIViewController) {
+		addChild(toVC)
+		toVC.view.frame = view.bounds
+		
+		fromVC.willMove(toParent: nil)
+		
+		CATransaction.begin()
+		CATransaction.setValue(kCFBooleanTrue, forKey:kCATransactionDisableActions)
+		
+		transition(
+			from: fromVC,
+			to: toVC,
+			duration: 0,
+			options: [.transitionCrossDissolve],
+			animations: nil) { _ in
+			fromVC.removeFromParent()
+			toVC.didMove(toParent: self)
+		}
+		
+		CATransaction.commit()
+	}
     
 }
 
-extension MenuBarNavigationVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MenuBarNavigationVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return menuItems.count
-    }
-    
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return menuItems.count
+	}
+	
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topMenuCell", for: indexPath) as! TopMenuCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TabMenuCell
         cell.label.text = menuItems[indexPath.row]
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width / CGFloat(menuItems.count)) - 8, height: (collectionView.frame.height))
-    }
-    
+	
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for row in 0..<menuItems.count {
-            getSelectedCell(at: [0,row], selectCell: .deSelected)
-        }
-        
-        getSelectedCell(at: indexPath, selectCell: .selected)
-        presentController(controllerViews[indexPath.row])
+        presentController(viewControllers[indexPath.row])
     }
     
 }

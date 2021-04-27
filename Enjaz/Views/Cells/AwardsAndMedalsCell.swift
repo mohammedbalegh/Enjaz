@@ -27,7 +27,7 @@ class AwardsAndMedalsCell: UICollectionViewCell {
     
     let itemLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true
@@ -42,7 +42,7 @@ class AwardsAndMedalsCell: UICollectionViewCell {
         backgroundColor = .clear
         layer.borderWidth = 0.5
         layer.cornerRadius = 4
-        layer.borderColor = UIColor(hex: 0xCECECE).cgColor
+		layer.borderColor = UIColor.border.cgColor
         setupSubviews()
     }
     
@@ -79,4 +79,7 @@ class AwardsAndMedalsCell: UICollectionViewCell {
         ])
     }
     
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		layer.borderColor = UIColor.border.cgColor
+	}
 }

@@ -77,7 +77,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.clipsToBounds = true
-        collectionView.backgroundColor = .none
+        collectionView.backgroundColor = .clear
         collectionView.allowsMultipleSelection = false
         collectionView.isHidden = true
         
@@ -115,8 +115,14 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         didSet {
             calendarContainer.animateTwoConsecutiveAnimations(
                 withDuration: 0.3,
-                firstAnimation: { self.calendarContainer.animate(opacityTo: 0, andScaleTo: 0.85) },
-                secondAnimation: { self.calendarContainer.animate(opacityTo: 1, andScaleTo: 1) },
+                firstAnimation: {
+					self.calendarContainer.alpha = 0
+					self.calendarContainer.scale(to: 0.85)
+				},
+                secondAnimation: {
+					self.calendarContainer.alpha = 1
+					self.calendarContainer.scale(to: 1)
+				},
                 midAnimationCompletionHandler: {_ in
                     self.weekDaysCollectionView.isHidden = !self.showInWeeklyView
                     self.monthDaysCollectionView.isHidden = !self.weekDaysCollectionView.isHidden
@@ -126,7 +132,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
                     if self.showInWeeklyView {
                         self.weekDayLabelsStackView.showWeekDayNumbers()
                         self.weekDayLabelsStackView.spacing = 15
-                        self.calendarContainer.backgroundColor = .white
+                        self.calendarContainer.backgroundColor = .tertiaryBackground
                     } else {
                         self.weekDayLabelsStackView.hideWeekDayNumbers()
                         self.weekDayLabelsStackView.spacing = 0
@@ -484,7 +490,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
         let from = NSLocalizedString("from", comment: "")
         let to = NSLocalizedString("to", comment: "")
-        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accentColor, stringSize: 13)
+        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accent, stringSize: 13)
     }
 
     func getWeekDayCellRowBy(weekDayIndex: Int, andHour hour: Int) -> Int {
@@ -593,7 +599,7 @@ extension CalendarView: MultipleCellSelectionCollectionViewDelegate, UICollectio
             } else if upperRowBound >= lowerRowBound && (lowerRowBound...upperRowBound) ~= selectedItemIndexPath.row {
                 cell?.isBetweenSelectionBounds = true
             } else {
-                cell?.backgroundColor = indexPathsForSelectedItems.count > 1 ? UIColor.accentColor.withAlphaComponent(0.2) : .clear
+                cell?.backgroundColor = indexPathsForSelectedItems.count > 1 ? UIColor.accent.withAlphaComponent(0.2) : .clear
                 cell?.isBetweenSelectionBounds = false
             }
         }

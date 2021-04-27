@@ -5,7 +5,7 @@ class ItemsTableViewCell: UITableViewCell {
     var itemModel: ItemModel? {
         didSet {
             guard let itemModel = itemModel else { return }
-            let checkBtnColor: UIColor = itemModel.is_completed ? .accentColor : .systemGray
+            let checkBtnColor: UIColor = itemModel.is_completed ? .accent : .systemGray
             checkBtn.setTitleColor(checkBtnColor, for: .normal)
             checkBtn.layer.borderColor = checkBtnColor.cgColor
             if let imageName = RealmManager.retrieveItemImageSourceById(itemModel.image_id) {
@@ -33,7 +33,7 @@ class ItemsTableViewCell: UITableViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(hex: 0x011942)
+        label.textColor = .highContrastText
         label.font = .systemFont(ofSize: 16)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
@@ -59,7 +59,7 @@ class ItemsTableViewCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.font = .systemFont(ofSize: 14)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
@@ -76,7 +76,7 @@ class ItemsTableViewCell: UITableViewCell {
         button.titleLabel?.font = button.titleLabel?.font.withSize(16)
         button.titleLabel?.textAlignment = .center
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.gray.cgColor
+        button.layer.borderColor = UIColor.systemGray.cgColor
         button.addTarget(self, action: #selector(handleCheckBtnTap), for: .touchUpInside)
         
         return button

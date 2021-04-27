@@ -96,12 +96,17 @@ extension String {
         return attributedString
     }
 	
-	func toImage() -> UIImage? {
-		if let decodedData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
-			let image = UIImage(data: decodedData)
-			return image
-		}
-		return nil
+	func attributedStringWithImage(_ image: UIImage?, color: UIColor? = nil) -> NSAttributedString {
+		let attributedString = NSAttributedString(string: " \(self)")
+		
+		let imageAttachment = NSTextAttachment()
+		imageAttachment.image = image
+		
+		let imageString = NSMutableAttributedString(attachment: imageAttachment)
+		
+		imageString.append(attributedString)
+		
+		return imageString
 	}
 	
 	func pluralizeInEnglishBasedOn(count: Int) -> String {

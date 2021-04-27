@@ -49,12 +49,14 @@
 
 // MARK: HomeScreen
 "Today's goals" = "Today's goals";
+"Today's tasks" = "Today's tasks";
 "Today's demahs" = "Today's demahs";
 "Good morning %@!" = "Good morning %@!";
 "Good evening %@!" = "Good evening %@!";
 "Take a look at today's goals and habits" = "Take a look at today's goals and habits";
 "Take a look at today's remaining goals" = "Take a look at today's remaining goals";
 "No goals today" = "No goals today";
+"No tasks today" = "No tasks today";
 "No demahs today" = "No demahs today";
 
 // MARK: AdditionTypeScreen
@@ -92,6 +94,7 @@
 "Third Week" = "Third Week";
 "Fourth Week" = "Fourth Week";
 "Last Week" = "Last Week";
+"Add %@" = "Add %@";
 
 // MARK: GoalsScreen
 "My Goals" = "My Goals";
@@ -163,6 +166,7 @@
 //MARK: UserProfileScreen
 "Change password" = "Change password";
 "Awards and medals" = "Awards and medals";
+"Dark Mode" = "Dark Mode";
 "Logout" = "Logout";
 "Choose a category" = "Choose a category";
 
@@ -235,3 +239,7 @@
 "Hide Rest" = "Hide Rest";
 "Camera" = "Camera";
 "Photos" = "Photos";
+"Delete" = "Delete";
+"Off" = "Off";
+"On" = "On";
+"Auto" = "Auto";

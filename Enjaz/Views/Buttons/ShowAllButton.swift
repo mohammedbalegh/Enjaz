@@ -19,7 +19,7 @@ class ShowAllButton: UIButton {
         let imageView = UIImageView(image: image?.withRenderingMode(.alwaysTemplate))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageView.tintColor = .accentColor
+        imageView.tintColor = .accent
         imageView.contentMode = .scaleAspectFit
         
         return imageView

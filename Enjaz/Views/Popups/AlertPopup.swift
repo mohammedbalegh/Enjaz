@@ -17,7 +17,7 @@ class AlertPopup: Popup {
         
         let fontSize: CGFloat = max(20, LayoutConstants.screenWidth * 0.06)
         label.font = UIFont.systemFont(ofSize: fontSize)
-        label.textColor = .black
+        label.textColor = .invertedSystemBackground
         
         return label
     }()
@@ -34,8 +34,11 @@ class AlertPopup: Popup {
         
         return label
     }()
+	
+	var buttonLabel: [String]?
     
-    override func popupContainerDidShow() {
+    override func setupSubViews() {
+		super.setupSubViews()
         setupSuccessImage()
         setupTitleLabel()
         setupMessageLabel()
@@ -76,7 +79,7 @@ class AlertPopup: Popup {
         imageView.image = image
         titleLabel.text = title
         messageLabel.text = message
-        present()
+        present(animated: true)
     }
     
     func presentAsError(withMessage message: String) {

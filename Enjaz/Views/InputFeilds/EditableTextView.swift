@@ -56,7 +56,7 @@ class EditableTextView: UITextView, UITextViewDelegate, InputField {
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		if textView.textColor == .placeholderText {
 			textView.text = nil
-			textView.textColor = .black
+			textView.textColor = .invertedSystemBackground
 		}
         customDelegate?.textViewDidBeginEditing?(textView)
 	}

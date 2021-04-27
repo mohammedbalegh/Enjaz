@@ -54,11 +54,11 @@ class SelfEvaluationScreenVC: UIViewController {
         let textField = EditableTextView(frame: .zero)
         textField.placeholder = "أكتب ما تريد تحقيقه من اهداف هنا"
         textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.lowContrastGray.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    
+	
     let selfEvaluationChart: SelfEvaluationChart = {
         let chart = SelfEvaluationChart()
         chart.layer.cornerRadius = 15
@@ -68,7 +68,7 @@ class SelfEvaluationScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -80,7 +80,7 @@ class SelfEvaluationScreenVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         goalTextField.text = defaults.string(forKey: "GoalTextFieldOfCategory\(categoryId)")
-        goalTextField.textColor = .darkText
+        goalTextField.textColor = .highContrastText
         selfEvaluationChart.slider.value = defaults.float(forKey: "SliderValueOfCategory\(categoryId)")
     }
     
@@ -168,5 +168,9 @@ class SelfEvaluationScreenVC: UIViewController {
             selfEvaluationChart.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.15)
         ])
     }
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		goalTextField.layer.borderColor = UIColor.lowContrastGray.cgColor
+	}
 
 }

@@ -33,9 +33,11 @@ struct HttpRequest {
         var request = URLRequest(url: requestUrl)
         
         request.httpMethod = method.rawValue
-        request.httpBody = Data(query.utf8)
-        setRequestHeaders(of: &request)
-        
+		if method != .get {
+			request.httpBody = Data(query.utf8)
+			setRequestHeaders(of: &request)
+		}
+		
         // Send HTTP Request
         URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
     }

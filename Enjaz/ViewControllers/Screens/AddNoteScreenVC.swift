@@ -33,7 +33,7 @@ class AddNoteScreenVC: UIViewController {
         textView.placeholder = NSLocalizedString("Write whats on your mind", comment: "")
         textView.layer.borderWidth = 0.4
         textView.layer.cornerRadius = 5
-        textView.layer.borderColor = UIColor.borderColor.cgColor
+        textView.layer.borderColor = UIColor.border.cgColor
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -44,7 +44,6 @@ class AddNoteScreenVC: UIViewController {
         pickerPopup.picker.delegate = self
         pickerPopup.picker.dataSource = self
         
-        pickerPopup.dismissalHandler = handleNotesCategoryPickerDismissal
         pickerPopup.selectBtn.addTarget(self, action: #selector(handleNoteCategorySelection), for: .touchUpInside)
         
         return pickerPopup
@@ -55,7 +54,7 @@ class AddNoteScreenVC: UIViewController {
         super.viewDidLoad()
         
         title = NSLocalizedString("Add Note", comment: "")
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         self.hideKeyboardWhenTappedAround()
         setupSubView()
     }
@@ -73,14 +72,13 @@ class AddNoteScreenVC: UIViewController {
     }
     
     @objc func handlesSubmitNewNoteBtn() {
-        let alertPopup = AlertPopup(hideOnOverlayTap: true)
         if titleTextField.textField.text == "" {
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Note title Can't be empty", comment: ""))
+			AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Note title Can't be empty", comment: ""))
         } else if noteCategoryButton.noteCategoryBtn.currentTitle == NSLocalizedString("Note category", comment: "")  {
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Note category can't be empty", comment:  ""))
+			AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Note category can't be empty", comment:  ""))
         }  else if noteTextField.text == NSLocalizedString("Write whats on your mind", comment: "") {
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Please write whats on your mind", comment: ""))
-        } else  {
+			AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Please write whats on your mind", comment: ""))
+        } else {
             let aspect = PersonalAspectsModel()
             
             aspect.title = titleTextField.textField.text ?? ""
@@ -96,20 +94,17 @@ class AddNoteScreenVC: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
-    
-    @objc func handleNotesCategoryPickerDismissal() {
-        notesCategoryPicker.picker.selectRow(selectedNoteCategoryIndex, inComponent: 0, animated: false)
-    }
-    
+        
     @objc func handleNoteCategorySelection() {
         selectedNoteCategoryIndex = notesCategoryPicker.picker.selectedRow(inComponent: 0)
         selectedCategory = itemCategoryModels[selectedNoteCategoryIndex].localized_name
-        noteCategoryButton.noteCategoryBtn.setTitleColor(.black, for: .normal)
+        noteCategoryButton.noteCategoryBtn.setTitleColor(.invertedSystemBackground, for: .normal)
         noteCategoryButton.noteCategoryBtn.setTitle(selectedCategory, for: .normal)
         notesCategoryPicker.dismiss(animated: true)
     }
     
     @objc func handleNoteCategoryButtonTap() {
+		notesCategoryPicker.picker.selectRow(selectedNoteCategoryIndex, inComponent: 0, animated: false)
         notesCategoryPicker.present(animated: true)
     }
     
@@ -172,6 +167,10 @@ class AddNoteScreenVC: UIViewController {
         
         noteCategoryButton.addBottomBorder(withColor: .gray, andWidth: 0.2)
     }
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		noteTextField.layer.borderColor = UIColor.border.cgColor
+	}
 }
 
 extension AddNoteScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {

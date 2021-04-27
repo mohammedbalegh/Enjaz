@@ -18,7 +18,7 @@ class AlertBottomSheetView: BottomSheetView {
         
         let fontSize: CGFloat = max(20, LayoutConstants.screenWidth * 0.06)
         label.font = UIFont.systemFont(ofSize: fontSize)
-        label.textColor = .black
+        label.textColor = .invertedSystemBackground
         
         return label
     }()
@@ -43,7 +43,7 @@ class AlertBottomSheetView: BottomSheetView {
         button.setTitle(NSLocalizedString("Ok", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
-        button.backgroundColor = .accentColor
+        button.backgroundColor = .accent
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
         

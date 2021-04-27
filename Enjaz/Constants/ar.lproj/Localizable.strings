@@ -48,13 +48,15 @@
 "Incorrect code" = "الكود غير صحيح";
 
 // MARK: HomeScreen
-"Today's goals" = "مهام اليوم";
+"Today's goals" = "اهداف اليوم";
+"Today's tasks" = "مهام اليوم";
 "Today's demahs" = "ديمة اليوم";
 "Good morning %@!" = "صباح الخير %@!";
 "Good evening %@!" = "مساء الخير %@!";
 "Take a look at today's goals and habits" = "أطلع على أهداف وعادات اليوم";
 "Take a look at today's remaining goals" = "أطلع على الأهداف المتبقية";
 "No goals today" = "لا يوجد أهداف اليوم";
+"No tasks today" = "لا يوجد مهام اليوم";
 "No demahs today" = "لا يوجد ديم اليوم";
 
 // MARK: AdditionTypeScreen
@@ -92,6 +94,7 @@
 "Third Week" = "الأسبوع الثالث";
 "Fourth Week" = "الأسبوع الرابع";
 "Last Week" = "الأسبوع الاخير";
+"Add %@" = "إضافة %@";
 
 // MARK: GoalsScreen
 "My Goals" = "أهدافي";
@@ -163,6 +166,7 @@
 //MARK: UserProfileScreen
 "Change password" = "تغير كلمة المرور";
 "Awards and medals" = "الجوائز و الاوسمة";
+"Dark Mode" = "الوضع الليلي";
 "Logout" = "تسجيل الخروج";
 "Choose a category" = "أختار مجال المناسب";
 
@@ -235,3 +239,7 @@
 "Hide Rest" = "اخفاء البقية";
 "Camera" = "الكاميرا";
 "Photos" = "الصور";
+"Delete" = "حذف";
+"Off" = "إلغاء التفعيل";
+"On" = "تفعيل";
+"Auto" = "تلقائي";

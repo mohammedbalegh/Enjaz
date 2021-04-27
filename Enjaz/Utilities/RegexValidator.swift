@@ -16,5 +16,5 @@ struct RegexValidator {
 		let passwordRegex = "^\\d{4}$"
 		return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: candidate)
 	}
-	
+		
 }

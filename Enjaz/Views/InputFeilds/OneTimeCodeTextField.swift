@@ -62,10 +62,10 @@ class OneTimeCodeTextField: UITextField {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textAlignment = .center
             label.font = .systemFont(ofSize: 30)
-            label.backgroundColor = .white
+            label.backgroundColor = .secondaryBackground
             label.textColor = .gray
             label.layer.borderWidth = 0.5
-            label.layer.borderColor = UIColor.accentColor.cgColor
+            label.layer.borderColor = UIColor.accent.cgColor
             label.applyShadow()
             
             DispatchQueue.main.async {

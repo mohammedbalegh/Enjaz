@@ -26,7 +26,7 @@ class NotesScreenVC: UIViewController {
     var titleLabel: SelfEvaluationLabel = {
         var label = SelfEvaluationLabel()
         label.textAlignment = .center
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -37,7 +37,7 @@ class NotesScreenVC: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         
         textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.borderColor.cgColor
+        textView.layer.borderColor = UIColor.border.cgColor
         textView.layer.cornerRadius = 5
         
         return textView
@@ -54,7 +54,7 @@ class NotesScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         setup()
         self.hideKeyboardWhenTappedAround()
     }

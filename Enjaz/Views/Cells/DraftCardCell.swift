@@ -19,9 +19,10 @@ class DraftCardCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = .secondaryBackground
         layer.cornerRadius = cornerRadius
         applyLightShadow()
+		layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
         setupSubviews()
     }
     
@@ -56,5 +57,8 @@ class DraftCardCell: UICollectionViewCell {
             draftMetaDataContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-        
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
+	}
 }

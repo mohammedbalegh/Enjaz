@@ -35,7 +35,7 @@ class ArticleScreenVC: UIViewController {
         draftMetaDataContainer.dateLabel.font = .systemFont(ofSize: 14)
         
         draftMetaDataContainer.categoryLabel.textColor = .systemGray2
-        draftMetaDataContainer.titleLabel.textColor = .accentColor
+        draftMetaDataContainer.titleLabel.textColor = .accent
         
         return draftMetaDataContainer
     }()
@@ -55,7 +55,7 @@ class ArticleScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         title = NSLocalizedString("Draft", comment: "")
         
         setupSubViews()

@@ -8,8 +8,7 @@ class LoginScreenVC: AuthScreenVC {
         
         button.setTitle(NSLocalizedString("Forgot your password?", comment: ""), for: .normal)
         button.setTitleColor(.gray, for: .normal)
-        let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
-        button.titleLabel?.font = .systemFont(ofSize: fontSize)
+        button.titleLabel?.font = .systemFont(ofSize: 17)
         button.addTarget(self, action: #selector(handleForgotPasswordBtnTap), for: .touchUpInside)
         
         return button
@@ -127,7 +126,7 @@ class LoginScreenVC: AuthScreenVC {
     }
     
     func navigateToMainTabBarController() {
-        navigationController?.pushViewController(MainTabBarController(), animated: true)
+		dismiss(animated: true)
     }
     
     func navigateToEmailVerificationScreen() {

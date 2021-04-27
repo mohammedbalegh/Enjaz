@@ -29,7 +29,7 @@ class PersonalAspectsCell: UICollectionViewCell {
     let aspectTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor(hex: 0x011942)
+        label.textColor = .highContrastText
         label.font = label.font.withSize(15)
         return label
     }()
@@ -45,7 +45,7 @@ class PersonalAspectsCell: UICollectionViewCell {
     let aspectCategory: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.font = label.font.withSize(10)
         return label
     }()
@@ -55,7 +55,7 @@ class PersonalAspectsCell: UICollectionViewCell {
         super.init(frame: frame)
         setupSubviews()
         
-        backgroundColor = .white
+        backgroundColor = .tertiaryBackground
     }
     
     required init?(coder: NSCoder) {

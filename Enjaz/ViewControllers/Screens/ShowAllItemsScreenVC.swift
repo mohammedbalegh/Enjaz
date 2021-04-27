@@ -5,7 +5,7 @@ class ShowAllItemsScreenVC: ShowAllCardsScreenVC {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+	
     override func registerCardCell() {
         self.collectionView!.register(ItemCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
     }
@@ -28,7 +28,7 @@ class ShowAllItemsScreenVC: ShowAllCardsScreenVC {
         guard let itemModel = cardModels[indexPath.row] as? ItemModel else { return }
         itemCardPopup.itemModels =  [itemModel]
 		itemCardPopup.itemsUpdateHandler = popViewController
-        self.itemCardPopup.present()
+        self.itemCardPopup.present(animated: true)
     }
     
 }

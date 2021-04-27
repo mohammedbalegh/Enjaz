@@ -85,7 +85,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
         super.viewDidLoad()
         setupSubViews()
         hideKeyboardWhenTappedAround()
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         title = NSLocalizedString("Contact Us", comment: "")
     }
     

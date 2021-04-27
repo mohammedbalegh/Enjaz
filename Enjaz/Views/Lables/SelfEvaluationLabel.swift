@@ -20,7 +20,7 @@ class SelfEvaluationLabel: UILabel {
     let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.font = label.font.withSize(15)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0

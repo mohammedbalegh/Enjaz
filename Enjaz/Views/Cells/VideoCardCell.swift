@@ -16,12 +16,12 @@ class VideoCardCell: DraftCardCell {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        let playIcon = UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate).withTintColor(.white)
+        let playIcon = UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate).withTintColor(.secondaryBackground)
         
         button.setImage(playIcon, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        button.backgroundColor = .accentColor
-        button.tintColor = .white
+        button.backgroundColor = .accent
+        button.tintColor = .secondaryBackground
         
         return button
     }()

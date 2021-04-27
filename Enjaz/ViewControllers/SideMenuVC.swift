@@ -7,7 +7,6 @@ class SideMenuVC: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setImage(UIImage(systemName: "xmark")?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
-                
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.cornerRadius = 8
@@ -22,8 +21,7 @@ class SideMenuVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .white
-        label.text = user?.name
-        
+		
         return label
     }()
     
@@ -47,12 +45,10 @@ class SideMenuVC: UIViewController {
     
     let signOutBtn = SideMenuBtn(label: NSLocalizedString("Sign Out", comment: ""), image: UIImage(named: "signOutIcon"))
     
-    
-    var user = UserDefaultsManager.user
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+		nameLabel.text = UserDefaultsManager.user?.name
     }
     
     override func viewDidLoad() {
@@ -162,10 +158,19 @@ class SideMenuVC: UIViewController {
         dismiss(animated: true)
     }
     
-    @objc func handleSignOutBtnTap() {
+	
+	@objc func handleSignOutBtnTap() {
         Auth.signOut()
-        UserDefaultsManager.user = nil
-        UserDefaultsManager.isLoggedIn = false
-        navigationController?.pushViewController(LoginScreenVC(), animated: true)
+		navigateToLoginScreen()
     }
+	
+	func navigateToLoginScreen() {
+		let authNavigationController = UINavigationController(rootViewController: LoginScreenVC())
+		authNavigationController.modalPresentationStyle = .fullScreen
+		present(authNavigationController, animated: true)
+	}
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		view.updateAccentColorGradient()
+	}
 }

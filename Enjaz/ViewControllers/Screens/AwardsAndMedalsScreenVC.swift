@@ -28,7 +28,7 @@ class AwardsAndMedalsScreenVC: UIViewController {
     
     let collectionTitle: UILabel = {
         let label = UILabel()
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -38,7 +38,7 @@ class AwardsAndMedalsScreenVC: UIViewController {
         
         title = NSLocalizedString("Awards and medals", comment: "")
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         rewardsCollectionView.delegate = self
         rewardsCollectionView.dataSource = self
         

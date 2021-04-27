@@ -17,7 +17,7 @@ class PersonalAspectsScreenVC: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .mainScreenBackgroundColor
+        collectionView.backgroundColor = .background
         collectionView.register(PersonalAspectsCell.self, forCellWithReuseIdentifier: "personalAspectsCell")
         return collectionView
     }()
@@ -35,7 +35,7 @@ class PersonalAspectsScreenVC: UIViewController {
         
         title = NSLocalizedString("Personal Aspects", comment: "")
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         setup()
     }
     

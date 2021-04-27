@@ -17,9 +17,10 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = NSLocalizedString("Enter verification code", comment: "")
-        let fontSize: CGFloat = max(23, LayoutConstants.screenHeight * 0.025)
-        label.font = UIFont.systemFont(ofSize: fontSize)
-        label.textColor = .accentColor
+        label.font = UIFont.systemFont(ofSize: 25)
+		label.adjustsFontSizeToFitWidth = true
+		label.minimumScaleFactor = 0.8
+        label.textColor = .accent
         return label
     }()
     
@@ -31,8 +32,9 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         label.textAlignment = .center
         label.numberOfLines = 0
         label.text = NSLocalizedString("Verification code sent to your email", comment: "")
-        let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
-        label.font = UIFont.systemFont(ofSize: fontSize)
+        label.font = UIFont.systemFont(ofSize: 18)
+		label.adjustsFontSizeToFitWidth = true
+		label.minimumScaleFactor = 0.8
         label.textColor = .gray
         return label
     }()
@@ -43,13 +45,13 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
-        button.setTitleColor(.accentColor, for: .normal)
+        button.setTitleColor(.accent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
         return button
     }()
     
-    let alertPopup = AlertPopup(hideOnOverlayTap: true)
+    let alertPopup = AlertPopup()
     
     var isConnectedToInternet = false
     
@@ -65,7 +67,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         store.subscribe(self)
         
@@ -161,9 +163,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     
     @objc func handleVerificationCodeEntered(resetCode: String) {
         guard let email = email else { return }
-        
-        print(email)
-        
+		
         guard isConnectedToInternet else {
             alertPopup.presentAsInternetConnectionError()
             return
@@ -197,6 +197,6 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     }
     
     func navigateToMainTabBarController() {
-        navigationController?.pushViewController(MainTabBarController(), animated: true)
+		dismiss(animated: true)
     }
 }

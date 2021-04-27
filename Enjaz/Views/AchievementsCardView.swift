@@ -6,7 +6,7 @@ class AchievementsCardView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.font = label.font.withSize(17)
-        label.textColor = UIColor(hex: 0x011942)
+        label.textColor = .highContrastText
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ class AchievementsCardView: UIView {
         label.layer.borderColor = UIColor.gray.cgColor
         label.layer.borderWidth = 0.5
         label.layer.masksToBounds = true
-        label.textColor = .darkGray
+        label.textColor = .highContrastGray
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.1
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ class AchievementsCardView: UIView {
         let label = UILabel()
         label.font = label.font.withSize(13)
         label.textAlignment = .center
-        label.textColor = .darkGray
+        label.textColor = .highContrastGray
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ class AchievementsCardView: UIView {
     
     override func layoutSubviews() {
          super.layoutSubviews()
-         self.backgroundColor = .white
+         self.backgroundColor = .secondaryBackground
          self.layer.cornerRadius = 8
      }
     

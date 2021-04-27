@@ -12,7 +12,7 @@ class EditableTextViewBadge: UIView {
     
     let badgeTitle: UILabel = {
         let label = UILabel()
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.textAlignment = .center
         label.font = label.font.withSize(16)
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -46,13 +46,12 @@ class DailyViewTableViewCustomHeader: UITableViewHeaderFooterView {
     	
 	override var frame: CGRect {
 		didSet {
-			addBottomBorder(withColor: .borderColor, andWidth: 0.5)
+			addBottomBorder(withColor: .border, andWidth: 0.5)
 		}
 	}
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .white
         
         setupLabelStackView()
     }
