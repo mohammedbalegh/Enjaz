@@ -42,7 +42,9 @@ class CardsViewHeader: UIView {
     var cardsCount: Int? {
         didSet {
             guard let cardsCount = cardsCount else { return }
-            cardsCountLabel.text = String(cardsCount)
+            DispatchQueue.main.async {
+                self.cardsCountLabel.text = String(cardsCount)
+            }
             cardsCountLabelWidthConstraint?.constant = cardsCountLabelWidth
         }
     }

@@ -3,7 +3,7 @@ import UIKit
 
 class GoalsBankScreenVC: UIViewController {
     
-    var goalSuggestions: [String] = []
+    var goalSuggestions: [GoalSuggestionsModel] = []
     
     var goalsTableView: UITableView = {
         let tableView = UITableView()
@@ -45,8 +45,13 @@ class GoalsBankScreenVC: UIViewController {
     }
     
     func updateScreen() {
-        NetworkingManager.retrieveGoalSuggestions() { goalSuggestions in
-            self.goalSuggestions = goalSuggestions
+        NetworkingManager.retrieveGoalSuggestions() { goals, error in
+            guard let goals = goals else {
+                print(error!)
+                return
+            }
+            
+            self.goalSuggestions = goals.data
             self.goalsTableView.reloadData()
         }
     }
@@ -90,7 +95,7 @@ extension GoalsBankScreenVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalsTableCell") as! GoalsTableCell
         cell.cellCount.text = "\(indexPath.row + 1)"
-        cell.goalLabel.text = "\(goalSuggestions[indexPath.row])"
+        cell.goalLabel.text = "\(goalSuggestions[indexPath.row].text)"
         return cell
     }
 }

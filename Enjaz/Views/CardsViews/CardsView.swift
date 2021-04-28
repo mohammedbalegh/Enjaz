@@ -16,9 +16,18 @@ class CardsView: UIView {
         return collectionView
     }()
     
+    let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = .mainScreenBackgroundColor
+        indicator.color = .darkGray
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     let header = CardsViewHeader()
     
-    private let noCardsLabel: UILabel = {
+    let noCardsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -65,6 +74,7 @@ class CardsView: UIView {
         setupHeader()
         setupCardsCollectionView()
         setupNoCardsLabel()
+        setupLoadingIndicator()
     }
     
     func setupHeader() {
@@ -94,6 +104,26 @@ class CardsView: UIView {
         addSubview(noCardsLabel)
         
         noCardsLabel.fill(cardsCollectionView)
+    }
+    
+    func setupLoadingIndicator() {
+        addSubview(loadingIndicator)
+        
+        NSLayoutConstraint.activate([
+            loadingIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            loadingIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        ])
+    }
+    
+    func startIndicatorAnimating() {
+        loadingIndicator.startAnimating()
+    }
+    
+    
+    func stopIndicatorAnimating() {
+        DispatchQueue.main.async {
+            self.loadingIndicator.stopAnimating()
+        }
     }
     
 }

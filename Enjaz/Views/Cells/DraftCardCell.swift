@@ -2,9 +2,9 @@ import UIKit
 
 class DraftCardCell: UICollectionViewCell {
     let cornerRadius: CGFloat = 18
-        
-    lazy var thumbnail: UIImageView = {
-        let imageView = UIImageView()
+    
+    lazy var thumbnail: DynamicImageView = {
+        let imageView = DynamicImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.contentMode = .scaleAspectFill

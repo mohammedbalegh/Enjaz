@@ -29,11 +29,15 @@ struct HttpRequest {
             components.queryItems = queryItems
         }
         
-        guard let query = components.url?.query else { return }
         var request = URLRequest(url: requestUrl)
         
         request.httpMethod = method.rawValue
-        request.httpBody = Data(query.utf8)
+        
+        if method != .get {
+            guard let query = components.url?.query else { return }
+            request.httpBody = Data(query.utf8)
+        }
+        
         setRequestHeaders(of: &request)
         
         // Send HTTP Request

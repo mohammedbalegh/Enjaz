@@ -5,18 +5,18 @@ class ArticleScreenVC: UIViewController {
     
     var articleModel: ArticleModel! {
         didSet {
-            articleHeaderImageView.image = articleModel.header
+            articleHeaderImageView.setImage(from: articleModel.image)
             draftMetaDataContainer.categoryLabel.text = articleModel.category
             draftMetaDataContainer.titleLabel.text = articleModel.title
-            draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: articleModel.date, withFormat: "d/M/yyyy", calendarIdentifier: .gregorian)
-            articleTextView.text = articleModel.article
+            draftMetaDataContainer.dateLabel.text = articleModel.date
+            articleTextView.text = articleModel.articleTitle
         }
     }
     
     let scrollView = UIScrollView()
     
-    let articleHeaderImageView: UIImageView = {
-        let imageView = UIImageView()
+    let articleHeaderImageView: DynamicImageView = {
+        let imageView = DynamicImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         imageView.layer.cornerRadius = 18

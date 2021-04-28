@@ -1,9 +1,14 @@
 import UIKit
 
-struct VideoModel {
-    let thumbnail: UIImage?
-    let category: String
-    let title: String
-    let date: Date
-    let videoUrl: String
+struct VideoModel: Decodable {
+    let thumbnail = UIImage(named: "tempArticleThumbnail")
+    let title, articleTitle: String
+    let video: String
+    let category, date: String
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case articleTitle = "article_title"
+        case video, category, date
+    }
 }

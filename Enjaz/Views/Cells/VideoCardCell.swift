@@ -6,9 +6,10 @@ class VideoCardCell: DraftCardCell {
             guard let viewModel = viewModel else { return }
             
             self.thumbnail.image = viewModel.thumbnail
+            url = viewModel.video
             self.draftMetaDataContainer.categoryLabel.text = viewModel.category
             self.draftMetaDataContainer.titleLabel.text = viewModel.title
-            self.draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: viewModel.date, withFormat: "d/M/yyyy", calendarIdentifier: .gregorian)
+            self.draftMetaDataContainer.dateLabel.text = viewModel.date
         }
     }
     
@@ -25,6 +26,8 @@ class VideoCardCell: DraftCardCell {
         
         return button
     }()
+    
+    var url = ""
     
     override func setupSubviews() {
         super.setupSubviews()

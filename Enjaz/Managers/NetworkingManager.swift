@@ -5,6 +5,18 @@ class NetworkingManager {
         case statusCode(code: Int)
     }
     
+    enum EncodingError: Error {
+        case invalidDataFormat
+    }
+    
+    enum CallType {
+        case video
+        case article
+        case bank
+    }
+    
+    static let cache = NSCache<NSString, NSString>()
+    
     static func signUp(user: UserModel, password: String, completionHandler: @escaping (_ token: String?, _ user: [String: Any]?, _ error: Error?) -> Void) {
         let url = URL(string: NetworkingUrls.apiSignupUrl)
         let data = [
@@ -172,44 +184,165 @@ class NetworkingManager {
     }
     
     // @stub
-    static func retrieveGoalSuggestions(completionHandler: (_ goalSuggestions: [String]) -> Void) {
-        let goalSuggestions = ["الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي","الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي","الحصول علي 97% في دراستي","المداومة علي الركض صباحا","قراءة كتاب عن احد الفنون","زيارة ذوي القربي","المداومة علي اذكار الصباح و المساء","تلاوة 5 صفحات من القرآن يوميا"]
+    static func retrieveGoalSuggestions(completionHandler: @escaping (GoalSuggestionsBankModel?, String?) -> Void) {
         
-        completionHandler(goalSuggestions)
+        guard let url = URL(string: NetworkingUrls.apiGoalsSuggestionsBankUrl) else {
+            print("not valid ur")
+            return
+        }
+        
+        let task =  URLSession.shared.dataTask(with: url) { data ,response, error in
+            if let _ = error {
+                completionHandler(nil,  "unable to complete your request")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completionHandler(nil, "Invalid response from server")
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(nil, "invalid data format")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let goals = try decoder.decode(GoalSuggestionsBankModel.self, from: data)
+                completionHandler(goals, nil)
+            } catch {
+                completionHandler(nil, "invalid data format")
+            }
+            
+        }
+        task.resume()
+        
+    }
+    
+    static func retrieveArticles(in page: Int, completionHandler: @escaping ([ArticleModel]?, Error?) -> Void) {
+        
+        let url = URL(string: NetworkingUrls.apiBlogArticlesUrl + String(page))
+        
+        let key = NSString(string: url!.absoluteString)
+        
+        let request = HttpRequest(url: url, method: .get)
+        
+        if let requestCache = cache.object(forKey: key) {
+            do {
+                let blog = try encodeArticles(requestCache, type: BlogModel.self)
+                let articles = blog?.data
+                completionHandler(articles, nil)
+            } catch {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+            
+            return
+        }
+        
+        request.send { data, response, error in
+            
+            if let _ = error {
+                completionHandler(nil,  error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                completionHandler(nil, StatusCodeError.statusCode(code: response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
+            
+            do {
+                let blog = try encodeArticles(dataAsString, type: BlogModel.self)
+                let articles = blog?.data
+                NetworkingManager.cache.setObject(dataAsString, forKey: key)
+                
+                completionHandler(articles, nil)
+            } catch {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+        }
+        
+    }
+    
+    static func encodeArticles<T: Decodable>(_ data: NSString, type: T.Type)  throws -> T? {
+        
+        let stringToData = Data(String(data).utf8)
+        let decoder = JSONDecoder()
+        let blog = try decoder.decode(type.self, from: stringToData)
+        return blog
+        
     }
     
     // @stub
-    static func retrieveArticles(completionHandler: (_ articles: [ArticleModel]) -> Void) {
-        let image = UIImage(named: "tempArticleThumbnail")
-        let header = UIImage(named: "tempArticleHeader")
+    static func retrieveVideos(in page: Int, completionHandler: @escaping ([VideoModel]?, Error?) -> Void) {
         
-        let articles = [
-            ArticleModel(thumbnail: image, header: header, category: "Religious", title: "Article Title", date: Date(), article: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
-            ArticleModel(thumbnail: image, header: header, category: "Religious", title: "Article Title", date: Date(), article: ""),
-            ArticleModel(thumbnail: image, header: header, category: "Religious", title: "Article Title", date: Date(), article: ""),
-        ]
+        let url = URL(string: NetworkingUrls.apiBlogVideosUrl + String(page))
         
-        completionHandler(articles)
-    }
-    
-    // @stub
-    static func retrieveVideos(completionHandler: (_ videos: [VideoModel]) -> Void) {
-        let image = UIImage(named: "tempArticleThumbnail")
+        let key = NSString(string: url!.absoluteString)
         
-        let videos = [
-            VideoModel(thumbnail: image, category: "Religious", title: "Video Title", date: Date(), videoUrl: ""),
-            VideoModel(thumbnail: image, category: "Religious", title: "Video Title", date: Date(), videoUrl: ""),
-            VideoModel(thumbnail: image, category: "Religious", title: "Video Title", date: Date(), videoUrl: ""),
-        ]
+        let request = HttpRequest(url: url, method: .get)
         
-        completionHandler(videos)
+        if let requestCache = cache.object(forKey: key) {
+            do {
+                let blog = try encodeArticles(requestCache, type: VideosTopModel.self)
+                let articles = blog?.data
+                completionHandler(articles, nil)
+            } catch {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+            
+            return
+        }
+        
+        request.send { data, response, error in
+            
+            if let _ = error {
+                completionHandler(nil,  error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                completionHandler(nil, StatusCodeError.statusCode(code: response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
+            
+            do {
+                let blog = try encodeArticles(dataAsString, type: VideosTopModel.self)
+                let articles = blog?.data
+                NetworkingManager.cache.setObject(dataAsString, forKey: key)
+                
+                completionHandler(articles, nil)
+            } catch {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+        }
     }
     
     // @stub
     static func sendEmail(name: String, phoneNumber: String, messageContent: String) {
         
     }
-        
+    
     private static func parseDataIntoDictionary(data: Data) -> [String: Any]? {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         let dictionary = json as? [String: Any]

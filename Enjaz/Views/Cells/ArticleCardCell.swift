@@ -5,10 +5,10 @@ class ArticleCardCell: DraftCardCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            self.thumbnail.image = viewModel.thumbnail
+            self.thumbnail.setImage(from: viewModel.image)
             self.draftMetaDataContainer.categoryLabel.text = viewModel.category
             self.draftMetaDataContainer.titleLabel.text = viewModel.title
-            self.draftMetaDataContainer.dateLabel.text = DateAndTimeTools.getReadableDate(from: viewModel.date, withFormat: "d/M/yyyy", calendarIdentifier: .gregorian)
+            self.draftMetaDataContainer.dateLabel.text = viewModel.date
         }
     }
 }

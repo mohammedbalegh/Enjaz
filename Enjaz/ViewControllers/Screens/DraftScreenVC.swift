@@ -1,4 +1,7 @@
 import UIKit
+import AVFoundation
+import MediaPlayer
+import AVKit
 
 class DraftScreenVC: UIViewController {
     
@@ -6,6 +9,8 @@ class DraftScreenVC: UIViewController {
     
     var articleModels: [ArticleModel] = []
     var videoModels: [VideoModel] = []
+    var articlesPage = 1
+    var videosPage = 1
     
     let cardsReuseIdentifier = "cardCell"
     
@@ -24,6 +29,7 @@ class DraftScreenVC: UIViewController {
         cardsView.cardsCollectionView.register(ArticleCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
         cardsView.cardsCollectionView.delegate = self
         cardsView.cardsCollectionView.dataSource = self
+        cardsView.tag = 1
         
         cardsView.title = NSLocalizedString("Most Recent Articles", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No articles yet", comment: "")
@@ -39,6 +45,7 @@ class DraftScreenVC: UIViewController {
         cardsView.cardsCollectionView.register(VideoCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
         cardsView.cardsCollectionView.delegate = self
         cardsView.cardsCollectionView.dataSource = self
+        cardsView.tag = 2
         
         cardsView.title = NSLocalizedString("Most Recent Videos", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No videos yet", comment: "")
@@ -61,6 +68,7 @@ class DraftScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateScreen()
         
         view.backgroundColor = .mainScreenBackgroundColor
@@ -119,23 +127,47 @@ class DraftScreenVC: UIViewController {
     // MARK: Tools
         
     func updateScreen() {
-        updateArticles()
-        updateVideos()
+        updateArticles(page: articlesPage)
+        updateVideos(page: videosPage)
     }
     
-    func updateArticles() {
-        NetworkingManager.retrieveArticles() { articles in
-            self.articleModels = articles
-            self.articlesView.cardsCount = articles.count
-            self.articlesView.cardsCollectionView.reloadData()
+    func updateArticles(page: Int) {
+        articlesView.startIndicatorAnimating()
+        articlesView.noCardsLabel.isHidden = true
+        
+        NetworkingManager.retrieveArticles(in: page) { (articles, error) in
+            DispatchQueue.main.async {
+                self.articlesView.stopIndicatorAnimating()
+                
+                guard let articles = articles else {
+                    self.articlesView.noCardsLabel.isHidden = false
+                    return
+                }
+                
+                self.articleModels += articles
+                self.articlesView.cardsCount = articles.count
+                self.articlesView.cardsCollectionView.reloadData()
+            }
         }
     }
     
-    func updateVideos() {
-        NetworkingManager.retrieveVideos() { videos in
-            self.videoModels = videos
-            self.videosView.cardsCount = videos.count
-            self.videosView.cardsCollectionView.reloadData()
+    func updateVideos(page: Int) {
+        videosView.startIndicatorAnimating()
+        videosView.noCardsLabel.isHidden = true
+        
+        NetworkingManager.retrieveVideos(in: page) { videos, error  in
+            DispatchQueue.main.async {
+                self.videosView.stopIndicatorAnimating()
+                
+                guard let videos = videos else {
+                    self.videosView.noCardsLabel.isHidden = false
+                    return
+                }
+                
+                self.videoModels += videos
+                self.videosView.cardsCount = videos.count
+                self.videosView.cardsCollectionView.reloadData()
+            }
         }
     }
     
@@ -159,11 +191,21 @@ class DraftScreenVC: UIViewController {
         navigationController?.pushViewController(showAllCardsScreenVC, animated: true)
     }
     
+    func playVideo(with url: URL) {
+        let player = AVPlayer(url: url)
+        let playerVC = AVPlayerViewController()
+        playerVC.delegate = self
+        playerVC.player = player
+        self.present(playerVC, animated: true) {
+            playerVC.player!.play()
+        }
+    }
+    
 }
 
-extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
+extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, AVPlayerViewControllerDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == articlesView ? articleModels.count : videoModels.count
+        return collectionView == articlesView.cardsCollectionView ? articleModels.count : videoModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -197,6 +239,30 @@ extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == articlesView.cardsCollectionView {
             navigateToArticleScreen(articleModel: articleModels[indexPath.row])
+        } else if collectionView == videosView.cardsCollectionView {
+            let cell = collectionView.cellForItem(at: indexPath) as? VideoCardCell
+            guard let url = URL(string: cell!.url) else {
+                return
+            }
+            playVideo(with: url)
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+
+        let offsetX = scrollView.contentOffset.x
+        let contentWidth = scrollView.contentSize.height
+        let width = LayoutConstants.screenWidth
+        
+        if offsetX > contentWidth - width {
+            if scrollView.isEqual(articlesView) {
+                articlesPage += 1
+                updateArticles(page: articlesPage)
+            } else if scrollView.isEqual(videosView) {
+                videosPage += 1
+                updateVideos(page: videosPage)
+            }
+            
         }
     }
 }

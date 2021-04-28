@@ -5,4 +5,7 @@ struct NetworkingUrls {
     static let apiResetPasswordUrl = apiBaseUrl + "/sendcode"
     static let apiRequestEmailVerificationCodeUrl = apiBaseUrl + "/sendbasicemail"
     static let apiEmailVerificationUrl = apiBaseUrl + "/verifyemail"
+    static let apiBlogArticlesUrl = apiBaseUrl + "/blog?page="
+    static let apiBlogVideosUrl = apiBaseUrl + "/video?page="
+    static let apiGoalsSuggestionsBankUrl = apiBaseUrl + "/bank"
 }
