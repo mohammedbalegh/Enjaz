@@ -146,9 +146,10 @@ class RootTabBarController: UITabBarController {
     
 	func configureTabBar() {
 		setValue(RootTabBar(), forKey: "TabBar")
+		
 		let homeScreenVC = HomeScreenVC()
 		let calendarScreenVC = CalendarScreenVC()
-		let monthlyPlanScreenVC = MonthlyPlanScreenVC()
+		let monthlyPlanScreenVC = MyPlanScreenVC()
 		let goalsScreenVC = GoalsScreenVC()
 		
 		setTabBarIcon(for: homeScreenVC, withImageName: "homeIcon")
@@ -157,12 +158,16 @@ class RootTabBarController: UITabBarController {
         setTabBarIcon(for: goalsScreenVC, withImageName: "categoryIcon")
 		
 		viewControllers = [homeScreenVC, calendarScreenVC, additionTypeScreenVC, monthlyPlanScreenVC, goalsScreenVC]
-        screenTitles = [NSLocalizedString("Home", comment: ""),
-                        NSLocalizedString("Calendar", comment: ""),
-                        NSLocalizedString("Choose Addition Type", comment: ""),
-                        NSLocalizedString("Monthly Plan", comment: ""),
-                        NSLocalizedString("Goals", comment: "")]
-        
+        screenTitles = [
+			NSLocalizedString("Home", comment: ""),
+			NSLocalizedString("Calendar", comment: ""),
+			NSLocalizedString("Choose Addition Type", comment: ""),
+			NSLocalizedString("My Plan", comment: ""),
+			NSLocalizedString("Goals", comment: "")
+		]
+		
+		title = screenTitles?.first
+        		
 		// Disable the additionTypeScreen tab bar item, because the screen is accessed through the floating button.
 		tabBar.items?[2].isEnabled = false
 	}
@@ -205,6 +210,7 @@ class RootTabBarController: UITabBarController {
         navigationItem.titleView = selectedIndex == 0 ? dateVerticalStack : navBarTitleLabel
         
         navBarTitleLabel.text = screenTitles?[selectedIndex]
+		title = screenTitles?[selectedIndex]
 	}
     	
 	func navigateToAdditionTypeScreen() {

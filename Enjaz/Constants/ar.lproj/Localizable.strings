@@ -2,7 +2,7 @@
 "Home" = "الرئيسية";
 "Calendar" = "التقويم";
 "New Addition" = "إضافة جديدة";
-"Monthly Plan" = "الخطة الشهرية";
+"My Plan" = "خطتي";
 "Goals" = "الأهداف";
 
 // MARK: StartScreen
@@ -170,7 +170,7 @@
 "Logout" = "تسجيل الخروج";
 "Choose a category" = "أختار مجال المناسب";
 
-// MARK: MonthlyPlanScreenVC
+// MARK: MyPlanScreenVC
 "Tasks" = "المهام";
 "Demahs" = "الديمة";
 "Achievements" = "الإنجازات";

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MonthlyPlanScreenVC: MenuBarNavigationVC {
+class MyPlanScreenVC: MenuBarNavigationVC {
 	
     override func viewDidLoad() {
         super.viewDidLoad()

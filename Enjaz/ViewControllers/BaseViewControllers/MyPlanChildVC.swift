@@ -1,6 +1,6 @@
 import UIKit
 
-class MonthlyPlanChildVC: UIViewController {
+class MyPlanChildVC: UIViewController {
 	
 	let searchVC = SearchControllerVC()
 	
@@ -23,7 +23,7 @@ class MonthlyPlanChildVC: UIViewController {
 	
 }
 
-extension MonthlyPlanChildVC:  UISearchResultsUpdating, UISearchControllerDelegate {
+extension MyPlanChildVC:  UISearchResultsUpdating, UISearchControllerDelegate {
 	
 	func updateSearchResults(for searchController: UISearchController) {
 		guard let text = searchController.searchBar.text else { return }

@@ -34,10 +34,12 @@ class EditableTextView: UITextView, UITextViewDelegate, InputField {
 		backgroundColor = .clear
 		delegate = self
 		isEditable = true
-        setTextViewDirectionToMatchSuperView()
+        setTextViewDirectionToMatchUserInterface()
+		
         if placeholder == text {
             textColor = .placeholderText
         }
+		
         textContainerInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
 	}
 	
@@ -46,7 +48,7 @@ class EditableTextView: UITextView, UITextViewDelegate, InputField {
 	}
 	
     func setPlaceholder(_ textView: UITextView) {
-        setTextViewDirectionToMatchSuperView()
+        setTextViewDirectionToMatchUserInterface()
         textView.text = placeholder
         textView.textColor = .placeholderText
     }
@@ -62,9 +64,10 @@ class EditableTextView: UITextView, UITextViewDelegate, InputField {
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
-		if textView.text.isEmpty {
+		if textView.text.isEmpty {			
             setPlaceholder(textView)
 		}
+		
         customDelegate?.textViewDidEndEditing?(textView)
 	}
 	

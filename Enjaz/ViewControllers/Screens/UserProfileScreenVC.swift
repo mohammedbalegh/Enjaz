@@ -57,14 +57,15 @@ class UserProfileScreenVC: UIViewController {
 		return stackView
 	}()
 	
-	let logoutBtn: UserProfileButtonView = {
+	let signOutBtn: UserProfileButtonView = {
 		let button = UserProfileButtonView()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
-		button.button.setTitle(NSLocalizedString("Logout", comment: ""), for: .normal)
+		button.button.setTitle(NSLocalizedString("Sign Out", comment: ""), for: .normal)
 		button.btnIcon.image = UIImage(named: "logoutIcon")
 		button.arrowIcon.isHidden = true
 		button.bottomBorder.isHidden = true
+		button.button.addTarget(self, action: #selector(handleSignOutBtnTap), for: .touchUpInside)
 		
 		return button
 	}()
@@ -111,13 +112,13 @@ class UserProfileScreenVC: UIViewController {
 	}
 	    
     func setupLogoutBtn() {
-        view.addSubview(logoutBtn)
+        view.addSubview(signOutBtn)
 
         NSLayoutConstraint.activate([
-            logoutBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.069)),
-            logoutBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoutBtn.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.322),
-            logoutBtn.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.031)
+            signOutBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(LayoutConstants.screenHeight * 0.069)),
+            signOutBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            signOutBtn.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.322),
+            signOutBtn.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.031)
         ])
     }
     
@@ -158,6 +159,17 @@ class UserProfileScreenVC: UIViewController {
 		UserDefaultsManager.interfaceStyleId = selectedValueIndex
 		
 		themePickerBottomSheet.dismiss(animated: true)
+	}
+	
+	@objc func handleSignOutBtnTap() {
+		Auth.signOut()
+		navigateToLoginScreen()
+	}
+	
+	func navigateToLoginScreen() {
+		let authNavigationController = UINavigationController(rootViewController: LoginScreenVC())
+		authNavigationController.modalPresentationStyle = .fullScreen
+		present(authNavigationController, animated: true)
 	}
 }
 

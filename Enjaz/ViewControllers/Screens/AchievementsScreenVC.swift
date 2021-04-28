@@ -1,6 +1,6 @@
 import UIKit
 
-class AchievementsScreenVC: MonthlyPlanChildVC {
+class AchievementsScreenVC: MyPlanChildVC {
     
     var achievementModels: [ItemModel] = [] {
         didSet {

@@ -2,7 +2,7 @@
 "Home" = "Home";
 "Calendar" = "Calendar";
 "New Addition" = "New Addition";
-"Monthly Plan" = "Monthly Plan";
+"My Plan" = "My Plan";
 "Goals" = "Goals";
 
 // MARK: StartScreen
@@ -170,7 +170,7 @@
 "Logout" = "Logout";
 "Choose a category" = "Choose a category";
 
-// MARK: MonthlyPlanScreenVC
+// MARK: MyPlanScreenVC
 "Tasks" = "Tasks";
 "Demahs" = "Demahs";
 "Achievements" = "Achievements";

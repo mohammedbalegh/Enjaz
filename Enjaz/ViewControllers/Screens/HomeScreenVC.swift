@@ -37,11 +37,11 @@ class HomeScreenVC: UIViewController {
         let view = GreetingMessageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        let mode = getHour()
+		let hour = DateAndTimeTools.getDateComponentsOf(Date(), forCalendarIdentifier: Calendar.current.identifier).hour ?? 0
         let name = user?.name
 		let firstName = String(name?.split(separator: " ").first ?? "")
         
-        if mode == "am" {
+        if hour < 12 {
             view.image.image = UIImage(named: "sunIcon")
             view.welcomeLabel.text = String(format: NSLocalizedString("Good morning %@!", comment: ""), firstName)
             view.messageLabel.text = NSLocalizedString("Take a look at today's goals and habits", comment: "")
@@ -134,12 +134,13 @@ class HomeScreenVC: UIViewController {
         
     func setupSubviews()  {
 		setupScrollView()
-        setupWelcomeBadge()
+        setupGreetingMessageView()
         setupItemViewsStack()
     }
 	
 	func setupScrollView() {
 		view.addSubview(scrollView)
+		
 		NSLayoutConstraint.activate([
 			scrollView.topAnchor.constraint(equalTo: view.topAnchor),
 			scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -148,14 +149,14 @@ class HomeScreenVC: UIViewController {
 		])
 	}
 	
-	func setupWelcomeBadge() {
+	func setupGreetingMessageView() {
 		scrollView.addSubview(greetingMessageView)
 		
 		NSLayoutConstraint.activate([
-			greetingMessageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstants.screenWidth * 0.06),
-			greetingMessageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: LayoutConstants.screenHeight * 0.055),
+			greetingMessageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
+			greetingMessageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+			greetingMessageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 			greetingMessageView.heightAnchor.constraint(equalToConstant: 30),
-			greetingMessageView.widthAnchor.constraint(equalTo: view.widthAnchor)
 		])
 	}
     
@@ -164,11 +165,11 @@ class HomeScreenVC: UIViewController {
 		let height = itemViewsStack.calculateHeightBasedOn(arrangedSubviewHeight: 240)
 		
         NSLayoutConstraint.activate([
-			itemViewsStack.topAnchor.constraint(equalTo: greetingMessageView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.06),
+			itemViewsStack.topAnchor.constraint(equalTo: greetingMessageView.bottomAnchor, constant: 50),
 			itemViewsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
 			itemViewsStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -60),
 			itemViewsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			itemViewsStack.heightAnchor.constraint(equalToConstant: height)
+			itemViewsStack.heightAnchor.constraint(equalToConstant: height),
         ])
     }
 	
@@ -227,16 +228,7 @@ class HomeScreenVC: UIViewController {
 		taskModels = updatedTaskModels
         demahModels = updatedDemahModels
     }
-    
-    func getHour() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "a"
-        formatter.amSymbol = "Am"
-        formatter.pmSymbol = "Pm"
-        let timeFromDate = formatter.string(from: Date())
-        return timeFromDate
-    }
-        
+            
     func navigateToShowAllItemsScreen(withModels models: [ItemModel], title: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

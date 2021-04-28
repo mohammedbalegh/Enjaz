@@ -1,6 +1,6 @@
 import UIKit
 
-class MonthItemsScreenVC: MonthlyPlanChildVC {
+class MonthItemsScreenVC: MyPlanChildVC {
 	
     let cardsReuseIdentifier = "cardCell"
 	

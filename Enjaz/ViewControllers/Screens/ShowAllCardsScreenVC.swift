@@ -5,7 +5,11 @@ class ShowAllCardsScreenVC: UICollectionViewController, UICollectionViewDelegate
     let cardsReuseIdentifier = "CardCell"
     let headerReuseIdentifier = "HeaderCell"
     
-    var cardModels: [Any] = []
+	var cardModels: [Any] = [] {
+		didSet {
+			collectionView.reloadData()
+		}
+	}
 
     let itemCardPopup = ItemCardPopup()
         

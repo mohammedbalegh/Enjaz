@@ -19,18 +19,7 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 		title = "\(NSLocalizedString("\(category.localized_name)", comment: ""))"
 		updateScreen()
 	}
-	
-    func getUpcomingAndCompletedGoalsScreen(itemModels: [ItemModel], title: String) -> ShowAllItemsScreenVC {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
-        let upcomingAndCompletedGoalsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
-        upcomingAndCompletedGoalsScreenVC.cardModels = itemModels
-        upcomingAndCompletedGoalsScreenVC.title = title
-        
-        return upcomingAndCompletedGoalsScreenVC
-    }
-	
+		
 	func updateScreen() {
 		guard let category = category else { return }
 		
@@ -49,7 +38,19 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 		
 		tableView.reloadData()
 	}
-    
+	
+	func getUpcomingAndCompletedGoalsScreen(itemModels: [ItemModel], title: String) -> ShowAllItemsScreenVC {
+		let layout = UICollectionViewFlowLayout()
+		layout.scrollDirection = .vertical
+		
+		let upcomingAndCompletedGoalsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
+		upcomingAndCompletedGoalsScreenVC.delegate = self
+		upcomingAndCompletedGoalsScreenVC.cardModels = itemModels
+		upcomingAndCompletedGoalsScreenVC.title = title
+		
+		return upcomingAndCompletedGoalsScreenVC
+	}
+	    
     func getTargetViewControllerBasedOnIndexPath(_ indexPath: IndexPath) -> UIViewController? {
 		guard let category = category else { return nil }
 		
@@ -80,4 +81,19 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
             navigationController?.pushViewController(targetViewController, animated: true)
         }
     }    
+}
+
+extension MonthGoalsScreenVC: ItemsScreenDelegate {
+	func didUpdateItem(_ itemsScreen: ShowAllItemsScreenVC) {
+		guard let items = itemsScreen.cardModels as? [ItemModel] else { return }
+		
+		if items == completedGoals {
+			updateScreen()
+			itemsScreen.cardModels = completedGoals
+		} else {
+			updateScreen()
+			itemsScreen.cardModels = upcomingGoals
+		}
+		
+	}
 }
