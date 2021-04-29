@@ -28,7 +28,7 @@ class PrivacyPolicyAndAboutAppScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         
         setupSubView()
     }

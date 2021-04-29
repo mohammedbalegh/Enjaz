@@ -19,7 +19,7 @@ class CardsView: UIView {
     let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-        indicator.backgroundColor = .mainScreenBackgroundColor
+        indicator.backgroundColor = .background
         indicator.color = .darkGray
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
@@ -93,7 +93,7 @@ class CardsView: UIView {
         addSubview(cardsCollectionView)
         
         NSLayoutConstraint.activate([
-            cardsCollectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 0),
+            cardsCollectionView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 5),
             cardsCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             cardsCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             cardsCollectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)

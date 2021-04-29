@@ -72,6 +72,8 @@ struct Auth {
     }
     
     static func signOut() {
+		UserDefaultsManager.user = nil
+		UserDefaultsManager.isLoggedIn = false
         resetAccessTokenAndUserIdInKeyChain()
     }
     

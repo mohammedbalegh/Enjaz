@@ -2,14 +2,12 @@
 import UIKit
 
 class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
-    
-    var chosenCard = 0
-        
+	
     lazy var goalCard: TypeCardBtn = {
         let card = TypeCardBtn()
         card.delegate = self
         card.id = ItemType.goal.id
-        card.typeImage.image = UIImage(named: "goalIcon")
+		card.typeImageContainer.imageView.image = ItemType.goal.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have a goal that you want to achieve in a specific field", comment: "")
         return card
@@ -19,7 +17,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         let card = TypeCardBtn()
         card.delegate = self
         card.id = ItemType.demah.id
-        card.typeImage.image = UIImage(named: "demahIcon")
+        card.typeImageContainer.imageView.image = ItemType.demah.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have a habit throughout a specific period", comment: "")
         return card
@@ -29,7 +27,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         let card = TypeCardBtn()
         card.delegate = self
         card.id = ItemType.achievement.id
-        card.typeImage.image = UIImage(named: "achievementIcon")
+		card.typeImageContainer.imageView.image = ItemType.achievement.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have an achievement that you want to complete in a specific time", comment: "")
         return card
@@ -39,7 +37,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         let card = TypeCardBtn()
         card.delegate = self
         card.id = ItemType.task.id
-        card.typeImage.image = UIImage(named: "taskIcon")
+        card.typeImageContainer.imageView.image = ItemType.task.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
         card.typeDescription.text = NSLocalizedString("If you have a task that want to complete in a specific time", comment: "")
         return card
@@ -64,27 +62,22 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         
         return stackView
     }()
-        
-    let alertPopup = AlertPopup(hideOnOverlayTap: true)
-    
-    var selectedTypeId = -1
-    
+	
     var delegate: AddItemScreenModalDelegate?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .mainScreenBackgroundColor
-                
+        view.backgroundColor = .background
+		
         setupSubviews()
     }
-        
+	
     func setupSubviews() {
         setupGoalDemahStack()
         setupStackAchievementTaskStack()
     }
-        
+	
     func setupGoalDemahStack() {
         view.addSubview(goalDemahStack)
                 
@@ -106,20 +99,10 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
             achievementTaskStack.heightAnchor.constraint(equalTo: goalDemahStack.heightAnchor),
         ])
     }
-        
+	
     func handleCardSelection(cardId selectedCardId: Int) {
-        selectedTypeId = selectedCardId
-        taskCard.selectedId = selectedCardId
-        demahCard.selectedId = selectedCardId
-        goalCard.selectedId = selectedCardId
-        achievementCard.selectedId = selectedCardId
-    }
- 
-    func resetCardSelection() {
-        selectedTypeId = -1
-        taskCard.selectedId = -1
-        demahCard.selectedId = -1
-        goalCard.selectedId = -1
-        achievementCard.selectedId = -1
+		let addItemScreenVC = AddItemScreenVC()
+		addItemScreenVC.itemType = selectedCardId
+		navigationController?.pushViewController(addItemScreenVC, animated: true)
     }
 }

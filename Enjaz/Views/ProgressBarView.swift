@@ -2,16 +2,16 @@ import UIKit
 
 class ProgressBarView: UIView {
     
-	private var barIcon: UIImageView = {
-        var image = UIImageView()
-        image.image = UIImage(named: "calendarBadge")
+	private var barIcon: RoundImageViewContainer = {
+        var image = RoundImageViewContainer()
+		image.backgroundColor = .background
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
 	private var mainLabel: UILabel = {
         var label = UILabel()
-        label.textColor = UIColor(hex:0x011942)
+		label.textColor = .highContrastText
         label.font = .systemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -42,7 +42,7 @@ class ProgressBarView: UIView {
     private var progressView: UIProgressView = {
         var view = UIProgressView(progressViewStyle: .bar)
         view.trackTintColor = UIColor(hex: 0xD0E9FA)
-		view.tintColor = .accentColor
+		view.tintColor = .accent
         view.layer.cornerRadius = 4
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -55,12 +55,15 @@ class ProgressBarView: UIView {
 		self.itemType = itemType
 		super.init(frame: .zero)
 		
-        backgroundColor = .white
+        backgroundColor = .secondaryBackground
         layer.cornerRadius = 8
         layer.masksToBounds = true
 		
+		barIcon.image = UIImage(named: "\(itemType.name.lowercased())Icon")
+		
 		setLabels()
         applyLightShadow()
+		layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
         setupSubviews()
     }
     
@@ -105,7 +108,7 @@ class ProgressBarView: UIView {
         
         NSLayoutConstraint.activate([
             subLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 5),
-            subLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            subLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             subLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.4),
             subLabel.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.0246)
         ])
@@ -153,4 +156,7 @@ class ProgressBarView: UIView {
 		}
 	}
 
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
+	}
 }

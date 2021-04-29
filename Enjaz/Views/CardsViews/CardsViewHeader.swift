@@ -7,7 +7,7 @@ class CardsViewHeader: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.font = label.font.withSize(18)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
@@ -19,7 +19,7 @@ class CardsViewHeader: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = UIColor.white
+		label.textColor = .white
         label.font = label.font.withSize(11)
         label.textAlignment = .center
         label.backgroundColor = UIColor(hex: 0xFF7676)

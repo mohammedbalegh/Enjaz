@@ -12,7 +12,7 @@ class CarouselVC: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
     }
     
     func setupCollectionView() {

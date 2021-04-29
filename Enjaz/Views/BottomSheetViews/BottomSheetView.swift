@@ -24,6 +24,7 @@ class BottomSheetView: UIView {
         view.layer.cornerRadius = 25
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.applyLightShadow()
+		view.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
         
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(handlePanGesture))
         view.addGestureRecognizer(gesture)
@@ -155,4 +156,9 @@ class BottomSheetView: UIView {
             self.contentView.frame.origin.y = YOrigin
         }, completion: completionHandler)
     }
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		contentView.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
+		dismiss(animated: false)
+	}
 }

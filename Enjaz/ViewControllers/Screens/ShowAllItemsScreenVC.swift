@@ -2,10 +2,12 @@ import UIKit
 
 class ShowAllItemsScreenVC: ShowAllCardsScreenVC {
     
+	var delegate: ItemsScreenDelegate?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+	
     override func registerCardCell() {
         self.collectionView!.register(ItemCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
     }
@@ -19,16 +21,16 @@ class ShowAllItemsScreenVC: ShowAllCardsScreenVC {
         
         return cell
     }
-    
-	func popViewController() {
-		navigationController?.popViewController(animated: true)
-	}
-	
+    	
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let itemModel = cardModels[indexPath.row] as? ItemModel else { return }
         itemCardPopup.itemModels =  [itemModel]
-		itemCardPopup.itemsUpdateHandler = popViewController
-        self.itemCardPopup.present()
+		itemCardPopup.itemsUpdateHandler = handleItemUpdate
+        self.itemCardPopup.present(animated: true)
     }
+	
+	func handleItemUpdate() {
+		delegate?.didUpdateItem(self)
+	}
     
 }

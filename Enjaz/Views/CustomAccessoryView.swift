@@ -7,7 +7,7 @@ class CustomAccessoryView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
-        button.setTitleColor(.accentColor, for: .normal)
+        button.setTitleColor(.accent, for: .normal)
         
         return button
     }()

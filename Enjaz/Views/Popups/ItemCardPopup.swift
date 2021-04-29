@@ -33,7 +33,8 @@ class ItemCardPopup: Popup {
         return collectionView
     }()
 		    
-    override func popupContainerDidShow() {
+    override func setupSubViews() {
+		super.setupSubViews()
         setupCardsCarouselCollectionViewView()
     }
     
@@ -63,7 +64,7 @@ class ItemCardPopup: Popup {
 		
 		// TODO: Show congrats popup and prompt to add to achievements in case item is a goal.
 		
-		dismiss()
+		dismiss(animated: true)
 	}
 	
 	

@@ -3,7 +3,7 @@ import UIKit
 class AuthTextField : UIView {
 	// MARK: Properties
 	
-    static let height: CGFloat = max(LayoutConstants.screenHeight * 0.085, 50)
+    static let height: CGFloat = max(LayoutConstants.screenHeight * 0.08, 50)
     
 	let textField = UITextField()
 	let icon = UIImageView()
@@ -26,7 +26,7 @@ class AuthTextField : UIView {
 	var defaultErrorMessage: String?
 	var validator: ((String) -> Bool)?
 	
-	let iconHorizontalMargin: CGFloat = 12
+	let iconHorizontalMargin: CGFloat = 17
 	let errorLabelHeight: CGFloat = 12
 	
 	var text: String {
@@ -68,8 +68,9 @@ class AuthTextField : UIView {
 		textFieldContainer.layer.cornerRadius = containerHeight / 2
 		
 		textFieldContainer.applyLightShadow()
+		textFieldContainer.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
 		
-		textFieldContainer.backgroundColor = .white
+		textFieldContainer.backgroundColor = .secondaryBackground
 		
 		NSLayoutConstraint.activate([
 			textFieldContainer.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 3),
@@ -160,5 +161,9 @@ class AuthTextField : UIView {
 	
 	@objc func hideErrorMessage() {
 		errorLabel.text = ""
+	}
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		textFieldContainer.layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor.lightShadow.cgColor
 	}
 }

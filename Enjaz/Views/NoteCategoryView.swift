@@ -38,7 +38,7 @@ class NoteCategoryView: UIView {
     var textView: UITextView = {
         var text = UITextView()
         text.text = "تصنيف المفكرة"
-        text.textColor = .lightGray
+        text.textColor = .lowContrastGray
         text.backgroundColor = .clear
         text.translatesAutoresizingMaskIntoConstraints = false
         return text

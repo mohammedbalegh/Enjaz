@@ -79,18 +79,60 @@ struct DateAndTimeTools {
         return currentDate
     }
     
+    static func setDateAndTimeLabelText(_ viewModel: ItemModel) -> NSAttributedString {
+        let itemDate = Date(timeIntervalSince1970: viewModel.date)
+        let dateFormat: String = {
+            if viewModel.isRepeated { return "d/M/yy" }
+            if Calendar.current.isDateInToday(itemDate) { return "hh:00  aa" }
+            return "d/M/yyyy hh:00  aa"
+        }()
+        
+        let readableStartDate = DateAndTimeTools.getReadableDate(from: itemDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
+        let readableEndDate: String = {
+            guard viewModel.isRepeated else { return "" }
+            
+            let itemEndDate = Date(timeIntervalSince1970: viewModel.endDate)
+            return DateAndTimeTools.getReadableDate(from: itemEndDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
+        }()
+        
+        let from = NSLocalizedString("from", comment: "")
+        let to = NSLocalizedString("to", comment: "")
+        
+        let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accent, stringSize: 11)
+        
+        let itemReadableDate = viewModel.isRepeated
+            ? rangeDate
+            : NSAttributedString(string: readableStartDate)
+        
+        return itemReadableDate
+    }
+    
     static func convertHourModelTo24HrFormatInt(_ hourModel: HourModel) -> Int {
         if hourModel.hour == 12 && hourModel.period == "pm" { return 12 }
         
         return hourModel.period == "pm" ? (hourModel.hour + 12) % 24 : hourModel.hour
     }
+	
+	static func convert12HourFormatTo24HrFormatInt(_ hourString: String) -> Int? {		
+		let splitString = hourString.split(separator: " ")
+		guard let hour = Int(splitString.first ?? "") else { return nil }
+		guard let period = splitString.last?.lowercased() else { return nil }
+				
+		if hour == 12 && period == "pm" { return 12 }
+		
+		return period == "pm" ? (hour + 12) % 24 : hour
+	}
     
-    static func getComponentsOfUnixTimeStampDate(timeIntervalSince1970: TimeInterval, forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> DateComponents {
-        let date = Date(timeIntervalSince1970: timeIntervalSince1970)
-        let calendar = Calendar(identifier: calendarIdentifier)
-        let dateComponents = calendar.dateComponents([.hour, .day, .month, .year], from: date)
-        
-        return dateComponents
+	static func getDateComponentsOf(_ date: Date, forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> DateComponents {
+		let calendar = Calendar(identifier: calendarIdentifier)
+		let dateComponents = calendar.dateComponents([.minute, .hour, .day, .month, .year], from: date)
+		
+		return dateComponents
+	}
+	
+    static func getDateComponentsOf(unixTimeStamp: TimeInterval, forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> DateComponents {
+        let date = Date(timeIntervalSince1970: unixTimeStamp)
+		return getDateComponentsOf(date, forCalendarIdentifier: calendarIdentifier)
     }
     
     static func getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier calendarIdentifier: Calendar.Identifier) -> (Double, Double) {

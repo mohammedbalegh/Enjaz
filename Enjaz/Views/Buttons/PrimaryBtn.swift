@@ -82,10 +82,10 @@ class PrimaryBtn: UIButton {
             applyAccentColorGradient(size: CGSize(width: btnWidth, height: btnHeight), cornerRadius: layer.cornerRadius)
             activityIndicator.color = .white
             setTitleColor(.white, for: .normal)
-            layer.shadowColor = UIColor.accentColor.cgColor
+            layer.shadowColor = UIColor.accent.cgColor
         } else {
             backgroundColor = .white
-            activityIndicator.color = .accentColor
+            activityIndicator.color = .accent
             setTitleColor( .gray, for: .normal)
             layer.shadowColor = UIColor.gray.cgColor
         }
@@ -109,4 +109,10 @@ class PrimaryBtn: UIButton {
             activityIndicator.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -layer.cornerRadius * 0.5 - 10),
         ])
     }
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		if theme == .blue {
+			updateAccentColorGradient()
+		}
+	}
 }

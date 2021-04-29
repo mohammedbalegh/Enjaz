@@ -7,6 +7,13 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
             label.text = viewModel.label
             subLabel.text = viewModel.subLabel
             iconImageView.source = viewModel.imageSource
+			
+			if viewModel.subLabel.isEmpty && labelsVerticalStack.arrangedSubviews.count == 2 {
+				labelsVerticalStack.removeArrangedSubview(subLabel)
+				subLabel.removeFromSuperview()
+			} else if !viewModel.subLabel.isEmpty && labelsVerticalStack.arrangedSubviews.count == 1 {
+				labelsVerticalStack.addArrangedSubview(subLabel)
+			}
         }
     }
     
@@ -14,7 +21,7 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
     let label: UILabel = {
         let label = UILabel(frame: .zero)
         
-        label.textColor = .black
+        label.textColor = .invertedSystemBackground
         label.baselineAdjustment = .alignCenters
         
         return label
@@ -26,7 +33,7 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 8.5)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
-        label.textColor = .lightGray
+        label.textColor = .lowContrastGray
         label.baselineAdjustment = .alignCenters
         
         return label
@@ -43,7 +50,7 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
     }()
     
     let arrowIcon: UIImageView = {
-        let image = UIImage(systemName: "chevron.forward")?.withTintColor(.darkGray, renderingMode: .alwaysOriginal)
+        let image = UIImage(systemName: "chevron.forward")?.withTintColor(.highContrastGray, renderingMode: .alwaysOriginal)
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -65,7 +72,7 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        backgroundColor = .white
+        backgroundColor = .secondaryBackground
         selectionStyle = .none
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
     }

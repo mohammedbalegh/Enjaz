@@ -78,7 +78,7 @@ class MajorGoalsView: UIView {
         addSubview(textField)
         
         textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.border.cgColor
         textField.layer.cornerRadius = 5
         
         NSLayoutConstraint.activate([
@@ -88,5 +88,8 @@ class MajorGoalsView: UIView {
             textField.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
     }
-    
+
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		textField.layer.borderColor = UIColor.border.cgColor
+	}
 }

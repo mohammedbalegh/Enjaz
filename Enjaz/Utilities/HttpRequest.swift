@@ -36,10 +36,9 @@ struct HttpRequest {
         if method != .get {
             guard let query = components.url?.query else { return }
             request.httpBody = Data(query.utf8)
+            setRequestHeaders(of: &request)
         }
-        
-        setRequestHeaders(of: &request)
-        
+         
         // Send HTTP Request
         URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
     }

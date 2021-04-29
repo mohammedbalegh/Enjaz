@@ -10,7 +10,7 @@ class OnboardingScreenVC: UIViewController {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .gray
         pageControl.semanticContentAttribute = .forceLeftToRight
-        pageControl.currentPageIndicatorTintColor = .accentColor
+        pageControl.currentPageIndicatorTintColor = .accent
         pageControl.numberOfPages = 4
         pageControl.subviews.forEach {
             $0.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -26,17 +26,10 @@ class OnboardingScreenVC: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    let logo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "logo")
-        return imageView
-    }()
-    
+        
     let mainLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.font = label.font.withSize(24)
@@ -59,10 +52,15 @@ class OnboardingScreenVC: UIViewController {
     let carousel: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+		
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(CarouselCell.self, forCellWithReuseIdentifier: "carouselCell")
+		cv.translatesAutoresizingMaskIntoConstraints = false
+		
         cv.showsHorizontalScrollIndicator = false
-        cv.translatesAutoresizingMaskIntoConstraints = false
+		cv.backgroundColor = .clear
+		cv.isPagingEnabled = true
+		cv.register(CarouselCell.self, forCellWithReuseIdentifier: "carouselCell")
+		
         return cv
     }()
     
@@ -73,7 +71,7 @@ class OnboardingScreenVC: UIViewController {
         super.viewDidLoad()
         carousel.delegate = self
         carousel.dataSource = self
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         mainLabel.text = carouselCard.mainLabel[0]
         secondaryLabel.text = carouselCard.secondaryLabel[0]
         setupSubviews()
@@ -81,7 +79,6 @@ class OnboardingScreenVC: UIViewController {
     
     func setupSubviews() {
         setupCarouselBackground()
-        setupLogo()
         setupRegisterBtn()
         setupLoginBtn()
         setupCarousel()
@@ -156,29 +153,15 @@ class OnboardingScreenVC: UIViewController {
         
         loginBtn.addTarget(self, action: #selector(handleLoginBtnTap), for: .touchUpInside)
     }
-    
-    func setupLogo() {
-        view.addSubview(logo)
-        let width = (LayoutConstants.screenWidth * 0.22)
-        let height = width * 0.9
-        
-        NSLayoutConstraint.activate([
-            logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (LayoutConstants.screenHeight * 0.045) - 5),
-            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.widthAnchor.constraint(equalToConstant: width),
-            logo.heightAnchor.constraint(equalToConstant: height)
-        ])
-    }
-    
+	
     func setupCarousel() {
         view.addSubview(carousel)
-        carousel.backgroundColor = UIColor.clear
-        carousel.isPagingEnabled = true
+		
         NSLayoutConstraint.activate([
             carousel.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 40),
             carousel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             carousel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            carousel.topAnchor.constraint(equalTo: logo.bottomAnchor)
+			carousel.centerYAnchor.constraint(equalTo: carouselBackground.centerYAnchor, constant: LayoutConstants.screenHeight * 0.082)
         ])
     }
     
@@ -252,4 +235,7 @@ extension OnboardingScreenVC: UICollectionViewDelegateFlowLayout, UICollectionVi
         pageControl.currentPage = Int(pageNumber)
     }
     
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		carouselBackground.image = UIImage(named: "onBoardingBackgroundImage")
+	}
 }

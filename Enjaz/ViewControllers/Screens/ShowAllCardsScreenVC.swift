@@ -5,14 +5,18 @@ class ShowAllCardsScreenVC: UICollectionViewController, UICollectionViewDelegate
     let cardsReuseIdentifier = "CardCell"
     let headerReuseIdentifier = "HeaderCell"
     
-    var cardModels: [Any] = []
+	var cardModels: [Any] = [] {
+		didSet {
+			collectionView.reloadData()
+		}
+	}
 
-    let itemCardPopup = ItemCardPopup(hideOnOverlayTap: true)
+    let itemCardPopup = ItemCardPopup()
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         collectionView.backgroundColor = .none
         
         self.collectionView!.register(CardsCollectionViewHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)

@@ -23,14 +23,12 @@ class PickerBottomSheetView: BottomSheetView {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
-        button.setTitleColor(.accentColor, for: .normal)
+        button.setTitleColor(.accent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18)
         
         return button
     }()
-    
-    var dismissalHandler: (() -> Void)?
-    
+	
     override func setup() {
         height = 270
         thumb.isHidden = true
@@ -75,10 +73,5 @@ class PickerBottomSheetView: BottomSheetView {
             selectBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             selectBtn.topAnchor.constraint(equalTo: picker.bottomAnchor, constant: 10),
         ])
-    }
-    
-    @objc override func handleDismissal() {
-        dismiss(animated: true)
-        dismissalHandler?()
     }
 }

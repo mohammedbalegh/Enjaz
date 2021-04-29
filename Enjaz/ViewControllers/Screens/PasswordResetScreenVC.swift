@@ -17,10 +17,14 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     var titleLabel: UILabel = {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
+		
         label.text = NSLocalizedString("Recover password", comment: "")
-        let fontSize: CGFloat = max(23, LayoutConstants.screenHeight * 0.025)
-        label.font = UIFont.systemFont(ofSize: fontSize)
-        label.textColor = .accentColor
+        label.font = UIFont.systemFont(ofSize: 25)
+		label.adjustsFontSizeToFitWidth = true
+		label.minimumScaleFactor = 0.8
+		label.textAlignment = .center
+        label.textColor = .accent
+		
         return label
     }()
     
@@ -32,9 +36,12 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.text = NSLocalizedString("Please Enter your email to send the verification code", comment: "")
-        let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
-        label.font = UIFont.systemFont(ofSize: fontSize)
-        label.textColor = .gray
+		label.font = UIFont.systemFont(ofSize: 18)
+		label.adjustsFontSizeToFitWidth = true
+		label.minimumScaleFactor = 0.8
+		label.textAlignment = .center
+        label.textColor = .systemGray
+		
         return label
     }()
     
@@ -95,8 +102,8 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     lazy var backBtn: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(NSLocalizedString("Next", comment: ""), for: .normal)
-        button.setTitleColor(.accentColor, for: .normal)
+        button.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
+        button.setTitleColor(.accent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
         return button
@@ -113,12 +120,13 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     }()
     
     lazy var resetPasswordPopup: ResetPasswordPopup = {
-        let popup = ResetPasswordPopup(hideOnOverlayTap: false)
+        let popup = ResetPasswordPopup()
+		popup.hideOnOverlayTap = false
         popup.backToLoginBtn.addTarget(self, action: #selector(handlePopupBackToLoginScreenBtnTap), for: .touchUpInside)
         return popup
     }()
     
-    let alertPopup = AlertPopup(hideOnOverlayTap: true)
+    let alertPopup = AlertPopup()
     
     var textFieldsVerticalStackHeightConstraint: NSLayoutConstraint!
     
@@ -132,7 +140,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         store.subscribe(self)
                 
@@ -165,7 +173,9 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: lockImage.bottomAnchor)
+            titleLabel.topAnchor.constraint(equalTo: lockImage.bottomAnchor),
+			titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     
@@ -174,7 +184,9 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
         NSLayoutConstraint.activate([
             subTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2)
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
+			subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     
@@ -244,7 +256,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
                     self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect code", comment: ""))
                 }
                 
-                self.resetPasswordPopup.present()
+                self.resetPasswordPopup.present(animated: true)
             }
         }
     }
@@ -254,7 +266,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     }
     
     @objc func handlePopupBackToLoginScreenBtnTap() {
-        resetPasswordPopup.dismiss()
+        resetPasswordPopup.dismiss(animated: true)
         navigateBackToLoginScreen()
     }
     

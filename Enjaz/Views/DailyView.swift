@@ -2,7 +2,7 @@ import UIKit
 
 class DailyView: UIView {
     let dailyViewCellReuseIdentifier = "dailyViewCell"
-    var dailyViewDayModels: [DailyViewDayModel] = Array(repeating: DailyViewDayModel(dayNumber: 0, weekDayName: "", includedItems: []), count: 31)
+	var dailyViewDayModels: [DailyViewDayModel] = Array(repeating: DailyViewDayModel(dayNumber: 0, month: 0, year: 0, calendarIdentifier: Calendar.current.identifier, weekDayName: "", includedItems: []), count: 31)
     
     lazy var carouselCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ZoomAndSnapFlowLayout())
@@ -25,14 +25,22 @@ class DailyView: UIView {
     var selectedCalendarIdentifier = Calendar.current.identifier
 	
 	var itemSelectionHandler: ((_ selectedItem: [ItemModel]) -> Void)?
+	var itemAdditionContextMenuActionHandler: ((_ type: ItemType, _ unixTimeStamp: Double?) -> Void)?
+	var dismiss: ((_ animated: Bool) -> Void)?
+	var blurOverlay: UIVisualEffectView?
+		
+	var selectedCellIndexPath: IndexPath {
+		return IndexPath(row: selectedDay - 1, section: 0)
+	}
     
     var monthDaysIncludedItems: [[ItemModel]] = [] {
         didSet {
             dailyViewDayModels = generateDailyViewDayModels(monthDaysIncludedItems: monthDaysIncludedItems)
-            carouselCollectionView.reloadData()
+			carouselCollectionView.reloadData()
 			
-			let selectedCellIndexPath = IndexPath(row: selectedDay - 1, section: 0)
-            carouselCollectionView.scrollToItem(at: selectedCellIndexPath, at: .centeredHorizontally, animated: false)
+			DispatchQueue.main.async {
+				self.carouselCollectionView.scrollToItem(at: self.selectedCellIndexPath, at: .centeredHorizontally, animated: false)
+			}
         }
     }
     
@@ -51,8 +59,7 @@ class DailyView: UIView {
     }
     
     func generateDailyViewDayModels(monthDaysIncludedItems: [[ItemModel]]) -> [DailyViewDayModel] {
-        var index = 0
-        let updatedDailyViewDayModels = monthDaysIncludedItems.map { includedItems -> DailyViewDayModel in
+		let updatedDailyViewDayModels = monthDaysIncludedItems.enumerated().map { (index, includedItems) -> DailyViewDayModel in
             let day = index + 1
             let calendar = Calendar(identifier: selectedCalendarIdentifier)
             
@@ -61,10 +68,8 @@ class DailyView: UIView {
             let weekdayNumber = calendar.component(.weekday, from: date)
             let weekdayName = calendar.weekdaySymbols[weekdayNumber - 1]
             
-            let dailyViewDayModel = DailyViewDayModel(dayNumber: day, weekDayName: weekdayName, includedItems: includedItems)
-            
-            index += 1
-            
+			let dailyViewDayModel = DailyViewDayModel(dayNumber: day, month: selectedMonth, year: selectedYear, calendarIdentifier: selectedCalendarIdentifier, weekDayName: weekdayName, includedItems: includedItems)
+                        
             return dailyViewDayModel
         }
         
@@ -81,8 +86,14 @@ extension DailyView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: dailyViewCellReuseIdentifier, for: indexPath) as! DailyViewCell
+		
         cell.viewModel = dailyViewDayModels[indexPath.row]
+		
 		cell.itemSelectionHandler = itemSelectionHandler
+		cell.itemAdditionContextMenuActionHandler = itemAdditionContextMenuActionHandler
+		cell.dismissPopup = dismiss
+		cell.blurOverlay = blurOverlay
+		
         return cell
     }
     

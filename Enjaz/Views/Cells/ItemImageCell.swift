@@ -21,7 +21,6 @@ class ItemImageCell: UICollectionViewCell {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		translatesAutoresizingMaskIntoConstraints = false
-		backgroundColor = UIColor(hex: 0xF7F7F7)
 		setup()
 	}
 	
@@ -31,7 +30,7 @@ class ItemImageCell: UICollectionViewCell {
 	
 	func setup() {
 		layer.cornerRadius = 10
-		layer.borderColor = UIColor.accentColor.cgColor
+		layer.borderColor = UIColor.accent.cgColor
 		setupImageView()
 		setupCheckMarkImageView()
 	}

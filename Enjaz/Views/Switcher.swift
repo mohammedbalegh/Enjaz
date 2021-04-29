@@ -7,7 +7,7 @@ class Switcher: UIStackView {
         let button = UIButton(type: .system)
         
         button.setImage(arrowIcon, for: .normal)
-        button.tintColor = .accentColor
+        button.tintColor = .accent
         
         return button
     }()
@@ -17,14 +17,14 @@ class Switcher: UIStackView {
         let button = UIButton(type: .system)
         
         button.setImage(arrowIcon, for: .normal)
-        button.tintColor = .accentColor
+        button.tintColor = .accent
         
         return button
     }()
     
     let label: UILabel = {
         let label = UILabel()
-        label.textColor = .darkText
+		label.textColor = .highContrastText
         label.textAlignment = .center
         return label
     }()

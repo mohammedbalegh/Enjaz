@@ -3,13 +3,13 @@ import UIKit
 
 class SelfEvaluationChart: UIView {
     
-    let categories = ["0%","25%","50%","75%","100%",]
+    let categories = ["0%","25%","50%","75%","100%"]
     
     let rateYourSelfLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = NSLocalizedString("Rate your progress in this field", comment: "")
-        label.textColor = .lightGray
+        label.textColor = .lowContrastGray
         label.font = .systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -32,18 +32,17 @@ class SelfEvaluationChart: UIView {
         slider.isUserInteractionEnabled = true
         slider.maximumValue = 100
         slider.minimumValue = 0
-        slider.maximumTrackTintColor = UIColor(hex: 0x707070)
-        slider.minimumTrackTintColor = UIColor.accentColor
-        slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+		slider.maximumTrackTintColor = .systemGray
+        slider.minimumTrackTintColor = UIColor.accent
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .secondaryBackground
         layer.shadowRadius = 4
-        layer.shadowColor = UIColor(hex: 0xD6D6D6).cgColor
+        layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor(hex: 0xD6D6D6).cgColor
         layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
         layer.shadowOpacity = 1.0
         layer.masksToBounds = false
@@ -60,16 +59,12 @@ class SelfEvaluationChart: UIView {
         setupPercentageStack()
         setupSlider()
     }
-    
-    @objc func sliderValueChanged() {
-        print(slider.value)
-    }
-    
+	
     func createLabel(_ text: String) -> UILabel {
         let label = UILabel()
         label.textAlignment = .center
         label.font = label.font.withSize(10)
-        label.textColor = .lightGray
+        label.textColor = .lowContrastGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "\(text)"
         return label
@@ -114,7 +109,11 @@ class SelfEvaluationChart: UIView {
         
         layoutIfNeeded()
         
-        percentageStack.addTopBorder(withColor: UIColor(hex: 0x707070), andWidth: 1)
+		percentageStack.addTopBorder(withColor: .systemGray, andWidth: 1)
     }
-    
+ 
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		layer.shadowColor = traitCollection.userInterfaceStyle == .dark ? UIColor.clear.cgColor : UIColor(hex: 0xD6D6D6).cgColor
+	}
+	
 }

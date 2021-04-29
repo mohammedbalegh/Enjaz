@@ -59,7 +59,7 @@ class WeekDayLabelsStackView: UIStackView {
         for _ in 0...6 {
             let weekDayLabel = UILabel(frame: .zero)
             
-            weekDayLabel.textColor = .lightGray
+            weekDayLabel.textColor = .lowContrastGray
             weekDayLabel.font = .systemFont(ofSize: 17)
             weekDayLabel.textAlignment = .center
             
@@ -105,4 +105,8 @@ class WeekDayLabelsStackView: UIStackView {
             label.textColor = color
         }
     }
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		updateAccentColorGradient()
+	}
 }

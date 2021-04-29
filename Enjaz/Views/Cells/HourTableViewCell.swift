@@ -28,7 +28,7 @@ class HourTableViewCell: UITableViewCell {
                     firstItemImageView.image = nil
                 }
                 
-                firstItemLabel.attributedText = (firstItem.name + " " + otherIncludedItemsLabelText).attributedStringWithColor([otherIncludedItemsLabelText], color: .accentColor, stringSize: 11, coloredSubstringsSize: 9)
+                firstItemLabel.attributedText = (firstItem.name + " " + otherIncludedItemsLabelText).attributedStringWithColor([otherIncludedItemsLabelText], color: .accent, stringSize: 11, coloredSubstringsSize: 9)
             } else {
                 firstItemImageView.image = nil
                 firstItemLabel.attributedText = NSAttributedString(string: "")
@@ -71,7 +71,7 @@ class HourTableViewCell: UITableViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.backgroundColor = .accentColor
+        view.backgroundColor = .accent
         view.isHidden = true
         view.clipsToBounds = true
         
@@ -92,7 +92,7 @@ class HourTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = .darkGray
+        label.textColor = .highContrastGray
         label.font = label.font.withSize(11)
         label.isHidden = true
         
@@ -133,13 +133,16 @@ class HourTableViewCell: UITableViewCell {
                 firstItemLabel.attributedText = NSAttributedString(string: updatedFirstItemLabelText)
             } else {
                 guard !firstItemLabelText.contains(otherIncludedItemsLabelText) else { return }
-                firstItemLabel.attributedText = (firstItemLabelText + otherIncludedItemsLabelText).attributedStringWithColor([otherIncludedItemsLabelText], color: .accentColor, stringSize: 11, coloredSubstringsSize: 9)
+                firstItemLabel.attributedText = (firstItemLabelText + otherIncludedItemsLabelText).attributedStringWithColor([otherIncludedItemsLabelText], color: .accent, stringSize: 11, coloredSubstringsSize: 9)
             }
         }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+		backgroundColor = .secondaryBackground
+		contentView.backgroundColor = .secondaryBackground
+		selectionStyle = .none
         setupSubviews()
     }
     

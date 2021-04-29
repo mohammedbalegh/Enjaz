@@ -6,7 +6,7 @@ class PopoverBtn: UIButton, InputField {
         case small, large
     }
     
-    static let defaultTintColor: UIColor = .lightGray
+    static let defaultTintColor: UIColor = .lowContrastGray
     static let fontSize: CGFloat = 16
     
 	let label: UILabel = {

@@ -129,12 +129,12 @@ class CalendarViewController: UIViewController {
         return (currentYear...currentYear + 5).map { String($0) }
     }
     
-    var alertPopup = AlertPopup(hideOnOverlayTap: true)
+    var alertPopup = AlertPopup()
     var delegate: AddItemScreenModalDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+		view.backgroundColor = .modalScreenBackground
         
         setPopoverBtnsDefaultLabels()
         setupSubviews()

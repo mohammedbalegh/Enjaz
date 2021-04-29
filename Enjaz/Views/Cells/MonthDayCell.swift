@@ -33,7 +33,7 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         let view = UIView(frame: CGRect(x: contentView.frame.width - (cornerRadius / 2), y: cornerRadius / 2, width: 6, height: 6))
         view.layer.cornerRadius = 2.5
         view.isHidden = true
-        view.backgroundColor = .indicatorColor
+        view.backgroundColor = .indicator
         
         return view
     }()
@@ -86,12 +86,12 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     // MARK: Tools
     
     func highlightCellAsSelected() {
-        label.backgroundColor = .accentColor
+        label.backgroundColor = .accent
         label.textColor = .white
     }
     
     func highlightCellAsSelectedBetweenSelectionBounds() {
-        backgroundColor = UIColor.accentColor.withAlphaComponent(0.2)
+        backgroundColor = UIColor.accent.withAlphaComponent(0.2)
         label.backgroundColor = .clear
         label.textColor = .gray
         layer.maskedCorners = []

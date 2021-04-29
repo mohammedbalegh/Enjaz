@@ -15,9 +15,10 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        let fontSize: CGFloat = max(23, LayoutConstants.screenHeight * 0.025)
-        label.font = UIFont.systemFont(ofSize: fontSize)
-        label.textColor = .accentColor
+        label.font = UIFont.systemFont(ofSize: 25)
+		label.adjustsFontSizeToFitWidth = true
+		label.minimumScaleFactor = 0.8
+        label.textColor = .accent
         
         return label
     }()
@@ -26,8 +27,9 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        let fontSize: CGFloat = max(18, LayoutConstants.screenHeight * 0.02)
-        label.font = UIFont.systemFont(ofSize: fontSize)
+        label.font = UIFont.systemFont(ofSize: 18)
+		label.adjustsFontSizeToFitWidth = true
+		label.minimumScaleFactor = 0.8
         label.textColor = .gray
         
         return label
@@ -61,7 +63,7 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitleColor(.accentColor, for: .normal)
+        button.setTitleColor(.accent, for: .normal)
         button.addTarget(self, action: #selector(handleOtherAuthMethodBtnTap), for: .touchUpInside)
         
         return button
@@ -77,7 +79,7 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
     let oAuthBtnsHorizontalStack = OAuthBtnsHorizontalStack()
     
-    let alertPopup = AlertPopup(hideOnOverlayTap: true)
+    let alertPopup = AlertPopup()
     
     var authenticationBtnTopAnchorConstraint: NSLayoutConstraint!
     
@@ -91,7 +93,7 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         store.subscribe(self)
         
@@ -153,7 +155,7 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
         NSLayoutConstraint.activate([
             subTitleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2)
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4)
         ])
     }
     
@@ -192,7 +194,7 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
             otherAuthMethodLabelAndBtnHorizontalStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -LayoutConstants.screenHeight * 0.1),
             otherAuthMethodLabelAndBtnHorizontalStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             otherAuthMethodLabelAndBtnHorizontalStack.widthAnchor.constraint(lessThanOrEqualTo: scrollView.widthAnchor),
-            otherAuthMethodLabelAndBtnHorizontalStack.heightAnchor.constraint(equalToConstant: 15),
+            otherAuthMethodLabelAndBtnHorizontalStack.heightAnchor.constraint(greaterThanOrEqualToConstant: 17),
         ])
     }
     

@@ -15,9 +15,9 @@ class ResetPasswordPopup: Popup {
 		label.translatesAutoresizingMaskIntoConstraints = false
 		
 		label.text = "تم تغيير كلمة المرور بنجاح"
-		let fontSize: CGFloat = max(20, LayoutConstants.screenWidth * 0.06)
+		let fontSize: CGFloat = 20
 		label.font = UIFont.systemFont(ofSize: fontSize)
-		label.textColor = .white
+		label.textColor = .secondaryBackground
 		
 		return label
 	}()
@@ -26,20 +26,21 @@ class ResetPasswordPopup: Popup {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
 		button.setTitle("الرجوع للتسجيل", for: .normal)
-		button.titleLabel?.font = .systemFont(ofSize: 22)
-		button.setTitleColor(.white, for: .normal)
+		button.titleLabel?.font = .systemFont(ofSize: 16)
+		button.setTitleColor(.secondaryBackground, for: .normal)
 		
 		return button
 	}()
 			
-	override func popupContainerDidShow() {
+	override func setupSubViews() {
+		super.setupSubViews()
 		setupSuccessImage()
 		setupLabel()
 		setupBackToLoginBtn()
 	}
 	
 	override func setupPopupContainer() {
-		popupContainer.backgroundColor = .accentColor
+		popupContainer.backgroundColor = .accent
 		popupContainer.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([
@@ -85,7 +86,7 @@ class ResetPasswordPopup: Popup {
 			backToLoginBtn.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor, constant: -40),
 			backToLoginBtn.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
 			backToLoginBtn.heightAnchor.constraint(equalToConstant: buttonHeight),
-			backToLoginBtn.widthAnchor.constraint(equalTo: popupContainer.widthAnchor, multiplier: 0.7),
+			backToLoginBtn.widthAnchor.constraint(equalTo: popupContainer.widthAnchor, multiplier: 0.5),
 		])
 	}
 

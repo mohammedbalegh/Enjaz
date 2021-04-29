@@ -2,7 +2,7 @@
 import UIKit
 import RealmSwift
 
-class RealmManager {
+struct RealmManager {
     
     static let realm = try! Realm()
     
@@ -56,6 +56,11 @@ class RealmManager {
     
     static func retrieveItems(withFilter filter: String) -> [ItemModel] {
         let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter(filter).sorted(byKeyPath: "date", ascending: true))
+        return items
+    }
+    
+    static func retrieveItemsBySearch(contains filter: String) -> [ItemModel] {
+        let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter("name contains[c] %@", filter).sorted(byKeyPath: "date", ascending: true))
         return items
     }
 	
@@ -123,9 +128,20 @@ class RealmManager {
 		saveItemImages([itemImage])
 	}
 	
-	static func retrieveItemImages() -> [ItemImageModel] {
-		let itemImages: [ItemImageModel] = Array(realm.objects(ItemImageModel.self))
+	static func retrieveItemImages(withFilter filter: String? = nil) -> [ItemImageModel] {
+		let itemImages: [ItemImageModel] = {
+			let allItemImages = realm.objects(ItemImageModel.self)
+			if let filter = filter {
+				return Array(allItemImages.filter(filter))
+			}
+			return Array(allItemImages)
+		}()
+		
 		return itemImages
+	}
+	
+	static func retrieveDefaultItemImages(withFilter filter: String? = nil) -> [ItemImageModel] {
+		return retrieveItemImages(withFilter: "is_default == true && is_selectable == true")
 	}
 	
 	static func retrieveItemImageById(_ id: Int) -> ItemImageModel? {

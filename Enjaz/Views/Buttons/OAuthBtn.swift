@@ -22,17 +22,25 @@ class OAuthBtn : UIButton {
     func configure() {
         frame = CGRect(x: 0, y: 0, width: frame.height, height: frame.height)
         
-        if let type = type {
-            switch type {
-            case .twitter:
-                setBackgroundImage(UIImage(named: "twitterIcon"), for: .normal)
-                
-            case .apple:
-                setBackgroundImage(UIImage(named: "appleIcon"), for: .normal)
-                
-            case .google:
-                setBackgroundImage(UIImage(named: "googleIcon"), for: .normal)
-            }
-        }
+        setBtnImage()
     }
+	
+	func setBtnImage() {
+		if let type = type {
+			switch type {
+			case .twitter:
+				setBackgroundImage(UIImage(named: "twitterIcon"), for: .normal)
+				
+			case .apple:
+				setBackgroundImage(UIImage(named: "appleIcon"), for: .normal)
+				
+			case .google:
+				setBackgroundImage(UIImage(named: "googleIcon"), for: .normal)
+			}
+		}
+	}
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		setBtnImage()
+	}
 }

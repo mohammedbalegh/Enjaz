@@ -8,6 +8,7 @@ let store = Store(reducer: appReducer, state: AppState(), middleware: [])
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configureNavigationBarAppearance()
+		configureTabBarAppearance()
         monitorInternetConnection()
         AppDataInitializer.initializeItemCategories()
 		AppDataInitializer.initializeItemImages()
@@ -17,11 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
         
     func configureNavigationBarAppearance() {
-        UINavigationBar.appearance().tintColor = .accentColor
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.accentColor]
-        UINavigationBar.appearance().backItem?.backButtonTitle = ""
+        UINavigationBar.appearance().tintColor = .accent
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.accent]
         UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
     }
+	
+	func configureTabBarAppearance() {
+		UITabBar.appearance().backgroundImage = UIImage()
+		UITabBar.appearance().shadowImage = UIImage()
+		UITabBar.appearance().clipsToBounds = true
+	}
     
     func monitorInternetConnection() {
         let monitor = NWPathMonitor()

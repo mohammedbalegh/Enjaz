@@ -1,10 +1,11 @@
-import Foundation
+import UIKit
 
 struct UserDefaultsManager {
     struct Keys {
         static let user = "user"
         static let isLoggedIn = "isLoggedIn"
         static let majorGoals = "majorGoals"
+		static let interFaceStyle = "interFaceStyleID"
     }
     
     static var isLoggedIn: Bool {
@@ -58,5 +59,15 @@ struct UserDefaultsManager {
             UserDefaults.standard.synchronize()
         }
     }
+	
+	static var interfaceStyleId: Int? {
+		get {
+			return UserDefaults.standard.integer(forKey: Keys.interFaceStyle)
+		}
+		set {
+			UserDefaults.standard.set(newValue, forKey: Keys.interFaceStyle)
+			UserDefaults.standard.synchronize()
+		}
+	}
     
 }

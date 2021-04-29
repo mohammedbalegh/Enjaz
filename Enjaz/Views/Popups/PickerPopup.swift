@@ -14,19 +14,20 @@ class PickerPopup: Popup {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
         button.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
-		button.setTitleColor(.accentColor, for: .normal)
+		button.setTitleColor(.accent, for: .normal)
 		button.titleLabel?.font = .systemFont(ofSize: 18)
 		
 		return button
 	}()
 	
-	override func popupContainerDidShow() {
+	override func setupSubViews() {
+		super.setupSubViews()
 		setupPicker()
 		setupSelectBtn()
 	}
 	
     override func setupPopupContainer() {
-		popupContainer.backgroundColor = .white
+		popupContainer.backgroundColor = .secondaryBackground
 		popupContainer.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([

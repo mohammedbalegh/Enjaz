@@ -20,7 +20,7 @@ class AchievementsCell: UICollectionViewCell {
     
     let achievementsCardInfo: AchievementsCardView = {
         let view = AchievementsCardView()
-        view.timeLabel.textColor = .accentColor
+        view.timeLabel.textColor = .accent
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -49,7 +49,7 @@ class AchievementsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = .secondaryBackground
         
         layer.cornerRadius = 25
         clipsToBounds = true

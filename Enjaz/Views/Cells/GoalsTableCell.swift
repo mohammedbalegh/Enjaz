@@ -9,7 +9,7 @@ class GoalsTableCell: UITableViewCell {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -20,14 +20,14 @@ class GoalsTableCell: UITableViewCell {
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.2
-        label.textColor = UIColor(hex: 0x011942)
+        label.textColor = .highContrastText
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .mainScreenBackgroundColor
+        contentView.backgroundColor = .background
         preservesSuperviewLayoutMargins = false
         separatorInset = UIEdgeInsets.zero
         layoutMargins = UIEdgeInsets.zero

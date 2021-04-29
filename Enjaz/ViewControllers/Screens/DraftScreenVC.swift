@@ -71,7 +71,7 @@ class DraftScreenVC: UIViewController {
         
         updateScreen()
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         title = NSLocalizedString("Draft", comment: "")
         
         setupSubViews()

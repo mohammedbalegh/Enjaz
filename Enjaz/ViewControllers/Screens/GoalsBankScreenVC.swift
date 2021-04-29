@@ -8,8 +8,12 @@ class GoalsBankScreenVC: UIViewController {
     var goalsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .mainScreenBackgroundColor
+        tableView.backgroundColor = .background
         tableView.tableFooterView = UIView()
+		
+		tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: LayoutConstants.tabBarHeight, right: 0)
+		tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
+		
         tableView.register(GoalsTableCell.self, forCellReuseIdentifier: "goalsTableCell")
         tableView.allowsSelection = false
         return tableView
@@ -22,14 +26,14 @@ class GoalsBankScreenVC: UIViewController {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         
         goalsTableView.delegate = self
         goalsTableView.dataSource = self

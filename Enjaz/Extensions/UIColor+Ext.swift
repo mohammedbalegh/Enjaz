@@ -1,6 +1,21 @@
 import UIKit
 
 extension UIColor {
+	static let accent = UIColor(hex: 0x12B3B9)
+	static let background = UIColor(hex: 0xF9F9F9) | .black
+	static let secondaryBackground = .white | UIColor(red: 28, green: 28, blue: 30)
+	static let tertiaryBackground = .white | UIColor(red: 14, green: 14, blue: 15)
+	static let modalScreenBackground = .white | UIColor(red: 12, green: 12, blue: 16)
+	static let invertedSystemBackground = .black | .white
+	static let highContrastGray = .darkGray | .lightGray
+	static let lowContrastGray = .lightGray | .darkGray
+	static let highContrastText = .darkText | .lightText
+	static let accentGradientStart = UIColor(hex: 0x20D4D0) | UIColor(hex: 0x1FC1BD)
+	static let accentGradientEnd = UIColor(hex: 0x12B3B9) | UIColor(hex: 0x0F969B)
+	static let border = UIColor(white: 0.85, alpha: 1) | UIColor(white: 0.85, alpha: 1).inverted
+	static let indicator = UIColor(hex: 0xFFD400)
+	static let lightShadow = UIColor(hex: 0x979797) | UIColor(hex: 0x979797).inverted
+	
     var inverted: UIColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
@@ -24,17 +39,15 @@ extension UIColor {
 			blue: hex & 0xFF,
             alpha: alpha)
 	}
-    
-	static let accentColor = UIColor(hex: 0x12B3B9)
-	static let mainScreenBackgroundColor = UIColor(hex: 0xF9F9F9)
-	static let gradientStartColor = UIColor(hex: 0x20D4D0)
-	static let gradientEndColor = UIColor(hex: 0x12B3B9)
-    static let borderColor = UIColor(white: 0.85, alpha: 1)
-    static let indicatorColor = UIColor(hex: 0xFFD400)
-    
+	
+	static func | (lightModeColor: UIColor, darkModeColor: UIColor) -> UIColor {
+		return UIColor { (traitCollection) -> UIColor in
+			return traitCollection.userInterfaceStyle == .light ? lightModeColor : darkModeColor
+		}
+	}
 }
 
-func assertRGBComponentsRange(_ red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) {
+private func assertRGBComponentsRange(_ red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) {
 	assert(red >= 0 && red <= 255, "Invalid value specified for the red component, must be between 0 and 255")
 	assert(green >= 0 && green <= 255, "Invalid value specified for the green component, must be between 0 and 255")
 	assert(blue >= 0 && blue <= 255, "Invalid value specified for the blue component, must be between 0 and 255")

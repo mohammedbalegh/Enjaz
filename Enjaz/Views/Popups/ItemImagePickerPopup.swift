@@ -27,7 +27,7 @@ class ItemImagePickerPopup: Popup {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
 		
-		label.textColor = UIColor(hex: 0x011942)
+		label.textColor = .highContrastText
 		
 		return label
 	}()
@@ -48,7 +48,7 @@ class ItemImagePickerPopup: Popup {
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		
 		collectionView.clipsToBounds = true
-		collectionView.backgroundColor = .white
+		collectionView.backgroundColor = .secondaryBackground
 
 		collectionView.register(ItemImagePickerImageSourceCell.self, forCellWithReuseIdentifier: imageSourceReuseIdentifier)
 		collectionView.register(ItemImageCell.self, forCellWithReuseIdentifier: imageCellReuseIdentifier)
@@ -65,7 +65,8 @@ class ItemImagePickerPopup: Popup {
 	// MARK: State
 	var selectedImageModelIndex: Int?
 	
-	override func popupContainerDidShow() {
+	override func setupSubViews() {
+		super.setupSubViews()
         configure()
 		setupImageIcon()
 		setupTitleLabel()
@@ -81,7 +82,7 @@ class ItemImagePickerPopup: Popup {
     }
     
     override func setupPopupContainer() {
-		popupContainer.backgroundColor = .white
+		popupContainer.backgroundColor = .secondaryBackground
 		popupContainer.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([
@@ -128,10 +129,13 @@ extension ItemImagePickerPopup: UICollectionViewDelegate, UICollectionViewDataSo
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cellBackgroundColor = UIColor(hex: 0xF7F7F7) | UIColor(hex: 0xF7F7F7).inverted
+		
 		if indexPath.row < itemImagePickerImageSourceCellModels.count {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageSourceReuseIdentifier, for: indexPath) as! ItemImagePickerImageSourceCell
 			
 			cell.viewModel = itemImagePickerImageSourceCellModels[indexPath.row]
+			cell.backgroundColor = cellBackgroundColor
 			
 			return cell
 		}
@@ -140,6 +144,7 @@ extension ItemImagePickerPopup: UICollectionViewDelegate, UICollectionViewDataSo
 		
 		let imageName = imageCellModels[indexPath.row - itemImagePickerImageSourceCellModels.count]
 		cell.image = UIImage(named: imageName)
+		cell.backgroundColor = cellBackgroundColor
 		
 		return cell
 	}

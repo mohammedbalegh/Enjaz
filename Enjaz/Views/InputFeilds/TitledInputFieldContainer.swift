@@ -7,7 +7,7 @@ class TitledInputFieldContainer: UIView {
         
         label.backgroundColor = .clear
         label.font = .systemFont(ofSize: 18)
-        label.textColor = .lightGray
+        label.textColor = .lowContrastGray
         
         return label
     }()

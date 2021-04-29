@@ -1,12 +1,9 @@
 import UIKit
 
-class MonthItemsScreenVC: UIViewController {
-    
+class MonthItemsScreenVC: MyPlanChildVC {
+	
     let cardsReuseIdentifier = "cardCell"
-    
-    let searchTextField = UITextField()
-    let progressView = UIView()
-        
+	
     var dayItemModels: [ItemModel] = []
     var weekItemModels: [ItemModel] = []
     var monthItemModels: [ItemModel] = []
@@ -14,7 +11,14 @@ class MonthItemsScreenVC: UIViewController {
     
     var currentMonthItems: [ItemModel] = []
     
-    let scrollView = UIScrollView()
+	lazy var scrollView: UIScrollView = {
+		let scrollView = UIScrollView()
+		scrollView.translatesAutoresizingMaskIntoConstraints = false
+		scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+		scrollView.delegate = self
+		return scrollView
+	}()
+	
     var itemsType: ItemType!
     
 	lazy var progressBar = ProgressBarView(itemType: itemsType)
@@ -86,21 +90,23 @@ class MonthItemsScreenVC: UIViewController {
         return stackView
     }()
     
-    let itemCardPopup = ItemCardPopup(hideOnOverlayTap: true)
+    let itemCardPopup = ItemCardPopup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
+        
         setItemCardViewsTitles()
         setupSubViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+		
         updateScreen()
     }
-    
+	    
     func setupSubViews() {
         setupScrollView()
 		setupProgressBarView()
@@ -109,8 +115,13 @@ class MonthItemsScreenVC: UIViewController {
     
     func setupScrollView() {
         view.addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.fillSuperView()
+				
+		NSLayoutConstraint.activate([
+			scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+			scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+			scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+		])
     }
 	
 	func setupProgressBarView() {
@@ -213,7 +224,7 @@ class MonthItemsScreenVC: UIViewController {
         showAllItemsScreenVC.cardModels = models
         showAllItemsScreenVC.title = title
         
-        navigationController?.pushViewController(showAllItemsScreenVC, animated: true)
+		parent?.navigationController?.pushViewController(showAllItemsScreenVC, animated: true)
     }
     
 }
@@ -251,7 +262,7 @@ extension MonthItemsScreenVC: UICollectionViewDelegateFlowLayout, UICollectionVi
         let viewModels = getViewModels(for: collectionView)
         itemCardPopup.itemModels = [viewModels[indexPath.row]]
 		itemCardPopup.itemsUpdateHandler = updateScreen
-        itemCardPopup.present()
+        itemCardPopup.present(animated: true)
     }
     
     func getViewModels(for collectionView: UICollectionView) -> [ItemModel] {
@@ -263,4 +274,13 @@ extension MonthItemsScreenVC: UICollectionViewDelegateFlowLayout, UICollectionVi
         default: return []
         }
     }
+}
+
+extension MonthItemsScreenVC: UIScrollViewDelegate {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		if scrollView.contentOffset.y < -250  && !searchController.searchBar.isFirstResponder {
+			Vibration.rigid.vibrate()
+			searchController.searchBar.becomeFirstResponder()
+		}
+	}
 }

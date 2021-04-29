@@ -1,6 +1,6 @@
 import UIKit
 
-class AchievementsScreenVC: UIViewController {
+class AchievementsScreenVC: MyPlanChildVC {
     
     var achievementModels: [ItemModel] = [] {
         didSet {
@@ -11,7 +11,7 @@ class AchievementsScreenVC: UIViewController {
     let noAchievementsLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("No achievements to show", comment: "")
-        label.textColor = .lightGray
+        label.textColor = .lowContrastGray
         label.font = .systemFont(ofSize: 18)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

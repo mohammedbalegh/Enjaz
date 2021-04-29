@@ -34,8 +34,8 @@ class RoundBtn: UIButton {
 		
 		imageView?.contentMode = .scaleAspectFill
 		
-		backgroundColor = .accentColor
-		setTitleColor(.white, for: .normal)
+		backgroundColor = .accent
+		setTitleColor(.secondaryBackground, for: .normal)
 		
 		layer.cornerRadius = size / 2
 	}

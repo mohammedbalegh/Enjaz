@@ -23,9 +23,9 @@ class InputFieldContainer: UIView {
     
     func setup() {
         layer.cornerRadius = LayoutConstants.inputHeight / 2
-        layer.borderColor = UIColor.borderColor.cgColor
+        layer.borderColor = UIColor.border.cgColor
         layer.borderWidth = 1
-        backgroundColor = .white
+        backgroundColor = .secondaryBackground
     }
     
     func setupSubViews() {
@@ -39,4 +39,8 @@ class InputFieldContainer: UIView {
         
         input.constrainEdgesToCorrespondingEdges(of: self, top: 0, leading: 20, bottom: 0, trailing: -25)
     }
+	
+	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+		layer.borderColor = UIColor.border.cgColor
+	}
 }

@@ -22,7 +22,6 @@ class ItemImagePickerImageSourceCell: UICollectionViewCell {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		translatesAutoresizingMaskIntoConstraints = false
-		backgroundColor = UIColor(hex: 0xF7F7F7)
 		setup()
 	}
 	

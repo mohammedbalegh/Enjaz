@@ -4,7 +4,11 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
     var hourPickerModels: [HourModel] = ModelsConstants.hourPickerModels
     
-    let header = ModalHeader(frame: .zero)
+	lazy var header: ModalHeader = {
+		let header = ModalHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
+		header.dismissButton.addTarget(self, action: #selector(handleDismissBtnTap), for: .touchUpInside)
+		return header
+	}()
     
     override var title: String? {
         didSet {
@@ -19,12 +23,12 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         
         return picker
     }()
-        
+	
     lazy var indicator: UIView = {
         let view = UILabel()
         view.layer.cornerRadius = pickerHeight / 2
         view.clipsToBounds = true
-        view.backgroundColor = .accentColor
+        view.backgroundColor = .accent
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -39,6 +43,18 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         hourPicker.selectRow(12, inComponent: 0, animated: false)
         selectCurrentDay()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		let window = UIApplication.shared.windows[0]
+		window.backgroundColor = .black
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		let window = UIApplication.shared.windows[0]
+		window.backgroundColor = .background
+	}
 
     override func setupSubviews() {
         setupHeader()
@@ -50,16 +66,6 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
     func setupHeader() {
         view.addSubview(header)
-        header.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 50),
-        ])
-        
-        header.dismissButton.addTarget(self, action: #selector(handleDismissBtnTap), for: .touchUpInside)
     }
     
     override func setupCalendarView() {

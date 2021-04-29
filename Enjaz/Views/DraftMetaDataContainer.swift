@@ -6,7 +6,7 @@ class DraftMetaDataContainer: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = .accentColor
+        label.textColor = .accent
         label.font = .systemFont(ofSize: 14.5)
         
         return label

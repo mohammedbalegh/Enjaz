@@ -6,8 +6,8 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
         
 	lazy var imagePickerPopup: ItemImagePickerPopup = {
-		let popup = ItemImagePickerPopup(hideOnOverlayTap: true)
-		popup.imageCellModels = RealmManager.retrieveItemImages().map { $0.image_source }
+		let popup = ItemImagePickerPopup()
+		popup.imageCellModels = RealmManager.retrieveDefaultItemImages().map { $0.image_source }
 		popup.delegate = self
 		return popup
 	}()
@@ -75,11 +75,11 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Add new category", comment: "")
-        view.backgroundColor = .mainScreenBackgroundColor
+        view.backgroundColor = .background
         
         setupSubviews()
     }
-    
+	
     func setupSubviews() {
         setupSetImageButton()
         setupTextFieldsVerticalStack()
@@ -125,7 +125,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     
     @objc func handleSetImageBtnTap() {
         dismissKeyboard()
-        imagePickerPopup.present()
+        imagePickerPopup.present(animated: true)
     }
         
     @objc func handleSaveBtnTap() {
@@ -166,11 +166,11 @@ extension AddCategoryScreenVC: ItemImagePickerPopupDelegate {
 		nonDefaultItemImage = nil
 		categoryImageId = imageId
 		setImageBtn.setImage(UIImage.getImageFrom(categoryImageSource), for: .normal)
-		imagePickerPopup.dismiss()
+		imagePickerPopup.dismiss(animated: true)
 	}
 	
 	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImageSource sourceType: UIImagePickerController.SourceType) {
-		itemImagePickerPopup.dismiss()
+		itemImagePickerPopup.dismiss(animated: true)
 		let imagePickerController = UIImagePickerController()
 		imagePickerController.sourceType = sourceType
 		imagePickerController.allowsEditing = true
@@ -184,8 +184,9 @@ extension AddCategoryScreenVC: UIImagePickerControllerDelegate, UINavigationCont
 		picker.dismiss(animated: true)
 		guard let image = info[.editedImage] as? UIImage else { return }
 		guard let imageData = image.scalePreservingAspectRatio(targetSize: CGSize(width: 132, height: 125)).toBase64() else { return }
-				
-		nonDefaultItemImage = ItemImageModel(imageSource: imageData, isDefault: false)
+		
+		imagePickerPopup.dismiss(animated: true)
+		nonDefaultItemImage = ItemImageModel(imageSource: imageData, isDefault: false, isSelectable: false)
 		categoryImageId = nonDefaultItemImage!.id
 		setImageBtn.setImage(UIImage.getImageFrom(imageData), for: .normal)
 	}

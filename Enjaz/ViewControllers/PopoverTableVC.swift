@@ -15,8 +15,8 @@ class PopoverTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		view.backgroundColor = .white
-		tableView.backgroundColor = .white
+		view.backgroundColor = .systemBackground
+		tableView.backgroundColor = .secondaryBackground
 		tableView.register(PopoverTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
         
