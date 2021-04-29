@@ -1,12 +1,33 @@
 import UIKit
+import ShimmerSwift
+
+let imageCache = NSCache<AnyObject, AnyObject>()
 
 class DynamicImageView: UIImageView {
-
-    var source: String? {
-        didSet {
-            setImage(from: source)
-        }
-    }
+	
+	let shimmeringView: ShimmeringView = {
+		let view = ShimmeringView()
+		view.layer.cornerRadius = 2
+		view.shimmerSpeed = 0.1
+		view.shimmerPauseDuration = 0.8
+		view.isShimmering = true
+		let contentView = UIView()
+		contentView.backgroundColor = .lowContrastGray
+		view.contentView = contentView
+		
+		return view
+	}()
+	
+	var source: String? {
+		didSet {
+			shimmeringView.isShimmering = true
+			shimmeringView.isHidden = false
+			
+			if let source = source, !source.isEmpty {
+				setImage(from: source)
+			}
+		}
+	}
 	
 	override var frame: CGRect {
 		didSet {
@@ -14,34 +35,52 @@ class DynamicImageView: UIImageView {
 			clipsToBounds = true
 		}
 	}
-    
-    init(source: String? = nil) {
-        super.init(frame: .zero)
-        self.source = source
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setImage(from source: String?) {
-        guard let source = source else { return }
+	
+	override var image: UIImage? {
+		didSet {
+			if image != nil {
+				shimmeringView.isShimmering = false
+				shimmeringView.isHidden = true
+			}
+		}
+	}
+	
+	init(source: String? = nil) {
+		super.init(frame: .zero)
+		self.source = source
+		addSubview(shimmeringView)
+		shimmeringView.fillSuperView()
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+	func setImage(from source: String) {
+		if !source.isURL {
+			self.image = UIImage.getImageFrom(source)
+			return
+		}
 		
-		if source.isURL {
-			guard let url = URL(string: source) else { return }
+		guard let url = URL(string: source) else { return }
+		
+		if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
+			self.image = imageFromCache
+			return
+		}
+		
+		let task = URLSession.shared.dataTask(with: url) { data, response, error in
+			guard let data = data, error == nil else { return }
 			
-			let task = URLSession.shared.dataTask(with: url) { data, response, error in
-				guard let data = data, error == nil else { return }
-				
-				DispatchQueue.main.async() {
-					self.image = UIImage(data: data)
+			DispatchQueue.main.async() {
+				if let image = UIImage(data: data) {
+					imageCache.setObject(image, forKey: url as AnyObject)
+					self.image = image
 				}
 			}
-			
-			task.resume()
-		} else {
-			self.image = UIImage.getImageFrom(source)
 		}
-    }
-
+		
+		task.resume()
+	}
+	
 }

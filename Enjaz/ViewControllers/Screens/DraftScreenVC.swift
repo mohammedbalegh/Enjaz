@@ -7,8 +7,8 @@ class DraftScreenVC: UIViewController {
     
     // MARK: Properties
     
-    var articleModels: [ArticleModel] = []
-    var videoModels: [VideoModel] = []
+    var articleModels: [ArticleModel] = Array(repeating: ArticleModel(title: "", articleTitle: "", image: "", category: "", date: ""), count: 3)
+	var videoModels: [VideoModel] = Array(repeating: VideoModel(title: "", articleTitle: "", video: "", category: "", date: ""), count: 3)
     var articlesPage = 1
     var videosPage = 1
     
@@ -33,6 +33,7 @@ class DraftScreenVC: UIViewController {
         
         cardsView.title = NSLocalizedString("Most Recent Articles", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No articles yet", comment: "")
+		cardsView.cardsCount = articleModels.count
         cardsView.header.cardsCountLabel.isHidden = true
         cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllArticlesBtnTap), for: .touchUpInside)
         
@@ -49,6 +50,7 @@ class DraftScreenVC: UIViewController {
         
         cardsView.title = NSLocalizedString("Most Recent Videos", comment: "")
         cardsView.noCardsMessage = NSLocalizedString("No videos yet", comment: "")
+		cardsView.cardsCount = videoModels.count
         cardsView.header.cardsCountLabel.isHidden = true
         cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllVideosBtnTap), for: .touchUpInside)
         
@@ -132,15 +134,15 @@ class DraftScreenVC: UIViewController {
     }
     
     func updateArticles(page: Int) {
-        articlesView.startIndicatorAnimating()
-        articlesView.noCardsLabel.isHidden = true
         
         NetworkingManager.retrieveArticles(in: page) { (articles, error) in
             DispatchQueue.main.async {
-                self.articlesView.stopIndicatorAnimating()
-                
+				if page == 1 {
+					self.articleModels = []
+				}
+				
                 guard let articles = articles else {
-                    self.articlesView.noCardsLabel.isHidden = false
+					self.articlesView.cardsCount = 0
                     return
                 }
                 
@@ -152,15 +154,14 @@ class DraftScreenVC: UIViewController {
     }
     
     func updateVideos(page: Int) {
-        videosView.startIndicatorAnimating()
-        videosView.noCardsLabel.isHidden = true
-        
         NetworkingManager.retrieveVideos(in: page) { videos, error  in
             DispatchQueue.main.async {
-                self.videosView.stopIndicatorAnimating()
-                
+				if page == 1 {
+					self.videoModels = []
+				}
+				
                 guard let videos = videos else {
-                    self.videosView.noCardsLabel.isHidden = false
+					self.videosView.cardsCount = 0
                     return
                 }
                 

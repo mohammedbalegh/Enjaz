@@ -1,7 +1,7 @@
 import UIKit
 
 struct VideoModel: Decodable {
-    let thumbnail = UIImage(named: "tempArticleThumbnail")
+	let thumbnail: String = "tempArticleThumbnail"
     let title, articleTitle: String
     let video: String
     let category, date: String

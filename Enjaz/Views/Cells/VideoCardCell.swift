@@ -5,7 +5,7 @@ class VideoCardCell: DraftCardCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            self.thumbnail.image = viewModel.thumbnail
+            self.thumbnail.source = viewModel.thumbnail
             url = viewModel.video
             self.draftMetaDataContainer.categoryLabel.text = viewModel.category
             self.draftMetaDataContainer.titleLabel.text = viewModel.title
@@ -17,12 +17,12 @@ class VideoCardCell: DraftCardCell {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        let playIcon = UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate).withTintColor(.secondaryBackground)
+        let playIcon = UIImage(systemName: "play.fill")
         
         button.setImage(playIcon, for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.backgroundColor = .accent
-        button.tintColor = .secondaryBackground
+        button.tintColor = .white
         
         return button
     }()

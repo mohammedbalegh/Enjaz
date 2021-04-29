@@ -2,8 +2,8 @@ import UIKit
 
 class DraftMetaDataContainer: UIView {
 
-    let categoryLabel: UILabel = {
-        let label = UILabel()
+    let categoryLabel: ShimmeringLabel = {
+        let label = ShimmeringLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .accent
@@ -12,8 +12,8 @@ class DraftMetaDataContainer: UIView {
         return label
     }()
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
+    let titleLabel: ShimmeringLabel = {
+        let label = ShimmeringLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .systemGray
@@ -22,8 +22,8 @@ class DraftMetaDataContainer: UIView {
         return label
     }()
     
-    let dateLabel: UILabel = {
-        let label = UILabel()
+    let dateLabel: ShimmeringLabel = {
+        let label = ShimmeringLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.textColor = .systemGray3
@@ -31,17 +31,7 @@ class DraftMetaDataContainer: UIView {
         
         return label
     }()
-    
-    lazy var titleAndDateLabelsStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, dateLabel])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        
-        return stackView
-    }()
-    
+	
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -53,7 +43,8 @@ class DraftMetaDataContainer: UIView {
     
     func setupSubviews() {
         setupCategoryLabel()
-        setupTitleAndDateLabelsStack()
+        setupTitleLabel()
+		setupDateLabel()
     }
     
     func setupCategoryLabel() {
@@ -62,20 +53,31 @@ class DraftMetaDataContainer: UIView {
         NSLayoutConstraint.activate([
             categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            categoryLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
-            categoryLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 16),
+            categoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            categoryLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: categoryLabel.font.pointSize + 5),
         ])
     }
     
-    func setupTitleAndDateLabelsStack() {
-        addSubview(titleAndDateLabelsStack)
+    func setupTitleLabel() {
+        addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            titleAndDateLabelsStack.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
-            titleAndDateLabelsStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            titleAndDateLabelsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
-            titleAndDateLabelsStack.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+			titleLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
+			titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+			titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
+			titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: titleLabel.font.pointSize + 5),
         ])
     }
+	
+	func setupDateLabel() {
+		addSubview(dateLabel)
+		
+		NSLayoutConstraint.activate([
+			dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18),
+			dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+			dateLabel.widthAnchor.constraint(greaterThanOrEqualTo: widthAnchor, multiplier: 0.4),
+			dateLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: dateLabel.font.pointSize + 5),
+		])
+	}
 
 }
