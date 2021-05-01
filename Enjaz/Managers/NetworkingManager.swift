@@ -13,6 +13,8 @@ struct NetworkingManager {
         case video
         case article
         case bank
+        case aboutUs
+        case privacyPolicy
     }
     
     static let cache = NSCache<NSString, NSString>()
@@ -184,40 +186,40 @@ struct NetworkingManager {
     }
     
     // @stub
-    static func retrieveGoalSuggestions(completionHandler: @escaping (GoalSuggestionsBankModel?, String?) -> Void) {
+    static func retrieveGoalSuggestions(completionHandler: @escaping ([GoalSuggestionsModel]?, Error?) -> Void) {
         
-        guard let url = URL(string: NetworkingUrls.apiGoalsSuggestionsBankUrl) else {
-            print("not valid ur")
-            return
-        }
+        let url = URL(string: NetworkingUrls.apiGoalsSuggestionsBankUrl)
         
-        let task =  URLSession.shared.dataTask(with: url) { data ,response, error in
+        let request = HttpRequest(url: url, method: .get)
+        
+        request.send { data, response, error in
+            
             if let _ = error {
-                completionHandler(nil,  "unable to complete your request")
+                completionHandler(nil,  error)
                 return
             }
             
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completionHandler(nil, "Invalid response from server")
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                completionHandler(nil, StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
             
             guard let data = data else {
-                completionHandler(nil, "invalid data format")
+                completionHandler(nil, error)
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let goals = try decoder.decode(GoalSuggestionsBankModel.self, from: data)
-                completionHandler(goals, nil)
-            } catch {
-                completionHandler(nil, "invalid data format")
-            }
+            let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
             
+            do {
+                let bank = try encodeBlog(dataAsString, type: [GoalSuggestionsModel].self)
+                completionHandler(bank, nil)
+            } catch {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
         }
-        task.resume()
         
     }
     
@@ -231,7 +233,7 @@ struct NetworkingManager {
         
         if let requestCache = cache.object(forKey: key) {
             do {
-                let blog = try encodeArticles(requestCache, type: BlogModel.self)
+                let blog = try encodeBlog(requestCache, type: BlogModel.self)
                 let articles = blog?.data
                 completionHandler(articles, nil)
             } catch {
@@ -263,7 +265,7 @@ struct NetworkingManager {
             let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
             
             do {
-                let blog = try encodeArticles(dataAsString, type: BlogModel.self)
+                let blog = try encodeBlog(dataAsString, type: BlogModel.self)
                 let articles = blog?.data
                 NetworkingManager.cache.setObject(dataAsString, forKey: key)
                 
@@ -275,16 +277,13 @@ struct NetworkingManager {
         
     }
     
-    static func encodeArticles<T: Decodable>(_ data: NSString, type: T.Type)  throws -> T? {
-        
+    static func encodeBlog<T: Decodable>(_ data: NSString, type: T.Type)  throws -> T? {
         let stringToData = Data(String(data).utf8)
         let decoder = JSONDecoder()
         let blog = try decoder.decode(type.self, from: stringToData)
         return blog
-        
     }
     
-    // @stub
     static func retrieveVideos(in page: Int, completionHandler: @escaping ([VideoModel]?, Error?) -> Void) {
         
         let url = URL(string: NetworkingUrls.apiBlogVideosUrl + String(page))
@@ -295,7 +294,7 @@ struct NetworkingManager {
         
         if let requestCache = cache.object(forKey: key) {
             do {
-                let blog = try encodeArticles(requestCache, type: VideosTopModel.self)
+                let blog = try encodeBlog(requestCache, type: VideosTopModel.self)
                 let articles = blog?.data
                 completionHandler(articles, nil)
             } catch {
@@ -327,7 +326,7 @@ struct NetworkingManager {
             let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
             
             do {
-                let blog = try encodeArticles(dataAsString, type: VideosTopModel.self)
+                let blog = try encodeBlog(dataAsString, type: VideosTopModel.self)
                 let articles = blog?.data
                 NetworkingManager.cache.setObject(dataAsString, forKey: key)
                 
@@ -337,6 +336,49 @@ struct NetworkingManager {
             }
         }
     }
+    
+    static func getPrivacyPolicyAndAboutUs(of type: CallType, completionHandler: @escaping (PrivacyPolicyAndAboutUsModel?, Error?) -> Void) {
+        
+        var urlString = ""
+        if type == .aboutUs {urlString = NetworkingUrls.apiAboutUs}
+        else {urlString = NetworkingUrls.apiPrivacyPolicy}
+        
+        let url = URL(string: urlString)
+        
+        let request = HttpRequest(url: url, method: .get)
+        
+        request.send { data, response, error in
+            
+            if let _ = error {
+                completionHandler(nil,  error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                completionHandler(nil, StatusCodeError.statusCode(code: response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(nil, error)
+                return
+            }
+            
+            let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
+            
+            do {
+                let privacyPolicyAndAboutUsModel = try encodeBlog(dataAsString, type: [PrivacyPolicyAndAboutUsModel].self)
+                completionHandler(privacyPolicyAndAboutUsModel?.first, nil)
+            } catch {
+                print("invalid data format")
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+        }
+    }
+    
+    
     
     // @stub
     static func sendEmail(name: String, phoneNumber: String, messageContent: String) {

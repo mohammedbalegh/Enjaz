@@ -8,4 +8,6 @@ struct NetworkingUrls {
     static let apiBlogArticlesUrl = apiBaseUrl + "/blog?page="
     static let apiBlogVideosUrl = apiBaseUrl + "/video?page="
     static let apiGoalsSuggestionsBankUrl = apiBaseUrl + "/bank"
+    static let apiAboutUs = apiBaseUrl + "/about"
+    static let apiPrivacyPolicy = apiBaseUrl + "/privacy"
 }

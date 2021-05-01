@@ -67,6 +67,9 @@
 "If you have a task that want to complete in a specific time" = "If you have a task that want to complete in a specific time";
 "No type has been selected" = "No type has been selected";
 
+// MARK: GoalsBankScreenVC
+"Some goals suggestions" = "أقتراحات لبعض الأهداف";
+
 // MARK: AddItemScreen
 "Add %@" = "Add %@";
 "Select Image" = "Select Image";

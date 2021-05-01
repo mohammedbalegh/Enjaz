@@ -12,7 +12,7 @@ class PrivacyPolicyAndAboutAppScreenVC: UIViewController {
     
     let scrollView = UIScrollView()
     
-    let TextView: UITextView = {
+    let textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -29,8 +29,9 @@ class PrivacyPolicyAndAboutAppScreenVC: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .background
-        
+        textView.text = showAboutAppTopView ? UserDefaultsManager.aboutUs: UserDefaultsManager.privacyPolicy
         setupSubView()
+        getText()
     }
     
     func setupSubView() {
@@ -57,6 +58,21 @@ class PrivacyPolicyAndAboutAppScreenVC: UIViewController {
         }
     }
     
+    func getText() {
+        var type: NetworkingManager.CallType
+        if showAboutAppTopView { type = .aboutUs } else { type = .privacyPolicy }
+        NetworkingManager.getPrivacyPolicyAndAboutUs(of: type) { (data, error) in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    return
+                }
+                if type == .aboutUs {UserDefaultsManager.aboutUs =  data?.text}
+                else {UserDefaultsManager.privacyPolicy =  data?.text}
+                self.textView.text = data?.text
+            }
+        }
+    }
+    
     func setupAboutAppTopView() {
         scrollView.addSubview(aboutAppTopView)
         
@@ -69,13 +85,13 @@ class PrivacyPolicyAndAboutAppScreenVC: UIViewController {
     }
     
     func setupTextView() {
-        scrollView.addSubview(TextView)
+        scrollView.addSubview(textView)
         
         NSLayoutConstraint.activate([
-            TextView.topAnchor.constraint(equalTo: aboutAppTopView.bottomAnchor, constant: 15),
-            TextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            TextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            TextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -15),
+            textView.topAnchor.constraint(equalTo: aboutAppTopView.bottomAnchor, constant: 15),
+            textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -15),
         ])
     }
 }

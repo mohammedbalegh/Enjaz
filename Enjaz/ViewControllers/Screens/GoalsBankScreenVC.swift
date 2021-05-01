@@ -5,6 +5,8 @@ class GoalsBankScreenVC: UIViewController {
     
     var goalSuggestions: [GoalSuggestionsModel] = []
     
+    var refreshControl: UIRefreshControl!
+    
     var goalsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +23,7 @@ class GoalsBankScreenVC: UIViewController {
     
     let suggestionsLabel: UILabel = {
         let label = UILabel()
-        label.text = "أقتراحات لبعض الأهداف"
+        label.text = NSLocalizedString("", comment: "Some goals suggestions")
         label.font = label.font.withSize(15)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -35,9 +37,13 @@ class GoalsBankScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .background
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        goalsTableView.insertSubview(refreshControl, at: 0)
+        
         goalsTableView.delegate = self
         goalsTableView.dataSource = self
-        
+        goalSuggestions = UserDefaultsManager.goalsBank ?? []
         setupSubviews()
     }
     
@@ -48,15 +54,24 @@ class GoalsBankScreenVC: UIViewController {
         updateScreen()
     }
     
+    @objc func onRefresh() {
+        updateScreen()
+    }
+    
     func updateScreen() {
         NetworkingManager.retrieveGoalSuggestions() { goals, error in
             guard let goals = goals else {
+                self.refreshControl.endRefreshing()
                 print(error!)
                 return
             }
             
-            self.goalSuggestions = goals.data
-            self.goalsTableView.reloadData()
+            self.goalSuggestions = goals
+            UserDefaultsManager.goalsBank = goals
+            DispatchQueue.main.async {
+                self.goalsTableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
     }
     

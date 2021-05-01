@@ -67,6 +67,9 @@
 "If you have a task that want to complete in a specific time" = "ان كان لديك مهمة تريد انجازها خلال وقت معين";
 "No type has been selected" = "لم يتم اختيار نوع";
 
+// MARK: GoalsBankScreenVC
+"Some goals suggestions" = "Some goals suggestions";
+
 // MARK: AddItemScreen
 "Add %@" = "إضافة %@";
 "Select Image" = "اختر صورة مناسبة";
