@@ -2,11 +2,11 @@ import UIKit
 
 class CustomAccessoryView: UIView {
     
-    let doneBtn: UIButton = {
+    let cancelBtn: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+        button.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         button.setTitleColor(.accent, for: .normal)
         
         return button
@@ -23,17 +23,17 @@ class CustomAccessoryView: UIView {
     }
     
     func setupSubviews() {
-        setupDoneBtn()
+        setupCancelBtn()
     }
     
-    func setupDoneBtn() {
-        addSubview(doneBtn)
+    func setupCancelBtn() {
+        addSubview(cancelBtn)
         
         NSLayoutConstraint.activate([
-            doneBtn.centerYAnchor.constraint(equalTo: centerYAnchor),
-            doneBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            doneBtn.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
-            doneBtn.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+            cancelBtn.centerYAnchor.constraint(equalTo: centerYAnchor),
+            cancelBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            cancelBtn.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
+            cancelBtn.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
         ])
     }
     

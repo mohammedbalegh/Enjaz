@@ -8,6 +8,8 @@ class ItemCardView: UIView {
             
 			cardBody.item = viewModel
 			
+			pinBtn.backgroundColor = viewModel.is_pinned ? .accent : .lowContrastGray
+			
             if let imageName = RealmManager.retrieveItemImageSourceById(viewModel.image_id) {
                 imageView.image = UIImage.getImageFrom(imageName)
             } else {
@@ -15,14 +17,31 @@ class ItemCardView: UIView {
             }
             
             let itemCategory = RealmManager.retrieveItemCategoryById(viewModel.category)
-						
+			
             cardBody.categoryLabel.text = itemCategory?.localized_name
             cardBody.titleLabel.text = viewModel.name
             cardBody.descriptionLabel.text = viewModel.item_description
-            cardBody.dateAndTimeLabel.attributedText = DateAndTimeTools.setDateAndTimeLabelText(viewModel)
+            cardBody.dateAndTimeLabel.attributedText = DateAndTimeTools.getDateAndTimeLabelText(viewModel)
+			
+			isMinimized = true
         }
     }
-    
+	    
+	let pinBtn: UIButton = {
+		let image = UIImage(systemName: "pin.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+		
+		let button = UIButton(type: .system)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+		button.setImage(image, for: .normal)
+		button.imageView?.contentMode = .scaleAspectFit
+		
+		button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+		button.transform = CGAffineTransform(rotationAngle: 45)
+		button.addTarget(self, action: #selector(handlePinBtnPress), for: .touchUpInside)
+		
+		return button
+	}()
     
     let imageContainer: UIView = {
         let view = UIView(frame: .zero)
@@ -49,6 +68,17 @@ class ItemCardView: UIView {
         return view
     }()
     
+	var isMinimized = true {
+		didSet {
+			guard let isPinned = viewModel?.is_pinned else { return }
+			
+			pinBtn.isHidden = isMinimized && !isPinned
+			pinBtn.isEnabled = !isMinimized
+		}
+	}
+	
+	var itemsUpdateHandler: (() -> Void)?
+	
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -59,11 +89,27 @@ class ItemCardView: UIView {
     }
     
     func setupSubviews() {
+		setupPinBtn()
         setupImageContainer()
         setupImageView()
         setupCardBody()
     }
     
+	func setupPinBtn() {
+		addSubview(pinBtn)
+		
+		let size: CGFloat = 27
+		
+		NSLayoutConstraint.activate([
+			pinBtn.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+			pinBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+			pinBtn.widthAnchor.constraint(equalToConstant: size),
+			pinBtn.heightAnchor.constraint(equalToConstant: size),
+		])
+		
+		pinBtn.layer.cornerRadius = size / 2
+	}
+	
     func setupImageContainer() {
         addSubview(imageContainer)
         
@@ -96,4 +142,16 @@ class ItemCardView: UIView {
             cardBody.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
     }
+	
+	@objc func handlePinBtnPress() {
+		guard let item = viewModel else { return }
+		let newPinState = !item.is_pinned
+		RealmManager.pinItem(item, isPinned: newPinState)
+		itemsUpdateHandler?()
+		
+		Vibration.light.vibrate()
+		UIView.animate(withDuration: 0.3) {
+			self.pinBtn.backgroundColor = newPinState ? .accent : .lowContrastGray
+		}
+	}
 }

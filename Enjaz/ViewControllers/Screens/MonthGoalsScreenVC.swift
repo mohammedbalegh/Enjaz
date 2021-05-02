@@ -29,8 +29,8 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 		upcomingGoals = allOriginalCategoryGoals.filter { !$0.is_completed && $0.date > Date().timeIntervalSince1970 }
 		
 		screenNavigatorCellModels = [
-			ScreenNavigatorCellModel(imageSource: "majorGoalsIcon", label: NSLocalizedString("Major goals", comment: ""), subLabel: "\(NSLocalizedString("My goal in life regarding ", comment: ""))\(category.localized_name)")
-			,ScreenNavigatorCellModel(imageSource: "completedGoalsIcon", label: NSLocalizedString("Finished goals", comment: ""), subLabel: "\(completedGoals.count) \(NSLocalizedString("Goal", comment: ""))"),
+			ScreenNavigatorCellModel(imageSource: "majorGoalsIcon", label: NSLocalizedString("Major goals", comment: ""), subLabel: "\(NSLocalizedString("My goal in life regarding ", comment: ""))\(category.localized_name.lowercased())")
+			,ScreenNavigatorCellModel(imageSource: "completedGoalsIcon", label: NSLocalizedString("Completed goals", comment: ""), subLabel: "\(completedGoals.count) \(NSLocalizedString("Goal", comment: ""))"),
 			ScreenNavigatorCellModel(imageSource: "upcomingGoalsIcon", label: NSLocalizedString("Upcoming goals", comment: ""), subLabel: "\(upcomingGoals.count) \(NSLocalizedString("Goal", comment: ""))"),
 			ScreenNavigatorCellModel(imageSource: "rateYourSelfIcon", label: NSLocalizedString("Self Evaluation", comment: ""), subLabel: ""),
 			ScreenNavigatorCellModel(imageSource: "addButton", label: NSLocalizedString("Add new goal", comment: ""), subLabel: ""),
@@ -39,13 +39,17 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 		tableView.reloadData()
 	}
 	
-	func getUpcomingAndCompletedGoalsScreen(itemModels: [ItemModel], title: String) -> ShowAllItemsScreenVC {
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .vertical
-		
-		let upcomingAndCompletedGoalsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
-		upcomingAndCompletedGoalsScreenVC.delegate = self
-		upcomingAndCompletedGoalsScreenVC.cardModels = itemModels
+	func getCompletedGoalsScreen(itemModels: [ItemModel], title: String) -> ItemsScreenVC {
+		return getUpcomingAndCompletedGoalsScreen(itemModels: itemModels, title: title, isUpcoming: false)
+	}
+	
+	func getUpcomingGoalsScreen(itemModels: [ItemModel], title: String) -> ItemsScreenVC {
+		return getUpcomingAndCompletedGoalsScreen(itemModels: itemModels, title: title, isUpcoming: true)
+	}
+	
+	func getUpcomingAndCompletedGoalsScreen(itemModels: [ItemModel], title: String, isUpcoming: Bool) -> ItemsScreenVC {
+		let upcomingAndCompletedGoalsScreenVC = isUpcoming ? UpcomingGoalsScreenVC() : ItemsScreenVC()
+		upcomingAndCompletedGoalsScreenVC.items = itemModels
 		upcomingAndCompletedGoalsScreenVC.title = title
 		
 		return upcomingAndCompletedGoalsScreenVC
@@ -60,9 +64,9 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
             vc.categoryId = category.id
             return vc
         case 1:
-            return getUpcomingAndCompletedGoalsScreen(itemModels: completedGoals, title: NSLocalizedString("Completed Goals", comment: ""))
+            return getCompletedGoalsScreen(itemModels: completedGoals, title: NSLocalizedString("Completed Goals", comment: ""))
         case 2:
-            return getUpcomingAndCompletedGoalsScreen(itemModels: upcomingGoals, title: NSLocalizedString("Upcoming Goals", comment: ""))
+			return getUpcomingGoalsScreen(itemModels: upcomingGoals, title: NSLocalizedString("Upcoming Goals", comment: ""))
         case 3:
             let vc = SelfEvaluationScreenVC()
             vc.categoryId = category.id
@@ -81,19 +85,4 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
             navigationController?.pushViewController(targetViewController, animated: true)
         }
     }    
-}
-
-extension MonthGoalsScreenVC: ItemsScreenDelegate {
-	func didUpdateItem(_ itemsScreen: ShowAllItemsScreenVC) {
-		guard let items = itemsScreen.cardModels as? [ItemModel] else { return }
-		
-		if items == completedGoals {
-			updateScreen()
-			itemsScreen.cardModels = completedGoals
-		} else {
-			updateScreen()
-			itemsScreen.cardModels = upcomingGoals
-		}
-		
-	}
 }

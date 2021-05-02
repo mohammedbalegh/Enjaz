@@ -490,7 +490,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
         let from = NSLocalizedString("from", comment: "")
         let to = NSLocalizedString("to", comment: "")
-        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accent, stringSize: 13)
+        selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accent, stringSize: 13, coloredSubstringsSize: 13)
     }
 
     func getWeekDayCellRowBy(weekDayIndex: Int, andHour hour: Int) -> Int {

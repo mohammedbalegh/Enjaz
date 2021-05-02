@@ -6,7 +6,7 @@ class PickerBottomSheetView: BottomSheetView {
         let customAccessoryView = CustomAccessoryView()
         customAccessoryView.translatesAutoresizingMaskIntoConstraints = false
         
-        customAccessoryView.doneBtn.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
+        customAccessoryView.cancelBtn.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
         
         return customAccessoryView
     }()

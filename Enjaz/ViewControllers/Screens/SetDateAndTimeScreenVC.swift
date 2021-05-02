@@ -72,7 +72,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         view.addSubview(calendarView)
         
         NSLayoutConstraint.activate([
-            calendarView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 35),
+			calendarView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: LayoutConstants.screenHeight * 0.022),
             calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             calendarView.widthAnchor.constraint(equalToConstant: CalendarView.width),
             calendarView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.75),

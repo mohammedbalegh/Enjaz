@@ -82,10 +82,10 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         view.addSubview(goalDemahStack)
                 
         NSLayoutConstraint.activate([
-            goalDemahStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            goalDemahStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             goalDemahStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             goalDemahStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            goalDemahStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.28),
+            goalDemahStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.30),
         ])
     }
     

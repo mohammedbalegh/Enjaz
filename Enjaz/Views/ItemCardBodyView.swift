@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class ItemCardBodyView: UIView {
 	var item: ItemModel? {
@@ -216,8 +217,16 @@ class ItemCardBodyView: UIView {
     
 	@objc func handleCheckBtnTap() {
 		guard let item = item else { return }
+		
+		guard !item.is_completed else {
+			let itemType = ItemType.getTypeById(id: item.type)
+			let alertMessage = String(format: NSLocalizedString("%@ is already completed", comment: ""), itemType.localizedName)
+			SPAlert.present(message: alertMessage, haptic: .error)
+			return
+		}
+		
 		let updatedItemIsCompletedValue = !item.is_completed
 		checkBtnHandler?(item, updatedItemIsCompletedValue)
 	}
-    
+	    
 }

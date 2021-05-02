@@ -2,7 +2,7 @@ import UIKit
 
 class MyPlanChildVC: UIViewController {
 	
-	let searchVC = SearchControllerVC()
+	let searchVC = ItemsScreenVC()
 	
 	lazy var searchController: UISearchController = {
 		let search = UISearchController(searchResultsController: searchVC)
@@ -23,14 +23,14 @@ class MyPlanChildVC: UIViewController {
 	
 }
 
-extension MyPlanChildVC:  UISearchResultsUpdating, UISearchControllerDelegate {
+extension MyPlanChildVC: UISearchResultsUpdating, UISearchControllerDelegate {
 	
 	func updateSearchResults(for searchController: UISearchController) {
 		guard let text = searchController.searchBar.text else { return }
 		
-		let searchItems = RealmManager.retrieveItemsBySearch(contains: text)
+		let searchItems = RealmManager.retrieveItemsBySearch(contains: text).filterOutNonOriginalItems()
 		
-		searchVC.itemsTableView.items = searchItems
+		searchVC.items = searchItems
+		searchVC.tableView.reloadData()
 	}
-	
 }

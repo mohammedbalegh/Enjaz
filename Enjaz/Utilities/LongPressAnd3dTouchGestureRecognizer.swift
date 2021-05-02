@@ -3,14 +3,6 @@ import UIKit
 /// A Gesture Recognizer that fires either on long press, or on "3D Touch"
 final class LongPressAnd3dTouchGestureRecognizer: UILongPressGestureRecognizer {
 	
-	override var state: UIGestureRecognizer.State {
-		didSet {
-			if state == .began {
-				Vibration.medium.vibrate()
-			}
-		}
-	}
-	
 	// MARK: - Properties
 	var triggerWithForceTouch: Bool = true
 	

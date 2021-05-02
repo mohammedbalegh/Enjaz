@@ -52,14 +52,6 @@ extension String {
         return "\(requiredFieldNamesAsSentence) field\(numberOfNonProvidedRequiredFields > 1 ? "s" : "") \(String.isOrAre(count: numberOfNonProvidedRequiredFields)) required.".capitalizeOnlyFirstLetter()
     }
     
-    static func generateAdditionSuccessMessage(type: String) -> String {
-        if Locale.current.languageCode == "ar" {
-            return "تم إضافة ال\(type) بنجاح"
-        }
-        
-        return "\(type) was added successfully"
-    }
-    
     private func isAllDigits()->Bool {
         let characterSet  = NSCharacterSet(charactersIn: "+0123456789").inverted
         let inputString = self.components(separatedBy: characterSet)

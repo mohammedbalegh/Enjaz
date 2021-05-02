@@ -179,12 +179,9 @@ class DraftScreenVC: UIViewController {
     }
     
     func navigateToShowAllCardsScreen(withModels models: [Any], title: String?) {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
         let showAllCardsScreenVC = models is [ArticleModel]
-            ? ShowAllIArticlesScreenVC(collectionViewLayout: layout)
-            : ShowAllIVideosScreenVC(collectionViewLayout: layout)
+            ? ShowAllIArticlesScreenVC()
+            : ShowAllIVideosScreenVC()
         
         showAllCardsScreenVC.cardModels = models
         showAllCardsScreenVC.title = title

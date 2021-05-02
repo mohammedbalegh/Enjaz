@@ -1,4 +1,5 @@
 import UIKit
+import SPAlert
 
 class HourTableViewCell: UITableViewCell {
 
@@ -39,7 +40,19 @@ class HourTableViewCell: UITableViewCell {
             isShowingAllIncludedItems = viewModel.isShowingAllIncludedItems
         }
     }
+	
+	var unixTimeStamp: TimeInterval? {
+		didSet {
+			if let unixTimeStamp = unixTimeStamp, unixTimeStamp < Date().timeIntervalSince1970 {
+				addGestureRecognizer(longPressAnd3dTouchGestureRecognizer)
+			} else {
+				removeGestureRecognizer(longPressAnd3dTouchGestureRecognizer)
+			}
+		}
+	}
     
+	lazy var longPressAnd3dTouchGestureRecognizer = LongPressAnd3dTouchGestureRecognizer(target: self, action: #selector(handleLongPressOr3dTouch))
+	
     let hourLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -143,6 +156,7 @@ class HourTableViewCell: UITableViewCell {
 		backgroundColor = .secondaryBackground
 		contentView.backgroundColor = .secondaryBackground
 		selectionStyle = .none
+		
         setupSubviews()
     }
     
@@ -215,4 +229,10 @@ class HourTableViewCell: UITableViewCell {
         isShowingAllIncludedItems ? showLessBtnHandler?(row) : showAllBtnHandler?(row)
         isShowingAllIncludedItems = !isShowingAllIncludedItems
     }
+	
+	@objc func handleLongPressOr3dTouch(gesture: LongPressAnd3dTouchGestureRecognizer) {
+		if gesture.state == .began {
+			SPAlert.present(message: NSLocalizedString("Cannot add a task in the past", comment: ""), haptic: .error)
+		}
+	}
 }

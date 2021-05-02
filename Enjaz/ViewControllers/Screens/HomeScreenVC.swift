@@ -176,15 +176,15 @@ class HomeScreenVC: UIViewController {
     // MARK: Event Handlers
     
     @objc func handleShowAllGoalsBtnTap() {
-        navigateToShowAllItemsScreen(withModels: goalModels, title: dailyGoalView.title)
+        navigateToItemsScreen(withModels: goalModels, title: dailyGoalView.title)
     }
 	
 	@objc func handleShowAllTasksBtnTap() {
-		navigateToShowAllItemsScreen(withModels: taskModels, title: dailyGoalView.title)
+		navigateToItemsScreen(withModels: taskModels, title: dailyGoalView.title)
 	}
     
     @objc func handleShowAllDemahsBtnTap() {
-        navigateToShowAllItemsScreen(withModels: demahModels, title: dailyDemahView.title)
+        navigateToItemsScreen(withModels: demahModels, title: dailyDemahView.title)
     }
     
     // MARK: Tools
@@ -229,15 +229,12 @@ class HomeScreenVC: UIViewController {
         demahModels = updatedDemahModels
     }
             
-    func navigateToShowAllItemsScreen(withModels models: [ItemModel], title: String?) {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+    func navigateToItemsScreen(withModels models: [ItemModel], title: String?) {        
+        let itemsScreenVC = ItemsScreenVC()
+		itemsScreenVC.items = models
+		itemsScreenVC.title = title
         
-        let showAllItemsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
-        showAllItemsScreenVC.cardModels = models
-        showAllItemsScreenVC.title = title
-        
-        navigationController?.pushViewController(showAllItemsScreenVC, animated: true)
+        navigationController?.pushViewController(itemsScreenVC, animated: true)
     }
 }
 
@@ -273,7 +270,7 @@ extension HomeScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewData
         let viewModels = getViewModels(for: collectionView)
         itemCardPopup.itemModels =  [viewModels[indexPath.row]]
 		itemCardPopup.itemsUpdateHandler = updateScreen
-        self.itemCardPopup.present(animated: true)
+        itemCardPopup.present(animated: true)
     }
     
     func getViewModels(for collectionView: UICollectionView) -> [ItemModel] {

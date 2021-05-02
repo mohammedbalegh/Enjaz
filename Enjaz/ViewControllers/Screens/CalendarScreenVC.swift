@@ -6,12 +6,7 @@ class CalendarScreenVC: CalendarViewController {
     var currentWeekItems: [ItemModel] = []
         
     var dailyViewPopup = DailyViewPopup()
-	lazy var itemCardPopup: ItemCardPopup = {
-		let popup = ItemCardPopup()
-		popup.itemsUpdateHandler = updateScreen
-		return popup
-	}()
-        
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
@@ -29,7 +24,7 @@ class CalendarScreenVC: CalendarViewController {
     // MARK: Tools
         
     override func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {
-        calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .viewType)
+		calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .viewType, thirdBtn: .year)
     }
     
     func configureCalendarView() {
@@ -139,6 +134,8 @@ class CalendarScreenVC: CalendarViewController {
     }
     
 	func handleDailyViewItemTap(items: [ItemModel]) {
+		let itemCardPopup = ItemCardPopup()
+		itemCardPopup.itemsUpdateHandler = updateScreen
 		itemCardPopup.itemModels = items
 		itemCardPopup.present(animated: true)
 	}
@@ -165,8 +162,12 @@ extension CalendarScreenVC: CalendarViewDelegate {
         if weeklyViewIsShown {
             let cell = calendarCollectionView.cellForItem(at: indexPath) as? WeekDayCell
 			guard let itemModels = cell?.viewModel?.includedItems, !itemModels.isEmpty else { return }
+			
+			let itemCardPopup = ItemCardPopup()
+			itemCardPopup.itemsUpdateHandler = updateScreen
             itemCardPopup.itemModels = itemModels
             itemCardPopup.present(animated: true)
+			
             return
         }
         

@@ -65,8 +65,8 @@ class Popup: UIView {
         NSLayoutConstraint.activate([
             popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
             popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3),
-            popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
+            popupContainer.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.3),
+            popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.78),
         ])
     }
 	
@@ -77,8 +77,8 @@ class Popup: UIView {
 	// MARK: Tools
 			
 	func present(animated: Bool) {
-		let window = UIApplication.shared.windows[0]
-		window.addSubview(self)
+		let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+		keyWindow?.addSubview(self)
 				
 		prepareForPresentation(animated)
 				

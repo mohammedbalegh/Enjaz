@@ -140,7 +140,7 @@ class ProgressBarView: UIView {
 		let localizedPluralItemTypeName = NSLocalizedString(itemType.name.pluralizeInEnglish(), comment: "").removeDefinitionArticle()
 		
 		mainLabel.text = String(format: NSLocalizedString("%@ of the month", comment: ""), localizedPluralItemTypeName)
-		subLabel.text = String(format: NSLocalizedString("What %@ have you finished", comment: ""), localizedPluralItemTypeName).capitalizeOnlyFirstLetter()
+		subLabel.text = String(format: NSLocalizedString("What %@ have you completed", comment: ""), localizedPluralItemTypeName).capitalizeOnlyFirstLetter()
 	}
 	
 	func updateProgressView(totalNumberOfItems: Int, numberOfCompletedItems: Int) {

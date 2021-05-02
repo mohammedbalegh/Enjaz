@@ -1,8 +1,11 @@
 import UIKit
 
 class ZoomAndSnapFlowLayout: UICollectionViewFlowLayout {
-
-    static let itemSize = CGSize(width: LayoutConstants.screenWidth * 0.67, height: LayoutConstants.screenHeight * 0.55)
+	private static let itemHeight = LayoutConstants.isScreenTall
+		? LayoutConstants.screenHeight * 0.55
+		: LayoutConstants.screenHeight * 0.65
+	
+    static let itemSize = CGSize(width: LayoutConstants.screenWidth * 0.67, height: itemHeight)
     static let zoomFactor: CGFloat = 0.3
     let activeDistance: CGFloat = 200
 	var zoomFactor: CGFloat = ZoomAndSnapFlowLayout.zoomFactor

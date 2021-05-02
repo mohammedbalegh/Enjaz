@@ -9,9 +9,14 @@ class ItemModel: Object {
     @objc dynamic var category: Int = 0
     @objc dynamic var type: Int = 0
     @objc dynamic var is_completed: Bool = false
+	@objc dynamic var is_pinned: Bool = false
     @objc dynamic var image_id: Int = 0
     @objc dynamic var originalItemId: Int = -1
     
     @objc dynamic var isOriginal: Bool { originalItemId == -1 }
     @objc dynamic var isRepeated: Bool { endDate != 0 }
+	
+	override class func primaryKey() -> String? {
+		return "id"
+	}
 }

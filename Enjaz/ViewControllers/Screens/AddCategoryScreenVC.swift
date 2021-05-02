@@ -139,7 +139,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
         
         navigationController?.popViewController(animated: true)
         
-        let successMessage = String.generateAdditionSuccessMessage(type: NSLocalizedString("category", comment: ""))
+        let successMessage = String(format: NSLocalizedString("%@ was added successfully", comment: ""), NSLocalizedString("category", comment: ""))
         SPAlert.present(title: successMessage, preset: .done)
     }
 	

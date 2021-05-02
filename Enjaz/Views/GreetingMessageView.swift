@@ -75,7 +75,7 @@ class GreetingMessageView: UIView {
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 3),
-            messageLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 35),
+            messageLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 30),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             messageLabel.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor),
         ])

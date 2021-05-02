@@ -79,7 +79,7 @@ struct DateAndTimeTools {
         return currentDate
     }
     
-    static func setDateAndTimeLabelText(_ viewModel: ItemModel) -> NSAttributedString {
+    static func getDateAndTimeLabelText(_ viewModel: ItemModel) -> NSAttributedString {
         let itemDate = Date(timeIntervalSince1970: viewModel.date)
         let dateFormat: String = {
             if viewModel.isRepeated { return "d/M/yy" }
@@ -98,7 +98,7 @@ struct DateAndTimeTools {
         let from = NSLocalizedString("from", comment: "")
         let to = NSLocalizedString("to", comment: "")
         
-        let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accent, stringSize: 11)
+        let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accent, stringSize: 11, coloredSubstringsSize: 11)
         
         let itemReadableDate = viewModel.isRepeated
             ? rangeDate

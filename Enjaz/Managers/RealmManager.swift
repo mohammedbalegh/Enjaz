@@ -41,44 +41,100 @@ struct RealmManager {
 	static func saveItem(_ item: ItemModel) {
 		realm.beginWrite()
 		realm.add(item)
-		try! realm.commitWrite()
+		try? realm.commitWrite()
+	}
+	
+	static func retrieveItemById(_ id: Int) -> ItemModel? {
+		let item = realm.object(ofType: ItemModel.self, forPrimaryKey: id)
+		return item
 	}
 	
     static func retrieveItems() -> [ItemModel] {
-        let items: [ItemModel] = Array(realm.objects(ItemModel.self).sorted(byKeyPath: "date", ascending: true))
+		let items: [ItemModel] = Array(realm.objects(ItemModel.self).sorted(byKeyPath: "date", ascending: true).sorted(byKeyPath: "is_pinned",ascending: false))
         return items
     }
-    
-    static func retrieveItemById(_ id: Int) -> ItemModel? {
-        let item = realm.object(ofType: ItemModel.self, forPrimaryKey: id)
-        return item
-    }
-    
+        
     static func retrieveItems(withFilter filter: String) -> [ItemModel] {
-        let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter(filter).sorted(byKeyPath: "date", ascending: true))
-        return items
-    }
-    
-    static func retrieveItemsBySearch(contains filter: String) -> [ItemModel] {
-        let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter("name contains[c] %@", filter).sorted(byKeyPath: "date", ascending: true))
+        let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter(filter).sorted(byKeyPath: "date", ascending: true).sorted(byKeyPath: "is_pinned",ascending: false))
         return items
     }
 	
-	static func deleteItems(withFilter filter: String) {
-		let items: [ItemModel] = retrieveItems(withFilter: filter)
+	static func retrieveItems(subsequentTo item: ItemModel) -> [ItemModel] {
+		return retrieveItems(withFilter: "originalItemId == \(item.id)")
+	}
+    
+    static func retrieveItemsBySearch(contains filter: String) -> [ItemModel] {
+        let items: [ItemModel] = Array(realm.objects(ItemModel.self).filter("name contains[c] %@", filter).sorted(byKeyPath: "date", ascending: true).sorted(byKeyPath: "is_pinned",ascending: false))
+        return items
+    }
+	
+	static func completeItem(_ item: ItemModel, isCompleted: Bool) {
 		realm.beginWrite()
-		
-		// Delete all non-default images related to the to-be-deleted items
-		for item in items {
-			if let image = retrieveItemImageById(item.image_id), !image.is_default {
-				realm.delete(image)
-			}
+		item.is_completed = isCompleted
+		completeSubsequentItemsIfIncluded(item, isCompleted: isCompleted)
+		try? realm.commitWrite()
+	}
+	
+	private static func completeSubsequentItemsIfIncluded(_ item: ItemModel, isCompleted: Bool) {
+		if item.isRepeated {
+			let subsequentItems = retrieveItems(subsequentTo: item)
+			subsequentItems.forEach { $0.is_completed = isCompleted }
 		}
-		
-		realm.delete(items)
+	}
+	
+	static func pinItem(_ item: ItemModel, isPinned: Bool) {
+		realm.beginWrite()
+		item.is_pinned = isPinned
+		pinSubsequentItemsIfIncluded(item, isPinned: isPinned)
+		try? realm.commitWrite()
+	}
+	
+	private static func pinSubsequentItemsIfIncluded(_ item: ItemModel, isPinned: Bool) {
+		if item.isRepeated {
+			let subsequentItems = retrieveItems(subsequentTo: item)
+			subsequentItems.forEach { $0.is_pinned = isPinned }
+		}
+	}
+	
+	static func deleteItems(withFilter filter: String) {
+		realm.beginWrite()
+		let items = retrieveItems(withFilter: filter)
+		items.forEach { deleteItemInsideWritingTransaction($0) }
 		try! realm.commitWrite()
 	}
 	
+	static func deleteItem(_ item: ItemModel) {
+		realm.beginWrite()
+		deleteItemInsideWritingTransaction(item)
+		try! realm.commitWrite()
+	}
+	
+	private static func deleteItemInsideWritingTransaction(_ item: ItemModel) {
+		deletePendingNotificationRequest(item)
+		deleteSubsequentItemsIfIncluded(item)
+		deleteAssociatedImageIfNeeded(item)
+		
+		realm.delete(item)
+	}
+		
+	private static func deletePendingNotificationRequest(_ item: ItemModel) {
+		if item.date > Date().timeIntervalSince1970 {
+			NotificationsManager.removePendingNotificationRequests(withIdentifiers: [String(item.id)])
+		}
+	}
+	
+	private static func deleteSubsequentItemsIfIncluded(_ item: ItemModel) {
+		if item.isRepeated {
+			let subsequentItems = retrieveItems(subsequentTo: item)
+			subsequentItems.forEach { deleteItemInsideWritingTransaction($0) }
+		}
+	}
+	
+	private static func deleteAssociatedImageIfNeeded(_ item: ItemModel) {
+		if let image = retrieveItemImageById(item.image_id), !image.is_default {
+			realm.delete(image)
+		}
+	}
 	
 	// MARK: ItemCategoryModel
     
@@ -87,20 +143,17 @@ struct RealmManager {
         for itemCategory in itemCategories {
             realm.add(itemCategory)
         }
-        try! realm.commitWrite()
+        try? realm.commitWrite()
     }
     
     static func saveItemCategory(_ itemCategory: ItemCategoryModel) {
 		saveItemCategories([itemCategory])
     }
     
-    static func deleteItemCategory(categoryId: Int) {
-        if let itemCategoryToBeDeleted = RealmManager.retrieveItemCategoryById(categoryId) {
-			deleteItems(withFilter: "category == \(categoryId)")
-            realm.beginWrite()
-            realm.delete(itemCategoryToBeDeleted)
-            try! realm.commitWrite()
-        }
+    static func deleteItemCategory(_ category: ItemCategoryModel) {
+		realm.beginWrite()
+		realm.delete(category)
+		try? realm.commitWrite()
     }
 	
 	static func retrieveItemCategories() -> [ItemCategoryModel] {
@@ -121,7 +174,7 @@ struct RealmManager {
 		for itemCategory in itemImages {
 			realm.add(itemCategory)
 		}
-		try! realm.commitWrite()
+		try? realm.commitWrite()
 	}
 	
 	static func saveItemImage(_ itemImage: ItemImageModel) {
@@ -166,7 +219,7 @@ struct RealmManager {
     static func saveItemMedal(_ itemMedal: MedalModel) {
         realm.beginWrite()
         realm.add(itemMedal)
-        try! realm.commitWrite()
+        try? realm.commitWrite()
     }
 	
 	static func retrieveItemMedals(category: Int) -> [MedalModel] {
@@ -180,7 +233,7 @@ struct RealmManager {
 	static func saveAspect(_ aspect: PersonalAspectsModel) {
 		realm.beginWrite()
 		realm.add(aspect)
-		try! realm.commitWrite()
+		try? realm.commitWrite()
 	}
 	
 	static func retrievePersonalAspects() -> [PersonalAspectsModel] {

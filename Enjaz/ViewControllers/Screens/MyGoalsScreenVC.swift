@@ -3,8 +3,7 @@ import UIKit
 class MyGoalsScreenVC: ScreenNavigatorTableVC {
 	    
     var itemCategories: [ItemCategoryModel] = []
-    var toBeDeletedCategoryIndexPath: IndexPath?
-    
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
@@ -29,28 +28,36 @@ class MyGoalsScreenVC: ScreenNavigatorTableVC {
 		tableView.reloadData()
     }
     
-    func presentConfirmDeletionActionSheet() {
-        let actionSheet = UIAlertController(title: NSLocalizedString("Are you sure you want to delete category?", comment: ""), message: NSLocalizedString("All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone.", comment: ""), preferredStyle: .actionSheet)
+	func presentConfirmDeletionActionSheet(forCategoryAt indexPath: IndexPath, completion: ((_ completed: Bool) -> Void)? = nil) {
+		let title = NSLocalizedString("Are you sure you want to delete category?", comment: "")
+		let message = NSLocalizedString("All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone.", comment: "")
 		
-        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Delete Category", comment: ""), style: .destructive, handler: deleteCategory))
+        let actionSheet = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
 		
-        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel))
+		let deleteAction = UIAlertAction(title: NSLocalizedString("Delete Category", comment: ""), style: .destructive) {_ in
+			self.deleteCategory(at: indexPath, completion: completion)
+		}
+		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) {_ in
+			completion?(false)
+		}
+		
+		actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
         actionSheet.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
         present(actionSheet, animated: true)
     }
     
-    func deleteCategory(_ alertAction: UIAlertAction) {
-        guard let toBeDeletedCategoryIndexPath = toBeDeletedCategoryIndexPath else { return }
-		
-        let toBeDeletedItemCategoryId = itemCategories[toBeDeletedCategoryIndexPath.row].id
+	func deleteCategory(at indexPath: IndexPath, completion: ((_ completed: Bool) -> Void)? = nil) {
+        let itemCategory = itemCategories[indexPath.row]
         
-        RealmManager.deleteItemCategory(categoryId: toBeDeletedItemCategoryId)
+        RealmManager.deleteItemCategory(itemCategory)
         
-        itemCategories.remove(at: toBeDeletedCategoryIndexPath.row)
-        screenNavigatorCellModels.remove(at: toBeDeletedCategoryIndexPath.row)
+        itemCategories.remove(at: indexPath.row)
+        screenNavigatorCellModels.remove(at: indexPath.row)
         
-		tableView.deleteRows(at: [toBeDeletedCategoryIndexPath], with: .automatic)
-		self.toBeDeletedCategoryIndexPath = nil
+		tableView.deleteRows(at: [indexPath], with: .automatic)
+		completion?(true)
     }
     
     @objc func handleAddBtnTap() {
@@ -62,30 +69,30 @@ class MyGoalsScreenVC: ScreenNavigatorTableVC {
         monthGoalsScreenVC.category = itemCategories[indexPath.row]
 		parent?.navigationController?.pushViewController(monthGoalsScreenVC, animated: true)
     }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        presentConfirmDeletionActionSheet()
-        toBeDeletedCategoryIndexPath = indexPath
-    }
-	    
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-		guard indexPath.section == 1 else { return .none }
+	
+	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		guard indexPath.section == 1 else { return nil }
 		
-        let itemCategory = itemCategories[indexPath.row]
-		return itemCategory.is_default ? .none : .delete
-    }
+		let itemCategory = itemCategories[indexPath.row]
+		guard !itemCategory.is_default else { return nil }
+		
+		let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completion  in
+			self.presentConfirmDeletionActionSheet(forCategoryAt: indexPath, completion: completion)
+		}
+		deleteAction.image = UIImage(systemName: "trash.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+		
+		return UISwipeActionsConfiguration(actions: [deleteAction])
+	}
 	
 	override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
 		guard indexPath.section == 1 else { return nil }
 		
 		let itemCategory = itemCategories[indexPath.row]
-		
 		guard !itemCategory.is_default else { return nil }
 		
 		return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
 			let deleteAction = UIAction(title: NSLocalizedString("Delete", comment: ""), image: UIImage(systemName: "trash"), attributes: .destructive) { action in
-				self.presentConfirmDeletionActionSheet()
-				self.toBeDeletedCategoryIndexPath = indexPath
+				self.presentConfirmDeletionActionSheet(forCategoryAt: indexPath)
 			}
 			return UIMenu(title: "", children: [deleteAction])
 		})

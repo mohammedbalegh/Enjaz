@@ -238,6 +238,8 @@ class CalendarViewController: UIViewController {
     
     func handleYearSelection(selectedIndex: Int) {
         guard selectedIndex != selectedYearIndex else { return }
+		
+		handleViewTypeSelection(selectedIndex: 0)
                 
         selectedYearIndex = selectedIndex
         calendarView.selectedYearLabel = yearPopoverDataSource[selectedIndex]

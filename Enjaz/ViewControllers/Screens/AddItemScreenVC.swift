@@ -348,7 +348,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 			navigationController?.popViewController(animated: true)
 		}
 		
-        let successMessage = String.generateAdditionSuccessMessage(type: itemTypeName)
+        let successMessage = String(format: NSLocalizedString("%@ was added successfully", comment: ""), itemTypeName)
         SPAlert.present(title: successMessage, preset: .done)
     }
     

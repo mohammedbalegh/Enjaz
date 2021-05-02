@@ -15,7 +15,7 @@
 "Not an existing user?" = "لم تشترك بعد؟";
 "Create an account" = "إنشاء حساب";
 "Incorrect username or password" = "اسم المستخدم أو كلمة السر غير صحيحين";
-"can not be empty" = "لا يمكن أن يتُرك فارغاً";
+"can not be empty" = "لا يمكن أن يتُرك فارغًا";
 "Can not start with a number" = "لا يمكن أن يبدأ برقم";
 "Should be" = "يجب أن يكون";
 "letters at least" = "حرف على الأقل";
@@ -64,7 +64,7 @@
 "If you have a goal that you want to achieve in a specific field" = "ان كان لديك هدف في مجال معين تريد تحقيقه";
 "If you have a habit throughout a specific period" = "اذا كان لديك عادة متكررة خلال فترة معينة";
 "If you have an achievement that you want to complete in a specific time" = "ان كان لديك أنجاز تريد تحقيقه خلال وقت معين";
-"If you have a task that want to complete in a specific time" = "ان كان لديك مهمة تريد انجازها خلال وقت معين";
+"If you have a task that want to complete in a specific time" = "ان كان لديك مهمة تريد إنجازها خلال وقت معين";
 "No type has been selected" = "لم يتم اختيار نوع";
 
 // MARK: AddItemScreen
@@ -95,6 +95,7 @@
 "Fourth Week" = "الأسبوع الرابع";
 "Last Week" = "الأسبوع الاخير";
 "Add %@" = "إضافة %@";
+"Cannot add a task in the past" = "لا يمكن اضافة مهمة في الماضي";
 
 // MARK: GoalsScreen
 "My Goals" = "أهدافي";
@@ -103,7 +104,7 @@
 "Add new category" = "إضافة مجال جديد";
 "Category Name" = "اسم المجال";
 "Category name must be entered" = "يجب ادخال اسم المجال";
-"Are you sure you want to delete category?" = "هل أنت متأكد من مسح المجال؟";
+"Are you sure you want to delete category?" = "هل أنت متأكد من حذف المجال؟";
 "All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone." = "جميع الأهداف، الديمة، الإنجازات و المهام المرتبطة بالمجال سيتم مسحها أيضا. لا يمكن التراجع عن هذا الإجراء.";
 "Delete Category" = "مسح المجال";
 
@@ -153,6 +154,13 @@
 "How do you feel" = "ما هي مشاعرك";
 "Rate your progress in this field" = "قيم نفسك بحسب إنجازاتك لأهدافك و تقدمك في المجالات";
 
+//MARK: ItemsScreen
+"Are you sure you want to delete %@?" = "هل انت متأكد من حذف ال%@؟";
+"All subsequent %@ will be deleted as well." = "جميع ال%@ التابعة سيتم حذفها أيضًا.";
+"This action cannot be undone." = "لا يمكن التراجع عن هذا الإجراء.";
+"%@ is already completed" = "ال%@ منتهي بالفعل";
+"Delete %@" = "حذف ال%@";
+
 // MARK: SideMenu Buttons
 "Draft" = "المدونة";
 "Note" = "المفكرة";
@@ -176,7 +184,7 @@
 "Achievements" = "الإنجازات";
 "of" = "من";
 "%@ of the month" = "%@ الشهر";
-"What %@ have you finished" = "ما تم إنجازه من %@";
+"What %@ have you completed" = "ما تم إنجازه من %@";
 
 //MARK: AchievementsScreenVC
 "No achievements to show" = "لا يوجد إنجازات";
@@ -194,7 +202,7 @@
 "No %@" = "لا يوجد %@";
 
 //MARK: MonthGoalsScreenVC
-"Finished goals" = "أهداف منتهية";
+"Completed goals" = "أهداف منتهية";
 "Upcoming goals" = "أهداف قادمة";
 "Goal" = "أهداف";
 "Add new goal" = "إضافة هدف جديد";
@@ -221,6 +229,12 @@
 "Achievement" = "إنجاز";
 "Goal" = "هدف";
 
+// MARK: Popups
+"Congrats" = "تهانينا";
+"%@ completed successfully" = "تمت ال%@ بنجاح";
+"Would you like to add it as an achievement?" = "هل تود اضافته إلي إنجازاتك؟";
+"%@ was added successfully" = "تم إضافة ال%@ بنجاح";
+
 // MARK: General
 "and" = "و";
 "," = "،";
@@ -243,3 +257,9 @@
 "Off" = "إلغاء التفعيل";
 "On" = "تفعيل";
 "Auto" = "تلقائي";
+"No item" = "لا يوجد";
+"No" = "لا";
+"Yes" = "نعم";
+"Mark as Completed" = "انهاء";
+"Unpin" = "الغاء الثبيت";
+"Pin" = "ثبيت";

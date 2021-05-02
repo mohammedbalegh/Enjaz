@@ -93,7 +93,7 @@ class CalendarPopoverBtnsRow: UIView {
         addSubview(yearPopoverBtn)
         
         NSLayoutConstraint.activate([
-            yearPopoverBtn.trailingAnchor.constraint(equalTo: trailingAnchor),
+            yearPopoverBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             yearPopoverBtn.centerYAnchor.constraint(equalTo: centerYAnchor),
             yearPopoverBtn.heightAnchor.constraint(equalTo: heightAnchor),
             yearPopoverBtn.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.16),

@@ -8,6 +8,12 @@ class ItemCardCell: UICollectionViewCell {
             cardView.viewModel = viewModel
         }
     }
+	
+	var itemsUpdateHandler: (() -> Void)? {
+		didSet {
+			cardView.itemsUpdateHandler = itemsUpdateHandler
+		}
+	}
     
     var showsCheckBtn: Bool = false {
         didSet {

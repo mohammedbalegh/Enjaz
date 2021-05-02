@@ -95,6 +95,7 @@
 "Fourth Week" = "Fourth Week";
 "Last Week" = "Last Week";
 "Add %@" = "Add %@";
+"Cannot add a task in the past" = "Cannot add a task in the past";
 
 // MARK: GoalsScreen
 "My Goals" = "My Goals";
@@ -153,6 +154,13 @@
 "How do you feel" = "How do you feel";
 "Rate your progress in this field" = "Rate your progress in this field";
 
+//MARK: ItemsScreen
+"Are you sure you want to delete %@?" = "Are you sure you want to delete %@?";
+"All subsequent %@ will be deleted as well." = "All subsequent %@ will be deleted as well.";
+"This action cannot be undone." = "This action cannot be undone.";
+"%@ is already completed" = "%@ is already completed";
+"Delete %@" = "Delete %@";
+
 // MARK: SideMenu
 "Draft" = "Draft";
 "Note" = "Note";
@@ -176,7 +184,7 @@
 "Achievements" = "Achievements";
 "of" = "of";
 "%@ of the month" = "%@ of the month";
-"What %@ have you finished" = "What %@ have you finished";
+"What %@ have you completed" = "What %@ have you completed";
 
 //MARK: AchievementsScreenVC
 "No achievements to show" = "No achievements to show";
@@ -194,7 +202,7 @@
 "No %@" = "No %@";
 
 //MARK: MonthGoalsScreenVC
-"Finished goals" = "Finished goals";
+"Completed goals" = "Completed goals";
 "Upcoming goals" = "Upcoming goals";
 "Goal" = "Goal";
 "Add new goal" = "Add new goal";
@@ -221,6 +229,12 @@
 "Achievement" = "Achievement";
 "Goal" = "Goal";
 
+// MARK: Popups
+"Congrats" = "Congrats";
+"%@ completed successfully" = "%@ completed successfully";
+"Would you like to add it as an achievement?" = "Would you like to add it as an achievement?";
+"%@ was added successfully" = "%@ was added successfully";
+
 // MARK: General
 "and" = "and";
 "," = ",";
@@ -243,3 +257,9 @@
 "Off" = "Off";
 "On" = "On";
 "Auto" = "Auto";
+"No item" = "No";
+"No" = "No";
+"Yes" = "Yes";
+"Mark as Completed" = "Mark as Completed";
+"Unpin" = "Unpin";
+"Pin" = "Pin";

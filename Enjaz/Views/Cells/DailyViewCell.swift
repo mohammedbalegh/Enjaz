@@ -207,6 +207,23 @@ class DailyViewCell: UICollectionViewCell {
 		return IndexPath(row: 0, section: 0)
 	}
 	
+	func getUnixTimeStampForRow(at indexPath: IndexPath) -> TimeInterval? {
+		guard let viewModel = viewModel else{ return nil }
+		let hourString = dailyViewHourModels[indexPath.row].hour
+		
+		guard !hourString.isEmpty else { return nil }
+		
+		guard let hour = DateAndTimeTools.convert12HourFormatTo24HrFormatInt(hourString) else { return nil }
+		let day = viewModel.dayNumber
+		let month = viewModel.month
+		let year = viewModel.year
+		let calendarIdentifier = viewModel.calendarIdentifier
+		
+		let unixTimeStamp = DateAndTimeTools.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarIdentifier).timeIntervalSince1970
+		
+		return unixTimeStamp
+	}
+	
 	func didSuccessfullyDragDownToDismiss(velocity: CGFloat) {
 		let maximumVelocity: CGFloat = 1000, minimumDuration: CGFloat = 0.05, maximumDuration: CGFloat = 0.3
 		let duration = TimeInterval(max(minimumDuration, (maximumDuration - (velocity / maximumVelocity) / 10)))
@@ -249,23 +266,15 @@ class DailyViewCell: UICollectionViewCell {
 		let currentLocation = gesture.location(in: nil)
 		let progress = (currentLocation.y - startingPoint.y) / 100
 		let targetShrinkScale: CGFloat = 0.5
-		let horizontalProgress = currentLocation.x - startingPoint.x
-		print(horizontalProgress)
 		
-
 		func createInteractiveDismissalAnimatorIfNeeded() -> UIViewPropertyAnimator {
 			if let animator = dismissalAnimator {
 				return animator
 			} else {
 				let animator = UIViewPropertyAnimator(duration: 0, curve: .linear, animations: {
-					targetAnimatedViews?.forEach { view in
-//						view.scale(to: targetShrinkScale)
-						let originalTransform = view.transform
-						let scaledTransform = originalTransform.scaledBy(x: targetShrinkScale, y: targetShrinkScale)
-						let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: horizontalProgress, y: 0)
-						view.transform = scaledAndTranslatedTransform
-					}
+					targetAnimatedViews?.forEach { $0.scale(to: targetShrinkScale) }
 				})
+				
 				animator.isReversed = false
 				animator.pauseAnimation()
 				animator.fractionComplete = progress
@@ -319,7 +328,6 @@ class DailyViewCell: UICollectionViewCell {
 			fatalError("Impossible gesture state? \(gesture.state.rawValue)")
 		}
 	}
-	
 }
 
 extension DailyViewCell: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -330,6 +338,7 @@ extension DailyViewCell: UITableViewDelegate, UITableViewDataSource, UICollectio
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: hourCellReuseIIdentifier) as! HourTableViewCell
 		cell.viewModel = dailyViewHourModels[indexPath.row]
+		cell.unixTimeStamp = getUnixTimeStampForRow(at: indexPath)
 		cell.row = indexPath.row
 		cell.showAllBtnHandler = showAllIncludedItems
 		cell.showLessBtnHandler = hideOtherIncludedItems
@@ -371,17 +380,7 @@ extension DailyViewCell: UITableViewDelegate, UITableViewDataSource, UICollectio
 	}
 		
 	func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-		let hourString = dailyViewHourModels[indexPath.row].hour
-		guard hourString != "" else { return nil }
-		guard let viewModel = viewModel else{ return nil }
-		
-		guard let hour = DateAndTimeTools.convert12HourFormatTo24HrFormatInt(hourString) else { return nil }
-		let day = viewModel.dayNumber
-		let month = viewModel.month
-		let year = viewModel.year
-		let calendarIdentifier = viewModel.calendarIdentifier
-		
-		let unixTimeStamp = DateAndTimeTools.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarIdentifier).timeIntervalSince1970
+		guard let unixTimeStamp = getUnixTimeStampForRow(at: indexPath) else { return nil}
 		
 		let isUnixTimeStampInPast = unixTimeStamp < Date().timeIntervalSince1970
 		

@@ -55,8 +55,8 @@ class DailyViewPopup: Popup {
 	}
 	
 	override func present(animated: Bool) {
-		let window = UIApplication.shared.windows[0]
-		window.rootViewController?.view.addSubview(self)
+		let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+		keyWindow?.rootViewController?.view.addSubview(self)
 		
 		prepareForPresentation(animated)
 		

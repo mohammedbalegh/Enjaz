@@ -79,8 +79,8 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
     
     func setupSubViews() {
         setupIconImageView()
+		setupArrowIcon()
         setupLabelsStack()
-        setupArrowIcon()
     }
         
     func setupIconImageView() {
@@ -96,6 +96,17 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor),
         ])
     }
+	
+	func setupArrowIcon() {
+		contentView.addSubview(arrowIcon)
+		
+		NSLayoutConstraint.activate([
+			arrowIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+			arrowIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalPadding),
+			arrowIcon.heightAnchor.constraint(equalToConstant: 30),
+			arrowIcon.widthAnchor.constraint(equalToConstant: 14),
+		])
+	}
     
     func setupLabelsStack() {
         contentView.addSubview(labelsVerticalStack)
@@ -104,18 +115,8 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
             labelsVerticalStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             labelsVerticalStack.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 15),
             labelsVerticalStack.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8),
-            labelsVerticalStack.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.9),
+			labelsVerticalStack.trailingAnchor.constraint(equalTo: arrowIcon.leadingAnchor, constant: -5),
         ])
     }
 
-    func setupArrowIcon() {
-        contentView.addSubview(arrowIcon)
-        
-        NSLayoutConstraint.activate([
-            arrowIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            arrowIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -horizontalPadding),
-            arrowIcon.heightAnchor.constraint(equalToConstant: 30),
-            arrowIcon.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.1),
-        ])
-    }
 }

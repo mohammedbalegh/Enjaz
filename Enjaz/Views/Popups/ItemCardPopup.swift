@@ -2,7 +2,7 @@ import UIKit
 
 class ItemCardPopup: Popup {
     let itemWidth = LayoutConstants.screenWidth * 0.6
-    let itemHeight = LayoutConstants.screenHeight * 0.35
+	let itemHeight: CGFloat = 313
     let itemCardCellReuseIdentifier = "itemCardCell"
 	
     var itemModels: [ItemModel] = [] {
@@ -32,7 +32,7 @@ class ItemCardPopup: Popup {
         
         return collectionView
     }()
-		    
+			    
     override func setupSubViews() {
 		super.setupSubViews()
         setupCardsCarouselCollectionViewView()
@@ -57,16 +57,11 @@ class ItemCardPopup: Popup {
     }
 	
 	func handleCheckBtnTap(item: ItemModel, isCompleted: Bool) {
-		RealmManager.realm.beginWrite()
-		item.is_completed = isCompleted
-		try? RealmManager.realm.commitWrite()
+		RealmManager.completeItem(item, isCompleted: isCompleted)
 		itemsUpdateHandler?()
-		
-		// TODO: Show congrats popup and prompt to add to achievements in case item is a goal.
-		
-		dismiss(animated: true)
+		dismiss(animated: false)
+		ItemTools.showCongratsPopup(for: item)
 	}
-	
 	
 }
 
@@ -80,6 +75,8 @@ extension ItemCardPopup: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCardCellReuseIdentifier, for: indexPath) as! ItemCardCell
 		let item = itemModels[indexPath.row]
         cell.viewModel = item
+		cell.cardView.isMinimized = false
+		cell.itemsUpdateHandler = itemsUpdateHandler
 		cell.showsCheckBtn = item.type == ItemType.achievement.id ? false : true
 		cell.showsDescription = true
 		cell.cardView.cardBody.checkBtnHandler = handleCheckBtnTap

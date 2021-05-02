@@ -153,19 +153,19 @@ class MonthItemsScreenVC: MyPlanChildVC {
     // MARK: Event Handlers
     
     @objc func handleShowAllDayItemsBtnTap() {
-        navigateToShowAllItemsScreen(withModels: dayItemModels, title: dayItemsView.title)
+        navigateToItemsScreen(withModels: dayItemModels, title: dayItemsView.title)
     }
     
     @objc func handleShowAllWeekItemsBtnTap() {
-        navigateToShowAllItemsScreen(withModels: weekItemModels, title: weekItemsView.title)
+        navigateToItemsScreen(withModels: weekItemModels, title: weekItemsView.title)
     }
     
     @objc func handleShowAllMonthItemsBtnTap() {
-        navigateToShowAllItemsScreen(withModels: monthItemModels, title: monthItemsView.title)
+        navigateToItemsScreen(withModels: monthItemModels, title: monthItemsView.title)
     }
     
     @objc func handleShowAllCompletedItemsBtnTap() {
-        navigateToShowAllItemsScreen(withModels: completedItemModels, title: completedItemsView.title)
+        navigateToItemsScreen(withModels: completedItemModels, title: completedItemsView.title)
     }
         
     // MARK: Tools
@@ -189,19 +189,21 @@ class MonthItemsScreenVC: MyPlanChildVC {
     func updateScreen() {
         updateItemModels()
         updateItemViews()
-		progressBar.updateProgressView(totalNumberOfItems: monthItemModels.count, numberOfCompletedItems: completedItemModels.count)
+		progressBar.updateProgressView(totalNumberOfItems: currentMonthItems.count, numberOfCompletedItems: completedItemModels.count)
     }
     
     func updateItemModels() {
         let (firstDayUnixTimeStamp, lastDayUnixTimeStamp) = DateAndTimeTools.getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier: Calendar.current.identifier)
         
 		currentMonthItems = RealmManager.retrieveItems(withFilter: "date >= \(firstDayUnixTimeStamp) AND date <= \(lastDayUnixTimeStamp)").filter { $0.type == itemsType.id }
+		
+		let upcomingCurrentMonthItems = currentMonthItems.filter { !$0.is_completed }
                 
-        dayItemModels = currentMonthItems.filter { Calendar.current.isDateInToday(Date(timeIntervalSince1970: $0.date)) }
+        dayItemModels = upcomingCurrentMonthItems.filter { Calendar.current.isDateInToday(Date(timeIntervalSince1970: $0.date)) }
         
-        weekItemModels = currentMonthItems.filter { DateAndTimeTools.isDateInCurrentWeek(date: Date(timeIntervalSince1970: $0.date), calendarIdentifier: Calendar.current.identifier) }
+        weekItemModels = upcomingCurrentMonthItems.filter { DateAndTimeTools.isDateInCurrentWeek(date: Date(timeIntervalSince1970: $0.date), calendarIdentifier: Calendar.current.identifier)}
         
-        monthItemModels = currentMonthItems
+		monthItemModels = upcomingCurrentMonthItems
         
         completedItemModels = currentMonthItems.filter { $0.is_completed }
     }
@@ -216,15 +218,12 @@ class MonthItemsScreenVC: MyPlanChildVC {
         }
     }
     
-    func navigateToShowAllItemsScreen(withModels models: [ItemModel], title: String?) {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+    func navigateToItemsScreen(withModels models: [ItemModel], title: String?) {
+        let itemsScreenVC = ItemsScreenVC()
+		itemsScreenVC.items = models
+		itemsScreenVC.title = title
         
-        let showAllItemsScreenVC = ShowAllItemsScreenVC(collectionViewLayout: layout)
-        showAllItemsScreenVC.cardModels = models
-        showAllItemsScreenVC.title = title
-        
-		parent?.navigationController?.pushViewController(showAllItemsScreenVC, animated: true)
+		parent?.navigationController?.pushViewController(itemsScreenVC, animated: true)
     }
     
 }
