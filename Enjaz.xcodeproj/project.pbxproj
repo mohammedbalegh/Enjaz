@@ -197,6 +197,8 @@
 		BCD82DAA263E7785006F7575 /* AlertPopupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DA9263E7785006F7575 /* AlertPopupAction.swift */; };
 		BCD82DAF263E779F006F7575 /* ShimmeringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DAE263E779E006F7575 /* ShimmeringLabel.swift */; };
 		BCD82DB4263E77FF006F7575 /* ItemTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DB3263E77FF006F7575 /* ItemTools.swift */; };
+		BCD82DBC263E79A4006F7575 /* NotificationsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DBB263E79A4006F7575 /* NotificationsScreenVC.swift */; };
+		BCD82DC1263E79F2006F7575 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */; };
 		BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */; };
 		BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D70258F95720032F2E4 /* EditableTextView.swift */; };
 		BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */; };
@@ -452,6 +454,8 @@
 		BCD82DA9263E7785006F7575 /* AlertPopupAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPopupAction.swift; sourceTree = "<group>"; };
 		BCD82DAE263E779E006F7575 /* ShimmeringLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmeringLabel.swift; sourceTree = "<group>"; };
 		BCD82DB3263E77FF006F7575 /* ItemTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTools.swift; sourceTree = "<group>"; };
+		BCD82DBB263E79A4006F7575 /* NotificationsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsScreenVC.swift; sourceTree = "<group>"; };
+		BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBtn.swift; sourceTree = "<group>"; };
 		BCD95D70258F95720032F2E4 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationScreenVC.swift; sourceTree = "<group>"; };
@@ -709,6 +713,7 @@
 				41798CC22618861300DF5ECF /* AchievementsScreenVC.swift */,
 				BCD82D9F263E7725006F7575 /* ItemsScreenVC.swift */,
 				BCD82DA4263E772F006F7575 /* UpcomingGoalsScreenVC.swift */,
+				BCD82DBB263E79A4006F7575 /* NotificationsScreenVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -941,7 +946,6 @@
 		BCDE2EAA2587AE6C0040345E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				41A9B325263A277C00366514 /* ItemsTableViewCell.swift */,
 				BC93D5AB2614A887005DE3AC /* PersonalAspectsCell.swift */,
 				4142F78025759DE5008FCC23 /* CarouselCell.swift */,
 				BCB54CC6258C07AB00E0E54D /* ItemImageCell.swift */,
@@ -960,6 +964,8 @@
 				41798CB12617C59B00DF5ECF /* DailyViewCell.swift */,
 				41798CC726188B2B00DF5ECF /* AchievementsCell.swift */,
 				BC8846B6261A432E005C6AAF /* HourTableViewCell.swift */,
+				41A9B325263A277C00366514 /* ItemsTableViewCell.swift */,
+				BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1332,6 +1338,7 @@
 				BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */,
 				BCD401AA25FB3F2000ABA183 /* ArticleCardCell.swift in Sources */,
 				BC8846B2261A38C7005C6AAF /* DailyViewPopup.swift in Sources */,
+				BCD82DC1263E79F2006F7575 /* NotificationTableViewCell.swift in Sources */,
 				BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */,
 				BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */,
 				BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */,
@@ -1399,6 +1406,7 @@
 				BC8846BF261A7611005C6AAF /* DailyViewHourModel.swift in Sources */,
 				BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */,
 				BC7D6C7325A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift in Sources */,
+				BCD82DBC263E79A4006F7575 /* NotificationsScreenVC.swift in Sources */,
 				417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */,
 				BC1A15ED262A41570012BE05 /* ProgressBarView.swift in Sources */,
 				BC93D5BE2614D22A005DE3AC /* AboutTheAppTopView.swift in Sources */,
