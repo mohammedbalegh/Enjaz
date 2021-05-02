@@ -9,7 +9,7 @@ target 'Enjaz' do
   pod 'ReSwift'
   pod 'SideMenu'
   pod 'SPAlert'
-	pod 'shimmerSwift'
+  pod 'ShimmerSwift'
 	
   target 'EnjazTests' do
     inherit! :search_paths
