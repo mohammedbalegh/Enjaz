@@ -44,12 +44,13 @@ class RootTabBarController: UITabBarController {
         return button
     }()
     
-    let notificationsButton: UIButton = {
+    lazy var notificationsButton: UIButton = {
         let button = UIButton(type: .custom)
         button.imageView?.contentMode = .scaleAspectFit
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.setImage(UIImage(named:"bellIcon"), for: .normal)
+        button.addTarget(self, action: #selector(pushNotificationsScreen), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -112,7 +113,7 @@ class RootTabBarController: UITabBarController {
         navigationItem.titleView = dateVerticalStack
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: notificationsButton)
-        		
+        
         configureTabBar()
         setupFloatingBtn()
 	}
@@ -193,6 +194,11 @@ class RootTabBarController: UITabBarController {
 	}
 	
     // MARK: Event Handlers
+    
+    @objc func pushNotificationsScreen() {
+        let vc = NotificationsScreenVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 	@objc func handleFloatingBtnTap() {
 		navigateToAdditionTypeScreen()
