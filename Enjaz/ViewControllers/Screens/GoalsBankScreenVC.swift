@@ -5,6 +5,8 @@ class GoalsBankScreenVC: UIViewController {
     
     var goalSuggestions: [GoalSuggestionsModel] = []
     
+    var refreshControl = UIRefreshControl()
+    
     var goalsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +23,7 @@ class GoalsBankScreenVC: UIViewController {
     
     let suggestionsLabel: UILabel = {
         let label = UILabel()
-        label.text = "أقتراحات لبعض الأهداف"
+        label.text = NSLocalizedString("", comment: "Some goals suggestions")
         label.font = label.font.withSize(15)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -35,28 +37,44 @@ class GoalsBankScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .background
         
+        refreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
+        goalsTableView.insertSubview(refreshControl, at: 0)
+        
         goalsTableView.delegate = self
         goalsTableView.dataSource = self
-        
+        goalSuggestions = UserDefaultsManager.goalsBank ?? []
         setupSubviews()
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         updateScreen()
     }
     
+    @objc func onRefresh() {
+        updateScreen()
+    }
+    
     func updateScreen() {
+		if !refreshControl.isRefreshing {
+			refreshControl.beginRefreshing()
+		}
+		
         NetworkingManager.retrieveGoalSuggestions() { goals, error in
-            guard let goals = goals else {
-                print(error!)
-                return
+			DispatchQueue.main.async {
+				self.refreshControl.endRefreshing()
+					
+				guard let goals = goals else {
+					print(error!)
+					return
+				}
+				
+				self.goalSuggestions = goals
+				UserDefaultsManager.goalsBank = goals
+                self.goalsTableView.reloadData()
             }
-            
-            self.goalSuggestions = goals.data
-            self.goalsTableView.reloadData()
         }
     }
     

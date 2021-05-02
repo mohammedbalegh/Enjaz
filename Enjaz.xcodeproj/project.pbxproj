@@ -199,6 +199,7 @@
 		BCD82DB4263E77FF006F7575 /* ItemTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DB3263E77FF006F7575 /* ItemTools.swift */; };
 		BCD82DBC263E79A4006F7575 /* NotificationsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DBB263E79A4006F7575 /* NotificationsScreenVC.swift */; };
 		BCD82DC1263E79F2006F7575 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */; };
+		BCD82DCC263E7CCA006F7575 /* PrivacyPolicyAndAboutUsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD82DCB263E7CCA006F7575 /* PrivacyPolicyAndAboutUsModel.swift */; };
 		BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */; };
 		BCD95D71258F95720032F2E4 /* EditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD95D70258F95720032F2E4 /* EditableTextView.swift */; };
 		BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */; };
@@ -456,6 +457,7 @@
 		BCD82DB3263E77FF006F7575 /* ItemTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTools.swift; sourceTree = "<group>"; };
 		BCD82DBB263E79A4006F7575 /* NotificationsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsScreenVC.swift; sourceTree = "<group>"; };
 		BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		BCD82DCB263E7CCA006F7575 /* PrivacyPolicyAndAboutUsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAndAboutUsModel.swift; sourceTree = "<group>"; };
 		BCD95D68258F88BE0032F2E4 /* PopoverBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverBtn.swift; sourceTree = "<group>"; };
 		BCD95D70258F95720032F2E4 /* EditableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextView.swift; sourceTree = "<group>"; };
 		BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationScreenVC.swift; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 		BCDE2EA92587ADEB0040345E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BCD82DCB263E7CCA006F7575 /* PrivacyPolicyAndAboutUsModel.swift */,
 				4142F78A257739DB008FCC23 /* CarouselCardModel.swift */,
 				BC39114E258E776B000E6273 /* ItemModel.swift */,
 				41912095258ECDA200CB7BF9 /* HourModel.swift */,
@@ -1391,6 +1394,7 @@
 				BCBEE85E2587D73000D8DE0A /* PasswordTextField.swift in Sources */,
 				BCCA217B2588106C003A18DA /* AddItemScreenVC.swift in Sources */,
 				BC20181126039D650060EFAF /* Switcher.swift in Sources */,
+				BCD82DCC263E7CCA006F7575 /* PrivacyPolicyAndAboutUsModel.swift in Sources */,
 				419121232593023000CB7BF9 /* ItemCardView.swift in Sources */,
 				BCACC4962614D9DA005F7F59 /* UserProfileScreenVC.swift in Sources */,
 				4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */,

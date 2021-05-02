@@ -70,6 +70,9 @@
 //MARK: NotificationsScreen
 "Notifications" = "الإشعارات";
 
+// MARK: GoalsBankScreenVC
+"Some goals suggestions" = "Some goals suggestions";
+
 // MARK: AddItemScreen
 "Add %@" = "إضافة %@";
 "Select Image" = "اختر صورة مناسبة";
