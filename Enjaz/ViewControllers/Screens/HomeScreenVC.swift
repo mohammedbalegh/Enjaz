@@ -209,11 +209,11 @@ class HomeScreenVC: UIViewController {
             
             guard itemIsDueToday && !item.is_completed else { continue }
             
-            if item.type == ItemType.goal.id {
+            if item.type_id == ItemType.goal.id {
                 updatedGoalModels.append(item)
-			} else if item.type == ItemType.task.id {
+			} else if item.type_id == ItemType.task.id {
 				updatedTaskModels.append(item)
-			} else if item.type == ItemType.demah.id {
+			} else if item.type_id == ItemType.demah.id {
                 updatedDemahModels.append(item)
             }
         }
@@ -223,7 +223,7 @@ class HomeScreenVC: UIViewController {
     
     func updateItemModels() {
         let (updatedGoalModels, updatedTaskModels, updatedDemahModels) = getUpdatedItemsModel()
-        
+		
         goalModels = updatedGoalModels
 		taskModels = updatedTaskModels
         demahModels = updatedDemahModels

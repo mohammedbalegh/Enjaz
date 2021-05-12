@@ -5,14 +5,14 @@ class CalendarPopoverBtnsRow: UIView {
         case calendarType, month, year, viewType
     }
     
-    let popoverBtnsRowFontSize: CGFloat = 12.5
+    static let popoverBtnsRowFontSize: CGFloat = 12.5
     
     lazy var calendarTypePopoverBtn: PopoverBtn = {
         let button = PopoverBtn(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.configure(withSize: .small)
-        button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
+		button.label.font = .systemFont(ofSize: CalendarPopoverBtnsRow.popoverBtnsRowFontSize)
         button.isHidden = true
         
         return button
@@ -23,7 +23,7 @@ class CalendarPopoverBtnsRow: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.configure(withSize: .small)
-        button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
+		button.label.font = .systemFont(ofSize: CalendarPopoverBtnsRow.popoverBtnsRowFontSize)
         button.isHidden = true
         
         return button
@@ -34,7 +34,7 @@ class CalendarPopoverBtnsRow: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.configure(withSize: .small)
-        button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
+		button.label.font = .systemFont(ofSize: CalendarPopoverBtnsRow.popoverBtnsRowFontSize)
         button.isHidden = true
         
         return button
@@ -45,7 +45,7 @@ class CalendarPopoverBtnsRow: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.configure(withSize: .small)
-        button.label.font = .systemFont(ofSize: popoverBtnsRowFontSize)
+		button.label.font = .systemFont(ofSize: CalendarPopoverBtnsRow.popoverBtnsRowFontSize)
         button.isHidden = true
         
         return button

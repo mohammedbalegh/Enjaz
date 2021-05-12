@@ -28,6 +28,7 @@ class DailyView: UIView {
 	var itemAdditionContextMenuActionHandler: ((_ type: ItemType, _ unixTimeStamp: Double?) -> Void)?
 	var dismiss: ((_ animated: Bool) -> Void)?
 	var blurOverlay: UIVisualEffectView?
+	var dismissBtn: UIButton?
 		
 	var selectedCellIndexPath: IndexPath {
 		return IndexPath(row: selectedDay - 1, section: 0)
@@ -93,6 +94,7 @@ extension DailyView: UICollectionViewDelegate, UICollectionViewDataSource {
 		cell.itemAdditionContextMenuActionHandler = itemAdditionContextMenuActionHandler
 		cell.dismissPopup = dismiss
 		cell.blurOverlay = blurOverlay
+		cell.dismissBtn = dismissBtn
 		
         return cell
     }

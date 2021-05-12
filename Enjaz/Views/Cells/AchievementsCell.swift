@@ -8,7 +8,7 @@ class AchievementsCell: UICollectionViewCell {
             
             medalImage.image = UIImage.getImageFrom(RealmManager.retrieveItemImageSourceById(viewModel.image_id) ?? "")
             achievementsCardInfo.titleLabel.text = viewModel.name
-            achievementsCardInfo.categoryLabel.text = RealmManager.retrieveItemCategoryById(viewModel.category)?.localized_name
+            achievementsCardInfo.categoryLabel.text = RealmManager.retrieveItemCategoryById(viewModel.category_id)?.localized_name
             let date = Date(timeIntervalSince1970: viewModel.date)
             let formatter = DateFormatter()
             formatter.dateFormat = "MM/dd/yyyy"

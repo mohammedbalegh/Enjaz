@@ -53,15 +53,15 @@ class SideMenuVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		
         view.applyAccentColorGradient(size: view.frame.size, axis: .vertical)
         
         setupSubviews()
         
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
         personalAspectsBtn.addTarget(self, action: #selector(handlePersonalAspectsBtn), for: .touchUpInside)
-        aboutAppBtn.addTarget(self, action: #selector(handleAboutAppBtnTapped), for: .touchUpInside)
-        privacyPolicyBtn.addTarget(self, action: #selector(handlePrivacyPolicyBtn), for: .touchUpInside)
+        aboutAppBtn.addTarget(self, action: #selector(handleAboutAppBtnTap), for: .touchUpInside)
+        privacyPolicyBtn.addTarget(self, action: #selector(handlePrivacyPolicyBtnTap), for: .touchUpInside)
         contactUsBtn.addTarget(self, action: #selector(handleContactUsBtnTap), for: .touchUpInside)
         userProfileBtn.addTarget(self, action: #selector(handleUserProfileBtnTap), for: .touchUpInside)
         signOutBtn.addTarget(self, action: #selector(handleSignOutBtnTap), for: .touchUpInside)
@@ -123,17 +123,12 @@ class SideMenuVC: UIViewController {
     
     // MARK: Event Handlers
     
-    @objc func handlePrivacyPolicyBtn() {
-        let vc = PrivacyPolicyAndAboutAppScreenVC()
-        vc.showAboutAppTopView = false
-        navigationController?.pushViewController(vc, animated: true)
+    @objc func handlePrivacyPolicyBtnTap() {        
+        navigationController?.pushViewController(PrivacyPolicyScreenVC(), animated: true)
     }
     
-    @objc func handleAboutAppBtnTapped() {
-        let vc = PrivacyPolicyAndAboutAppScreenVC()
-        vc.showAboutAppTopView = true
-        
-        navigationController?.pushViewController(vc, animated: true)
+    @objc func handleAboutAppBtnTap() {
+        navigationController?.pushViewController(AboutAppScreenVC(), animated: true)
     }
     
     @objc func handleContactUsBtnTap() {
@@ -155,11 +150,16 @@ class SideMenuVC: UIViewController {
     @objc func handleDismissBtnTap() {
         dismiss(animated: true)
     }
-    
 	
 	@objc func handleSignOutBtnTap() {
-        Auth.signOut()
-		navigateToLoginScreen()
+		AlertPopup().presentAsConfirmationAlert(
+			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
+			message: NSLocalizedString("All data will be lost", comment: ""),
+			confirmationBtnTitle: NSLocalizedString("Sign Out", comment: "")
+		) {
+			Auth.signOut()
+			self.navigateToLoginScreen()
+		}
     }
 	
 	func navigateToLoginScreen() {

@@ -1,7 +1,7 @@
 import UIKit
 
 class BottomSheetView: UIView {
-    var height = LayoutConstants.screenHeight * 0.5
+	var height: CGFloat = 380
     
     lazy var overlay: UIView = {
         let view = UIView()

@@ -1,6 +1,6 @@
 import UIKit
 
-class ShowAllButton: UIButton {
+class ShowAllBtn: UIButton {
     
     let label: UILabel = {
         let label = UILabel()

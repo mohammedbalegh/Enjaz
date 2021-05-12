@@ -9,7 +9,7 @@ class ArticleScreenVC: UIViewController {
             draftMetaDataContainer.categoryLabel.text = articleModel.category
             draftMetaDataContainer.titleLabel.text = articleModel.title
             draftMetaDataContainer.dateLabel.text = articleModel.date
-            articleTextView.text = articleModel.articleTitle
+            articleTextView.text = articleModel.article
         }
     }
     

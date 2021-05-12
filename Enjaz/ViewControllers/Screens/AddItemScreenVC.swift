@@ -14,7 +14,18 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 	
     let scrollView = UIScrollView()
 	
-    let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
+	lazy var setImageBtn: RoundBtn = {
+		let button = RoundBtn()
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+		button.setImage(UIImage(named: "imageIcon"), for: .normal)
+		button.imageView?.contentMode = .scaleAspectFill
+		button.backgroundColor = .accent
+		
+		button.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
+		
+		return button
+	}()
         
 	lazy var imagePickerPopup: ItemImagePickerPopup = {
 		let popup = ItemImagePickerPopup()
@@ -94,6 +105,8 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         button.setTitleColor(.placeholderText, for: .normal)
         button.contentHorizontalAlignment = .leading
         button.titleLabel?.font = .systemFont(ofSize: 16)
+		button.titleLabel?.adjustsFontSizeToFitWidth = true
+		button.titleLabel?.minimumScaleFactor = 0.6
         
         button.frame.size = CGSize(width: 0, height: LayoutConstants.inputHeight)
         
@@ -163,7 +176,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     var selectedItemCategoryIndex: Int?
     
     var itemCategory: Int?
-    var itemDates: [Double]?
+    var itemPartitionDates: [[TimeInterval]]?
     var itemType: Int!
     var itemImageId: Int?
 	
@@ -229,13 +242,13 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 	
     func setupSetImageButton() {
         scrollView.addSubview(setImageBtn)
-        
+		
         NSLayoutConstraint.activate([
 			setImageBtn.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20 + thumb.frame.height),
             setImageBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+			setImageBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.24),
+			setImageBtn.heightAnchor.constraint(equalTo: setImageBtn.widthAnchor),
         ])
-        
-        setImageBtn.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
     }
         
     func setupTextFieldsVerticalStack() {
@@ -244,7 +257,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         let height = textFieldsVerticalStack.calculateHeightBasedOn(arrangedSubviewHeight: LayoutConstants.inputHeight)
         
         NSLayoutConstraint.activate([
-            textFieldsVerticalStack.topAnchor.constraint(equalTo: setImageBtn.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
+            textFieldsVerticalStack.topAnchor.constraint(equalTo: setImageBtn.bottomAnchor, constant: LayoutConstants.screenHeight * 0.04),
             textFieldsVerticalStack.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             textFieldsVerticalStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
             textFieldsVerticalStack.heightAnchor.constraint(equalToConstant: height),
@@ -307,20 +320,21 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         
         let setDateAndTimeScreenVC = repetitionIsTurnedOn ? SetDateRangeScreenVC() : SetDateAndTimeScreenVC()
 		
+		setDateAndTimeScreenVC.itemType = ItemType.getTypeById(id: itemType)
         setDateAndTimeScreenVC.delegate = self
-		present(setDateAndTimeScreenVC, animated: true)
+		present(UINavigationController(rootViewController: setDateAndTimeScreenVC), animated: true)
     }
     
     @objc func handleRepeatSwitchValueChange() {
-        itemDates = nil
+        itemPartitionDates = nil
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.placeholderText, for: .normal)
         additionDateAndTimeInput.input?.inputText = repetitionIsTurnedOn
             ? NSLocalizedString("Date (from - to)", comment: "")
             : additionDateAndTimeInput.fieldName
     }
     
-    func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [Double], readableDate: String ) {
-        self.itemDates = selectedDatesTimeStamps
+    func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[TimeInterval]], readableDate: String ) {
+        self.itemPartitionDates = selectedDatesTimeStamps
         
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.invertedSystemBackground, for: .normal)
         additionDateAndTimeInput.input?.inputText = readableDate
@@ -376,7 +390,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         
         let nameIsProvided = !itemName.isEmpty
         let categoryIsProvided = itemCategory != nil
-        let dateIsProvided = itemDates != nil
+        let dateIsProvided = itemPartitionDates != nil
         
         if !nameIsProvided { nonProvidedRequiredFieldNames.append(additionNameTextField.fieldName) }
         if !categoryIsProvided { nonProvidedRequiredFieldNames.append(additionCategoryPopoverBtn.fieldName) }
@@ -394,31 +408,33 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 	}
     
     func saveItem() {
-        var firstItemId: Int!
+        guard let itemPartitionsDates = itemPartitionDates else { return }
         
-        guard let itemDates = itemDates else { return }
-        
-		for (index, date) in itemDates.enumerated() {
-            let item = ItemModel()
-            
-            item.name = itemName
-            item.category = itemCategory!
-            item.type = itemType
-            item.date = date
-            item.item_description = itemDescription
-			item.image_id = itemImageId ?? ItemType.getTypeById(id: itemType).imageId
-            if index == 0 {
-                firstItemId = item.id
-                if itemDates.count > 1 {
-                    item.endDate = itemDates.last!
-                }
-            } else {
-                item.originalItemId = firstItemId
-            }
+		for (partitionIndex, itemPartitionDates) in itemPartitionsDates.enumerated() {
+			var firstItemId: Int!
 			
-            RealmManager.saveItem(item)
-			NotificationsManager.scheduleNotification(forItem: item)
-        }
+			for (dateIndex, date) in itemPartitionDates.enumerated() {
+				let item = ItemModel()
+				
+				item.name = itemName + (itemPartitionsDates.count > 1 ? " \(partitionIndex + 1)" : "")
+				item.category_id = itemCategory!
+				item.type_id = itemType
+				item.date = date
+				item.item_description = itemDescription
+				item.image_id = itemImageId ?? ItemType.getTypeById(id: itemType).imageId
+				if dateIndex == 0 {
+					firstItemId = item.id
+					if itemPartitionDates.count > 1 {
+						item.end_date = itemPartitionDates.last!
+					}
+				} else {
+					item.original_item_id = firstItemId
+				}
+				
+				RealmManager.saveItem(item)
+				NotificationsManager.scheduleNotification(forItem: item)
+			}
+		}
     }
 	
 }

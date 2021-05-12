@@ -58,6 +58,7 @@ class DynamicImageView: UIImageView {
 	
 	func setImage(from source: String) {
 		if !source.isURL {
+			if source.isEmpty { return }
 			self.image = UIImage.getImageFrom(source)
 			return
 		}

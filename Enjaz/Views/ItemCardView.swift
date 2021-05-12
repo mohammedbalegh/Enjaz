@@ -16,7 +16,7 @@ class ItemCardView: UIView {
                 imageView.image = nil
             }
             
-            let itemCategory = RealmManager.retrieveItemCategoryById(viewModel.category)
+            let itemCategory = RealmManager.retrieveItemCategoryById(viewModel.category_id)
 			
             cardBody.categoryLabel.text = itemCategory?.localized_name
             cardBody.titleLabel.text = viewModel.name
@@ -27,16 +27,15 @@ class ItemCardView: UIView {
         }
     }
 	    
-	let pinBtn: UIButton = {
+	let pinBtn: RoundBtn = {
 		let image = UIImage(systemName: "pin.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
 		
-		let button = UIButton(type: .system)
+		let button = RoundBtn()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
 		button.setImage(image, for: .normal)
 		button.imageView?.contentMode = .scaleAspectFit
 		
-		button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
 		button.transform = CGAffineTransform(rotationAngle: 45)
 		button.addTarget(self, action: #selector(handlePinBtnPress), for: .touchUpInside)
 		
@@ -67,6 +66,11 @@ class ItemCardView: UIView {
 		view.layer.cornerRadius = frame.width * 0.08
         return view
     }()
+	
+	var pinBtnWidthConstraint: NSLayoutConstraint!
+	
+	let pinBtnLargeSize: CGFloat = 30
+	let pinBtnSmallSize: CGFloat = 20
     
 	var isMinimized = true {
 		didSet {
@@ -74,6 +78,14 @@ class ItemCardView: UIView {
 			
 			pinBtn.isHidden = isMinimized && !isPinned
 			pinBtn.isEnabled = !isMinimized
+			
+			if isMinimized {
+				pinBtnWidthConstraint.constant = pinBtnSmallSize
+				pinBtn.imageEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+			} else {
+				pinBtnWidthConstraint.constant = pinBtnLargeSize
+				pinBtn.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
+			}
 		}
 	}
 	
@@ -97,17 +109,16 @@ class ItemCardView: UIView {
     
 	func setupPinBtn() {
 		addSubview(pinBtn)
-		
-		let size: CGFloat = 27
+				
+		pinBtnWidthConstraint = pinBtn.widthAnchor.constraint(equalToConstant: pinBtnLargeSize)
 		
 		NSLayoutConstraint.activate([
 			pinBtn.topAnchor.constraint(equalTo: topAnchor, constant: 5),
 			pinBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-			pinBtn.widthAnchor.constraint(equalToConstant: size),
-			pinBtn.heightAnchor.constraint(equalToConstant: size),
+			pinBtnWidthConstraint,
+			pinBtn.heightAnchor.constraint(equalTo: pinBtn.widthAnchor),
 		])
 		
-		pinBtn.layer.cornerRadius = size / 2
 	}
 	
     func setupImageContainer() {
@@ -150,7 +161,7 @@ class ItemCardView: UIView {
 		itemsUpdateHandler?()
 		
 		Vibration.light.vibrate()
-		UIView.animate(withDuration: 0.3) {
+		UIView.animate(withDuration: 0.2) {
 			self.pinBtn.backgroundColor = newPinState ? .accent : .lowContrastGray
 		}
 	}

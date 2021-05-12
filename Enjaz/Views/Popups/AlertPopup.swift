@@ -15,8 +15,8 @@ class AlertPopup: Popup {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.font = UIFont.systemFont(ofSize: 21)
-        label.textColor = .invertedSystemBackground
+        label.font = UIFont.systemFont(ofSize: 19)
+        label.textColor = .highContrastText
         
         return label
     }()
@@ -28,7 +28,7 @@ class AlertPopup: Popup {
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .gray
         
         return label
@@ -58,70 +58,73 @@ class AlertPopup: Popup {
 				actionsRow.addArrangedSubview(action)
 			}
 			
-			actionsRowHeightConstraint.constant = 45
+			actionsRowHeightConstraint.constant = 35
 		}
 	}
 	
 	var actionsRowHeightConstraint: NSLayoutConstraint!
+	var titleLabelTopAnchorConstraint: NSLayoutConstraint?
     
     override func setupSubViews() {
 		super.setupSubViews()
-        setupSuccessImage()
+        setupImageView()
         setupTitleLabel()
         setupMessageLabel()
 		setupActionsRow()
     }
-    
-    func setupSuccessImage() {
-        popupContainer.addSubview(imageView)
+	
+    func setupImageView() {
+        contentView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: popupContainer.topAnchor, constant: LayoutConstants.screenHeight * 0.021),
-            imageView.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
-            imageView.heightAnchor.constraint(lessThanOrEqualTo: popupContainer.heightAnchor),
-            imageView.widthAnchor.constraint(equalTo: popupContainer.widthAnchor, multiplier: 0.5),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 14),
+            imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            imageView.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor),
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.35),
         ])
     }
     
     func setupTitleLabel() {
-        popupContainer.addSubview(titleLabel)
-        
+        contentView.addSubview(titleLabel)
+        		
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: LayoutConstants.screenHeight * 0.02),
-            titleLabel.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
-            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: popupContainer.widthAnchor, multiplier: 0.9),
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.9),
         ])
     }
     
     func setupMessageLabel() {
-        popupContainer.addSubview(messageLabel)
+        contentView.addSubview(messageLabel)
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.018),
-            messageLabel.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
-            messageLabel.widthAnchor.constraint(lessThanOrEqualTo: popupContainer.widthAnchor, multiplier: 0.9),
+            messageLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            messageLabel.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.9),
         ])
     }
 	
 	func setupActionsRow() {
-		popupContainer.addSubview(actionsRow)
+		contentView.addSubview(actionsRow)
 		
 		actionsRowHeightConstraint = actionsRow.heightAnchor.constraint(equalToConstant: 0)
 		
 		NSLayoutConstraint.activate([
 			actionsRow.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.018),
-			actionsRow.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor),
-			actionsRow.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
-			actionsRow.widthAnchor.constraint(equalTo: popupContainer.widthAnchor),
+			actionsRow.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+			actionsRow.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+			actionsRow.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 			actionsRowHeightConstraint,
 		])
 	}
-    
-	func present(withImage image: UIImage?, title: String, message: String, actions: [AlertPopupAction] = []) {
+    	
+	func present(withImage image: UIImage? = nil, title: String, message: String, actions: [AlertPopupAction] = []) {
         imageView.image = image
         titleLabel.text = title
         messageLabel.text = message
 		self.actions = actions
+		
+		adjustTitleLabelTopAnchorConstraint(image)
+		
         present(animated: true)
     }
     
@@ -134,5 +137,25 @@ class AlertPopup: Popup {
     func presentAsInternetConnectionError() {
         presentAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
     }
+	
+	func presentAsConfirmationAlert(title: String, message: String, confirmationBtnTitle: String, confirmationHandler: @escaping () -> Void) {
+		let cancelAction = AlertPopupAction(title: NSLocalizedString("Cancel", comment: ""), style: .normal) {
+			self.dismiss(animated: true)
+		}
+		
+		let signOutAction = AlertPopupAction(title: confirmationBtnTitle, style: .destructive, handler: confirmationHandler)
+		
+		present(title: title, message: message, actions: [cancelAction, signOutAction])
+	}
+	
+	func adjustTitleLabelTopAnchorConstraint(_ image: UIImage?) {
+		titleLabelTopAnchorConstraint?.isActive = false
+		
+		titleLabelTopAnchorConstraint = image != nil
+			? titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16)
+			: titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor)
+		
+		titleLabelTopAnchorConstraint?.isActive = true
+	}
     
 }

@@ -84,7 +84,7 @@
 		BC39114F258E776B000E6273 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39114E258E776B000E6273 /* ItemModel.swift */; };
 		BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */; };
 		BC391166258E90A5000E6273 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391165258E90A5000E6273 /* CalendarView.swift */; };
-		BC39116E258E95A5000E6273 /* ShowAllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39116D258E95A5000E6273 /* ShowAllButton.swift */; };
+		BC39116E258E95A5000E6273 /* ShowAllBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC39116D258E95A5000E6273 /* ShowAllBtn.swift */; };
 		BC3C5D4F26186250000EE002 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C5D4E26186250000EE002 /* DailyView.swift */; };
 		BC3C5D57261862B7000EE002 /* CarouselVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C5D56261862B7000EE002 /* CarouselVC.swift */; };
 		BC3C5D5C2618B428000EE002 /* TitledInputFieldContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C5D5B2618B428000EE002 /* TitledInputFieldContainer.swift */; };
@@ -142,8 +142,8 @@
 		BC93D5912613CEB8005DE3AC /* NoteTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5902613CEB8005DE3AC /* NoteTitleTextField.swift */; };
 		BC93D5AC2614A887005DE3AC /* PersonalAspectsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5AB2614A887005DE3AC /* PersonalAspectsCell.swift */; };
 		BC93D5B12614A8AA005DE3AC /* AddNoteScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */; };
-		BC93D5B92614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */; };
-		BC93D5BE2614D22A005DE3AC /* AboutTheAppTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */; };
+		BC93D5B92614D1D7005DE3AC /* PrivacyPolicyScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5B82614D1D7005DE3AC /* PrivacyPolicyScreenVC.swift */; };
+		BC93D5BE2614D22A005DE3AC /* LinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93D5BD2614D22A005DE3AC /* LinksView.swift */; };
 		BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC963E6B259CF09100A1556B /* SideMenuVC.swift */; };
 		BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC963E70259D04C000A1556B /* SideMenuBtn.swift */; };
 		BC9F669A25924B6900E17117 /* NetworkingUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9F669925924B6900E17117 /* NetworkingUrls.swift */; };
@@ -165,6 +165,8 @@
 		BCB54CBD258C016400E0E54D /* ItemImagePickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CBC258C016400E0E54D /* ItemImagePickerPopup.swift */; };
 		BCB54CC7258C07AB00E0E54D /* ItemImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB54CC6258C07AB00E0E54D /* ItemImageCell.swift */; };
 		BCB5D20D2605E71D004275A9 /* WeekDayLabelsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */; };
+		BCB658AF263EAB8E007FA4C6 /* PrivacyPolicyAndAboutAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB658AE263EAB8E007FA4C6 /* PrivacyPolicyAndAboutAppVC.swift */; };
+		BCB658B4263EACB6007FA4C6 /* AboutAppScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB658B3263EACB6007FA4C6 /* AboutAppScreenVC.swift */; };
 		BCB98CED2588275200B64DC9 /* InputFieldContainerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB98CEC2588275200B64DC9 /* InputFieldContainerTextField.swift */; };
 		BCB98CF7258AB83800B64DC9 /* PickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB98CF6258AB83800B64DC9 /* PickerPopup.swift */; };
 		BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBEE8502587C91000D8DE0A /* UsernameTextField.swift */; };
@@ -341,7 +343,7 @@
 		BC39114E258E776B000E6273 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateAndTimeScreenVC.swift; sourceTree = "<group>"; };
 		BC391165258E90A5000E6273 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		BC39116D258E95A5000E6273 /* ShowAllButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAllButton.swift; sourceTree = "<group>"; };
+		BC39116D258E95A5000E6273 /* ShowAllBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowAllBtn.swift; sourceTree = "<group>"; };
 		BC3C5D4E26186250000EE002 /* DailyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
 		BC3C5D56261862B7000EE002 /* CarouselVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselVC.swift; sourceTree = "<group>"; };
 		BC3C5D5B2618B428000EE002 /* TitledInputFieldContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledInputFieldContainer.swift; sourceTree = "<group>"; };
@@ -400,8 +402,8 @@
 		BC93D5902613CEB8005DE3AC /* NoteTitleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteTitleTextField.swift; sourceTree = "<group>"; };
 		BC93D5AB2614A887005DE3AC /* PersonalAspectsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalAspectsCell.swift; sourceTree = "<group>"; };
 		BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteScreenVC.swift; sourceTree = "<group>"; };
-		BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAndAboutAppScreenVC.swift; sourceTree = "<group>"; };
-		BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTheAppTopView.swift; sourceTree = "<group>"; };
+		BC93D5B82614D1D7005DE3AC /* PrivacyPolicyScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyScreenVC.swift; sourceTree = "<group>"; };
+		BC93D5BD2614D22A005DE3AC /* LinksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinksView.swift; sourceTree = "<group>"; };
 		BC963E6B259CF09100A1556B /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		BC963E70259D04C000A1556B /* SideMenuBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuBtn.swift; sourceTree = "<group>"; };
 		BC9F669925924B6900E17117 /* NetworkingUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingUrls.swift; sourceTree = "<group>"; };
@@ -423,6 +425,8 @@
 		BCB54CBC258C016400E0E54D /* ItemImagePickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImagePickerPopup.swift; sourceTree = "<group>"; };
 		BCB54CC6258C07AB00E0E54D /* ItemImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageCell.swift; sourceTree = "<group>"; };
 		BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayLabelsStackView.swift; sourceTree = "<group>"; };
+		BCB658AE263EAB8E007FA4C6 /* PrivacyPolicyAndAboutAppVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyAndAboutAppVC.swift; sourceTree = "<group>"; };
+		BCB658B3263EACB6007FA4C6 /* AboutAppScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppScreenVC.swift; sourceTree = "<group>"; };
 		BCB98CEC2588275200B64DC9 /* InputFieldContainerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldContainerTextField.swift; sourceTree = "<group>"; };
 		BCB98CF6258AB83800B64DC9 /* PickerPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopup.swift; sourceTree = "<group>"; };
 		BCBEE8502587C91000D8DE0A /* UsernameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameTextField.swift; sourceTree = "<group>"; };
@@ -660,7 +664,7 @@
 				BC7FE4C9260F69630012F5F4 /* DynamicImageView.swift */,
 				BCF2F78F26214934006275AA /* DynamicImage.swift */,
 				BC93D5902613CEB8005DE3AC /* NoteTitleTextField.swift */,
-				BC93D5BD2614D22A005DE3AC /* AboutTheAppTopView.swift */,
+				BC93D5BD2614D22A005DE3AC /* LinksView.swift */,
 				BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */,
 				BCD4497626177707006FC8B7 /* SwitchView.swift */,
 				BC3C5D4E26186250000EE002 /* DailyView.swift */,
@@ -701,7 +705,8 @@
 				BC541A562610DF3B00341BDE /* PersonalAspectsScreenVC.swift */,
 				BC93D58B2613CE94005DE3AC /* NotesScreenVC.swift */,
 				BC93D5B02614A8AA005DE3AC /* AddNoteScreenVC.swift */,
-				BC93D5B82614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift */,
+				BC93D5B82614D1D7005DE3AC /* PrivacyPolicyScreenVC.swift */,
+				BCB658B3263EACB6007FA4C6 /* AboutAppScreenVC.swift */,
 				BCACC4712614D461005F7F59 /* ContactUsScreenVC.swift */,
 				BCACC4902614D9D2005F7F59 /* AwardsAndMedalsScreenVC.swift */,
 				BCACC4952614D9D9005F7F59 /* UserProfileScreenVC.swift */,
@@ -780,6 +785,7 @@
 				BC20180B260393F70060EFAF /* CalendarViewController.swift */,
 				BCACC49A2614FEBF005F7F59 /* MonthItemsScreenVC.swift */,
 				BCE783DA2635397400ADD3A1 /* MyPlanChildVC.swift */,
+				BCB658AE263EAB8E007FA4C6 /* PrivacyPolicyAndAboutAppVC.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -816,7 +822,7 @@
 				BC5400A325799D1D009DC69B /* PrimaryBtn.swift */,
 				BCC4D016258054BE0024429B /* OAuthBtn.swift */,
 				BCB54CB1258AE5E300E0E54D /* RoundBtn.swift */,
-				BC39116D258E95A5000E6273 /* ShowAllButton.swift */,
+				BC39116D258E95A5000E6273 /* ShowAllBtn.swift */,
 				BC963E70259D04C000A1556B /* SideMenuBtn.swift */,
 				BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */,
 				BCC429DA25A2E2FC00803CE9 /* NewAdditionInputFieldContainerBtn.swift */,
@@ -1227,7 +1233,7 @@
 				417EE8C925A01C17002F71E5 /* MajorGoalsView.swift in Sources */,
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
 				BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */,
-				BC93D5B92614D1D7005DE3AC /* PrivacyPolicyAndAboutAppScreenVC.swift in Sources */,
+				BC93D5B92614D1D7005DE3AC /* PrivacyPolicyScreenVC.swift in Sources */,
 				BCD4497726177707006FC8B7 /* SwitchView.swift in Sources */,
 				BC8F2F5725A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift in Sources */,
 				BCF2F7782620FAC5006275AA /* ItemImagePickerImageSourceCellModel.swift in Sources */,
@@ -1244,6 +1250,7 @@
 				BCB54CC7258C07AB00E0E54D /* ItemImageCell.swift in Sources */,
 				BCF2F79026214934006275AA /* DynamicImage.swift in Sources */,
 				BCDE2EBA2587B4BE0040345E /* OnboardingScreenVC.swift in Sources */,
+				BCB658B4263EACB6007FA4C6 /* AboutAppScreenVC.swift in Sources */,
 				BC8846B7261A432E005C6AAF /* HourTableViewCell.swift in Sources */,
 				BCD95D69258F88BE0032F2E4 /* PopoverBtn.swift in Sources */,
 				41798C34260B073900DF5ECF /* UIButton+Ext.swift in Sources */,
@@ -1320,7 +1327,7 @@
 				BC8846CC261B56B6005C6AAF /* DailyViewTableViewCustomHeader.swift in Sources */,
 				417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */,
 				BCF2F7442620D878006275AA /* ItemImageModel.swift in Sources */,
-				BC39116E258E95A5000E6273 /* ShowAllButton.swift in Sources */,
+				BC39116E258E95A5000E6273 /* ShowAllBtn.swift in Sources */,
 				BC7EFC0A25863CBB00F35312 /* ResetPasswordPopup.swift in Sources */,
 				419121192592AF3F00CB7BF9 /* HourPickerView.swift in Sources */,
 				BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */,
@@ -1383,6 +1390,7 @@
 				41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */,
 				BC3C5D57261862B7000EE002 /* CarouselVC.swift in Sources */,
 				BCC429DB25A2E2FC00803CE9 /* NewAdditionInputFieldContainerBtn.swift in Sources */,
+				BCB658AF263EAB8E007FA4C6 /* PrivacyPolicyAndAboutAppVC.swift in Sources */,
 				41A9B326263A277C00366514 /* ItemsTableViewCell.swift in Sources */,
 				BC963E6C259CF09100A1556B /* SideMenuVC.swift in Sources */,
 				BC730277259B91BC007AEA96 /* BidirectionalStringCollection+Ext.swift in Sources */,
@@ -1413,7 +1421,7 @@
 				BCD82DBC263E79A4006F7575 /* NotificationsScreenVC.swift in Sources */,
 				417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */,
 				BC1A15ED262A41570012BE05 /* ProgressBarView.swift in Sources */,
-				BC93D5BE2614D22A005DE3AC /* AboutTheAppTopView.swift in Sources */,
+				BC93D5BE2614D22A005DE3AC /* LinksView.swift in Sources */,
 				BC54007C25795B13009DC69B /* UIView+Ext.swift in Sources */,
 				BCF2F7492620D968006275AA /* DefaultItemImages.swift in Sources */,
 				BCBEE8592587D03E00D8DE0A /* ConfirmPasswordTextField.swift in Sources */,
@@ -1627,7 +1635,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = prototype.Enjaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1648,7 +1656,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = prototype.Enjaz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

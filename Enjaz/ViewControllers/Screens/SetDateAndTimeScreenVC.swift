@@ -33,7 +33,30 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         return view
     }()
     
-    lazy var saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
+    var saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
+	var nextBtn: PrimaryBtn = {
+		let button = PrimaryBtn(label: NSLocalizedString("Next", comment: ""), theme: .blue, size: .large)
+		button.isHidden = true
+		return button
+	}()
+	
+	var partitionsNumberPopoverDataSource = ["1", "2", "3"]
+	
+	var selectedDatesTimeStamps: [[TimeInterval]] = []
+		
+	var selectedPartitionsNumberIndex = 0 {
+		didSet {
+			let currentPartitionNumber = selectedDatesTimeStamps.count
+			nextBtn.isHidden = currentPartitionNumber == numberOfPartitions - 1
+			saveBtn.isHidden = !nextBtn.isHidden
+		}
+	}
+	
+	var numberOfPartitions: Int {
+		return Int(partitionsNumberPopoverDataSource[selectedPartitionsNumberIndex])!
+	}
+	
+	var itemType: ItemType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,24 +65,35 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         calendarView.delegate = self
         hourPicker.selectRow(12, inComponent: 0, animated: false)
         selectCurrentDay()
+		
+		if itemType == .goal {
+			calendarView.partitionsNumberPopoverBtn.isHidden = false
+			calendarView.partitionsNumberPopoverBtn.addTarget(self, action: #selector(handlePartitionsNumberPopoverBtnTap), for: .touchUpInside)
+		}
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		let window = UIApplication.shared.windows[0]
 		window.backgroundColor = .black
+		
+		navigationController?.setNavigationBarHidden(true, animated: true)
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
-		let window = UIApplication.shared.windows[0]
-		window.backgroundColor = .background
+		
+		if presentingViewController?.isModal == false {
+			let window = UIApplication.shared.windows[0]
+			window.backgroundColor = .background
+		}
 	}
 
     override func setupSubviews() {
         setupHeader()
         super.setupSubviews()
         setupSaveBtn()
+		setupNextBtn()
         setupIndicator()
         setupHourPicker()
     }
@@ -89,6 +123,12 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         
         saveBtn.addTarget(self, action: #selector(handleSaveBtnTap), for: .touchUpInside)
     }
+	
+	func setupNextBtn() {
+		view.addSubview(nextBtn)
+		nextBtn.constrainEdgesToCorrespondingEdges(of: saveBtn, top: 0, leading: 0, bottom: 0, trailing: 0)
+		nextBtn.addTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
+	}
     
     func setupHourPicker() {
         view.addSubview(hourPicker)
@@ -120,36 +160,65 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     @objc func handleDismissBtnTap() {
         dismiss(animated: true)
     }
-    
+	    
     override func handleCalendarTypeSelection(selectedIndex: Int) {
         super.handleCalendarTypeSelection(selectedIndex: selectedIndex)
         selectCurrentDay()
     }
+	
+	@objc func handlePartitionsNumberPopoverBtnTap() {
+		popoverTableVC.dataSourceArray = partitionsNumberPopoverDataSource
+		popoverTableVC.optionSelectionHandler = handlePartitionsNumberSelection
+		
+		let buttonFrame = calendarView.partitionsNumberPopoverBtn.frame
+		
+		let frame = CGRect(x: buttonFrame.minX, y: buttonFrame.minY - 60, width: buttonFrame.width, height: buttonFrame.height)
+		
+		presentPopover(frame: frame, numberOfOptions: partitionsNumberPopoverDataSource.count)
+	}
+	
+	func handlePartitionsNumberSelection(selectedIndex: Int) {
+		guard selectedIndex != selectedPartitionsNumberIndex else { return }
+		
+		selectedPartitionsNumberIndex = selectedIndex
+		calendarView.partitionsNumberLabel = partitionsNumberPopoverDataSource[selectedIndex]
+	}
     
+	@objc func handleNextBtnTap() {
+		guard let selectedDateUnixTimeStamps = getSelectedTimeStamps() else { return }
+		selectedDatesTimeStamps.append(selectedDateUnixTimeStamps)
+		
+		let setDateAndTimeScreen = Self.init()
+		
+		setDateAndTimeScreen.selectedDatesTimeStamps = selectedDatesTimeStamps
+		setDateAndTimeScreen.selectedPartitionsNumberIndex = selectedPartitionsNumberIndex
+		setDateAndTimeScreen.calendarView.partitionsNumberLabel = calendarView.partitionsNumberLabel
+		setDateAndTimeScreen.calendarView.partitionsNumberPopoverBtn.isEnabled = false
+		setDateAndTimeScreen.itemType = itemType
+		setDateAndTimeScreen.delegate = delegate
+		
+		navigationController?.pushViewController(setDateAndTimeScreen, animated: true)
+	}
+	
     @objc func handleSaveBtnTap() {
-        guard calendarView.selectedMonthDayItemRow != nil else {
-            alertPopup.presentAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
-            return
-        }
-        
-        let selectedDate = getSelectedDate()
-                
-        let currentDateUnixTimeStamp = Date().timeIntervalSince1970
-        let selectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
-        
-        if selectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-            alertPopup.presentAsError(withMessage: NSLocalizedString("Selected date cannot be in the past", comment: ""))
-            return
-        }
-        
-        let readableDate = DateAndTimeTools.getReadableDate(from: selectedDate, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
-        
-        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [selectedDateUnixTimeStamp], readableDate: readableDate)
+		guard let selectedDateUnixTimeStamps = getSelectedTimeStamps() else { return }
+		selectedDatesTimeStamps.append(selectedDateUnixTimeStamps)
+		
+		let date = Date(timeIntervalSince1970: selectedDateUnixTimeStamps.first!)
+		
+		let readableDate = DateAndTimeTools.getReadableDate(from: date, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
+		
+        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate)
         dismiss(animated: true)
     }
     
     // MARK: TOOLS
     
+	override func setPopoverBtnsDefaultLabels() {
+		super.setPopoverBtnsDefaultLabels()
+		calendarView.partitionsNumberLabel = calendarView.partitionsNumberLabel ?? NSLocalizedString("Number of partitions", comment: "")
+	}
+	
     override func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {
         calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .month, thirdBtn: .year)
     }
@@ -160,19 +229,38 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         calendarView.monthDaysCollectionView.selectItem(at: currentDayIndexPath, animated: true, scrollPosition: .centeredVertically)
         calendarView.collectionView(calendarView.monthDaysCollectionView, didSelectItemAt: currentDayIndexPath)
     }
-        
+    
+	func getSelectedTimeStamps() -> [TimeInterval]? {
+		guard calendarView.selectedMonthDayItemRow != nil else {
+			alertPopup.presentAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
+			return nil
+		}
+		
+		let selectedDate = getSelectedDate()
+		
+		let currentDateUnixTimeStamp = Date().timeIntervalSince1970
+		let selectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
+		
+		if selectedDateUnixTimeStamp < currentDateUnixTimeStamp {
+			alertPopup.presentAsError(withMessage: NSLocalizedString("Selected date cannot be in the past", comment: ""))
+			return nil
+		}
+		
+		return ([selectedDateUnixTimeStamp])
+	}
+	
     func getSelectedDate(ofDay day: Int? = nil) -> Date {
         let day = day ?? calendarView.selectedDay
         let month = selectedMonthIndex + 1
         let year = currentYear + selectedYearIndex
         let time = hourPicker.hourModels[hourPicker.selectedTimePickerIndex]
         let hour = DateAndTimeTools.convertHourModelTo24HrFormatInt(time)
-                
+		
         let date = DateAndTimeTools.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: selectedCalendarIdentifier)
         
         return date
     }
-    
+	    
     func getFirstSelectedDate() -> Date {
         return getSelectedDate(ofDay: calendarView.firstSelectedDay)
     }
@@ -194,13 +282,13 @@ class SetDateAndTimeScreenVC: CalendarViewController {
             let lastSelectedDateYear = calendar.component(.year, from: lastSelectedDate)
             
             if firstSelectedDateYear != lastSelectedDateYear {
-                format = "dd MMMM yyyy"
+				format = itemType == .goal ? "d-M-yyyy" : "dd MMMM yyyy"
             }
             
             earlierDate = min(firstSelectedDate, lastSelectedDate)
             laterDate = firstSelectedDate == lastSelectedDate ? nil : max(firstSelectedDate, lastSelectedDate)
         }
-                
+		
         let readableFirstSelectedDate = DateAndTimeTools.getReadableDate(from: earlierDate, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)
         
         let readableLastSelectedDate = DateAndTimeTools.getReadableDate(from: laterDate, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)

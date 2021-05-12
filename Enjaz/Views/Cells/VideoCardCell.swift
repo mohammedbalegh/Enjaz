@@ -6,7 +6,7 @@ class VideoCardCell: DraftCardCell {
             guard let viewModel = viewModel else { return }
             
             self.thumbnail.source = viewModel.thumbnail
-            url = viewModel.video
+            url = viewModel.url
             self.draftMetaDataContainer.categoryLabel.text = viewModel.category
             self.draftMetaDataContainer.titleLabel.text = viewModel.title
             self.draftMetaDataContainer.dateLabel.text = viewModel.date
@@ -20,6 +20,7 @@ class VideoCardCell: DraftCardCell {
         let playIcon = UIImage(systemName: "play.fill")
         
         button.setImage(playIcon, for: .normal)
+		button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.backgroundColor = .accent
         button.tintColor = .white

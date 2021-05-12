@@ -10,15 +10,15 @@ struct ItemTools {
 		achievement.name = item.name
 		achievement.date = item.date
 		achievement.item_description = item.item_description
-		achievement.category = item.category
-		achievement.type = ItemType.achievement.id
+		achievement.category_id = item.category_id
+		achievement.type_id = ItemType.achievement.id
 		achievement.image_id = item.image_id == ItemType.goal.imageId ? ItemType.achievement.imageId : item.image_id
 		
 		RealmManager.saveItem(achievement)
 	}
 	
 	static func showCongratsPopup(for item: ItemModel) {
-		let itemType = ItemType.getTypeById(id: item.type)
+		let itemType = ItemType.getTypeById(id: item.type_id)
 		let popupImage = UIImage(named: "congratsIcon")
 		let popupTitle = NSLocalizedString("Congrats", comment: "")
 		var popupMessage = String(format: NSLocalizedString("%@ completed successfully", comment: ""), itemType.localizedName)

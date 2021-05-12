@@ -38,21 +38,21 @@ class ItemCardPopup: Popup {
         setupCardsCarouselCollectionViewView()
     }
     
-    override func setupPopupContainer() {
-        popupContainer.backgroundColor = .clear
+    override func setupContentView() {
+        contentView.backgroundColor = .clear
         
         let height = itemHeight * (1 + ZoomAndSnapFlowLayout.zoomFactor)
         
         NSLayoutConstraint.activate([
-            popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            popupContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
-            popupContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-            popupContainer.heightAnchor.constraint(equalToConstant: height),
+            contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: height),
         ])
     }
     
     func setupCardsCarouselCollectionViewView() {
-        popupContainer.addSubview(cardsCarouselCollectionView)
+        contentView.addSubview(cardsCarouselCollectionView)
         cardsCarouselCollectionView.fillSuperView()
     }
 	
@@ -77,7 +77,7 @@ extension ItemCardPopup: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.viewModel = item
 		cell.cardView.isMinimized = false
 		cell.itemsUpdateHandler = itemsUpdateHandler
-		cell.showsCheckBtn = item.type == ItemType.achievement.id ? false : true
+		cell.showsCheckBtn = item.type_id == ItemType.achievement.id ? false : true
 		cell.showsDescription = true
 		cell.cardView.cardBody.checkBtnHandler = handleCheckBtnTap
         return cell

@@ -26,7 +26,7 @@ class AlertPopupAction: UIButton {
 		
 		setTitle(title, for: .normal)
 		
-		let titleColor: UIColor = style == .normal ? .secondaryLabel : .systemRed
+		let titleColor: UIColor = style == .normal ? .highContrastText : .systemRed
 		setTitleColor(titleColor, for: .normal)
 		setTitleColor(titleColor.withAlphaComponent(0.3), for: .highlighted)
 		

@@ -25,7 +25,6 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.isHidden = true
-        label.textAlignment = .center
         
         return label
     }()
@@ -170,7 +169,18 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     var viewTypePopoverBtn: PopoverBtn {
         return calendarPopoverBtnsRow.viewTypePopoverBtn
     }
-    
+	
+	lazy var partitionsNumberPopoverBtn: PopoverBtn = {
+		let button = PopoverBtn(type: .custom)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+		button.configure(withSize: .small)
+		button.label.font = .systemFont(ofSize: CalendarPopoverBtnsRow.popoverBtnsRowFontSize)
+		button.isHidden = true
+		
+		return button
+	}()
+	
     var nextMonthBtn: UIButton {
         return monthSwitcher.nextBtn
     }
@@ -204,6 +214,15 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
             viewTypePopoverBtn.label.text = newValue
         }
     }
+	
+	var partitionsNumberLabel: String? {
+		get {
+			return partitionsNumberPopoverBtn.label.text
+		}
+		set {
+			partitionsNumberPopoverBtn.label.text = newValue
+		}
+	}
     
     var selectedWeekLabel: String? {
         get {
@@ -265,6 +284,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         setupWeekSwitcher()
         setupPopoverCalendarBtnsRow()
         setupSelectedDaysLabel()
+		setupPartitionsNumberPopoverBtn()
         setupCalendarContainer()
         setupWeekDayLabelsStackView()
         setupMonthDaysCollectionView()
@@ -311,10 +331,21 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
         NSLayoutConstraint.activate([
             selectedDaysLabel.topAnchor.constraint(equalTo: calendarPopoverBtnsRow.bottomAnchor, constant: 8),
             selectedDaysLabel.leadingAnchor.constraint(equalTo: calendarPopoverBtnsRow.leadingAnchor),
-            selectedDaysLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
+			selectedDaysLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor),
             selectedDaysLabelHeightConstraint,
         ])
     }
+	
+	func setupPartitionsNumberPopoverBtn() {
+		addSubview(partitionsNumberPopoverBtn)
+		
+		NSLayoutConstraint.activate([
+			partitionsNumberPopoverBtn.centerYAnchor.constraint(equalTo: selectedDaysLabel.centerYAnchor),
+			partitionsNumberPopoverBtn.leadingAnchor.constraint(equalTo: selectedDaysLabel.trailingAnchor, constant: 8),
+			partitionsNumberPopoverBtn.trailingAnchor.constraint(equalTo: calendarPopoverBtnsRow.trailingAnchor),
+			partitionsNumberPopoverBtn.heightAnchor.constraint(equalTo: selectedDaysLabel.heightAnchor)
+		])
+	}
     
     func setupCalendarContainer() {
         addSubview(calendarContainer)

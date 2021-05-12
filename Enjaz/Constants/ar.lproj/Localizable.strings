@@ -102,6 +102,7 @@
 "Last Week" = "الأسبوع الاخير";
 "Add %@" = "إضافة %@";
 "Cannot add a task in the past" = "لا يمكن اضافة مهمة في الماضي";
+"Number of partitions" = "عدد الأقسام";
 
 // MARK: GoalsScreen
 "My Goals" = "أهدافي";
@@ -183,6 +184,8 @@
 "Dark Mode" = "الوضع الليلي";
 "Logout" = "تسجيل الخروج";
 "Choose a category" = "أختار مجال المناسب";
+"Are sure you want to sign out?" = "هل أنت متأكد من تسجيل الخروج؟";
+"All data will be lost" = "سيتم حذف جميع البيانات";
 
 // MARK: MyPlanScreenVC
 "Tasks" = "المهام";
@@ -269,3 +272,4 @@
 "Mark as Completed" = "انهاء";
 "Unpin" = "الغاء الثبيت";
 "Pin" = "ثبيت";
+"Sign Out" = "تسجيل الخروج";

@@ -1,4 +1,7 @@
 import UIKit
+import AVFoundation
+import MediaPlayer
+import AVKit
 
 class ShowAllIVideosScreenVC: ShowAllCardsScreenVC {
 
@@ -9,6 +12,16 @@ class ShowAllIVideosScreenVC: ShowAllCardsScreenVC {
     override func registerCardCell() {
         self.collectionView!.register(VideoCardCell.self, forCellWithReuseIdentifier: cardsReuseIdentifier)
     }
+	
+	func playVideo(with url: URL) {
+		let player = AVPlayer(url: url)
+		let playerVC = AVPlayerViewController()
+		playerVC.player = player
+		
+		self.present(playerVC, animated: true) {
+			playerVC.player!.play()
+		}
+	}
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cardsReuseIdentifier, for: indexPath) as! VideoCardCell
@@ -19,8 +32,9 @@ class ShowAllIVideosScreenVC: ShowAllCardsScreenVC {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: implement show video
-        print("show video")
+		if let videoUrl = (cardModels[indexPath.row] as? VideoModel)?.url, let url = URL(string: videoUrl) {
+			playVideo(with: url)
+		}
     }
 
 }

@@ -3,7 +3,18 @@ import SPAlert
 
 class AddCategoryScreenVC: KeyboardHandlingViewController {
 
-    let setImageBtn = RoundBtn(image: UIImage(named: "imageIcon"), size: LayoutConstants.screenHeight * 0.11)
+	lazy var setImageBtn: RoundBtn = {
+		let button = RoundBtn()
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+		button.setImage(UIImage(named: "imageIcon"), for: .normal)
+		button.imageView?.contentMode = .scaleAspectFill
+		button.backgroundColor = .accent
+		
+		button.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
+		
+		return button
+	}()
         
 	lazy var imagePickerPopup: ItemImagePickerPopup = {
 		let popup = ItemImagePickerPopup()
@@ -88,13 +99,14 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     
     func setupSetImageButton() {
         view.addSubview(setImageBtn)
-        
+		
         NSLayoutConstraint.activate([
             setImageBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             setImageBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			setImageBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.24),
+			setImageBtn.heightAnchor.constraint(equalTo: setImageBtn.widthAnchor),
         ])
 		
-        setImageBtn.addTarget(self, action: #selector(handleSetImageBtnTap), for: .touchUpInside)
     }
     
     func setupTextFieldsVerticalStack() {

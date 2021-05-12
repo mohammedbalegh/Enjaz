@@ -63,6 +63,9 @@ class ItemsScreenVC: UITableViewController {
 		let newItemRowIndex = items.firstIndex(of: item)!
 		let newItemIndexPath = IndexPath(row: newItemRowIndex, section: indexPath.section)
 		
+		let cell = tableView.cellForRow(at: indexPath) as? ItemsTableViewCell
+		cell?.isPinned = item.is_pinned
+		
 		guard newItemIndexPath.row != indexPath.row else { return }
 		
 		tableView.moveRow(at: indexPath, to: newItemIndexPath)
@@ -76,7 +79,7 @@ class ItemsScreenVC: UITableViewController {
 		
 		let actionSheet = UIAlertController(title: itemDeletionWarningTitle, message: deletionWarningMessage, preferredStyle: .actionSheet)
 		
-		let deleteActionTitle = String(format: NSLocalizedString("Delete %@", comment: ""), ItemType.getTypeById(id: item.type).localizedName)  
+		let deleteActionTitle = String(format: NSLocalizedString("Delete %@", comment: ""), ItemType.getTypeById(id: item.type_id).localizedName)  
 		
 		let deleteAction = UIAlertAction(title: deleteActionTitle, style: .destructive) { _ in
 			self.deleteItem(at: indexPath, completion: completion)
@@ -94,7 +97,7 @@ class ItemsScreenVC: UITableViewController {
 	}
 	
 	func getDeletionWarningTitleAndMessage(forItem item: ItemModel) -> (String, String) {
-		let itemType = ItemType.getTypeById(id: item.type)
+		let itemType = ItemType.getTypeById(id: item.type_id)
 		let itemTypeName = itemType.localizedName.lowercased()
 		let pluralItemTypeName = NSLocalizedString(itemType.name.pluralizeInEnglish(), comment: "").removeDefinitionArticle().lowercased()
 		
@@ -104,7 +107,7 @@ class ItemsScreenVC: UITableViewController {
 		
 		let repeatingItemDeletionWarningMessage = String(format: NSLocalizedString("All subsequent %@ will be deleted as well.", comment: ""), pluralItemTypeName) + " \(singleItemDeletionWarningMessage)"
 		
-		let deletionWarningMessage = item.isRepeated
+		let deletionWarningMessage = item.is_repeated
 			? repeatingItemDeletionWarningMessage
 			: singleItemDeletionWarningMessage
 		
@@ -124,7 +127,7 @@ class ItemsScreenVC: UITableViewController {
 		let item = getItem(at: indexPath)
 		
 		guard !item.is_completed else {
-			let itemType = ItemType.getTypeById(id: item.type)
+			let itemType = ItemType.getTypeById(id: item.type_id)
 			let alertMessage = String(format: NSLocalizedString("%@ is already completed", comment: ""), itemType.localizedName)
 
 			SPAlert.present(message: alertMessage, haptic: .none)
@@ -143,9 +146,6 @@ class ItemsScreenVC: UITableViewController {
 		let newPinState = !item.is_pinned
 		
 		RealmManager.pinItem(item, isPinned: newPinState)
-		
-		let cell = tableView.cellForRow(at: indexPath) as? ItemsTableViewCell
-		cell?.isPinned = newPinState
 		
 		handleItemPinUpdate(at: indexPath)
 		completion?(true)
@@ -169,8 +169,11 @@ class ItemsScreenVC: UITableViewController {
         return cell
     }
     
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {		
-		dismissKeyboard()
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		// Dismiss keyboard
+		let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+		keyWindow?.endEditing(true)
+		
         let item = getItem(at: indexPath)
         itemCardPopup.itemModels = [item]
 		itemCardPopup.itemsUpdateHandler = updateScreen

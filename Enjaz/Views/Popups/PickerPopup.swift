@@ -26,33 +26,33 @@ class PickerPopup: Popup {
 		setupSelectBtn()
 	}
 	
-    override func setupPopupContainer() {
-		popupContainer.backgroundColor = .secondaryBackground
-		popupContainer.layer.cornerRadius = 20
+    override func setupContentView() {
+		contentView.backgroundColor = .secondaryBackground
+		contentView.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([
-			popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-			popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-			popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.28),
-			popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.85),
+			contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
+			contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
+			contentView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.28),
+			contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.85),
 		])
 	}
 	
 	func setupPicker() {
-		popupContainer.addSubview(picker)
+		contentView.addSubview(picker)
 		
 		NSLayoutConstraint.activate([
-			picker.topAnchor.constraint(equalTo: popupContainer.topAnchor),
-			picker.heightAnchor.constraint(equalTo: popupContainer.heightAnchor, multiplier: 0.78),
-			picker.widthAnchor.constraint(equalTo: popupContainer.widthAnchor),
+			picker.topAnchor.constraint(equalTo: contentView.topAnchor),
+			picker.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.78),
+			picker.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 		])
 	}
 	
 	func setupSelectBtn() {
-		popupContainer.addSubview(selectBtn)
+		contentView.addSubview(selectBtn)
 
 		NSLayoutConstraint.activate([
-			selectBtn.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
+			selectBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 			selectBtn.topAnchor.constraint(equalTo: picker.bottomAnchor),
 		])
 	}

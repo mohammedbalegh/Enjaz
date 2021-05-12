@@ -58,11 +58,11 @@ class PrimaryBtn: UIButton {
         var btnWidth, btnHeight, fontSize : CGFloat
         
         if size == .large {
-            fontSize = max(22, LayoutConstants.screenHeight * 0.025)
+            fontSize = 20
             btnHeight = LayoutConstants.screenHeight * 0.053
             btnWidth = LayoutConstants.screenWidth * 0.7
         } else {
-            fontSize = max(16, LayoutConstants.screenHeight * 0.02)
+            fontSize = 16
             btnHeight = LayoutConstants.screenHeight * 0.05
             btnWidth = LayoutConstants.screenWidth * 0.57
         }

@@ -82,16 +82,16 @@ struct DateAndTimeTools {
     static func getDateAndTimeLabelText(_ viewModel: ItemModel) -> NSAttributedString {
         let itemDate = Date(timeIntervalSince1970: viewModel.date)
         let dateFormat: String = {
-            if viewModel.isRepeated { return "d/M/yy" }
+            if viewModel.is_repeated { return "d/M/yy" }
             if Calendar.current.isDateInToday(itemDate) { return "hh:00  aa" }
             return "d/M/yyyy hh:00  aa"
         }()
         
         let readableStartDate = DateAndTimeTools.getReadableDate(from: itemDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
         let readableEndDate: String = {
-            guard viewModel.isRepeated else { return "" }
+            guard viewModel.is_repeated else { return "" }
             
-            let itemEndDate = Date(timeIntervalSince1970: viewModel.endDate)
+            let itemEndDate = Date(timeIntervalSince1970: viewModel.end_date)
             return DateAndTimeTools.getReadableDate(from: itemEndDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
         }()
         
@@ -100,7 +100,7 @@ struct DateAndTimeTools {
         
         let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accent, stringSize: 11, coloredSubstringsSize: 11)
         
-        let itemReadableDate = viewModel.isRepeated
+        let itemReadableDate = viewModel.is_repeated
             ? rangeDate
             : NSAttributedString(string: readableStartDate)
         
@@ -108,7 +108,9 @@ struct DateAndTimeTools {
     }
     
     static func convertHourModelTo24HrFormatInt(_ hourModel: HourModel) -> Int {
-        if hourModel.hour == 12 && hourModel.period == "pm" { return 12 }
+		if hourModel.hour == 12 {
+			return hourModel.period == "pm" ? 12 : 0
+		}
         
         return hourModel.period == "pm" ? (hourModel.hour + 12) % 24 : hourModel.hour
     }
@@ -117,8 +119,10 @@ struct DateAndTimeTools {
 		let splitString = hourString.split(separator: " ")
 		guard let hour = Int(splitString.first ?? "") else { return nil }
 		guard let period = splitString.last?.lowercased() else { return nil }
-				
-		if hour == 12 && period == "pm" { return 12 }
+		
+		if hour == 12 {
+			return period == "pm" ? 12 : 0
+		}
 		
 		return period == "pm" ? (hour + 12) % 24 : hour
 	}

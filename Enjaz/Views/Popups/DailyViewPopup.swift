@@ -14,6 +14,7 @@ class DailyViewPopup: Popup {
 		
 		dailyView.dismiss = dismiss
 		dailyView.blurOverlay = blurOverlay
+		dailyView.dismissBtn = dismissBtn
 		
 		return dailyView
 	}()
@@ -61,14 +62,14 @@ class DailyViewPopup: Popup {
 		prepareForPresentation(animated)
 		
 		if animated {
-			animatePopupContainerIn()
+			animateContentViewIn()
 		} else {
-			popupContainer.alpha = 1
+			contentView.alpha = 1
 		}
 	}
 		    
     func setupDailyView() {
-        popupContainer.addSubview(dailyView)
+        contentView.addSubview(dailyView)
         dailyView.fillSuperView()
     }
 	
@@ -77,15 +78,15 @@ class DailyViewPopup: Popup {
 		setupDailyView()
 	}
 	
-	override func setupPopupContainer() {
-		popupContainer.backgroundColor = .none
+	override func setupContentView() {
+		contentView.backgroundColor = .none
 		let height = ZoomAndSnapFlowLayout.itemSize.height * (1 + ZoomAndSnapFlowLayout.zoomFactor)
 		
 		NSLayoutConstraint.activate([
-			popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-			popupContainer.leadingAnchor.constraint(equalTo: leadingAnchor),
-			popupContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-			popupContainer.heightAnchor.constraint(equalToConstant: height),
+			contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
+			contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+			contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+			contentView.heightAnchor.constraint(equalToConstant: height),
 		])
 	}
 	

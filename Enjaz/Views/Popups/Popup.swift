@@ -13,14 +13,26 @@ class Popup: UIView {
 		return visualEffectView
 	}()
     
-	lazy var popupContainer: UIView = {
+	lazy var dismissBtn: UIButton = {
+		let button = UIButton(type: .system)
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+		button.setImage(UIImage(systemName: "xmark"), for: .normal)
+		button.tintColor = .white
+		button.addTarget(self, action: #selector(handleOverlayAndDismissBtnTab), for: .touchUpInside)
+		button.imageView?.contentMode = .scaleAspectFit
+		
+		return button
+	}()
+	
+	lazy var contentView: UIView = {
 		let view = UIView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
 		
 		view.backgroundColor = .secondaryBackground
-		view.layer.cornerRadius = 10
+		view.layer.cornerRadius = 18
 		view.alpha = 0
-		view.scale(to: popupContainerInitialScale)
+		view.scale(to: contentViewInitialScale)
 		
 		return view
 	}()
@@ -31,7 +43,7 @@ class Popup: UIView {
 		return traitCollection.userInterfaceStyle == .dark ? .light : .dark
 	}
     
-	let popupContainerInitialScale: CGFloat = 1.2
+	let contentViewInitialScale: CGFloat = 1.2
 	var popupDismissalHandler: (() -> Void)?
 	
 	var hideOnOverlayTap: Bool = true {
@@ -55,18 +67,28 @@ class Popup: UIView {
 		addSubview(blurOverlay)
 		blurOverlay.fillSuperView()
 		
-		addSubview(popupContainer)
-        setupPopupContainer()
+		setupDismissBtn()
+		addSubview(contentView)
+        setupContentView()
 	}
 	
-	internal func setupPopupContainer() {
-        popupContainer.layer.cornerRadius = 20
-        
+	internal func setupDismissBtn() {
+		addSubview(dismissBtn)
+		
+		NSLayoutConstraint.activate([
+			dismissBtn.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
+			dismissBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),
+			dismissBtn.heightAnchor.constraint(equalToConstant: 18),
+			dismissBtn.widthAnchor.constraint(equalToConstant: 18),
+		])
+	}
+	
+	internal func setupContentView() {
         NSLayoutConstraint.activate([
-            popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            popupContainer.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.3),
-            popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.78),
+            contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.15),
+            contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.78),
         ])
     }
 	
@@ -83,9 +105,9 @@ class Popup: UIView {
 		prepareForPresentation(animated)
 				
 		if animated {
-			animatePopupContainerIn()
+			animateContentViewIn()
 		} else {
-			popupContainer.alpha = 1
+			contentView.alpha = 1
 		}
 	}
 	
@@ -98,7 +120,7 @@ class Popup: UIView {
 		}
 		
 		if animated {
-			animatePopupContainerOut(completionHandler: animationCompletionHandler)
+			animateContentViewOut(completionHandler: animationCompletionHandler)
 		} else {
 			animationCompletionHandler(completed: true)
 		}
@@ -109,28 +131,30 @@ class Popup: UIView {
 			blurOverlay.addGestureRecognizer(overlayTapGestureRecognizer)
 		}
 		
-		popupContainer.scale(to: animated ? popupContainerInitialScale : 1)
+		contentView.scale(to: animated ? contentViewInitialScale : 1)
 		blurOverlay.alpha = 1
+		dismissBtn.alpha = 1
 		
 		fillScreen()
 	}
 	
-	internal func animatePopupContainerIn() {
+	internal func animateContentViewIn() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
-			self.popupContainer.alpha = 1
-			self.popupContainer.scale(to: 1)
+			self.contentView.alpha = 1
+			self.contentView.scale(to: 1)
 		}
 	}
 	
-	func animatePopupContainerOut(completionHandler: @escaping (Bool) -> Void) {
+	func animateContentViewOut(completionHandler: @escaping (Bool) -> Void) {
 		UIView.animate(
 			withDuration: 0.1,
             delay: 0,
             options: .curveEaseIn,
 			animations: {
-				self.popupContainer.alpha = 0
-				self.popupContainer.scale(to: self.popupContainerInitialScale)
+				self.contentView.alpha = 0
+				self.contentView.scale(to: self.contentViewInitialScale)
 				self.blurOverlay.alpha = 0
+				self.dismissBtn.alpha = 0
 			},
 			completion: completionHandler
 		)

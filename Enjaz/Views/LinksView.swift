@@ -1,6 +1,6 @@
 import UIKit
 
-class AboutTheAppTopView: UIView {
+class LinksView: UIView {
     
     let topSpace = LayoutConstants.screenHeight * 0.018
     let buttonSize = LayoutConstants.screenWidth * 0.1

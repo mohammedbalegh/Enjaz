@@ -28,8 +28,8 @@ class CardsViewHeader: UIView {
         return label
     }()
     
-    let showAllButton: ShowAllButton = {
-        let button = ShowAllButton()
+    let showAllButton: ShowAllBtn = {
+        let button = ShowAllBtn()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.isHidden = true

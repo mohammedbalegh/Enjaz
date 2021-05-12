@@ -17,9 +17,16 @@ class ItemImagePickerPopup: Popup {
 		}
 	}
 	
-	lazy var imageIconOrSticker: RoundBtn = {
-		let button = RoundBtn(image: nil, size: LayoutConstants.screenHeight * 0.11)
+	lazy var imageIcon: RoundBtn = {
+		let button = RoundBtn()
+		button.translatesAutoresizingMaskIntoConstraints = false
+		
+		button.imageView?.contentMode = .scaleAspectFill
+		button.backgroundColor = .accent
 		button.isUserInteractionEnabled = false
+		button.setImage(UIImage(named: "imageIcon"), for: .normal)
+		button.tintColor = .white
+		
 		return button
 	}()
 	
@@ -56,12 +63,12 @@ class ItemImagePickerPopup: Popup {
 		return collectionView
 	}()
 	
-	let popupContainerWidth = LayoutConstants.screenWidth * 0.85
+	let contentViewWidth = LayoutConstants.screenWidth * 0.85
 	let collectionViewSectionHorizontalInset: CGFloat = 10
-	lazy var collectionViewWidth = popupContainerWidth * 0.7 + collectionViewSectionHorizontalInset * 2
+	lazy var collectionViewWidth = contentViewWidth * 0.7 + collectionViewSectionHorizontalInset * 2
 	
 	let imageTitleLabel = NSLocalizedString("Select Image", comment: "")
-		
+	
 	// MARK: State
 	var selectedImageModelIndex: Int?
 	
@@ -78,47 +85,48 @@ class ItemImagePickerPopup: Popup {
 		collectionView.delegate = self
 		collectionView.dataSource = self
 		titleLabel.text = imageTitleLabel
-		imageIconOrSticker.setImage(UIImage(named: "imageIcon"), for: .normal)
     }
     
-    override func setupPopupContainer() {
-		popupContainer.backgroundColor = .secondaryBackground
-		popupContainer.layer.cornerRadius = 20
+    override func setupContentView() {
+		contentView.backgroundColor = .secondaryBackground
+		contentView.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([
-			popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-			popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-			popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
-			popupContainer.widthAnchor.constraint(equalToConstant: popupContainerWidth),
+			contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
+			contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
+			contentView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
+			contentView.widthAnchor.constraint(equalToConstant: contentViewWidth),
 		])
 	}
 		
 	func setupImageIcon() {
-		popupContainer.addSubview(imageIconOrSticker)
+		contentView.addSubview(imageIcon)
 		
 		NSLayoutConstraint.activate([
-			imageIconOrSticker.topAnchor.constraint(equalTo: popupContainer.topAnchor, constant: 10),
-			imageIconOrSticker.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
+			imageIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+			imageIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+			imageIcon.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+			imageIcon.heightAnchor.constraint(equalTo: imageIcon.widthAnchor),
 		])
 	}
 	
 	func setupTitleLabel() {
-		popupContainer.addSubview(titleLabel)
+		contentView.addSubview(titleLabel)
 		
 		NSLayoutConstraint.activate([
-			titleLabel.topAnchor.constraint(equalTo: imageIconOrSticker.bottomAnchor, constant: 10),
-			titleLabel.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
+			titleLabel.topAnchor.constraint(equalTo: imageIcon.bottomAnchor, constant: 10),
+			titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 		])
 	}
 	
 	func setupCollectionView() {
-		popupContainer.addSubview(collectionView)
+		contentView.addSubview(collectionView)
 		
 		NSLayoutConstraint.activate([
 			collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-			collectionView.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
+			collectionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 			collectionView.widthAnchor.constraint(equalToConstant: collectionViewWidth),
-			collectionView.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor),
+			collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 		])
 	}
 }

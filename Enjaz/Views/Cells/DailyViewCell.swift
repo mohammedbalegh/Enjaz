@@ -97,6 +97,7 @@ class DailyViewCell: UICollectionViewCell {
 	var itemAdditionContextMenuActionHandler: ((_ type: ItemType, _ unixTimeStamp: Double?) -> Void)?
 	var dismissPopup: ((_ animated: Bool) -> Void)?
 	var blurOverlay: UIVisualEffectView?
+	var dismissBtn: UIButton?
 		
 	var additionTimeStamp: Double?
 	
@@ -108,6 +109,7 @@ class DailyViewCell: UICollectionViewCell {
 			let targetOpacity: CGFloat = isDraggingDownToDismiss ? 0 : 1
 			UIView.animate(withDuration: 0.35) {
 				self.blurOverlay?.alpha = targetOpacity
+				self.dismissBtn?.alpha = targetOpacity
 			}
 		}
 	}

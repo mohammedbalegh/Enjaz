@@ -162,8 +162,14 @@ class UserProfileScreenVC: UIViewController {
 	}
 	
 	@objc func handleSignOutBtnTap() {
-		Auth.signOut()
-		navigateToLoginScreen()
+		AlertPopup().presentAsConfirmationAlert(
+			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
+			message: NSLocalizedString("All data will be lost", comment: ""),
+			confirmationBtnTitle: NSLocalizedString("Sign Out", comment: "")
+		) {
+			Auth.signOut()
+			self.navigateToLoginScreen()
+		}
 	}
 	
 	func navigateToLoginScreen() {

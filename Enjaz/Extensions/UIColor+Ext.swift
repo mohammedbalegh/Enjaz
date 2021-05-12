@@ -12,7 +12,7 @@ extension UIColor {
 	static let highContrastText = .darkText | .lightText
 	static let accentGradientStart = UIColor(hex: 0x20D4D0) | UIColor(hex: 0x1FC1BD)
 	static let accentGradientEnd = UIColor(hex: 0x12B3B9) | UIColor(hex: 0x0F969B)
-	static let border = UIColor(white: 0.85, alpha: 1) | UIColor(white: 0.85, alpha: 1).inverted
+	static let border = UIColor(white: 0.9, alpha: 1) | UIColor(white: 0.9, alpha: 1).inverted
 	static let indicator = UIColor(hex: 0xFFD400)
 	static let lightShadow = UIColor(hex: 0x979797) | UIColor(hex: 0x979797).inverted
 	

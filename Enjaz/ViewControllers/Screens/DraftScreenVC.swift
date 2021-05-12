@@ -7,8 +7,8 @@ class DraftScreenVC: UIViewController {
     
     // MARK: Properties
     
-    var articleModels: [ArticleModel] = Array(repeating: ArticleModel(title: "", articleTitle: "", image: "", category: "", date: ""), count: 3)
-	var videoModels: [VideoModel] = Array(repeating: VideoModel(title: "", articleTitle: "", video: "", category: "", date: ""), count: 3)
+    var articleModels: [ArticleModel] = Array(repeating: ArticleModel(title: "", article: "", image: "", category: "", date: ""), count: 3)
+	var videoModels: [VideoModel] = Array(repeating: VideoModel(title: "", articleTitle: "", url: "", category: "", date: ""), count: 3)
     var articlesPage = 1
     var videosPage = 1
     
@@ -192,8 +192,8 @@ class DraftScreenVC: UIViewController {
     func playVideo(with url: URL) {
         let player = AVPlayer(url: url)
         let playerVC = AVPlayerViewController()
-        playerVC.delegate = self
         playerVC.player = player
+		
         self.present(playerVC, animated: true) {
             playerVC.player!.play()
         }
@@ -201,7 +201,7 @@ class DraftScreenVC: UIViewController {
     
 }
 
-extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, AVPlayerViewControllerDelegate {
+extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionView == articlesView.cardsCollectionView ? articleModels.count : videoModels.count
     }
@@ -236,14 +236,18 @@ extension DraftScreenVC: UICollectionViewDelegateFlowLayout, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == articlesView.cardsCollectionView {
-            navigateToArticleScreen(articleModel: articleModels[indexPath.row])
-        } else if collectionView == videosView.cardsCollectionView {
-            let cell = collectionView.cellForItem(at: indexPath) as? VideoCardCell
-            guard let url = URL(string: cell!.url) else {
-                return
-            }
-            playVideo(with: url)
+			let articleModel = articleModels[indexPath.row]
+			guard !articleModel.title.isEmpty else { return }
+			
+            navigateToArticleScreen(articleModel: articleModel)
+			return
         }
+		
+		let videoUrl = videoModels[indexPath.row].url
+		
+		if let url = URL(string: videoUrl) {
+			playVideo(with: url)
+		}
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

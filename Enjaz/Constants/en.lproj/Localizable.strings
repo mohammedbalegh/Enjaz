@@ -102,6 +102,7 @@
 "Last Week" = "Last Week";
 "Add %@" = "Add %@";
 "Cannot add a task in the past" = "Cannot add a task in the past";
+"Number of partitions" = "Number of partitions";
 
 // MARK: GoalsScreen
 "My Goals" = "My Goals";
@@ -183,6 +184,8 @@
 "Dark Mode" = "Dark Mode";
 "Logout" = "Logout";
 "Choose a category" = "Choose a category";
+"Are sure you want to sign out?" = "Are sure you want to sign out?";
+"All data will be lost" = "All data will be lost";
 
 // MARK: MyPlanScreenVC
 "Tasks" = "Tasks";
@@ -269,3 +272,4 @@
 "Mark as Completed" = "Mark as Completed";
 "Unpin" = "Unpin";
 "Pin" = "Pin";
+"Sign Out" = "Sign Out";

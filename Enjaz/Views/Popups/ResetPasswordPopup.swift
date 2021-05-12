@@ -39,41 +39,41 @@ class ResetPasswordPopup: Popup {
 		setupBackToLoginBtn()
 	}
 	
-	override func setupPopupContainer() {
-		popupContainer.backgroundColor = .accent
-		popupContainer.layer.cornerRadius = 20
+	override func setupContentView() {
+		contentView.backgroundColor = .accent
+		contentView.layer.cornerRadius = 20
 		
 		NSLayoutConstraint.activate([
-			popupContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-			popupContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-			popupContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
-			popupContainer.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
+			contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
+			contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
+			contentView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+			contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75),
 		])
 	}
 	
 	func setupSuccessImage() {
-		popupContainer.addSubview(successImage)
+		contentView.addSubview(successImage)
 		
 		NSLayoutConstraint.activate([
-			successImage.topAnchor.constraint(equalTo: popupContainer.topAnchor, constant: 20),
-			successImage.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
-			successImage.heightAnchor.constraint(lessThanOrEqualTo: popupContainer.heightAnchor),
-			successImage.widthAnchor.constraint(equalTo: popupContainer.widthAnchor, multiplier: 0.5),
+			successImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+			successImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+			successImage.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor),
+			successImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
 		])
 	}
 	
 	func setupLabel() {
-		popupContainer.addSubview(label)
+		contentView.addSubview(label)
 		
 		NSLayoutConstraint.activate([
 			label.topAnchor.constraint(equalTo: successImage.bottomAnchor, constant: 10),
-			label.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
-			label.widthAnchor.constraint(lessThanOrEqualTo: popupContainer.widthAnchor, multiplier: 0.9),
+			label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+			label.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.9),
 		])
 	}
 	
 	func setupBackToLoginBtn() {
-		popupContainer.addSubview(backToLoginBtn)
+		contentView.addSubview(backToLoginBtn)
 		
 		let buttonHeight: CGFloat = 50
 		
@@ -83,10 +83,10 @@ class ResetPasswordPopup: Popup {
 		backToLoginBtn.layer.borderColor = UIColor.white.cgColor
 		    
 		NSLayoutConstraint.activate([
-			backToLoginBtn.bottomAnchor.constraint(equalTo: popupContainer.bottomAnchor, constant: -40),
-			backToLoginBtn.centerXAnchor.constraint(equalTo: popupContainer.centerXAnchor),
+			backToLoginBtn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
+			backToLoginBtn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 			backToLoginBtn.heightAnchor.constraint(equalToConstant: buttonHeight),
-			backToLoginBtn.widthAnchor.constraint(equalTo: popupContainer.widthAnchor, multiplier: 0.5),
+			backToLoginBtn.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
 		])
 	}
 

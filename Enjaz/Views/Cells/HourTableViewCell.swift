@@ -45,8 +45,10 @@ class HourTableViewCell: UITableViewCell {
 		didSet {
 			if let unixTimeStamp = unixTimeStamp, unixTimeStamp < Date().timeIntervalSince1970 {
 				addGestureRecognizer(longPressAnd3dTouchGestureRecognizer)
+				longPressAnd3dTouchGestureRecognizer.isEnabled = true
 			} else {
 				removeGestureRecognizer(longPressAnd3dTouchGestureRecognizer)
+				longPressAnd3dTouchGestureRecognizer.isEnabled = false
 			}
 		}
 	}

@@ -195,7 +195,7 @@ class MonthItemsScreenVC: MyPlanChildVC {
     func updateItemModels() {
         let (firstDayUnixTimeStamp, lastDayUnixTimeStamp) = DateAndTimeTools.getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier: Calendar.current.identifier)
         
-		currentMonthItems = RealmManager.retrieveItems(withFilter: "date >= \(firstDayUnixTimeStamp) AND date <= \(lastDayUnixTimeStamp)").filter { $0.type == itemsType.id }
+		currentMonthItems = RealmManager.retrieveItems(withFilter: "date >= \(firstDayUnixTimeStamp) AND date <= \(lastDayUnixTimeStamp)").filter { $0.type_id == itemsType.id }
 		
 		let upcomingCurrentMonthItems = currentMonthItems.filter { !$0.is_completed }
                 

@@ -8,15 +8,7 @@ struct NetworkingManager {
     enum EncodingError: Error {
         case invalidDataFormat
     }
-    
-    enum CallType {
-        case video
-        case article
-        case bank
-        case aboutUs
-        case privacyPolicy
-    }
-    
+	
     static let cache = NSCache<NSString, NSString>()
     
     static func signUp(user: UserModel, password: String, completionHandler: @escaping (_ token: String?, _ user: [String: Any]?, _ error: Error?) -> Void) {
@@ -336,19 +328,14 @@ struct NetworkingManager {
         }
     }
     
-    static func getPrivacyPolicyAndAboutUs(of type: CallType, completionHandler: @escaping (PrivacyPolicyAndAboutUsModel?, Error?) -> Void) {
-        
-        var urlString = ""
-        if type == .aboutUs {urlString = NetworkingUrls.apiAboutUs}
-        else {urlString = NetworkingUrls.apiPrivacyPolicy}
-        
-        let url = URL(string: urlString)
+    static func retrievePrivacyPolicy(completionHandler: @escaping (PrivacyPolicyAndAboutUsModel?, Error?) -> Void) {
+		let url = URL(string: NetworkingUrls.apiPrivacyPolicy)
         
         let request = HttpRequest(url: url, method: .get)
         
         request.send { data, response, error in
             
-            if let _ = error {
+            if let error = error {
                 completionHandler(nil,  error)
                 return
             }
@@ -371,9 +358,9 @@ struct NetworkingManager {
                 let privacyPolicyAndAboutUsModel = try encodeBlog(dataAsString, type: [PrivacyPolicyAndAboutUsModel].self)
                 completionHandler(privacyPolicyAndAboutUsModel?.first, nil)
             } catch {
-                print("invalid data format")
                 completionHandler(nil, EncodingError.invalidDataFormat)
             }
+			
         }
     }
     

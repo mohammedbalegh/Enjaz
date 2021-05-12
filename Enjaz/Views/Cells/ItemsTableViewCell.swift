@@ -12,7 +12,7 @@ class ItemsTableViewCell: UITableViewCell {
                 itemImage.image = nil
             }
             
-            let itemCategory = RealmManager.retrieveItemCategoryById(itemModel.category)
+            let itemCategory = RealmManager.retrieveItemCategoryById(itemModel.category_id)
             categoryLabel.text = itemCategory?.localized_name
             
 			isPinned = itemModel.is_pinned

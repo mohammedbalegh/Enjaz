@@ -148,7 +148,7 @@ class CalendarScreenVC: CalendarViewController {
 		
 		if let unixTimeStamp = unixTimeStamp {
 			let readableDate = DateAndTimeTools.getReadableDate(from: Date(timeIntervalSince1970: unixTimeStamp), withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
-			addItemScreenVC.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [unixTimeStamp], readableDate: readableDate)
+			addItemScreenVC.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[unixTimeStamp]], readableDate: readableDate)
 		}
 		
 		navigationController?.present(addItemScreenVC, animated: true)

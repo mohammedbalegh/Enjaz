@@ -76,7 +76,7 @@ struct RealmManager {
 	}
 	
 	private static func completeSubsequentItemsIfIncluded(_ item: ItemModel, isCompleted: Bool) {
-		if item.isRepeated {
+		if item.is_repeated {
 			let subsequentItems = retrieveItems(subsequentTo: item)
 			subsequentItems.forEach { $0.is_completed = isCompleted }
 		}
@@ -90,7 +90,7 @@ struct RealmManager {
 	}
 	
 	private static func pinSubsequentItemsIfIncluded(_ item: ItemModel, isPinned: Bool) {
-		if item.isRepeated {
+		if item.is_repeated {
 			let subsequentItems = retrieveItems(subsequentTo: item)
 			subsequentItems.forEach { $0.is_pinned = isPinned }
 		}
@@ -114,7 +114,7 @@ struct RealmManager {
 		deleteSubsequentItemsIfIncluded(item)
 		deleteAssociatedImageIfNeeded(item)
 		
-		realm.delete(item)
+		realm.delete(realm.object(ofType: ItemModel.self, forPrimaryKey: item.id)!)
 	}
 		
 	private static func deletePendingNotificationRequest(_ item: ItemModel) {
@@ -124,7 +124,7 @@ struct RealmManager {
 	}
 	
 	private static func deleteSubsequentItemsIfIncluded(_ item: ItemModel) {
-		if item.isRepeated {
+		if item.is_repeated {
 			let subsequentItems = retrieveItems(subsequentTo: item)
 			subsequentItems.forEach { deleteItemInsideWritingTransaction($0) }
 		}
