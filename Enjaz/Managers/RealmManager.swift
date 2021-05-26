@@ -60,7 +60,7 @@ struct RealmManager {
     }
 	
 	static func retrieveItems(subsequentTo item: ItemModel) -> [ItemModel] {
-		return retrieveItems(withFilter: "originalItemId == \(item.id)")
+		return retrieveItems(withFilter: "original_item_id == \(item.id)")
 	}
     
     static func retrieveItemsBySearch(contains filter: String) -> [ItemModel] {

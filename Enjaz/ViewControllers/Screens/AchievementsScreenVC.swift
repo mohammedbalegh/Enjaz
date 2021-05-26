@@ -86,7 +86,7 @@ class AchievementsScreenVC: MyPlanChildVC {
     }
     
     func updateItemModels() {
-        achievementModels = RealmManager.retrieveItems(withFilter: "type == \(ItemType.achievement.id)")
+        achievementModels = RealmManager.retrieveItems(withFilter: "type_id == \(ItemType.achievement.id)")
     }
     
 }

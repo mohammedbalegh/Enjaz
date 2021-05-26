@@ -23,7 +23,7 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 	func updateScreen() {
 		guard let category = category else { return }
 		
-		let allOriginalCategoryGoals = RealmManager.retrieveItems(withFilter: "type == \(ItemType.goal.id) AND category == \(category.id)").filterOutNonOriginalItems()
+		let allOriginalCategoryGoals = RealmManager.retrieveItems(withFilter: "type_id == \(ItemType.goal.id) AND category_id == \(category.id)").filterOutNonOriginalItems()
 		
 		completedGoals = allOriginalCategoryGoals.filter { $0.is_completed }
 		upcomingGoals = allOriginalCategoryGoals.filter { !$0.is_completed && $0.date > Date().timeIntervalSince1970 }
