@@ -151,6 +151,7 @@ struct RealmManager {
     }
     
     static func deleteItemCategory(_ category: ItemCategoryModel) {
+		deleteItems(withFilter: "category_id == \(category.id)")
 		realm.beginWrite()
 		realm.delete(category)
 		try? realm.commitWrite()
