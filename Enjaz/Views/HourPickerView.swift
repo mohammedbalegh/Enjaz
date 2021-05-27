@@ -21,7 +21,8 @@ class HourPickerView: UIPickerView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         delegate = self
-        dataSource = self        
+        dataSource = self
+        
     }
     
     required init?(coder: NSCoder) {

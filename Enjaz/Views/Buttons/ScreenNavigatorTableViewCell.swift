@@ -87,7 +87,7 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
         contentView.addSubview(iconImageView)
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
                 
-        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.contentMode = .scaleAspectFill
         
         NSLayoutConstraint.activate([
             iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -95,6 +95,12 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
             iconImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8),
             iconImageView.widthAnchor.constraint(equalTo: iconImageView.heightAnchor),
         ])
+        
+        iconImageView.layoutIfNeeded()
+        
+        iconImageView.layer.cornerRadius = contentView.frame.height / 1.4
+        iconImageView.layer.masksToBounds = false
+        iconImageView.clipsToBounds = true
     }
 	
 	func setupArrowIcon() {
