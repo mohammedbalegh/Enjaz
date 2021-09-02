@@ -87,13 +87,13 @@ class Popup: UIView {
         NSLayoutConstraint.activate([
             contentView.centerXAnchor.constraint(equalTo: centerXAnchor),
             contentView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.15),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.2),
             contentView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.78),
         ])
     }
 	
 	@objc func handleOverlayAndDismissBtnTab() {
-		dismiss(animated: true)
+//		dismiss(animated: true)
 	}
 	
 	// MARK: Tools

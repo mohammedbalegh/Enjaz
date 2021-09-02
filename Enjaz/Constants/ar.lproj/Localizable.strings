@@ -133,6 +133,11 @@
 "life vision answers the \"why\" and \"where\" , where will your feature be ?, what it will be like, what will you do in 5 or 10 years " = "الرؤية اتجيب عن سؤال \"اين\" و \" لماذا \" ؟أين سيكون المستقبل؟ كيف سيكون ؟ و ماذا ستقرم بعر خمس او عشر سنوات";
 "Write your life vision" = "أكتب رؤيتك في الحياة";
 
+//MARK: LifeTreeVC
+"How do you want to plant the tree?" = "كيف تريد أن تسقي الشجرة؟";
+"why are you watering the tree?" = "سبب روي الشجرة";
+"Water" = "اروي";
+
 //MARK: AddNote
 "Add Note" = "إضافة مفكرة";
 "Note title" = "عنوان المفكرة";
@@ -169,6 +174,7 @@
 "Delete %@" = "حذف ال%@";
 
 // MARK: SideMenu Buttons
+"Life Tree" =  "شجرة الحياة";
 "Draft" = "المدونة";
 "Note" = "المفكرة";
 "Goals Rating" = "تقييمات أهدافي";

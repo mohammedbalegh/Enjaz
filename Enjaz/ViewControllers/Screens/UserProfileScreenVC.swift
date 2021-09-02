@@ -165,7 +165,7 @@ class UserProfileScreenVC: UIViewController {
 		AlertPopup().presentAsConfirmationAlert(
 			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
 			message: NSLocalizedString("All data will be lost", comment: ""),
-			confirmationBtnTitle: NSLocalizedString("Sign Out", comment: "")
+            confirmationBtnTitle: NSLocalizedString("Sign Out", comment: ""), confirmationBtnStyle: .destructive
 		) {
 			Auth.signOut()
 			self.navigateToLoginScreen()

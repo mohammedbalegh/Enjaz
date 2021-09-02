@@ -25,6 +25,8 @@ class SideMenuVC: UIViewController {
         return label
     }()
     
+    let lifeTreeBtn = SideMenuBtn(label: NSLocalizedString("Life Tree", comment: ""), image: UIImage(named: "lifeTreeSideIcon"))
+    
     let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
     let personalAspectsBtn = SideMenuBtn(label: NSLocalizedString("Personal Aspects", comment: ""), image: UIImage(named: "noteIcon"))
     let userProfileBtn = SideMenuBtn(label: NSLocalizedString("Profile", comment: ""), image: UIImage(named: "userProfileIcon"))
@@ -33,7 +35,7 @@ class SideMenuVC: UIViewController {
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -58,6 +60,7 @@ class SideMenuVC: UIViewController {
         
         setupSubviews()
         
+        lifeTreeBtn.addTarget(self, action: #selector(handleLifeTreeBtnTap), for: .touchUpInside)
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
         personalAspectsBtn.addTarget(self, action: #selector(handlePersonalAspectsBtn), for: .touchUpInside)
         aboutAppBtn.addTarget(self, action: #selector(handleAboutAppBtnTap), for: .touchUpInside)
@@ -139,6 +142,10 @@ class SideMenuVC: UIViewController {
         navigationController?.pushViewController(UserProfileScreenVC(), animated: true)
     }
     
+    @objc func handleLifeTreeBtnTap() {
+        navigationController?.pushViewController(LifeTreeVC(), animated: true)
+    }
+    
     @objc func handleDraftBtnTap() {
         navigationController?.pushViewController(DraftScreenVC(), animated: true)
     }
@@ -155,7 +162,7 @@ class SideMenuVC: UIViewController {
 		AlertPopup().presentAsConfirmationAlert(
 			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
 			message: NSLocalizedString("All data will be lost", comment: ""),
-			confirmationBtnTitle: NSLocalizedString("Sign Out", comment: "")
+            confirmationBtnTitle: NSLocalizedString("Sign Out", comment: ""), confirmationBtnStyle: .destructive
 		) {
 			Auth.signOut()
 			self.navigateToLoginScreen()

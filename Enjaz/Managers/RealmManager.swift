@@ -6,6 +6,10 @@ struct RealmManager {
     
     static let realm = try! Realm()
     
+    static var treesCount: Int {
+        return  retrieveTrees().count
+    }
+    
     static var itemCategoriesCount: Int {
         return retrieveItemCategories().count
     }
@@ -37,6 +41,38 @@ struct RealmManager {
 	
 	
 	// MARK: ItemModel
+    static func retrieveTreesById(_ id: Int) -> TreeModel? {
+        let item = realm.object(ofType: TreeModel.self, forPrimaryKey: id)
+        return item
+    }
+    
+    static func retrieveTrees() -> [TreeModel] {
+        let trees: [TreeModel] = Array(realm.objects(TreeModel.self).sorted(byKeyPath: "id", ascending: false))
+        return trees
+    }
+    
+    static func treeStages() -> List<TreeStageModel>? {
+        let stages = retrieveTrees().first?.stages
+        return stages
+    }
+    
+    static func treeStagesById(_ id: Int) -> List<TreeStageModel>? {
+        let stages = retrieveTreesById(id)?.stages
+        return stages
+    }
+    
+    static func waterTree(_ stage: TreeStageModel) {
+        let tree = retrieveTrees().first
+        try! realm.write({
+            tree?.stages.append(stage)
+        })
+    }
+    
+    static func saveTree(_ tree: TreeModel) {
+        realm.beginWrite()
+        realm.add(tree, update: .all)
+        try? realm.commitWrite()
+    }
 	
 	static func saveItem(_ item: ItemModel) {
 		realm.beginWrite()

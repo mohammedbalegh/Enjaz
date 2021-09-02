@@ -116,8 +116,8 @@ class AlertPopup: Popup {
 			actionsRowHeightConstraint,
 		])
 	}
-    	
-	func present(withImage image: UIImage? = nil, title: String, message: String, actions: [AlertPopupAction] = []) {
+    
+	func present(withImage image: UIImage? = nil, title: String, message: String?, actions: [AlertPopupAction] = []) {
         imageView.image = image
         titleLabel.text = title
         messageLabel.text = message
@@ -138,12 +138,12 @@ class AlertPopup: Popup {
         presentAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
     }
 	
-	func presentAsConfirmationAlert(title: String, message: String, confirmationBtnTitle: String, confirmationHandler: @escaping () -> Void) {
+    func presentAsConfirmationAlert(title: String, message: String, confirmationBtnTitle: String, confirmationBtnStyle: AlertPopupAction.Style, confirmationHandler: @escaping () -> Void) {
 		let cancelAction = AlertPopupAction(title: NSLocalizedString("Cancel", comment: ""), style: .normal) {
 			self.dismiss(animated: true)
 		}
 		
-		let signOutAction = AlertPopupAction(title: confirmationBtnTitle, style: .destructive, handler: confirmationHandler)
+		let signOutAction = AlertPopupAction(title: confirmationBtnTitle, style: confirmationBtnStyle, handler: confirmationHandler)
 		
 		present(title: title, message: message, actions: [cancelAction, signOutAction])
 	}

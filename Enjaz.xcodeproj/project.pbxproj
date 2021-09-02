@@ -39,6 +39,13 @@
 		419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419120F52590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift */; };
 		419121192592AF3F00CB7BF9 /* HourPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419121182592AF3F00CB7BF9 /* HourPickerView.swift */; };
 		419121232593023000CB7BF9 /* ItemCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419121222593023000CB7BF9 /* ItemCardView.swift */; };
+		41A112E326DB1F18005C693E /* LifeTreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112E226DB1F18005C693E /* LifeTreeVC.swift */; };
+		41A112E526DB26DA005C693E /* TreeStageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112E426DB26DA005C693E /* TreeStageModel.swift */; };
+		41A112E726DB2727005C693E /* TreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112E626DB2727005C693E /* TreeModel.swift */; };
+		41A112E926DB2D93005C693E /* TreeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112E826DB2D93005C693E /* TreeCollectionViewCell.swift */; };
+		41A112EB26DC85DB005C693E /* WateringTreePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112EA26DC85DB005C693E /* WateringTreePopup.swift */; };
+		41A112ED26DF2A6D005C693E /* TreeAchievementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112EC26DF2A6D005C693E /* TreeAchievementsVC.swift */; };
+		41A112EF26DF2C87005C693E /* TreeAchievementsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A112EE26DF2C87005C693E /* TreeAchievementsCell.swift */; };
 		41A9B2EC26366B5A00366514 /* VideosTopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B2EB26366B5A00366514 /* VideosTopModel.swift */; };
 		41A9B2F4263783C500366514 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B2F3263783C500366514 /* ArticleModel.swift */; };
 		41A9B30C263A24DA00366514 /* ItemCardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B30B263A24DA00366514 /* ItemCardBodyView.swift */; };
@@ -293,6 +300,13 @@
 		419120F52590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionTypeScreenCardDelegate.swift; sourceTree = "<group>"; };
 		419121182592AF3F00CB7BF9 /* HourPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourPickerView.swift; sourceTree = "<group>"; };
 		419121222593023000CB7BF9 /* ItemCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCardView.swift; sourceTree = "<group>"; };
+		41A112E226DB1F18005C693E /* LifeTreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeTreeVC.swift; sourceTree = "<group>"; };
+		41A112E426DB26DA005C693E /* TreeStageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeStageModel.swift; sourceTree = "<group>"; };
+		41A112E626DB2727005C693E /* TreeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeModel.swift; sourceTree = "<group>"; };
+		41A112E826DB2D93005C693E /* TreeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeCollectionViewCell.swift; sourceTree = "<group>"; };
+		41A112EA26DC85DB005C693E /* WateringTreePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTreePopup.swift; sourceTree = "<group>"; };
+		41A112EC26DF2A6D005C693E /* TreeAchievementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAchievementsVC.swift; sourceTree = "<group>"; };
+		41A112EE26DF2C87005C693E /* TreeAchievementsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAchievementsCell.swift; sourceTree = "<group>"; };
 		41A9B2EB26366B5A00366514 /* VideosTopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosTopModel.swift; sourceTree = "<group>"; };
 		41A9B2F3263783C500366514 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		41A9B30B263A24DA00366514 /* ItemCardBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCardBodyView.swift; sourceTree = "<group>"; };
@@ -721,6 +735,8 @@
 				BCD82D9F263E7725006F7575 /* ItemsScreenVC.swift */,
 				BCD82DA4263E772F006F7575 /* UpcomingGoalsScreenVC.swift */,
 				BCD82DBB263E79A4006F7575 /* NotificationsScreenVC.swift */,
+				41A112E226DB1F18005C693E /* LifeTreeVC.swift */,
+				41A112EC26DF2A6D005C693E /* TreeAchievementsVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -840,6 +856,7 @@
 				BC391149258E773E000E6273 /* ItemCardPopup.swift */,
 				BC0AA7172594D3B9008AF315 /* AlertPopup.swift */,
 				BC8846B1261A38C7005C6AAF /* DailyViewPopup.swift */,
+				41A112EA26DC85DB005C693E /* WateringTreePopup.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -948,6 +965,8 @@
 				418E42CA2633B6050084A6BB /* GoalSuggestionsBankModel.swift */,
 				41A9B2EB26366B5A00366514 /* VideosTopModel.swift */,
 				41A9B2F3263783C500366514 /* ArticleModel.swift */,
+				41A112E426DB26DA005C693E /* TreeStageModel.swift */,
+				41A112E626DB2727005C693E /* TreeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -975,6 +994,8 @@
 				BC8846B6261A432E005C6AAF /* HourTableViewCell.swift */,
 				41A9B325263A277C00366514 /* ItemsTableViewCell.swift */,
 				BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */,
+				41A112E826DB2D93005C693E /* TreeCollectionViewCell.swift */,
+				41A112EE26DF2C87005C693E /* TreeAchievementsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1234,6 +1255,7 @@
 				BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */,
 				BCABE44C260F49D000E790F2 /* ItemCategoryModel.swift in Sources */,
 				BC93D5B92614D1D7005DE3AC /* PrivacyPolicyScreenVC.swift in Sources */,
+				41A112E526DB26DA005C693E /* TreeStageModel.swift in Sources */,
 				BCD4497726177707006FC8B7 /* SwitchView.swift in Sources */,
 				BC8F2F5725A81CD600EF7EA4 /* MultipleCellSelectionCollectionView.swift in Sources */,
 				BCF2F7782620FAC5006275AA /* ItemImagePickerImageSourceCellModel.swift in Sources */,
@@ -1289,6 +1311,7 @@
 				BCDE2E9D2587AD7E0040345E /* CalendarScreenVC.swift in Sources */,
 				417EE8D925A13262002F71E5 /* MajorGoalsModel.swift in Sources */,
 				BC2018012603690C0060EFAF /* DraftMetaDataContainer.swift in Sources */,
+				41A112E926DB2D93005C693E /* TreeCollectionViewCell.swift in Sources */,
 				41A9B2EC26366B5A00366514 /* VideosTopModel.swift in Sources */,
 				BC391166258E90A5000E6273 /* CalendarView.swift in Sources */,
 				BC4780A1259629BE00D21060 /* Actions.swift in Sources */,
@@ -1316,6 +1339,7 @@
 				BCACC4912614D9D3005F7F59 /* AwardsAndMedalsScreenVC.swift in Sources */,
 				BCF2F7882620FE00006275AA /* imagePickerPopupDelegate.swift in Sources */,
 				BC54008F2579878C009DC69B /* LayoutTools.swift in Sources */,
+				41A112EB26DC85DB005C693E /* WateringTreePopup.swift in Sources */,
 				BCD4495726169606006FC8B7 /* ShowAllIVideosScreenVC.swift in Sources */,
 				BCB98CED2588275200B64DC9 /* InputFieldContainerTextField.swift in Sources */,
 				BC32E8962590EF03008DF8B7 /* ItemType.swift in Sources */,
@@ -1329,6 +1353,7 @@
 				BCF2F7442620D878006275AA /* ItemImageModel.swift in Sources */,
 				BC39116E258E95A5000E6273 /* ShowAllBtn.swift in Sources */,
 				BC7EFC0A25863CBB00F35312 /* ResetPasswordPopup.swift in Sources */,
+				41A112E726DB2727005C693E /* TreeModel.swift in Sources */,
 				419121192592AF3F00CB7BF9 /* HourPickerView.swift in Sources */,
 				BCB02EEE260A4B8E000FA158 /* WeekDayCellModel.swift in Sources */,
 				BC026C3D25900B23008222BD /* PopoverTableViewCellModel.swift in Sources */,
@@ -1352,6 +1377,7 @@
 				BCB070DE25931FE4005346AE /* OneTimeCodeTextField.swift in Sources */,
 				BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */,
 				BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */,
+				41A112EF26DF2C87005C693E /* TreeAchievementsCell.swift in Sources */,
 				BC67971125A914A3002B9A71 /* CalendarViewDelegate.swift in Sources */,
 				BC4646DE2587EBCF00218D7A /* RootTabBarController.swift in Sources */,
 				BC32E8912590EE8C008DF8B7 /* DefaultItemCategories.swift in Sources */,
@@ -1408,6 +1434,7 @@
 				4141505D25A589FA00DC369A /* MenuBarNavigationVC.swift in Sources */,
 				41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */,
 				BC7EFC052586354E00F35312 /* Popup.swift in Sources */,
+				41A112ED26DF2A6D005C693E /* TreeAchievementsVC.swift in Sources */,
 				BC541A572610DF3C00341BDE /* PersonalAspectsScreenVC.swift in Sources */,
 				41798CC826188B2B00DF5ECF /* AchievementsCell.swift in Sources */,
 				41A9B311263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift in Sources */,
@@ -1417,6 +1444,7 @@
 				BC80D2E6258EAEDE00E4F7B9 /* MonthDayCellModel.swift in Sources */,
 				BC8846BF261A7611005C6AAF /* DailyViewHourModel.swift in Sources */,
 				BCBEE8512587C91100D8DE0A /* UsernameTextField.swift in Sources */,
+				41A112E326DB1F18005C693E /* LifeTreeVC.swift in Sources */,
 				BC7D6C7325A2448B00369FC5 /* OAuthBtnsHorizontalStack.swift in Sources */,
 				BCD82DBC263E79A4006F7575 /* NotificationsScreenVC.swift in Sources */,
 				417EE873259C1AEA002F71E5 /* GoalsBankScreenVC.swift in Sources */,

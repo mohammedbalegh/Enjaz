@@ -133,6 +133,11 @@
 "life vision answers the \"why\" and \"where\" , where will your feature be ?, what it will be like, what will you do in 5 or 10 years " = "life vision answers the \"why\" and \"where\" , where will your feature be ?, what it will be like, what will you do in 5 or 10 years ";
 "Write your life vision" = "Write your life vision";
 
+//MARK: LifeTreeVC
+"How do you want to plant the tree?" = "How do you want to plant the tree?";
+"why are you watering the tree?" = "why are you watering the tree?";
+"Water" = "Water";
+
 //MARK: AddNote
 "Add Note" = "Add Note";
 "Note title" = "Note title";
@@ -169,6 +174,7 @@
 "Delete %@" = "Delete %@";
 
 // MARK: SideMenu
+"Life Tree" = "Life Tree";
 "Draft" = "Draft";
 "Note" = "Note";
 "Goals Rating" = "Goals Rating";
