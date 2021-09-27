@@ -214,6 +214,41 @@ struct NetworkingManager {
         
     }
     
+    static func retrieveMedals() {
+        
+        let url = URL(string: NetworkingUrls.apiMedals)
+        
+        let request = HttpRequest(url: url, method: .get)
+        
+        request.send { data, response, error in
+            
+            if let _ = error {
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
+            
+            do {
+                let medals = try encodeBlog(dataAsString, type: [MedalModel].self)
+                
+                RealmManager.saveItemMedal(medals!)
+            } catch {
+                return
+            }
+        }
+        
+    }
+    
     static func retrieveArticles(in page: Int, completionHandler: @escaping ([ArticleModel]?, Error?) -> Void) {
         
         let url = URL(string: NetworkingUrls.apiBlogArticlesUrl + String(page))

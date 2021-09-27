@@ -13,6 +13,8 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 	}()
 	
     let scrollView = UIScrollView()
+    
+    let itemInfo: [Int?: Any] = [0:0]
 	
 	lazy var setImageBtn: RoundBtn = {
 		let button = RoundBtn()

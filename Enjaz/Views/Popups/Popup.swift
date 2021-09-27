@@ -93,7 +93,7 @@ class Popup: UIView {
     }
 	
 	@objc func handleOverlayAndDismissBtnTab() {
-//		dismiss(animated: true)
+		dismiss(animated: true)
 	}
 	
 	// MARK: Tools

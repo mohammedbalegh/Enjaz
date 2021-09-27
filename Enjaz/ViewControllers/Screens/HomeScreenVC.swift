@@ -123,6 +123,8 @@ class HomeScreenVC: UIViewController {
         view.backgroundColor = .background
         
         setupSubviews()
+        
+        NetworkingManager.retrieveMedals()
     }
     
     override func viewWillAppear(_ animated: Bool) {

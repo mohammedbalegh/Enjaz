@@ -52,6 +52,7 @@
 		41A9B311263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B310263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift */; };
 		41A9B31C263A269C00366514 /* GoalsBankTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B31B263A269C00366514 /* GoalsBankTableView.swift */; };
 		41A9B326263A277C00366514 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B325263A277C00366514 /* ItemsTableViewCell.swift */; };
+		41AA417F26EAE46D00C3302F /* MedalsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA417E26EAE46D00C3302F /* MedalsManager.swift */; };
 		41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646A9257397BA000327D5 /* AppDelegate.swift */; };
 		41C646AC257397BA000327D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646AB257397BA000327D5 /* SceneDelegate.swift */; };
 		41C646B3257397BC000327D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41C646B2257397BC000327D5 /* Assets.xcassets */; };
@@ -313,6 +314,7 @@
 		41A9B310263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorTableViewHeaderCellModel.swift; sourceTree = "<group>"; };
 		41A9B31B263A269C00366514 /* GoalsBankTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsBankTableView.swift; sourceTree = "<group>"; };
 		41A9B325263A277C00366514 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
+		41AA417E26EAE46D00C3302F /* MedalsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalsManager.swift; sourceTree = "<group>"; };
 		41C646A6257397BA000327D5 /* Enjaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enjaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C646A9257397BA000327D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41C646AB257397BA000327D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				BC32E8A0259239B8008DF8B7 /* NetworkingManager.swift */,
 				BC863E26259CAE7C006B7F68 /* UserDefaultsManager.swift */,
 				BCA2C72D2637F4B100ADED8C /* NotificationsManager.swift */,
+				41AA417E26EAE46D00C3302F /* MedalsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1391,6 +1394,7 @@
 				419120F62590C6F100CB7BF9 /* AdditionTypeScreenCardDelegate.swift in Sources */,
 				41798CCD2618C9D700DF5ECF /* AchievementsCardView.swift in Sources */,
 				41798C902615EA1100DF5ECF /* MedalModel.swift in Sources */,
+				41AA417F26EAE46D00C3302F /* MedalsManager.swift in Sources */,
 				BCEBF48E259F76690001EB40 /* MyGoalsScreenVC.swift in Sources */,
 				BCC429D625A2DCD900803CE9 /* InputField.swift in Sources */,
 				BC8F2F9025A9049600EF7EA4 /* ModelsConstants.swift in Sources */,

@@ -10,4 +10,5 @@ struct NetworkingUrls {
     static let apiGoalsSuggestionsBankUrl = apiBaseUrl + "/bank"
     static let apiAboutUs = apiBaseUrl + "/about"
     static let apiPrivacyPolicy = apiBaseUrl + "/privacy"
+    static let apiMedals = apiBaseUrl + "/medals"
 }
