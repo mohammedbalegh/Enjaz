@@ -2,8 +2,6 @@ import UIKit
 
 class SignupScreenVC: AuthScreenVC {
     
-    var previousScreenIsLoginScreen = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,15 +67,12 @@ class SignupScreenVC: AuthScreenVC {
     }
     
     func navigateToLoginVC() {
-        if previousScreenIsLoginScreen {
+        if previousViewController is LoginScreenVC {
             navigationController?.popViewController(animated: true)
             return
         }
         
-        let loginScreen = LoginScreenVC()
-        loginScreen.previousScreenIsSignupScreen = true
-        
-        navigationController?.pushViewController(loginScreen, animated: true)
+        navigationController?.pushViewController(LoginScreenVC(), animated: true)
     }
     
     func navigateToEmailVerificationScreen() {

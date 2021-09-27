@@ -66,7 +66,6 @@
 		BC026C33258FFB8B008222BD /* PopoverTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC026C32258FFB8B008222BD /* PopoverTableVC.swift */; };
 		BC026C3825900138008222BD /* PopoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC026C3725900138008222BD /* PopoverTableViewCell.swift */; };
 		BC026C3D25900B23008222BD /* PopoverTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC026C3C25900B23008222BD /* PopoverTableViewCellModel.swift */; };
-		BC026C42259021B2008222BD /* DateAndTimeTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC026C41259021B2008222BD /* DateAndTimeTools.swift */; };
 		BC06A7F4258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC06A7F3258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift */; };
 		BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0A87CF2575836F0045A54E /* AppLogo.swift */; };
 		BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0AA7172594D3B9008AF315 /* AlertPopup.swift */; };
@@ -83,7 +82,6 @@
 		BC32E8962590EF03008DF8B7 /* ItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC32E8952590EF03008DF8B7 /* ItemType.swift */; };
 		BC32E8A1259239B8008DF8B7 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC32E8A0259239B8008DF8B7 /* NetworkingManager.swift */; };
 		BC32E8A625923D6D008DF8B7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC32E8A525923D6D008DF8B7 /* UserModel.swift */; };
-		BC36DBD125BC356600F57ED2 /* CardModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC36DBD025BC356600F57ED2 /* CardModalVC.swift */; };
 		BC389450258521EC0039EE35 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38944F258521EC0039EE35 /* UIViewController+Ext.swift */; };
 		BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3894542586077F0039EE35 /* PasswordResetScreenVC.swift */; };
 		BC391145258E771A000E6273 /* ItemCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC391144258E771A000E6273 /* ItemCardCell.swift */; };
@@ -113,7 +111,6 @@
 		BC54008F2579878C009DC69B /* LayoutTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC54008E2579878C009DC69B /* LayoutTools.swift */; };
 		BC5400A425799D1D009DC69B /* PrimaryBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5400A325799D1D009DC69B /* PrimaryBtn.swift */; };
 		BC541A572610DF3C00341BDE /* PersonalAspectsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC541A562610DF3B00341BDE /* PersonalAspectsScreenVC.swift */; };
-		BC556DD5259934C4000B2B0C /* ModalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC556DD4259934C3000B2B0C /* ModalHeader.swift */; };
 		BC5CBB7725B9CA820028FFC1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC5CBB7925B9CA820028FFC1 /* Localizable.strings */; };
 		BC67971125A914A3002B9A71 /* CalendarViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971025A914A2002B9A71 /* CalendarViewDelegate.swift */; };
 		BC67971625AAB371002B9A71 /* UIDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC67971525AAB370002B9A71 /* UIDirection.swift */; };
@@ -214,6 +211,7 @@
 		BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */; };
 		BCDCF79E25B5968400FA94DE /* EditableTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDCF79D25B5968400FA94DE /* EditableTextViewDelegate.swift */; };
 		BCDD83FA2590B1EE0026E113 /* AddItemScreenModalDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD83F92590B1EE0026E113 /* AddItemScreenModalDelegate.swift */; };
+		BCDD9140272E6D2F004F7FCB /* UserNameAndEmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD913F272E6D2F004F7FCB /* UserNameAndEmailTextField.swift */; };
 		BCDE2E992587AD770040345E /* HomeScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EC22586110600A86330 /* HomeScreenVC.swift */; };
 		BCDE2E9D2587AD7E0040345E /* CalendarScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328ED82586258B00A86330 /* CalendarScreenVC.swift */; };
 		BCDE2EA12587AD820040345E /* GoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EDD258628E900A86330 /* GoalsScreenVC.swift */; };
@@ -231,13 +229,16 @@
 		BCEBF4BA259FA5E40001EB40 /* TableViewCustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeaderCell.swift */; };
 		BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */; };
 		BCEC42A9259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */; };
+		BCF0492126FA4B1F00CE4CC8 /* ItemRepetitionScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0492026FA4B1E00CE4CC8 /* ItemRepetitionScreenVC.swift */; };
+		BCF0492626FA780B00CE4CC8 /* ModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0492526FA780B00CE4CC8 /* ModalVC.swift */; };
+		BCF0492E26FA8AE800CE4CC8 /* ItemRepetitionOptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0492D26FA8AE800CE4CC8 /* ItemRepetitionOptionsTableViewCell.swift */; };
+		BCF0494526FB77F000CE4CC8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF0494426FB77F000CE4CC8 /* Date+Ext.swift */; };
 		BCF2F73F2620CE09006275AA /* RoundImageViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F73E2620CE09006275AA /* RoundImageViewContainer.swift */; };
 		BCF2F7442620D878006275AA /* ItemImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F7432620D878006275AA /* ItemImageModel.swift */; };
 		BCF2F7492620D968006275AA /* DefaultItemImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F7482620D968006275AA /* DefaultItemImages.swift */; };
 		BCF2F7782620FAC5006275AA /* ItemImagePickerImageSourceCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F7772620FAC4006275AA /* ItemImagePickerImageSourceCellModel.swift */; };
 		BCF2F7802620FAFA006275AA /* ItemImagePickerImageSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F77F2620FAFA006275AA /* ItemImagePickerImageSourceCell.swift */; };
 		BCF2F7882620FE00006275AA /* imagePickerPopupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F7872620FE00006275AA /* imagePickerPopupDelegate.swift */; };
-		BCF2F79026214934006275AA /* DynamicImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2F78F26214934006275AA /* DynamicImage.swift */; };
 		E298AC267A0982FAD37AF7AE /* Pods_Enjaz_EnjazUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -334,7 +335,6 @@
 		BC026C32258FFB8B008222BD /* PopoverTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverTableVC.swift; sourceTree = "<group>"; };
 		BC026C3725900138008222BD /* PopoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverTableViewCell.swift; sourceTree = "<group>"; };
 		BC026C3C25900B23008222BD /* PopoverTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverTableViewCellModel.swift; sourceTree = "<group>"; };
-		BC026C41259021B2008222BD /* DateAndTimeTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeTools.swift; sourceTree = "<group>"; };
 		BC06A7F3258FEAD5008BF4BA /* CalendarPopoverBtnsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverBtnsRow.swift; sourceTree = "<group>"; };
 		BC0A87CF2575836F0045A54E /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		BC0AA7172594D3B9008AF315 /* AlertPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPopup.swift; sourceTree = "<group>"; };
@@ -349,7 +349,6 @@
 		BC32E8952590EF03008DF8B7 /* ItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemType.swift; sourceTree = "<group>"; };
 		BC32E8A0259239B8008DF8B7 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		BC32E8A525923D6D008DF8B7 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		BC36DBD025BC356600F57ED2 /* CardModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModalVC.swift; sourceTree = "<group>"; };
 		BC38944F258521EC0039EE35 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		BC3894542586077F0039EE35 /* PasswordResetScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetScreenVC.swift; sourceTree = "<group>"; };
 		BC391144258E771A000E6273 /* ItemCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCardCell.swift; sourceTree = "<group>"; };
@@ -378,7 +377,6 @@
 		BC54008E2579878C009DC69B /* LayoutTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTools.swift; sourceTree = "<group>"; };
 		BC5400A325799D1D009DC69B /* PrimaryBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryBtn.swift; sourceTree = "<group>"; };
 		BC541A562610DF3B00341BDE /* PersonalAspectsScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalAspectsScreenVC.swift; sourceTree = "<group>"; };
-		BC556DD4259934C3000B2B0C /* ModalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeader.swift; sourceTree = "<group>"; };
 		BC5CBB7325B9C9900028FFC1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BC5CBB7825B9CA820028FFC1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BC5CBB7A25B9CA890028FFC1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -481,6 +479,7 @@
 		BCDA932D25930BF1003477AF /* EmailVerificationScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationScreenVC.swift; sourceTree = "<group>"; };
 		BCDCF79D25B5968400FA94DE /* EditableTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTextViewDelegate.swift; sourceTree = "<group>"; };
 		BCDD83F92590B1EE0026E113 /* AddItemScreenModalDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemScreenModalDelegate.swift; sourceTree = "<group>"; };
+		BCDD913F272E6D2F004F7FCB /* UserNameAndEmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameAndEmailTextField.swift; sourceTree = "<group>"; };
 		BCDE2EB92587B4BE0040345E /* OnboardingScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingScreenVC.swift; sourceTree = "<group>"; };
 		BCDE2EBE2587B4DB0040345E /* StartScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScreenVC.swift; sourceTree = "<group>"; };
 		BCE7836D26323B2200ADD3A1 /* LongPressAnd3dTouchGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressAnd3dTouchGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -494,13 +493,16 @@
 		BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCustomHeaderCell.swift; sourceTree = "<group>"; };
 		BCEBF4C8259FE7F00001EB40 /* AddGoalScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalScreenVC.swift; sourceTree = "<group>"; };
 		BCEC42A8259F73CD008BAF38 /* ScreenNavigatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorTableViewCell.swift; sourceTree = "<group>"; };
+		BCF0492026FA4B1E00CE4CC8 /* ItemRepetitionScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRepetitionScreenVC.swift; sourceTree = "<group>"; };
+		BCF0492526FA780B00CE4CC8 /* ModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalVC.swift; sourceTree = "<group>"; };
+		BCF0492D26FA8AE800CE4CC8 /* ItemRepetitionOptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRepetitionOptionsTableViewCell.swift; sourceTree = "<group>"; };
+		BCF0494426FB77F000CE4CC8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		BCF2F73E2620CE09006275AA /* RoundImageViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageViewContainer.swift; sourceTree = "<group>"; };
 		BCF2F7432620D878006275AA /* ItemImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemImageModel.swift; sourceTree = "<group>"; };
 		BCF2F7482620D968006275AA /* DefaultItemImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultItemImages.swift; sourceTree = "<group>"; };
 		BCF2F7772620FAC4006275AA /* ItemImagePickerImageSourceCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemImagePickerImageSourceCellModel.swift; sourceTree = "<group>"; };
 		BCF2F77F2620FAFA006275AA /* ItemImagePickerImageSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemImagePickerImageSourceCell.swift; sourceTree = "<group>"; };
 		BCF2F7872620FE00006275AA /* imagePickerPopupDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imagePickerPopupDelegate.swift; sourceTree = "<group>"; };
-		BCF2F78F26214934006275AA /* DynamicImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicImage.swift; sourceTree = "<group>"; };
 		C4F1984BEF54DA421F5FB696 /* Pods_Enjaz_EnjazUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enjaz_EnjazUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92202812A6434C5C1FCEC34 /* Pods-Enjaz-EnjazUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz-EnjazUITests.release.xcconfig"; path = "Target Support Files/Pods-Enjaz-EnjazUITests/Pods-Enjaz-EnjazUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E9D3D64764CEC8734F87247B /* Pods-Enjaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enjaz.debug.xcconfig"; path = "Target Support Files/Pods-Enjaz/Pods-Enjaz.debug.xcconfig"; sourceTree = "<group>"; };
@@ -664,7 +666,6 @@
 				419120E82590948100CB7BF9 /* TypeCardBtn.swift */,
 				419121182592AF3F00CB7BF9 /* HourPickerView.swift */,
 				419121222593023000CB7BF9 /* ItemCardView.swift */,
-				BC556DD4259934C3000B2B0C /* ModalHeader.swift */,
 				417EE8A5259F756A002F71E5 /* EditableTextViewBadge.swift */,
 				41A9B30B263A24DA00366514 /* ItemCardBodyView.swift */,
 				BCEBF4B9259FA5E40001EB40 /* TableViewCustomHeaderCell.swift */,
@@ -676,7 +677,6 @@
 				BC20181026039D650060EFAF /* Switcher.swift */,
 				BCB5D20C2605E71D004275A9 /* WeekDayLabelsStackView.swift */,
 				BC7FE4C9260F69630012F5F4 /* DynamicImageView.swift */,
-				BCF2F78F26214934006275AA /* DynamicImage.swift */,
 				BC93D5902613CEB8005DE3AC /* NoteTitleTextField.swift */,
 				BC93D5BD2614D22A005DE3AC /* LinksView.swift */,
 				BCACC48B2614D9B2005F7F59 /* UserProfileButtonView.swift */,
@@ -705,6 +705,7 @@
 				41328EDD258628E900A86330 /* GoalsScreenVC.swift */,
 				41328EE225862DAD00A86330 /* MyPlanScreenVC.swift */,
 				BCCA217A2588106C003A18DA /* AddItemScreenVC.swift */,
+				BCF0492026FA4B1E00CE4CC8 /* ItemRepetitionScreenVC.swift */,
 				BC391160258E8232000E6273 /* SetDateAndTimeScreenVC.swift */,
 				419120ED25909CC700CB7BF9 /* AdditionTypeScreenVC.swift */,
 				417EE872259C1AEA002F71E5 /* GoalsBankScreenVC.swift */,
@@ -776,7 +777,6 @@
 			children = (
 				BC54008125795B9D009DC69B /* RegexValidator.swift */,
 				BC54008E2579878C009DC69B /* LayoutTools.swift */,
-				BC026C41259021B2008222BD /* DateAndTimeTools.swift */,
 				BC9F66A1259255AA00E17117 /* HttpRequest.swift */,
 				BC9F66A9259260FA00E17117 /* Auth.swift */,
 				BC8F2F7F25A8650000EF7EA4 /* UIDirectionalRectCorner.swift */,
@@ -797,11 +797,11 @@
 				BC7D6C7725A2780D00369FC5 /* AuthScreenVC.swift */,
 				BCEBF4A9259F95910001EB40 /* ScreenNavigatorTableVC.swift */,
 				4141505C25A589FA00DC369A /* MenuBarNavigationVC.swift */,
-				BC36DBD025BC356600F57ED2 /* CardModalVC.swift */,
 				BC20180B260393F70060EFAF /* CalendarViewController.swift */,
 				BCACC49A2614FEBF005F7F59 /* MonthItemsScreenVC.swift */,
 				BCE783DA2635397400ADD3A1 /* MyPlanChildVC.swift */,
 				BCB658AE263EAB8E007FA4C6 /* PrivacyPolicyAndAboutAppVC.swift */,
+				BCF0492526FA780B00CE4CC8 /* ModalVC.swift */,
 			);
 			path = BaseViewControllers;
 			sourceTree = "<group>";
@@ -876,6 +876,7 @@
 				41798BF22605740400DF5ECF /* UIImage+Ext.swift */,
 				41798C33260B073900DF5ECF /* UIButton+Ext.swift */,
 				BC3C5D7C2618E4F7000EE002 /* BidirectionalItemModelCollection+Ext.swift */,
+				BCF0494426FB77F000CE4CC8 /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -915,6 +916,7 @@
 				BCBEE86F2587D85C00D8DE0A /* NameTextField.swift */,
 				BCBEE8502587C91000D8DE0A /* UsernameTextField.swift */,
 				BCBEE8742587D89100D8DE0A /* EmailTextField.swift */,
+				BCDD913F272E6D2F004F7FCB /* UserNameAndEmailTextField.swift */,
 				BCBEE85D2587D73000D8DE0A /* PasswordTextField.swift */,
 				BCBEE8582587D03E00D8DE0A /* ConfirmPasswordTextField.swift */,
 				BCBEE8622587D7CF00D8DE0A /* NewPasswordTextField.swift */,
@@ -996,6 +998,7 @@
 				BCD82DC0263E79F2006F7575 /* NotificationTableViewCell.swift */,
 				41A112E826DB2D93005C693E /* TreeCollectionViewCell.swift */,
 				41A112EE26DF2C87005C693E /* TreeAchievementsCell.swift */,
+				BCF0492D26FA8AE800CE4CC8 /* ItemRepetitionOptionsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1270,7 +1273,6 @@
 				BC39114A258E773E000E6273 /* ItemCardPopup.swift in Sources */,
 				BC93769625A133E800048BEF /* KeyboardHandlingViewController.swift in Sources */,
 				BCB54CC7258C07AB00E0E54D /* ItemImageCell.swift in Sources */,
-				BCF2F79026214934006275AA /* DynamicImage.swift in Sources */,
 				BCDE2EBA2587B4BE0040345E /* OnboardingScreenVC.swift in Sources */,
 				BCB658B4263EACB6007FA4C6 /* AboutAppScreenVC.swift in Sources */,
 				BC8846B7261A432E005C6AAF /* HourTableViewCell.swift in Sources */,
@@ -1292,11 +1294,11 @@
 				BCACC4722614D461005F7F59 /* ContactUsScreenVC.swift in Sources */,
 				BC7271E025BDAB7500779C77 /* BottomSheetView.swift in Sources */,
 				BC32E8A625923D6D008DF8B7 /* UserModel.swift in Sources */,
+				BCDD9140272E6D2F004F7FCB /* UserNameAndEmailTextField.swift in Sources */,
 				BCD401B525FB3FBB00ABA183 /* VideoCardCell.swift in Sources */,
 				BC391145258E771A000E6273 /* ItemCardCell.swift in Sources */,
 				419120EE25909CC700CB7BF9 /* AdditionTypeScreenVC.swift in Sources */,
 				4141502425A2AAA200DC369A /* SelfEvaluationScreenVC.swift in Sources */,
-				BC026C42259021B2008222BD /* DateAndTimeTools.swift in Sources */,
 				BC3C5D7D2618E4F7000EE002 /* BidirectionalItemModelCollection+Ext.swift in Sources */,
 				BCE783E8263559A100ADD3A1 /* RoundView.swift in Sources */,
 				BCBEE8702587D85C00D8DE0A /* NameTextField.swift in Sources */,
@@ -1314,6 +1316,7 @@
 				41A112E926DB2D93005C693E /* TreeCollectionViewCell.swift in Sources */,
 				41A9B2EC26366B5A00366514 /* VideosTopModel.swift in Sources */,
 				BC391166258E90A5000E6273 /* CalendarView.swift in Sources */,
+				BCF0492E26FA8AE800CE4CC8 /* ItemRepetitionOptionsTableViewCell.swift in Sources */,
 				BC4780A1259629BE00D21060 /* Actions.swift in Sources */,
 				41798CB22617C59B00DF5ECF /* DailyViewCell.swift in Sources */,
 				BC7FE4CA260F69630012F5F4 /* DynamicImageView.swift in Sources */,
@@ -1348,6 +1351,7 @@
 				41DB38B826335CB20042FC5B /* BlogModel.swift in Sources */,
 				BCABE451260F52ED00E790F2 /* AppDataInitializer.swift in Sources */,
 				BCDCF79E25B5968400FA94DE /* EditableTextViewDelegate.swift in Sources */,
+				BCF0494526FB77F000CE4CC8 /* Date+Ext.swift in Sources */,
 				BC8846CC261B56B6005C6AAF /* DailyViewTableViewCustomHeader.swift in Sources */,
 				417EE895259C2566002F71E5 /* GoalsTableCell.swift in Sources */,
 				BCF2F7442620D878006275AA /* ItemImageModel.swift in Sources */,
@@ -1378,11 +1382,11 @@
 				BCEBF4C9259FE7F00001EB40 /* AddGoalScreenVC.swift in Sources */,
 				BC963E71259D04C000A1556B /* SideMenuBtn.swift in Sources */,
 				41A112EF26DF2C87005C693E /* TreeAchievementsCell.swift in Sources */,
+				BCF0492626FA780B00CE4CC8 /* ModalVC.swift in Sources */,
 				BC67971125A914A3002B9A71 /* CalendarViewDelegate.swift in Sources */,
 				BC4646DE2587EBCF00218D7A /* RootTabBarController.swift in Sources */,
 				BC32E8912590EE8C008DF8B7 /* DefaultItemCategories.swift in Sources */,
 				417EE8A6259F756A002F71E5 /* EditableTextViewBadge.swift in Sources */,
-				BC36DBD125BC356600F57ED2 /* CardModalVC.swift in Sources */,
 				BCD4494F26169424006FC8B7 /* ShowAllIArticlesScreenVC.swift in Sources */,
 				BC54008A2579622D009DC69B /* String+Ext.swift in Sources */,
 				BC0AA7182594D3B9008AF315 /* AlertPopup.swift in Sources */,
@@ -1425,6 +1429,7 @@
 				BCE7836E26323B2200ADD3A1 /* LongPressAnd3dTouchGestureRecognizer.swift in Sources */,
 				BC2734BB2587B79300EFB42C /* CarouselCardModel.swift in Sources */,
 				BC0A87D02575836F0045A54E /* AppLogo.swift in Sources */,
+				BCF0492126FA4B1F00CE4CC8 /* ItemRepetitionScreenVC.swift in Sources */,
 				BCBEE85E2587D73000D8DE0A /* PasswordTextField.swift in Sources */,
 				BCCA217B2588106C003A18DA /* AddItemScreenVC.swift in Sources */,
 				BC20181126039D650060EFAF /* Switcher.swift in Sources */,
@@ -1460,7 +1465,6 @@
 				BC39114F258E776B000E6273 /* ItemModel.swift in Sources */,
 				BC3894552586077F0039EE35 /* PasswordResetScreenVC.swift in Sources */,
 				BC93D5872613CE1C005DE3AC /* PersonalAspectsModel.swift in Sources */,
-				BC556DD5259934C4000B2B0C /* ModalHeader.swift in Sources */,
 				BC1FFACF25F8C2E800A436CA /* CardsView.swift in Sources */,
 				BC67DFD425F8CC2B00183EFD /* DraftCardCell.swift in Sources */,
 				BC5029A925F8B32E00407B16 /* DraftScreenVC.swift in Sources */,

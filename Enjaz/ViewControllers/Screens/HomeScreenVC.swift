@@ -37,7 +37,7 @@ class HomeScreenVC: UIViewController {
         let view = GreetingMessageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
-		let hour = DateAndTimeTools.getDateComponentsOf(Date(), forCalendarIdentifier: Calendar.current.identifier).hour ?? 0
+		let hour = Date().getDateComponents(forCalendarIdentifier: Calendar.current.identifier).hour ?? 0
         let name = user?.name
 		let firstName = String(name?.split(separator: " ").first ?? "")
         

@@ -1,7 +1,7 @@
 import UIKit
 
 struct LayoutConstants {
-	static let isScreenTall = LayoutConstants.screenHeight / LayoutConstants.screenWidth > 1.8
+	static let isScreenTall = screenHeight / screenWidth > 1.8
 	static let screenHeight = UIScreen.main.bounds.size.height
 	static let screenWidth = UIScreen.main.bounds.size.width
     static let inputHeight: CGFloat = 52

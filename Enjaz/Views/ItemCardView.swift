@@ -21,7 +21,7 @@ class ItemCardView: UIView {
             cardBody.categoryLabel.text = itemCategory?.localized_name
             cardBody.titleLabel.text = viewModel.name
             cardBody.descriptionLabel.text = viewModel.item_description
-            cardBody.dateAndTimeLabel.attributedText = DateAndTimeTools.getDateAndTimeLabelText(viewModel)
+            cardBody.dateAndTimeLabel.attributedText = Date.getDateAndTimeLabelText(viewModel)
 			
 			isMinimized = true
         }

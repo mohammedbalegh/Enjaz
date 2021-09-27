@@ -68,7 +68,7 @@ class CalendarScreenVC: CalendarViewController {
         let itemModels = RealmManager.retrieveItems()
         
         currentMonthItems = itemModels.filter { item in
-            let itemDateComponents = DateAndTimeTools.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
+            let itemDateComponents = Date.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
             let selectedMonth = selectedMonthIndex + 1
             let selectedYear = currentYear + selectedYearIndex
             
@@ -78,7 +78,7 @@ class CalendarScreenVC: CalendarViewController {
         var itemsOfMonthDayRows: [Int: [ItemModel]] = [:]
         
         for item in currentMonthItems {
-            let itemDateComponents = DateAndTimeTools.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
+            let itemDateComponents = Date.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
             
             guard let itemDay = itemDateComponents.day else { continue }
             
@@ -96,14 +96,14 @@ class CalendarScreenVC: CalendarViewController {
     
     func updateWeekItems() {
         currentWeekItems = currentMonthItems.filter { item in
-            let itemDateComponents = DateAndTimeTools.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
+            let itemDateComponents = Date.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
             return (calendarView.firstWeekDayNumber...calendarView.lastWeekDayNumber) ~= itemDateComponents.day ?? -1
         }
         
         var itemsOfWeekDayRows: [Int: [ItemModel]] = [:]
         
         for item in currentWeekItems {
-            let itemDateComponents = DateAndTimeTools.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
+            let itemDateComponents = Date.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: selectedCalendarIdentifier)
             
             guard let itemDay = itemDateComponents.day, let itemHour = itemDateComponents.hour else { continue }
             
@@ -147,11 +147,11 @@ class CalendarScreenVC: CalendarViewController {
 		addItemScreenVC.delegate = self
 		
 		if let unixTimeStamp = unixTimeStamp {
-			let readableDate = DateAndTimeTools.getReadableDate(from: Date(timeIntervalSince1970: unixTimeStamp), withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
+			let readableDate = Date.getReadableDate(from: Date(timeIntervalSince1970: unixTimeStamp), withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
 			addItemScreenVC.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[unixTimeStamp]], readableDate: readableDate)
 		}
 		
-		navigationController?.present(addItemScreenVC, animated: true)
+		navigationController?.present(UINavigationController(rootViewController: addItemScreenVC), animated: true)
 	}
     
 }

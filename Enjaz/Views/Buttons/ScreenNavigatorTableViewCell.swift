@@ -72,7 +72,7 @@ class ScreenNavigatorTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        backgroundColor = .secondaryBackground
+//		contentView.backgroundColor = .secondaryBackground
         selectionStyle = .none
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
     }

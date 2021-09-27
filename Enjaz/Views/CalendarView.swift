@@ -266,7 +266,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     var firstWeekDayColumnIndex: Int = 0
     var lastWeekDayColumnIndex: Int = 0
     
-    let hourLabels = DateAndTimeTools.twelveHourFormatHourLabels
+    let hourLabels = Date.twelveHourFormatHourLabels
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -520,7 +520,7 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
         let from = NSLocalizedString("from", comment: "")
-        let to = NSLocalizedString("to", comment: "")
+        let to = NSLocalizedString("to ", comment: "")
         selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accent, stringSize: 13, coloredSubstringsSize: 13)
     }
 

@@ -2,12 +2,23 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-	var isModal: Bool {
+	var isPresentedModally: Bool {
 		let presentingIsModal = presentingViewController != nil
 		let presentingIsNavigation = navigationController?.presentingViewController?.presentedViewController == navigationController
 		let presentingIsTabBar = tabBarController?.presentingViewController is UITabBarController
 		
 		return presentingIsModal || presentingIsNavigation || presentingIsTabBar
+	}
+	
+	var previousViewController: UIViewController? {
+		guard let navigationControllerVCs = navigationController?.viewControllers, navigationControllerVCs.count >= 2 else {
+			return nil
+		}
+		
+		let previousVCIndex = navigationControllerVCs.count - 2
+		let previousVC = navigationControllerVCs[previousVCIndex]
+		
+		return previousVC
 	}
 	
     func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {

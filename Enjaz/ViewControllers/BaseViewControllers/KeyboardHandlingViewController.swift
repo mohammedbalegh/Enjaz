@@ -1,6 +1,6 @@
 import UIKit
 
-class KeyboardHandlingViewController: UIViewController {
+class KeyboardHandlingViewController: ModalVC {
     
     let keyboardPlaceHolderView = UIView()
     

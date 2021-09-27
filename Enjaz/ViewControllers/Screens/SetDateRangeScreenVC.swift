@@ -11,7 +11,6 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
     }
     
     override func setupSubviews() {
-        setupHeader()
         setupCalendarView()
         setupSaveBtn()
 		setupNextBtn()
@@ -44,9 +43,9 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
 			
 			let dateFormat = firstSelectedDateYear == lastSelectedDateYear ? "d-M" : "d-M-yy"
 			
-			let firstPartitionReadableDate = DateAndTimeTools.getReadableDate(from: firstPartitionDate, withFormat: dateFormat, calendarIdentifier: selectedCalendarIdentifier)
+			let firstPartitionReadableDate = Date.getReadableDate(from: firstPartitionDate, withFormat: dateFormat, calendarIdentifier: selectedCalendarIdentifier)
 			
-			let lastPartitionReadableDate = DateAndTimeTools.getReadableDate(from: lastPartitionDate, withFormat: dateFormat, calendarIdentifier: selectedCalendarIdentifier)
+			let lastPartitionReadableDate = Date.getReadableDate(from: lastPartitionDate, withFormat: dateFormat, calendarIdentifier: selectedCalendarIdentifier)
 			
 			let partitionReadableDate = firstPartitionReadableDate + " : " + lastPartitionReadableDate
 			multiplePartitionsReadableDates.append(partitionReadableDate)
@@ -79,11 +78,10 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
             return nil
         }
         
-        
         let earlierDate = min(firstSelectedDate, lastSelectedDate)
         let laterDate = max(firstSelectedDate, lastSelectedDate)
         
-        guard let numberOfDays = DateAndTimeTools.getNumberOfDaysBetween(earlierDate, laterDate) else { return nil }
+        guard let numberOfDays = Date.getNumberOfDaysBetween(earlierDate, laterDate) else { return nil }
         
         var selectedDates: [Date] = [earlierDate]
         var lastDate = earlierDate

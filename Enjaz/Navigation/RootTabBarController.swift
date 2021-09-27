@@ -7,7 +7,7 @@ class RootTabBarController: UITabBarController {
         let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .highContrastText
-        label.text = DateAndTimeTools.getReadableDate(from: Date(), withFormat: "dd MMMM", calendarIdentifier: .islamicCivil)
+        label.text = Date.getReadableDate(from: Date(), withFormat: "dd MMMM", calendarIdentifier: .islamicCivil)
         label.font = label.font.withSize(18)
         label.textAlignment = .center
         return label
@@ -17,7 +17,7 @@ class RootTabBarController: UITabBarController {
         let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .systemGray
-        label.text = DateAndTimeTools.getReadableDate(from: Date(), withFormat: "d MMMM yyyy", calendarIdentifier: .gregorian)
+        label.text = Date.getReadableDate(from: Date(), withFormat: "d MMMM yyyy", calendarIdentifier: .gregorian)
         label.font = label.font.withSize(13)
         label.textAlignment = .center
         return label
@@ -107,6 +107,10 @@ class RootTabBarController: UITabBarController {
         
     override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		if #available(iOS 14.0, *) {
+			navigationItem.backButtonDisplayMode = .minimal
+		}
 		
 		view.tintColor = .accent
         

@@ -193,7 +193,7 @@ class MonthItemsScreenVC: MyPlanChildVC {
     }
     
     func updateItemModels() {
-        let (firstDayUnixTimeStamp, lastDayUnixTimeStamp) = DateAndTimeTools.getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier: Calendar.current.identifier)
+        let (firstDayUnixTimeStamp, lastDayUnixTimeStamp) = Date.getFirstAndLastUnixTimeStampsOfCurrentMonth(forCalendarIdentifier: Calendar.current.identifier)
         
 		currentMonthItems = RealmManager.retrieveItems(withFilter: "date >= \(firstDayUnixTimeStamp) AND date <= \(lastDayUnixTimeStamp)").filter { $0.type_id == itemsType.id }
 		
@@ -201,7 +201,7 @@ class MonthItemsScreenVC: MyPlanChildVC {
                 
         dayItemModels = upcomingCurrentMonthItems.filter { Calendar.current.isDateInToday(Date(timeIntervalSince1970: $0.date)) }
         
-        weekItemModels = upcomingCurrentMonthItems.filter { DateAndTimeTools.isDateInCurrentWeek(date: Date(timeIntervalSince1970: $0.date), calendarIdentifier: Calendar.current.identifier)}
+        weekItemModels = upcomingCurrentMonthItems.filter { Date(timeIntervalSince1970: $0.date).isInCurrentWeek(calendarIdentifier: Calendar.current.identifier) }
         
 		monthItemModels = upcomingCurrentMonthItems
         

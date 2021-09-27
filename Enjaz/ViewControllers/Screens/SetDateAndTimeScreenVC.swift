@@ -3,19 +3,7 @@ import UIKit
 class SetDateAndTimeScreenVC: CalendarViewController {
     
     var hourPickerModels: [HourModel] = ModelsConstants.hourPickerModels
-    
-	lazy var header: ModalHeader = {
-		let header = ModalHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 70))
-		header.dismissButton.addTarget(self, action: #selector(handleDismissBtnTap), for: .touchUpInside)
-		return header
-	}()
-    
-    override var title: String? {
-        didSet {
-            header.titleLabel.text = title
-        }
-    }
-    
+        
     lazy var hourPicker: HourPickerView = {
         let picker = HourPickerView()
         
@@ -77,36 +65,33 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 		let window = UIApplication.shared.windows[0]
 		window.backgroundColor = .black
 		
-		navigationController?.setNavigationBarHidden(true, animated: true)
+		if isPresentedModally && LayoutConstants.isScreenTall {
+			navigationController?.navigationBar.prefersLargeTitles = true
+		}
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
-		if presentingViewController?.isModal == false {
+		if presentingViewController?.isPresentedModally == false {
 			let window = UIApplication.shared.windows[0]
 			window.backgroundColor = .background
 		}
 	}
 
     override func setupSubviews() {
-        setupHeader()
         super.setupSubviews()
         setupSaveBtn()
 		setupNextBtn()
         setupIndicator()
         setupHourPicker()
     }
-    
-    func setupHeader() {
-        view.addSubview(header)
-    }
-    
+        
     override func setupCalendarView() {
         view.addSubview(calendarView)
         
         NSLayoutConstraint.activate([
-			calendarView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: LayoutConstants.screenHeight * 0.022),
+			calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
             calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             calendarView.widthAnchor.constraint(equalToConstant: CalendarView.width),
             calendarView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.75),
@@ -206,7 +191,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 		
 		let date = Date(timeIntervalSince1970: selectedDateUnixTimeStamps.first!)
 		
-		let readableDate = DateAndTimeTools.getReadableDate(from: date, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
+		let readableDate = Date.getReadableDate(from: date, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
 		
         delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate)
         dismiss(animated: true)
@@ -254,9 +239,9 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         let month = selectedMonthIndex + 1
         let year = currentYear + selectedYearIndex
         let time = hourPicker.hourModels[hourPicker.selectedTimePickerIndex]
-        let hour = DateAndTimeTools.convertHourModelTo24HrFormatInt(time)
+        let hour = Date.convertHourModelTo24HrFormatInt(time)
 		
-        let date = DateAndTimeTools.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: selectedCalendarIdentifier)
+        let date = Date.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: selectedCalendarIdentifier)
         
         return date
     }
@@ -289,9 +274,9 @@ class SetDateAndTimeScreenVC: CalendarViewController {
             laterDate = firstSelectedDate == lastSelectedDate ? nil : max(firstSelectedDate, lastSelectedDate)
         }
 		
-        let readableFirstSelectedDate = DateAndTimeTools.getReadableDate(from: earlierDate, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)
+        let readableFirstSelectedDate = Date.getReadableDate(from: earlierDate, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)
         
-        let readableLastSelectedDate = DateAndTimeTools.getReadableDate(from: laterDate, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)
+        let readableLastSelectedDate = Date.getReadableDate(from: laterDate, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)
         
         return (readableFirstSelectedDate, readableLastSelectedDate)
     }

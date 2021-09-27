@@ -2,6 +2,8 @@ import UIKit
 
 class LoginScreenVC: AuthScreenVC {
     
+	let usernameAndEmailTextField = UserNameAndEmailTextField()
+	
     let forgotPasswordBtn: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -14,11 +16,9 @@ class LoginScreenVC: AuthScreenVC {
         return button
     }()
     
-    var previousScreenIsSignupScreen = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
         titleLabel.text = NSLocalizedString("Login", comment: "")
         subTitleLabel.text = NSLocalizedString("Enter your username and password", comment: "")
         authenticationBtn.setTitle(NSLocalizedString("Login", comment: ""), for: .normal)
@@ -57,7 +57,7 @@ class LoginScreenVC: AuthScreenVC {
         let allInputsAreValid = validateInputs()
         guard allInputsAreValid else { return }
         
-        let username = usernameTextField.text
+        let username = usernameAndEmailTextField.text
         let password = passwordTextField.text
         
         guard isConnectedToInternet else {
@@ -100,7 +100,7 @@ class LoginScreenVC: AuthScreenVC {
     // MARK: Tools
     
     override func getTextFieldsStackArrangedSubviews() -> [UIView] {
-        let arrangedSubviews = [usernameTextField, passwordTextField]
+        let arrangedSubviews = [usernameAndEmailTextField, passwordTextField]
         return arrangedSubviews
     }
     
@@ -110,15 +110,12 @@ class LoginScreenVC: AuthScreenVC {
     }
     
     func navigateToSignupScreen() {
-        if previousScreenIsSignupScreen {
+        if previousViewController is SignupScreenVC {
             navigationController?.popViewController(animated: true)
             return
         }
         
-        let signupScreen = SignupScreenVC()
-        signupScreen.previousScreenIsLoginScreen = true
-        
-        navigationController?.pushViewController(signupScreen, animated: true)
+        navigationController?.pushViewController(SignupScreenVC(), animated: true)
     }
     
     func navigateToPasswordResetScreen() {

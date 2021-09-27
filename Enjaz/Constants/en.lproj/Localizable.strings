@@ -7,6 +7,11 @@
 
 // MARK: StartScreen
 "Start" = "Start";
+"Welcome to Enjaz App" = "Welcome to Enjaz App";
+"Finish Tasks on Time" = "Finish Tasks on Time";
+"Reminding You of Repeating Habits" = "Reminding You of Repeating Habits";
+"Keep Track of Your Achievements' Stats" = "Keep Track of Your Achievements' Stats";
+"This text is an example of a description" = "This text is an example of a description";
 
 //MARK: LoginScreen
 "Forgot your password?" = "Forgot your password?";
@@ -29,6 +34,8 @@
 "Full name" = "Full name";
 "Email" = "Email";
 "Incorrect email" = "Incorrect email";
+"Username or email" = "Username or email";
+"Incorrect username or email" = "Incorrect username or email";
 "Password" = "Password";
 "Confirm password" = "Confirm password";
 "The password does not match" = "The password does not match";
@@ -85,6 +92,12 @@
 "Repeat the %@" = "Repeat the %@";
 "In case the %@ repeats more than once" = "In case the %@ repeats more than once";
 "Date (from - to)" = "Date (from - to)";
+"Repetition" = "Repetition";
+"Daily" = "Daily";
+"Weekly" = "Weekly";
+"Biweekly" = "Biweekly";
+"Monthly" = "Monthly";
+"Custom" = "Custom";
 
 // MARK: CalendarViewController
 "Hijri Calendar" = "Hijri Calendar";
@@ -259,7 +272,7 @@
 "Cancel" = "Cancel";
 "Save" = "Save";
 "from" = "from";
-"to" = "to";
+"to " = "to ";
 "Ok" = "Ok";
 "Done" = "Done";
 "optional" = "optional";

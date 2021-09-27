@@ -2,7 +2,7 @@ import UIKit
 
 class DailyViewCell: UICollectionViewCell {
 	let hourCellReuseIIdentifier = "hourCell"
-	let hourLabels = DateAndTimeTools.twelveHourFormatHourLabels
+	let hourLabels = Date.twelveHourFormatHourLabels
 	
 	var dailyViewHourModels: [DailyViewHourModel] = []
 	
@@ -12,7 +12,7 @@ class DailyViewCell: UICollectionViewCell {
 			
 			dailyViewHourModels = generateDailyViewHourModels(includedItemsInDay: viewModel.includedItems)
 			
-			let lastUnixTimeStamp = DateAndTimeTools.generateDateObjectFromComponents(year: viewModel.year, month: viewModel.month, day: viewModel.dayNumber, hour: 23, calendarIdentifier: viewModel.calendarIdentifier).timeIntervalSince1970
+			let lastUnixTimeStamp = Date.generateDateObjectFromComponents(year: viewModel.year, month: viewModel.month, day: viewModel.dayNumber, hour: 23, calendarIdentifier: viewModel.calendarIdentifier).timeIntervalSince1970
 			
 			let isLastUnixTimeStampInPast = lastUnixTimeStamp < Date().timeIntervalSince1970
 			
@@ -52,7 +52,7 @@ class DailyViewCell: UICollectionViewCell {
 		
 		return tableView
 	}()
-			
+	
 	lazy var addItemBtn: UIButton = {
 		let button = UIButton(type: .system)
 		button.translatesAutoresizingMaskIntoConstraints = false
@@ -158,7 +158,7 @@ class DailyViewCell: UICollectionViewCell {
 		}
 		
 		for item in includedItemsInDay {
-			let itemDateComponents = DateAndTimeTools.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: Calendar.current.identifier)
+			let itemDateComponents = Date.getDateComponentsOf(unixTimeStamp: item.date, forCalendarIdentifier: Calendar.current.identifier)
 			updatedHourModels[itemDateComponents.hour ?? 0].includedItems.append(item)
 		}
 		
@@ -215,13 +215,13 @@ class DailyViewCell: UICollectionViewCell {
 		
 		guard !hourString.isEmpty else { return nil }
 		
-		guard let hour = DateAndTimeTools.convert12HourFormatTo24HrFormatInt(hourString) else { return nil }
+		guard let hour = Date.convert12HourFormatTo24HrFormatInt(hourString) else { return nil }
 		let day = viewModel.dayNumber
 		let month = viewModel.month
 		let year = viewModel.year
 		let calendarIdentifier = viewModel.calendarIdentifier
 		
-		let unixTimeStamp = DateAndTimeTools.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarIdentifier).timeIntervalSince1970
+		let unixTimeStamp = Date.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: calendarIdentifier).timeIntervalSince1970
 		
 		return unixTimeStamp
 	}
@@ -403,7 +403,7 @@ extension DailyViewCell: UITableViewDelegate, UITableViewDataSource, UICollectio
 	}
 	
 	func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-		// Without this, when user drag down and lift the finger fast at the top, there'll be some scrolling going on.
+		// Without this, when user drags down and lifts their finger quickly at the top, there'll be some scrolling going on.
 		// This check prevents that.
 		if velocity.y > 0 && scrollView.contentOffset.y <= 0 {
 			scrollView.contentOffset = .zero

@@ -1,6 +1,6 @@
 import UIKit
 
-class CalendarViewController: UIViewController {
+class CalendarViewController: ModalVC {
     
     lazy var calendarView: CalendarView = {
         let calendarView = CalendarView()
@@ -102,15 +102,15 @@ class CalendarViewController: UIViewController {
     }
     
     var currentDay: Int {
-        return DateAndTimeTools.getCurrentDay(forCalendarIdentifier: selectedCalendarIdentifier)
+        return Date.getCurrentDay(forCalendarIdentifier: selectedCalendarIdentifier)
     }
     
     var currentMonth: Int {
-        return DateAndTimeTools.getCurrentMonth(forCalendarIdentifier: selectedCalendarIdentifier)
+        return Date.getCurrentMonth(forCalendarIdentifier: selectedCalendarIdentifier)
     }
     
     var currentYear: Int {
-        return DateAndTimeTools.getCurrentYear(forCalendarIdentifier: selectedCalendarIdentifier)
+        return Date.getCurrentYear(forCalendarIdentifier: selectedCalendarIdentifier)
     }
     
     var formatter: DateFormatter {
@@ -367,7 +367,7 @@ class CalendarViewController: UIViewController {
         let month = selectedMonthIndex + 1
         let year = currentYear + selectedYearIndex
         
-        let (numberOfDaysInMonth, firstWeekDayNumber) = DateAndTimeTools.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarIdentifier: selectedCalendarIdentifier)
+        let (numberOfDaysInMonth, firstWeekDayNumber) = Date.getNumberOfMonthDaysAndFirstWeekDay(ofYear: year, andMonth: month, forCalendarIdentifier: selectedCalendarIdentifier)
         
         numberOfWeeksInMonth = getNumberOfWeeksInMonth(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnNumber: firstWeekDayNumber - 1)        
         calendarView.handleNewMonthSelection(numberOfDaysInMonth: numberOfDaysInMonth, startsAtColumnIndex: firstWeekDayNumber - 1)

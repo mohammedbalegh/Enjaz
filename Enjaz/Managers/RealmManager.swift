@@ -105,6 +105,11 @@ struct RealmManager {
     }
 	
 	static func completeItem(_ item: ItemModel, isCompleted: Bool) {
+		if !item.is_original, let originalItem = retrieveItemById(item.original_item_id) {
+			completeItem(originalItem, isCompleted: isCompleted)
+			return
+		}
+		
 		realm.beginWrite()
 		item.is_completed = isCompleted
 		completeSubsequentItemsIfIncluded(item, isCompleted: isCompleted)

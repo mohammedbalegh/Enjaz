@@ -33,7 +33,7 @@ enum ItemType {
 	}
 	
 	var localizedName: String {
-		return NSLocalizedString(name, comment: "")
+		return name.localized
 	}
 	
 	var image: UIImage? {

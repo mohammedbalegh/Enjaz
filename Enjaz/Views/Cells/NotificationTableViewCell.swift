@@ -12,7 +12,7 @@ class NotificationTableViewCell: UITableViewCell {
             }
             
             nameLabel.text = itemModel.name
-            timeLabel.attributedText = DateAndTimeTools.getDateAndTimeLabelText(itemModel)
+            timeLabel.attributedText = Date.getDateAndTimeLabelText(itemModel)
         }
     }
     

@@ -7,6 +7,11 @@
 
 // MARK: StartScreen
 "Start" = "إبدأ";
+"Welcome to Enjaz App" = "مرحبا بك في تطبيق إنجاز";
+"Finish Tasks on Time" = "انجاز المهام في التاريخ المحدد";
+"Reminding You of Repeating Habits" = "التذكير بالعادات المتكررة";
+"Keep Track of Your Achievements' Stats" = "متابعة إحصائيات انجازاتك";
+"This text is an example of a description" = "هذا النص مثال يمكن ان يستبدل في نفس المساحة";
 
 //MARK: LoginScreen
 "Forgot your password?" = "نسيت كلمة السر؟";
@@ -85,6 +90,12 @@
 "Repeat the %@" = "تكرار ال%@";
 "In case the %@ repeats more than once" = "في حالة تكرار ال%@ أكثر من مرة";
 "Date (from - to)" = "التاريخ (من - إلى)";
+"Repetition" = "التكرار";
+"Daily" = "يوميًا";
+"Weekly" = "أسبوعيًا";
+"Biweekly" = "كل أسبوعين";
+"Monthly" = "شهريًا";
+"Custom" = "مخصص";
 
 // MARK: CalendarViewController
 "Hijri Calendar" = "التقويم الهجري";
@@ -259,7 +270,7 @@
 "Cancel" = "إلغاء";
 "Save" = "حفظ";
 "from" = "من";
-"to" = "إلى";
+"to " = "إلى";
 "Ok" = "حسنًا";
 "Done" = "تم";
 "optional" = "اختياري";

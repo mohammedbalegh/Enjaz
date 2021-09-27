@@ -179,6 +179,7 @@ extension UIView {
     
     func addTopBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = UIView()
+		border.tag = 1001
         border.backgroundColor = color
         border.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: width)
 		self.addSubview(border)
@@ -186,6 +187,7 @@ extension UIView {
     
     func addRightBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = UIView()
+		border.tag = 1002
         border.backgroundColor = color
         border.frame = CGRect(x: frame.size.width - width, y: 0, width: width, height: frame.size.height)
 		self.addSubview(border)
@@ -193,6 +195,7 @@ extension UIView {
     
     func addBottomBorder(withColor color: UIColor, andWidth width: CGFloat) {
         let border = UIView()
+		border.tag = 1003
         border.backgroundColor = color
         border.frame = CGRect(x: 0, y: frame.size.height - width, width: frame.size.width, height: width)
         self.addSubview(border)
@@ -200,10 +203,19 @@ extension UIView {
     
     func addLeftBorder(withColor color: UIColor, andWidth width: CGFloat) {
 		let border = UIView()
+		border.tag = 1004
         border.backgroundColor = color
         border.frame = CGRect(x: 0, y: 0, width: width, height: frame.size.height)
 		self.addSubview(border)
     }
+	
+	func removeAllBorders() {
+		for view in self.subviews {
+			if view.tag >= 1001 && view.tag <= 1004 {
+				view.removeFromSuperview()
+			}
+		}
+	}
 }
 
 // MARK: Effects

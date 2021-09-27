@@ -19,7 +19,7 @@ struct NotificationsManager {
 		
 		content.sound = .default
 		
-		let dateComponents = DateAndTimeTools.getDateComponentsOf(date, forCalendarIdentifier: Calendar.current.identifier)
+		let dateComponents = date.getDateComponents(forCalendarIdentifier: Calendar.current.identifier)
 		
 		let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 		let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)

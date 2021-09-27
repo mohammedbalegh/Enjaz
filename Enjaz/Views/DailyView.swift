@@ -64,7 +64,7 @@ class DailyView: UIView {
             let day = index + 1
             let calendar = Calendar(identifier: selectedCalendarIdentifier)
             
-            let date = DateAndTimeTools.generateDateObjectFromComponents(year: selectedYear, month: selectedMonth, day: day, hour: 12, calendarIdentifier: selectedCalendarIdentifier)
+            let date = Date.generateDateObjectFromComponents(year: selectedYear, month: selectedMonth, day: day, hour: 12, calendarIdentifier: selectedCalendarIdentifier)
             
             let weekdayNumber = calendar.component(.weekday, from: date)
             let weekdayName = calendar.weekdaySymbols[weekdayNumber - 1]

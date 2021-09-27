@@ -18,7 +18,7 @@ class ItemsTableViewCell: UITableViewCell {
 			isPinned = itemModel.is_pinned
 			
             nameLabel.text = itemModel.name
-            dateAndTimeLabel.attributedText = DateAndTimeTools.getDateAndTimeLabelText(itemModel)
+            dateAndTimeLabel.attributedText = Date.getDateAndTimeLabelText(itemModel)
         }
     }
 	

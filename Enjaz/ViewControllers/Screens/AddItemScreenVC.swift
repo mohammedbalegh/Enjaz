@@ -3,15 +3,6 @@ import SPAlert
 
 class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegate {
     // MARK: Properties
-	
-	lazy var thumb: UIView = {
-		let width: CGFloat = 35, height: CGFloat = 5
-		let thumb = UIView(frame: CGRect(x: view.frame.width / 2 - width / 2, y: 5, width: width, height: height))
-		thumb.layer.cornerRadius = height / 2
-		thumb.backgroundColor = .lowContrastGray
-		return thumb
-	}()
-	
     let scrollView = UIScrollView()
 	
 	lazy var setImageBtn: RoundBtn = {
@@ -176,6 +167,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     var selectedItemCategoryIndex: Int?
     
     var itemCategory: Int?
+	var selectedRepetitionOption: Date.DateSeparationType?
     var itemPartitionDates: [[TimeInterval]]?
     var itemType: Int!
     var itemImageId: Int?
@@ -188,30 +180,26 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         }
         return ""
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-				        
-		view.backgroundColor = isModal ? .modalScreenBackground : .background
-        definesPresentationContext = true
-		
-		if !isModal {
-			thumb.frame = .zero
-		}
-		
-        removeRepetitionSwitchForTypeThatDontSupportRepetition()
-        setupSubviews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        title = String(format: NSLocalizedString("Add %@", comment: ""), itemTypeName)
-        itemCategoryModels = RealmManager.retrieveItemCategories()
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		title = String(format: NSLocalizedString("Add %@", comment: ""), itemTypeName)
+		itemCategoryModels = RealmManager.retrieveItemCategories()
 		
 		let window = UIApplication.shared.windows[0]
 		window.backgroundColor = .black
+	}
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+		
+		view.backgroundColor = isPresentedModally ? .modalScreenBackground : .background
+        definesPresentationContext = true
+				
+        removeRepetitionSwitchForTypeThatDontSupportRepetition()
+        setupSubviews()
     }
-	
+    	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		let window = UIApplication.shared.windows[0]
@@ -224,7 +212,6 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         setupTextFieldsVerticalStack()
         setupAdditionDescriptionTextView()
         setupSaveBtn()
-		view.addSubview(thumb)
     }
     
     func setupScrollView() {
@@ -243,8 +230,10 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     func setupSetImageButton() {
         scrollView.addSubview(setImageBtn)
 		
+		let topAnchorConstant: CGFloat = isPresentedModally ? 25 : 20
+		
         NSLayoutConstraint.activate([
-			setImageBtn.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20 + thumb.frame.height),
+			setImageBtn.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: topAnchorConstant),
             setImageBtn.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
 			setImageBtn.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.24),
 			setImageBtn.heightAnchor.constraint(equalTo: setImageBtn.widthAnchor),
@@ -317,23 +306,36 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         
     @objc func handleAdditionDateAndTimeInputTap() {
         dismissKeyboard()
-        
+		
         let setDateAndTimeScreenVC = repetitionIsTurnedOn ? SetDateRangeScreenVC() : SetDateAndTimeScreenVC()
+		let presentedScreen = repetitionIsTurnedOn ? ItemRepetitionScreenVC() : setDateAndTimeScreenVC
 		
 		setDateAndTimeScreenVC.itemType = ItemType.getTypeById(id: itemType)
         setDateAndTimeScreenVC.delegate = self
-		present(UINavigationController(rootViewController: setDateAndTimeScreenVC), animated: true)
+		
+		if let presentedScreen = presentedScreen as? ItemRepetitionScreenVC {
+			presentedScreen.setDateAndTimeScreen = setDateAndTimeScreenVC
+			presentedScreen.delegate = self
+			presentedScreen.selectedOption = selectedRepetitionOption
+		}
+		
+		present(UINavigationController(rootViewController: presentedScreen), animated: true)
     }
     
     @objc func handleRepeatSwitchValueChange() {
         itemPartitionDates = nil
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.placeholderText, for: .normal)
         additionDateAndTimeInput.input?.inputText = repetitionIsTurnedOn
-            ? NSLocalizedString("Date (from - to)", comment: "")
+			? "Repetition".localized
             : additionDateAndTimeInput.fieldName
     }
     
-    func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[TimeInterval]], readableDate: String ) {
+	func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[TimeInterval]], readableDate: String, repetitionOption: Date.DateSeparationType?) {
+		selectedRepetitionOption = repetitionOption
+		handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate)
+	}
+	
+	func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[TimeInterval]], readableDate: String) {
         self.itemPartitionDates = selectedDatesTimeStamps
         
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.invertedSystemBackground, for: .normal)
@@ -355,7 +357,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 		NotificationsManager.requestNotificationsPermission()
         saveItem()
 				
-		if isModal {
+		if isPresentedModally {
 			dismiss(animated: true)
 			delegate?.didAddItem(self)
 		} else {
@@ -400,7 +402,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     }
 	
 	func showErrorMessage(_ errorMessage: String) {
-		if isModal {
+		if isPresentedModally {
 			alertPopup.presentAsError(withMessage: errorMessage)
 		} else {
 			AlertBottomSheetView.shared.presentAsError(withMessage: errorMessage)

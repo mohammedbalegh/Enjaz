@@ -2,6 +2,10 @@ import UIKit
 
 extension String {
     
+	var localized: String {
+		return NSLocalizedString(self, comment: "")
+	}
+	
     var isURL: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
         if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {

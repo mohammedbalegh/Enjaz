@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func configureNavigationBarAppearance() {
         UINavigationBar.appearance().tintColor = .accent
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.accent]
-        UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
     }
 	
 	func configureTabBarAppearance() {

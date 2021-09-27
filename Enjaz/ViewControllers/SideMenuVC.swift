@@ -2,6 +2,16 @@ import UIKit
 
 class SideMenuVC: UIViewController {
 
+	var screenNavigatorCellModels: [ScreenNavigatorCellModel] = [
+		ScreenNavigatorCellModel(imageSource: "lifeTreeSideIcon", label: "Life Tree".localized, subLabel: ""),
+		ScreenNavigatorCellModel(imageSource: "draftIcon", label: "Draft".localized, subLabel: ""),
+		ScreenNavigatorCellModel(imageSource: "noteIcon", label: "Personal Aspects".localized, subLabel: ""),
+		ScreenNavigatorCellModel(imageSource: "userProfileIcon", label: "Profile".localized, subLabel: ""),
+		ScreenNavigatorCellModel(imageSource: "infoIcon", label: "About App".localized, subLabel: ""),
+		ScreenNavigatorCellModel(imageSource: "sheetIcon", label: "Privacy Policy".localized, subLabel: ""),
+		ScreenNavigatorCellModel(imageSource: "phoneIcon", label: "Contact Us".localized, subLabel: ""),
+	]
+	
     lazy var dismissBtn: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -24,14 +34,46 @@ class SideMenuVC: UIViewController {
 		
         return label
     }()
+	
+	let screenNavigatorCellReuseIdentifier = "screenNavigatorCellReuseIdentifier"
+	let signOutBtnCellReuseIdentifier = "screenNavigatorCellReuseIdentifier"
+	
+	lazy var screenNavigatorTableView: UITableView = {
+		let tableView = UITableView(frame: .zero, style: .plain)
+		tableView.backgroundColor = .clear
+		tableView.separatorStyle = .none
+		
+		tableView.register(ScreenNavigatorTableViewCell.self, forCellReuseIdentifier: screenNavigatorCellReuseIdentifier)
+		
+		tableView.dataSource = self
+		tableView.delegate = self
+		
+		
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		return tableView
+	}()
+	
+	var scrollViewContainsTopBorder = false
+	
+	lazy var scrollView: UIScrollView = {
+		let scrollView = UIScrollView()
+		scrollView.delegate = self
+		scrollView.translatesAutoresizingMaskIntoConstraints = false
+		return scrollView
+	}()
     
     let lifeTreeBtn = SideMenuBtn(label: NSLocalizedString("Life Tree", comment: ""), image: UIImage(named: "lifeTreeSideIcon"))
     
     let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
+	
     let personalAspectsBtn = SideMenuBtn(label: NSLocalizedString("Personal Aspects", comment: ""), image: UIImage(named: "noteIcon"))
+	
     let userProfileBtn = SideMenuBtn(label: NSLocalizedString("Profile", comment: ""), image: UIImage(named: "userProfileIcon"))
+	
     let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
+	
     let privacyPolicyBtn = SideMenuBtn(label: NSLocalizedString("Privacy Policy", comment: ""), image: UIImage(named: "sheetIcon"))
+	
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
@@ -73,7 +115,10 @@ class SideMenuVC: UIViewController {
     func setupSubviews() {
         setupDismissBtn()
         setupNameLabel()
+		setupScrollview()
         setupMenuBtnsStack()
+//		setupScreenNavigatorTableView()
+		
         setupSignOutBtn()
     }
     
@@ -100,26 +145,54 @@ class SideMenuVC: UIViewController {
             nameLabel.heightAnchor.constraint(equalToConstant: LayoutConstants.sideMenuBtnHeight),
         ])
     }
+	
+	func setupScrollview() {
+		view.addSubview(scrollView)
+		
+		NSLayoutConstraint.activate([
+			scrollView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+			scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+		])
+	}
     
     func setupMenuBtnsStack() {
-        view.addSubview(menuBtnsVerticalStack)
-                
+		scrollView.addSubview(menuBtnsVerticalStack)
+		
+		let height = menuBtnsVerticalStack.calculateHeightBasedOn(arrangedSubviewHeight: 35)
+		
         NSLayoutConstraint.activate([
-            menuBtnsVerticalStack.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
-            menuBtnsVerticalStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            menuBtnsVerticalStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            menuBtnsVerticalStack.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.8),
+            menuBtnsVerticalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 35),
+            menuBtnsVerticalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25),
+            menuBtnsVerticalStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            menuBtnsVerticalStack.heightAnchor.constraint(equalToConstant: height),
         ])
     }
-    
+	
+	func setupScreenNavigatorTableView() {
+		view.addSubview(screenNavigatorTableView)
+		
+		screenNavigatorTableView.backgroundColor = .clear
+		screenNavigatorTableView.backgroundView?.backgroundColor = .clear
+		
+		NSLayoutConstraint.activate([
+			screenNavigatorTableView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: LayoutConstants.screenHeight * 0.05),
+			screenNavigatorTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+			screenNavigatorTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			screenNavigatorTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+		])
+	}
+	    
     func setupSignOutBtn() {
-        view.addSubview(signOutBtn)
+        scrollView.addSubview(signOutBtn)
         signOutBtn.translatesAutoresizingMaskIntoConstraints = false
-        
+		
         NSLayoutConstraint.activate([
-            signOutBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -LayoutConstants.screenHeight * 0.06),
-            signOutBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            signOutBtn.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
+			signOutBtn.topAnchor.constraint(greaterThanOrEqualTo: menuBtnsVerticalStack.bottomAnchor, constant: 55),
+            signOutBtn.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -LayoutConstants.screenHeight * 0.06),
+            signOutBtn.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 50),
+            signOutBtn.widthAnchor.constraint(lessThanOrEqualTo: scrollView.widthAnchor),
             signOutBtn.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
@@ -177,5 +250,45 @@ class SideMenuVC: UIViewController {
 	
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
 		view.updateAccentColorGradient()
+	}
+}
+
+extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return screenNavigatorCellModels.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = screenNavigatorTableView.dequeueReusableCell(withIdentifier: screenNavigatorCellReuseIdentifier) as! ScreenNavigatorTableViewCell
+		
+		cell.viewModel = screenNavigatorCellModels[indexPath.row]
+		cell.arrowIcon.isHidden = true
+//		cell.contentView.backgroundColor = .clear
+		
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 62
+	}
+	
+}
+
+extension SideMenuVC: UIScrollViewDelegate {
+	
+	
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		print(scrollView.contentOffset.y)
+		if scrollView.contentOffset.y > 10 && !scrollViewContainsTopBorder {
+			UIView.animate(withDuration: 0.2) {
+				scrollView.addTopBorder(withColor: .white, andWidth: 1)
+			}
+			scrollViewContainsTopBorder = true
+		} else {
+			UIView.animate(withDuration: 0.2) {
+				scrollView.removeAllBorders()
+			}
+			scrollViewContainsTopBorder = false
+		}
 	}
 }

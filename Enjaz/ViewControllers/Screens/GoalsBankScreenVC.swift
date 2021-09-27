@@ -100,7 +100,7 @@ class GoalsBankScreenVC: UITableViewController {
 		addItemScreenVC.itemType = ItemType.goal.id
 		addItemScreenVC.additionNameTextField.input?.inputText = goalSuggestion
 		
-		navigationController?.present(addItemScreenVC, animated: true)
+		navigationController?.present(UINavigationController(rootViewController: addItemScreenVC), animated: true)
 	}
 	
 }

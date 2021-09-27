@@ -52,6 +52,7 @@ class SelfEvaluationScreenVC: UIViewController {
     
     let goalTextField: EditableTextView = {
         let textField = EditableTextView(frame: .zero)
+//		TODO: Localize the following
         textField.placeholder = "أكتب ما تريد تحقيقه من اهداف هنا"
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lowContrastGray.cgColor
