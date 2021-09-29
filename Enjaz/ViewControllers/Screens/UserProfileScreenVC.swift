@@ -137,8 +137,6 @@ class UserProfileScreenVC: UIViewController {
 	
 	@objc func handleMedalsBtnTap() {
 		let vc = AwardsAndMedalsScreenVC()
-		vc.collectionTitle.text = NSLocalizedString("Choose a category", comment: "")
-		vc.currentState = .categoriesController
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	

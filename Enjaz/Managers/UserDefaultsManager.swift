@@ -9,6 +9,7 @@ struct UserDefaultsManager {
         static let aboutUs = "aboutUs"
         static let privacyPolicy = "privacyPolicy"
         static let goalsBank = "goalsBank"
+        static let blogs = "blogs"
     }
     
     static var goalsBank: [GoalSuggestionsModel]? {
@@ -49,6 +50,16 @@ struct UserDefaultsManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.aboutUs)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var blogs: [String]? {
+        get {
+            return UserDefaults.standard.stringArray(forKey: Keys.blogs)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.blogs)
             UserDefaults.standard.synchronize()
         }
     }

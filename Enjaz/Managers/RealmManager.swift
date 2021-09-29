@@ -22,11 +22,12 @@ struct RealmManager {
 		return retrievePersonalAspects().count
 	}
 	
-    static func itemMedalsCount(category: Int) -> Int {
-        return retrieveItemMedals(category: category).count
+    static func itemMedalsCount() -> Int {
+        return retrieveItemMedals().count
     }
 	
 	static func dropModelTable(_ model: Object.Type) {
+        let realm = try! Realm()
 		try? realm.write {
 			let table = realm.objects(model)
 			realm.delete(table)
@@ -62,22 +63,27 @@ struct RealmManager {
     }
     
     static func waterTree(_ stage: TreeStageModel) {
-        let tree = retrieveTrees().first
+        let trees = retrieveTrees()
+        let tree = trees.first
         try! realm.write({
-            tree?.stages.append(stage)
+            tree!.stages.append(stage)
         })
+        MedalsManager.treeWateringMedals(tree: trees)
     }
     
     static func saveTree(_ tree: TreeModel) {
         realm.beginWrite()
         realm.add(tree, update: .all)
         try? realm.commitWrite()
+        let trees = retrieveTrees()
+        MedalsManager.treeWateringMedals(tree: trees)
     }
 	
 	static func saveItem(_ item: ItemModel) {
 		realm.beginWrite()
 		realm.add(item)
 		try? realm.commitWrite()
+        MedalsManager.firstItemAdded()
 	}
 	
 	static func retrieveItemById(_ id: Int) -> ItemModel? {
@@ -113,8 +119,9 @@ struct RealmManager {
 		realm.beginWrite()
 		item.is_completed = isCompleted
 		completeSubsequentItemsIfIncluded(item, isCompleted: isCompleted)
-		try? realm.commitWrite()
-	}
+        try? realm.commitWrite()
+        MedalsManager.checkForMedals(itemAdded: item)
+    }
 	
 	private static func completeSubsequentItemsIfIncluded(_ item: ItemModel, isCompleted: Bool) {
 		if item.is_repeated {
@@ -253,21 +260,52 @@ struct RealmManager {
 		realm.beginWrite()
 		realm.delete(itemImage)
 		try? realm.commitWrite()
-	}
-	
+	}	
 	
 	// MARK: MedalModel
 	
-    static func saveItemMedal(_ itemMedal: MedalModel) {
-        realm.beginWrite()
-        realm.add(itemMedal)
-        try? realm.commitWrite()
+    static func saveItemMedal(_ itemMedal: [MedalModel]) {
+        let realm = try! Realm()
+        let medals = RealmManager.retrieveItemMedals()
+        for item in itemMedal {
+            if medals.count != 0 {
+                let medal = RealmManager.retrieveMedalById(id: item.id)
+                item.earned = medal!.earned
+            }
+            try! realm.write{
+                realm.add(item, update: .modified)
+            }
+        }
+    }
+    
+    static func retrieveMedalById(id: Int) -> MedalModel? {
+        let realm = try! Realm()
+        let medal = realm.object(ofType: MedalModel.self, forPrimaryKey: id)
+        return medal
+    }
+    
+    static func retrieveMedalEarnedById(id: Int) -> Bool? {
+        let medal = realm.object(ofType: MedalModel.self, forPrimaryKey: id)?.earned
+        return medal
     }
 	
-	static func retrieveItemMedals(category: Int) -> [MedalModel] {
-		let count = realm.objects(MedalModel.self).filter("category == \(category)").map({ $0 })
-		return Array(count)
+    static func retrieveItemMedals() -> [MedalModel] {
+        let realm = try! Realm()
+		let medals = realm.objects(MedalModel.self)
+		return Array(medals)
 	}
+    
+    static func retrieveItemMedals(category: Int) -> [MedalModel] {
+        let medals = realm.objects(MedalModel.self).filter("")
+        return Array(medals)
+    }
+    
+    static func updateMedal(id: Int, earned: Bool) {
+        let medal = realm.object(ofType: MedalModel.self, forPrimaryKey: id)
+        try! realm.write{
+            medal?.earned = earned
+        }
+    }
 	
 	
 	// MARK: PersonalAspectsModel

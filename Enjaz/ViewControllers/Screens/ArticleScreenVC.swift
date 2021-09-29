@@ -61,6 +61,15 @@ class ArticleScreenVC: UIViewController {
         setupSubViews()
     }
     
+    func articleRead() {
+        var blog = UserDefaultsManager.blogs
+        if !blog!.contains(draftMetaDataContainer.titleLabel.text!) {
+            blog!.append(draftMetaDataContainer.titleLabel.text!)
+            UserDefaultsManager.blogs = blog
+        }
+        MedalsManager.checkForBlogsMedals()
+    }
+    
     // MARK: View Setups
     
     func setupSubViews() {
