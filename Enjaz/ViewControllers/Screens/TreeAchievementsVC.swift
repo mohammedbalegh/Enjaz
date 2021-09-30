@@ -25,7 +25,6 @@ class TreeAchievementsVC: UITableViewController {
     }
     
     @objc func doneBtnTapped() {
-        print("pressed")
         self.dismiss(animated: true, completion: nil)
     }
     

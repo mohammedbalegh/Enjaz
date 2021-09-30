@@ -4,7 +4,7 @@ target 'Enjaz' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 10.15'
   pod 'SwiftKeychainWrapper', '~> 4.0'
   pod 'ReSwift'
   pod 'SideMenu'

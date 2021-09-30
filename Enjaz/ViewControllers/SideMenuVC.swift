@@ -278,7 +278,6 @@ extension SideMenuVC: UIScrollViewDelegate {
 	
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		print(scrollView.contentOffset.y)
 		if scrollView.contentOffset.y > 10 && !scrollViewContainsTopBorder {
 			UIView.animate(withDuration: 0.2) {
 				scrollView.addTopBorder(withColor: .white, andWidth: 1)

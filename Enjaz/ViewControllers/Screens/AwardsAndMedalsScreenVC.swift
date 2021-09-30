@@ -62,8 +62,6 @@ extension AwardsAndMedalsScreenVC: UICollectionViewDelegate, UICollectionViewDat
             cell.lockView.isHidden = false
         }
         
-        print("id", medals[indexPath.row].id, medals[indexPath.row].earned)
-        
         return cell
     }
 

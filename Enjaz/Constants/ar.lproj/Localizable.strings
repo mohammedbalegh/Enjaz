@@ -175,7 +175,8 @@
 "What have you learned" = "ماذا تعلمت";
 "What changed in you" = "ما الذي تغير فيك";
 "How do you feel" = "ما هي مشاعرك";
-"Rate your progress in this field" = "قيم نفسك بحسب إنجازاتك لأهدافك و تقدمك في المجالات";
+"Write the goals you want to achieve here" = "أكتب ما تريد تحقيقه من اهداف هنا";
+"Your progress in this field" = "تقييمك بحسب إنجازاتك لأهدافك و تقدمك في المجالات";
 
 //MARK: ItemsScreen
 "Are you sure you want to delete %@?" = "هل انت متأكد من حذف ال%@؟";

@@ -32,6 +32,8 @@ class UserProfileScreenVC: UIViewController {
     
     let changePasswordBtn: UserProfileButtonView = {
         let button = UserProfileButtonView()
+        // Not implemented yet.
+        button.isHidden = true
         button.button.setTitle(NSLocalizedString("Change password", comment: ""), for: .normal)
 		button.btnIcon.image = UIImage(systemName: "lock")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
         return button
@@ -47,7 +49,7 @@ class UserProfileScreenVC: UIViewController {
 	}()
 	
 	lazy var btnsStack: UIStackView = {
-		var stackView = UIStackView(arrangedSubviews: [medalsBtn, changePasswordBtn, themeBtn])
+		var stackView = UIStackView(arrangedSubviews: [medalsBtn, themeBtn])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		
 		stackView.axis = .vertical

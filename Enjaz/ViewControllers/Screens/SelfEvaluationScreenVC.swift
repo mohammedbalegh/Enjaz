@@ -52,8 +52,7 @@ class SelfEvaluationScreenVC: UIViewController {
     
     let goalTextField: EditableTextView = {
         let textField = EditableTextView(frame: .zero)
-//		TODO: Localize the following
-        textField.placeholder = "أكتب ما تريد تحقيقه من اهداف هنا"
+        textField.placeholder = "Write the goals you want to achieve here".localized
         textField.layer.borderWidth = 0.5
         textField.layer.borderColor = UIColor.lowContrastGray.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -77,12 +76,12 @@ class SelfEvaluationScreenVC: UIViewController {
         
         
         setupSubviews()
+        setSliderValue()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         goalTextField.text = defaults.string(forKey: "GoalTextFieldOfCategory\(categoryId)")
         goalTextField.textColor = .highContrastText
-        selfEvaluationChart.slider.value = defaults.float(forKey: "SliderValueOfCategory\(categoryId)")
     }
     
     func setupSubviews() {
@@ -168,6 +167,19 @@ class SelfEvaluationScreenVC: UIViewController {
             selfEvaluationChart.widthAnchor.constraint(equalToConstant: LayoutConstants.screenWidth * 0.9),
             selfEvaluationChart.heightAnchor.constraint(equalToConstant: LayoutConstants.screenHeight * 0.15)
         ])
+    }
+    
+    func setSliderValue() {
+        let goals = RealmManager.retrieveItems(withFilter: "type_id == \(ItemType.goal.id) AND category_id == \(categoryId)").filterOutNonOriginalItems()
+        
+        guard goals.count > 0 else { return }
+        
+        let numberOfCompletedGoals = goals.reduce(0) { result, item in
+            return item.is_completed ? result + 1 : result
+        }
+        
+        let goalCompletionRatio = Float(numberOfCompletedGoals) / Float(goals.count) * 100
+        selfEvaluationChart.slider.setValue(goalCompletionRatio, animated: true)
     }
 	
 	override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

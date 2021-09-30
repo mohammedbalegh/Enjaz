@@ -3,8 +3,6 @@ import UIKit
 
 class MedalsManager {
     
-    static let itemsCount = RealmManager.retrieveItems().count
-    
     static func checkForMedals(itemAdded: ItemModel) {
         
         switch itemAdded.type_id {
@@ -205,11 +203,11 @@ class MedalsManager {
         var tenDailyGoals = 100
         
         if goals.count >= 10 {
-            tenDailyGoals =  DateAndTimeTools.getNumberOfDaysBetween(Date(timeIntervalSince1970:goals[0].end_date), Date(timeIntervalSince1970:goals[9].end_date))!
+            tenDailyGoals =  Date.getNumberOfDaysBetween(Date(timeIntervalSince1970:goals[0].end_date), Date(timeIntervalSince1970:goals[9].end_date))!
         }
         
         if goals.count >= 3 {
-            threeDailyGoals =  DateAndTimeTools.getNumberOfDaysBetween(Date(timeIntervalSince1970:goals[0].end_date), Date(timeIntervalSince1970:goals[2].end_date))!
+            threeDailyGoals =  Date.getNumberOfDaysBetween(Date(timeIntervalSince1970:goals[0].end_date), Date(timeIntervalSince1970:goals[2].end_date))!
         }
         
         if threeDailyGoals == 0  && RealmManager.retrieveMedalEarnedById(id: 30) == false {
@@ -225,7 +223,7 @@ class MedalsManager {
         var WeaklyGoals = 100
         
         if goals.count >= 70 {
-            WeaklyGoals =  DateAndTimeTools.getNumberOfDaysBetween(Date(timeIntervalSince1970:goals[0].date), Date(timeIntervalSince1970:goals[69].end_date))!
+            WeaklyGoals =  Date.getNumberOfDaysBetween(Date(timeIntervalSince1970:goals[0].date), Date(timeIntervalSince1970:goals[69].end_date))!
         }
         
         if WeaklyGoals <= 7  && RealmManager.retrieveMedalEarnedById(id: 32) == false {
@@ -234,6 +232,8 @@ class MedalsManager {
     }
     
     static func firstItemAdded() {
+        let itemsCount = RealmManager.retrieveItems().count
+        
         if itemsCount == 1 {
             presentMedalPopUp(id: 1)
         }

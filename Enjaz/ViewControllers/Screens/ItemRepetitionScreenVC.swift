@@ -49,7 +49,7 @@ class ItemRepetitionScreenVC: ModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		view.backgroundColor = .modalScreenBackground
+        view.backgroundColor = .systemGroupedBackground | .modalScreenBackground
 		title = "Repetition".localized
 		navigationController?.navigationBar.prefersLargeTitles = true
 		

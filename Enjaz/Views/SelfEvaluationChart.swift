@@ -8,7 +8,7 @@ class SelfEvaluationChart: UIView {
     let rateYourSelfLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = NSLocalizedString("Rate your progress in this field", comment: "")
+        label.text = NSLocalizedString("Your progress in this field", comment: "")
         label.textColor = .lowContrastGray
         label.font = .systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true
@@ -27,9 +27,8 @@ class SelfEvaluationChart: UIView {
     
     let slider: UISlider = {
         let slider = UISlider()
-        slider.value = 0
         slider.isContinuous = true
-        slider.isUserInteractionEnabled = true
+        slider.isUserInteractionEnabled = false
         slider.maximumValue = 100
         slider.minimumValue = 0
 		slider.maximumTrackTintColor = .systemGray

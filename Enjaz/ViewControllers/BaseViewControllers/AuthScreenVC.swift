@@ -201,6 +201,8 @@ class AuthScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     func setupOAuthBtnsHorizontalStack() {
         view.addSubview(oAuthBtnsHorizontalStack)
         oAuthBtnsHorizontalStack.translatesAutoresizingMaskIntoConstraints = false
+        // Not implemented yet.
+        oAuthBtnsHorizontalStack.isHidden = true
         
         let arrangedSubviewSize: CGFloat = 45
         

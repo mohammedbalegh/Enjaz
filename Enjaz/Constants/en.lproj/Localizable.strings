@@ -177,7 +177,8 @@
 "What have you learned" = "What have you learned";
 "What changed in you" = "What changed in you";
 "How do you feel" = "How do you feel";
-"Rate your progress in this field" = "Rate your progress in this field";
+"Write the goals you want to achieve here" = "Write the goals you want to achieve here";
+"Your progress in this field" = "Your progress in this field";
 
 //MARK: ItemsScreen
 "Are you sure you want to delete %@?" = "Are you sure you want to delete %@?";
