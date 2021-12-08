@@ -477,8 +477,6 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }
     
     func updateMonthDaysModelWithDueItems(itemsOfMonthDayRows: [Int: [ItemModel]]) {
-        guard !itemsOfMonthDayRows.isEmpty else { return }
-        
         resetMonthDayCellModelsIncludedItems()
         
         for itemRow in itemsOfMonthDayRows.keys {
@@ -490,8 +488,6 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }
     
     func updateWeekDaysModelWithDueItems(itemsOfWeekDayRows: [Int: [ItemModel]]) {
-        guard !itemsOfWeekDayRows.isEmpty else { return }
-        
         resetWeekDayCellModelsIncludedItems()
         
         for itemRow in itemsOfWeekDayRows.keys {

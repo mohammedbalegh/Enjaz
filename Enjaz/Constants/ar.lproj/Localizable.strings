@@ -7,11 +7,15 @@
 
 // MARK: StartScreen
 "Start" = "إبدأ";
-"Welcome to Enjaz App" = "مرحبا بك في تطبيق إنجاز";
-"Finish Tasks on Time" = "انجاز المهام في التاريخ المحدد";
-"Reminding You of Repeating Habits" = "التذكير بالعادات المتكررة";
-"Keep Track of Your Achievements' Stats" = "متابعة إحصائيات انجازاتك";
-"This text is an example of a description" = "هذا النص مثال يمكن ان يستبدل في نفس المساحة";
+"Welcome to Enjaz App" = "مفكرة إنجاز ترحّب بك";
+"Finish Tasks on Time" = "متابعة الأهداف والمواعيد";
+"Reminding You of Repeating Habits" = "ديمة";
+"Keep Track of Your Achievements' Stats" = "إحصائيات وأوسمة";
+
+"We're delighted to have you on board. Because your life desreves achievement, we're here" = "سعيدن لانضمامك معنا. لأن حياتك تستحق الإنجاز، نحن هنا";
+"Register your appintments, write down your goals and keep track of them" = "سجّل مواعيدك، ودوّن أهدافك وتابعها وذكّر نفسك بها";
+"Keep track of your personal habits" = "عاداتك الشحصية سواء ماتريد اكتسابه أو ماتريد التخلص منه، تابعها هنا";
+"Keep trck of your progress and see your rewards" = "تابع تقدّمك وشاهد جوائزك، فلكل مجتهد نصيب، ودائما هناك فرصة للتحسين";
 
 //MARK: LoginScreen
 "Forgot your password?" = "نسيت كلمة السر؟";
@@ -28,6 +32,7 @@
 //MARK: SignupScreen
 "Enter your account details" = "ادخل بيانات الحساب";
 "Already have an account?" = "لديك حساب بالفعل؟";
+"Username or Email" = "اسم المستخدم أو البريد الإلكتروني";
 "Username or email already taken" = "اسم المستخدم أو البريد الإلكتروني مسجل بالفعل";
 "Username" = "اسم المستخدم";
 "Incorrect username" = "اسم المستخدم غير صحيح";
@@ -76,7 +81,7 @@
 "Notifications" = "الإشعارات";
 
 // MARK: GoalsBankScreenVC
-"Some goals suggestions" = "Some goals suggestions";
+"Some goals suggestions" = "اقتراحات لبعض الأهداف";
 
 // MARK: AddItemScreen
 "Add %@" = "إضافة %@";
@@ -135,7 +140,7 @@
 //MARK: PersonalAspectsScreen
 "Personal Aspects" = "الجوانب الشخصية";
 "Write what you know about your self" = "أكتب ما تعرفه عن نفسك هنا";
-"Who am i" = "من أنا";
+"Who am I" = "من أنا";
 "My mission in life" = "رسالتي في الحياة";
 "Write your life mission" = "أكتب رسالتك في الحياة";
 "Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year" = "ترجم ما تعرفه عن نفسك من احلام و امنيات و تطلعات  و غيرها الي اهداف,لتحقق منها تقدم هذا العام";
@@ -245,10 +250,10 @@
 "Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
 "Goals related to science, reading, courses and mind development" = "الاهداف المرتبطة بالعلم و التعلم و القراءة و الدورات و تنمية العقل";
 "Goals related to your personal health, fitness and mental health" = "الاهداف المرتبطة بصحتك الشخصية و اللياقة البدنية و الصحة النفسية";
-"Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
-"Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
-"Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
-"Goals related to faith and your relationship with Allah the almighty" = "الاهداف المتعلقة بالإيمان و علاقتك مع الله سبحانه و تعالي";
+"Goals related to your social life and friends and family" = "الاهداف المتعلقة بحياتك الاجتماعية و علاقتك مع العائلة و الاصدقاء";
+"Goals related to your career and job" = "الاهداف المتعلقة بحياتك المهنية و وظيفتك";
+"Goals related to your personal life" = "الاهداف المتعلقة بحياتك الشخصية";
+"Goals related to your financial situation" = "الاهداف المتعلقة بالأموال";
 
 // MARK: Item Types
 "Task" = "مهمة";

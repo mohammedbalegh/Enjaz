@@ -14,13 +14,14 @@ class AboutAppScreenVC: PrivacyPolicyAndAboutAppVC {
         super.viewDidLoad()
 		title = NSLocalizedString("About App", comment: "")
 		
-		textView.text = "Lorem ipusm dolor"
-		textViewTopAnchorConstraint.constant = linksViewHeight + 30
+		textView.text = UserDefaultsManager.aboutUs
+//		textViewTopAnchorConstraint.constant = linksViewHeight + 30
+        updateScreen()
     }
-	
+    	
 	override func setupSubviews() {
 		super.setupSubviews()
-		setupLinksView()
+//		setupLinksView()
 	}
 	
 	func setupLinksView() {
@@ -33,5 +34,18 @@ class AboutAppScreenVC: PrivacyPolicyAndAboutAppVC {
 			linksView.heightAnchor.constraint(equalToConstant: linksViewHeight)
 		])
 	}
+    
+    func updateScreen() {
+        NetworkingManager.retrieveAboutUs { (data, error) in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    return
+                }
+                
+                UserDefaultsManager.aboutUs = data?.text
+                self.textView.text = data?.text
+            }
+        }
+    }
 	
 }

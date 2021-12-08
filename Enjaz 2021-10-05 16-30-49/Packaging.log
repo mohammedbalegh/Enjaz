@@ -1,0 +1,501 @@
+2021-10-05 14:30:40 +0000  Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fe94f3ef100; archive(resolved)="<IDEArchive: 0x7fe93183e8c0>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team(resolved)="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	Chain (14, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fe94f3ef100; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionProcessingPipelineContext: 0x7fe9500f0400; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe9500e4370; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe9500ee0c0; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe94feea430; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe94feea260; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe94f626440; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe9500bbaf0; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe947068870; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="<IDEProvisioningDisambiguatableBasicTeam: 0x7fe950855e80; teamID='878WRHSR2X', teamName='Ahmed Elsawasay', teamType='Company', username='abdlrhmanelmahdy@gmail.com', isFreeProvisioningTeam='0'>">
+	<IDEDistributionContext: 0x7fe950072410; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="(null)">
+	<IDEDistributionContext: 0x7fe931eee940; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="(null)">
+	<IDEDistributionContext: 0x7fe9482efac0; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="(null)">
+	<IDEDistributionContext: 0x7fe94f61b580; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="<IDEDistributionMethodiOSAdHoc: 0x7fe931b1a990>", team="(null)">
+	<IDEDistributionContext: 0x7fe949aaafd0; archive = "<IDEArchive: 0x7fe93183e8c0>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7fe94f3ef100>
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionCreateDestRootStep
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionCopyItemStep
+2021-10-05 14:30:40 +0000  Running /usr/bin/ditto '-V' '/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app'
+2021-10-05 14:30:40 +0000  >>> Copying /Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app 
+2021-10-05 14:30:40 +0000  copying file ./_CodeSignature/CodeResources ... 
+2021-10-05 14:30:40 +0000  10660 bytes for ./_CodeSignature/CodeResources
+2021-10-05 14:30:40 +0000  copying file ./ar.lproj/LaunchScreen.strings ... 
+2021-10-05 14:30:40 +0000  1 bytes for ./ar.lproj/LaunchScreen.strings
+2021-10-05 14:30:40 +0000  copying file ./ar.lproj/Localizable.strings ... 
+2021-10-05 14:30:40 +0000  14443 bytes for ./ar.lproj/Localizable.strings
+2021-10-05 14:30:40 +0000  copying file ./en.lproj/Localizable.strings ... 
+2021-10-05 14:30:40 +0000  584 bytes for ./en.lproj/Localizable.strings
+2021-10-05 14:30:40 +0000  copying file ./AppIcon60x60@2x.png ... 
+12972 bytes for ./AppIcon60x60@2x.png
+copying file ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2021-10-05 14:30:40 +0000  2480 bytes for ./Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+2021-10-05 14:30:40 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+2021-10-05 14:30:40 +0000  896 bytes for ./Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+2021-10-05 14:30:40 +0000  copying file ./Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+2021-10-05 14:30:40 +0000  258 bytes for ./Base.lproj/LaunchScreen.storyboardc/Info.plist
+2021-10-05 14:30:40 +0000  copying file ./Assets.car ... 
+2021-10-05 14:30:40 +0000  6200480 bytes for ./Assets.car
+2021-10-05 14:30:40 +0000  copying file ./AppIcon76x76@2x~ipad.png ... 
+2021-10-05 14:30:40 +0000  17416 bytes for ./AppIcon76x76@2x~ipad.png
+2021-10-05 14:30:40 +0000  copying file ./Enjaz ... 
+2021-10-05 14:30:40 +0000  18895904 bytes for ./Enjaz
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/RealmSwift.framework/_CodeSignature/CodeResources ... 
+2021-10-05 14:30:40 +0000  1798 bytes for ./Frameworks/RealmSwift.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/RealmSwift.framework/RealmSwift ... 
+2021-10-05 14:30:40 +0000  7991888 bytes for ./Frameworks/RealmSwift.framework/RealmSwift
+copying file ./Frameworks/RealmSwift.framework/Info.plist ... 
+2021-10-05 14:30:40 +0000  745 bytes for ./Frameworks/RealmSwift.framework/Info.plist
+copying file ./Frameworks/SwiftKeychainWrapper.framework/_CodeSignature/CodeResources ... 
+2021-10-05 14:30:40 +0000  1798 bytes for ./Frameworks/SwiftKeychainWrapper.framework/_CodeSignature/CodeResources
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper ... 
+2021-10-05 14:30:40 +0000  553296 bytes for ./Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/SwiftKeychainWrapper.framework/Info.plist ... 
+765 bytes for ./Frameworks/SwiftKeychainWrapper.framework/Info.plist
+copying file ./Frameworks/ReSwift.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/ReSwift.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/ReSwift.framework/ReSwift ... 
+2021-10-05 14:30:40 +0000  652912 bytes for ./Frameworks/ReSwift.framework/ReSwift
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/ReSwift.framework/Info.plist ... 
+2021-10-05 14:30:40 +0000  737 bytes for ./Frameworks/ReSwift.framework/Info.plist
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/SPAlert.framework/_CodeSignature/CodeResources ... 
+2021-10-05 14:30:40 +0000  1798 bytes for ./Frameworks/SPAlert.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/SPAlert.framework/SPAlert ... 
+2021-10-05 14:30:40 +0000  639072 bytes for ./Frameworks/SPAlert.framework/SPAlert
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/SPAlert.framework/Info.plist ... 
+2021-10-05 14:30:40 +0000  785 bytes for ./Frameworks/SPAlert.framework/Info.plist
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/Realm.framework/_CodeSignature/CodeResources ... 
+2021-10-05 14:30:40 +0000  1798 bytes for ./Frameworks/Realm.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/Realm.framework/Info.plist ... 
+2021-10-05 14:30:40 +0000  735 bytes for ./Frameworks/Realm.framework/Info.plist
+copying file ./Frameworks/Realm.framework/Realm ... 
+2021-10-05 14:30:40 +0000  48949488 bytes for ./Frameworks/Realm.framework/Realm
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/ShimmerSwift.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/ShimmerSwift.framework/_CodeSignature/CodeResources
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/ShimmerSwift.framework/Info.plist ... 
+2021-10-05 14:30:40 +0000  748 bytes for ./Frameworks/ShimmerSwift.framework/Info.plist
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/ShimmerSwift.framework/ShimmerSwift ... 
+2021-10-05 14:30:40 +0000  501936 bytes for ./Frameworks/ShimmerSwift.framework/ShimmerSwift
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/SideMenu.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Frameworks/SideMenu.framework/_CodeSignature/CodeResources
+copying file ./Frameworks/SideMenu.framework/SideMenu ... 
+2021-10-05 14:30:40 +0000  1695296 bytes for ./Frameworks/SideMenu.framework/SideMenu
+2021-10-05 14:30:40 +0000  copying file ./Frameworks/SideMenu.framework/Info.plist ... 
+2021-10-05 14:30:40 +0000  740 bytes for ./Frameworks/SideMenu.framework/Info.plist
+2021-10-05 14:30:40 +0000  copying file ./embedded.mobileprovision ... 
+2021-10-05 14:30:40 +0000  14411 bytes for ./embedded.mobileprovision
+2021-10-05 14:30:40 +0000  /usr/bin/ditto exited with 0
+2021-10-05 14:30:40 +0000  copying file ./Info.plist ... 
+1841 bytes for ./Info.plist
+copying file ./PkgInfo ... 
+8 bytes for ./PkgInfo
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionEmbedProfileStep
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe94f939f50; bundleID='org.cocoapods.ReSwift', path='<DVTFilePath:0x7fe94b207c50:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe944796f10; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6f0a30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ReSwift', executablePath='<DVTFilePath:0x7fe9452fc4f0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework/ReSwift'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe931cc6500; bundleID='org.cocoapods.Realm', path='<DVTFilePath:0x7fe934ddcda0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe947c64930; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6f0a30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.Realm', executablePath='<DVTFilePath:0x7fe934da1b40:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework/Realm'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe95006cad0; bundleID='org.cocoapods.RealmSwift', path='<DVTFilePath:0x7fe931ed9210:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94b6c18a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6f0a30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.RealmSwift', executablePath='<DVTFilePath:0x7fe94d9174a0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe95002dfa0; bundleID='org.cocoapods.SPAlert', path='<DVTFilePath:0x7fe93365ac20:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94ebf4520; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6f0a30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SPAlert', executablePath='<DVTFilePath:0x7fe94b6eb060:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework/SPAlert'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe9500b2000; bundleID='org.cocoapods.ShimmerSwift', path='<DVTFilePath:0x7fe9341b6da0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94d9461c0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6f0a30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ShimmerSwift', executablePath='<DVTFilePath:0x7fe9507ae280:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe9320b5950; bundleID='org.cocoapods.SideMenu', path='<DVTFilePath:0x7fe9336366b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe9350e5cb0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fe39d80; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SideMenu', executablePath='<DVTFilePath:0x7fe94f3fb2d0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework/SideMenu'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Skipping profile for item: <IDEDistributionItem: 0x7fe95007b720; bundleID='org.cocoapods.SwiftKeychainWrapper', path='<DVTFilePath:0x7fe934194650:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe93465c850; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6f0a30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SwiftKeychainWrapper', executablePath='<DVTFilePath:0x7fe94d60ea90:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionInfoPlistStep
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionInfoPlistStep because it said so
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionAppThinningPlistStep
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionCompileBitcodeStep
+2021-10-05 14:30:40 +0000  Skipping step: IDEDistributionCompileBitcodeStep because it said so
+2021-10-05 14:30:40 +0000  Processing step: IDEDistributionCodeSlimmingStep
+2021-10-05 14:30:40 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework/ReSwift' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework/ReSwift'
+2021-10-05 14:30:40 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:40 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework/Realm' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework/Realm'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework/SPAlert' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework/SPAlert'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework/SideMenu' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework/SideMenu'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Enjaz' '-r' '-keep_cs' '-o' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Enjaz'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip exited with 0
+2021-10-05 14:30:41 +0000  Processing step: IDEDistributionCopyBCSymbolMapsStep
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionCopyBCSymbolMapsStep because it said so
+2021-10-05 14:30:41 +0000  Processing step: IDEDistributionSymbolsStep
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionSymbolsStep because it said so
+2021-10-05 14:30:41 +0000  Processing step: IDEDistributionAppThinningStep
+2021-10-05 14:30:41 +0000  Skipping step: IDEDistributionAppThinningStep because it said so
+2021-10-05 14:30:41 +0000  Processing step: IDEDistributionArchThinningStep
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework/ReSwift' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "ReSwift" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework/Realm' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "Realm" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "RealmSwift" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework/SPAlert' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "SPAlert" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "ShimmerSwift" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework/SideMenu' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "SideMenu" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "SwiftKeychainWrapper" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Enjaz' '-verify_arch' 'arm64e'
+2021-10-05 14:30:41 +0000  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2021-10-05 14:30:41 +0000  Skipping architecture thinning for item "Enjaz" because arch "arm64e" wasn't found
+2021-10-05 14:30:41 +0000  Processing step: IDEDistributionODRStep
+2021-10-05 14:30:41 +0000  Processing step: IDEDistributionStripXattrsStep
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe94f939f50; bundleID='org.cocoapods.ReSwift', path='<DVTFilePath:0x7fe94b207c50:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe944796f10; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe931e543f0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ReSwift', executablePath='<DVTFilePath:0x7fe9452fc4f0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework/ReSwift'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe931cc6500; bundleID='org.cocoapods.Realm', path='<DVTFilePath:0x7fe934ddcda0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe947c64930; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9500e6050; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.Realm', executablePath='<DVTFilePath:0x7fe934da1b40:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework/Realm'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe95006cad0; bundleID='org.cocoapods.RealmSwift', path='<DVTFilePath:0x7fe931ed9210:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94b6c18a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe931e543f0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.RealmSwift', executablePath='<DVTFilePath:0x7fe94d9174a0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe95002dfa0; bundleID='org.cocoapods.SPAlert', path='<DVTFilePath:0x7fe93365ac20:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94ebf4520; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe931e543f0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SPAlert', executablePath='<DVTFilePath:0x7fe94b6eb060:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework/SPAlert'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe9500b2000; bundleID='org.cocoapods.ShimmerSwift', path='<DVTFilePath:0x7fe9341b6da0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94d9461c0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94c5b4460; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ShimmerSwift', executablePath='<DVTFilePath:0x7fe9507ae280:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe9320b5950; bundleID='org.cocoapods.SideMenu', path='<DVTFilePath:0x7fe9336366b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe9350e5cb0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f3f2c10; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SideMenu', executablePath='<DVTFilePath:0x7fe94f3fb2d0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework/SideMenu'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Skipping stripping extended attributes of item: <IDEDistributionItem: 0x7fe95007b720; bundleID='org.cocoapods.SwiftKeychainWrapper', path='<DVTFilePath:0x7fe934194650:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe93465c850; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fecf450; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SwiftKeychainWrapper', executablePath='<DVTFilePath:0x7fe94d60ea90:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper'>', hardenedRuntime='0'>'>
+2021-10-05 14:30:41 +0000  Running /usr/bin/xattr '-crs' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app'
+2021-10-05 14:30:42 +0000  /usr/bin/xattr exited with 0
+2021-10-05 14:30:42 +0000  Processing step: IDEDistributionCodesignStep
+2021-10-05 14:30:42 +0000  Entitlements for <IDEDistributionItem: 0x7fe94f939f50; bundleID='org.cocoapods.ReSwift', path='<DVTFilePath:0x7fe94b207c50:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe944796f10; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9341d0480; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ReSwift', executablePath='<DVTFilePath:0x7fe9452fc4f0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework/ReSwift'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:42 +0000  Entitlements for <IDEDistributionItem: 0x7fe94f939f50; bundleID='org.cocoapods.ReSwift', path='<DVTFilePath:0x7fe94b207c50:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe944796f10; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94d575ed0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ReSwift', executablePath='<DVTFilePath:0x7fe9452fc4f0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework/ReSwift'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:42 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe94f939f50; bundleID='org.cocoapods.ReSwift', path='<DVTFilePath:0x7fe94b207c50:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe944796f10; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fecf450; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ReSwift', executablePath='<DVTFilePath:0x7fe9452fc4f0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ReSwift.framework/ReSwift'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~ZsCKwQ
+2021-10-05 14:30:42 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~ZsCKwQ' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework'
+2021-10-05 14:30:42 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework: replacing existing signature
+2021-10-05 14:30:42 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.ReSwift]
+2021-10-05 14:30:42 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:42 +0000  Entitlements for <IDEDistributionItem: 0x7fe931cc6500; bundleID='org.cocoapods.Realm', path='<DVTFilePath:0x7fe934ddcda0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe947c64930; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9341d0480; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.Realm', executablePath='<DVTFilePath:0x7fe934da1b40:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework/Realm'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:42 +0000  Entitlements for <IDEDistributionItem: 0x7fe931cc6500; bundleID='org.cocoapods.Realm', path='<DVTFilePath:0x7fe934ddcda0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe947c64930; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94da7fb30; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.Realm', executablePath='<DVTFilePath:0x7fe934da1b40:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework/Realm'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:42 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe931cc6500; bundleID='org.cocoapods.Realm', path='<DVTFilePath:0x7fe934ddcda0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe947c64930; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe950545cd0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.Realm', executablePath='<DVTFilePath:0x7fe934da1b40:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/Realm.framework/Realm'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~vuy3Sp
+2021-10-05 14:30:42 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~vuy3Sp' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework'
+2021-10-05 14:30:42 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework: replacing existing signature
+2021-10-05 14:30:42 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.Realm]
+2021-10-05 14:30:42 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:42 +0000  Entitlements for <IDEDistributionItem: 0x7fe95006cad0; bundleID='org.cocoapods.RealmSwift', path='<DVTFilePath:0x7fe931ed9210:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94b6c18a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9341d0480; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.RealmSwift', executablePath='<DVTFilePath:0x7fe94d9174a0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:42 +0000  Entitlements for <IDEDistributionItem: 0x7fe95006cad0; bundleID='org.cocoapods.RealmSwift', path='<DVTFilePath:0x7fe931ed9210:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94b6c18a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f6a7920; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.RealmSwift', executablePath='<DVTFilePath:0x7fe94d9174a0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:43 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe95006cad0; bundleID='org.cocoapods.RealmSwift', path='<DVTFilePath:0x7fe931ed9210:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94b6c18a0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fea07a0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.RealmSwift', executablePath='<DVTFilePath:0x7fe94d9174a0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~ri29sQ
+2021-10-05 14:30:43 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~ri29sQ' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework'
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework: replacing existing signature
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.RealmSwift]
+2021-10-05 14:30:43 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe95002dfa0; bundleID='org.cocoapods.SPAlert', path='<DVTFilePath:0x7fe93365ac20:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94ebf4520; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9341d0480; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SPAlert', executablePath='<DVTFilePath:0x7fe94b6eb060:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework/SPAlert'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe95002dfa0; bundleID='org.cocoapods.SPAlert', path='<DVTFilePath:0x7fe93365ac20:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94ebf4520; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fea07a0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SPAlert', executablePath='<DVTFilePath:0x7fe94b6eb060:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework/SPAlert'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:43 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe95002dfa0; bundleID='org.cocoapods.SPAlert', path='<DVTFilePath:0x7fe93365ac20:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94ebf4520; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fe7eef0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SPAlert', executablePath='<DVTFilePath:0x7fe94b6eb060:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SPAlert.framework/SPAlert'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~TeKpUO
+2021-10-05 14:30:43 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~TeKpUO' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework'
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework: replacing existing signature
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework: signed bundle with Mach-O thin (arm64) [org.cocoapods.SPAlert]
+2021-10-05 14:30:43 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe9500b2000; bundleID='org.cocoapods.ShimmerSwift', path='<DVTFilePath:0x7fe9341b6da0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94d9461c0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fe909f0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ShimmerSwift', executablePath='<DVTFilePath:0x7fe9507ae280:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe9500b2000; bundleID='org.cocoapods.ShimmerSwift', path='<DVTFilePath:0x7fe9341b6da0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94d9461c0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fede060; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ShimmerSwift', executablePath='<DVTFilePath:0x7fe9507ae280:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:43 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe9500b2000; bundleID='org.cocoapods.ShimmerSwift', path='<DVTFilePath:0x7fe9341b6da0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe94d9461c0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fe766b0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.ShimmerSwift', executablePath='<DVTFilePath:0x7fe9507ae280:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~Ab78ne
+2021-10-05 14:30:43 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~Ab78ne' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework'
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework: replacing existing signature
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.ShimmerSwift]
+2021-10-05 14:30:43 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe9320b5950; bundleID='org.cocoapods.SideMenu', path='<DVTFilePath:0x7fe9336366b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe9350e5cb0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9341d0480; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SideMenu', executablePath='<DVTFilePath:0x7fe94f3fb2d0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework/SideMenu'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe9320b5950; bundleID='org.cocoapods.SideMenu', path='<DVTFilePath:0x7fe9336366b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe9350e5cb0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fe39d80; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SideMenu', executablePath='<DVTFilePath:0x7fe94f3fb2d0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework/SideMenu'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:43 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe9320b5950; bundleID='org.cocoapods.SideMenu', path='<DVTFilePath:0x7fe9336366b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe9350e5cb0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe950587a20; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SideMenu', executablePath='<DVTFilePath:0x7fe94f3fb2d0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SideMenu.framework/SideMenu'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~Neabs0
+2021-10-05 14:30:43 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~Neabs0' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework'
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework: replacing existing signature
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.SideMenu]
+2021-10-05 14:30:43 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe95007b720; bundleID='org.cocoapods.SwiftKeychainWrapper', path='<DVTFilePath:0x7fe934194650:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe93465c850; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fe39d80; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SwiftKeychainWrapper', executablePath='<DVTFilePath:0x7fe94d60ea90:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper'>', hardenedRuntime='0'>'>: {
+}
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe95007b720; bundleID='org.cocoapods.SwiftKeychainWrapper', path='<DVTFilePath:0x7fe934194650:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe93465c850; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe931ea5630; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SwiftKeychainWrapper', executablePath='<DVTFilePath:0x7fe94d60ea90:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper'>', hardenedRuntime='0'>'> are: {
+}
+2021-10-05 14:30:43 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe95007b720; bundleID='org.cocoapods.SwiftKeychainWrapper', path='<DVTFilePath:0x7fe934194650:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe93465c850; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fede080; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='(null)', teamID='878WRHSR2X', identifier='org.cocoapods.SwiftKeychainWrapper', executablePath='<DVTFilePath:0x7fe94d60ea90:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~QizRCa
+2021-10-05 14:30:43 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~QizRCa' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework: replacing existing signature
+2021-10-05 14:30:43 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework: signed bundle with Mach-O universal (arm64) [org.cocoapods.SwiftKeychainWrapper]
+2021-10-05 14:30:43 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe935178950; bundleID='prototype.Enjaz', path='<DVTFilePath:0x7fe93185d500:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe949aaa1d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe9341d0480; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='{
+    "application-identifier" = "878WRHSR2X.prototype.Enjaz";
+    "com.apple.developer.team-identifier" = 878WRHSR2X;
+    "get-task-allow" = 1;
+    "keychain-access-groups" =     (
+        "878WRHSR2X.prototype.Enjaz"
+    );
+}', teamID='878WRHSR2X', identifier='prototype.Enjaz', executablePath='<DVTFilePath:0x7fe95009e2b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Enjaz'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "878WRHSR2X.prototype.Enjaz";
+    "com.apple.developer.team-identifier" = 878WRHSR2X;
+    "get-task-allow" = 0;
+    "keychain-access-groups" =     (
+        "878WRHSR2X.prototype.Enjaz"
+    );
+}
+2021-10-05 14:30:43 +0000  Entitlements for <IDEDistributionItem: 0x7fe935178950; bundleID='prototype.Enjaz', path='<DVTFilePath:0x7fe93185d500:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe949aaa1d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94fecf450; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='{
+    "application-identifier" = "878WRHSR2X.prototype.Enjaz";
+    "com.apple.developer.team-identifier" = 878WRHSR2X;
+    "get-task-allow" = 1;
+    "keychain-access-groups" =     (
+        "878WRHSR2X.prototype.Enjaz"
+    );
+}', teamID='878WRHSR2X', identifier='prototype.Enjaz', executablePath='<DVTFilePath:0x7fe95009e2b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Enjaz'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "878WRHSR2X.prototype.Enjaz";
+    "com.apple.developer.team-identifier" = 878WRHSR2X;
+    "get-task-allow" = 0;
+    "keychain-access-groups" =     (
+        "878WRHSR2X.prototype.Enjaz"
+    );
+}
+2021-10-05 14:30:43 +0000  Writing entitlements for <IDEDistributionItem: 0x7fe935178950; bundleID='prototype.Enjaz', path='<DVTFilePath:0x7fe93185d500:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x7fe949aaa1d0; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x7fe94f3f31c0; name='Apple Development: Abdelrhman Elmahdy (GS3YR2MZ84)', hash='2F824359C7E0DB6DAECB0256FD9D70716C3C8FCA', serialNumber='34AC81A7AE1E957FA8CC42B539CAE1A8', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2021-04-25 21:49:41 +0000''>', entitlements='{
+    "application-identifier" = "878WRHSR2X.prototype.Enjaz";
+    "com.apple.developer.team-identifier" = 878WRHSR2X;
+    "get-task-allow" = 1;
+    "keychain-access-groups" =     (
+        "878WRHSR2X.prototype.Enjaz"
+    );
+}', teamID='878WRHSR2X', identifier='prototype.Enjaz', executablePath='<DVTFilePath:0x7fe95009e2b0:'/Users/Abdelrhman/Library/Developer/Xcode/Archives/2021-10-02/Enjaz 02-10-2021, 3.32 AM.xcarchive/Products/Applications/Enjaz.app/Enjaz'>', hardenedRuntime='0'>'> to: /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~7Qx1mN
+2021-10-05 14:30:43 +0000  Running /usr/bin/codesign '-vvv' '--force' '--sign' 'E3D07061842F22AEE366FC0EB9F1370E555E605E' '--entitlements' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/entitlements~~~7Qx1mN' '--preserve-metadata=identifier,flags,runtime' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app'
+2021-10-05 14:30:44 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app: replacing existing signature
+2021-10-05 14:30:44 +0000  /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app: signed app bundle with Mach-O thin (arm64) [prototype.Enjaz]
+2021-10-05 14:30:44 +0000  /usr/bin/codesign exited with 0
+2021-10-05 14:30:44 +0000  Processing step: IDEDistributionZipODRItemStep
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Skipping step: IDEDistributionZipODRItemStep because it said so
+2021-10-05 14:30:44 +0000  Processing step: IDEDistributionCreateIPAStep
+2021-10-05 14:30:44 +0000  Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root' '/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Packages/Enjaz.ipa'
+2021-10-05 14:30:44 +0000  >>> Copying /var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root 
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/_CodeSignature/CodeResources ... 
+2021-10-05 14:30:44 +0000  10660 bytes for ./Payload/Enjaz.app/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/ar.lproj/LaunchScreen.strings ... 
+2021-10-05 14:30:44 +0000  1 bytes for ./Payload/Enjaz.app/ar.lproj/LaunchScreen.strings
+copying file ./Payload/Enjaz.app/ar.lproj/Localizable.strings ... 
+2021-10-05 14:30:44 +0000  14443 bytes for ./Payload/Enjaz.app/ar.lproj/Localizable.strings
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/en.lproj/Localizable.strings ... 
+584 bytes for ./Payload/Enjaz.app/en.lproj/Localizable.strings
+copying file ./Payload/Enjaz.app/AppIcon60x60@2x.png ... 
+2021-10-05 14:30:44 +0000  12972 bytes for ./Payload/Enjaz.app/AppIcon60x60@2x.png
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib ... 
+2021-10-05 14:30:44 +0000  2480 bytes for ./Payload/Enjaz.app/Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib ... 
+896 bytes for ./Payload/Enjaz.app/Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib
+copying file ./Payload/Enjaz.app/Base.lproj/LaunchScreen.storyboardc/Info.plist ... 
+258 bytes for ./Payload/Enjaz.app/Base.lproj/LaunchScreen.storyboardc/Info.plist
+copying file ./Payload/Enjaz.app/Assets.car ... 
+2021-10-05 14:30:44 +0000  6200480 bytes for ./Payload/Enjaz.app/Assets.car
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/AppIcon76x76@2x~ipad.png ... 
+17416 bytes for ./Payload/Enjaz.app/AppIcon76x76@2x~ipad.png
+copying file ./Payload/Enjaz.app/Enjaz ... 
+2021-10-05 14:30:44 +0000  2515984 bytes for ./Payload/Enjaz.app/Enjaz
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Frameworks/RealmSwift.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/RealmSwift.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift ... 
+2021-10-05 14:30:44 +0000  2749120 bytes for ./Payload/Enjaz.app/Frameworks/RealmSwift.framework/RealmSwift
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Frameworks/RealmSwift.framework/Info.plist ... 
+745 bytes for ./Payload/Enjaz.app/Frameworks/RealmSwift.framework/Info.plist
+copying file ./Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper ... 
+2021-10-05 14:30:44 +0000  221744 bytes for ./Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/SwiftKeychainWrapper
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/Info.plist ... 
+765 bytes for ./Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework/Info.plist
+copying file ./Payload/Enjaz.app/Frameworks/ReSwift.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/ReSwift.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/ReSwift.framework/ReSwift ... 
+2021-10-05 14:30:44 +0000  221824 bytes for ./Payload/Enjaz.app/Frameworks/ReSwift.framework/ReSwift
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Frameworks/ReSwift.framework/Info.plist ... 
+737 bytes for ./Payload/Enjaz.app/Frameworks/ReSwift.framework/Info.plist
+copying file ./Payload/Enjaz.app/Frameworks/SPAlert.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/SPAlert.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/SPAlert.framework/SPAlert ... 
+2021-10-05 14:30:44 +0000  210016 bytes for ./Payload/Enjaz.app/Frameworks/SPAlert.framework/SPAlert
+2021-10-05 14:30:44 +0000  copying file ./Payload/Enjaz.app/Frameworks/SPAlert.framework/Info.plist ... 
+785 bytes for ./Payload/Enjaz.app/Frameworks/SPAlert.framework/Info.plist
+copying file ./Payload/Enjaz.app/Frameworks/Realm.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/Realm.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/Realm.framework/Info.plist ... 
+735 bytes for ./Payload/Enjaz.app/Frameworks/Realm.framework/Info.plist
+copying file ./Payload/Enjaz.app/Frameworks/Realm.framework/Realm ... 
+2021-10-05 14:30:45 +0000  10589072 bytes for ./Payload/Enjaz.app/Frameworks/Realm.framework/Realm
+2021-10-05 14:30:45 +0000  copying file ./Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/Info.plist ... 
+748 bytes for ./Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/Info.plist
+copying file ./Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift ... 
+2021-10-05 14:30:45 +0000  186992 bytes for ./Payload/Enjaz.app/Frameworks/ShimmerSwift.framework/ShimmerSwift
+2021-10-05 14:30:45 +0000  copying file ./Payload/Enjaz.app/Frameworks/SideMenu.framework/_CodeSignature/CodeResources ... 
+1798 bytes for ./Payload/Enjaz.app/Frameworks/SideMenu.framework/_CodeSignature/CodeResources
+copying file ./Payload/Enjaz.app/Frameworks/SideMenu.framework/SideMenu ... 
+2021-10-05 14:30:45 +0000  583936 bytes for ./Payload/Enjaz.app/Frameworks/SideMenu.framework/SideMenu
+2021-10-05 14:30:45 +0000  copying file ./Payload/Enjaz.app/Frameworks/SideMenu.framework/Info.plist ... 
+740 bytes for ./Payload/Enjaz.app/Frameworks/SideMenu.framework/Info.plist
+copying file ./Payload/Enjaz.app/embedded.mobileprovision ... 
+2021-10-05 14:30:45 +0000  16499 bytes for ./Payload/Enjaz.app/embedded.mobileprovision
+2021-10-05 14:30:45 +0000  copying file ./Payload/Enjaz.app/Info.plist ... 
+2021-10-05 14:30:45 +0000  1841 bytes for ./Payload/Enjaz.app/Info.plist
+copying file ./Payload/Enjaz.app/PkgInfo ... 
+2021-10-05 14:30:45 +0000  8 bytes for ./Payload/Enjaz.app/PkgInfo
+2021-10-05 14:30:45 +0000  /usr/bin/ditto exited with 0
+2021-10-05 14:30:45 +0000  Processing step: IDEDistributionAppStoreInformationStep
+2021-10-05 14:30:45 +0000  Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2021-10-05 14:30:45 +0000  Processing step: IDEDistributionGenerateProcessedDistributionItems
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe94fed6080:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SPAlert.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe94fee0420:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ReSwift.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe94fec9bf0:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/RealmSwift.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe9500c65c0:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/Realm.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe9505049b0:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SideMenu.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe950506b90:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/ShimmerSwift.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe94fe757c0:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app/Frameworks/SwiftKeychainWrapper.framework'>
+2021-10-05 14:30:45 +0000  IDEDistributionItem init <DVTFilePath:0x7fe94d5e28b0:'/var/folders/nj/y2wbn0k928g09qd_dcmd6h2h0000gn/T/XcodeDistPipeline.~~~Lc7nMH/Root/Payload/Enjaz.app'>
+2021-10-05 14:30:45 +0000  Processing step: IDEDistributionCreateManifestStep

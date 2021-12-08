@@ -6,8 +6,8 @@ class GoalsBankScreenVC: UITableViewController {
     var goalSuggestions: [GoalSuggestionsModel] = []
 	
     lazy var headerLabel: UILabel = {
-		let label = UILabel(frame: CGRect(x: 8, y: 0, width: view.frame.width - 8, height: 50))
-        label.text = NSLocalizedString("Some goals suggestions", comment: "")
+		let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 8, height: 50))
+        label.text = "   " + NSLocalizedString("Some goals suggestions", comment: "")
         label.font = label.font.withSize(16)
 		label.textAlignment = .natural
         label.adjustsFontSizeToFitWidth = true

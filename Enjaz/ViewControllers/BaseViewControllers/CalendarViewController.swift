@@ -98,7 +98,7 @@ class CalendarViewController: ModalVC {
     
     var selectedCalendarIdentifier: Calendar.Identifier {
         let islamicCalendarIndex = Locale.current.languageCode == "ar" ? 0 : 1
-        return selectedCalendarTypeIndex == islamicCalendarIndex ? .islamicCivil : .gregorian
+        return selectedCalendarTypeIndex == islamicCalendarIndex ? .islamicUmmAlQura : .gregorian
     }
     
     var currentDay: Int {

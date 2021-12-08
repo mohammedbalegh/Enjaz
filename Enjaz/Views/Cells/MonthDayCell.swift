@@ -16,8 +16,22 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             itemIndicator.isHidden = !viewModel.includesItem
 
 			label.text = String(viewModel.dayNumber)
+            
+            if isCurrentDay {
+                isCurrentDay = false
+            }
 		}
 	}
+    
+    lazy var highlightView: UIView = {
+        let view = RoundView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .yellow
+        
+        view.isHidden = true
+        
+        return view
+    }()
 	
 	lazy var label: UILabel = {
 		let label = UILabel(frame: contentView.frame)
@@ -25,6 +39,7 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 		label.font = .systemFont(ofSize: 16)
 		label.textAlignment = .center
         label.textColor = .gray
+        label.backgroundColor = .clear
 		
 		return label
 	}()
@@ -45,8 +60,18 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             if isSelected {
                 highlightCellAsSelected()
             } else {
-                resetCellSelectionHighlight()
+                resetCellHighlight()
                 isBetweenSelectionBounds = false
+            }
+        }
+    }
+    
+    var isCurrentDay: Bool = false {
+        didSet {
+            if isCurrentDay {
+                highlightCellAsCurrentDay()
+            } else {
+                resetCellHighlight()
             }
         }
     }
@@ -56,7 +81,7 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             if isBetweenSelectionBounds {
                 highlightCellAsSelectedBetweenSelectionBounds()
             } else {
-                isSelected ? highlightCellAsSelected() : resetCellSelectionHighlight()
+                isSelected ? highlightCellAsSelected() : resetCellHighlight()
             }
         }
     }
@@ -79,11 +104,27 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
 		label.layer.cornerRadius = cornerRadius
 		label.layer.masksToBounds = true
 		
+        setupHiglightView()
 		contentView.addSubview(label)
         contentView.addSubview(itemIndicator)
 	}
+    
+    func setupHiglightView() {
+        contentView.addSubview(highlightView)
+        
+        NSLayoutConstraint.activate([
+            highlightView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            highlightView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            highlightView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.65),
+            highlightView.widthAnchor.constraint(equalTo: highlightView.heightAnchor),
+        ])
+    }
 		
     // MARK: Tools
+    
+    func highlightCellAsCurrentDay() {
+        highlightView.isHidden = false
+    }
     
     func highlightCellAsSelected() {
         label.backgroundColor = .accent
@@ -97,7 +138,8 @@ class MonthDayCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         layer.maskedCorners = []
     }
     
-    func resetCellSelectionHighlight() {
+    func resetCellHighlight() {
+        highlightView.isHidden = true
         backgroundColor = .clear
         label.backgroundColor = .clear
         label.textColor = .gray

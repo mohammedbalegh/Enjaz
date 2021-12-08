@@ -150,8 +150,8 @@ extension ItemImagePickerPopup: UICollectionViewDelegate, UICollectionViewDataSo
 		
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageCellReuseIdentifier, for: indexPath) as! ItemImageCell
 		
-		let imageName = imageCellModels[indexPath.row - itemImagePickerImageSourceCellModels.count]
-		cell.image = UIImage(named: imageName)
+		let imageSource = imageCellModels[indexPath.row - itemImagePickerImageSourceCellModels.count]
+		cell.imageSource = imageSource
 		cell.backgroundColor = cellBackgroundColor
 		
 		return cell

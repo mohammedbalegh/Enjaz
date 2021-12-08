@@ -218,10 +218,18 @@ struct RealmManager {
 	
 	// MARK: ItemImageModel
     
+    static func resetItemImages() {
+        let allItemImages = realm.objects(ItemImageModel.self)
+        
+        try? realm.write {
+            realm.delete(allItemImages)
+        }
+    }
+    
 	static func saveItemImages(_ itemImages: [ItemImageModel]) {
 		realm.beginWrite()
-		for itemCategory in itemImages {
-			realm.add(itemCategory)
+		for itemImage in itemImages {
+            realm.add(itemImage, update: .modified)
 		}
 		try? realm.commitWrite()
 	}

@@ -117,7 +117,6 @@ class SideMenuVC: UIViewController {
         setupNameLabel()
 		setupScrollview()
         setupMenuBtnsStack()
-//		setupScreenNavigatorTableView()
 		
         setupSignOutBtn()
     }
@@ -164,8 +163,8 @@ class SideMenuVC: UIViewController {
 		
         NSLayoutConstraint.activate([
             menuBtnsVerticalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 35),
-            menuBtnsVerticalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25),
-            menuBtnsVerticalStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            menuBtnsVerticalStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            menuBtnsVerticalStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             menuBtnsVerticalStack.heightAnchor.constraint(equalToConstant: height),
         ])
     }
@@ -191,8 +190,8 @@ class SideMenuVC: UIViewController {
         NSLayoutConstraint.activate([
 			signOutBtn.topAnchor.constraint(greaterThanOrEqualTo: menuBtnsVerticalStack.bottomAnchor, constant: 55),
             signOutBtn.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -LayoutConstants.screenHeight * 0.06),
-            signOutBtn.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 50),
-            signOutBtn.widthAnchor.constraint(lessThanOrEqualTo: scrollView.widthAnchor),
+            signOutBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            signOutBtn.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
             signOutBtn.heightAnchor.constraint(equalToConstant: 25),
         ])
     }
@@ -263,7 +262,6 @@ extension SideMenuVC: UITableViewDelegate, UITableViewDataSource {
 		
 		cell.viewModel = screenNavigatorCellModels[indexPath.row]
 		cell.arrowIcon.isHidden = true
-//		cell.contentView.backgroundColor = .clear
 		
 		return cell
 	}

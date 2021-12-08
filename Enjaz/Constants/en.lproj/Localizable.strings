@@ -11,7 +11,11 @@
 "Finish Tasks on Time" = "Finish Tasks on Time";
 "Reminding You of Repeating Habits" = "Reminding You of Repeating Habits";
 "Keep Track of Your Achievements' Stats" = "Keep Track of Your Achievements' Stats";
-"This text is an example of a description" = "This text is an example of a description";
+
+"We're delighted to have you on board. Because your life desreves achievement, we're here" = "We're delighted to have you on board. Because your life desreves achievement, we're here";
+"Register your appintments, write down your goals and keep track of them" = "Register your appintments, write down your goals and keep track of them";
+"Keep track of your personal habits" = "Keep track of your personal habits";
+"Keep trck of your progress and see your rewards" = "Keep trck of your progress and see your rewards";
 
 //MARK: LoginScreen
 "Forgot your password?" = "Forgot your password?";
@@ -34,7 +38,7 @@
 "Full name" = "Full name";
 "Email" = "Email";
 "Incorrect email" = "Incorrect email";
-"Username or email" = "Username or email";
+"Username or Email" = "Username or Email";
 "Incorrect username or email" = "Incorrect username or email";
 "Password" = "Password";
 "Confirm password" = "Confirm password";
@@ -78,7 +82,7 @@
 "Notifications" = "الإشعارات";
 
 // MARK: GoalsBankScreenVC
-"Some goals suggestions" = "أقتراحات لبعض الأهداف";
+"Some goals suggestions" = "Some goals suggestions";
 
 // MARK: AddItemScreen
 "Add %@" = "Add %@";
@@ -137,7 +141,7 @@
 //MARK: PersonalAspectsScreen
 "Personal Aspects" = "Personal Aspects";
 "Write what you know about your self" = "Write what you know about your self";
-"Who am i" = "Who am i";
+"Who am I" = "Who am I";
 "My mission in life" = "My mission in life";
 "Write your life mission" = "Write your life mission";
 "Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year" = "Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year";
@@ -247,10 +251,10 @@
 "Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
 "Goals related to science, reading, courses and mind development" = "Goals related to science, reading, courses and mind development";
 "Goals related to your personal health, fitness and mental health" = "Goals related to your personal health, fitness and mental health";
-"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
-"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
-"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
-"Goals related to faith and your relationship with Allah the almighty" = "Goals related to faith and your relationship with Allah the almighty";
+"Goals related to your social life and friends and family" = "Goals related to your social life and friends and family";
+"Goals related to your career and job" = "Goals related to your career and job";
+"Goals related to your personal life" = "Goals related to your personal life";
+"Goals related to your financial situation" = "Goals related to your financial situation";
 
 // MARK: Item Types
 "Task" = "Task";

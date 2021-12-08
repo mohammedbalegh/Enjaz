@@ -177,6 +177,47 @@ struct NetworkingManager {
         }
     }
     
+    static func retreiveItemImages(completionHandler: @escaping (_ images: [ItemImageModel?]?, _ error: Error?) -> Void) {
+        let url = URL(string: NetworkingUrls.itemImagesUrl)
+        
+        let request = HttpRequest(url: url, method: .get)
+        
+        request.send { (data, response, error) in
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                completionHandler(nil, StatusCodeError.statusCode(code: response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+                return
+            }
+            
+            do {
+                var index = 0
+                let itemImages = try JSONDecoder().decode([ItemImageModel].self, from: data).map() { itemImage -> ItemImageModel in
+                    let defaultItemImage = itemImage
+                    defaultItemImage.is_default = true
+                    defaultItemImage.id = index
+                    index += 1
+                    return defaultItemImage
+                }
+                completionHandler(itemImages, nil)
+            } catch {
+                print("encoding error")
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+            
+        }
+    }
+    
     static func retrieveGoalSuggestions(completionHandler: @escaping ([GoalSuggestionsModel]?, Error?) -> Void) {
         
         let url = URL(string: NetworkingUrls.apiGoalsSuggestionsBankUrl)
@@ -289,10 +330,10 @@ struct NetworkingManager {
             }
             
             let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
-            
+            // TODO: fix the decoding problem in the articles and videos retreval. eg. the following code block fails
             do {
-                let blog = try encodeBlog(dataAsString, type: BlogModel.self)
-                let articles = blog?.data
+                let blog = try JSONDecoder().decode(BlogModel.self, from: data)
+                let articles = blog.data
                 NetworkingManager.cache.setObject(dataAsString, forKey: key)
                 
                 completionHandler(articles, nil)
@@ -352,11 +393,11 @@ struct NetworkingManager {
             let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
             
             do {
-                let blog = try encodeBlog(dataAsString, type: VideosTopModel.self)
-                let articles = blog?.data
+                let blog = try JSONDecoder().decode(VideosTopModel.self, from: data)
+                let videos = blog.data
                 NetworkingManager.cache.setObject(dataAsString, forKey: key)
                 
-                completionHandler(articles, nil)
+                completionHandler(videos, nil)
             } catch {
                 completionHandler(nil, EncodingError.invalidDataFormat)
             }
@@ -364,8 +405,16 @@ struct NetworkingManager {
     }
     
     static func retrievePrivacyPolicy(completionHandler: @escaping (PrivacyPolicyAndAboutUsModel?, Error?) -> Void) {
-		let url = URL(string: NetworkingUrls.apiPrivacyPolicy)
-        
+        let url = URL(string: NetworkingUrls.apiPrivacyPolicy)
+		retrievePrivacyPolicyAndAboutUs(url: url, completionHandler: completionHandler)
+    }
+    
+    static func retrieveAboutUs(completionHandler: @escaping (PrivacyPolicyAndAboutUsModel?, Error?) -> Void) {
+        let url = URL(string: NetworkingUrls.apiPrivacyPolicy)
+        retrievePrivacyPolicyAndAboutUs(url: url, completionHandler: completionHandler)
+    }
+    
+    private static func retrievePrivacyPolicyAndAboutUs(url: URL?, completionHandler: @escaping (PrivacyPolicyAndAboutUsModel?, Error?) -> Void) {
         let request = HttpRequest(url: url, method: .get)
         
         request.send { data, response, error in
@@ -387,15 +436,16 @@ struct NetworkingManager {
                 return
             }
             
-            let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
+            let dataAsString = NSString(string: String(decoding: data, as: UTF8.self))
+            print(dataAsString)
             
             do {
-                let privacyPolicyAndAboutUsModel = try encodeBlog(dataAsString, type: [PrivacyPolicyAndAboutUsModel].self)
-                completionHandler(privacyPolicyAndAboutUsModel?.first, nil)
+                let privacyPolicyAndAboutUsModel = try JSONDecoder().decode(PrivacyPolicyAndAboutUsModel.self, from: data)
+                completionHandler(privacyPolicyAndAboutUsModel, nil)
             } catch {
                 completionHandler(nil, EncodingError.invalidDataFormat)
             }
-			
+            
         }
     }
     

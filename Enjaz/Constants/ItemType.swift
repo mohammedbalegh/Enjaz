@@ -41,7 +41,7 @@ enum ItemType {
 		case .goal:
 			return UIImage(named: "goalIcon")
 		case .demah:
-			return UIImage(named: "demahIcon")
+            return UIImage(systemName: "cloud.drizzle")?.withTintColor(.accent)
 		case .achievement:
 			return UIImage(named: "achievementIcon")
 		case .task:

@@ -10,9 +10,9 @@ struct CarouselCardModel {
 	]
 	
     let secondaryLabel = [
-		"This text is an example of a description".localized,
-		"This text is an example of a description".localized,
-		"This text is an example of a description".localized,
-		"This text is an example of a description".localized
+        "We're delighted to have you on board. Because your life desreves achievement, we're here".localized,
+        "Register your appintments, write down your goals and keep track of them".localized,
+        "Keep track of your personal habits".localized,
+        "Keep trck of your progress and see your rewards".localized
 	]
 }

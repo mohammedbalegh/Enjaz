@@ -151,7 +151,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
         view.addSubview(submitBtn)
         
         NSLayoutConstraint.activate([
-            submitBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            submitBtn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
             submitBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

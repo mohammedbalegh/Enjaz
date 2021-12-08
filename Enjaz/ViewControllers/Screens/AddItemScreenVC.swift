@@ -326,7 +326,10 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     
     @objc func handleRepeatSwitchValueChange() {
         itemPartitionDates = nil
+        selectedRepetitionOption = nil
+        
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.placeholderText, for: .normal)
+        
         additionDateAndTimeInput.input?.inputText = repetitionIsTurnedOn
 			? "Repetition".localized
             : additionDateAndTimeInput.fieldName
@@ -334,15 +337,11 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     
 	func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[TimeInterval]], readableDate: String, repetitionOption: Date.DateSeparationType?) {
 		selectedRepetitionOption = repetitionOption
-		handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate)
-	}
-	
-	func handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[TimeInterval]], readableDate: String) {
         self.itemPartitionDates = selectedDatesTimeStamps
         
         (additionDateAndTimeInput.input as? UIButton)?.setTitleColor(.invertedSystemBackground, for: .normal)
         additionDateAndTimeInput.input?.inputText = readableDate
-    }
+	}
 	
 	@objc func handleSaveBtnTap() {
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
@@ -470,8 +469,8 @@ extension AddItemScreenVC: ItemImagePickerPopupDelegate {
 	func ImagePickerPopup(_ itemImagePickerPopup: ItemImagePickerPopup, didSelectImage imageId: Int) {
 		itemImageId = imageId
 		
-		if let imageName = RealmManager.retrieveItemImageSourceById(imageId) {
-			setImageBtn.setImage(UIImage.getImageFrom(imageName), for: .normal)
+		if let imageSource = RealmManager.retrieveItemImageSourceById(imageId) {
+			setImageBtn.setImage(UIImage.getImageFrom(imageSource), for: .normal)
 		}
 		
 		imagePickerPopup.dismiss(animated: true)

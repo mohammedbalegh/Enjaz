@@ -6,8 +6,8 @@ class PersonalAspectsCell: UICollectionViewCell {
         didSet {
             id = viewModel!.id
             aspectBadge.source = viewModel?.badge_image_source
-            aspectTitle.text = viewModel?.title
-            aspectBrief.text = viewModel?.brief_or_date
+            aspectTitle.text = viewModel?.title.localized
+            aspectBrief.text = viewModel?.brief_or_date?.localized
             if let category = viewModel?.category.value  {
                 let itemCategory = RealmManager.retrieveItemCategoryById(category)
                 aspectCategory.text = itemCategory?.localized_name

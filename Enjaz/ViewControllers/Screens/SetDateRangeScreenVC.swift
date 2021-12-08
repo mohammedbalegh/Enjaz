@@ -24,7 +24,7 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
 			? getReadableDateForMultiplePartitions(selectedDatesTimeStamps: selectedDatesTimeStamps)
 			: calendarView.selectedDaysLabel.text ?? ""
 		
-        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate)
+        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate, repetitionOption: nil)
         dismiss(animated: true)
     }
 	

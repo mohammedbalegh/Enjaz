@@ -1,6 +1,6 @@
 import RealmSwift
 
-class ItemImageModel: Object {
+class ItemImageModel: Object, Decodable {
 	@objc dynamic var id = UUID().hashValue
 	@objc dynamic var image_source = ""
 	@objc dynamic var is_default = false
@@ -20,4 +20,9 @@ class ItemImageModel: Object {
 	override class func primaryKey() -> String? {
 		return "id"
 	}
+    
+    enum CodingKeys: String, CodingKey {
+        case image_source = "image"
+        case id = "id"
+    }
 }

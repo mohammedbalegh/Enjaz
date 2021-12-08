@@ -33,6 +33,7 @@ class OnboardingScreenVC: UIViewController {
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.font = label.font.withSize(24)
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,6 +46,9 @@ class OnboardingScreenVC: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.preferredMaxLayoutWidth = LayoutConstants.screenWidth
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.65
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

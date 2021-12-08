@@ -7,7 +7,7 @@ class RootTabBarController: UITabBarController {
         let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .highContrastText
-        label.text = Date.getReadableDate(from: Date(), withFormat: "dd MMMM", calendarIdentifier: .islamicCivil)
+        label.text = Date.getReadableDate(from: Date(), withFormat: "dd MMMM", calendarIdentifier: .islamicUmmAlQura)
         label.font = label.font.withSize(18)
         label.textAlignment = .center
         return label
@@ -127,6 +127,8 @@ class RootTabBarController: UITabBarController {
 		
 		// Redirect the user to the authScreens first if not logged in.
 		let loggedIn = UserDefaultsManager.isLoggedIn
+        // TODO: Uncomment when server is fixed
+        
 		if !loggedIn {
 			let authNavigationController = UINavigationController(rootViewController: StartScreenVC())
 			authNavigationController.modalPresentationStyle = .fullScreen

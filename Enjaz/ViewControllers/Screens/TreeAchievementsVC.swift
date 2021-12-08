@@ -42,7 +42,7 @@ class TreeAchievementsVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "treeStageCell", for: indexPath) as! TreeAchievementsCell
 
         cell.messageLabel.text = stages[indexPath.row].message
-        cell.cellCount.text = "\(stages[indexPath.row].stage)"
+        cell.cellCount.text = "\(stages[indexPath.row].stage + 1)"
 
         return cell
     }

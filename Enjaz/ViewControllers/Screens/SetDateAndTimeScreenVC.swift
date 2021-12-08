@@ -193,7 +193,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 		
 		let readableDate = Date.getReadableDate(from: date, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
 		
-        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate)
+        delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate, repetitionOption: nil)
         dismiss(animated: true)
     }
     

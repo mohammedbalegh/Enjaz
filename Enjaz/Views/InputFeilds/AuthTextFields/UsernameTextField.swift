@@ -8,7 +8,7 @@ class UsernameTextField: AuthTextField {
 	override init() {
 		super.init()
 		
-		minimumLength = 6
+		minimumLength = 2
 		canStartWithNumber = false
 		
         fieldName = NSLocalizedString("Username", comment: "")

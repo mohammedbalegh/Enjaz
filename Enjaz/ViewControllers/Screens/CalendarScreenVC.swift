@@ -92,6 +92,17 @@ class CalendarScreenVC: CalendarViewController {
         }
         
         calendarView.updateMonthDaysModelWithDueItems(itemsOfMonthDayRows: itemsOfMonthDayRows)
+        highlighCurrentDay()
+    }
+    
+    func highlighCurrentDay() {
+        guard selectedMonthIndex + 1 == currentMonth && selectedYearIndex == 0 else { return }
+        let currentDayIndexPath = IndexPath(row: currentDay - 1 + calendarView.monthDaysCollectionView.minimumSelectableItemRow, section: 0)
+        
+        DispatchQueue.main.async {
+            (self.calendarView.monthDaysCollectionView.cellForItem(at: currentDayIndexPath) as? MonthDayCell)?.isCurrentDay = true
+        }
+        
     }
     
     func updateWeekItems() {
@@ -148,7 +159,7 @@ class CalendarScreenVC: CalendarViewController {
 		
 		if let unixTimeStamp = unixTimeStamp {
 			let readableDate = Date.getReadableDate(from: Date(timeIntervalSince1970: unixTimeStamp), withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
-			addItemScreenVC.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[unixTimeStamp]], readableDate: readableDate)
+			addItemScreenVC.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [[unixTimeStamp]], readableDate: readableDate, repetitionOption: nil)
 		}
 		
 		navigationController?.present(UINavigationController(rootViewController: addItemScreenVC), animated: true)

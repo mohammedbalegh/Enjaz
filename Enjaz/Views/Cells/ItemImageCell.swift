@@ -2,9 +2,9 @@ import UIKit
 
 class ItemImageCell: UICollectionViewCell {
 	
-	var image: UIImage? {
+	var imageSource: String? {
 		didSet {
-			imageView.image = image
+			imageView.source = imageSource
 		}
 	}
     
@@ -15,7 +15,7 @@ class ItemImageCell: UICollectionViewCell {
         }
     }
 	
-	let imageView = UIImageView(frame: .zero)
+    let imageView = DynamicImageView(source: nil)
 	let checkMarkImageView = UIImageView(image: UIImage(named: "smallCheckMarkImage"))
 	
 	override init(frame: CGRect) {

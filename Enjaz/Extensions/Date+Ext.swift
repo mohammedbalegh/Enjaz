@@ -44,11 +44,14 @@ extension Date {
 		let range = calendar.range(of: .day, in: .month, for: date)
 		let numberOfDays = range?.count ?? 0
 		
-		let georgianWeekDay = calendar.component(.weekday, from: date)
+		let firstWeekDay = calendar.component(.weekday, from: date)
 		
-		let weekDay = mapWeekGeorgianWeekDayToIslamicWeekDay(georgianWeekDay)
+        let firstIslmaicWeekDay =
+            calendarIdentifier == .islamicUmmAlQura
+                ? firstWeekDay
+                : mapWeekGeorgianWeekDayToIslamicWeekDay(firstWeekDay)
 		
-		return (numberOfDays, weekDay)
+		return (numberOfDays, firstIslmaicWeekDay)
 	}
 	
 	static func mapWeekGeorgianWeekDayToIslamicWeekDay(_ georgianWeekDay: Int) -> Int {
@@ -81,8 +84,8 @@ extension Date {
 		formatter.dateStyle = .long
 		formatter.dateFormat = format
 		
-		if calendarIdentifier == .islamicCivil {
-			let islamicCalendar = Calendar(identifier: .islamicCivil)
+		if calendarIdentifier == .islamicUmmAlQura {
+			let islamicCalendar = Calendar(identifier: .islamicUmmAlQura)
 			formatter.calendar = islamicCalendar
 		}
 		
