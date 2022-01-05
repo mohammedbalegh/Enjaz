@@ -74,7 +74,7 @@ struct NetworkingManager {
     }
     
     static func requestPasswordResetCode(email: String, completionHandler: @escaping (_ error: Error?) -> Void) {
-        let url = URL(string: NetworkingUrls.apiResetPasswordUrl)
+        let url = URL(string: NetworkingUrls.apiRequestEmailVerificationCodeUrl)
         let data = [
             "email": email,
         ]
@@ -93,7 +93,7 @@ struct NetworkingManager {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
-            
+                        
             completionHandler(nil)
         }
     }
@@ -103,7 +103,7 @@ struct NetworkingManager {
         let data = [
             "email": email,
             "code": resetCode,
-            "password": newPassword,
+            "new_password": newPassword,
         ]
         
         let request = HttpRequest(url: url, method: .post, body: data)

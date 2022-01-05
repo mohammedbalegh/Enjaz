@@ -231,14 +231,17 @@ class SideMenuVC: UIViewController {
     }
 	
 	@objc func handleSignOutBtnTap() {
-		AlertPopup().presentAsConfirmationAlert(
+        let popUp = AlertPopup()
+        popUp.presentAsConfirmationAlert(
 			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
 			message: NSLocalizedString("All data will be lost", comment: ""),
             confirmationBtnTitle: NSLocalizedString("Sign Out", comment: ""), confirmationBtnStyle: .destructive
 		) {
 			Auth.signOut()
+            popUp.dismiss(animated: true)
 			self.navigateToLoginScreen()
-		}
+        }
+        
     }
 	
 	func navigateToLoginScreen() {

@@ -13,7 +13,7 @@ struct RegexValidator {
 	}
 		
 	static func validateResetCode(candidate: String) -> Bool {
-		let passwordRegex = "^\\d{4}$"
+		let passwordRegex = "^\\d{6}$"
 		return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: candidate)
 	}
 		

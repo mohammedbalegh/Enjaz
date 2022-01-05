@@ -7,6 +7,8 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     
     // MARK: Properties
     
+    let alterPopup = AlertPopup()
+    
     var lockImage: UIImageView = {
         var imageView = UIImageView(image: UIImage(named: "LockImage"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -221,17 +223,29 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
     @objc func handleNextBtnTap() {
         let emailIsValid = emailTextField.validate()
+        var code: Error?
         
         guard emailIsValid else { return }
         
-        updateSubTitle()
-        
-        updateNextBtn()
-        
-        
-        updateTextFieldsVerticalStack()
-        
         // TODO: Request rest password code from backend
+        
+        NetworkingManager.requestPasswordResetCode(email: emailTextField.text) { error in
+            
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.alterPopup.presentAsError(withMessage: "هذا الحساب غير موجود، الرجاء التأكد من انك قمت بإدخال البايات بشكل صحيح")
+                }
+                code = error
+            } else {
+                DispatchQueue.main.async {
+                    self.updateSubTitle()
+                    
+                    self.updateNextBtn()
+                    
+                    self.updateTextFieldsVerticalStack()
+                }
+            }
+        }
     }
     
     // MARK: Event Handlers

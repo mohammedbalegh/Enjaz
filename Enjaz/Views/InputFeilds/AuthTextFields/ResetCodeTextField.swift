@@ -10,12 +10,12 @@ class ResetCodeTextField: AuthTextField {
 		
 		// The length is checked by the validator and a custom error label is shown, if the check fails.
 		minimumLength = 0
-
+        // TODO: Localization
 		fieldName = "الكود"
 		textField.textContentType = .oneTimeCode
 		textField.keyboardType = .numberPad
 		icon.image = UIImage(named: "lockIcon")
 		validator = RegexValidator.validateResetCode
-		defaultErrorMessage = "الرمز مكون من ٤ أحرف"
+		defaultErrorMessage = "الرمز مكون من ٦ أحرف"
 	}
 }
