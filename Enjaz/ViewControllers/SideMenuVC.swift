@@ -69,15 +69,17 @@ class SideMenuVC: UIViewController {
     let personalAspectsBtn = SideMenuBtn(label: NSLocalizedString("Personal Aspects", comment: ""), image: UIImage(named: "noteIcon"))
 	
     let userProfileBtn = SideMenuBtn(label: NSLocalizedString("Profile", comment: ""), image: UIImage(named: "userProfileIcon"))
+    
+    let awardsAndMedalsBtn = SideMenuBtn(label: NSLocalizedString("Awards and Medals", comment: ""), image: UIImage(named: "medalIcon"))
 	
     let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
 	
     let privacyPolicyBtn = SideMenuBtn(label: NSLocalizedString("Privacy Policy", comment: ""), image: UIImage(named: "sheetIcon"))
 	
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
-    
+        
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, awardsAndMedalsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -109,6 +111,7 @@ class SideMenuVC: UIViewController {
         privacyPolicyBtn.addTarget(self, action: #selector(handlePrivacyPolicyBtnTap), for: .touchUpInside)
         contactUsBtn.addTarget(self, action: #selector(handleContactUsBtnTap), for: .touchUpInside)
         userProfileBtn.addTarget(self, action: #selector(handleUserProfileBtnTap), for: .touchUpInside)
+        awardsAndMedalsBtn.addTarget(self, action: #selector(handleAwardsAndMedalsBtnTap), for: .touchUpInside)
         signOutBtn.addTarget(self, action: #selector(handleSignOutBtnTap), for: .touchUpInside)
     }
     
@@ -200,6 +203,10 @@ class SideMenuVC: UIViewController {
     
     @objc func handlePrivacyPolicyBtnTap() {        
         navigationController?.pushViewController(PrivacyPolicyScreenVC(), animated: true)
+    }
+    
+    @objc func handleAwardsAndMedalsBtnTap() {
+        navigationController?.pushViewController(AwardsAndMedalsScreenVC(), animated: true)
     }
     
     @objc func handleAboutAppBtnTap() {

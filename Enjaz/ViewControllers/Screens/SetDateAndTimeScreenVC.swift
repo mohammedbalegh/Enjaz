@@ -45,6 +45,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 	}
 	
 	var itemType: ItemType?
+    var selectedDay: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         
         calendarView.delegate = self
         hourPicker.selectRow(12, inComponent: 0, animated: false)
-        selectCurrentDay()
+        selectCurrentOrSelectedDay()
 		
 		if itemType == .goal {
 			calendarView.partitionsNumberPopoverBtn.isHidden = false
@@ -148,7 +149,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 	    
     override func handleCalendarTypeSelection(selectedIndex: Int) {
         super.handleCalendarTypeSelection(selectedIndex: selectedIndex)
-        selectCurrentDay()
+        selectCurrentOrSelectedDay()
     }
 	
 	@objc func handlePartitionsNumberPopoverBtnTap() {
@@ -191,7 +192,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 		
 		let date = Date(timeIntervalSince1970: selectedDateUnixTimeStamps.first!)
 		
-		let readableDate = Date.getReadableDate(from: date, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
+		let readableDate = Date.getReadableDate(from: date, withFormat: "hh:mm aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
 		
         delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate, repetitionOption: nil)
         dismiss(animated: true)
@@ -207,9 +208,19 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     override func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {
         calendarPopoverBtnsRow.configureWithBtns(firstBtn: .calendarType, secondBtn: .month, thirdBtn: .year)
     }
-    
-    func selectCurrentDay() {
-        let currentDayIndexPath = IndexPath(row: currentDay - 1 + calendarView.monthDaysCollectionView.minimumSelectableItemRow, section: 0)
+        
+    func selectCurrentOrSelectedDay() {
+        let selectedDayComponents = selectedDay?.getDateComponents(forCalendarIdentifier: selectedCalendarIdentifier)
+        let selectedYear = selectedDayComponents?.year
+        let selectedMonth = selectedDayComponents?.month
+        
+        if let selectedMonth = selectedMonth, let selectedYear = selectedYear {
+            handleMonthSelection(selectedIndex: selectedMonth - 1)
+            handleYearSelection(selectedIndex: selectedYear - currentYear)
+        }
+        
+        let selectedDayNumber = selectedDayComponents?.day
+        let currentDayIndexPath = IndexPath(row: (selectedDayNumber ?? currentDay) - 1 + calendarView.monthDaysCollectionView.minimumSelectableItemRow, section: 0)
         
         calendarView.monthDaysCollectionView.selectItem(at: currentDayIndexPath, animated: true, scrollPosition: .centeredVertically)
         calendarView.collectionView(calendarView.monthDaysCollectionView, didSelectItemAt: currentDayIndexPath)

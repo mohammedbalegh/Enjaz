@@ -45,29 +45,10 @@ extension Date {
 		let numberOfDays = range?.count ?? 0
 		
 		let firstWeekDay = calendar.component(.weekday, from: date)
-		
-        let firstIslmaicWeekDay =
-            calendarIdentifier == .islamicUmmAlQura
-                ? firstWeekDay
-                : mapWeekGeorgianWeekDayToIslamicWeekDay(firstWeekDay)
-		
-		return (numberOfDays, firstIslmaicWeekDay)
+        
+		return (numberOfDays, firstWeekDay)
 	}
-	
-	static func mapWeekGeorgianWeekDayToIslamicWeekDay(_ georgianWeekDay: Int) -> Int {
-		let map = [
-			1 : 2,
-			2 : 3,
-			3 : 4,
-			4 : 5,
-			5 : 6,
-			6 : 7,
-			7 : 1,
-		]
 		
-		return map[georgianWeekDay] ?? 0
-	}
-	
 	static func generateDateObjectFromComponents(year: Int, month: Int, day: Int, hour: Int, calendarIdentifier: Calendar.Identifier) -> Date {
 		
 		let dateComponents = DateComponents(year: year, month: month, day: day, hour: hour)
@@ -99,8 +80,8 @@ extension Date {
 		let itemDate = Date(timeIntervalSince1970: viewModel.date)
 		let dateFormat: String = {
 			if viewModel.is_repeated { return "d/M/yy" }
-			if Calendar.current.isDateInToday(itemDate) { return "hh:00  aa" }
-			return "d/M/yyyy hh:00  aa"
+			if Calendar.current.isDateInToday(itemDate) { return "hh:mm  aa" }
+			return "d/M/yyyy hh:mm  aa"
 		}()
 		
 		let readableStartDate = Date.getReadableDate(from: itemDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
@@ -179,8 +160,8 @@ extension Date {
 		return Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day
 	}
 	
-	static func generateConsecutiveDates(from startingDate: Date, to endingDate: Date,separatedBy separator: DateSeparationType) -> [Date] {
-		var consecutiveDates: [Date] =  startingDate.isInPast ? [] : [startingDate]
+	static func generateConsecutiveDates(from startingDate: Date, to endingDate: Date, separatedBy separator: DateSeparationType) -> [Date] {
+		var consecutiveDates: [Date] =  [startingDate]
 		
 		var index = 1
 		while consecutiveDates.last ?? Date() < endingDate {
@@ -196,11 +177,11 @@ extension Date {
 			case .biweekly:
 				dateComponent.day = 14 * index
 			case .monthly:
-				dateComponent.month = index
+				dateComponent.month = 1 * index
 			default:
 				fatalError("Unsupported separator type")
 			}
-						
+            
 			let nextDate = Calendar.current.date(byAdding: dateComponent, to: startingDate)!
 			
 			consecutiveDates.append(nextDate)

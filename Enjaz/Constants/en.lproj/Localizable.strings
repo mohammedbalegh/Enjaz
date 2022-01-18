@@ -79,7 +79,7 @@
 "No type has been selected" = "No type has been selected";
 
 //MARK: NotificationsScreen
-"Notifications" = "الإشعارات";
+"Notifications" = "Notifications";
 
 // MARK: GoalsBankScreenVC
 "Some goals suggestions" = "Some goals suggestions";
@@ -204,7 +204,7 @@
 
 //MARK: UserProfileScreen
 "Change password" = "Change password";
-"Awards and medals" = "Awards and medals";
+"Awards and Medals" = "Awards and Medals";
 "Dark Mode" = "Dark Mode";
 "Logout" = "Logout";
 "Choose a category" = "Choose a category";

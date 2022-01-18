@@ -129,11 +129,11 @@ class RootTabBarController: UITabBarController {
 		let loggedIn = UserDefaultsManager.isLoggedIn
         // TODO: Uncomment when server is fixed
         
-		if !loggedIn {
-			let authNavigationController = UINavigationController(rootViewController: StartScreenVC())
-			authNavigationController.modalPresentationStyle = .fullScreen
-			present(authNavigationController, animated: false)
-		}
+//		if !loggedIn {
+//			let authNavigationController = UINavigationController(rootViewController: StartScreenVC())
+//			authNavigationController.modalPresentationStyle = .fullScreen
+//			present(authNavigationController, animated: false)
+//		}
 		
         navigationController?.setNavigationBarHidden(false, animated: true)
         

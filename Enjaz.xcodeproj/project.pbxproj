@@ -50,7 +50,6 @@
 		41A9B2F4263783C500366514 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B2F3263783C500366514 /* ArticleModel.swift */; };
 		41A9B30C263A24DA00366514 /* ItemCardBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B30B263A24DA00366514 /* ItemCardBodyView.swift */; };
 		41A9B311263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B310263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift */; };
-		41A9B31C263A269C00366514 /* GoalsBankTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B31B263A269C00366514 /* GoalsBankTableView.swift */; };
 		41A9B326263A277C00366514 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A9B325263A277C00366514 /* ItemsTableViewCell.swift */; };
 		41AA417F26EAE46D00C3302F /* MedalsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AA417E26EAE46D00C3302F /* MedalsManager.swift */; };
 		41C646AA257397BA000327D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C646A9257397BA000327D5 /* AppDelegate.swift */; };
@@ -315,7 +314,6 @@
 		41A9B2F3263783C500366514 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		41A9B30B263A24DA00366514 /* ItemCardBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCardBodyView.swift; sourceTree = "<group>"; };
 		41A9B310263A257400366514 /* ScreenNavigatorTableViewHeaderCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenNavigatorTableViewHeaderCellModel.swift; sourceTree = "<group>"; };
-		41A9B31B263A269C00366514 /* GoalsBankTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsBankTableView.swift; sourceTree = "<group>"; };
 		41A9B325263A277C00366514 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		41AA417E26EAE46D00C3302F /* MedalsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalsManager.swift; sourceTree = "<group>"; };
 		41C646A6257397BA000327D5 /* Enjaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enjaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -576,14 +574,6 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		41A9B31A263A269C00366514 /* TabelViews */ = {
-			isa = PBXGroup;
-			children = (
-				41A9B31B263A269C00366514 /* GoalsBankTableView.swift */,
-			);
-			path = TabelViews;
-			sourceTree = "<group>";
-		};
 		41C6469D257397BA000327D5 = {
 			isa = PBXGroup;
 			children = (
@@ -664,7 +654,6 @@
 				BC8015CA2587BFB4007AD202 /* Popups */,
 				BC1EB2BB25BE1F6D0021B983 /* BottomSheetViews */,
 				BC1FFACD25F8C2A900A436CA /* CardsViews */,
-				41A9B31A263A269C00366514 /* TabelViews */,
 				BC0A87CF2575836F0045A54E /* AppLogo.swift */,
 				BC026C0225E6CA59004B6DA3 /* CustomAccessoryView.swift */,
 				41328EF9258843CD00A86330 /* GreetingMessageView.swift */,
@@ -1383,7 +1372,6 @@
 				BCB54CB2258AE5E300E0E54D /* RoundBtn.swift in Sources */,
 				BCD82DA5263E772F006F7575 /* UpcomingGoalsScreenVC.swift in Sources */,
 				BCACC49B2614FEBF005F7F59 /* MonthItemsScreenVC.swift in Sources */,
-				41A9B31C263A269C00366514 /* GoalsBankTableView.swift in Sources */,
 				BC391161258E8232000E6273 /* SetDateAndTimeScreenVC.swift in Sources */,
 				BCDA932E25930BF1003477AF /* EmailVerificationScreenVC.swift in Sources */,
 				BCD401AA25FB3F2000ABA183 /* ArticleCardCell.swift in Sources */,

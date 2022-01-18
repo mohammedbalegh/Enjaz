@@ -37,9 +37,8 @@ class WeekDayLabelsStackView: UIStackView {
         
         let formatter = DateFormatter()
         let weekDayNames = formatter.shortWeekdaySymbols ?? []
-        let islamicallySortedWeekDayNames = sortWeekDayNamesIslamically(weekDayNames)
         
-        for weekDayName in islamicallySortedWeekDayNames {
+        for weekDayName in weekDayNames {
             let weekDayLabel = UILabel(frame: .zero)
             
             weekDayLabel.text = weekDayName
@@ -81,11 +80,7 @@ class WeekDayLabelsStackView: UIStackView {
     func resetWeekDayNumbers() {
         weekDayNumbersStackView.arrangedSubviews.forEach { ($0 as! UILabel).text = "" }
     }
-    
-    func sortWeekDayNamesIslamically(_ weekDayNames: [String]) -> [String] {
-        return [weekDayNames.last!] + weekDayNames.dropLast()
-    }
-    
+        
     func showWeekDayNumbers() {
         addArrangedSubview(weekDayNumbersStackView)
         toggleGradientLayer(show: false)

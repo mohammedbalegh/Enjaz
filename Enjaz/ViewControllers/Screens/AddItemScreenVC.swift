@@ -19,7 +19,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 		
 		return button
 	}()
-        
+    
 	lazy var imagePickerPopup: ItemImagePickerPopup = {
 		let popup = ItemImagePickerPopup()
 		popup.delegate = self
@@ -167,6 +167,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     }
     
     var selectedItemCategoryIndex: Int?
+    var selectedDay: Date?
     
     var itemCategory: Int?
 	var selectedRepetitionOption: Date.DateSeparationType?
@@ -314,11 +315,13 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 		
 		setDateAndTimeScreenVC.itemType = ItemType.getTypeById(id: itemType)
         setDateAndTimeScreenVC.delegate = self
+        setDateAndTimeScreenVC.selectedDay = selectedDay
 		
 		if let presentedScreen = presentedScreen as? ItemRepetitionScreenVC {
 			presentedScreen.setDateAndTimeScreen = setDateAndTimeScreenVC
 			presentedScreen.delegate = self
 			presentedScreen.selectedOption = selectedRepetitionOption
+            presentedScreen.selectedDay = selectedDay
 		}
 		
 		present(UINavigationController(rootViewController: presentedScreen), animated: true)

@@ -17,15 +17,19 @@ class ItemRepetitionScreenVC: ModalVC {
 	var delegate: AddItemScreenModalDelegate?
 	
 	var selectedOption: Date.DateSeparationType?
+    
+    var selectedDay: Date?
 	
 	var startDate: Date {
-		let currentDateComponents = Date().getDateComponents(forCalendarIdentifier: Calendar.current.identifier)
-		return Date.generateDateObjectFromComponents(year: currentDateComponents.year!, month: currentDateComponents.month!, day: currentDateComponents.day!, hour: 12, calendarIdentifier: Calendar.current.identifier)
+        let startDate = selectedDay ?? Date()
+		let startDateComponents = startDate.getDateComponents(forCalendarIdentifier: Calendar.current.identifier)
+        
+        return Date.generateDateObjectFromComponents(year: startDateComponents.year!, month: startDateComponents.month!, day: startDateComponents.day!, hour: startDateComponents.hour!, calendarIdentifier: Calendar.current.identifier)
 	}
 	
 	var endDate: Date {
 		let endYear = Date.getCurrentYear(forCalendarIdentifier: Calendar.current.identifier) + 15
-		return Date.generateDateObjectFromComponents(year: endYear, month: 12, day: 31, hour: 12, calendarIdentifier: .gregorian)
+		return Date.generateDateObjectFromComponents(year: endYear, month: 12, day: 31, hour: 12, calendarIdentifier: Calendar.current.identifier)
 	}
 	
 	lazy var repetitionOptionsTableView: UITableView = {

@@ -58,11 +58,19 @@ class DailyViewCell: UICollectionViewCell {
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
 		button.setBackgroundImage(UIImage(named: "addButton"), for: .normal)
-		
+		        
 		if #available(iOS 14.0, *) {
 			button.showsMenuAsPrimaryAction = true
 			button.menu = getAddItemContextMenu { type in
-				self.itemAdditionContextMenuActionHandler?(type, nil)
+                guard let viewModel = self.viewModel else {
+                    return
+                }
+                
+                let nextHour = Date().getDateComponents(forCalendarIdentifier: Calendar.current.identifier).hour! + 1
+
+                let dateOfSelectedDay = Date.generateDateObjectFromComponents(year: viewModel.year, month: viewModel.month, day: viewModel.dayNumber, hour: nextHour, calendarIdentifier: Calendar.current.identifier)
+                
+                self.itemAdditionContextMenuActionHandler?(type, dateOfSelectedDay.timeIntervalSince1970)
 			}
 		} else {
 			button.isHidden = true
