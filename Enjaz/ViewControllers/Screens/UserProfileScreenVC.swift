@@ -22,14 +22,6 @@ class UserProfileScreenVC: UIViewController {
 		return label
 	}()
 	
-    let medalsBtn: UserProfileButtonView = {
-        let button = UserProfileButtonView()
-        button.button.setTitle(NSLocalizedString("Awards and medals", comment: ""), for: .normal)
-        button.btnIcon.image = UIImage(named: "medalIcon")
-        button.button.addTarget(self, action: #selector(handleMedalsBtnTap), for: .touchUpInside)
-        return button
-    }()
-    
     let changePasswordBtn: UserProfileButtonView = {
         let button = UserProfileButtonView()
         // Not implemented yet.
@@ -49,7 +41,7 @@ class UserProfileScreenVC: UIViewController {
 	}()
 	
 	lazy var btnsStack: UIStackView = {
-		var stackView = UIStackView(arrangedSubviews: [medalsBtn, themeBtn])
+		var stackView = UIStackView(arrangedSubviews: [themeBtn])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		
 		stackView.axis = .vertical
@@ -135,11 +127,6 @@ class UserProfileScreenVC: UIViewController {
 			btnsStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
 			btnsStack.heightAnchor.constraint(equalToConstant: height),
 		])
-	}
-	
-	@objc func handleMedalsBtnTap() {
-		let vc = AwardsAndMedalsScreenVC()
-		navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	@objc func handleThemeBtnTap() {

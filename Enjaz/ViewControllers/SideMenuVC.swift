@@ -62,6 +62,8 @@ class SideMenuVC: UIViewController {
 		return scrollView
 	}()
     
+    let medalsBtn = SideMenuBtn(label: NSLocalizedString("Awards and medals", comment: ""), image: UIImage(named: "medalIcon"))
+    
     let lifeTreeBtn = SideMenuBtn(label: NSLocalizedString("Life Tree", comment: ""), image: UIImage(named: "lifeTreeSideIcon"))
     
     let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
@@ -77,7 +79,7 @@ class SideMenuVC: UIViewController {
     let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
     
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, medalsBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -101,7 +103,7 @@ class SideMenuVC: UIViewController {
         view.applyAccentColorGradient(size: view.frame.size, axis: .vertical)
         
         setupSubviews()
-        
+        medalsBtn.addTarget(self, action: #selector(handleMedalsBtnTap), for: .touchUpInside)
         lifeTreeBtn.addTarget(self, action: #selector(handleLifeTreeBtnTap), for: .touchUpInside)
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
         personalAspectsBtn.addTarget(self, action: #selector(handlePersonalAspectsBtn), for: .touchUpInside)
@@ -228,6 +230,10 @@ class SideMenuVC: UIViewController {
     
     @objc func handleDismissBtnTap() {
         dismiss(animated: true)
+    }
+    
+    @objc func handleMedalsBtnTap() {
+        navigationController?.pushViewController(AwardsAndMedalsScreenVC(), animated: true)
     }
 	
 	@objc func handleSignOutBtnTap() {

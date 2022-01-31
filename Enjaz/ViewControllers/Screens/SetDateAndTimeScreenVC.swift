@@ -46,6 +46,10 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 	
 	var itemType: ItemType?
     
+    var isRepetition = true
+    
+    var repetitionHour = 12
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Date and Time", comment: "")
@@ -81,6 +85,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 
     override func setupSubviews() {
         super.setupSubviews()
+        isRepetition = false
         setupSaveBtn()
 		setupNextBtn()
         setupIndicator()
@@ -189,9 +194,16 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 		guard let selectedDateUnixTimeStamps = getSelectedTimeStamps() else { return }
 		selectedDatesTimeStamps.append(selectedDateUnixTimeStamps)
 		
-		let date = Date(timeIntervalSince1970: selectedDateUnixTimeStamps.first!)
+        let date = Date(timeIntervalSince1970: selectedDateUnixTimeStamps.first!)
+        
+        var format = ""
+        if view.semanticContentAttribute == .forceLeftToRight {
+            format = "hh:00 aa | dd MMMM yyyy"
+        } else {
+            format = "00:hh aa | dd MMMM yyyy"
+        }
 		
-		let readableDate = Date.getReadableDate(from: date, withFormat: "hh:00 aa | dd MMMM yyyy", calendarIdentifier: selectedCalendarIdentifier)
+		let readableDate = Date.getReadableDate(from: date, withFormat: format, calendarIdentifier: selectedCalendarIdentifier)
 		
         delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: selectedDatesTimeStamps, readableDate: readableDate, repetitionOption: nil)
         dismiss(animated: true)
@@ -240,8 +252,12 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         let year = currentYear + selectedYearIndex
         let time = hourPicker.hourModels[hourPicker.selectedTimePickerIndex]
         let hour = Date.convertHourModelTo24HrFormatInt(time)
-		
-        let date = Date.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: selectedCalendarIdentifier)
+        var date = Date()
+        if isRepetition {
+            date = Date.generateDateObjectFromComponents(year: year, month: month, day: day, hour: repetitionHour, calendarIdentifier: selectedCalendarIdentifier)
+        } else {
+            date = Date.generateDateObjectFromComponents(year: year, month: month, day: day, hour: hour, calendarIdentifier: selectedCalendarIdentifier)
+        }
         
         return date
     }

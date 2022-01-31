@@ -332,6 +332,7 @@ struct NetworkingManager {
             let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
             // TODO: fix the decoding problem in the articles and videos retreval. eg. the following code block fails
             do {
+                print(dataAsString)
                 let blog = try JSONDecoder().decode(BlogModel.self, from: data)
                 let articles = blog.data
                 NetworkingManager.cache.setObject(dataAsString, forKey: key)

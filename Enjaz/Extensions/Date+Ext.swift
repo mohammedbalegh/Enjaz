@@ -95,11 +95,26 @@ extension Date {
 		return currentDate
 	}
 	
+    static func stripTime() -> Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let date = Calendar.current.date(from: components)
+        return date!
+    }
+    
 	static func getDateAndTimeLabelText(_ viewModel: ItemModel) -> NSAttributedString {
 		let itemDate = Date(timeIntervalSince1970: viewModel.date)
 		let dateFormat: String = {
 			if viewModel.is_repeated { return "d/M/yy" }
-			if Calendar.current.isDateInToday(itemDate) { return "hh:00  aa" }
+			if Calendar.current.isDateInToday(itemDate) {
+                if SceneDelegate.layoutDirectionIsRTL {
+                    return "00:hh  aa"
+                }
+                return "hh:00  aa"
+                
+            }
+            if SceneDelegate.layoutDirectionIsRTL {
+                return "d/M/yyyy 00:hh  aa"
+            }
 			return "d/M/yyyy hh:00  aa"
 		}()
 		
@@ -179,7 +194,7 @@ extension Date {
 		return Calendar.current.dateComponents([.day], from: firstDate, to: secondDate).day
 	}
 	
-	static func generateConsecutiveDates(from startingDate: Date, to endingDate: Date,separatedBy separator: DateSeparationType) -> [Date] {
+    static func generateConsecutiveDates(from startingDate: Date, to endingDate: Date,separatedBy separator: DateSeparationType) -> [Date] {
 		var consecutiveDates: [Date] =  startingDate.isInPast ? [] : [startingDate]
 		
 		var index = 1
@@ -201,7 +216,7 @@ extension Date {
 				fatalError("Unsupported separator type")
 			}
 						
-			let nextDate = Calendar.current.date(byAdding: dateComponent, to: startingDate)!
+            let nextDate = Calendar.current.date(byAdding: dateComponent, to: startingDate)!
 			
 			consecutiveDates.append(nextDate)
 			index += 1

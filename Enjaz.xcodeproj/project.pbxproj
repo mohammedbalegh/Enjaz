@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4123DD1D27A8156900F2CBF5 /* Collections + EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4123DD1C27A8156900F2CBF5 /* Collections + EXT.swift */; };
 		41328EFA258843CD00A86330 /* GreetingMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328EF9258843CD00A86330 /* GreetingMessageView.swift */; };
 		41328F06258955CD00A86330 /* CardsViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41328F05258955CD00A86330 /* CardsViewHeader.swift */; };
 		4141500925A1875A00DC369A /* MonthGoalsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4141500825A1875A00DC369A /* MonthGoalsScreenVC.swift */; };
@@ -265,6 +266,7 @@
 /* Begin PBXFileReference section */
 		1C3AFFB79D9CBF250C14AB43 /* Pods_EnjazTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnjazTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2E824E42FD6B70390F67C5 /* Pods-EnjazTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnjazTests.release.xcconfig"; path = "Target Support Files/Pods-EnjazTests/Pods-EnjazTests.release.xcconfig"; sourceTree = "<group>"; };
+		4123DD1C27A8156900F2CBF5 /* Collections + EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collections + EXT.swift"; sourceTree = "<group>"; };
 		41328EC22586110600A86330 /* HomeScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenVC.swift; sourceTree = "<group>"; };
 		41328ED3258622DC00A86330 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		41328ED82586258B00A86330 /* CalendarScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreenVC.swift; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 				41798C33260B073900DF5ECF /* UIButton+Ext.swift */,
 				BC3C5D7C2618E4F7000EE002 /* BidirectionalItemModelCollection+Ext.swift */,
 				BCF0494426FB77F000CE4CC8 /* Date+Ext.swift */,
+				4123DD1C27A8156900F2CBF5 /* Collections + EXT.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1315,6 +1318,7 @@
 				BCBEE8702587D85C00D8DE0A /* NameTextField.swift in Sources */,
 				BC93D5B12614A8AA005DE3AC /* AddNoteScreenVC.swift in Sources */,
 				BC3C5D612618B486000EE002 /* InputFieldContainer.swift in Sources */,
+				4123DD1D27A8156900F2CBF5 /* Collections + EXT.swift in Sources */,
 				BC8F2F8025A8650000EF7EA4 /* UIDirectionalRectCorner.swift in Sources */,
 				BC47809C259629AD00D21060 /* State.swift in Sources */,
 				BCF2F73F2620CE09006275AA /* RoundImageViewContainer.swift in Sources */,

@@ -196,6 +196,10 @@ class ItemCardBodyView: UIView {
     func setupTimeLabel() {
         addSubview(dateAndTimeLabel)
         
+        if SceneDelegate.layoutDirectionIsRTL {
+//            dateAndTimeLabel.transform = CGAffineTransform(scaleX: -1, y: 1)
+        }
+        
         NSLayoutConstraint.activate([
             dateAndTimeLabel.bottomAnchor.constraint(equalTo: checkBtn.topAnchor, constant: -7),
             dateAndTimeLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
