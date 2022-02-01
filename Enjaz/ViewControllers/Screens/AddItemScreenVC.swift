@@ -1,5 +1,6 @@
 import UIKit
 import SPAlert
+import RealmSwift
 
 class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegate {
     // MARK: Properties
@@ -344,24 +345,25 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 	}
 	
 	@objc func handleSaveBtnTap() {
+        
         let nonProvidedRequiredFieldNames = getNonProvidedRequiredFieldNames()
         
         if let errorMessage = String.generateRequiredFieldNamesErrorMessage(requiredFieldNames: nonProvidedRequiredFieldNames) {
 			showErrorMessage(errorMessage)
             return
         }
-        
-		if let itemImage = nonDefaultItemImage {
-			RealmManager.saveItemImage(itemImage)
-		}
-		
-		NotificationsManager.requestNotificationsPermission()
-        saveItem()
+    
+        if let itemImage = self.nonDefaultItemImage {
+            RealmManager.saveItemImage(itemImage)
+        }
+        NotificationsManager.requestNotificationsPermission()
+        self.saveItem()
 				
 		if isPresentedModally {
 			dismiss(animated: true)
 			delegate?.didAddItem(self)
 		} else {
+            RealmManager.realmRefresh()
 			navigationController?.popViewController(animated: true)
 		}
 		

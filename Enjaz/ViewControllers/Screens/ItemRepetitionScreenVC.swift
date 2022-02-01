@@ -142,8 +142,9 @@ class ItemRepetitionScreenVC: ModalVC {
 		let selectedDates = Date.generateConsecutiveDates(from: startDate, to: endDate, separatedBy: repetitionOption)
 		
 		let selectedDatesUnixTimeStamps = selectedDates.map { $0.timeIntervalSince1970 }
-		
+        
 		delegate?.handleDateAndTimeSaveBtnTap(selectedDatesTimeStamps: [selectedDatesUnixTimeStamps], readableDate: repetitionOption.rawValue.localized, repetitionOption: repetitionOption)
+        
 		dismiss(animated: true)
 	}
 	
