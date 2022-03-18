@@ -93,7 +93,7 @@ struct NetworkingManager {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
-            
+            print(response.statusCode)
             completionHandler(nil)
         }
     }

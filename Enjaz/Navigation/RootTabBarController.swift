@@ -127,7 +127,6 @@ class RootTabBarController: UITabBarController {
 		
 		// Redirect the user to the authScreens first if not logged in.
 		let loggedIn = UserDefaultsManager.isLoggedIn
-        // TODO: Uncomment when server is fixed
         
 		if !loggedIn {
 			let authNavigationController = UINavigationController(rootViewController: StartScreenVC())

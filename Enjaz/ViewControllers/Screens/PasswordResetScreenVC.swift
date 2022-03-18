@@ -1,6 +1,7 @@
 import UIKit
 import Network
 import ReSwift
+import SwiftUI
 
 class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
@@ -231,7 +232,13 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
         updateTextFieldsVerticalStack()
         
-        // TODO: Request rest password code from backend
+        NetworkingManager.requestPasswordResetCode(email: emailTextField.text) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.alertPopup.present(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("The email you entered does not exist", comment: ""))
+                }
+            }
+        }
     }
     
     // MARK: Event Handlers

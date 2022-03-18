@@ -24,7 +24,7 @@
 "Not an existing user?" = "Not an existing user?";
 "Create an account" = "Create an account";
 "Incorrect username or password" = "Incorrect username or password";
-"cant not be empty" = "can not be empty";
+"can not be empty" = "can not be empty";
 "Can not start with a number" = "Can not start with a number";
 "Should be" = "Should be";
 "letters at least" = "letters at least";;
