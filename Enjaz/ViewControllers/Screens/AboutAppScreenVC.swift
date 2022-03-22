@@ -4,6 +4,7 @@ class AboutAppScreenVC: PrivacyPolicyAndAboutAppVC {
 	
 	let linksView: LinksView = {
 		let view = LinksView()
+        view.isHidden = true
 		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
@@ -43,6 +44,7 @@ class AboutAppScreenVC: PrivacyPolicyAndAboutAppVC {
                 }
                 
                 UserDefaultsManager.aboutUs = data?.text
+                print(data?.text)
                 self.textView.text = data?.text
             }
         }

@@ -181,6 +181,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
                     return
                 }
             
+                UserDefaultsManager.isLoggedIn = true
                 self.navigateToMainTabBarController()
             }
         }

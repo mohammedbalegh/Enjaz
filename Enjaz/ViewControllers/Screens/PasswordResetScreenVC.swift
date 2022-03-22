@@ -1,6 +1,7 @@
 import UIKit
 import Network
 import ReSwift
+import SwiftUI
 
 class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     typealias StoreSubscriberStateType = AppState
@@ -227,22 +228,17 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         
         guard emailIsValid else { return }
         
-        // TODO: Request rest password code from backend
+        updateSubTitle()
+        
+        updateNextBtn()
+        
+        
+        updateTextFieldsVerticalStack()
         
         NetworkingManager.requestPasswordResetCode(email: emailTextField.text) { error in
-            
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.alterPopup.presentAsError(withMessage: "هذا الحساب غير موجود، الرجاء التأكد من انك قمت بإدخال البايات بشكل صحيح")
-                }
-                code = error
-            } else {
-                DispatchQueue.main.async {
-                    self.updateSubTitle()
-                    
-                    self.updateNextBtn()
-                    
-                    self.updateTextFieldsVerticalStack()
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.alertPopup.present(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("The email you entered does not exist", comment: ""))
                 }
             }
         }

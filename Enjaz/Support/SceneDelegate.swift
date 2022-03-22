@@ -5,6 +5,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    static var layoutDirectionIsRTL: Bool!
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {        
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -15,15 +16,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let sideMenuVC = SideMenuVC()
         let menuNavigationController = SideMenuNavigationController(rootViewController: sideMenuVC)
-        let layoutDirectionIsRTL = LayoutTools.getCurrentLayoutDirection(for: rootTabBarController.view) == .rightToLeft
+        SceneDelegate.layoutDirectionIsRTL = LayoutTools.getCurrentLayoutDirection(for: rootTabBarController.view) == .rightToLeft
         
-        if layoutDirectionIsRTL {
+        if SceneDelegate.layoutDirectionIsRTL {
             SideMenuManager.default.rightMenuNavigationController = menuNavigationController
         } else {
             SideMenuManager.default.leftMenuNavigationController = menuNavigationController
         }
         
-        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: rootTabBarController.view, forMenu: layoutDirectionIsRTL ? .right : .left)
+        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: rootTabBarController.view, forMenu: SceneDelegate.layoutDirectionIsRTL ? .right : .left)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
 		window?.backgroundColor = .background

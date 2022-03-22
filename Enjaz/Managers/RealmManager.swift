@@ -40,11 +40,14 @@ struct RealmManager {
 		}
 	}
 	
-	
 	// MARK: ItemModel
     static func retrieveTreesById(_ id: Int) -> TreeModel? {
         let item = realm.object(ofType: TreeModel.self, forPrimaryKey: id)
         return item
+    }
+    
+    static func realmRefresh() {
+        realm.refresh()
     }
     
     static func retrieveTrees() -> [TreeModel] {
@@ -79,11 +82,17 @@ struct RealmManager {
         MedalsManager.treeWateringMedals(tree: trees)
     }
 	
+    static func saveItems(_ items: [ItemModel]) {
+        autoreleasepool(invoking: {
+            realm.beginWrite()
+            realm.add(items)
+            try? realm.commitWrite()
+            MedalsManager.firstItemAdded()
+        })
+    }
+    
 	static func saveItem(_ item: ItemModel) {
-		realm.beginWrite()
-		realm.add(item)
-		try? realm.commitWrite()
-        MedalsManager.firstItemAdded()
+        saveItems([item])
 	}
 	
 	static func retrieveItemById(_ id: Int) -> ItemModel? {
@@ -189,7 +198,7 @@ struct RealmManager {
     static func saveItemCategories(_ itemCategories: [ItemCategoryModel]) {
         realm.beginWrite()
         for itemCategory in itemCategories {
-            realm.add(itemCategory)
+            realm.add(itemCategory, update: .modified)
         }
         try? realm.commitWrite()
     }

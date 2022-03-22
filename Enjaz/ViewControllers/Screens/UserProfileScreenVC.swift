@@ -21,7 +21,7 @@ class UserProfileScreenVC: UIViewController {
 		
 		return label
 	}()
-	    
+	
     let changePasswordBtn: UserProfileButtonView = {
         let button = UserProfileButtonView()
         // Not implemented yet.
@@ -128,7 +128,7 @@ class UserProfileScreenVC: UIViewController {
 			btnsStack.heightAnchor.constraint(equalToConstant: height),
 		])
 	}
-		
+	
 	@objc func handleThemeBtnTap() {
 		themePickerBottomSheet.picker.selectRow(selectedThemeIndex, inComponent: 0, animated: false)
 		themePickerBottomSheet.present(animated: true)

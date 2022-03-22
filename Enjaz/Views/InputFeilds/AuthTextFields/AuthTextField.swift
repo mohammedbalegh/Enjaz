@@ -122,12 +122,12 @@ class AuthTextField : UIView {
 	
 	func validate() -> Bool {
 		if text.count == 0 {
-			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("cant not be empty", comment: ""))")
+			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("can not be empty", comment: ""))")
 			return false
 		}
 		
 		if !canStartWithNumber && Character(text[0]).isNumber {
-			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("Can not start with a number", comment: ""))")
+			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("can not be empty", comment: ""))")
 			return false
 		}
 		

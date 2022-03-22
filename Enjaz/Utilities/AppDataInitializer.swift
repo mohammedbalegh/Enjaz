@@ -2,15 +2,26 @@ import Foundation
 
 struct AppDataInitializer {
     static func initializeItemCategories() {
-        let itemCategoriesAreEmpty = RealmManager.itemCategoriesCount == 0
-        guard itemCategoriesAreEmpty else { return }
-        
-        RealmManager.saveItemCategories(DEFAULT_ITEM_CATEGORIES)
+//        let itemCategoriesAreEmpty = RealmManager.itemCategoriesCount == 0
+//        guard itemCategoriesAreEmpty else { return }
+//
+//        RealmManager.saveItemCategories(DEFAULT_ITEM_CATEGORIES)
+        NetworkingManager.retreiveItemCategories { itemCategoryModels, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error)
+//                    RealmManager.saveItemCategories(DEFAULT_ITEM_CATEGORIES)
+                    return
+                }
+
+                if let itemCategoryModels = itemCategoryModels as? [ItemCategoryModel] {
+                    RealmManager.saveItemCategories(itemCategoryModels)
+                }
+            }
+        }
     }
 	
 	static func initializeItemImages() {
-//      TODO: make only new ids update and don't reset because custom images from gallery will be deleted as well
-		
         NetworkingManager.retreiveItemImages { itemImageModels, error in
             DispatchQueue.main.async {
                 if let error = error {
@@ -28,7 +39,7 @@ struct AppDataInitializer {
         }
 		
 	}
-    
+        
     static func initializePersonalAspects() {
         if RealmManager.personalAspectsCount == 0 {
             addMainAspects(title: "Who am I", brief: "Write what you know about your self", image: "whoAmIImage", badge: "whoAmIBadge", description: "Translate what you know about your self from dreams and ambitions into goals, to achieve as much as possible year")

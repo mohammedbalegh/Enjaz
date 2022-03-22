@@ -48,7 +48,6 @@ class SignupScreenVC: AuthScreenVC {
                 guard let newUser = newUser else { return }
                 
                 UserDefaultsManager.user = newUser
-                UserDefaultsManager.isLoggedIn = true
                 self.navigateToEmailVerificationScreen()
             }
         }

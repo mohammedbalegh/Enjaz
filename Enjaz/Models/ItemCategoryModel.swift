@@ -1,6 +1,6 @@
 import RealmSwift
 
-class ItemCategoryModel: Object {
+class ItemCategoryModel: Object, Decodable {
     @objc dynamic var id = UUID().hashValue
     @objc dynamic var name = ""
     @objc dynamic var category_description: String = ""
@@ -37,5 +37,12 @@ class ItemCategoryModel: Object {
     
     override class func primaryKey() -> String? {
             return "id"
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case image_source = "image"
+        case category_description = "description"
     }
 }

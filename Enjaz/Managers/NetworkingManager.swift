@@ -93,7 +93,7 @@ struct NetworkingManager {
                 completionHandler(StatusCodeError.statusCode(code: response.statusCode))
                 return
             }
-                        
+            print(response.statusCode)
             completionHandler(nil)
         }
     }
@@ -218,6 +218,47 @@ struct NetworkingManager {
         }
     }
     
+    static func retreiveItemCategories(completionHandler: @escaping (_ images: [ItemCategoryModel?]?, _ error: Error?) -> Void) {
+        let url = URL(string: NetworkingUrls.itemCategoriesUrl)
+        
+        let request = HttpRequest(url: url, method: .get)
+        
+        request.send { (data, response, error) in
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else { return }
+            
+            guard (200...299) ~= response.statusCode else {
+                completionHandler(nil, StatusCodeError.statusCode(code: response.statusCode))
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(nil, EncodingError.invalidDataFormat)
+                return
+            }
+            
+            do {
+                var index = 0
+                let itemCategories = try JSONDecoder().decode([ItemCategoryModel].self, from: data).map() { itemCategory -> ItemCategoryModel in
+                    let defaultItemCategory = itemCategory
+                    defaultItemCategory.is_default = true
+                    defaultItemCategory.id = index
+                    index += 1
+                    return defaultItemCategory
+                }
+                completionHandler(itemCategories, nil)
+            } catch {
+                print("encoding error")
+                completionHandler(nil, EncodingError.invalidDataFormat)
+            }
+            
+        }
+    }
+    
     static func retrieveGoalSuggestions(completionHandler: @escaping ([GoalSuggestionsModel]?, Error?) -> Void) {
         
         let url = URL(string: NetworkingUrls.apiGoalsSuggestionsBankUrl)
@@ -332,6 +373,7 @@ struct NetworkingManager {
             let dataAsString = NSString(string: String(decoding: data,as: UTF8.self))
             // TODO: fix the decoding problem in the articles and videos retreval. eg. the following code block fails
             do {
+                print(dataAsString)
                 let blog = try JSONDecoder().decode(BlogModel.self, from: data)
                 let articles = blog.data
                 NetworkingManager.cache.setObject(dataAsString, forKey: key)

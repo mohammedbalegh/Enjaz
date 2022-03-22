@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "medalIcon.png",
+      "filename" : "meadalIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "medalIcon@2x.png",
+      "filename" : "meadalIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "medalIcon@3x.png",
+      "filename" : "meadalIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
