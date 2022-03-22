@@ -44,7 +44,7 @@ class ItemsScreenVC: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		if let title = title {
-			noItemsLabel.text = NSLocalizedString("No item", comment: "") + " \(title.lowercased())"
+			noItemsLabel.text = "No item".localized + " \(title.lowercased())"
 		}
 	}
 		
@@ -79,13 +79,13 @@ class ItemsScreenVC: UITableViewController {
 		
 		let actionSheet = UIAlertController(title: itemDeletionWarningTitle, message: deletionWarningMessage, preferredStyle: .actionSheet)
 		
-		let deleteActionTitle = String(format: NSLocalizedString("Delete %@", comment: ""), ItemType.getTypeById(id: item.type_id).localizedName)  
+		let deleteActionTitle = String(format: "Delete %@".localized, ItemType.getTypeById(id: item.type_id).localizedName)  
 		
 		let deleteAction = UIAlertAction(title: deleteActionTitle, style: .destructive) { _ in
 			self.deleteItem(at: indexPath, completion: completion)
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { _ in
+		let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel) { _ in
 			completion?(false)
 		}
 		
@@ -99,13 +99,13 @@ class ItemsScreenVC: UITableViewController {
 	func getDeletionWarningTitleAndMessage(forItem item: ItemModel) -> (String, String) {
 		let itemType = ItemType.getTypeById(id: item.type_id)
 		let itemTypeName = itemType.localizedName.lowercased()
-		let pluralItemTypeName = NSLocalizedString(itemType.name.pluralizeInEnglish(), comment: "").removeDefinitionArticle().lowercased()
+		let pluralItemTypeName = itemType.name.pluralizeInEnglish().localized.removeDefinitionArticle().lowercased()
 		
-		let itemDeletionWarningTitle = String(format: NSLocalizedString("Are you sure you want to delete %@?", comment: ""), itemTypeName)
+		let itemDeletionWarningTitle = String(format: "Are you sure you want to delete %@?".localized, itemTypeName)
 		
-		let singleItemDeletionWarningMessage = NSLocalizedString("This action cannot be undone.", comment: "")
+		let singleItemDeletionWarningMessage = "This action cannot be undone.".localized
 		
-		let repeatingItemDeletionWarningMessage = String(format: NSLocalizedString("All subsequent %@ will be deleted as well.", comment: ""), pluralItemTypeName) + " \(singleItemDeletionWarningMessage)"
+		let repeatingItemDeletionWarningMessage = String(format: "All subsequent %@ will be deleted as well.".localized, pluralItemTypeName) + " \(singleItemDeletionWarningMessage)"
 		
 		let deletionWarningMessage = item.is_repeated
 			? repeatingItemDeletionWarningMessage
@@ -128,7 +128,7 @@ class ItemsScreenVC: UITableViewController {
 		
 		guard !item.is_completed else {
 			let itemType = ItemType.getTypeById(id: item.type_id)
-			let alertMessage = String(format: NSLocalizedString("%@ is already completed", comment: ""), itemType.localizedName)
+			let alertMessage = String(format: "%@ is already completed".localized, itemType.localizedName)
 
 			SPAlert.present(message: alertMessage, haptic: .none)
 			completion?(true)
@@ -216,17 +216,17 @@ class ItemsScreenVC: UITableViewController {
 		let item = getItem(at: indexPath)
 		
 		return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-			let deleteAction = UIAction(title: NSLocalizedString("Delete", comment: ""), image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+			let deleteAction = UIAction(title: "Delete".localized, image: UIImage(systemName: "trash"), attributes: .destructive) { action in
 				self.presentConfirmDeletionActionSheet(forItemAt: indexPath)
 			}
 			
-			let completeAction = UIAction(title: NSLocalizedString("Mark as Completed", comment: ""), image: UIImage(systemName: "checkmark.circle")) { action in
+			let completeAction = UIAction(title: "Mark as Completed".localized, image: UIImage(systemName: "checkmark.circle")) { action in
 				self.completeItem(at: indexPath)
 			}
 			
 			let pinActionTitle = item.is_pinned ? "Unpin" : "Pin"
 			let pinActionImageName = item.is_pinned ? "pin.slash" : "pin"
-			let pinAction = UIAction(title: NSLocalizedString(pinActionTitle, comment: ""), image: UIImage(systemName: pinActionImageName)) { action in
+			let pinAction = UIAction(title: pinActionTitle.localized, image: UIImage(systemName: pinActionImageName)) { action in
 				self.pinItem(at: indexPath)
 			}
 			

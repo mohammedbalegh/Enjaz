@@ -6,7 +6,7 @@ class GoalsScreenVC: MenuBarNavigationVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-        menuItems = [NSLocalizedString("My Goals", comment: ""), NSLocalizedString("Goals Bank", comment: "")]
+        menuItems = ["My Goals".localized, "Goals Bank".localized]
         viewControllers = [MyGoalsScreenVC(), GoalsBankScreenVC()]
     }
     

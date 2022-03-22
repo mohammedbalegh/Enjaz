@@ -4,7 +4,7 @@ class PrivacyPolicyScreenVC: PrivacyPolicyAndAboutAppVC {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = NSLocalizedString("Privacy Policy", comment: "")
+		title = "Privacy Policy".localized
 		
 		textView.text = UserDefaultsManager.privacyPolicy
 		updateScreen()

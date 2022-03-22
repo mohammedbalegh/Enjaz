@@ -81,7 +81,7 @@ class DailyViewCell: UICollectionViewCell {
 	
 	func getAddItemContextMenu(actionHandler: @escaping (_ : ItemType) -> Void) -> UIMenu {
 		let menuActions = [ItemType.goal, ItemType.demah, ItemType.achievement, ItemType.task].map { type -> UIAction in
-			let actionTitle = String(format: NSLocalizedString("Add %@", comment: ""), type.localizedName).capitalizeOnlyFirstLetter()
+			let actionTitle = String(format: "Add %@".localized, type.localizedName).capitalizeOnlyFirstLetter()
 			let actionImage = type.image?.withRenderingMode(.alwaysTemplate)
 			
 			return UIAction(
@@ -372,9 +372,9 @@ extension DailyViewCell: UITableViewDelegate, UITableViewDataSource, UICollectio
 		header.contentView.backgroundColor = backgroundColor
 		header.dayNumberLabel.text = String(format: "%02d", viewModel.dayNumber)
 		header.weekDayNameLabel.text = viewModel.weekDayName
-		header.numberOfItemsLabel.text = String(numberOfItems) + " " + NSLocalizedString("Task", comment: "")
+		header.numberOfItemsLabel.text = String(numberOfItems) + " " + "Task".localized
 		
-		if Locale.current.languageCode == "en" {
+		if UserDefaultsManager.i18nLanguage == "en" {
 			header.numberOfItemsLabel.text! += numberOfItems > 1 ? "s" : ""
 		}
 		

@@ -10,7 +10,7 @@ class PersonalAspectsModel: Object {
     @objc dynamic var badge_image_source: String = ""
     @objc dynamic var aspect_description: String? = nil
     @objc dynamic var aspect_text: String? = ""
-    @objc dynamic var placeholder = NSLocalizedString("Write what you know about your self", comment:"")
+    @objc dynamic var placeholder = "Write what you know about your self".localized
     
     override class func primaryKey() -> String? {
        return "id"

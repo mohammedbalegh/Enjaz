@@ -14,7 +14,7 @@ class NoteTitleTextField: UIView {
     var textField: UITextField = {
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = NSLocalizedString("Note title", comment: "")
+        textField.placeholder = "Note title".localized
         return textField
     }()
     

@@ -5,7 +5,7 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Start and End Date", comment: "")
+        title = "Start and End Date".localized
         calendarView.allowsRangeSelection = true
         calendarView.monthDaysCollectionView.deselectAllItems(animated: false)
     }
@@ -56,7 +56,7 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
 	
 	override func getSelectedTimeStamps() -> [TimeInterval]? {
 		guard let firstSelectedDate = firstSelectedDate, let lastSelectedDate = lastSelectedDate, firstSelectedDate != lastSelectedDate else {
-			alertPopup.presentAsError(withMessage: NSLocalizedString("A date range must be selected", comment: ""))
+			alertPopup.presentAsError(withMessage: "A date range must be selected".localized)
 			return nil
 		}
 		
@@ -64,7 +64,7 @@ class SetDateRangeScreenVC: SetDateAndTimeScreenVC {
 		let firstSelectedDateUnixTimeStamp = firstSelectedDate.timeIntervalSince1970
 		
 		if firstSelectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-			alertPopup.presentAsError(withMessage: NSLocalizedString("Selected date range cannot be in the past", comment: ""))
+			alertPopup.presentAsError(withMessage: "Selected date range cannot be in the past".localized)
 			return nil
 		}
 		

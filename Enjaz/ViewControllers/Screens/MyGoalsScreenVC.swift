@@ -12,7 +12,7 @@ class MyGoalsScreenVC: ScreenNavigatorTableVC {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 		
-		headerCellModels = [ScreenNavigatorTableViewHeaderCellModel(title: NSLocalizedString("Choose goal category", comment: ""), addBtnTitle: NSLocalizedString("Add new category", comment: ""))]
+		headerCellModels = [ScreenNavigatorTableViewHeaderCellModel(title: "Choose goal category".localized, addBtnTitle: "Add new category".localized)]
 		let headerCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? TableViewCustomHeaderCell
 		headerCell?.addBtn.addTarget(self, action: #selector(handleAddBtnTap), for: .touchUpInside)
 		
@@ -29,16 +29,16 @@ class MyGoalsScreenVC: ScreenNavigatorTableVC {
     }
     
 	func presentConfirmDeletionActionSheet(forCategoryAt indexPath: IndexPath, completion: ((_ completed: Bool) -> Void)? = nil) {
-		let title = NSLocalizedString("Are you sure you want to delete category?", comment: "")
-		let message = NSLocalizedString("All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone.", comment: "")
+		let title = "Are you sure you want to delete category?".localized
+		let message = "All related goals, demahs, achievements and tasks will be deleted as well. This action cannot be undone.".localized
 		
         let actionSheet = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
 		
-		let deleteAction = UIAlertAction(title: NSLocalizedString("Delete Category", comment: ""), style: .destructive) {_ in
+		let deleteAction = UIAlertAction(title: "Delete Category".localized, style: .destructive) {_ in
 			self.deleteCategory(at: indexPath, completion: completion)
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) {_ in
+		let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel) {_ in
 			completion?(false)
 		}
 		
@@ -91,7 +91,7 @@ class MyGoalsScreenVC: ScreenNavigatorTableVC {
 		guard !itemCategory.is_default else { return nil }
 		
 		return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-			let deleteAction = UIAction(title: NSLocalizedString("Delete", comment: ""), image: UIImage(systemName: "trash"), attributes: .destructive) { action in
+			let deleteAction = UIAction(title: "Delete".localized, image: UIImage(systemName: "trash"), attributes: .destructive) { action in
 				self.presentConfirmDeletionActionSheet(forCategoryAt: indexPath)
 			}
 			return UIMenu(title: "", children: [deleteAction])

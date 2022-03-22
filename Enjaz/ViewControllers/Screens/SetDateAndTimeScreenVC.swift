@@ -21,9 +21,9 @@ class SetDateAndTimeScreenVC: CalendarViewController {
         return view
     }()
     
-    var saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
+    var saveBtn = PrimaryBtn(label: "Save".localized, theme: .blue, size: .large)
 	var nextBtn: PrimaryBtn = {
-		let button = PrimaryBtn(label: NSLocalizedString("Next", comment: ""), theme: .blue, size: .large)
+		let button = PrimaryBtn(label: "Next".localized, theme: .blue, size: .large)
 		button.isHidden = true
 		return button
 	}()
@@ -53,7 +53,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Date and Time", comment: "")
+        title = "Date and Time".localized
         
         calendarView.delegate = self
         hourPicker.selectRow(12, inComponent: 0, animated: false)
@@ -214,7 +214,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
 	override func setPopoverBtnsDefaultLabels() {
 		super.setPopoverBtnsDefaultLabels()
-		calendarView.partitionsNumberLabel = calendarView.partitionsNumberLabel ?? NSLocalizedString("Number of partitions", comment: "")
+		calendarView.partitionsNumberLabel = calendarView.partitionsNumberLabel ?? "Number of partitions".localized
 	}
 	
     override func configureCalendarPopoverBtnsRow(calendarPopoverBtnsRow: CalendarPopoverBtnsRow) {
@@ -240,7 +240,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
     
 	func getSelectedTimeStamps() -> [TimeInterval]? {
 		guard calendarView.selectedMonthDayItemRow != nil else {
-			alertPopup.presentAsError(withMessage: NSLocalizedString("A day must be selected", comment: ""))
+			alertPopup.presentAsError(withMessage: "A day must be selected".localized)
 			return nil
 		}
 		
@@ -250,7 +250,7 @@ class SetDateAndTimeScreenVC: CalendarViewController {
 		let selectedDateUnixTimeStamp = selectedDate.timeIntervalSince1970
 		
 		if selectedDateUnixTimeStamp < currentDateUnixTimeStamp {
-			alertPopup.presentAsError(withMessage: NSLocalizedString("Selected date cannot be in the past", comment: ""))
+			alertPopup.presentAsError(withMessage: "Selected date cannot be in the past".localized)
 			return nil
 		}
 		

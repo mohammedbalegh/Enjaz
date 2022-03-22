@@ -16,7 +16,7 @@ class SelfEvaluationScreenVC: UIViewController {
     
     let whatYouLearnedLabel: SelfEvaluationLabel = {
         let label = SelfEvaluationLabel()
-        label.label.text  = NSLocalizedString("What have you learned", comment: "")
+        label.label.text  = "What have you learned".localized
         label.label.font = .systemFont(ofSize: 12)
         label.label.adjustsFontSizeToFitWidth = true
         label.label.minimumScaleFactor = 0.3
@@ -28,7 +28,7 @@ class SelfEvaluationScreenVC: UIViewController {
     
     let whatChangedLabel: SelfEvaluationLabel = {
         let label = SelfEvaluationLabel()
-        label.label.text  = NSLocalizedString("What changed in you", comment: "")
+        label.label.text  = "What changed in you".localized
         label.label.font = .systemFont(ofSize: 12)
         label.label.adjustsFontSizeToFitWidth = true
         label.label.minimumScaleFactor = 0.5
@@ -40,7 +40,7 @@ class SelfEvaluationScreenVC: UIViewController {
     
     let whatYouFeelLabel: SelfEvaluationLabel = {
         let label = SelfEvaluationLabel()
-        label.label.text  = NSLocalizedString("How do you feel", comment: "")
+        label.label.text  = "How do you feel".localized
         label.label.font = .systemFont(ofSize: 12)
         label.label.adjustsFontSizeToFitWidth = true
         label.label.minimumScaleFactor = 0.5
@@ -72,7 +72,7 @@ class SelfEvaluationScreenVC: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        title = NSLocalizedString("Self Evaluation", comment: "")
+        title = "Self Evaluation".localized
         
         
         setupSubviews()

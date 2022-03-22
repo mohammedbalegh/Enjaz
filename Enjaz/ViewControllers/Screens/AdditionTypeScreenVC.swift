@@ -9,7 +9,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.id = ItemType.goal.id
 		card.typeImageContainer.imageView.image = ItemType.goal.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
-        card.typeDescription.text = NSLocalizedString("If you have a goal that you want to achieve in a specific field", comment: "")
+        card.typeDescription.text = "If you have a goal that you want to achieve in a specific field".localized
         return card
     }()
     
@@ -19,7 +19,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.id = ItemType.demah.id
         card.typeImageContainer.imageView.image = ItemType.demah.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
-        card.typeDescription.text = NSLocalizedString("If you have a habit throughout a specific period", comment: "")
+        card.typeDescription.text = "If you have a habit throughout a specific period".localized
         return card
     }()
     
@@ -29,7 +29,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.id = ItemType.achievement.id
 		card.typeImageContainer.imageView.image = ItemType.achievement.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
-        card.typeDescription.text = NSLocalizedString("If you have an achievement that you want to complete in a specific time", comment: "")
+        card.typeDescription.text = "If you have an achievement that you want to complete in a specific time".localized
         return card
     }()
     
@@ -39,7 +39,7 @@ class AdditionTypeScreenVC: UIViewController, AdditionTypeScreenCardDelegate {
         card.id = ItemType.task.id
         card.typeImageContainer.imageView.image = ItemType.task.image
         card.typeTitle.text = ItemType.getTypeById(id: card.id).localizedName
-        card.typeDescription.text = NSLocalizedString("If you have a task that want to complete in a specific time", comment: "")
+        card.typeDescription.text = "If you have a task that want to complete in a specific time".localized
         return card
     }()
     

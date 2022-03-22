@@ -43,12 +43,12 @@ class HomeScreenVC: UIViewController {
         
         if hour < 12 {
             view.image.image = UIImage(named: "sunIcon")
-            view.welcomeLabel.text = String(format: NSLocalizedString("Good morning %@!", comment: ""), firstName)
-            view.messageLabel.text = NSLocalizedString("Take a look at today's goals and habits", comment: "")
+            view.welcomeLabel.text = String(format: "Good morning %@!".localized, firstName)
+            view.messageLabel.text = "Take a look at today's goals and habits".localized
         } else {
             view.image.image = UIImage(named: "moonIcon")
-            view.welcomeLabel.text = String(format: NSLocalizedString("Good evening %@!", comment: ""), firstName)
-            view.messageLabel.text = NSLocalizedString("Take a look at today's remaining goals", comment: "")
+            view.welcomeLabel.text = String(format: "Good evening %@!".localized, firstName)
+            view.messageLabel.text = "Take a look at today's remaining goals".localized
         }
         
         return view
@@ -62,8 +62,8 @@ class HomeScreenVC: UIViewController {
         cardsView.cardsCollectionView.delegate = self
         cardsView.cardsCollectionView.dataSource = self
         
-        cardsView.title = NSLocalizedString("Today's goals", comment: "")
-        cardsView.noCardsMessage = NSLocalizedString("No goals today", comment: "")
+        cardsView.title = "Today's goals".localized
+        cardsView.noCardsMessage = "No goals today".localized
         cardsView.cardsCount = goalModels.count
         cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllGoalsBtnTap), for: .touchUpInside)
         
@@ -78,8 +78,8 @@ class HomeScreenVC: UIViewController {
 		cardsView.cardsCollectionView.delegate = self
 		cardsView.cardsCollectionView.dataSource = self
 		
-		cardsView.title = NSLocalizedString("Today's tasks", comment: "")
-		cardsView.noCardsMessage = NSLocalizedString("No tasks today", comment: "")
+		cardsView.title = "Today's tasks".localized
+		cardsView.noCardsMessage = "No tasks today".localized
 		cardsView.cardsCount = goalModels.count
 		cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllGoalsBtnTap), for: .touchUpInside)
 		
@@ -94,8 +94,8 @@ class HomeScreenVC: UIViewController {
         cardsView.cardsCollectionView.delegate = self
         cardsView.cardsCollectionView.dataSource = self
         
-        cardsView.title = NSLocalizedString("Today's demahs", comment: "")
-        cardsView.noCardsMessage = NSLocalizedString("No demahs today", comment: "")
+        cardsView.title = "Today's demahs".localized
+        cardsView.noCardsMessage = "No demahs today".localized
         cardsView.cardsCount = demahModels.count
         cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllDemahsBtnTap), for: .touchUpInside)
         

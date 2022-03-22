@@ -10,7 +10,7 @@ class PasswordTextField: AuthTextField {
 		
 		minimumLength = 8
 		
-		fieldName = NSLocalizedString("Password", comment:  "")
+		fieldName = "Password".localized
 		textField.textContentType = .password
 		textField.isSecureTextEntry = true
 		icon.image = UIImage(named: "lockIcon")

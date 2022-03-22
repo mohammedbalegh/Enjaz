@@ -20,22 +20,22 @@ struct ItemTools {
 	static func showCongratsPopup(for item: ItemModel) {
 		let itemType = ItemType.getTypeById(id: item.type_id)
 		let popupImage = UIImage(named: "congratsIcon")
-		let popupTitle = NSLocalizedString("Congrats", comment: "")
-		var popupMessage = String(format: NSLocalizedString("%@ completed successfully", comment: ""), itemType.localizedName)
+		let popupTitle = "Congrats".localized
+		var popupMessage = String(format: "%@ completed successfully".localized, itemType.localizedName)
 		
 		var actions: [AlertPopupAction] = []
 		
 		if itemType == .goal {
-			popupMessage = popupMessage + "\n" + NSLocalizedString("Would you like to add it as an achievement?", comment: "")
+			popupMessage = popupMessage + "\n" + "Would you like to add it as an achievement?".localized
 			
-			let noAction = AlertPopupAction(title: NSLocalizedString("No", comment: ""), style: .normal) {
+			let noAction = AlertPopupAction(title: "No".localized, style: .normal) {
 				alertPopup.dismiss(animated: true)
 			}
 			
-			let yesAction = AlertPopupAction(title: NSLocalizedString("Yes", comment: ""), style: .normal) {
+			let yesAction = AlertPopupAction(title: "Yes".localized, style: .normal) {
 				instantiateAchievement(from: item)
 				
-				let successMessage = String(format: NSLocalizedString("%@ was added successfully", comment: ""), ItemType.achievement.localizedName)
+				let successMessage = String(format: "%@ was added successfully".localized, ItemType.achievement.localizedName)
 				SPAlert.present(title: successMessage, preset: .done)
 				
 				alertPopup.dismiss(animated: true)

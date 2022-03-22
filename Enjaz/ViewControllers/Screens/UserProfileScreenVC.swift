@@ -1,12 +1,19 @@
 import UIKit
+import SideMenu
 
 class UserProfileScreenVC: UIViewController {
 	
 	let themePickerModels = [
-		NSLocalizedString("Off", comment: ""),
-		NSLocalizedString("On", comment: ""),
-		NSLocalizedString("Auto", comment: ""),
+		"Off".localized,
+		"On".localized,
+		"Auto".localized,
 	]
+    
+    let langaugePickerModels = [
+        "العربية",
+        "English",
+        "Auto".localized,
+    ]
 	
 	let userNameLabel: UILabel = {
 		let label = UILabel()
@@ -26,22 +33,31 @@ class UserProfileScreenVC: UIViewController {
         let button = UserProfileButtonView()
         // Not implemented yet.
         button.isHidden = true
-        button.button.setTitle(NSLocalizedString("Change password", comment: ""), for: .normal)
+        button.button.setTitle("Change password".localized, for: .normal)
 		button.btnIcon.image = UIImage(systemName: "lock")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
         return button
     }()
 	
 	let themeBtn: UserProfileButtonView = {
 		let button = UserProfileButtonView()
-		button.button.setTitle(NSLocalizedString("Dark Mode", comment: ""), for: .normal)
+		button.button.setTitle("Dark Mode".localized, for: .normal)
 		button.btnIcon.image = UIImage(systemName: "moon")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
 		button.arrowIcon.image = UIImage(systemName: "chevron.down")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
 		button.button.addTarget(self, action: #selector(handleThemeBtnTap), for: .touchUpInside)
 		return button
 	}()
 	
+	let languageBtn: UserProfileButtonView = {
+		let button = UserProfileButtonView()
+        button.button.setTitle("Language".localized, for: .normal)
+		button.btnIcon.image = UIImage(systemName: "textformat")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
+		button.arrowIcon.image = UIImage(systemName: "chevron.down")?.withTintColor(.lowContrastGray, renderingMode: .alwaysOriginal)
+		button.button.addTarget(self, action: #selector(handleLanguageBtnTap), for: .touchUpInside)
+		return button
+	}()
+	
 	lazy var btnsStack: UIStackView = {
-		var stackView = UIStackView(arrangedSubviews: [themeBtn])
+		var stackView = UIStackView(arrangedSubviews: [themeBtn, languageBtn])
 		stackView.translatesAutoresizingMaskIntoConstraints = false
 		
 		stackView.axis = .vertical
@@ -55,7 +71,7 @@ class UserProfileScreenVC: UIViewController {
 		let button = UserProfileButtonView()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		
-		button.button.setTitle(NSLocalizedString("Sign Out", comment: ""), for: .normal)
+		button.button.setTitle("Sign Out".localized, for: .normal)
 		button.btnIcon.image = UIImage(named: "logoutIcon")
 		button.arrowIcon.isHidden = true
 		button.bottomBorder.isHidden = true
@@ -74,15 +90,30 @@ class UserProfileScreenVC: UIViewController {
 		
 		return pickerBottomSheet
 	}()
+
+	lazy var languagePickerBottomSheet: PickerBottomSheetView = {
+		let pickerBottomSheet = PickerBottomSheetView()
+		
+		pickerBottomSheet.picker.delegate = self
+		pickerBottomSheet.picker.dataSource = self
+		
+		pickerBottomSheet.selectBtn.addTarget(self, action: #selector(handleLanguagePickerSelection), for: .touchUpInside)
+		
+		return pickerBottomSheet
+	}()
 	
 	var selectedThemeIndex: Int {
 		return UserDefaultsManager.interfaceStyleId ?? 0
 	}
 
+	var selectedLanguageIndex: Int {
+		return UserDefaultsManager.i18nLanguageId ?? 0
+	}
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-		title = NSLocalizedString("Profile", comment: "")
+		title = "Profile".localized
         view.backgroundColor = .background
                 
         setupSubViews()
@@ -133,26 +164,40 @@ class UserProfileScreenVC: UIViewController {
 		themePickerBottomSheet.picker.selectRow(selectedThemeIndex, inComponent: 0, animated: false)
 		themePickerBottomSheet.present(animated: true)
 	}
+
+	@objc func handleLanguageBtnTap() {
+		languagePickerBottomSheet.picker.selectRow(selectedLanguageIndex, inComponent: 0, animated: false)
+		languagePickerBottomSheet.present(animated: true)
+	}
 		
-	@objc func handleThemePickerSelection() {
-		let selectedValueIndex = themePickerBottomSheet.picker.selectedRow(inComponent: 0)
+    @objc func handleThemePickerSelection() {
+        let selectedValueIndex = themePickerBottomSheet.picker.selectedRow(inComponent: 0)
+        
+        guard let window = UIApplication.shared.windows.first else { return }
+        
+        UIView.transition (with: window, duration: 0.3, options: .transitionCrossDissolve) {
+            window.overrideUserInterfaceStyle = InterfaceStyleConstants[selectedValueIndex] ?? .light
+        }
+        
+        UserDefaultsManager.interfaceStyleId = selectedValueIndex
+        
+        themePickerBottomSheet.dismiss(animated: true)
+    }
+    
+    @objc func handleLanguagePickerSelection() {
+		let selectedValueIndex = languagePickerBottomSheet.picker.selectedRow(inComponent: 0)
+				
+		UserDefaultsManager.i18nLanguageId = selectedValueIndex
 		
-		guard let window = UIApplication.shared.windows.first else { return }
-		
-		UIView.transition (with: window, duration: 0.3, options: .transitionCrossDissolve) {
-			window.overrideUserInterfaceStyle = InterfaceStyleConstants[selectedValueIndex] ?? .light
-		}
-		
-		UserDefaultsManager.interfaceStyleId = selectedValueIndex
-		
-		themePickerBottomSheet.dismiss(animated: true)
+		languagePickerBottomSheet.dismiss(animated: true)
+        restartApplication()
 	}
 	
 	@objc func handleSignOutBtnTap() {
 		AlertPopup().presentAsConfirmationAlert(
-			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
-			message: NSLocalizedString("All data will be lost", comment: ""),
-            confirmationBtnTitle: NSLocalizedString("Sign Out", comment: ""), confirmationBtnStyle: .destructive
+			title: "Are sure you want to sign out?".localized,
+			message: "All data will be lost".localized,
+            confirmationBtnTitle: "Sign Out".localized, confirmationBtnStyle: .destructive
 		) {
 			Auth.signOut()
 			self.navigateToLoginScreen()
@@ -173,11 +218,41 @@ extension UserProfileScreenVC: UIPickerViewDataSource, UIPickerViewDelegate {
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return themePickerModels.count
+        return pickerView == themePickerBottomSheet.picker ? themePickerModels.count : langaugePickerModels.count
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		return themePickerModels[row]
+        return pickerView == themePickerBottomSheet.picker ? themePickerModels[row] : langaugePickerModels[row]
 	}
 	
+}
+
+
+func restartApplication () {
+    let rootTabBarController = RootTabBarController()
+    
+    let newRootViewController = UINavigationController(rootViewController: rootTabBarController)
+    
+    let sideMenuVC = SideMenuVC()
+    let menuNavigationController = SideMenuNavigationController(rootViewController: sideMenuVC)
+    SceneDelegate.layoutDirectionIsRTL = LayoutTools.getCurrentLayoutDirection(for: rootTabBarController.view) == .rightToLeft
+    
+    if SceneDelegate.layoutDirectionIsRTL {
+        SideMenuManager.default.rightMenuNavigationController = menuNavigationController
+    } else {
+        SideMenuManager.default.leftMenuNavigationController = menuNavigationController
+    }
+    
+    SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: rootTabBarController.view, forMenu: SceneDelegate.layoutDirectionIsRTL ? .right : .left)
+    
+
+    guard
+        let window = UIApplication.shared.keyWindow, let rootViewController = window.rootViewController else { return }
+
+    newRootViewController.view.frame = rootViewController.view.frame
+    newRootViewController.view.layoutIfNeeded()
+
+    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+        window.rootViewController = newRootViewController
+    })
 }

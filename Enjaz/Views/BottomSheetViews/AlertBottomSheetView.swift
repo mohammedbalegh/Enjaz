@@ -40,7 +40,7 @@ class AlertBottomSheetView: BottomSheetView {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("Ok", comment: ""), for: .normal)
+        button.setTitle("Ok".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16)
         button.backgroundColor = .accent
@@ -111,12 +111,12 @@ class AlertBottomSheetView: BottomSheetView {
     
     func presentAsError(withMessage message: String) {
         let image = UIImage(named: "errorImage")
-        let title = NSLocalizedString("Error", comment: "")
+        let title = "Error".localized
         present(withImage: image, title: title, message: message)
     }
     
     func presentAsInternetConnectionError() {
-        presentAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
+        presentAsError(withMessage: "No Internet Connection".localized)
     }
     
     override func dismiss(animated: Bool, withDuration duration: TimeInterval = 0.3) {

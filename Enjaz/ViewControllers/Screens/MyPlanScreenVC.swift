@@ -9,9 +9,9 @@ class MyPlanScreenVC: MenuBarNavigationVC {
 		showSmallTabBar = true
 		
         menuItems = [
-            NSLocalizedString("Tasks", comment: ""),
-            NSLocalizedString("Demahs", comment: ""),
-            NSLocalizedString("Achievements", comment: ""),
+            "Tasks".localized,
+            "Demahs".localized,
+            "Achievements".localized,
         ]
 		        
         viewControllers = [MonthTasksScreenVC(), MonthDemahsScreenVC(), AchievementsScreenVC()]

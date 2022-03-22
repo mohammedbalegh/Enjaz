@@ -22,7 +22,7 @@ class PickerBottomSheetView: BottomSheetView {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("Select", comment: ""), for: .normal)
+        button.setTitle("Select".localized, for: .normal)
         button.setTitleColor(.accent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18)
         

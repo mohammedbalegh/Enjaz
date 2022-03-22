@@ -18,7 +18,7 @@ class AwardsAndMedalsScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Awards and Medals", comment: "")
+        title = "Awards and Medals".localized
 
         view.backgroundColor = .background
         rewardsCollectionView.delegate = self

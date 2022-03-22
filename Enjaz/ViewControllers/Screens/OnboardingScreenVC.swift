@@ -68,8 +68,8 @@ class OnboardingScreenVC: UIViewController {
         return cv
     }()
     
-    let signupBtn = PrimaryBtn(label: NSLocalizedString("Create an account", comment: ""), theme: .white)
-    let loginBtn = PrimaryBtn(label: NSLocalizedString("Login", comment: ""), theme: .blue)
+    let signupBtn = PrimaryBtn(label: "Create an account".localized, theme: .white)
+    let loginBtn = PrimaryBtn(label: "Login".localized, theme: .blue)
     
     override func viewDidLoad() {
         super.viewDidLoad()

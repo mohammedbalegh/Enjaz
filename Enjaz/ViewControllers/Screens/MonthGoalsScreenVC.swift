@@ -16,7 +16,7 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 	override func viewWillAppear(_ animated: Bool) {
 		guard let category = category else { fatalError("Invalid category") }
 		
-		title = "\(NSLocalizedString("\(category.localized_name)", comment: ""))"
+		title = "\("\(category.localized_name)".localized)"
 		updateScreen()
 	}
 		
@@ -29,11 +29,11 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
 		upcomingGoals = allOriginalCategoryGoals.filter { !$0.is_completed && $0.date > Date().timeIntervalSince1970 }
 		
 		screenNavigatorCellModels = [
-			ScreenNavigatorCellModel(imageSource: "majorGoalsIcon", label: NSLocalizedString("Major goals", comment: ""), subLabel: "\(NSLocalizedString("My goal in life regarding ", comment: ""))\(category.localized_name.lowercased())")
-			,ScreenNavigatorCellModel(imageSource: "completedGoalsIcon", label: NSLocalizedString("Completed goals", comment: ""), subLabel: "\(completedGoals.count) \(NSLocalizedString("Goal", comment: ""))"),
-			ScreenNavigatorCellModel(imageSource: "upcomingGoalsIcon", label: NSLocalizedString("Upcoming goals", comment: ""), subLabel: "\(upcomingGoals.count) \(NSLocalizedString("Goal", comment: ""))"),
-			ScreenNavigatorCellModel(imageSource: "rateYourSelfIcon", label: NSLocalizedString("Self Evaluation", comment: ""), subLabel: ""),
-			ScreenNavigatorCellModel(imageSource: "addButton", label: NSLocalizedString("Add new goal", comment: ""), subLabel: ""),
+			ScreenNavigatorCellModel(imageSource: "majorGoalsIcon", label: "Major goals".localized, subLabel: "\("My goal in life regarding ".localized)\(category.localized_name.lowercased())")
+			,ScreenNavigatorCellModel(imageSource: "completedGoalsIcon", label: "Completed goals".localized, subLabel: "\(completedGoals.count) \("Goal".localized)"),
+			ScreenNavigatorCellModel(imageSource: "upcomingGoalsIcon", label: "Upcoming goals".localized, subLabel: "\(upcomingGoals.count) \("Goal".localized)"),
+			ScreenNavigatorCellModel(imageSource: "rateYourSelfIcon", label: "Self Evaluation".localized, subLabel: ""),
+			ScreenNavigatorCellModel(imageSource: "addButton", label: "Add new goal".localized, subLabel: ""),
 		]
 		
 		tableView.reloadData()
@@ -64,9 +64,9 @@ class MonthGoalsScreenVC: ScreenNavigatorTableVC {
             vc.categoryId = category.id
             return vc
         case 1:
-            return getCompletedGoalsScreen(itemModels: completedGoals, title: NSLocalizedString("Completed Goals", comment: ""))
+            return getCompletedGoalsScreen(itemModels: completedGoals, title: "Completed Goals".localized)
         case 2:
-			return getUpcomingGoalsScreen(itemModels: upcomingGoals, title: NSLocalizedString("Upcoming Goals", comment: ""))
+			return getUpcomingGoalsScreen(itemModels: upcomingGoals, title: "Upcoming Goals".localized)
         case 3:
             let vc = SelfEvaluationScreenVC()
             vc.categoryId = category.id

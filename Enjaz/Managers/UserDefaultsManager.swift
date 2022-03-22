@@ -10,6 +10,8 @@ struct UserDefaultsManager {
         static let privacyPolicy = "privacyPolicy"
         static let goalsBank = "goalsBank"
         static let blogs = "blogs"
+        static let i18nLanguage = "i18n_language"
+        static let i18nLanguageId = "i18nLanguageId"
     }
     
     static var goalsBank: [GoalSuggestionsModel]? {
@@ -41,6 +43,34 @@ struct UserDefaultsManager {
             } catch {
                 print("Unable to Encode data (\(error))")
             }
+        }
+    }
+    
+    static var i18nLanguageId: Int? {
+        get {
+            return UserDefaults.standard.integer(forKey: Keys.i18nLanguageId)
+        }
+        set {
+            switch newValue {
+            case 0: i18nLanguage = "ar"
+            case 1: i18nLanguage = "en"
+            case 2: i18nLanguage = "auto"
+            default:
+                return
+            }
+            
+            UserDefaults.standard.set(newValue, forKey: Keys.i18nLanguageId)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    static var i18nLanguage: String? {
+        get {
+            return UserDefaults.standard.string(forKey: Keys.i18nLanguage) ?? "ar"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.i18nLanguage)
+            UserDefaults.standard.synchronize()
         }
     }
     

@@ -6,7 +6,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
     let scrollView = UIScrollView()
     
     let submitBtn: PrimaryBtn = {
-        let button = PrimaryBtn(label: NSLocalizedString("Send", comment: ""), theme: .blue, size: .large)
+        let button = PrimaryBtn(label: "Send".localized, theme: .blue, size: .large)
         button.addTarget(self, action: #selector(handleSubmitBtnTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -14,12 +14,12 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
     
     lazy var clientNameView: TitledInputFieldContainer = {
         let textField = InputFieldContainerTextField()
-        textField.placeholder = NSLocalizedString("Full name", comment: "")
+        textField.placeholder = "Full name".localized
         textField.delegate = self
         textField.tag = 0
         textField.returnKeyType = .next
         
-        let containerView = TitledInputFieldContainer(input: textField, title: NSLocalizedString("Client name", comment: ""))
+        let containerView = TitledInputFieldContainer(input: textField, title: "Client name".localized)
         
         return containerView
     }()
@@ -32,7 +32,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
         textField.tag = 1
         textField.returnKeyType = .next
         
-        let containerView = TitledInputFieldContainer(input: textField, title: NSLocalizedString("Phone number", comment: ""))
+        let containerView = TitledInputFieldContainer(input: textField, title: "Phone number".localized)
         
         return containerView
     }()
@@ -52,11 +52,11 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
         let textView = EditableTextView(frame: .zero)
         textView.translatesAutoresizingMaskIntoConstraints = false
         
-        textView.placeholder = NSLocalizedString("Type your message here", comment: "")
+        textView.placeholder = "Type your message here".localized
         textView.font = .systemFont(ofSize: 18)
         textView.tag = 2
         
-        let containerView = TitledInputFieldContainer(input: textView, title: NSLocalizedString("Message content", comment: ""))
+        let containerView = TitledInputFieldContainer(input: textView, title: "Message content".localized)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         return containerView
@@ -86,7 +86,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
         setupSubViews()
         hideKeyboardWhenTappedAround()
         view.backgroundColor = .background
-        title = NSLocalizedString("Contact Us", comment: "")
+        title = "Contact Us".localized
     }
     
     func setupSubViews() {
@@ -158,7 +158,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
     
     @objc func handleSubmitBtnTapped() {
         guard phoneNumber.isPhoneNumber else {
-            AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Please enter a valid phone number", comment: ""))
+            AlertBottomSheetView.shared.presentAsError(withMessage: "Please enter a valid phone number".localized)
             return
         }
         
@@ -191,7 +191,7 @@ class ContactUsScreenVC: KeyboardHandlingViewController {
     }
     
     func generateSuccessMessage() -> String {
-        if Locale.current.languageCode == "ar" {
+        if UserDefaultsManager.i18nLanguage == "ar" {
             return "تم الارسال بنجاح"
         }
         

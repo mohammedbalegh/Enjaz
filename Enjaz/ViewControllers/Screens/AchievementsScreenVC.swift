@@ -10,7 +10,7 @@ class AchievementsScreenVC: MyPlanChildVC {
     
     let noAchievementsLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("No achievements to show", comment: "")
+        label.text = "No achievements to show".localized
         label.textColor = .lowContrastGray
         label.font = .systemFont(ofSize: 18)
         label.textAlignment = .center

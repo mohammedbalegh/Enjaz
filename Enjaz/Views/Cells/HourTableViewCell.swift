@@ -118,7 +118,7 @@ class HourTableViewCell: UITableViewCell {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("Show All", comment: ""), for: .normal)
+        button.setTitle("Show All".localized, for: .normal)
         button.setTitleColor(.systemGray2, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 10)
         button.isHidden = true
@@ -136,8 +136,8 @@ class HourTableViewCell: UITableViewCell {
     var isShowingAllIncludedItems = false {
         didSet {
             let showAllOrLessBtnTitle = isShowingAllIncludedItems
-                ? NSLocalizedString("Hide Rest", comment: "")
-                : NSLocalizedString("Show All", comment: "")
+                ? "Hide Rest".localized
+                : "Show All".localized
             
             showAllOrLessBtn.setTitle(showAllOrLessBtnTitle, for: .normal)
 
@@ -234,7 +234,7 @@ class HourTableViewCell: UITableViewCell {
 	
 	@objc func handleLongPressOr3dTouch(gesture: LongPressAnd3dTouchGestureRecognizer) {
 		if gesture.state == .began {
-			SPAlert.present(message: NSLocalizedString("Cannot add a task in the past", comment: ""), haptic: .error)
+			SPAlert.present(message: "Cannot add a task in the past".localized, haptic: .error)
 		}
 	}
 }

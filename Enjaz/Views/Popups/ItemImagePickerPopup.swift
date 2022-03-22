@@ -5,8 +5,8 @@ class ItemImagePickerPopup: Popup {
 	let imageSourceReuseIdentifier = "imageSourceCell"
 	
 	let itemImagePickerImageSourceCellModels = [
-		ItemImagePickerImageSourceCellModel(imageSource: "cameraIcon", label: NSLocalizedString("Camera", comment: "")),
-		ItemImagePickerImageSourceCellModel(imageSource: "galleryIcon", label: NSLocalizedString("Photos", comment: "")),
+		ItemImagePickerImageSourceCellModel(imageSource: "cameraIcon", label: "Camera".localized),
+		ItemImagePickerImageSourceCellModel(imageSource: "galleryIcon", label: "Photos".localized),
 	]
 	
 	var delegate: ItemImagePickerPopupDelegate?
@@ -67,7 +67,7 @@ class ItemImagePickerPopup: Popup {
 	let collectionViewSectionHorizontalInset: CGFloat = 10
 	lazy var collectionViewWidth = contentViewWidth * 0.7 + collectionViewSectionHorizontalInset * 2
 	
-	let imageTitleLabel = NSLocalizedString("Select Image", comment: "")
+	let imageTitleLabel = "Select Image".localized
 	
 	// MARK: State
 	var selectedImageModelIndex: Int?

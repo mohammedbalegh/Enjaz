@@ -137,10 +137,10 @@ class ProgressBarView: UIView {
     }
 	
 	private func setLabels() {
-		let localizedPluralItemTypeName = NSLocalizedString(itemType.name.pluralizeInEnglish(), comment: "").removeDefinitionArticle()
+		let localizedPluralItemTypeName = itemType.name.pluralizeInEnglish().localized.removeDefinitionArticle()
 		
-		mainLabel.text = String(format: NSLocalizedString("%@ of the month", comment: ""), localizedPluralItemTypeName)
-		subLabel.text = String(format: NSLocalizedString("What %@ have you completed", comment: ""), localizedPluralItemTypeName).capitalizeOnlyFirstLetter()
+		mainLabel.text = String(format: "%@ of the month".localized, localizedPluralItemTypeName)
+		subLabel.text = String(format: "What %@ have you completed".localized, localizedPluralItemTypeName).capitalizeOnlyFirstLetter()
 	}
 	
 	func updateProgressView(totalNumberOfItems: Int, numberOfCompletedItems: Int) {
@@ -149,9 +149,9 @@ class ProgressBarView: UIView {
 	}
 	
 	private func updateCounterLabelText(_ totalNumberOfItems: Int, _ numberOfCompletedItems: Int) {
-		counterLabel.text = "\(numberOfCompletedItems) \(NSLocalizedString("of", comment: "")) \(totalNumberOfItems) \(NSLocalizedString(itemType.localizedName, comment: ""))"
+		counterLabel.text = "\(numberOfCompletedItems) \("of".localized) \(totalNumberOfItems) \(itemType.localizedName.localized)"
 		
-		if Locale.current.languageCode == "en" {
+		if UserDefaultsManager.i18nLanguage == "en" {
 			counterLabel.text! += totalNumberOfItems > 1 ? "s" : ""
 		}
 	}

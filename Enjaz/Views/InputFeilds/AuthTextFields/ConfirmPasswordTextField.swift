@@ -11,12 +11,12 @@ class ConfirmPasswordTextField: AuthTextField {
 		
 		minimumLength = 8
 		
-		fieldName = NSLocalizedString("Confirm password", comment: "")
-		fieldNounName = NSLocalizedString("Confirm password", comment: "")
+		fieldName = "Confirm password".localized
+		fieldNounName = "Confirm password".localized
 		textField.textContentType = .password
 		textField.isSecureTextEntry = true
 		icon.image = UIImage(named: "lockIcon")
-		defaultErrorMessage = NSLocalizedString("The password does not match", comment: "")
+		defaultErrorMessage = "The password does not match".localized
 	}
 	
     func validate(password: String?) -> Bool {

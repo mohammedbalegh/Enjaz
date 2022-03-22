@@ -13,7 +13,7 @@ class AboutAppScreenVC: PrivacyPolicyAndAboutAppVC {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		title = NSLocalizedString("About App", comment: "")
+		title = "About App".localized
 		
 		textView.text = UserDefaultsManager.aboutUs
 //		textViewTopAnchorConstraint.constant = linksViewHeight + 30

@@ -122,17 +122,17 @@ class AuthTextField : UIView {
 	
 	func validate() -> Bool {
 		if text.count == 0 {
-			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("can not be empty", comment: ""))")
+			showErrorMessage(errorMessage: "\(fieldNounName) \("can not be empty".localized)")
 			return false
 		}
 		
 		if !canStartWithNumber && Character(text[0]).isNumber {
-			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("can not be empty", comment: ""))")
+			showErrorMessage(errorMessage: "\(fieldNounName) \("can not be empty".localized)")
 			return false
 		}
 		
 		if text.count < minimumLength {
-			showErrorMessage(errorMessage: "\(fieldNounName) \(NSLocalizedString("Should be", comment: "")) \(minimumLength) \(NSLocalizedString("", comment: ""))")
+			showErrorMessage(errorMessage: "\(fieldNounName) \("Should be".localized) \(minimumLength) \("".localized)")
 			return false
 		}
 

@@ -31,8 +31,8 @@ class DraftScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         cardsView.tag = 1
         
-        cardsView.title = NSLocalizedString("Most Recent Articles", comment: "")
-        cardsView.noCardsMessage = NSLocalizedString("No articles yet", comment: "")
+        cardsView.title = "Most Recent Articles".localized
+        cardsView.noCardsMessage = "No articles yet".localized
 		cardsView.cardsCount = articleModels.count
         cardsView.header.cardsCountLabel.isHidden = true
         cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllArticlesBtnTap), for: .touchUpInside)
@@ -48,8 +48,8 @@ class DraftScreenVC: UIViewController {
         cardsView.cardsCollectionView.dataSource = self
         cardsView.tag = 2
         
-        cardsView.title = NSLocalizedString("Most Recent Videos", comment: "")
-        cardsView.noCardsMessage = NSLocalizedString("No videos yet", comment: "")
+        cardsView.title = "Most Recent Videos".localized
+        cardsView.noCardsMessage = "No videos yet".localized
 		cardsView.cardsCount = videoModels.count
         cardsView.header.cardsCountLabel.isHidden = true
         cardsView.header.showAllButton.addTarget(self, action: #selector(handleShowAllVideosBtnTap), for: .touchUpInside)
@@ -74,7 +74,7 @@ class DraftScreenVC: UIViewController {
         updateScreen()
         
         view.backgroundColor = .background
-        title = NSLocalizedString("Draft", comment: "")
+        title = "Draft".localized
         
         setupSubViews()
     }

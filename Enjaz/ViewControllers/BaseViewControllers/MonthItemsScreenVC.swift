@@ -171,14 +171,14 @@ class MonthItemsScreenVC: MyPlanChildVC {
     // MARK: Tools
     
     func setItemCardViewsTitles() {
-		let localizedPluralItemTypeName = NSLocalizedString(itemsType.name.pluralizeInEnglish(), comment: "").removeDefinitionArticle().lowercased()
+		let localizedPluralItemTypeName = itemsType.name.pluralizeInEnglish().localized.removeDefinitionArticle().lowercased()
 		
-		dayItemsView.title = String(format: NSLocalizedString("Today's %@", comment: ""), localizedPluralItemTypeName)
-		weekItemsView.title = String(format: NSLocalizedString("Week's %@", comment: ""), localizedPluralItemTypeName)
-		monthItemsView.title = String(format: NSLocalizedString("Month's %@", comment: ""), localizedPluralItemTypeName)
-		completedItemsView.title = String(format: NSLocalizedString("Completed %@", comment: ""), localizedPluralItemTypeName)
+		dayItemsView.title = String(format: "Today's %@".localized, localizedPluralItemTypeName)
+		weekItemsView.title = String(format: "Week's %@".localized, localizedPluralItemTypeName)
+		monthItemsView.title = String(format: "Month's %@".localized, localizedPluralItemTypeName)
+		completedItemsView.title = String(format: "Completed %@".localized, localizedPluralItemTypeName)
 		
-		let localizedNoItemsMessage = String(format: NSLocalizedString("No %@", comment: ""), localizedPluralItemTypeName)
+		let localizedNoItemsMessage = String(format: "No %@".localized, localizedPluralItemTypeName)
 		
 		dayItemsView.noCardsMessage = localizedNoItemsMessage
 		weekItemsView.noCardsMessage = localizedNoItemsMessage

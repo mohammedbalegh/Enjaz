@@ -3,7 +3,16 @@ import UIKit
 extension String {
     
 	var localized: String {
-		return NSLocalizedString(self, comment: "")
+        let lang = UserDefaultsManager.i18nLanguage ?? "ar"
+        
+        if lang == "auto" {
+            return NSLocalizedString(self, comment: "")
+        }
+
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
 	}
 	
     var isURL: Bool {
@@ -49,7 +58,7 @@ extension String {
         let requiredFieldNamesAsSentence = requiredFieldNames.joinAsSentence()
         let numberOfNonProvidedRequiredFields = requiredFieldNames.count
         
-        if Locale.current.languageCode == "ar" {
+        if UserDefaultsManager.i18nLanguage == "ar" {
             return "يجب ادخال \(requiredFieldNamesAsSentence)."
         }
         

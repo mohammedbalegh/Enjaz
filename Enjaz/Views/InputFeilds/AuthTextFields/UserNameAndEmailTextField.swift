@@ -11,9 +11,9 @@ class UserNameAndEmailTextField: AuthTextField {
 		minimumLength = 6
 		canStartWithNumber = false
 		
-		fieldName = NSLocalizedString("Username or Email", comment: "")
+		fieldName = "Username or Email".localized
 		textField.textContentType = .username
 		icon.image = UIImage(named: "personIcon")
-		defaultErrorMessage = NSLocalizedString("Incorrect username or email", comment: "")
+		defaultErrorMessage = "Incorrect username or email".localized
 	}
 }

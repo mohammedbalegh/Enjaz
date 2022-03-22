@@ -33,7 +33,7 @@ class PersonalAspectsScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("Personal Aspects", comment: "")
+        title = "Personal Aspects".localized
         
         view.backgroundColor = .background
         setup()

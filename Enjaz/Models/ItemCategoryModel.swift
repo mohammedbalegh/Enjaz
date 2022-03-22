@@ -9,7 +9,7 @@ class ItemCategoryModel: Object, Decodable {
     
     @objc dynamic var localized_name: String {
         if is_default {
-            return NSLocalizedString(name, comment: "")
+            return name.localized
         }
         
         return name
@@ -17,7 +17,7 @@ class ItemCategoryModel: Object, Decodable {
     
     @objc dynamic var localized_description: String {
         if is_default {
-            return NSLocalizedString(category_description, comment: "")
+            return category_description.localized
         }
         
         return category_description

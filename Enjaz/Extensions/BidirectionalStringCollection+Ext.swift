@@ -2,8 +2,8 @@ import Foundation
 
 extension BidirectionalCollection where Element: StringProtocol {
     func joinAsSentence() -> String {
-        let comma = NSLocalizedString(",", comment: "") + " "
-        let and = " " + NSLocalizedString("and", comment: "") + " "
+        let comma = ",".localized + " "
+        let and = " " + "and".localized + " "
         
         guard let last = last else { return "" }
         

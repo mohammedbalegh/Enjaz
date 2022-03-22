@@ -31,7 +31,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     lazy var additionNameTextField: InputFieldContainer = {
         let containerView = InputFieldContainer(frame: .zero)
         
-        let fieldName = NSLocalizedString("Addition Name", comment: "")
+        let fieldName = "Addition Name".localized
         containerView.fieldName = fieldName
         
         let textField = InputFieldContainerTextField()
@@ -51,7 +51,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 
         button.tintColor = .placeholderText
         
-        let fieldName = NSLocalizedString("Addition Category", comment: "")
+        let fieldName = "Addition Category".localized
         containerView.fieldName = fieldName
         button.label.text = fieldName
         
@@ -78,8 +78,8 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         let switchView = SwitchView(frame: .zero)
         switchView.translatesAutoresizingMaskIntoConstraints = false
         
-        switchView.label.text = String(format: NSLocalizedString("Repeat the %@", comment: ""), itemTypeName.lowercased())
-        switchView.descriptionLabel.text = String(format: NSLocalizedString("In case the %@ repeats more than once", comment: ""), itemTypeName.lowercased())
+        switchView.label.text = String(format: "Repeat the %@".localized, itemTypeName.lowercased())
+        switchView.descriptionLabel.text = String(format: "In case the %@ repeats more than once".localized, itemTypeName.lowercased())
         switchView.layoutMargins = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         switchView.isLayoutMarginsRelativeArrangement = true
         switchView.switch.addTarget(self, action: #selector(handleRepeatSwitchValueChange), for: .valueChanged)
@@ -90,7 +90,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
     lazy var additionDateAndTimeInput: InputFieldContainer = {
         let containerView = InputFieldContainer(frame: .zero)
         
-        let fieldName = NSLocalizedString("Date and Time", comment: "")
+        let fieldName = "Date and Time".localized
         containerView.fieldName = fieldName
         
         let button = NewAdditionInputFieldContainerBtn(type: .system)
@@ -134,7 +134,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         
         textView.font = .systemFont(ofSize: 18)
         
-        let fieldName = NSLocalizedString("Description", comment: "")
+        let fieldName = "Description".localized
         containerView.fieldName = fieldName
         
         textView.placeholder = fieldName
@@ -144,7 +144,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
         return containerView
     }()
             
-    let saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
+    let saveBtn = PrimaryBtn(label: "Save".localized, theme: .blue, size: .large)
     
     var itemCategoryModels: [ItemCategoryModel] = []
     
@@ -187,7 +187,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		title = String(format: NSLocalizedString("Add %@", comment: ""), itemTypeName)
+		title = String(format: "Add %@".localized, itemTypeName)
 		itemCategoryModels = RealmManager.retrieveItemCategories()
 		
 		let window = UIApplication.shared.windows[0]
@@ -370,7 +370,7 @@ class AddItemScreenVC: KeyboardHandlingViewController, AddItemScreenModalDelegat
 			navigationController?.popViewController(animated: true)
 		}
 		
-        let successMessage = String(format: NSLocalizedString("%@ was added successfully", comment: ""), itemTypeName)
+        let successMessage = String(format: "%@ was added successfully".localized, itemTypeName)
         SPAlert.present(title: successMessage, preset: .done)
     }
     

@@ -8,7 +8,7 @@ class TreeAchievementsVC: UITableViewController {
     
     let doneBtn: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+        button.setTitle("Done".localized, for: .normal)
         button.setTitleColor(.accent, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

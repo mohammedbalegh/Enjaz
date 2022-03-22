@@ -6,7 +6,7 @@ class ShowAllBtn: UIButton {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.text = NSLocalizedString("Show All", comment: "")
+        label.text = "Show All".localized
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 14)
         

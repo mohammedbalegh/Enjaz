@@ -6,7 +6,7 @@ class CustomAccessoryView: UIView {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        button.setTitle("Cancel".localized, for: .normal)
         button.setTitleColor(.accent, for: .normal)
         
         return button

@@ -6,7 +6,7 @@ class NotificationsScreenVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		title = NSLocalizedString("Notifications", comment: "")
+		title = "Notifications".localized
 		
 		tableView.backgroundColor = .background
 		

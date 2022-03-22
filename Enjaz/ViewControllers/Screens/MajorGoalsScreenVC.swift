@@ -24,7 +24,7 @@ class MajorGoalsScreenVC: KeyboardHandlingViewController{
         super.viewDidLoad()
         view.backgroundColor = .background
         
-        title = NSLocalizedString("Major goals", comment: "")
+        title = "Major goals".localized
         
         setupSubviews()
         getGoalCategory()

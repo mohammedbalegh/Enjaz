@@ -56,7 +56,7 @@ class ArticleScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .background
-        title = NSLocalizedString("Draft", comment: "")
+        title = "Draft".localized
         
         setupSubViews()
     }

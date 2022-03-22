@@ -1,16 +1,59 @@
 import Foundation
+import UIKit
+import SideMenu
 
 struct AppDataInitializer {
-    static func initializeItemCategories() {
-//        let itemCategoriesAreEmpty = RealmManager.itemCategoriesCount == 0
-//        guard itemCategoriesAreEmpty else { return }
+    
+    static func restartApplication () {
+        let viewController = RootTabBarController()
+        let navCtrl = UINavigationController(rootViewController: viewController)
+
+        guard
+            let window = UIApplication.shared.keyWindow,
+            let rootViewController = window.rootViewController
+
+        else {
+            return
+        }
+
+        navCtrl.view.frame = rootViewController.view.frame
+        navCtrl.view.layoutIfNeeded()
+
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+            window.rootViewController = navCtrl
+        })
+        
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
 //
-//        RealmManager.saveItemCategories(DEFAULT_ITEM_CATEGORIES)
+//        let rootTabBarController = RootTabBarController()
+//
+//        let rootViewController = UINavigationController(rootViewController: rootTabBarController)
+//
+//        let sideMenuVC = SideMenuVC()
+//        let menuNavigationController = SideMenuNavigationController(rootViewController: sideMenuVC)
+//        SceneDelegate.layoutDirectionIsRTL = LayoutTools.getCurrentLayoutDirection(for: rootTabBarController.view) == .rightToLeft
+//
+//        if SceneDelegate.layoutDirectionIsRTL {
+//            SideMenuManager.default.rightMenuNavigationController = menuNavigationController
+//        } else {
+//            SideMenuManager.default.leftMenuNavigationController = menuNavigationController
+//        }
+//
+//        SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: rootTabBarController.view, forMenu: SceneDelegate.layoutDirectionIsRTL ? .right : .left)
+//
+//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//        window?.backgroundColor = .background
+//        window?.windowScene = windowScene
+//        window?.rootViewController = rootViewController
+//        window?.overrideUserInterfaceStyle = InterfaceStyleConstants[UserDefaultsManager.interfaceStyleId ?? 0]!
+//        window?.makeKeyAndVisible()
+    }
+    
+    static func initializeItemCategories() {
         NetworkingManager.retreiveItemCategories { itemCategoryModels, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-//                    RealmManager.saveItemCategories(DEFAULT_ITEM_CATEGORIES)
                     return
                 }
 
@@ -54,11 +97,11 @@ struct AppDataInitializer {
     private static func addMainAspects(title: String, brief: String, image: String, badge: String, description: String) {
         let aspect = PersonalAspectsModel()
         
-        aspect.title = NSLocalizedString(title, comment: "")
-        aspect.brief_or_date = NSLocalizedString(brief, comment: "")
+        aspect.title = title.localized
+        aspect.brief_or_date = brief.localized
         aspect.image_source = image
         aspect.badge_image_source = badge
-        aspect.aspect_description = NSLocalizedString(description, comment: "")
+        aspect.aspect_description = description.localized
         
         RealmManager.saveAspect(aspect)
     }

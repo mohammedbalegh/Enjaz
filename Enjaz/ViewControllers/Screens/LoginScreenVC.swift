@@ -8,7 +8,7 @@ class LoginScreenVC: AuthScreenVC {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("Forgot your password?", comment: ""), for: .normal)
+        button.setTitle("Forgot your password?".localized, for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17)
         button.addTarget(self, action: #selector(handleForgotPasswordBtnTap), for: .touchUpInside)
@@ -19,11 +19,11 @@ class LoginScreenVC: AuthScreenVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-        titleLabel.text = NSLocalizedString("Login", comment: "")
-        subTitleLabel.text = NSLocalizedString("Enter your username and password", comment: "")
-        authenticationBtn.setTitle(NSLocalizedString("Login", comment: ""), for: .normal)
-        otherAuthMethodLabel.text = NSLocalizedString("Not an existing user?", comment: "")
-        otherAuthMethodBtn.setTitle(NSLocalizedString("Create an account", comment: ""), for: .normal)
+        titleLabel.text = "Login".localized
+        subTitleLabel.text = "Enter your username and password".localized
+        authenticationBtn.setTitle("Login".localized, for: .normal)
+        otherAuthMethodLabel.text = "Not an existing user?".localized
+        otherAuthMethodBtn.setTitle("Create an account".localized, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +75,7 @@ class LoginScreenVC: AuthScreenVC {
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect username or password", comment: ""))
+                    self.alertPopup.presentAsError(withMessage: "Incorrect username or password".localized)
                     return
                 }
                 

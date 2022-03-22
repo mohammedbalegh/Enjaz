@@ -130,16 +130,16 @@ class AlertPopup: Popup {
     
     func presentAsError(withMessage message: String, actions: [AlertPopupAction] = []) {
         let image = UIImage(named: "errorImage")
-        let title = NSLocalizedString("Error", comment: "")
+        let title = "Error".localized
 		present(withImage: image, title: title, message: message, actions: actions)
     }
     
     func presentAsInternetConnectionError() {
-        presentAsError(withMessage: NSLocalizedString("No Internet Connection", comment: ""))
+        presentAsError(withMessage: "No Internet Connection".localized)
     }
 	
     func presentAsConfirmationAlert(title: String, message: String, confirmationBtnTitle: String, confirmationBtnStyle: AlertPopupAction.Style, confirmationHandler: @escaping () -> Void) {
-		let cancelAction = AlertPopupAction(title: NSLocalizedString("Cancel", comment: ""), style: .normal) {
+		let cancelAction = AlertPopupAction(title: "Cancel".localized, style: .normal) {
 			self.dismiss(animated: true)
 		}
 		

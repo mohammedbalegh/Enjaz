@@ -27,16 +27,16 @@ class CalendarViewController: ModalVC {
     var popoverTableVC = PopoverTableVC()
     
     let calendarTypePopoverDataSource: [String] = {
-        var calendarTypes = [NSLocalizedString("Georgian Calendar", comment: ""), NSLocalizedString("Hijri Calendar", comment: "")]
+        var calendarTypes = ["Georgian Calendar".localized, "Hijri Calendar".localized]
         
-        if Locale.current.languageCode == "ar" {
+        if UserDefaultsManager.i18nLanguage == "ar" {
             calendarTypes.reverse()
         }
         
         return calendarTypes
     }()
     
-    let viewTypePopoverDataSource = [NSLocalizedString("Monthly View", comment: ""), NSLocalizedString("Weekly View", comment: "")]
+    let viewTypePopoverDataSource = ["Monthly View".localized, "Weekly View".localized]
     
     lazy var monthPopoverDataSource = monthsNames
     lazy var yearPopoverDataSource = selectableYears
@@ -97,7 +97,7 @@ class CalendarViewController: ModalVC {
     }
     
     var selectedCalendarIdentifier: Calendar.Identifier {
-        let islamicCalendarIndex = Locale.current.languageCode == "ar" ? 0 : 1
+        let islamicCalendarIndex = UserDefaultsManager.i18nLanguage == "ar" ? 0 : 1
         return selectedCalendarTypeIndex == islamicCalendarIndex ? .islamicUmmAlQura : .gregorian
     }
     
@@ -123,7 +123,7 @@ class CalendarViewController: ModalVC {
         return formatter.monthSymbols
     }
     
-    let weekNames = [NSLocalizedString("First Week", comment: ""), NSLocalizedString("Second Week", comment: ""), NSLocalizedString("Third Week", comment: ""), NSLocalizedString("Fourth Week", comment: ""), NSLocalizedString("Last Week", comment: "")]
+    let weekNames = ["First Week".localized, "Second Week".localized, "Third Week".localized, "Fourth Week".localized, "Last Week".localized]
     
     var selectableYears: [String] {
         return (currentYear...currentYear + 5).map { String($0) }

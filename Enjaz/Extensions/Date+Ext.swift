@@ -70,7 +70,7 @@ extension Date {
 			formatter.calendar = islamicCalendar
 		}
 		
-		formatter.locale = Locale(identifier: Locale.current.languageCode ?? "en_US")
+		formatter.locale = Locale(identifier: UserDefaultsManager.i18nLanguage ?? "en_US")
 		let currentDate = formatter.string(from: date)
 		
 		return currentDate
@@ -107,8 +107,8 @@ extension Date {
 			return Date.getReadableDate(from: itemEndDate, withFormat: dateFormat, calendarIdentifier: Calendar.current.identifier)
 		}()
 		
-		let from = NSLocalizedString("from", comment: "")
-		let to = NSLocalizedString("to ", comment: "")
+		let from = "from".localized
+		let to = "to ".localized
 		
 		let rangeDate = "\(from) \(readableStartDate) \(to) \(readableEndDate)".attributedStringWithColor([from, to], color: .accent, stringSize: 11, coloredSubstringsSize: 11)
 		

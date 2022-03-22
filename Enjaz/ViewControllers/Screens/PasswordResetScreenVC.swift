@@ -21,7 +21,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
 		
-        label.text = NSLocalizedString("Recover password", comment: "")
+        label.text = "Recover password".localized
         label.font = UIFont.systemFont(ofSize: 25)
 		label.adjustsFontSizeToFitWidth = true
 		label.minimumScaleFactor = 0.8
@@ -38,7 +38,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = NSLocalizedString("Please Enter your email to send the verification code", comment: "")
+        label.text = "Please Enter your email to send the verification code".localized
 		label.font = UIFont.systemFont(ofSize: 18)
 		label.adjustsFontSizeToFitWidth = true
 		label.minimumScaleFactor = 0.8
@@ -96,7 +96,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     }()
     
     lazy var nextBtn: PrimaryBtn = {
-        var button = PrimaryBtn(label: NSLocalizedString("Next", comment: ""), theme: .blue, size: .large)
+        var button = PrimaryBtn(label: "Next".localized, theme: .blue, size: .large)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
         return button
@@ -105,7 +105,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     lazy var backBtn: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
+        button.setTitle("Back".localized, for: .normal)
         button.setTitleColor(.accent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
@@ -238,7 +238,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
         NetworkingManager.requestPasswordResetCode(email: emailTextField.text) { error in
             DispatchQueue.main.async {
                 if let error = error {
-                    self.alertPopup.present(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("The email you entered does not exist", comment: ""))
+                    self.alertPopup.present(title: "Error".localized, message: "The email you entered does not exist".localized)
                 }
             }
         }
@@ -263,7 +263,7 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect code", comment: ""))
+                    self.alertPopup.presentAsError(withMessage: "Incorrect code".localized)
                 }
                 
                 self.resetPasswordPopup.present(animated: true)
@@ -283,13 +283,13 @@ class PasswordResetScreenVC: KeyboardHandlingViewController, StoreSubscriber {
     // MARK: Tools
     
     func updateNextBtn() {
-        nextBtn.setTitle(NSLocalizedString("Start now", comment: ""), for: .normal)
+        nextBtn.setTitle("Start now".localized, for: .normal)
         nextBtn.removeTarget(self, action: #selector(handleNextBtnTap), for: .touchUpInside)
         nextBtn.addTarget(self, action: #selector(handleStartBtnTap), for: .touchUpInside)
     }
     
     func updateSubTitle() {
-        subTitleLabel.text = NSLocalizedString("Enter your username and password", comment: "")
+        subTitleLabel.text = "Enter your username and password".localized
     }
     
     func updateTextFieldsVerticalStack() {

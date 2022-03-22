@@ -10,12 +10,12 @@ class EmailTextField: AuthTextField {
 		
 		minimumLength = 0
 
-		fieldName = NSLocalizedString("Email", comment: "")
+		fieldName = "Email".localized
 		textField.textContentType = .emailAddress
 		textField.keyboardType = .emailAddress
 		icon.image = UIImage(named: "emailIcon")
 		validator = RegexValidator.validateEmail
-		defaultErrorMessage = NSLocalizedString("Incorrect email", comment: "")
+		defaultErrorMessage = "Incorrect email".localized
 	}
 }
 

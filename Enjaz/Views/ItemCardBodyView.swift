@@ -224,7 +224,7 @@ class ItemCardBodyView: UIView {
 		
 		guard !item.is_completed else {
 			let itemType = ItemType.getTypeById(id: item.type_id)
-			let alertMessage = String(format: NSLocalizedString("%@ is already completed", comment: ""), itemType.localizedName)
+			let alertMessage = String(format: "%@ is already completed".localized, itemType.localizedName)
 			SPAlert.present(message: alertMessage, haptic: .error)
 			return
 		}

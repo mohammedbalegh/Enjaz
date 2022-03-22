@@ -8,7 +8,7 @@ class SelfEvaluationChart: UIView {
     let rateYourSelfLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = NSLocalizedString("Your progress in this field", comment: "")
+        label.text = "Your progress in this field".localized
         label.textColor = .lowContrastGray
         label.font = .systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true

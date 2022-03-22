@@ -515,8 +515,8 @@ class CalendarView: UIView, UIGestureRecognizerDelegate {
     }
     
     func updateSelectedDaysLabel(firstDay: String, lastDay: String) {
-        let from = NSLocalizedString("from", comment: "")
-        let to = NSLocalizedString("to ", comment: "")
+        let from = "from".localized
+        let to = "to ".localized
         selectedDaysLabel.attributedText = "\(from) \(firstDay) \(to) \(lastDay)".attributedStringWithColor([from, to], color: .accent, stringSize: 13, coloredSubstringsSize: 13)
     }
 

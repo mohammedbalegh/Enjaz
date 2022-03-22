@@ -52,7 +52,7 @@ class LifeTreeVC: UIViewController, UITextFieldDelegate {
         treeCollectionView.delegate = self
         treeCollectionView.dataSource = self
         view.backgroundColor = .background
-        title = NSLocalizedString("Life Tree", comment: "")
+        title = "Life Tree".localized
     }
     
     func setupWateringBtn() {
@@ -101,9 +101,9 @@ class LifeTreeVC: UIViewController, UITextFieldDelegate {
     
     @objc func wateringBtnTapped() {
         popup.presentAsConfirmationAlert(
-            title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
+            title: "Are sure you want to sign out?".localized,
             message: "",
-            confirmationBtnTitle: NSLocalizedString("Water", comment: ""), confirmationBtnStyle: .normal)
+            confirmationBtnTitle: "Water".localized, confirmationBtnStyle: .normal)
         {
             if RealmManager.treeStages()?.count == 29 {
                 self.createTree(id: RealmManager.retrieveTrees().count)

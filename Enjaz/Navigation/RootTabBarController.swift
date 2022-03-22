@@ -165,11 +165,11 @@ class RootTabBarController: UITabBarController {
 		
 		viewControllers = [homeScreenVC, calendarScreenVC, additionTypeScreenVC, monthlyPlanScreenVC, goalsScreenVC]
         screenTitles = [
-			NSLocalizedString("Home", comment: ""),
-			NSLocalizedString("Calendar", comment: ""),
-			NSLocalizedString("Choose Addition Type", comment: ""),
-			NSLocalizedString("My Plan", comment: ""),
-			NSLocalizedString("Goals", comment: "")
+			"Home".localized,
+			"Calendar".localized,
+			"Choose Addition Type".localized,
+			"My Plan".localized,
+			"Goals".localized
 		]
 		
 		title = screenTitles?.first

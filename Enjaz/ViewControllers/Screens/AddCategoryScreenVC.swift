@@ -24,7 +24,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
 	}()
     
     lazy var categoryNameTextField: InputFieldContainer = {
-        let fieldName = NSLocalizedString("Category Name", comment: "")
+        let fieldName = "Category Name".localized
 		
         let textField = InputFieldContainerTextField()
         textField.placeholder = fieldName
@@ -38,7 +38,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
     }()
     
     lazy var categoryDescriptionTextView: InputFieldContainer = {
-        let fieldName = NSLocalizedString("Description", comment: "") + " (\(NSLocalizedString("optional", comment: "")))"
+        let fieldName = "Description".localized + " (\("optional".localized))"
 		
 		let textField = InputFieldContainerTextField()
 		textField.placeholder = fieldName
@@ -63,7 +63,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
         return stackView
     }()
     
-    let saveBtn = PrimaryBtn(label: NSLocalizedString("Save", comment: ""), theme: .blue, size: .large)
+    let saveBtn = PrimaryBtn(label: "Save".localized, theme: .blue, size: .large)
     
 	var nonDefaultItemImage: ItemImageModel?
 	
@@ -85,7 +85,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
 	    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Add new category", comment: "")
+        title = "Add new category".localized
         view.backgroundColor = .background
         
         setupSubviews()
@@ -142,7 +142,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
         
     @objc func handleSaveBtnTap() {
         guard !categoryName.isEmpty else {
-            AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Category name must be entered", comment: ""))
+            AlertBottomSheetView.shared.presentAsError(withMessage: "Category name must be entered".localized)
             
             return
         }
@@ -151,7 +151,7 @@ class AddCategoryScreenVC: KeyboardHandlingViewController {
         
         navigationController?.popViewController(animated: true)
         
-        let successMessage = String(format: NSLocalizedString("%@ was added successfully", comment: ""), NSLocalizedString("category", comment: ""))
+        let successMessage = String(format: "%@ was added successfully".localized, "category".localized)
         SPAlert.present(title: successMessage, preset: .done)
     }
 	

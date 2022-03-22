@@ -13,7 +13,7 @@ class WateringTreePopup: AlertPopup {
             string: "Placeholder",
             attributes: [.paragraphStyle: paragraphStyle]
         )
-        textField.placeholder = NSLocalizedString("why are you watering the tree?", comment: "")
+        textField.placeholder = "why are you watering the tree?".localized
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()

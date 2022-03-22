@@ -16,7 +16,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     var titleLabel: UILabel = {
         var label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("Enter verification code", comment: "")
+        label.text = "Enter verification code".localized
         label.font = UIFont.systemFont(ofSize: 25)
 		label.adjustsFontSizeToFitWidth = true
 		label.minimumScaleFactor = 0.8
@@ -31,7 +31,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = NSLocalizedString("Verification code sent to your email", comment: "")
+        label.text = "Verification code sent to your email".localized
         label.font = UIFont.systemFont(ofSize: 18)
 		label.adjustsFontSizeToFitWidth = true
 		label.minimumScaleFactor = 0.8
@@ -44,7 +44,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
     lazy var backBtn: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(NSLocalizedString("Back", comment: ""), for: .normal)
+        button.setTitle("Back".localized, for: .normal)
         button.setTitleColor(.accent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleBackBtnTap), for: .touchUpInside)
@@ -153,7 +153,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
             DispatchQueue.main.async {
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("The email you entered does not exist", comment: ""))
+                    self.alertPopup.presentAsError(withMessage: "The email you entered does not exist".localized)
                 }
                                 
                 self.oneTimeCodeTextField.didEnterLastCharacter = self.handleVerificationCodeEntered
@@ -177,7 +177,7 @@ class EmailVerificationScreenVC: KeyboardHandlingViewController, StoreSubscriber
                 
                 if let error = error {
                     print(error)
-                    self.alertPopup.presentAsError(withMessage: NSLocalizedString("Incorrect code", comment: ""))
+                    self.alertPopup.presentAsError(withMessage: "Incorrect code".localized)
                     return
                 }
             

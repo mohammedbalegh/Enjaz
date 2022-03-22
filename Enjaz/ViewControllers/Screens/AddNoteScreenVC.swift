@@ -16,7 +16,7 @@ class AddNoteScreenVC: UIViewController {
     
     lazy var noteCategoryButton: NoteCategoryPickerView = {
         var button = NoteCategoryPickerView()
-        button.noteCategoryBtn.setTitle(NSLocalizedString("Note category", comment: ""), for: .normal)
+        button.noteCategoryBtn.setTitle("Note category".localized, for: .normal)
         button.noteCategoryBtn.addTarget(self, action: #selector(handleNoteCategoryButtonTap), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -30,7 +30,7 @@ class AddNoteScreenVC: UIViewController {
     
     var noteTextField: EditableTextView = {
         var textView = EditableTextView(frame: .zero)
-        textView.placeholder = NSLocalizedString("Write whats on your mind", comment: "")
+        textView.placeholder = "Write whats on your mind".localized
         textView.layer.borderWidth = 0.4
         textView.layer.cornerRadius = 5
         textView.layer.borderColor = UIColor.border.cgColor
@@ -53,7 +53,7 @@ class AddNoteScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = NSLocalizedString("Add Note", comment: "")
+        title = "Add Note".localized
         view.backgroundColor = .background
         self.hideKeyboardWhenTappedAround()
         setupSubView()
@@ -73,11 +73,11 @@ class AddNoteScreenVC: UIViewController {
     
     @objc func handlesSubmitNewNoteBtn() {
         if titleTextField.textField.text == "" {
-			AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Note title Can't be empty", comment: ""))
-        } else if noteCategoryButton.noteCategoryBtn.currentTitle == NSLocalizedString("Note category", comment: "")  {
-			AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Note category can't be empty", comment:  ""))
-        }  else if noteTextField.text == NSLocalizedString("Write whats on your mind", comment: "") {
-			AlertBottomSheetView.shared.presentAsError(withMessage: NSLocalizedString("Please write whats on your mind", comment: ""))
+			AlertBottomSheetView.shared.presentAsError(withMessage: "Note title Can't be empty".localized)
+        } else if noteCategoryButton.noteCategoryBtn.currentTitle == "Note category".localized  {
+			AlertBottomSheetView.shared.presentAsError(withMessage: "Note category can't be empty".localized)
+        }  else if noteTextField.text == "Write whats on your mind".localized {
+			AlertBottomSheetView.shared.presentAsError(withMessage: "Please write whats on your mind".localized)
         } else {
             let aspect = PersonalAspectsModel()
             

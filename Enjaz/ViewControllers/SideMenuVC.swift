@@ -61,27 +61,25 @@ class SideMenuVC: UIViewController {
 		scrollView.translatesAutoresizingMaskIntoConstraints = false
 		return scrollView
 	}()
+        
+    let lifeTreeBtn = SideMenuBtn(label: "Life Tree".localized, image: UIImage(named: "lifeTreeSideIcon"))
     
-    let medalsBtn = SideMenuBtn(label: NSLocalizedString("Awards and medals", comment: ""), image: UIImage(named: "medalIcon"))
+    let draftBtn = SideMenuBtn(label: "Draft".localized, image: UIImage(named: "draftIcon"))
+	
+    let personalAspectsBtn = SideMenuBtn(label: "Personal Aspects".localized, image: UIImage(named: "noteIcon"))
+	
+    let userProfileBtn = SideMenuBtn(label: "Profile".localized, image: UIImage(named: "userProfileIcon"))
     
-    let lifeTreeBtn = SideMenuBtn(label: NSLocalizedString("Life Tree", comment: ""), image: UIImage(named: "lifeTreeSideIcon"))
-    
-    let draftBtn = SideMenuBtn(label: NSLocalizedString("Draft", comment: ""), image: UIImage(named: "draftIcon"))
+    let awardsAndMedalsBtn = SideMenuBtn(label: "Awards and Medals".localized, image: UIImage(named: "medalIcon"))
 	
-    let personalAspectsBtn = SideMenuBtn(label: NSLocalizedString("Personal Aspects", comment: ""), image: UIImage(named: "noteIcon"))
+    let aboutAppBtn = SideMenuBtn(label: "About App".localized, image: UIImage(named: "infoIcon"))
 	
-    let userProfileBtn = SideMenuBtn(label: NSLocalizedString("Profile", comment: ""), image: UIImage(named: "userProfileIcon"))
-    
-    let awardsAndMedalsBtn = SideMenuBtn(label: NSLocalizedString("Awards and Medals", comment: ""), image: UIImage(named: "medalIcon"))
+    let privacyPolicyBtn = SideMenuBtn(label: "Privacy Policy".localized, image: UIImage(named: "sheetIcon"))
 	
-    let aboutAppBtn = SideMenuBtn(label: NSLocalizedString("About App", comment: ""), image: UIImage(named: "infoIcon"))
-	
-    let privacyPolicyBtn = SideMenuBtn(label: NSLocalizedString("Privacy Policy", comment: ""), image: UIImage(named: "sheetIcon"))
-	
-    let contactUsBtn = SideMenuBtn(label: NSLocalizedString("Contact Us", comment: ""), image: UIImage(named: "phoneIcon"))
+    let contactUsBtn = SideMenuBtn(label: "Contact Us".localized, image: UIImage(named: "phoneIcon"))
         
     lazy var menuBtnsVerticalStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, medalsBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
+        let stackView = UIStackView(arrangedSubviews: [userProfileBtn, awardsAndMedalsBtn, lifeTreeBtn, draftBtn, personalAspectsBtn, aboutAppBtn, privacyPolicyBtn, contactUsBtn])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.axis = .vertical
@@ -91,7 +89,7 @@ class SideMenuVC: UIViewController {
         return stackView
     }()
     
-    let signOutBtn = SideMenuBtn(label: NSLocalizedString("Sign Out", comment: ""), image: UIImage(named: "signOutIcon"))
+    let signOutBtn = SideMenuBtn(label: "Sign Out".localized, image: UIImage(named: "signOutIcon"))
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -105,7 +103,6 @@ class SideMenuVC: UIViewController {
         view.applyAccentColorGradient(size: view.frame.size, axis: .vertical)
         
         setupSubviews()
-        medalsBtn.addTarget(self, action: #selector(handleMedalsBtnTap), for: .touchUpInside)
         lifeTreeBtn.addTarget(self, action: #selector(handleLifeTreeBtnTap), for: .touchUpInside)
         draftBtn.addTarget(self, action: #selector(handleDraftBtnTap), for: .touchUpInside)
         personalAspectsBtn.addTarget(self, action: #selector(handlePersonalAspectsBtn), for: .touchUpInside)
@@ -246,9 +243,9 @@ class SideMenuVC: UIViewController {
 	@objc func handleSignOutBtnTap() {
         let popUp = AlertPopup()
         popUp.presentAsConfirmationAlert(
-			title: NSLocalizedString("Are sure you want to sign out?", comment: ""),
-			message: NSLocalizedString("All data will be lost", comment: ""),
-            confirmationBtnTitle: NSLocalizedString("Sign Out", comment: ""), confirmationBtnStyle: .destructive
+			title: "Are sure you want to sign out?".localized,
+			message: "All data will be lost".localized,
+            confirmationBtnTitle: "Sign Out".localized, confirmationBtnStyle: .destructive
 		) {
 			Auth.signOut()
             popUp.dismiss(animated: true)
